@@ -1,0 +1,14 @@
+modLoader="javafml" #mandatory
+loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+[[mods]] #mandatory
+# The modid of the mod
+modId="block_clover" #mandatory
+version="${file.jarVersion}" #mandatory
+ # A display name for the mod
+displayName="Block Clover" #mandatory
+logoFile="examplemod.png" #optional
+credits="Thanks to your mother for physically supporting me through this project" #optional
+authors="Beo, Con, honorable mentions: Wynd" #optional
+description='''
+Black clover mod, big thanks to Jo for his original mod'''

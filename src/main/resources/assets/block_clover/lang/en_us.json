@@ -1,0 +1,62 @@
+{
+  "gui.blackclover.stats.spells": "Spells",
+
+  "Keys.block_clover.combat": "Combat keys",
+  "Keys.block_clover.combat_1": "Combat key 1",
+  "Keys.block_clover.combat_2": "Combat key 2",
+  "Keys.block_clover.combat_3": "Combat key 3",
+  "Keys.block_clover.combat_4": "Combat key 4",
+  "Keys.block_clover.combat_5": "Combat key 5",
+  "Keys.block_clover.combat_6": "Combat key 6",
+  "Keys.block_clover.combat_7": "Combat key 7",
+  "Keys.block_clover.combat_8": "Combat key 8",
+  "Keys.block_clover.combat_mode": "Combat mode",
+  "Keys.blocK_clover.next_bar": "Next combat bar",
+  "Keys.block_clover.previous_bar": "Previous combat bar",
+
+  "Keys.block_clover.gui": "Gui keys",
+  "Keys.block_clover.info_card": "Info card",
+
+  "ability.block_clover.wind_blade": "Wind blade",
+  "ability.block_clover.wind_crescent": "Wind crescent",
+  "ability.block_clover.wind_blade_shower": "Wind blade shower",
+  "ability.block_clover.towering_tornado": "Towering tornado",
+
+  "ability.block_clover.dark_cloaked_blade": "Darkness cloaked blade",
+  "ability.block_clover.avidya_slash": "Avidya slash",
+
+  "ability.block_clover.earth_chunk": "Earth chunk",
+  "ability.block_clover.earth_charge": "Earth charge",
+  "ability.block_clover.earth_gloves": "Earth gloves",
+  "ability.block_clover.earth_minion": "Earth minions",
+  "ability.block_clover.earth_manipulation": "Earth Manipulation",
+  "ability.block_clover.earth_golem": "Earth golem",
+  "ability.block_clover.earth_quake": "Earthquake",
+  "ability.block_clover.earth_shake": "Earth shake",
+
+  "ability.block_clover.fire_ball": "Fire ball",
+  "ability.block_clover.flame_roar": "Flame roar",
+  "ability.block_clover.sol_linea": "Sol linea",
+  "ability.block_clover.spiral_flame": "Spiral flame",
+  "ability.block_clover.leo_palma": "Leo palma",
+
+  "ability.block_clover.light_blade": "Light blade",
+  "ability.block_clover.light_blade_shower": "Light blade shower",
+  "ability.block_clover.light_healing": "Light healing",
+  "ability.block_clover.light_movement": "Light movement",
+  "ability.block_clover.light_sword": "Light sword",
+
+  "ability.block_clover.thunder_god_gloves": "Thunder god gloves",
+  "ability.block_clover.thunder_god_boots": "Thunder god boots",
+  "ability.block_clover.thunder_crumbling_orb": "Thunder crumbling orb",
+  "ability.block_clover.thunder_crumbling_orb_multi": "Thunder crumbling orb multi",
+  "ability.block_clover.thunder_discharge": "Thunder discharge",
+  "ability.block_clover.thunder_fiend": "Thunder fiend",
+  "ability.block_clover.thunder_fiend_multi": "Thunder fiend multi",
+
+  "ability.block_clover.slash_blades": "Slash blades",
+  "ability.block_clover.death_scythe": "Death scythe",
+  "ability.block_clover.forward_thrust": "Forward thrust",
+  "ability.block_clover.lunatic_slash": "Lunatic slash",
+  "ability.block_clover.round_lunatic_slash": "Round lunatic slash"
+}

@@ -3,16 +3,28 @@ package com.example.block_clover.models.projectiles.fire;// Made with Blockbench
 // Paste this class into your mod and generate all required imports
 
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.CrossbowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.UseAction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LeoPalmaModel extends EntityModel {
+public class LeoPalmaModel<T extends LivingEntity> extends BipedModel<T>{
 	private final ModelRenderer LeoPalmaMain;
 	private final ModelRenderer LeoPalma;
 	private final ModelRenderer LeoPalma8_r1;
@@ -25,6 +37,7 @@ public class LeoPalmaModel extends EntityModel {
 	private final ModelRenderer LeoPalma1_r1;
 
 	public LeoPalmaModel() {
+		super(RenderType::entityTranslucent, 1, 0.0F, 64, 64);
 		texWidth = 32;
 		texHeight = 32;
 
@@ -79,14 +92,74 @@ public class LeoPalmaModel extends EntityModel {
 	}
 
 	@Override
-	public void setupAnim(Entity p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
+	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		super.setupAnim(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.crouching = entityIn.isCrouching();
+
+
+		/*
+		if(!(entityIn instanceof PlayerEntity))
+			return;
+
+		 */
+
+		AbstractClientPlayerEntity clientPlayer = (AbstractClientPlayerEntity) entityIn;
+
+		BipedModel.ArmPose mainHandPos = armPose(clientPlayer, Hand.MAIN_HAND);
+		BipedModel.ArmPose offHandPos = armPose(clientPlayer, Hand.OFF_HAND);
+
+		this.swimAmount = clientPlayer.getSwimAmount(ageInTicks);
+
+		if (clientPlayer.getMainArm() == HandSide.RIGHT) {
+			this.rightArmPose = mainHandPos;
+			this.leftArmPose = offHandPos;
+		} else {
+			this.rightArmPose = offHandPos;
+			this.leftArmPose = mainHandPos;
+		}
 
 	}
 
-
 	@Override
-	public void renderToBuffer(MatrixStack p_225598_1_, IVertexBuilder p_225598_2_, int p_225598_3_, int p_225598_4_, float p_225598_5_, float p_225598_6_, float p_225598_7_, float p_225598_8_) {
-		LeoPalmaMain.render(p_225598_1_, p_225598_2_, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		ImmutableList.of(this.LeoPalmaMain, this.LeoPalmaMain).forEach((modelRenderer) -> {
+			modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		});
+	}
 
+	private static BipedModel.ArmPose armPose(AbstractClientPlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getItemInHand(hand);
+		if (itemstack.isEmpty()) {
+			return BipedModel.ArmPose.EMPTY;
+		} else {
+			if (player.getUsedItemHand() == hand && player.getUseItemRemainingTicks() > 0) {
+				UseAction useaction = itemstack.getUseAnimation();
+				if (useaction == UseAction.BLOCK) {
+					return BipedModel.ArmPose.BLOCK;
+				}
+
+				if (useaction == UseAction.BOW) {
+					return BipedModel.ArmPose.BOW_AND_ARROW;
+				}
+
+				if (useaction == UseAction.SPEAR) {
+					return BipedModel.ArmPose.THROW_SPEAR;
+				}
+
+				if (useaction == UseAction.CROSSBOW && hand == player.getUsedItemHand()) {
+					return BipedModel.ArmPose.CROSSBOW_CHARGE;
+				}
+			} else if (!player.swinging && itemstack.getItem() == Items.CROSSBOW && CrossbowItem.isCharged(itemstack)) {
+				return BipedModel.ArmPose.CROSSBOW_HOLD;
+			}
+
+			return BipedModel.ArmPose.ITEM;
+		}
+	}
+
+	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+		modelRenderer.xRot = x;
+		modelRenderer.yRot = y;
+		modelRenderer.zRot = z;
 	}
 }

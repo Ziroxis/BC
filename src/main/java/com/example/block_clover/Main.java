@@ -5,6 +5,7 @@ import com.example.block_clover.api.ability.AbilityGroupArgument;
 import com.example.block_clover.client.ClientHandler;
 import com.example.block_clover.client.gui.ManaBarOverlay;
 import com.example.block_clover.init.*;
+import com.example.block_clover.world.structure.configured.ConfiguredStructures;
 import net.minecraft.command.arguments.ArgumentSerializer;
 import net.minecraft.command.arguments.ArgumentTypes;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,7 +39,7 @@ public class Main
         ModItems.ITEMS.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
         ModEffects.EFFECTS.register(modEventBus);
-
+        ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -53,6 +54,12 @@ public class Main
     {
         ModCapabilities.init();
         ModNetwork.init();
+
+        event.enqueueWork(() ->
+        {
+           ModStructures.setupStructures();
+            ConfiguredStructures.registerConfiguredStructures();
+        });
 
         ArgumentTypes.register("ability", AbilityArgument.class, new ArgumentSerializer<>(AbilityArgument::ability));
         ArgumentTypes.register("group", AbilityGroupArgument.class, new ArgumentSerializer<>(AbilityGroupArgument::abilityGroup));

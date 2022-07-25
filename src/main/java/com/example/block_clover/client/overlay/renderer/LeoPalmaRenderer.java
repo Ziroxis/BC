@@ -31,7 +31,7 @@ public class LeoPalmaRenderer<T extends LivingEntity, M extends EntityModel<T>> 
     {
 
 
-        if (entitylivingbaseIn.hasEffect(ModEffects.LEO_PALMA.get()))
+        if (entitylivingbaseIn.hasEffect(ModEffects.LEO_PALMA.get().getEffect()))
         {
             matrixStackIn.pushPose();
             this.getParentModel().copyPropertiesTo(this.model);

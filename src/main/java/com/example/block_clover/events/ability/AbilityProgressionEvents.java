@@ -38,6 +38,8 @@ public class AbilityProgressionEvents {
     {
         IEntityStats statsProps = EntityStatsCapability.get(event.getPlayer());
 
+        if (!statsProps.hasGrimoire())
+            return;
         if (statsProps.getAttribute().equals(ModValues.WIND))
         {
             gainAbility(event.getPlayer(), 3, WindCrescentAbility.INSTANCE);

@@ -16,6 +16,7 @@ public class EntityStatsBase implements IEntityStats{
     private int maxExperience;
     private float mana;
     private float maxMana;
+    private boolean hasGrimoire = false;
 
 
     @Override
@@ -152,5 +153,15 @@ public class EntityStatsBase implements IEntityStats{
             return false;
 
         return true;
+    }
+
+    @Override
+    public boolean hasGrimoire() {
+        return this.hasGrimoire;
+    }
+
+    @Override
+    public void setGrimoire(boolean value) {
+        this.hasGrimoire = value;
     }
 }

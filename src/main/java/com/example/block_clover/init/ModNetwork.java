@@ -2,10 +2,7 @@ package com.example.block_clover.init;
 
 import com.example.block_clover.networking.*;
 import com.example.block_clover.networking.client.*;
-import com.example.block_clover.networking.server.SOpenPlayerScreenPacket;
-import com.example.block_clover.networking.server.SSyncAbilityDataPacket;
-import com.example.block_clover.networking.server.SSyncEntityStatsPacket;
-import com.example.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.example.block_clover.networking.server.*;
 
 public class ModNetwork {
 

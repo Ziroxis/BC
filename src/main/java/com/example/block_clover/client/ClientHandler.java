@@ -2,6 +2,7 @@ package com.example.block_clover.client;
 
 import com.example.block_clover.client.overlay.renderer.*;
 import com.example.block_clover.entities.summons.earth.EarthSummons;
+import com.example.block_clover.init.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.entity.LivingRenderer;
@@ -21,6 +22,7 @@ public class ClientHandler {
 
     public static void onSetup()
     {
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.GRIMOIRE_MAGICIAN.get(), new GrimoireMagicianRenderer.Factory());
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
         ClientHandler.addPlayerLayers(playerSkinMap.get("slim"));

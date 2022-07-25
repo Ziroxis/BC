@@ -38,4 +38,8 @@ public interface IEntityStats {
     String getRace();
     void setRace(String value);
     boolean hasRace();
+
+    // GRIMOIRE
+    boolean hasGrimoire();
+    void setGrimoire(boolean value);
 }

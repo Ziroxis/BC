@@ -1,5 +1,6 @@
 package com.example.block_clover.init;
 
+import com.example.block_clover.entities.GrimoireMagicianEntity;
 import com.example.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.example.block_clover.entities.summons.earth.EarthMinionEntity;
 import com.example.block_clover.entities.summons.earth.EarthSummons;
@@ -15,5 +16,6 @@ public class ModEventBusEvents {
         //CURSED SPIRITS
         event.put(EarthSummons.EARTH_MINION.get(), EarthMinionEntity.setCustomAttributes().build());
         event.put(EarthSummons.EARTH_GOLEM.get(), EarthGolemEntity.setCustomAttributes().build());
+        event.put(ModEntities.GRIMOIRE_MAGICIAN.get(), GrimoireMagicianEntity.setCustomAttributes().build());
     }
 }

@@ -21,6 +21,7 @@ public class EntityStatsCapability {
             public INBT writeNBT(Capability<IEntityStats> capability, IEntityStats instance, Direction side)
             {
                 CompoundNBT props = new CompoundNBT();
+                props.putBoolean("isInCombatMode", instance.isInCombatMode());
                 props.putInt("level", instance.getLevel());
                 props.putInt("maxLevel", instance.getMaxLevel());
                 props.putInt("experience", instance.getExperience());
@@ -29,6 +30,7 @@ public class EntityStatsCapability {
                 props.putFloat("maxMana", instance.getMaxMana());
                 props.putString("attribute", instance.getAttribute());
                 props.putString("race", instance.getRace());
+                props.putBoolean("hasGrimoire", instance.hasGrimoire());
 
                 return props;
             }
@@ -38,6 +40,7 @@ public class EntityStatsCapability {
             {
                 CompoundNBT props = (CompoundNBT) nbt;
 
+                instance.setCombatMode(props.getBoolean("isInCombatMode"));
                 instance.setLevel(props.getInt("level"));
                 instance.setMaxLevel(props.getInt("maxLevel"));
                 instance.setExperience(props.getInt("experience"));
@@ -46,6 +49,7 @@ public class EntityStatsCapability {
                 instance.setMaxMana(props.getFloat("maxMana"));
                 instance.setAttribute(props.getString("attribute"));
                 instance.setRace(props.getString("race"));
+                instance.setGrimoire(props.getBoolean("hasGrimoire"));
 
             }
         }, () -> new EntityStatsBase());

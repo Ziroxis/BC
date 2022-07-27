@@ -5,15 +5,16 @@ import com.example.block_clover.api.ability.interfaces.IParallelContinuousAbilit
 import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.IEntityStats;
 import com.example.block_clover.data.world.ExtendedWorldData;
+import com.example.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.example.block_clover.networking.ManaSync;
 import com.example.block_clover.networking.PacketHandler;
+import com.example.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.example.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 
 public abstract class RepeaterAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
-    private int experiencePoint = 0;
-    private int experienceGainLevelCap = 0;
 
     private int repeaterCount;
     private int maxRepeaterCount;
@@ -73,6 +74,18 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
     @Override
     public void use(PlayerEntity player)
     {
+        IEntityStats stats = EntityStatsCapability.get(player);
+        stats.alterMana(-getmanaCost());
+        if (stats.getLevel() < getExperienceGainLevelCap())
+        {
+            stats.alterExperience(getExperiencePoint());
+
+            ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
+            MinecraftForge.EVENT_BUS.post(eventExperience);
+        }
+        PacketHandler.sendTo(new ManaSync(stats.getMana()), player);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+
         super.use(player);
     }
 

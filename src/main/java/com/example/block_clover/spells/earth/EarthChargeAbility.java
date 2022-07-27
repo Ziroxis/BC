@@ -18,7 +18,7 @@ public class EarthChargeAbility extends ChargeableAbility {
         super("Earth Charge", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Concetrates everything on throwing one big chunk of earth");
         this.setMaxCooldown(15);
-        this.setMaxChargeTime(10);
+        this.setMaxChargeTime(5);
         this.setmanaCost(20);
         this.setExperiencePoint(20);
         this.setCancelable();
@@ -54,7 +54,7 @@ public class EarthChargeAbility extends ChargeableAbility {
 
         int charge = this.getMaxChargeTime() - this.getChargeTime();
 
-        if (charge < 20 * 10)
+        if (charge < 20 * 5)
             return false;
 
         EarthChargeProjectile projectile = new EarthChargeProjectile(player.level, player);

@@ -63,6 +63,7 @@ public class EarthGolemEntity extends CreatureEntity {
         this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
 
+
         this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
     }
 
@@ -136,7 +137,7 @@ public class EarthGolemEntity extends CreatureEntity {
                 this.setPos(this.getOwner().getX(), this.getOwner().getY(), this.getOwner().getZ());
 
             IEntityStats ownerProps = EntityStatsCapability.get(this.getOwner());
-            List<LivingEntity> earthMinionAttackList = this.isAggressive ? Beapi.getEntitiesNear(this.blockPosition(), this.level, 10, PlayerEntity.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
+            List<LivingEntity> earthMinionAttackList = this.isAggressive ? Beapi.getEntitiesNear(this.blockPosition(), this.level, 20, PlayerEntity.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
             LivingEntity target = null;
 
 

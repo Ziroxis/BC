@@ -112,8 +112,8 @@ public class ContinuousAbility extends Ability {
      */
     public void tick(PlayerEntity player)
     {
-        //if(player.level.isClientSide)
-        //	return;
+        if(player.level.isClientSide)
+        	return;
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.canUse(player))
         {

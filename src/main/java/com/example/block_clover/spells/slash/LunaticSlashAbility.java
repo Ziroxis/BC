@@ -47,7 +47,7 @@ public class LunaticSlashAbility extends RepeaterAbility {
                 if (ability instanceof SlashBladesAbility && ability.isContinuous())
                 {
                     RayTraceResult mop = Beapi.rayTraceBlocksAndEntities(player, 5);
-                    List<LivingEntity> entities = Beapi.getEntitiesAround(new BlockPos(mop.getLocation()), player.level, 7, LivingEntity.class);
+                    List<LivingEntity> entities = Beapi.getEntitiesAround(new BlockPos(mop.getLocation()), player.level, 3, LivingEntity.class);
                     if(entities.contains(player))
                         entities.remove(player);
 

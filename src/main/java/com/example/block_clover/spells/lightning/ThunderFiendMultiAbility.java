@@ -35,6 +35,7 @@ public class ThunderFiendMultiAbility extends RepeaterAbility implements IMultiT
 
     private boolean onUseEvent(PlayerEntity player)
     {
+        this.clearTargets();
 
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))

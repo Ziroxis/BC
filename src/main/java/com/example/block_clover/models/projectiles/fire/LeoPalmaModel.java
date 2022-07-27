@@ -23,7 +23,6 @@ import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class LeoPalmaModel<T extends LivingEntity> extends BipedModel<T>{
 	private final ModelRenderer LeoPalmaMain;
 	private final ModelRenderer LeoPalma;
@@ -105,61 +104,21 @@ public class LeoPalmaModel<T extends LivingEntity> extends BipedModel<T>{
 
 		AbstractClientPlayerEntity clientPlayer = (AbstractClientPlayerEntity) entityIn;
 
-		BipedModel.ArmPose mainHandPos = armPose(clientPlayer, Hand.MAIN_HAND);
-		BipedModel.ArmPose offHandPos = armPose(clientPlayer, Hand.OFF_HAND);
 
 		this.swimAmount = clientPlayer.getSwimAmount(ageInTicks);
+		this.LeoPalma.copyFrom(this.body);
 
-		if (clientPlayer.getMainArm() == HandSide.RIGHT) {
-			this.rightArmPose = mainHandPos;
-			this.leftArmPose = offHandPos;
-		} else {
-			this.rightArmPose = offHandPos;
-			this.leftArmPose = mainHandPos;
-		}
 
 	}
 
 	@Override
 	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		ImmutableList.of(this.LeoPalmaMain, this.LeoPalmaMain).forEach((modelRenderer) -> {
+		ImmutableList.of(this.LeoPalmaMain).forEach((modelRenderer) -> {
 			modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 		});
 	}
 
-	private static BipedModel.ArmPose armPose(AbstractClientPlayerEntity player, Hand hand) {
-		ItemStack itemstack = player.getItemInHand(hand);
-		if (itemstack.isEmpty()) {
-			return BipedModel.ArmPose.EMPTY;
-		} else {
-			if (player.getUsedItemHand() == hand && player.getUseItemRemainingTicks() > 0) {
-				UseAction useaction = itemstack.getUseAnimation();
-				if (useaction == UseAction.BLOCK) {
-					return BipedModel.ArmPose.BLOCK;
-				}
 
-				if (useaction == UseAction.BOW) {
-					return BipedModel.ArmPose.BOW_AND_ARROW;
-				}
 
-				if (useaction == UseAction.SPEAR) {
-					return BipedModel.ArmPose.THROW_SPEAR;
-				}
 
-				if (useaction == UseAction.CROSSBOW && hand == player.getUsedItemHand()) {
-					return BipedModel.ArmPose.CROSSBOW_CHARGE;
-				}
-			} else if (!player.swinging && itemstack.getItem() == Items.CROSSBOW && CrossbowItem.isCharged(itemstack)) {
-				return BipedModel.ArmPose.CROSSBOW_HOLD;
-			}
-
-			return BipedModel.ArmPose.ITEM;
-		}
-	}
-
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.xRot = x;
-		modelRenderer.yRot = y;
-		modelRenderer.zRot = z;
-	}
 }

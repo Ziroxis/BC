@@ -19,10 +19,11 @@ public class EarthSummons {
 
     public static final RegistryObject<EntityType<EarthMinionEntity>> EARTH_MINION = Beapi.registerEntityType("Earth Minion",
             () -> Beapi.createEntityType(EarthMinionEntity::new)
+                    .sized(1f, 2f)
                     .build(Main.MODID + ":earth_minion"));
     public static final RegistryObject<EntityType<EarthGolemEntity>> EARTH_GOLEM = Beapi.registerEntityType("Earth Golem",
             () -> Beapi.createEntityType(EarthGolemEntity::new)
-                    .sized(3f, 3f)
+                    .sized(1.5f, 3f)
                     .build(Main.MODID + ":earth_golem"));
 
     /*

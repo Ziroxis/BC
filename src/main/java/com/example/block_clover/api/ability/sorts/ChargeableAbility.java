@@ -4,7 +4,12 @@ import com.example.block_clover.api.Beapi;
 import com.example.block_clover.api.ability.Ability;
 import com.example.block_clover.api.ability.AbilityCategories;
 import com.example.block_clover.api.ability.AbilityUseEvent;
+import com.example.block_clover.data.entity.EntityStatsCapability;
+import com.example.block_clover.data.entity.IEntityStats;
+import com.example.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.example.block_clover.networking.ManaSync;
 import com.example.block_clover.networking.PacketHandler;
+import com.example.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.example.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +40,7 @@ public class ChargeableAbility extends Ability {
     {
         if(player.level.isClientSide)
             return;
+        IEntityStats propsEntity = EntityStatsCapability.get(player);
 
         if(this.isOnCooldown() && this.getCooldown() <= 10)
             this.stopCooldown(player);
@@ -49,6 +55,16 @@ public class ChargeableAbility extends Ability {
         {
             if(this.onStartChargingEvent.onStartCharging(player))
             {
+                if (propsEntity.getLevel() < getExperienceGainLevelCap())
+                {
+                    propsEntity.alterExperience(getExperiencePoint());
+                    ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
+                    MinecraftForge.EVENT_BUS.post(eventExperience);
+                }
+                propsEntity.alterMana((int) - getmanaCost());
+                PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
+                PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
+
                 this.checkAbilityPool(player, State.CHARGING);
 
 

@@ -25,7 +25,7 @@ public class EarthGlovesAbility extends ContinuousPunchAbility implements IParal
         super("Earth Gloves", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Makes gloves out of earth");
         this.setMaxCooldown(3);
-        this.setmanaCost(3);
+        this.setmanaCost(5);
         this.setExperiencePoint(10);
         this.setExperienceGainLevelCap(20);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

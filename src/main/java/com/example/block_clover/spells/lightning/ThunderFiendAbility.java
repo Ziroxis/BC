@@ -36,6 +36,7 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
 
     private boolean onUseEvent(PlayerEntity player)
     {
+        this.clearTargets();
 
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
@@ -47,7 +48,6 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
             {
                 if (ability instanceof ThunderGodBootsAbility && ability.isContinuous())
                 {
-                    this.clearTargets();
 
                     Vector3d speed = Beapi.propulsion(player, 9, 9);
                     player.setDeltaMovement(speed.x, 0.2, speed.z);

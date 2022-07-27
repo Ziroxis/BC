@@ -12,8 +12,11 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 
+@SuppressWarnings("unchecked")
 public class LeoPalmaRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
 
     private static final ResourceLocation resourceLocation =
@@ -29,16 +32,21 @@ public class LeoPalmaRenderer<T extends LivingEntity, M extends EntityModel<T>> 
     public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn,
                        float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
     {
+        if (!(entitylivingbaseIn instanceof LivingEntity))
+            return;
 
-
-        if (entitylivingbaseIn.hasEffect(ModEffects.LEO_PALMA.get().getEffect()))
+        LivingEntity target = (LivingEntity) entitylivingbaseIn;
+        if (target.hasEffect(ModEffects.LEO_PALMA.get()))
         {
+            System.out.println("Check 1");
             matrixStackIn.pushPose();
             this.getParentModel().copyPropertiesTo(this.model);
-            this.model.setupAnim(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            this.model.setupAnim(target, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             IVertexBuilder ivertexbuilder = ItemRenderer.getFoilBuffer(bufferIn, this.model.renderType(resourceLocation), false, false);
             this.model.renderToBuffer(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             matrixStackIn.popPose();
         }
+        else
+            System.out.println("Check 2");
     }
 }

@@ -42,4 +42,10 @@ public interface IEntityStats {
     // GRIMOIRE
     boolean hasGrimoire();
     void setGrimoire(boolean value);
+
+    // STATES
+    int getState();
+    void alterState(int value);
+    void setState(int value);
+
 }

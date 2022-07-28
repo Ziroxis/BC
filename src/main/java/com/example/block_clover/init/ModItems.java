@@ -19,5 +19,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> LIGHT_SWORD = ITEMS.register("light_sword",
             () -> new LightSwordItem(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1), 7, 1.9f));
+    public static final RegistryObject<Item> DEMON_DWELLER = ITEMS.register("demon_slayer_anti",
+            () -> new LightSwordItem(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1), 7, 1.9f));
 
 }

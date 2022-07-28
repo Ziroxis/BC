@@ -34,28 +34,41 @@ public class StatsEvent {
 
         if (!props.hasAttribute())
         {
+            props.setAttribute(Beapi.randomizer(ModValues.attributes));
+            String attribute = props.getAttribute();
+            switch (attribute)
+            {
+                case "Wind":
+                    abilityProps.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                    break;
+                case "Fire":
+                    abilityProps.addUnlockedAbility(FireBallAbility.INSTANCE);
+                    break;
+                case "Light":
+                    abilityProps.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                    break;
+                case "Darkness":
+                    abilityProps.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                    break;
+                case "Earth":
+                    abilityProps.addUnlockedAbility(EarthChargeAbility.INSTANCE);
+                case "Slash":
+                    abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                    break;
+            }
             props.setLevel(1);
             props.setExperience(0);
             props.setMaxExperience(100);
-            props.setMana(50);
-            props.setMaxMana(50);
-            props.setAttribute(Beapi.randomizer(ModValues.attributes));
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
-            String attribute = props.getAttribute();
-            if (attribute.equals(ModValues.WIND))
-                abilityProps.addUnlockedAbility(WindBladeAbility.INSTANCE);
-            if (attribute.equals(ModValues.FIRE))
-                abilityProps.addUnlockedAbility(FireBallAbility.INSTANCE);
-            if (attribute.equals(ModValues.LIGHT))
-                abilityProps.addUnlockedAbility(LightBladeAbility.INSTANCE);
-            if (attribute.equals(ModValues.LIGHTNING))
-                abilityProps.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
-            if (attribute.equals(ModValues.DARKNESS))
-                abilityProps.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
-            if (attribute.equals(ModValues.EARTH))
-                abilityProps.addUnlockedAbility(EarthChargeAbility.INSTANCE);
-            if (attribute.equals(ModValues.SLASH))
-                abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+            if (!attribute.equals(ModValues.ANTIMAGIC))
+            {
+                props.setMana(50);
+                props.setMaxMana(50);
+            }
+            else
+            {
+                props.setMana(0);
+                props.setMaxMana(0);
+            }
         }
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);

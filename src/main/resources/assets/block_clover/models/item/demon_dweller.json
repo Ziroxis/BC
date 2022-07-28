@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "texture_size": [80, 80],
   "textures": {
-    "0": "blackclover:items/demon_dweller",
-    "particle": "blackclover:items/demon_dweller"
+    "0": "block_clover:items/demon_dweller",
+    "particle": "block_clover:items/demon_dweller"
   },
   "elements": [
     {

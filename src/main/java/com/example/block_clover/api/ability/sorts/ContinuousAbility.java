@@ -41,8 +41,11 @@ public class ContinuousAbility extends Ability {
     @Override
     public void use(PlayerEntity player)
     {
+
         if(player.level.isClientSide)
             return;
+
+
 
         if (this.isOnCooldown() && this.getCooldown() <= 10)
             this.stopCooldown(player);
@@ -112,8 +115,11 @@ public class ContinuousAbility extends Ability {
      */
     public void tick(PlayerEntity player)
     {
+        /*
         if(player.level.isClientSide)
         	return;
+        	
+         */
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.canUse(player))
         {

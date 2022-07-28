@@ -1,8 +1,8 @@
 {
-  "parent": "blackclover:item/demon_slayer",
+  "parent": "block_clover:item/demon_slayer",
   "textures": {
-    "0": "blackclover:items/demon_slayer_anti",
-    "particle": "blackclover:items/demon_slayer_anti"
+    "0": "block_clover:items/demon_slayer_anti",
+    "particle": "block_clover:items/demon_slayer_anti"
   }
 
 }

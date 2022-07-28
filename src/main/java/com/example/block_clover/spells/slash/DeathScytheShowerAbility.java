@@ -21,7 +21,7 @@ public class DeathScytheShowerAbility extends RepeaterAbility {
 
     public DeathScytheShowerAbility()
     {
-        super("Death Sycthe Shower", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super("Death Scythe Shower", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Shoots a big amount of death scythes");
         this.setMaxCooldown(10);
         this.setmanaCost(20);

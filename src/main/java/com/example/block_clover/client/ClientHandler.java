@@ -35,6 +35,7 @@ public class ClientHandler {
         List<LayerRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>>> layers = ObfuscationReflectionHelper.getPrivateValue(LivingRenderer.class, renderer, "field_177097_h");
         if(layers != null)
         {
+            layers.add(new BlackModeRenderer<>(renderer));
             layers.add(new EarthManipulationRenderer<>(renderer));
             layers.add(new LeoPalmaRenderer<>(renderer));
             layers.add(new SlashBladesRenderer<>(renderer));

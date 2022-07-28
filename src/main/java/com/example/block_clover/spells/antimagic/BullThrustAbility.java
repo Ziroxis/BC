@@ -32,7 +32,7 @@ public class BullThrustAbility extends Ability implements IMultiTargetAbility {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_DWELLER.get())))
+        if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get())))
         {
             player.sendMessage(new StringTextComponent("Need to hold an anti-magic sword!"), Util.NIL_UUID);
             return false;

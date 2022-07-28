@@ -80,7 +80,7 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 
 		for (int i = 0; i < 35; i++)
 		{
-			if (player.inventory.getItem(i).getItem().equals(ModItems.LIGHT_SWORD.get()))
+			if (player.inventory.getItem(i).getItem().equals(this.getItemStack(player).getItem()))
 				player.inventory.getItem(i).shrink(1);
 		}
 

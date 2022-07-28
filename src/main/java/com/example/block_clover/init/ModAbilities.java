@@ -4,7 +4,7 @@ import com.example.block_clover.Main;
 import com.example.block_clover.api.Beapi;
 import com.example.block_clover.api.ability.Ability;
 import com.example.block_clover.spells.antimagic.BullThrustAbility;
-import com.example.block_clover.spells.antimagic.DemonDwellerAbility;
+import com.example.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.example.block_clover.spells.antimagic.DemonStateAbility;
 import com.example.block_clover.spells.darkness.AvidyaSlashAbility;
 import com.example.block_clover.spells.darkness.DarkCloakedBladeAbility;
@@ -36,7 +36,7 @@ public class ModAbilities {
     public static final IForgeRegistry<Ability> ABILITIES_REGISTRY = RegistryManager.ACTIVE.getRegistry(Ability.class);
     private static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(ABILITIES_REGISTRY, Main.MODID);
 
-    public static final Ability[] ANTIMAGIC = {DemonDwellerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE};
+    public static final Ability[] ANTIMAGIC = {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE};
     public static final Ability[] EARTH = {EarthChunkAbility.INSTANCE, EarthChargeAbility.INSTANCE, EarthGlovesAbility.INSTANCE, EarthMinionAbility.INSTANCE, EarthManipulationAbility.INSTANCE, EarthGolemAbility.INSTANCE, EarthQuakeAbility.INSTANCE, EarthPassiveAbility.INSTANCE};
     public static final Ability[] FIRE = {FireBallAbility.INSTANCE, FlameRoarAbility.INSTANCE, SolLineaAbility.INSTANCE, SpiralFlameAbility.INSTANCE, LeoPalmaAbility.INSTANCE};
     public static final Ability[] SLASH = {SlashBladesAbility.INSTANCE, DeathScytheAbility.INSTANCE, DeathScytheShowerAbility.INSTANCE, ForwardThrustAbility.INSTANCE, LunaticSlashAbility.INSTANCE, RoundLunaticSlashAbility.INSTANCE};

@@ -62,7 +62,7 @@ public class CombatModeEvents
 				if(absorptionBonus > 0)
 					rgb = Color.YELLOW.getRGB();
 				
-				Beapi.drawStringWithBorder(Minecraft.getInstance().font, event.getMatrixStack(), (int) (health + absorptionBonus)+ "", posX / 2 - 27, posY - 39, rgb);
+				Beapi.drawStringWithBorder(Minecraft.getInstance().font, event.getMatrixStack(), (int) (health + absorptionBonus)+ "", posX / 2 - 27, posY - 49, rgb);
 	
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	
@@ -72,7 +72,7 @@ public class CombatModeEvents
 				{
 					int k = (posX / 2 - 91) + i % 10 * 6;
 	
-					GuiUtils.drawTexturedModalRect(event.getMatrixStack(), k, posY - 39, 16, 0, 9, 9, 0);
+					GuiUtils.drawTexturedModalRect(event.getMatrixStack(), k, posY - 49, 16, 0, 9, 9, 0);
 				}
 	
 				for (int i = 0; i < (100 - (((maxHealth - health) / maxHealth)) * 100) / 10; i++)
@@ -83,7 +83,7 @@ public class CombatModeEvents
 					if(absorptionBonus > 0)
 						u = 144;
 					
-					GuiUtils.drawTexturedModalRect(event.getMatrixStack(), k, posY - 39, 16 + u, 9 * 0, 9, 9, 0);
+					GuiUtils.drawTexturedModalRect(event.getMatrixStack(), k, posY - 49, 16 + u, 9 * 0, 9, 9, 0);
 				}
 			}
 	

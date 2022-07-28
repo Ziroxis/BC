@@ -31,10 +31,12 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        player.abilities.mayfly = false;
-        player.abilities.flying = false;
-        player.fallDistance = 0;
-        if(player instanceof ServerPlayerEntity)
+        if (!player.isCreative())
+        {
+            player.abilities.mayfly = false;
+            player.abilities.flying = false;
+            player.fallDistance = 0;
+        }        if(player instanceof ServerPlayerEntity)
             ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
     return true;
     }

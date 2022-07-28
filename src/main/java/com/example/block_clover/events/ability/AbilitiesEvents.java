@@ -465,9 +465,9 @@ public class AbilitiesEvents
 			{
 				if(props.hasEquippedAbility(abl) && props.getEquippedAbility(abl).isContinuous())
 				{			
-					((ISniperAbility)props.getEquippedAbility(abl)).shoot(event.getPlayer());
-					props.getEquippedAbility(abl).use(event.getPlayer());
-					event.setCanceled(true);
+					//((ISniperAbility)props.getEquippedAbility(abl)).shoot(event.getPlayer());
+					//props.getEquippedAbility(abl).use(event.getPlayer());
+					//event.setCanceled(true);
 				}
 			}
 		}

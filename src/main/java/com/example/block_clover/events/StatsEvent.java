@@ -2,22 +2,31 @@ package com.example.block_clover.events;
 
 import com.example.block_clover.Main;
 import com.example.block_clover.api.Beapi;
+import com.example.block_clover.api.ability.AbilityCategories;
 import com.example.block_clover.data.ability.AbilityDataCapability;
 import com.example.block_clover.data.ability.IAbilityData;
 import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.IEntityStats;
+import com.example.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.example.block_clover.init.ModValues;
 import com.example.block_clover.networking.PacketHandler;
 import com.example.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.example.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.example.block_clover.spells.antimagic.BullThrustAbility;
+import com.example.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.example.block_clover.spells.darkness.DarkCloakedBladeAbility;
 import com.example.block_clover.spells.earth.EarthChargeAbility;
+import com.example.block_clover.spells.earth.EarthChunkAbility;
 import com.example.block_clover.spells.fire.FireBallAbility;
 import com.example.block_clover.spells.light.LightBladeAbility;
 import com.example.block_clover.spells.lightning.ThunderGodBootsAbility;
 import com.example.block_clover.spells.slash.SlashBladesAbility;
 import com.example.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -47,13 +56,21 @@ public class StatsEvent {
                 case "Light":
                     abilityProps.addUnlockedAbility(LightBladeAbility.INSTANCE);
                     break;
+                case "Lightning":
+                    abilityProps.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                    break;
                 case "Darkness":
                     abilityProps.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
                     break;
                 case "Earth":
-                    abilityProps.addUnlockedAbility(EarthChargeAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                    break;
                 case "Slash":
                     abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                    break;
+                case "Anti-magic":
+                    abilityProps.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(BullThrustAbility.INSTANCE);
                     break;
             }
             props.setLevel(1);
@@ -74,4 +91,83 @@ public class StatsEvent {
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
 
     }
+
+    @SubscribeEvent
+    public static void onRelogging(PlayerEvent.PlayerRespawnEvent event) {
+        PlayerEntity player = event.getPlayer();
+        IEntityStats statsProps = EntityStatsCapability.get(player);
+        IAbilityData abilityData = AbilityDataCapability.get(player);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+    }
+
+    @SubscribeEvent
+    public static void onClonePlayer(PlayerEvent.Clone event) {
+        if (event.isWasDeath()) {
+            StatsEvent.restoreFullData(event.getOriginal(), event.getPlayer());
+            IAbilityData newAbilityData = AbilityDataCapability.get(event.getPlayer());
+            IEntityStats newEntityStats = EntityStatsCapability.get(event.getPlayer());
+            PacketHandler.sendTo(new SSyncAbilityDataPacket(event.getPlayer().getId(), newAbilityData), event.getPlayer());
+            ExperienceUpEvent e = new ExperienceUpEvent(event.getPlayer(), newEntityStats.getExperience());
+            MinecraftForge.EVENT_BUS.post(e);
+        } else
+            StatsEvent.restoreFullData(event.getOriginal(), event.getPlayer());
+    }
+    private static void restoreFullData(PlayerEntity original, PlayerEntity player) {
+        INBT nbt = new CompoundNBT();
+
+        // Keep the entity stats
+        IEntityStats oldEntityStats = EntityStatsCapability.get(original);
+        nbt = EntityStatsCapability.INSTANCE.writeNBT(oldEntityStats, null);
+        IEntityStats newEntityStats = EntityStatsCapability.get(player);
+        EntityStatsCapability.INSTANCE.readNBT(newEntityStats, null, nbt);
+        ExperienceUpEvent event = new ExperienceUpEvent(player, newEntityStats.getExperience());
+        MinecraftForge.EVENT_BUS.post(event);
+
+
+        // Keep the ability stats
+        IAbilityData oldAbilityData = AbilityDataCapability.get(original);
+        oldAbilityData.clearEquippedAbilities(AbilityCategories.AbilityCategory.ALL);
+
+        nbt = AbilityDataCapability.INSTANCE.writeNBT(oldAbilityData, null);
+        IAbilityData newAbilityData = AbilityDataCapability.get(player);
+        AbilityDataCapability.INSTANCE.readNBT(newAbilityData, null, nbt);
+
+
+        /*
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), newAbilityData), player);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), newEntityStats), player);
+
+         */
+
+
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangeDimensions(PlayerEvent.PlayerChangedDimensionEvent event)
+    {
+        PlayerEntity player = event.getPlayer();
+        IEntityStats stats = EntityStatsCapability.get(player);
+        IAbilityData abilityData = AbilityDataCapability.get(player);
+
+        PacketHandler.sendToAllTrackingAndSelf(new SSyncEntityStatsPacket(player.getId(), stats), player);
+        PacketHandler.sendToAllTrackingAndSelf(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+        //MinecraftForge.EVENT_BUS.post(new EntityEvent.Size(player, player.getPose(), player.getDimensions(player.getPose()), player.getBbHeight()));
+    }
+
+    @SubscribeEvent
+    public static void onPlayerStartsTracking(PlayerEvent.StartTracking event)
+    {
+        if (event.getTarget() instanceof  PlayerEntity)
+        {
+            PlayerEntity player = (PlayerEntity) event.getTarget();
+            IEntityStats stats = EntityStatsCapability.get(player);
+            IAbilityData abilityData = AbilityDataCapability.get(player);
+
+            PacketHandler.sendToAllTrackingAndSelf(new SSyncEntityStatsPacket(player.getId(), stats), player);
+            PacketHandler.sendToAllTrackingAndSelf(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+
+        }
+    }
+
 }

@@ -1,4 +1,36 @@
 {
+  "itemGroup.block_cloverModTabWeapons": "Block clover weapons",
+
+  "item.block_clover.demon_destroyer": "Demon destroyer",
+  "item.block_clover.demon_dweller": "Demon dweller",
+  "item.block_clover.yamis_katana": "Katana",
+
+  "itemGroup.block_cloverModTabClothes": "Block clover clothes",
+
+  "item.block_clover.mage_hat": "Mage hat",
+  "item.block_clover.mage_chest": "Mage chest",
+  "item.block_clover.mage_legs": "Mage legs",
+  "item.block_clover.mage_feet": "Mage feet",
+
+  "item.block_clover.asta_hat": "Asta bandana",
+  "item.block_clover.asta_chest": "Asta chest",
+  "item.block_clover.asta_legs": "Asta legs",
+  "item.block_clover.asta_feet": "Asta feet",
+
+  "item.block_clover.asta_2_hat": "Asta bandana",
+  "item.block_clover.asta_2_chest": "Asta chest",
+  "item.block_clover.asta_2_legs": "Asta legs",
+  "item.block_clover.asta_2_feet": "Asta feet",
+
+  "item.block_clover.yuno_chest": "Yuno chest",
+  "item.block_clover.yuno_legs": "Yuno legs",
+  "item.block_clover.yuno_feet": "Yuno feet",
+
+  "item.block_clover.golden_dawn_chest": "Golden dawn chest",
+  "item.block_clover.golden_dawn_legs": "Golden dawn legs",
+  "item.block_clover.golden_dawn_feet": "Golden dawn feet",
+
+
   "gui.blackclover.stats.spells": "Spells",
 
   "Keys.block_clover.combat": "Combat keys",
@@ -14,8 +46,11 @@
   "Keys.blocK_clover.next_bar": "Next combat bar",
   "Keys.block_clover.previous_bar": "Previous combat bar",
 
-  "Keys.block_clover.gui": "Gui keys",
-  "Keys.block_clover.info_card": "Info card",
+  "Keys.block_clover.gui": "Gui keys block clover",
+  "Keys.block_clover.info_card": "Info card block clover",
+
+  "item.block_clover.light_sword": "Light sword",
+  "item.block_clover.demon_slayer_antimagic": "Demon slayer sword",
 
   "ability.block_clover.wind_blade": "Wind blade",
   "ability.block_clover.wind_crescent": "Wind crescent",

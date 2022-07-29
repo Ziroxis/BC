@@ -1,7 +1,7 @@
   {
-  "parent": "blackclover:item/demon_destroyer",
+  "parent": "block_clover:item/demon_destroyer",
   "textures": {
-    "0": "blackclover:items/full_black",
-    "particle": "blackclover:items/full_black"
+    "0": "block_clover:items/full_black",
+    "particle": "block_clover:items/full_black"
   }
 }

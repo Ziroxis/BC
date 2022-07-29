@@ -5,12 +5,12 @@
     64
   ],
   "textures": {
-    "0": "blackclover:items/dd2",
-    "1": "blackclover:items/yk1",
-    "2": "blackclover:items/yk2",
-    "3": "blackclover:items/dd1",
-    "missing": "blackclover:items/dd2",
-    "particle": "blackclover:items/dd2"
+    "0": "block_clover:items/dd2",
+    "1": "block_clover:items/yk1",
+    "2": "block_clover:items/yk2",
+    "3": "block_clover:items/dd1",
+    "missing": "block_clover:items/dd2",
+    "particle": "block_clover:items/dd2"
   },
   "elements": [
     {

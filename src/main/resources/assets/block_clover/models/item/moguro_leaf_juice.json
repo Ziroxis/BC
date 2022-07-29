@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "blackclover:items/moguro_leaf_juice"
+    "layer0": "block_clover:items/moguro_leaf_juice"
   }
 }

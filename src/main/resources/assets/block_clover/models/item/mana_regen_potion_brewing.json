@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:items/mana_regen_potion"
+    "layer0": "block_clover:items/mana_regen_potion"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blackclover:items/armors/golden_dawn_chest"
+    "layer0": "block_clover:items/armors/golden_dawn_chest"
   }
 }

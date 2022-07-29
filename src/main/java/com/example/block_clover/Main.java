@@ -41,6 +41,7 @@ public class Main
         ModEffects.EFFECTS.register(modEventBus);
         ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
+        ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

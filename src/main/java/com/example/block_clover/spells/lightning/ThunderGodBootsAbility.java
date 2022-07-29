@@ -6,6 +6,8 @@ import com.example.block_clover.api.ability.sorts.ContinuousAbility;
 import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.IEntityStats;
 import com.example.block_clover.init.ModAttributes;
+import com.example.block_clover.particles.ParticleEffect;
+import com.example.block_clover.particles.lightning.BootsParticleEffect;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +22,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     private static final AttributeModifier LIGHTNING_STEP = new AttributeModifier(UUID.fromString("25c5b788-fec9-11ec-b939-0242ac120002"),
             "Lightning Step", 1, AttributeModifier.Operation.ADDITION);
 
+    private static final ParticleEffect PARTICLES = new BootsParticleEffect();
     public ThunderGodBootsAbility()
     {
         super("Thunder God Boots", AbilityCategories.AbilityCategory.ATTRIBUTE);
@@ -40,6 +43,11 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(LIGHTNING_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(LIGHTNING_STEP);
         return true;
+    }
+
+    private void onDuringContinuityEvent(PlayerEntity player)
+    {
+        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
     {

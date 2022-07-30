@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 public class DemonSlayerItem extends MagicWeapon {
 
     public DemonSlayerItem() {
-        super(ModTiers.WEAPON, 7, 1.5f, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_WEAPONS).stacksTo(1));
+        super(ModTiers.WEAPON, 7, 0.1f, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_WEAPONS).stacksTo(1));
     }
 
     @Override

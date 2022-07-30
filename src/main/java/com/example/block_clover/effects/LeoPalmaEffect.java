@@ -2,7 +2,10 @@ package com.example.block_clover.effects;
 
 import com.example.block_clover.api.Beapi;
 import com.example.block_clover.init.ModAttributes;
+import com.example.block_clover.particles.ParticleEffect;
+import com.example.block_clover.particles.fire.LeoPalmaParticleEffect;
 import net.minecraft.block.Block;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.potion.EffectInstance;
@@ -11,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeMod;
 
 public class LeoPalmaEffect extends SpecialEffect {
-
+    private static final ParticleEffect PARTICLES = new LeoPalmaParticleEffect();
     public LeoPalmaEffect()
     {
         super(EffectType.HARMFUL, Beapi.hexToRGB("#000000").getRGB());
@@ -21,6 +24,17 @@ public class LeoPalmaEffect extends SpecialEffect {
                 .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "f8b2474d-4cdb-42b0-a868-327443a2a505", 100, AttributeModifier.Operation.ADDITION)
                 .addAttributeModifier(Attributes.ARMOR_TOUGHNESS, "096ae850-ca45-11ec-9d64-0242ac120002", -200, AttributeModifier.Operation.ADDITION);
 
+    }
+
+    @Override
+    public void applyEffectTick(LivingEntity livingEntity, int amplifier)
+    {
+        PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+    }
+    @Override
+    public boolean isDurationEffectTick(int duration, int amplifier)
+    {
+        return true;
     }
     @Override
     public boolean shouldRender(EffectInstance effect)

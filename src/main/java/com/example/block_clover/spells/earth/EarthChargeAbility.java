@@ -4,6 +4,8 @@ import com.example.block_clover.api.ability.AbilityCategories;
 import com.example.block_clover.api.ability.sorts.ChargeableAbility;
 import com.example.block_clover.entities.projectiles.earth.EarthChargeProjectile;
 import com.example.block_clover.init.ModEffects;
+import com.example.block_clover.particles.ParticleEffect;
+import com.example.block_clover.particles.earth.EarthChargeParticleEffect;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 
@@ -12,6 +14,7 @@ public class EarthChargeAbility extends ChargeableAbility {
 
     public static final EarthChargeAbility INSTANCE = new EarthChargeAbility();
     private boolean cancelled = false;
+    private static final ParticleEffect PARTICLES = new EarthChargeParticleEffect();
 
     public EarthChargeAbility()
     {
@@ -42,7 +45,7 @@ public class EarthChargeAbility extends ChargeableAbility {
             this.cancelled = true;
             this.stopCharging(player);
         }
-
+        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         player.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 200, 10));
     }
 

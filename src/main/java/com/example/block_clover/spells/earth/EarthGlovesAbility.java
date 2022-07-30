@@ -10,6 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.UUID;
 
@@ -44,8 +45,9 @@ public class EarthGlovesAbility extends ContinuousPunchAbility implements IParal
 
     private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
     {
-        target.push((player.getX() + target.getX()) * 0.3, (player.getY() + target.getY() + 1) * 0.05, (player.getZ() + target.getZ()) * 0.3);
-        return 4;
+        double knockback = 1.5;
+        ((LivingEntity)target).knockback((float)knockback * 0.5F, (double) MathHelper.sin(player.yRot * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(player.yRot * ((float)Math.PI / 180F))));
+        return 3;
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)

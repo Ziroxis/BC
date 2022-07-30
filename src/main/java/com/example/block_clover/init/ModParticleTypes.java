@@ -28,6 +28,9 @@ public class ModParticleTypes {
     public static final RegistryObject<ParticleType<GenericParticleData>> LIGHTNING = PARTICLE_TYPES.register("lightning", GenericParticleData::new);
     public static final RegistryObject<ParticleType<GenericParticleData>> WATER = PARTICLE_TYPES.register("water", GenericParticleData::new);
     public static final RegistryObject<ParticleType<GenericParticleData>> WIND = PARTICLE_TYPES.register("wind", GenericParticleData::new);
+    public static final RegistryObject<ParticleType<GenericParticleData>> SLASH = PARTICLE_TYPES.register("slash", GenericParticleData::new);
+    public static final RegistryObject<ParticleType<GenericParticleData>> EARTH = PARTICLE_TYPES.register("earth", GenericParticleData::new);
+    public static final RegistryObject<ParticleType<GenericParticleData>> ANTI_MAGIC = PARTICLE_TYPES.register("anti_magic", GenericParticleData::new);
 
 
     @OnlyIn(Dist.CLIENT)
@@ -42,6 +45,9 @@ public class ModParticleTypes {
         manager.register(ModParticleTypes.LIGHTNING.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/lightning_particle.png")));
         manager.register(ModParticleTypes.WATER.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/water_particle.png")));
         manager.register(ModParticleTypes.WIND.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/water_particle.png")));
+        manager.register(ModParticleTypes.SLASH.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/slash_particle.png")));
+        manager.register(ModParticleTypes.EARTH.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/earth_particle.png")));
+        manager.register(ModParticleTypes.ANTI_MAGIC.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/anti_magic_particle.png")));
 
     }
 

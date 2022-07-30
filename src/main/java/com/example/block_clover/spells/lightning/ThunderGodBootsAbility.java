@@ -33,6 +33,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         this.setExperienceGainLevelCap(50);
 
         this.onStartContinuityEvent = this::onStartContinuityEvent;
+        this.duringContinuityEvent = this::onDuringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 
@@ -45,9 +46,10 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         return true;
     }
 
-    private void onDuringContinuityEvent(PlayerEntity player)
+    private void onDuringContinuityEvent(PlayerEntity player, int timer)
     {
-        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
+        if (player.isOnGround())
+            PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
     {

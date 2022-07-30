@@ -1,4 +1,4 @@
-package com.example.block_clover.particles.lightning;
+package com.example.block_clover.particles.fire;
 
 import com.example.block_clover.api.Beapi;
 import com.example.block_clover.init.ModParticleTypes;
@@ -7,7 +7,7 @@ import com.example.block_clover.particles.ParticleEffect;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class BootsParticleEffect extends ParticleEffect {
+public class LeoPalmaParticleEffect extends ParticleEffect {
     @Override
     public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
         for (int i = 0; i < 20; i++)
@@ -17,14 +17,14 @@ public class BootsParticleEffect extends ParticleEffect {
             double offsetY = Beapi.randomDouble() / 1.25;
             double offsetZ = Beapi.randomDouble() / 1.25;
              */
-            double offsetX = Beapi.randomDouble() / 3;
-            double offsetY = Beapi.randomDouble() / 3;
-            double offsetZ = Beapi.randomDouble() / 3;
+            double offsetX = Beapi.randomDouble();
+            double offsetY = Beapi.randomDouble();
+            double offsetZ = Beapi.randomDouble();
 
-            GenericParticleData data = new GenericParticleData(ModParticleTypes.LIGHTNING.get());
+            GenericParticleData data = new GenericParticleData(ModParticleTypes.FIRE.get());
             data.setLife(1);
             data.setSize(1.5f);
-            Beapi.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
+            Beapi.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + 0.3 + offsetY, posZ + offsetZ);
         }
     }
 }

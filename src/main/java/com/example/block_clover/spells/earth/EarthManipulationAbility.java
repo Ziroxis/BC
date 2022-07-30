@@ -10,6 +10,7 @@ import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
 public class EarthManipulationAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
     public static final EarthManipulationAbility INSTANCE = new EarthManipulationAbility();
+    public int secondsActivated = 0;
 
     public EarthManipulationAbility()
     {
@@ -18,6 +19,7 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
         this.setMaxCooldown(15);
         this.setmanaCost(5);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
+        this.duringContinuityEvent = this::duringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 
@@ -27,6 +29,14 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
         if(player instanceof ServerPlayerEntity)
             ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
         return true;
+    }
+
+    private void duringContinuityEvent(PlayerEntity player, int timer)
+    {
+        if (player.tickCount % 20 == 0)
+            secondsActivated += 1;
+        if (secondsActivated >= 120)
+            this.stopContinuity(player);
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)

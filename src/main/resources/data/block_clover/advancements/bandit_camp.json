@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:green_wool"
+    },
+    "title": {
+      "translate": "Bandits!"
+    },
+    "description": {
+      "translate": "Where have they all gone?",
+      "frame": "task",
+      "show_toast": true,
+      "announce_to_chat": false
+    }
+  },
+  "parent": "block_clover:root",
+  "criteria": {
+    "in_camp": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "feature": "block_clover:bandit_camp"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "in_camp"
+    ]
+  ]
+}

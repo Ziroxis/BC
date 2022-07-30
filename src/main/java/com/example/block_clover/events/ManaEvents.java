@@ -17,7 +17,7 @@ public class ManaEvents {
         PlayerEntity player = event.player;
         IEntityStats propsEntity = EntityStatsCapability.get(player);
 
-        float regen = 1 + (float) propsEntity.getLevel()/10;
+        float regen = 1 + (float) propsEntity.getLevel()/20;
 
         if (player.tickCount % 20 == 0 && propsEntity.getMana() < propsEntity.getMaxMana())
         {

@@ -1,4 +1,4 @@
-package com.example.block_clover.particles.lightning;
+package com.example.block_clover.particles.earth;
 
 import com.example.block_clover.api.Beapi;
 import com.example.block_clover.init.ModParticleTypes;
@@ -9,11 +9,10 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
-public class DischargeParticleEffect extends ParticleEffect {
+public class EarthShakeParticleEffect extends ParticleEffect {
 
     @Override
-    public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
-    {
+    public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
         double phi = 0;
         double x, y, z;
         double radius = 0.4;
@@ -37,21 +36,22 @@ public class DischargeParticleEffect extends ParticleEffect {
                 z = (radius* Math.sin(theta) * Math.sin(phi)) + Beapi.randomDouble();
                  */
 
+
                 motionX = x * 1.2;
                 motionY = 0.2 + (random.nextDouble() / 8);
                 motionZ = z * 1.2;
 
                 GenericParticleData data;
                 if(i % 3 == 0)
-                    data = new GenericParticleData(ModParticleTypes.LIGHTNING.get());
+                    data = new GenericParticleData(ModParticleTypes.EARTH.get());
                 else
-                    data = new GenericParticleData(ModParticleTypes.LIGHTNING.get());
+                    data = new GenericParticleData(ModParticleTypes.EARTH.get());
                 data.setLife(7);
-                data.setSize(8F);
+                data.setSize(3F);
                 data.setMotion(motionX, motionY / 2, motionZ);
                 //data.setColor(0.7F, 0, 0.7F, 0.5F); -> purple
                 data.setColor(1, 1, 1, 1);
-                Beapi.spawnParticles(data, (ServerWorld) world, posX + x, posY - 0.2 + y, posZ + z);
+                Beapi.spawnParticles(data, (ServerWorld) world, posX + x, posY , posZ + z);
 
                 i++;
             }

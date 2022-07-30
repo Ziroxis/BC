@@ -37,7 +37,7 @@ public class ExperienceEvents {
             ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, statsProps.getExperience());
             if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
                 return;
-            statsProps.alterMaxMana(10);
+            statsProps.alterMaxMana(5);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
             //player.sendMessage(new StringTextComponent("You leveled up to level " + statsProps.getLevel() + "!"), player.getUUID());
         }

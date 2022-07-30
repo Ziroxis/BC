@@ -9,6 +9,9 @@ import com.example.block_clover.data.ability.IAbilityData;
 import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.IEntityStats;
 import com.example.block_clover.init.ModDamageSource;
+import com.example.block_clover.particles.ParticleEffect;
+import com.example.block_clover.particles.earth.EarthShakeParticleEffect;
+import com.example.block_clover.particles.lightning.BootsParticleEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -21,6 +24,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class EarthPassiveEvent {
+    private static final ParticleEffect PARTICLES = new EarthShakeParticleEffect();
 
     @SubscribeEvent
     public static void fallingDamage(LivingFallEvent event)
@@ -52,8 +56,9 @@ public class EarthPassiveEvent {
             }
         }
 
-        if (distance < 5)
+        if (distance < 3)
             return;
+        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         IEntityStats stats = EntityStatsCapability.get(player);
         List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 10 + (float) event.getDistance() / 2);
         if (entities.contains(player))

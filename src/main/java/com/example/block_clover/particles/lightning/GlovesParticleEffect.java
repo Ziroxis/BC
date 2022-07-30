@@ -7,23 +7,23 @@ import com.example.block_clover.particles.ParticleEffect;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class BootsParticleEffect extends ParticleEffect {
+public class GlovesParticleEffect extends ParticleEffect {
+
+
     @Override
-    public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+    public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+    {
+
         for (int i = 0; i < 20; i++)
         {
-            /*
-            double offsetX = Beapi.randomDouble() / 1.25;
-            double offsetY = Beapi.randomDouble() / 1.25;
-            double offsetZ = Beapi.randomDouble() / 1.25;
-             */
-            double offsetX = Beapi.randomDouble() / 3;
-            double offsetY = Beapi.randomDouble() / 3;
-            double offsetZ = Beapi.randomDouble() / 3;
+            double offsetX = Beapi.randomDouble() / 1.2;
+            double offsetY = Beapi.randomDouble();
+            double offsetZ = Beapi.randomDouble() / 1.2;
 
             GenericParticleData data = new GenericParticleData(ModParticleTypes.LIGHTNING.get());
-            data.setLife(1);
+            data.setLife(10);
             data.setSize(1.5f);
+            data.setColor(1, 1, 1, 0.6f);
             Beapi.spawnParticles(data, (ServerWorld) world, posX + offsetX, posY + offsetY, posZ + offsetZ);
         }
     }

@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "item": "block_clover:mage_hat"
+    },
+    "title": {
+      "translate": "Magic!"
+    },
+    "description": {
+      "translate": "Let the true magic begin!"
+    },
+    "background": "block_clover:textures/blocks/moguro_log.png",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "in_tower": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "feature": "block_clover:magictower"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "in_tower"
+    ]
+  ]
+}

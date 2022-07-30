@@ -6,6 +6,9 @@ import com.example.block_clover.api.ability.AbilityCategories;
 import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.IEntityStats;
 import com.example.block_clover.init.ModDamageSource;
+import com.example.block_clover.particles.ParticleEffect;
+import com.example.block_clover.particles.earth.EarthQuakeParticleEffect;
+import com.example.block_clover.particles.lightning.BootsParticleEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -15,6 +18,7 @@ import java.util.List;
 
 public class EarthQuakeAbility extends Ability {
     public static final EarthQuakeAbility INSTANCE = new EarthQuakeAbility();
+    private static final ParticleEffect PARTICLES = new EarthQuakeParticleEffect();
 
     public EarthQuakeAbility()
     {
@@ -30,6 +34,7 @@ public class EarthQuakeAbility extends Ability {
     {
         IEntityStats stats = EntityStatsCapability.get(player);
         List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 10 + (float) stats.getLevel() / 2);
+        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (entities.contains(player))
         {
             entities.remove(player);

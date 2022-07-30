@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "block_clover:yamis_katana"
+    },
+    "title": "Slice n dice",
+    "description": "Get a hold of a katana! ",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "block_clover:bandit_camp",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "block_clover:yamis_katana"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

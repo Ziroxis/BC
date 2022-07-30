@@ -7,11 +7,12 @@ import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.IEntityStats;
 import com.example.block_clover.init.ModAttributes;
 import com.example.block_clover.init.ModItems;
+import com.example.block_clover.particles.ParticleEffect;
+import com.example.block_clover.particles.anti_magic.DemonStateParticleEffect;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.SwordItem;
 import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
@@ -20,6 +21,8 @@ import java.util.UUID;
 
 //TODO add the model and the experience by using the ability
 public class DemonStateAbility extends ContinuousAbility implements IParallelContinuousAbility {
+
+    private static final ParticleEffect PARTICLES = new DemonStateParticleEffect();
 
     public static final DemonStateAbility INSTANCE = new DemonStateAbility();
     public int secondsActivated = 0;
@@ -65,6 +68,7 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
             secondsActivated += 1;
         if (secondsActivated >= 120)
             this.stopContinuity(player);
+        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get())))
         {
             player.sendMessage(new StringTextComponent("Need to hold an anti-magic sword!"), Util.NIL_UUID);

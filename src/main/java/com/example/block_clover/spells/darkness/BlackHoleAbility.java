@@ -11,12 +11,11 @@ public class BlackHoleAbility extends ContinuousAbility {
     public BlackHoleAbility()
     {
         super("Black Hole", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Spawns in a black hole following you.\n The black hole sucks all the enemy spells near it.");
+        this.setDescription("Spawns in a black hole following you.\nThe black hole sucks all the enemy spells near it.");
         this.setmanaCost(10);
         this.setExperiencePoint(10);
         this.setExperienceGainLevelCap(50);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
-        this.duringContinuityEvent = this::duringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
     
@@ -27,11 +26,7 @@ public class BlackHoleAbility extends ContinuousAbility {
         player.level.addFreshEntity(this.blackHoleEntity);
         return true;
     }
-    private void duringContinuityEvent(PlayerEntity player, int timer)
-    {
-        if (timer >= 20)
-            this.stopContinuity(player);
-    }
+
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
         this.blackHoleEntity.remove();

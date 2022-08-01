@@ -22,7 +22,6 @@ public class ManaEvents {
         if (player.tickCount % 20 == 0 && propsEntity.getMana() < propsEntity.getMaxMana())
         {
             propsEntity.alterMana(regen);
-            System.out.println(propsEntity.getMana());
         }
     }
 }

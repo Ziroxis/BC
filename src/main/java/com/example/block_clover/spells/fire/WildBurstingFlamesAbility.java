@@ -28,7 +28,7 @@ public class WildBurstingFlamesAbility extends RepeaterAbility {
         FireBallProjectile projectile = new FireBallProjectile(player.level, player);
         player.level.addFreshEntity(projectile);
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 20);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 3, 20);
 
         return true;
     }

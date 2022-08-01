@@ -11,6 +11,7 @@ import com.example.block_clover.spells.lightning.ThunderGodBootsAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
@@ -37,7 +38,7 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
 
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         SlashBladesAbility slashBladesAbility = abilityProps.getEquippedAbility(SlashBladesAbility.INSTANCE);
-        if (slashBladesAbility.isContinuous())
+        if (slashBladesAbility != null && slashBladesAbility.isContinuous())
         {
             this.clearTargets();
 
@@ -45,6 +46,7 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
             player.setDeltaMovement(speed.x, 0.3, speed.z);
             player.hurtMarked = true;
             ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+
             return true;
         }
         else
@@ -58,11 +60,15 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
     {
         if (this.canDealDamage())
         {
+
             List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 1.5, LivingEntity.class);
             list.remove(player);
 
             list.forEach(entity ->
             {
+                ((ServerWorld) player.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY(),
+                        entity.getZ(), (int) 10, 3, 3, 3, 0.1);
+
                 if(this.isTarget(entity) && player.canSee(entity))
                     entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
             });

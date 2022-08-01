@@ -2,6 +2,7 @@ package com.example.block_clover.setup;
 
 import com.example.block_clover.Main;
 import com.example.block_clover.commands.AbilityCommand;
+import com.example.block_clover.commands.AttributeCommand;
 import com.example.block_clover.commands.ExperienceCommand;
 import com.example.block_clover.commands.LevelCommand;
 import com.mojang.brigadier.CommandDispatcher;
@@ -20,5 +21,6 @@ public class ForgeSetup {
         ExperienceCommand.register(dispatcher);
         AbilityCommand.register(dispatcher);
         LevelCommand.register(dispatcher);
+        AttributeCommand.register(dispatcher);
     }
 }

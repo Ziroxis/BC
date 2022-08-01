@@ -63,7 +63,6 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
     }
     private void duringContinuityEvent(PlayerEntity player, int timer)
     {
-        System.out.println(this.isContinuous());
         if (player.tickCount % 20 == 0)
             secondsActivated += 1;
         if (secondsActivated >= 120)

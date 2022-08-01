@@ -29,36 +29,17 @@ public class ThunderCrumblingOrbAbility extends Ability {
         this.onUseEvent = this::onUseEvent;
     }
 
-    private boolean onUseEvent(PlayerEntity player)
-    {
+    private boolean onUseEvent(PlayerEntity player) {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
-        {
-            if (ability == null)
-                continue;
-
-            try {
-                if (ability instanceof ThunderGodGlovesAbility && ability.isContinuous())
-                {
-                    LightningOrbProjectile projectile = new LightningOrbProjectile(player.level, player);
-                    player.level.addFreshEntity(projectile);
-                    ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-                    projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1.5f, 1);
-                    return true;
-                }
-                else
-                {
-                    player.sendMessage(new StringTextComponent("Need to put on your electric gloves!"), Util.NIL_UUID);
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+        ThunderGodGlovesAbility godGlovesAbility = abilityProps.getEquippedAbility(ThunderGodGlovesAbility.INSTANCE);
+        if (godGlovesAbility != null && godGlovesAbility.isContinuous()) {
+            LightningOrbProjectile projectile = new LightningOrbProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1.5f, 1);
+            return true;
         }
-
+        player.sendMessage(new StringTextComponent("Need to put on your god gloves!"), Util.NIL_UUID);
         return false;
-
     }
 }

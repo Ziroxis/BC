@@ -24,7 +24,7 @@ public class LeoPalmaAbility extends Ability {
     public LeoPalmaAbility()
     {
         super("Leo Palma", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Engulfs the entity you're looking at with flames");
+        this.setDescription("Engulfs the entity you're looking at with flames.\n The entity engulfed by the flames cannot move.");
         this.setMaxCooldown(10);
         this.setmanaCost(30);
         this.setExperiencePoint(30);

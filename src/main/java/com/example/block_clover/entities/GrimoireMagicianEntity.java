@@ -70,7 +70,8 @@ public class GrimoireMagicianEntity extends CreatureEntity
             {
                 player.displayClientMessage(new StringTextComponent("You already got your grimoire go away!"), false);
 
-            }else {
+            }
+            else {
                 if (magicLevel >= 5)
                 {
                     player.displayClientMessage(new StringTextComponent("Here is your Grimoire! You seem mature enough"), false);
@@ -79,7 +80,7 @@ public class GrimoireMagicianEntity extends CreatureEntity
 
                 } else
                 {
-                    player.displayClientMessage(new StringTextComponent("Come back when you're mature enough for a grimoire! Get at least level5!"), false);
+                    player.displayClientMessage(new StringTextComponent("Come back when you're mature enough for a grimoire! Get at least level 5!"), false);
                 }
             }
 

@@ -45,7 +45,7 @@ public class EarthPassiveEvent {
 
             try
             {
-                if (!(ability instanceof EarthPassiveAbility && ability.isContinuous()))
+                if (!(ability instanceof EarthPassiveAbility && ability.isPassiveEnabled()))
                 {
                     return;
                 }

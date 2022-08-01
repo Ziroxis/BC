@@ -49,7 +49,11 @@ public class ObtainDemonStateEvent {
         if (random == 0)
         {
             abilityProps.addUnlockedAbility(DemonStateAbility.INSTANCE);
+            abilityProps.addUnlockedAbility(BlackSlashAbility.INSTANCE);
+            abilityProps.addUnlockedAbility(BlackTornadoAbility.INSTANCE);
             abilityProps.setEquippedAbility(3, DemonStateAbility.INSTANCE);
+            abilityProps.setEquippedAbility(4, BlackSlashAbility.INSTANCE);
+            abilityProps.setEquippedAbility(5, BlackTornadoAbility.INSTANCE);
             player.addEffect(new EffectInstance(Effects.ABSORPTION, 80, 6));
             player.sendMessage(new StringTextComponent("You unlocked your demon form!"), player.getUUID());
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);

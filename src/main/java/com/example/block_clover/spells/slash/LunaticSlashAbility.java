@@ -6,6 +6,7 @@ import com.example.block_clover.api.ability.AbilityCategories;
 import com.example.block_clover.api.ability.sorts.RepeaterAbility;
 import com.example.block_clover.data.ability.AbilityDataCapability;
 import com.example.block_clover.data.ability.IAbilityData;
+import com.example.block_clover.entities.projectiles.slash.DeathScytheProjectile;
 import com.example.block_clover.init.ModDamageSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -37,38 +38,25 @@ public class LunaticSlashAbility extends RepeaterAbility {
     private boolean onUseEvent(PlayerEntity player)
     {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
+        SlashBladesAbility slashBladesAbility = abilityProps.getEquippedAbility(SlashBladesAbility.INSTANCE);
+        if (slashBladesAbility.isContinuous())
         {
-            if (ability == null)
-                continue;
+            RayTraceResult mop = Beapi.rayTraceBlocksAndEntities(player, 5);
+            List<LivingEntity> entities = Beapi.getEntitiesAround(new BlockPos(mop.getLocation()), player.level, 3, LivingEntity.class);
+            if(entities.contains(player))
+                entities.remove(player);
 
-            try
-            {
-                if (ability instanceof SlashBladesAbility && ability.isContinuous())
-                {
-                    RayTraceResult mop = Beapi.rayTraceBlocksAndEntities(player, 5);
-                    List<LivingEntity> entities = Beapi.getEntitiesAround(new BlockPos(mop.getLocation()), player.level, 3, LivingEntity.class);
-                    if(entities.contains(player))
-                        entities.remove(player);
-
-                    entities.forEach(entity -> {
-                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 5);
-                        ((ServerWorld) player.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY(),
-                                entity.getZ(), (int) 10, 3, 3, 3, 0.1);
-                    });
-
-                    return true;
-                }
-                else
-                {
-                    player.sendMessage(new StringTextComponent("Need to put on your slash blades!"), Util.NIL_UUID);
-                    return false;
-                }
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            entities.forEach(entity -> {
+                entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 5);
+                ((ServerWorld) player.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY(),
+                        entity.getZ(), (int) 10, 3, 3, 3, 0.1);
+            });
+            return true;
         }
-        return false;
+        else
+        {
+            player.sendMessage(new StringTextComponent("Need to put on your slash blades!"), Util.NIL_UUID);
+            return false;
+        }
     }
 }

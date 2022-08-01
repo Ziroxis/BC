@@ -19,7 +19,6 @@ import net.minecraft.util.text.StringTextComponent;
 
 import java.util.UUID;
 
-//TODO add the model and the experience by using the ability
 public class DemonStateAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
     private static final ParticleEffect PARTICLES = new DemonStateParticleEffect();
@@ -64,10 +63,14 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
     }
     private void duringContinuityEvent(PlayerEntity player, int timer)
     {
+        System.out.println(this.isContinuous());
         if (player.tickCount % 20 == 0)
             secondsActivated += 1;
         if (secondsActivated >= 120)
+        {
             this.stopContinuity(player);
+            return;
+        }
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get())))
         {
@@ -82,9 +85,12 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
         player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(ANTISTRENGTH);
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(ANTISPEED);
         player.getAttribute(ModAttributes.JUMP_HEIGHT.get()).removeModifier(ANTIJUMP);
-        player.abilities.mayfly = false;
-        player.abilities.flying = false;
-        player.fallDistance = 0;
+        if (!player.isCreative())
+        {
+            player.abilities.mayfly = false;
+            player.abilities.flying = false;
+            player.fallDistance = 0;
+        }
         if(player instanceof ServerPlayerEntity)
             ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
 

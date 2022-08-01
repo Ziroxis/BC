@@ -1,7 +1,7 @@
 package com.example.block_clover.spells.darkness;
 
-import com.example.block_clover.api.ability.Ability;
 import com.example.block_clover.api.ability.AbilityCategories;
+import com.example.block_clover.api.ability.sorts.RepeaterAbility;
 import com.example.block_clover.data.ability.AbilityDataCapability;
 import com.example.block_clover.data.ability.IAbilityData;
 import com.example.block_clover.entities.projectiles.darkness.AvidyaSlashProjectile;
@@ -11,17 +11,16 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
-public class AvidyaSlashAbility extends Ability {
+public class AvidyaWildSlashAbility extends RepeaterAbility {
+    public static final AvidyaWildSlashAbility INSTANCE = new AvidyaWildSlashAbility();
 
-    public static final AvidyaSlashAbility INSTANCE = new AvidyaSlashAbility();
-
-    public AvidyaSlashAbility()
+    public AvidyaWildSlashAbility()
     {
-        super("Avidya Slash", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoot a slash of darkness");
-        this.setMaxCooldown(5);
-        this.setmanaCost(15);
-        this.setExperiencePoint(20);
+        super("Avidya Wild Slash", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        this.setDescription("Wildly slashes darkness in front of you");
+        this.setmanaCost(20);
+        this.setMaxCooldown(15);
+        this.setMaxRepeaterCount(6, 2);
         this.onUseEvent = this::onUseEvent;
     }
 
@@ -29,18 +28,18 @@ public class AvidyaSlashAbility extends Ability {
     {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         DarkCloakedBladeAbility darkCloakedBladeAbility = abilityProps.getEquippedAbility(DarkCloakedBladeAbility.INSTANCE);
-        if (darkCloakedBladeAbility.isContinuous())
+        if (darkCloakedBladeAbility != null && darkCloakedBladeAbility.isContinuous())
         {
             AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
             player.level.addFreshEntity(projectile);
             ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 10);
             return true;
         }
-        else
-        {
-            player.sendMessage(new StringTextComponent("Need to cloak your sword with darkness!"), Util.NIL_UUID);
-            return false;
-        }
+        player.sendMessage(new StringTextComponent("Need to cloak your sword with darkness!"), Util.NIL_UUID);
+        this.stopContinuity(player);
+        this.startCooldown(player);
+        return false;
+
     }
 }

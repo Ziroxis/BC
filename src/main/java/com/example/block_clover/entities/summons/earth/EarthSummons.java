@@ -2,8 +2,8 @@ package com.example.block_clover.entities.summons.earth;
 
 import com.example.block_clover.Main;
 import com.example.block_clover.api.Beapi;
-import com.example.block_clover.client.EarthGolemRenderer;
-import com.example.block_clover.client.EarthMinionRenderer;
+import com.example.block_clover.client.renderers.summons.earth.EarthGolemRenderer;
+import com.example.block_clover.client.renderers.summons.earth.EarthMinionRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

@@ -35,32 +35,19 @@ public class DeathScytheShowerAbility extends RepeaterAbility {
     private boolean onUseEvent(PlayerEntity player)
     {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
+        SlashBladesAbility slashBladesAbility = abilityProps.getEquippedAbility(SlashBladesAbility.INSTANCE);
+        if (slashBladesAbility.isContinuous())
         {
-            if (ability == null)
-                continue;
-
-            try
-            {
-                if (ability instanceof SlashBladesAbility && ability.isContinuous())
-                {
-                    DeathScytheProjectile projectile = new DeathScytheProjectile(player.level, player);
-                    player.level.addFreshEntity(projectile);
-                    ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-                    projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1.5f, 2f);
-                    return true;
-                }
-                else
-                {
-                    player.sendMessage(new StringTextComponent("Need to put on your slash blades!"), Util.NIL_UUID);
-                    return false;
-                }
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            DeathScytheProjectile projectile = new DeathScytheProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1.5f);
+            return true;
         }
-
-        return false;
+        else
+        {
+            player.sendMessage(new StringTextComponent("Need to put on your slash blades!"), Util.NIL_UUID);
+            return false;
+        }
     }
 }

@@ -74,6 +74,7 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
     @Override
     public void use(PlayerEntity player)
     {
+        super.use(player);
         IEntityStats stats = EntityStatsCapability.get(player);
         stats.alterMana(-getmanaCost());
         if (stats.getLevel() < getExperienceGainLevelCap())
@@ -86,7 +87,6 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
         PacketHandler.sendTo(new ManaSync(stats.getMana()), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
 
-        super.use(player);
     }
 
     @Override

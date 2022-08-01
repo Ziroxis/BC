@@ -44,7 +44,7 @@ public class ModParticleTypes {
         manager.register(ModParticleTypes.LIGHT.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/light_particle.png")));
         manager.register(ModParticleTypes.LIGHTNING.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/lightning_particle.png")));
         manager.register(ModParticleTypes.WATER.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/water_particle.png")));
-        manager.register(ModParticleTypes.WIND.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/water_particle.png")));
+        manager.register(ModParticleTypes.WIND.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/wind_particle.png")));
         manager.register(ModParticleTypes.SLASH.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/slash_particle.png")));
         manager.register(ModParticleTypes.EARTH.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/earth_particle.png")));
         manager.register(ModParticleTypes.ANTI_MAGIC.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/anti_magic_particle.png")));

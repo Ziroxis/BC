@@ -11,6 +11,9 @@ import com.example.block_clover.init.ModValues;
 import com.example.block_clover.networking.PacketHandler;
 import com.example.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.example.block_clover.spells.darkness.AvidyaSlashAbility;
+import com.example.block_clover.spells.darkness.AvidyaWildSlashAbility;
+import com.example.block_clover.spells.darkness.BlackHoleAbility;
+import com.example.block_clover.spells.darkness.BluntStrikeAbility;
 import com.example.block_clover.spells.earth.*;
 import com.example.block_clover.spells.fire.FlameRoarAbility;
 import com.example.block_clover.spells.fire.LeoPalmaAbility;
@@ -82,6 +85,9 @@ public class AbilityProgressionEvents {
         if (statsProps.getAttribute().equals(ModValues.DARKNESS))
         {
             gainAbility(event.getPlayer(), 3, AvidyaSlashAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, BluntStrikeAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, AvidyaWildSlashAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, BlackHoleAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.SLASH))
         {

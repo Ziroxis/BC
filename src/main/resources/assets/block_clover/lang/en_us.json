@@ -94,5 +94,11 @@
   "ability.block_clover.death_scythe_shower": "Death scythe shower",
   "ability.block_clover.forward_thrust": "Forward thrust",
   "ability.block_clover.lunatic_slash": "Lunatic slash",
-  "ability.block_clover.round_lunatic_slash": "Round lunatic slash"
+  "ability.block_clover.round_lunatic_slash": "Round lunatic slash",
+
+  "ability.block_clover.demon_state": "Demon state",
+  "ability.block_clover.black_slash": "Black slash",
+  "ability.block_clover.black_tornado": "Black tornado",
+  "ability.block_clover.bull_thrust": "Bull thrust",
+  "ability.block_clover.demon_slayer": "Demon slayer"
 }

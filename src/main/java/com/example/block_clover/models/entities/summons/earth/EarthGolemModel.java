@@ -1,4 +1,4 @@
-package com.example.block_clover.models.entities.summons;
+package com.example.block_clover.models.entities.summons.earth;
 
 import com.example.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;

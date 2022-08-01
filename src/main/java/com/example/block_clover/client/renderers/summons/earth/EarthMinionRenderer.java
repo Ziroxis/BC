@@ -1,7 +1,7 @@
-package com.example.block_clover.client;
+package com.example.block_clover.client.renderers.summons.earth;
 
 import com.example.block_clover.entities.summons.earth.EarthMinionEntity;
-import com.example.block_clover.models.entities.summons.EarthMinionModel;
+import com.example.block_clover.models.entities.summons.earth.EarthMinionModel;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;

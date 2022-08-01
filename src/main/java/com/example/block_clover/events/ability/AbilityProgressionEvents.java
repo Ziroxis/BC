@@ -15,10 +15,7 @@ import com.example.block_clover.spells.darkness.AvidyaWildSlashAbility;
 import com.example.block_clover.spells.darkness.BlackHoleAbility;
 import com.example.block_clover.spells.darkness.BluntStrikeAbility;
 import com.example.block_clover.spells.earth.*;
-import com.example.block_clover.spells.fire.FlameRoarAbility;
-import com.example.block_clover.spells.fire.LeoPalmaAbility;
-import com.example.block_clover.spells.fire.SolLineaAbility;
-import com.example.block_clover.spells.fire.SpiralFlameAbility;
+import com.example.block_clover.spells.fire.*;
 import com.example.block_clover.spells.light.LightBladeShowerAbility;
 import com.example.block_clover.spells.light.LightHealingAbility;
 import com.example.block_clover.spells.light.LightMovementAbility;
@@ -28,6 +25,7 @@ import com.example.block_clover.spells.slash.*;
 import com.example.block_clover.spells.wind.ToweringTornadoAbility;
 import com.example.block_clover.spells.wind.WindBladeShowerAbility;
 import com.example.block_clover.spells.wind.WindCrescentAbility;
+import com.example.block_clover.spells.wind.WindFlightAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,7 +46,7 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 3, WindCrescentAbility.INSTANCE);
             gainAbility(event.getPlayer(), 7, WindBladeShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ToweringTornadoAbility.INSTANCE);
-
+            gainAbility(event.getPlayer(), 20, WindFlightAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.LIGHT))
         {
@@ -72,6 +70,7 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 10, SpiralFlameAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, SolLineaAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, LeoPalmaAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, WildBurstingFlamesAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.EARTH))
         {

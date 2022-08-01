@@ -517,7 +517,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
         if (propsEntity.getMana() < manaCost)
         {
-            player.sendMessage(new TranslationTextComponent("Not enough mana!"), Util.NIL_UUID);
+            //player.sendMessage(new TranslationTextComponent("Not enough mana!"), Util.NIL_UUID);
 
             return false;
         }

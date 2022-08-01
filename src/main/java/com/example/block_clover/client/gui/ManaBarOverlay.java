@@ -16,25 +16,46 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class ManaBarOverlay {
     private final ResourceLocation manaBar = new ResourceLocation(Main.MODID + ":textures/gui/mana_bars.png");
     private final int tex_width = 9, tex_height = 102, bar_width = 7, bar_height = 100;
-
+    int mana = 0;
 
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent.Post event) {
-
+        ClientPlayerEntity player = Minecraft.getInstance().player;
+        assert player != null;
+        IEntityStats entityStats = EntityStatsCapability.get(player);
+        String attribute = entityStats.getAttribute();
+        switch (attribute)
+        {
+            case "Wind":
+            case "Slash":
+                mana = 1;
+                break;
+            case "Fire":
+                mana = 6;
+                break;
+            case "Light":
+                mana = 7;
+                break;
+            case "Lightning":
+                mana = 3;
+                break;
+            case "Darkness":
+                mana = 2;
+                break;
+            case "Earth":
+                mana = 4;
+                break;
+        }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
 
-            ClientPlayerEntity player = Minecraft.getInstance().player;
-            IEntityStats entityStats = EntityStatsCapability.get(player);
+            //ClientPlayerEntity player = Minecraft.getInstance().player;
+            //IEntityStats entityStats = EntityStatsCapability.get(player);
 
             if (entityStats.getMaxMana() > 0) {
                 Minecraft mc = Minecraft.getInstance();
-                /*
-                int mana = 0;
-                if ("Wind".equals(entityStats.getAttribute())) {
-                    mana = 1;
-                }
-                 */
-                int mana = 1;
+
+
+
                 int colour_x = ((mana * 8) + 9); // CORRECT FORMULA ((chakra.returncolorChakra() * 8) + 9)
                 mc.textureManager.bind(manaBar);
                 mc.gui.blit(event.getMatrixStack(), 20, 130, 0, 0, tex_width, tex_height);

@@ -15,7 +15,10 @@ import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class BlackModeModel<T extends LivingEntity> extends BipedModel<T>{
     private final ModelRenderer LeftArm3;
     private final ModelRenderer Body2;

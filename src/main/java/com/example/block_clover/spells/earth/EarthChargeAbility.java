@@ -45,7 +45,6 @@ public class EarthChargeAbility extends ChargeableAbility {
             this.cancelled = true;
             this.stopCharging(player);
         }
-        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         player.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 200, 10));
     }
 
@@ -53,6 +52,7 @@ public class EarthChargeAbility extends ChargeableAbility {
     {
         if (this.cancelled)
             return true;
+        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
 
 
         int charge = this.getMaxChargeTime() - this.getChargeTime();

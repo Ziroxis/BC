@@ -4,6 +4,7 @@ import com.example.block_clover.Main;
 import com.example.block_clover.data.ability.AbilityDataCapability;
 import com.example.block_clover.data.entity.EntityStatsCapability;
 import com.example.block_clover.data.entity.EntityStatsProvider;
+import com.example.block_clover.data.quest.QuestDataCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +19,7 @@ public class ModCapabilities {
     {
         EntityStatsCapability.register();
         AbilityDataCapability.register();
-
+        QuestDataCapability.register();
     }
 
     @SubscribeEvent

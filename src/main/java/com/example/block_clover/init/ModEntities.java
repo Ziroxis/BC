@@ -1,6 +1,7 @@
 package com.example.block_clover.init;
 
 import com.example.block_clover.Main;
+import com.example.block_clover.entities.BanditEntity;
 import com.example.block_clover.entities.GrimoireMagicianEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -18,6 +19,13 @@ public class ModEntities {
                             .sized(1f, 2f)
                             .setTrackingRange(5)
                             .build(new ResourceLocation(Main.MODID, "grimoire_magician").toString()));
+
+    public static final RegistryObject<EntityType<BanditEntity>> BANDIT = ENTITIES
+            .register("bandit",
+                    () -> EntityType.Builder.of(BanditEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "bandit").toString()));
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

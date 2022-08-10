@@ -25,7 +25,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.curios.CuriosApi;
 import com.yuanno.block_clover.api.curios.type.capability.ICurio;
 import com.yuanno.block_clover.api.curios.type.capability.ICurioItem;
-import com.yuanno.block_clover.client.curios.CrownModel;
+import com.yuanno.block_clover.client.curios.render.model.CrownModel;
 import com.yuanno.block_clover.curios.capability.CurioItemCapability;
 import com.yuanno.block_clover.init.ModItemGroup;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -33,7 +33,6 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
@@ -43,7 +42,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 
 public class CrownItem extends Item implements ICurioItem {
 

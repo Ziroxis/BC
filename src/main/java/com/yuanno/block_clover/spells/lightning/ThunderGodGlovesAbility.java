@@ -29,8 +29,8 @@ public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements I
     {
         super("Thunder God Gloves", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("The user gets speed by enveloping himself with lightning gloves");
-        this.setMaxCooldown(30);
-        this.setmanaCost(3);
+        this.setmanaCost(5);
+        this.setMaxCooldown(5);
         this.setExperiencePoint(10);
         this.setExperienceGainLevelCap(50);
 

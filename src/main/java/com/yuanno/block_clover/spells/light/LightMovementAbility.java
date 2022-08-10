@@ -20,8 +20,8 @@ public class LightMovementAbility extends Ability {
     public LightMovementAbility()
     {
         super("Light Movement", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setmanaCost(30);
-        this.setMaxCooldown(3);
+        this.setmanaCost(45);
+        this.setMaxCooldown(4);
         this.setExperiencePoint(10);
         this.onUseEvent = this::onUseEvent;
     }

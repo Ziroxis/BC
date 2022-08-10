@@ -20,7 +20,7 @@ public class ToweringTornadoAbility extends Ability {
         super("Towering Tornado", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Pushes enemies away from you with wind");
         this.setMaxCooldown(10);
-        this.setmanaCost(5);
+        this.setmanaCost(15);
         this.setExperiencePoint(15);
         this.setExperienceGainLevelCap(30);
 
@@ -29,18 +29,18 @@ public class ToweringTornadoAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        List<LivingEntity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 6F, LivingEntity.class);
+        List<LivingEntity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 12F, LivingEntity.class);
         entities.remove(player);
 
         entities.forEach(entityi ->
         {
-            Vector3d speed = Beapi.Propulsion(player, 2.5, 2.5, 2.5);
+            Vector3d speed = Beapi.Propulsion(player, 5, 5, 5);
             entityi.setDeltaMovement(speed.x, speed.y, speed.z);
             entityi.hurtMarked = true;
             entityi.hasImpulse = true;
 
 
-            entityi.hurt(ModDamageSource.causeAbilityDamage(player, this), 5);
+            entityi.hurt(ModDamageSource.causeAbilityDamage(player, this), 7);
         });
 
         if (player.level instanceof ServerWorld)

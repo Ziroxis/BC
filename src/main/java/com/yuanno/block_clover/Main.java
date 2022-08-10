@@ -8,6 +8,8 @@ import com.yuanno.block_clover.api.curios.SlotTypeMessage;
 import com.yuanno.block_clover.api.curios.SlotTypePreset;
 import com.yuanno.block_clover.client.ClientHandler;
 import com.yuanno.block_clover.client.curios.*;
+import com.yuanno.block_clover.client.curios.gui.CuriosScreen;
+import com.yuanno.block_clover.client.curios.gui.GuiEventHandler;
 import com.yuanno.block_clover.client.gui.ManaBarOverlay;
 import com.yuanno.block_clover.curios.CuriosConfig;
 import com.yuanno.block_clover.curios.CuriosHelper;
@@ -18,6 +20,7 @@ import com.yuanno.block_clover.curios.event.CuriosEventHandler;
 import com.yuanno.block_clover.curios.network.NetworkHandler;
 import com.yuanno.block_clover.curios.server.SlotHelper;
 import com.yuanno.block_clover.curios.server.command.CurioArgumentType;
+import com.yuanno.block_clover.curios.server.command.CuriosSelectorOptions;
 import com.yuanno.block_clover.curios.slottype.SlotTypeManager;
 import com.yuanno.block_clover.curios.triggers.EquipCurioTrigger;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
@@ -43,7 +46,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -99,7 +101,6 @@ public class Main
         InterModComms.sendTo(Main.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BACK.getMessageBuilder().build());
         InterModComms.sendTo(Main.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
         InterModComms.sendTo(Main.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BRACELET.getMessageBuilder().build());
-        InterModComms.sendTo(Main.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.BELT.getMessageBuilder().build());
 
         if (DEBUG) {
             InterModComms.sendTo(MODID, SlotTypeMessage.REGISTER_TYPE,
@@ -127,6 +128,7 @@ public class Main
         CuriosApi.setCuriosHelper(new CuriosHelper());
         CurioInventoryCapability.register();
         CurioItemCapability.register();
+        CuriosSelectorOptions.register();
         MinecraftForge.EVENT_BUS.register(new CuriosEventHandler());
         CriteriaTriggers.register(EquipCurioTrigger.INSTANCE);
         ArgumentTypes.register("curios:slot_type", CurioArgumentType.class,

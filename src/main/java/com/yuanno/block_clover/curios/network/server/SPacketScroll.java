@@ -19,7 +19,7 @@
 
 package com.yuanno.block_clover.curios.network.server;
 
-import com.yuanno.block_clover.client.curios.CuriosScreen;
+import com.yuanno.block_clover.client.curios.gui.CuriosScreen;
 import com.yuanno.block_clover.curios.inventory.container.CuriosContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;

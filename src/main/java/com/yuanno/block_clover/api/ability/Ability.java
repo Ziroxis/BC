@@ -38,7 +38,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     private String textureName = "";
     private int manaCost = 1;
     private int experiencePoint = 0;
-    private int experienceGainLevelCap = 100;
+    private int experienceGainLevelCap = 50;
     private ITextComponent tooltip;
     protected double cooldown;
     protected double maxCooldown;

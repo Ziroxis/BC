@@ -25,7 +25,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.curios.SlotContext;
 import com.yuanno.block_clover.api.curios.type.capability.ICurio;
 import com.yuanno.block_clover.api.curios.type.capability.ICurioItem;
-import com.yuanno.block_clover.client.curios.AmuletModel;
+import com.yuanno.block_clover.client.curios.render.model.AmuletModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;

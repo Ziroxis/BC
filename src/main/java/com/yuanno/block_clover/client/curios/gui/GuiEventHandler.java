@@ -17,7 +17,7 @@
  * License along with Curios.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.yuanno.block_clover.client.curios;
+package com.yuanno.block_clover.client.curios.gui;
 
 import com.yuanno.block_clover.curios.network.NetworkHandler;
 import com.yuanno.block_clover.curios.network.client.CPacketDestroy;

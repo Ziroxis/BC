@@ -3,9 +3,12 @@ package com.yuanno.block_clover.spells.lightning;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
+import com.yuanno.block_clover.curios.network.NetworkHandler;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.lightning.BootsParticleEffect;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -27,10 +30,10 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     {
         super("Thunder God Boots", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("The user gets speed by enveloping himself with lightning boots");
-        this.setMaxCooldown(30);
-        this.setmanaCost(3);
-        this.setExperiencePoint(10);
-        this.setExperienceGainLevelCap(50);
+        this.setmanaCost(5);
+        this.setMaxCooldown(5);
+        this.setExperiencePoint(7);
+        this.setExperienceGainLevelCap(10);
 
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::onDuringContinuityEvent;
@@ -41,8 +44,11 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         propsEntity.alterMana(-15);
+        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(LIGHTNING_SPEED);
+        player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(LIGHTNING_STEP);
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(LIGHTNING_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(LIGHTNING_STEP);
+        PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
     }
 

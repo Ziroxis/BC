@@ -133,8 +133,9 @@ public class AbilitiesEvents
 				{
 					if(ability.getState() == Ability.State.CONTINUOUS)
 					{
-						if (ability instanceof ContinuousAbility)
-							((ContinuousAbility) ability).stopContinuity(player);
+						if (ability instanceof ContinuousAbility) {
+							((ContinuousAbility) ability).endContinuity(player);
+						}
 						
 						if (ability instanceof RepeaterAbility)
 							((RepeaterAbility) ability).setRepeaterCount(((RepeaterAbility) ability).getMaxRepeaterCount());					
@@ -224,9 +225,11 @@ public class AbilitiesEvents
 				{
 					if (ability instanceof DamagedContinuousAbility && ability.isContinuous())
 					{
-						boolean result = ((DamagedContinuousAbility) ablProps.getUnlockedAbility(ability)).damage(entity, event.getSource(), event.getAmount());
-						event.setCanceled(!result);
-					}
+						if(event.getSource() instanceof ModDamageSource && !((ModDamageSource)event.getSource()).isInternalDamage())
+						{
+							boolean result = ((DamagedContinuousAbility) ablProps.getUnlockedAbility(ability)).damage(entity, event.getSource(), event.getAmount());
+							event.setCanceled(!result);
+						}					}
 					
 					if (ability instanceof IFallDamageBlockingAbility && event.getSource() == DamageSource.FALL)
 					{
@@ -410,7 +413,7 @@ public class AbilitiesEvents
 					((ChargeableAbility) props.getEquippedAbility(ability)).stopCharging(player);
 
 				if (ability instanceof ContinuousAbility && ability.isContinuous())
-					((ContinuousAbility) props.getEquippedAbility(ability)).stopContinuity(player);
+					((ContinuousAbility)ability).stopContinuity(player);
 			}
 			catch (Exception e)
 			{

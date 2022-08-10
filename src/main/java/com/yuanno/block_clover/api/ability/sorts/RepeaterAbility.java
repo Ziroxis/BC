@@ -46,6 +46,8 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
         this.repeaterCount = this.maxRepeaterCount;
         this.repeaterInterval = interval;
         int threshold = (int) Math.ceil((this.repeaterCount * this.repeaterInterval) / 20.0f);
+        if(this.repeaterInterval == 0)
+            threshold = -1;
         this.setThreshold(threshold);
     }
 
@@ -96,7 +98,7 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
         {
             if(ExtendedWorldData.get(player.level).isInsideRestrictedArea((int)player.getX(), (int)player.getY(), (int)player.getZ()))
             {
-                this.stopContinuity(player);
+                this.endContinuity(player);
                 return;
             }
 
@@ -106,13 +108,13 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
                 this.repeater(player, this.continueTime);
             }
 
-            if(this.getThreshold() > 0 && this.continueTime >= this.getThreshold())
-                this.stopContinuity(player);
+            if(this.getThreshold() != 0 && this.continueTime >= this.getThreshold())
+                this.endContinuity(player);
         }
     }
 
     @Override
-    public void stopContinuity(PlayerEntity player)
+    public void endContinuity(PlayerEntity player)
     {
         if(player.level.isClientSide)
             return;

@@ -14,9 +14,9 @@ public class EarthChunkAbility extends Ability {
     {
         super("Earth chunk", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Shoots a chunk of earth");
-        this.setMaxCooldown(5);
-        this.setmanaCost(5);
-        this.setExperiencePoint(10);
+        this.setMaxCooldown(4);
+        this.setmanaCost(15);
+        this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
     }

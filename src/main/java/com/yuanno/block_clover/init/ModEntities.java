@@ -3,6 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.entities.BanditEntity;
 import com.yuanno.block_clover.entities.GrimoireMagicianEntity;
+import com.yuanno.block_clover.entities.VolcanoMonsterEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +27,12 @@ public class ModEntities {
                             .sized(1f, 2f)
                             .setTrackingRange(15)
                             .build(new ResourceLocation(Main.MODID, "bandit").toString()));
+    public static final RegistryObject<EntityType<VolcanoMonsterEntity>> VOLCANO_MONSTER = ENTITIES
+            .register("volcano_monster",
+                    () -> EntityType.Builder.of(VolcanoMonsterEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "volcano_monster").toString()));
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

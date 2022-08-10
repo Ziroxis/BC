@@ -92,7 +92,7 @@ public class AbilityHelper {
             if (ability != null && !ability.isDisabled())
             {
                 if (ability instanceof ContinuousAbility && ability.getState() == Ability.State.CONTINUOUS)
-                    ((ContinuousAbility) ability).stopContinuity(player);
+                    ((ContinuousAbility) ability).endContinuity(player);
                 if (ability instanceof RepeaterAbility && ability.getState() == Ability.State.CONTINUOUS)
                     ((RepeaterAbility) ability).setRepeaterCount(((RepeaterAbility) ability).getMaxRepeaterCount());
                 if (ability instanceof ChargeableAbility && ability.getState() == Ability.State.CHARGING)

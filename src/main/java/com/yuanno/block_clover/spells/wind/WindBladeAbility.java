@@ -14,9 +14,9 @@ public class WindBladeAbility extends Ability {
     {
         super("Wind Blade", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Shoots a wind blade");
-        this.setMaxCooldown(5);
-        this.setmanaCost(5);
-        this.setExperiencePoint(10);
+        this.setMaxCooldown(3);
+        this.setmanaCost(15);
+        this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
     }

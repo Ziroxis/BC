@@ -29,6 +29,9 @@ public class ContinuousAbility extends Ability {
     protected IOnEndContinuity onEndContinuityEvent = (player) -> { return true; };
     protected IDuringContinuity duringContinuityEvent = (player, continuousTime) -> {};
 
+    protected IOnStopContinuity onStopContinuityEvent = (player) -> {};
+
+
     public ContinuousAbility(String name, AbilityCategories.AbilityCategory category)
     {
         super(name, category);
@@ -66,11 +69,9 @@ public class ContinuousAbility extends Ability {
         }
         else
         {
-            if (!this.isStateForced() && this.onEndContinuityEvent.onEndContinuity(player))
-            {
-                this.checkAbilityPool(player, State.COOLDOWN);
-                this.stopContinuity(player);
-            }
+            if (!this.isStateForced())
+                this.endContinuity(player);
+
         }
     }
 
@@ -119,7 +120,7 @@ public class ContinuousAbility extends Ability {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.canUse(player))
         {
-            this.stopContinuity(player);
+            this.endContinuity(player);
             return;
         }
 
@@ -127,7 +128,6 @@ public class ContinuousAbility extends Ability {
 
         if(this.isContinuous())
         {
-
             if (player.tickCount % 20 == 0)
             {
                 if (propsEntity.getLevel() < getExperienceGainLevelCap())
@@ -136,7 +136,10 @@ public class ContinuousAbility extends Ability {
                     ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
                     MinecraftForge.EVENT_BUS.post(eventExperience);
                 }
-                propsEntity.alterMana((int) - getmanaCost());
+                if (propsEntity.getMana() > getmanaCost())
+                    propsEntity.alterMana((int) - getmanaCost());
+                else
+                    this.endContinuity(player);
             }
             PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
@@ -145,7 +148,7 @@ public class ContinuousAbility extends Ability {
                 this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 
             if(this.threshold > 0 && this.continueTime >= this.threshold)
-                this.stopContinuity(player);
+                this.endContinuity(player);
         }
 
         player.level.getProfiler().pop();
@@ -155,18 +158,24 @@ public class ContinuousAbility extends Ability {
     {
         this.setState(State.CONTINUOUS);
     }
-
-    public void stopContinuity(PlayerEntity player)
+    public void endContinuity(PlayerEntity player)
     {
         if(player.level.isClientSide)
             return;
 
         if(this.onEndContinuityEvent.onEndContinuity(player))
         {
-            this.continueTime = 0;
-            this.startCooldown(player);
-            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+            this.stopContinuity(player);
         }
+    }
+    public void stopContinuity(PlayerEntity player)
+    {
+        this.checkAbilityPool(player, State.COOLDOWN);
+        this.continueTime = 0;
+        this.startCooldown(player);
+        if (!player.level.isClientSide)
+            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+        this.onStopContinuityEvent.onStopContinuity(player);
     }
 
     /*
@@ -185,5 +194,9 @@ public class ContinuousAbility extends Ability {
     public interface IOnEndContinuity extends Serializable
     {
         boolean onEndContinuity(PlayerEntity player);
+    }
+    public interface IOnStopContinuity extends Serializable
+    {
+        void onStopContinuity(PlayerEntity player);
     }
 }

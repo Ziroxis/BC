@@ -2,14 +2,15 @@ package com.yuanno.block_clover.entities.goals.attribute.fire;
 
 import com.yuanno.block_clover.entities.BCentity;
 import com.yuanno.block_clover.entities.goals.CooldownGoal;
-import com.yuanno.block_clover.entities.projectiles.fire.FireBallProjectile;
+import com.yuanno.block_clover.entities.projectiles.fire.FlameRoarProjectile;
+import com.yuanno.block_clover.entities.projectiles.fire.SpiralFlameProjectile;
 
-public class FireBallGoal extends CooldownGoal {
+public class SpiralFlameGoal extends CooldownGoal {
     private BCentity entity;
 
-    public FireBallGoal(BCentity entity)
+    public SpiralFlameGoal(BCentity entity)
     {
-        super(entity, 45, entity.getRandom().nextInt(10));
+        super(entity, 180, entity.getRandom().nextInt(10));
         this.entity = entity;
         //this.entity.addThreat(3);
     }
@@ -43,7 +44,7 @@ public class FireBallGoal extends CooldownGoal {
         double d2 = this.entity.getTarget().getBoundingBox().minY + this.entity.getTarget().getBbHeight() / 2.0F - (this.entity.getY() + this.entity.getBbHeight() / 2.0F);
         double d3 = this.entity.getTarget().getZ() - this.entity.getZ();
 
-        FireBallProjectile projectile = new FireBallProjectile(this.entity.level, this.entity);
+        SpiralFlameProjectile projectile = new SpiralFlameProjectile(this.entity.level, this.entity);
         projectile.setPos(projectile.getX(), this.entity.getY() + this.entity.getBbHeight() / 2.0F + 0.5D, projectile.getZ());
         projectile.shoot(d1 + this.entity.getRandom().nextGaussian(), d2, d3 + this.entity.getRandom().nextGaussian(), 1F, 0);
         this.entity.level.addFreshEntity(projectile);

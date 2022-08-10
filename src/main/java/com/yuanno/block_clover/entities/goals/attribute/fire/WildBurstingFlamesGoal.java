@@ -4,12 +4,12 @@ import com.yuanno.block_clover.entities.BCentity;
 import com.yuanno.block_clover.entities.goals.CooldownGoal;
 import com.yuanno.block_clover.entities.projectiles.fire.FireBallProjectile;
 
-public class FireBallGoal extends CooldownGoal {
+public class WildBurstingFlamesGoal extends CooldownGoal {
     private BCentity entity;
 
-    public FireBallGoal(BCentity entity)
+    public WildBurstingFlamesGoal(BCentity entity)
     {
-        super(entity, 45, entity.getRandom().nextInt(10));
+        super(entity, 90, entity.getRandom().nextInt(20));
         this.entity = entity;
         //this.entity.addThreat(3);
     }
@@ -39,15 +39,17 @@ public class FireBallGoal extends CooldownGoal {
     @Override
     public void start()
     {
-        double d1 = this.entity.getTarget().getX() - this.entity.getX();
-        double d2 = this.entity.getTarget().getBoundingBox().minY + this.entity.getTarget().getBbHeight() / 2.0F - (this.entity.getY() + this.entity.getBbHeight() / 2.0F);
-        double d3 = this.entity.getTarget().getZ() - this.entity.getZ();
+        for (int i = 0; i<5; i++)
+        {
+            double d1 = this.entity.getTarget().getX() - this.entity.getX();
+            double d2 = this.entity.getTarget().getBoundingBox().minY + this.entity.getTarget().getBbHeight() / 2.0F - (this.entity.getY() + this.entity.getBbHeight() / 2.0F);
+            double d3 = this.entity.getTarget().getZ() - this.entity.getZ();
 
-        FireBallProjectile projectile = new FireBallProjectile(this.entity.level, this.entity);
-        projectile.setPos(projectile.getX(), this.entity.getY() + this.entity.getBbHeight() / 2.0F + 0.5D, projectile.getZ());
-        projectile.shoot(d1 + this.entity.getRandom().nextGaussian(), d2, d3 + this.entity.getRandom().nextGaussian(), 1F, 0);
-        this.entity.level.addFreshEntity(projectile);
-
+            FireBallProjectile projectile = new FireBallProjectile(this.entity.level, this.entity);
+            projectile.setPos(projectile.getX(), this.entity.getY() + this.entity.getBbHeight() / 2.0F + 0.5D, projectile.getZ());
+            projectile.shoot(d1 + this.entity.getRandom().nextGaussian(), d2, d3 + this.entity.getRandom().nextGaussian(), 1F, 0);
+            this.entity.level.addFreshEntity(projectile);
+        }
         //this.entity.setCurrentGoal(this);
         this.setOnCooldown(true);
     }

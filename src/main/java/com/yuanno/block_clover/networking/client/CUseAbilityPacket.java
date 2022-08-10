@@ -46,7 +46,7 @@ public class CUseAbilityPacket
 			{
 				PlayerEntity player = ctx.get().getSender();
 				
-				player.level.getProfiler().push("abilityUse");	
+				player.level.getProfiler().push("abilityUse");
 				
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 				Ability abl = abilityDataProps.getEquippedAbility(message.slot);
@@ -69,7 +69,7 @@ public class CUseAbilityPacket
 							if (ability instanceof ContinuousAbility && ability.isContinuous() && !(ability instanceof IParallelContinuousAbility))
 							{
 								if(true)
-									((ContinuousAbility)ability).stopContinuity(player);
+									((ContinuousAbility)ability).endContinuity(player);
 								else
 									return;
 							}

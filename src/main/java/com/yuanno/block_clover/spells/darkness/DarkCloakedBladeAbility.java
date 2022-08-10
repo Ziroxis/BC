@@ -20,9 +20,9 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
     {
         super("Dark Cloaked Blade", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Envelops your blade with darkness");
-        this.setMaxCooldown(10);
+        this.setMaxCooldown(5);
         this.setmanaCost(5);
-        this.setExperiencePoint(3);
+        this.setExperiencePoint(7);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
         this.onHitEntityEvent = this::onHitEntity;

@@ -15,7 +15,8 @@ public class LightBladeAbility extends Ability {
         super("Light Blade", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setmanaCost(10);
         this.setCooldown(2);
-        this.setExperiencePoint(5);
+        this.setExperiencePoint(20);
+        this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
     }
 

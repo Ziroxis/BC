@@ -26,7 +26,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.curios.SlotContext;
 import com.yuanno.block_clover.api.curios.type.capability.ICurio;
-import com.yuanno.block_clover.client.curios.KnucklesModel;
+import com.yuanno.block_clover.client.curios.render.model.KnucklesModel;
 import com.yuanno.block_clover.curios.capability.CurioItemCapability;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;

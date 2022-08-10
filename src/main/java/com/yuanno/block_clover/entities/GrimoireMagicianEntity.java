@@ -1,9 +1,13 @@
 package com.yuanno.block_clover.entities;
 
+import com.yuanno.block_clover.data.ability.AbilityDataBase;
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -63,7 +67,6 @@ public class GrimoireMagicianEntity extends CreatureEntity
         if (!player.level.isClientSide)
         {
             IEntityStats stats = EntityStatsCapability.get(player);
-
             int magicLevel = stats.getLevel();
 
             if (stats.hasGrimoire())
@@ -77,6 +80,8 @@ public class GrimoireMagicianEntity extends CreatureEntity
                     player.displayClientMessage(new StringTextComponent("Here is your Grimoire! You seem mature enough"), false);
                     stats.setGrimoire(true);
                     PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+                    IAbilityData abilityData = AbilityDataCapability.get(player);
+                    PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
 
                 } else
                 {

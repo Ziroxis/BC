@@ -31,8 +31,8 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
         this.setDescription("Makes slash blades out of magic");
         this.setMaxCooldown(3);
         this.setmanaCost(3);
-        this.setExperiencePoint(10);
-        this.setExperienceGainLevelCap(20);
+        this.setExperiencePoint(7);
+        this.setExperienceGainLevelCap(10);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;

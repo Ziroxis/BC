@@ -21,6 +21,7 @@ public class ClientHandler {
 
     public static void onSetup()
     {
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOLCANO_MONSTER.get(), new VolcanoMonsterRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BANDIT.get(), new BanditEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GRIMOIRE_MAGICIAN.get(), new GrimoireMagicianRenderer.Factory());
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();

@@ -17,13 +17,15 @@
  * License along with Curios.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.yuanno.block_clover.client.curios;
+package com.yuanno.block_clover.client.curios.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.curios.CuriosApi;
 import com.yuanno.block_clover.api.curios.type.capability.ICuriosItemHandler;
+import com.yuanno.block_clover.client.curios.CuriosClientConfig;
+import com.yuanno.block_clover.client.curios.KeyRegistry;
 import com.yuanno.block_clover.curios.inventory.CosmeticCurioSlot;
 import com.yuanno.block_clover.curios.inventory.CurioSlot;
 import com.yuanno.block_clover.curios.inventory.container.CuriosContainer;

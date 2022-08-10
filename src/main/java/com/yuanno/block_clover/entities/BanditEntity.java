@@ -29,6 +29,7 @@ public class BanditEntity extends BCentity {
     public BanditEntity(EntityType type, World world)
     {
         super(type, world);
+        this.xpDrop = 20;
     }
 
     @Override
@@ -79,32 +80,7 @@ public class BanditEntity extends BCentity {
 
     }
 
-    @Override
-    public void die(DamageSource cause) {
-        super.die(cause);
-/*
-        if (cause.getEntity() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) cause.getEntity();
-            IPlayerHandler playercap = player.getCapability(PlayerProvider.CAPABILITY_PLAYER).orElseThrow(() -> new RuntimeException("CAPABILITY_PLAYER NOT FOUND!"));
 
-            Beapi.experienceMultiplier(player, this.magicXPDrop);
-
-            NetworkLoader.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new PacketMagicExpSync(playercap.returnMagicExp(), player.getId()));
-
-        }
-        */
-        if (cause.getEntity() instanceof PlayerEntity)
-        {
-            PlayerEntity player = (PlayerEntity) cause.getEntity();
-            IEntityStats props = EntityStatsCapability.get(player);
-
-            props.alterExperience(15);
-            ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, props.getExperience());
-            if (MinecraftForge.EVENT_BUS.post(eventExperience))
-                return;
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
-        }
-    }
 
     @Override
     public boolean removeWhenFarAway(double d)

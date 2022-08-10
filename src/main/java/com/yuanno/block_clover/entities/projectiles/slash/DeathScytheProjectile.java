@@ -21,13 +21,12 @@ public class DeathScytheProjectile extends AbilityProjectileEntity {
         this.setDamage(8);
         this.setMaxLife(128);
         this.setPhysical(false);
+        this.onBlockImpactEvent = this::onHitBlock;
     }
 
-    @Override
-    protected void onHitBlock(BlockRayTraceResult result)
+    private void onHitBlock(BlockPos hit)
     {
-        BlockPos pos = result.getBlockPos();
         World world = this.level;
-        world.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+        world.setBlock(hit, Blocks.AIR.defaultBlockState(), 2);
     }
 }

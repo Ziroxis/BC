@@ -3,6 +3,7 @@ package com.yuanno.block_clover.networking.server;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
+import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.api.data.IExtraUpdateData;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -42,6 +43,8 @@ public class SUpdateEquippedAbilityPacket
 	// Chargeable
 	private double chargeTime;
 	private double maxChargeTime;
+
+	private boolean isPaused;
 
 	public SUpdateEquippedAbilityPacket()
 	{
@@ -89,10 +92,10 @@ public class SUpdateEquippedAbilityPacket
 		this.customTexture = ability.getCustomTexture();
 		this.state = state.ordinal();
 		this.isStateForced = ability.isStateForced();
-		
+
 		if(ability instanceof IExtraUpdateData)
 			this.extraData = ((IExtraUpdateData)ability).getExtraData();
-		
+
 		if (state == Ability.State.COOLDOWN)
 		{
 			this.cooldown = values[0];
@@ -125,11 +128,11 @@ public class SUpdateEquippedAbilityPacket
 		buffer.writeUtf(this.customTexture, textureLen);
 		buffer.writeInt(this.abilityType);
 		buffer.writeBoolean(this.isStateForced);
-		
+
 		buffer.writeBoolean(this.extraData != null);
 		if(this.extraData != null)
 			buffer.writeNbt(this.extraData);
-		
+
 		buffer.writeDouble(this.cooldown);
 		buffer.writeDouble(this.maxCooldown);
 		buffer.writeDouble(this.disableTicks);
@@ -144,6 +147,10 @@ public class SUpdateEquippedAbilityPacket
 		{
 			buffer.writeDouble(this.chargeTime);
 			buffer.writeDouble(this.maxChargeTime);
+		}
+		else if (this.abilityType == 3)
+		{
+			buffer.writeBoolean(this.isPaused);
 		}
 	}
 
@@ -160,7 +167,7 @@ public class SUpdateEquippedAbilityPacket
 		boolean hasExtraData = buffer.readBoolean();
 		if(hasExtraData)
 			msg.extraData = buffer.readNbt();
-		
+
 		msg.cooldown = buffer.readDouble();
 		msg.maxCooldown = buffer.readDouble();
 		msg.disableTicks = buffer.readDouble();
@@ -175,6 +182,10 @@ public class SUpdateEquippedAbilityPacket
 		{
 			msg.chargeTime = buffer.readDouble();
 			msg.maxChargeTime = buffer.readDouble();
+		}
+		else if (msg.abilityType == 3)
+		{
+			msg.isPaused = buffer.readBoolean();
 		}
 
 		return msg;
@@ -200,22 +211,22 @@ public class SUpdateEquippedAbilityPacket
 			Entity target = Minecraft.getInstance().level.getEntity(message.entityId);
 			if (target == null || !(target instanceof PlayerEntity) || message.abilityId < 0)
 				return;
-			
+
 			IAbilityData props = AbilityDataCapability.get((LivingEntity) target);
-			Ability ability = props.getEquippedAbility(message.abilityId);		
-			
+			Ability ability = props.getEquippedAbility(message.abilityId);
+
 			if (ability == null)
 				return;
-			
+
 			Ability.State state = Ability.State.values()[message.state];
 			ability.setCustomTexture(message.customTexture);
 			ability.setState(state);
 
 			ability.setForcedState(message.isStateForced);
-			
+
 			if(message.extraData != null && ability instanceof IExtraUpdateData)
 				((IExtraUpdateData)ability).setExtraData(message.extraData);
-			
+
 			if (state == Ability.State.COOLDOWN)
 			{
 				ability.setCooldown(message.cooldown);
@@ -235,6 +246,10 @@ public class SUpdateEquippedAbilityPacket
 			{
 				((ChargeableAbility) ability).setChargeTime((int) message.chargeTime);
 				((ChargeableAbility) ability).setMaxChargeTime(message.maxChargeTime);
+			}
+			else if (ability instanceof PassiveAbility)
+			{
+				((PassiveAbility) ability).setPause(message.isPaused);
 			}
 		}
 	}

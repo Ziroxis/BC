@@ -17,9 +17,9 @@ public class ModEntityGeneration {
         RegistryKey key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());
         Set types = BiomeDictionary.getTypes(key);
 
-        if (!types.contains(BiomeDictionary.Type.WET) && !types.contains(BiomeDictionary.Type.OCEAN) && !types.contains(BiomeDictionary.Type.RIVER))
+        if (!types.contains(BiomeDictionary.Type.WET) && !types.contains(BiomeDictionary.Type.OCEAN) && !types.contains(BiomeDictionary.Type.RIVER)  && !types.contains(BiomeDictionary.Type.WATER))
         {
-            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BANDIT.get(), 50, 2, 4));
+            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BANDIT.get(), 20, 2, 4));
         }
     }
 }

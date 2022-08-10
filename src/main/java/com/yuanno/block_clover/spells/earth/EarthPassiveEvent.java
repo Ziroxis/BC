@@ -38,7 +38,7 @@ public class EarthPassiveEvent {
         PlayerEntity player = (PlayerEntity) event.getEntityLiving();
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         EarthPassiveAbility earthPassiveAbility = abilityProps.getEquippedAbility(EarthPassiveAbility.INSTANCE);
-        if (!earthPassiveAbility.isContinuous())
+        if (earthPassiveAbility == null || !earthPassiveAbility.isContinuous())
             return;
 
         if (distance < 3)

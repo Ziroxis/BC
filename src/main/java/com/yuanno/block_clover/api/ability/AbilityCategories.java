@@ -24,6 +24,16 @@ public class AbilityCategories {
         return icon;
     };
 
+    private static final Function<PlayerEntity, ResourceLocation> GET_SECOND_ATTRIBUTE_ICON = (player) ->
+    {
+        IEntityStats props = EntityStatsCapability.get(player);
+        String iconName = props.getSecondAttribute();
+        ResourceLocation icon = null;
+        icon = new ResourceLocation(Main.MODID, "textures/gui/attributes/" + Beapi.getResourceName(iconName) + ".png");
+
+        return icon;
+    };
+
     private static final Function<PlayerEntity, ResourceLocation> GET_DEVIL_ICON = (player) ->
     {
         IEntityStats props = EntityStatsCapability.get(player);
@@ -50,16 +60,18 @@ public class AbilityCategories {
 
     public static enum AbilityCategory implements IExtensibleEnum
     {
-        ATTRIBUTE(GET_ATTRIBUTE_ICON),
+        ATTRIBUTE(GET_ATTRIBUTE_ICON, GET_SECOND_ATTRIBUTE_ICON),
         SPIRIT,
         DEVIL,
         ALL;
 
         private Function<PlayerEntity, ResourceLocation> iconFunction;
+        private Function<PlayerEntity, ResourceLocation> secondIconFunction;
 
         private AbilityCategory()
         {
             this.iconFunction = null;
+            this.secondIconFunction = null;
         }
 
         private AbilityCategory(Function<PlayerEntity, ResourceLocation> function)
@@ -67,12 +79,29 @@ public class AbilityCategories {
             this.iconFunction = function;
         }
 
+
+        private AbilityCategory(Function<PlayerEntity, ResourceLocation> getAttributeIcon, Function<PlayerEntity, ResourceLocation> getSecondAttributeIcon)
+        {
+            this.iconFunction = getAttributeIcon;
+            this.secondIconFunction = getSecondAttributeIcon;
+        }
+
+
+
         @Nullable
         public ResourceLocation getIcon(PlayerEntity player)
         {
             if(this.iconFunction == null)
                 return null;
             return this.iconFunction.apply(player);
+        }
+        @Nullable
+        public ResourceLocation getSecondIcon(PlayerEntity player)
+        {
+
+            if(this.secondIconFunction == null)
+                return null;
+            return this.secondIconFunction.apply(player);
         }
 
         public static AbilityCategory create(String name, Function<PlayerEntity, ResourceLocation> function)

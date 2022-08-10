@@ -105,5 +105,16 @@
   "ability.block_clover.black_slash": "Black slash",
   "ability.block_clover.black_tornado": "Black tornado",
   "ability.block_clover.bull_thrust": "Bull thrust",
-  "ability.block_clover.demon_slayer": "Demon slayer"
+  "ability.block_clover.demon_slayer": "Demon slayer",
+
+  "curios.slot": "Slot",
+  "curios.identifier.head": "Head",
+  "curios.identifier.necklace": "Necklace",
+  "curios.identifier.bracelet": "Bracelet",
+  "curios.identifier.ring": "Ring",
+  "curios.identifier.hands": "Hands",
+  "curios.identifier.charm": "Charm",
+  "curios.identifier.back": "Back",
+  "curios.identifier.belt": "Belt",
+  "curios.identifier.slot": "Bracelet"
 }

@@ -21,5 +21,9 @@ public class ModEntityGeneration {
         {
             event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BANDIT.get(), 20, 2, 4));
         }
+        if (types.contains(BiomeDictionary.Type.NETHER) || types.contains(BiomeDictionary.Type.DEAD) || types.contains(BiomeDictionary.Type.MESA))
+        {
+            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.VOLCANO_MONSTER.get(), 10, 1, 2));
+        }
     }
 }

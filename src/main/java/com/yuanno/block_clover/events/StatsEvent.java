@@ -69,7 +69,44 @@ public class StatsEvent {
                 case "Anti-magic":
                     abilityProps.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
                     abilityProps.addUnlockedAbility(BullThrustAbility.INSTANCE);
+                    props.setRace(ModValues.HUMAN);
                     break;
+            }
+            if (!attribute.equals(ModValues.ANTIMAGIC))
+            {
+                props.setRace(Beapi.randomizer(ModValues.races));
+                String race = props.getRace();
+                if (race.equals(ModValues.HYBRID))
+                {
+                    props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                    if (props.getSecondAttribute().equals(props.getAttribute()))
+                        props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                    String secondAttribute = props.getSecondAttribute();
+                    switch (secondAttribute)
+                    {
+                        case "Wind":
+                            abilityProps.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                            break;
+                        case "Fire":
+                            abilityProps.addUnlockedAbility(FireBallAbility.INSTANCE);
+                            break;
+                        case "Light":
+                            abilityProps.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                            break;
+                        case "Lightning":
+                            abilityProps.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                            break;
+                        case "Darkness":
+                            abilityProps.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                            break;
+                        case "Earth":
+                            abilityProps.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                            break;
+                        case "Slash":
+                            abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                            break;
+                    }
+                }
             }
             props.setLevel(1);
             props.setExperience(0);

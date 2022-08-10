@@ -50,6 +50,7 @@ public class CPacketOpenCurios {
         NetworkHooks.openGui(sender, new CuriosContainerProvider());
 
         if (!stack.isEmpty()) {
+          System.out.println("holding an item");
           sender.inventory.setCarried(stack);
           NetworkHandler.INSTANCE
               .send(PacketDistributor.PLAYER.with(() -> sender), new SPacketGrabbedItem(stack));

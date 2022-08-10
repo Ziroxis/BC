@@ -18,7 +18,16 @@ public class ModValues {
     public static final String[] attributes = {
             ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.ANTIMAGIC
     };
+    public static final String[] attributes_no_antimagic = {
+            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND
+    };
 
-
-
+    //Races
+    public static final String HUMAN = "Human";
+    public static final String ELF = "Elf";
+    public static final String HYBRID = "Hybrid";
+    public static final String DWARF = "Dwarf";
+    public static final String[] races = {
+      ModValues.HUMAN, ModValues.ELF, ModValues.HYBRID
+    };
 }

@@ -81,6 +81,7 @@ public class PlayerStatsScreen extends Screen {
         String name = player.getName().getString();
         String race = props.getRace();
         String attribute = props.getAttribute();
+        String secondAttribute = props.getSecondAttribute();
         int level = props.getLevel();
         int experience = props.getExperience();
         int maxExperience = props.getMaxExperience();
@@ -96,7 +97,10 @@ public class PlayerStatsScreen extends Screen {
 
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Name: " + TextFormatting.RESET + name, posX - 30, posY + 50, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, posX - 30, posY + 70, -1);
-        drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute, posX - 30, posY + 90, -1);
+        if (props.hasSecondAttribute())
+            drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute + ", " + secondAttribute, posX - 30, posY + 90, -1);
+        else
+            drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute, posX - 30, posY + 90, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Race: " + TextFormatting.RESET + race, posX - 30, posY + 110, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Experience: " + TextFormatting.RESET + experience + "/" + maxExperience, posX - 30, posY + 130, -1);
 

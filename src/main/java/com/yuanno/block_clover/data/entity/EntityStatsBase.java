@@ -10,6 +10,7 @@ public class EntityStatsBase implements IEntityStats{
 
     private String race = "";
     private String attribute = "";
+    private  String secondAttribute = "";
     private int level;
     private int maxLevel;
     private int experience;
@@ -126,6 +127,23 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public String getAttribute() {
         return this.attribute;
+    }
+
+    @Override
+    public boolean hasSecondAttribute() {
+        if (Beapi.isNullOrEmpty(this.secondAttribute))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void setSecondAttribute(String value) {
+        this.secondAttribute = value;
+    }
+
+    @Override
+    public String getSecondAttribute() {
+        return this.secondAttribute;
     }
 
     @Override

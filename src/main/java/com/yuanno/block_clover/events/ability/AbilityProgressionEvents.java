@@ -41,30 +41,32 @@ public class AbilityProgressionEvents {
 
         if (!statsProps.hasGrimoire())
             return;
-        if (statsProps.getAttribute().equals(ModValues.WIND))
+        if (statsProps.getAttribute().equals(ModValues.WIND) || statsProps.getSecondAttribute().equals(ModValues.WIND))
         {
             gainAbility(event.getPlayer(), 3, WindCrescentAbility.INSTANCE);
             gainAbility(event.getPlayer(), 7, WindBladeShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ToweringTornadoAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, WindFlightAbility.INSTANCE);
         }
-        if (statsProps.getAttribute().equals(ModValues.LIGHT))
+        if (statsProps.getAttribute().equals(ModValues.LIGHT) || statsProps.getSecondAttribute().equals(ModValues.LIGHT))
         {
             gainAbility(event.getPlayer(), 5, LightSwordAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, LightBladeShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, LightHealingAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, LightMovementAbility.INSTANCE);
         }
-        if (statsProps.getAttribute().equals(ModValues.LIGHTNING))
+        if (statsProps.getAttribute().equals(ModValues.LIGHTNING) || statsProps.getSecondAttribute().equals(ModValues.LIGHTNING))
         {
             gainAbility(event.getPlayer(), 3, ThunderFiendAbility.INSTANCE);
             gainAbility(event.getPlayer(), 5, ThunderGodGlovesAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, ThunderCrumblingOrbAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 15, ThunderFiendMultiAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 20, ThunderCrumblingOrbMultiAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 25, ThunderDischargeAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, ThunderSlashAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, ThunderFiendMultiAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, ThunderCrumblingOrbMultiAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 30, ThunderChargeAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 35, ThunderDischargeAbility.INSTANCE);
         }
-        if (statsProps.getAttribute().equals(ModValues.FIRE))
+        if (statsProps.getAttribute().equals(ModValues.FIRE) || statsProps.getSecondAttribute().equals(ModValues.FIRE))
         {
             gainAbility(event.getPlayer(), 5, FlameRoarAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, SpiralFlameAbility.INSTANCE);
@@ -72,7 +74,7 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 20, LeoPalmaAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, WildBurstingFlamesAbility.INSTANCE);
         }
-        if (statsProps.getAttribute().equals(ModValues.EARTH))
+        if (statsProps.getAttribute().equals(ModValues.EARTH) || statsProps.getSecondAttribute().equals(ModValues.EARTH))
         {
             gainAbility(event.getPlayer(), 3, EarthPassiveAbility.INSTANCE);
             gainAbility(event.getPlayer(), 5, EarthChargeAbility.INSTANCE);
@@ -81,14 +83,14 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 20, EarthGolemAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, EarthQuakeAbility.INSTANCE);
         }
-        if (statsProps.getAttribute().equals(ModValues.DARKNESS))
+        if (statsProps.getAttribute().equals(ModValues.DARKNESS) || statsProps.getSecondAttribute().equals(ModValues.DARKNESS))
         {
             gainAbility(event.getPlayer(), 3, AvidyaSlashAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, BluntStrikeAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, AvidyaWildSlashAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, BlackHoleAbility.INSTANCE);
         }
-        if (statsProps.getAttribute().equals(ModValues.SLASH))
+        if (statsProps.getAttribute().equals(ModValues.SLASH) || statsProps.getSecondAttribute().equals(ModValues.SLASH))
         {
             gainAbility(event.getPlayer(), 3, DeathScytheAbility.INSTANCE);
             gainAbility(event.getPlayer(), 5, DeathScytheShowerAbility.INSTANCE);

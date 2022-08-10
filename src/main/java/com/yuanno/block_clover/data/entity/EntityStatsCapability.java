@@ -29,6 +29,7 @@ public class EntityStatsCapability {
                 props.putFloat("mana", instance.getMana());
                 props.putFloat("maxMana", instance.getMaxMana());
                 props.putString("attribute", instance.getAttribute());
+                props.putString("secondAttribute", instance.getSecondAttribute());
                 props.putString("race", instance.getRace());
                 props.putBoolean("hasGrimoire", instance.hasGrimoire());
                 props.putInt("state", instance.getState());
@@ -49,6 +50,7 @@ public class EntityStatsCapability {
                 instance.setMana(props.getFloat("mana"));
                 instance.setMaxMana(props.getFloat("maxMana"));
                 instance.setAttribute(props.getString("attribute"));
+                instance.setSecondAttribute(props.getString("secondAttribute"));
                 instance.setRace(props.getString("race"));
                 instance.setGrimoire(props.getBoolean("hasGrimoire"));
                 instance.setState(props.getInt("state"));

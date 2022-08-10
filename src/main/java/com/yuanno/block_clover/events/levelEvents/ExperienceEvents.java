@@ -3,6 +3,7 @@ package com.yuanno.block_clover.events.levelEvents;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,7 +37,10 @@ public class ExperienceEvents {
             ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, statsProps.getExperience());
             if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
                 return;
-            statsProps.alterMaxMana(5);
+            if (statsProps.getRace().equals(ModValues.ELF))
+                statsProps.alterMaxMana(10);
+            else
+                statsProps.alterMaxMana(5);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
             //player.sendMessage(new StringTextComponent("You leveled up to level " + statsProps.getLevel() + "!"), player.getUUID());
         }

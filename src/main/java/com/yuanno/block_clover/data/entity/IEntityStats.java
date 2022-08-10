@@ -30,6 +30,9 @@ public interface IEntityStats {
     boolean hasAttribute();
     void setAttribute(String value);
     String getAttribute();
+    boolean hasSecondAttribute();
+    void setSecondAttribute(String value);
+    String getSecondAttribute();
 
     // COMBAT
     boolean isInCombatMode();

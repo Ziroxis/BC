@@ -6,6 +6,8 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModResources;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CRemoveAbilityPacket;
@@ -32,6 +34,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 	protected boolean forceUpdate = false;
 	
 	private IAbilityData abilityDataProps;
+	private IEntityStats stats;
 
 	public SelectHotbarAbilitiesScreen(PlayerEntity player)
 	{
@@ -40,6 +43,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		this.minecraft = Minecraft.getInstance();
 
 		this.abilityDataProps = AbilityDataCapability.get(player);
+		this.stats = EntityStatsCapability.get(player);
 	}
 
 	@Override
@@ -121,6 +125,16 @@ public class SelectHotbarAbilitiesScreen extends Screen
 					icon = new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png");
 				TexturedIconButton button = new TexturedIconButton(ModResources.TAB, posX2 - 145, posY3, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
 				button = button.setTextureInfo(posX2 - 146, posY3 - 3, 32, 32).setIconInfo(icon, posX2 - 142, posY3 + 2, 1.45);
+
+				if (stats.hasSecondAttribute())
+				{
+					ResourceLocation secondIcon = category.getSecondIcon(this.player);
+					if (secondIcon == null)
+						secondIcon = new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png");
+					TexturedIconButton secondButton = new TexturedIconButton(ModResources.TAB, posX2 - 145, posY3 + 24, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
+					secondButton = secondButton.setTextureInfo(posX2 - 146, posY3 + 27, 32, 32).setIconInfo(secondIcon, posX2 - 142, posY3 + 32, 1.45);
+					this.addButton(secondButton);
+				}
 				this.addButton(button);
 				idx++;
 			}

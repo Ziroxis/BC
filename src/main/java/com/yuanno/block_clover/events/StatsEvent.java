@@ -78,9 +78,10 @@ public class StatsEvent {
                 String race = props.getRace();
                 if (race.equals(ModValues.HYBRID))
                 {
-                    props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
-                    if (props.getSecondAttribute().equals(props.getAttribute()))
+                    do
+                    {
                         props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                    }   while (props.getSecondAttribute().equals(props.getAttribute()));
                     String secondAttribute = props.getSecondAttribute();
                     switch (secondAttribute)
                     {

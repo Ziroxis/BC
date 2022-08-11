@@ -87,9 +87,10 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                 stats.setMaxMana(0);
             }
             if (stats.hasSecondAttribute()) {
-                stats.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
-                if (stats.getSecondAttribute().equals(stats.getAttribute()))
+                do
+                {
                     stats.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                }   while (stats.getSecondAttribute().equals(stats.getAttribute()));
                 String secondAttribute = stats.getSecondAttribute();
                 switch (secondAttribute) {
                     case "Wind":
@@ -118,6 +119,7 @@ public class MagicChangeArtifactItem extends ArtifactItem {
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
         }
+        //TODO make the item finally delete itself
         int id = Beapi.getIndexOfItemStack(ModItems.CHANGE_MAGIC_ITEM.get().asItem(), player.inventory);
         player.inventory.getItem(id).shrink(1);
 

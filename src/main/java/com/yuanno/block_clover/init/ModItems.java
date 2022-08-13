@@ -1,8 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.items.artifacts.LightWeightRingArtifactItem;
-import com.yuanno.block_clover.items.artifacts.MagicChangeArtifactItem;
+import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
 import com.yuanno.block_clover.items.weapons.*;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -22,6 +21,25 @@ public class ModItems {
     //ITEMS
     public static final RegistryObject<Item> LIGHT_WEIGHT_RING = ITEMS.register("light_weight_ring", LightWeightRingArtifactItem::new);
     public static final RegistryObject<Item> CHANGE_MAGIC_ITEM = ITEMS.register("artifact_change", MagicChangeArtifactItem::new);
+    public static final RegistryObject<Item> SURPLUS_MAGIC_ITEM = ITEMS.register("artifact_surplus", MagicSurplusArtifactItem::new);
+    public static final RegistryObject<Item> FIRE_BELT_ITEM = ITEMS.register("fire_belt", BeltOfFireArtifactItem::new);
+    public static final RegistryObject<Item> IMPATIENCE_GLOVES = ITEMS.register("gloves_impatience", GlovesOfImpatienceArtifactItem::new);
+    public static final RegistryObject<Item> RABBIT_FOOT = ITEMS.register("rabbit_foot", RabbitFootArtifactItem::new);
+    public static final RegistryObject<Item> LUCKY_RING = ITEMS.register("lucky_ring", LuckyRingArtifactItem::new);
+    public static final RegistryObject<Item> MITTENS_REGENERATION = ITEMS.register("mittens_regeneration", MittensOfRegenerationArtifactItem::new);
+    public static final RegistryObject<Item> BRACELET_BRAVERY = ITEMS.register("bracelet_bravery", BraceletOfBraveryArtifactItem::new);
+    public static final RegistryObject<Item> CHARM_PROTECTION = ITEMS.register("charm_protection", CharmOfProtectionArtifactItem::new);
+    public static final RegistryObject<Item> HEALTH_ARTIFACT = ITEMS.register("health_artifact", HealthArtifactItem::new);
+    public static final RegistryObject<Item> REGEN_ARTIFACT = ITEMS.register("regen_artifact", RegenArtifactItem::new);
+    public static final RegistryObject<Item> NECKLACE_AGITATION = ITEMS.register("necklace_agitation", NecklaceOfAgitationArtifactItem::new);
+    public static final RegistryObject<Item> CLOAK_INVISIBILITY = ITEMS.register("cloak_invisibility", CloakOfInvisibilityArtifactItem::new);
+    public static final RegistryObject<Item> BELT_AIR = ITEMS.register("belt_air", BeltOfAirArtifactItem::new);
+    public static final RegistryObject<Item> BRACELET_PUSH = ITEMS.register("bracelet_push", BraceletOfPushArtifactItem::new);
+    public static final RegistryObject<Item> RARE_CANDY = ITEMS.register("rare_candy", RareCandyArtifactItem::new);
+    public static final RegistryObject<Item> MANA_ARTIFACT = ITEMS.register("mana_artifact", ManaArtifactItem::new);
+    public static final RegistryObject<Item> MANA_REGENERATION = ITEMS.register("mana_regeneration", ManaRegenerationArtifactItem::new);
+    public static final RegistryObject<Item> BAG_GLUTTONY = ITEMS.register("bag_gluttony", BagOfGluttonyArtifactItem::new);
+    public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
 
     //WEAPONS
     public static final RegistryObject<Item> LIGHT_SWORD = ITEMS.register("light_sword", LightSwordItem::new);

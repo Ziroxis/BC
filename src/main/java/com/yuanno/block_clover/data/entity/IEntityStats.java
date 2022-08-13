@@ -25,6 +25,9 @@ public interface IEntityStats {
     float getMaxMana();
     void alterMaxMana(float value);
     void setMaxMana(float value);
+    float getManaRegeneration();
+    void alterManaRegeneration(float value);
+    void setManaRegeneration(float value);
 
     // ATTRIBUTE
     boolean hasAttribute();

@@ -17,6 +17,7 @@ public class EntityStatsBase implements IEntityStats{
     private int maxExperience;
     private float mana;
     private float maxMana;
+    private  float manaRegeneration;
     private boolean hasGrimoire = false;
     private int state = 0;
 
@@ -109,6 +110,21 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public void setMaxMana(float value) {
         this.maxMana = value;
+    }
+
+    @Override
+    public float getManaRegeneration() {
+        return this.manaRegeneration;
+    }
+
+    @Override
+    public void alterManaRegeneration(float value) {
+        this.manaRegeneration = this.manaRegeneration + value;
+    }
+
+    @Override
+    public void setManaRegeneration(float value) {
+        this.manaRegeneration = value;
     }
 
     @Override

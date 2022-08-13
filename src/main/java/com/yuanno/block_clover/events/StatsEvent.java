@@ -76,8 +76,17 @@ public class StatsEvent {
             {
                 props.setRace(Beapi.randomizer(ModValues.races));
                 String race = props.getRace();
+                if (race.equals(ModValues.HUMAN))
+                {
+                    props.setManaRegeneration(1);
+                }
+                else if (race.equals(ModValues.ELF))
+                {
+                    props.setManaRegeneration(2);
+                }
                 if (race.equals(ModValues.HYBRID))
                 {
+                    props.setManaRegeneration(1);
                     do
                     {
                         props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));

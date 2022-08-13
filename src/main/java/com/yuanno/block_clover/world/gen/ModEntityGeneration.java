@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
+import org.lwjgl.system.CallbackI;
 
 import java.util.Set;
 
@@ -24,6 +25,10 @@ public class ModEntityGeneration {
         if (types.contains(BiomeDictionary.Type.NETHER) || types.contains(BiomeDictionary.Type.DEAD) || types.contains(BiomeDictionary.Type.MESA))
         {
             event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.VOLCANO_MONSTER.get(), 10, 1, 2));
+        }
+        if (types.contains(BiomeDictionary.Type.JUNGLE) || types.contains(BiomeDictionary.Type.FOREST))
+        {
+            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.MONKEY_ENTITY.get(), 15, 2, 4));
         }
     }
 }

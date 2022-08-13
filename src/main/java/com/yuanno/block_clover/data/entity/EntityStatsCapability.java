@@ -28,6 +28,7 @@ public class EntityStatsCapability {
                 props.putInt("maxExperience", instance.getMaxExperience());
                 props.putFloat("mana", instance.getMana());
                 props.putFloat("maxMana", instance.getMaxMana());
+                props.putFloat("manaRegeneration", instance.getManaRegeneration());
                 props.putString("attribute", instance.getAttribute());
                 props.putString("secondAttribute", instance.getSecondAttribute());
                 props.putString("race", instance.getRace());
@@ -49,6 +50,7 @@ public class EntityStatsCapability {
                 instance.setMaxExperience(props.getInt("maxExperience"));
                 instance.setMana(props.getFloat("mana"));
                 instance.setMaxMana(props.getFloat("maxMana"));
+                instance.setManaRegeneration(props.getFloat("manaRegeneration"));
                 instance.setAttribute(props.getString("attribute"));
                 instance.setSecondAttribute(props.getString("secondAttribute"));
                 instance.setRace(props.getString("race"));

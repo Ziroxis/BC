@@ -6,8 +6,8 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.events.ability.AbilityProgressionEvents;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
-import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.items.ArtifactItem;
 import com.yuanno.block_clover.networking.PacketHandler;
@@ -29,61 +29,34 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-
-public class MagicChangeArtifactItem extends ArtifactItem {
-
+public class MagicSurplusArtifactItem extends ArtifactItem {
 
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {
-        ItemStack stack = player.getItemInHand(hand);
+        ItemStack itemStack = player.getItemInHand(hand);
         if (!world.isClientSide)
         {
-            //TODO give abilities of the level
             IEntityStats stats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
-            abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
-            stats.setAttribute(Beapi.randomizer(ModValues.attributes));
-            String attribute = stats.getAttribute();
-            switch (attribute) {
-                case "Wind":
-                    abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
-                    break;
-                case "Fire":
-                    abilityData.addUnlockedAbility(FireBallAbility.INSTANCE);
-                    break;
-                case "Light":
-                    abilityData.addUnlockedAbility(LightBladeAbility.INSTANCE);
-                    break;
-                case "Lightning":
-                    abilityData.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
-                    break;
-                case "Darkness":
-                    abilityData.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
-                    break;
-                case "Earth":
-                    abilityData.addUnlockedAbility(EarthChunkAbility.INSTANCE);
-                    break;
-                case "Slash":
-                    abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
-                    break;
-                case "Anti-magic":
-                    abilityData.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
-                    abilityData.addUnlockedAbility(BullThrustAbility.INSTANCE);
-                    stats.setRace(ModValues.HUMAN);
-                    break;
-            }
-            if (attribute.equals(ModValues.ANTIMAGIC))
+
+            if (stats.hasSecondAttribute() || stats.getAttribute().equals(ModValues.ANTIMAGIC))
             {
-                stats.setMana(0);
-                stats.setMaxMana(0);
+                stats.alterExperience(3000);
+                ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, stats.getExperience());
+                if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
+                    ActionResult.fail(itemStack);
+                AbilityProgressionEvents.onLevelGained(eventExperienceUp); //TODO give abilities with level up
             }
-            if (stats.hasSecondAttribute()) {
+            else
+            {
                 do
                 {
                     stats.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
                 }   while (stats.getSecondAttribute().equals(stats.getAttribute()));
                 String secondAttribute = stats.getSecondAttribute();
+                String firstAttribute = stats.getAttribute();
+                abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
                 switch (secondAttribute) {
                     case "Wind":
                         abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
@@ -107,22 +80,42 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                         abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
                         break;
                 }
+                switch (firstAttribute) {
+                    case "Wind":
+                        abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                        break;
+                    case "Fire":
+                        abilityData.addUnlockedAbility(FireBallAbility.INSTANCE);
+                        break;
+                    case "Light":
+                        abilityData.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                        break;
+                    case "Lightning":
+                        abilityData.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                        break;
+                    case "Darkness":
+                        abilityData.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                        break;
+                    case "Earth":
+                        abilityData.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                        break;
+                    case "Slash":
+                        abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                        break;
+                }
+                stats.setLevel(1);
+                stats.setMaxExperience(50);
+                stats.setExperience(0);
+                stats.setMana(50);
+                stats.setMaxMana(50);
+                ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, stats.getExperience());
+                if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
+                    ActionResult.fail(itemStack);
             }
-            ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, stats.getExperience());
-            if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
-                ActionResult.fail(stack);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
         }
-        stack.shrink(1);
-        /*
-        int id = Beapi.getIndexOfItemStack(ModItems.CHANGE_MAGIC_ITEM.get().asItem(), player.inventory);
-        System.out.println("item found");
-        player.inventory.getItem(id).shrink(1);
-
-         */
-
-        return ActionResult.sidedSuccess(stack, world.isClientSide());
+        itemStack.shrink(1);
+        return ActionResult.sidedSuccess(itemStack, world.isClientSide());
     }
-
 }

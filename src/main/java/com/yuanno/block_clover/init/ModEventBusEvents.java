@@ -2,6 +2,7 @@ package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.entities.BanditEntity;
 import com.yuanno.block_clover.entities.GrimoireMagicianEntity;
+import com.yuanno.block_clover.entities.MonkeyEntity;
 import com.yuanno.block_clover.entities.VolcanoMonsterEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
@@ -21,5 +22,6 @@ public class ModEventBusEvents {
         event.put(ModEntities.GRIMOIRE_MAGICIAN.get(), GrimoireMagicianEntity.setCustomAttributes().build());
         event.put(ModEntities.BANDIT.get(), BanditEntity.setCustomAttributes().build());
         event.put(ModEntities.VOLCANO_MONSTER.get(), VolcanoMonsterEntity.setCustomAttributes().build());
+        event.put(ModEntities.MONKEY_ENTITY.get(), MonkeyEntity.setCustomAttributes().build());
     }
 }

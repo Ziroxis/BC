@@ -1,4 +1,7 @@
 {
   "replace": "false",
-  "values": ["block_clover:light_weight_ring"]
+  "values": [
+    "block_clover:light_weight_ring",
+    "block_clover:lucky_ring"
+  ]
 }

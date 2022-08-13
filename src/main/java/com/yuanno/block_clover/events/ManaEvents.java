@@ -17,12 +17,9 @@ public class ManaEvents {
     {
         PlayerEntity player = event.player;
         IEntityStats propsEntity = EntityStatsCapability.get(player);
-        float regen;
+        float regen = propsEntity.getManaRegeneration();
 
-        if (propsEntity.getRace().equals(ModValues.ELF))
-            regen = 1 + (float) propsEntity.getLevel()/10;
-        else
-            regen = 1 + (float) propsEntity.getLevel()/20;
+
 
 
 

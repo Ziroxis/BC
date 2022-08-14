@@ -9,6 +9,7 @@ import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
+import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraft.util.ResourceLocation;
@@ -33,6 +34,7 @@ public class ModAbilities {
     public static final IForgeRegistry<Ability> ABILITIES_REGISTRY = RegistryManager.ACTIVE.getRegistry(Ability.class);
     private static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(ABILITIES_REGISTRY, Main.MODID);
 
+    public static final Ability[] MISC = {ManaSkinAbility.INSTANCE};
     public static final Ability[] ANTIMAGIC = {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE};
     public static final Ability[] EARTH = {EarthChunkAbility.INSTANCE, EarthChargeAbility.INSTANCE, EarthGlovesAbility.INSTANCE, EarthMinionAbility.INSTANCE, EarthManipulationAbility.INSTANCE, EarthGolemAbility.INSTANCE, EarthQuakeAbility.INSTANCE, EarthPassiveAbility.INSTANCE};
     public static final Ability[] FIRE = {FireBallAbility.INSTANCE, FlameRoarAbility.INSTANCE, SolLineaAbility.INSTANCE, SpiralFlameAbility.INSTANCE, LeoPalmaAbility.INSTANCE, WildBurstingFlamesAbility.INSTANCE};
@@ -62,6 +64,7 @@ public class ModAbilities {
 
     public static void register(IEventBus eventBus)
     {
+        registerAbilities(MISC);
         registerAbilities(ANTIMAGIC);
         registerAbilities(EARTH);
         registerAbilities(FIRE);

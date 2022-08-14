@@ -52,11 +52,11 @@ public class MonkeyEntity extends BCentity{
     public static AttributeModifierMap.MutableAttribute setCustomAttributes()
     {
         return MobEntity.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 7)
+                .add(Attributes.ATTACK_DAMAGE, 5)
                 .add(Attributes.ARMOR, 10)
                 .add(Attributes.MAX_HEALTH, 50)
                 .add(Attributes.FOLLOW_RANGE, 20)
-                .add(Attributes.MOVEMENT_SPEED, 0.24)
+                .add(Attributes.MOVEMENT_SPEED, 0.27)
                 .add(ModAttributes.FALL_RESISTANCE.get(), 50);
 
     }

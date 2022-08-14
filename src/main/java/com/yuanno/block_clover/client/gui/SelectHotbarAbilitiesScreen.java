@@ -124,15 +124,15 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				if(icon == null)
 					icon = new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png");
 				TexturedIconButton button = new TexturedIconButton(ModResources.TAB, posX2 - 145, posY3, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
-				button = button.setTextureInfo(posX2 - 146, posY3 - 3, 32, 32).setIconInfo(icon, posX2 - 142, posY3 + 2, 1.45);
+				button = button.setTextureInfo(posX2 - 146, posY3 - 3, 0, 0).setIconInfo(icon, posX2 - 142, posY3 + 2, 1.45);
 
-				if (stats.hasSecondAttribute())
+				if (stats.hasSecondAttribute() && category.equals(AbilityCategories.AbilityCategory.ATTRIBUTE))
 				{
 					ResourceLocation secondIcon = category.getSecondIcon(this.player);
 					if (secondIcon == null)
 						secondIcon = new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png");
-					TexturedIconButton secondButton = new TexturedIconButton(ModResources.TAB, posX2 - 145, posY3 + 24, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
-					secondButton = secondButton.setTextureInfo(posX2 - 146, posY3 + 27, 32, 32).setIconInfo(secondIcon, posX2 - 142, posY3 + 32, 1.45);
+					TexturedIconButton secondButton = new TexturedIconButton(ModResources.TAB, posX2 - 158, posY3, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
+					secondButton = secondButton.setTextureInfo(posX2 - 162, posY3 - 3, 0, 0).setIconInfo(secondIcon, posX2 - 154, posY3 + 2, 1.05);
 					this.addButton(secondButton);
 				}
 				this.addButton(button);

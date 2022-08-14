@@ -6,6 +6,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
@@ -17,10 +18,17 @@ import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 
 public class GrimoireMagicianEntity extends CreatureEntity
@@ -93,24 +101,24 @@ public class GrimoireMagicianEntity extends CreatureEntity
         return ActionResultType.PASS;
     }
 
-    /*
+    
     @Override
     @Nullable
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag)
     {
         spawnData = super.finalizeSpawn(world, difficulty, reason, spawnData, dataTag);
 
-        ItemStack hatStack = new ItemStack(ItemInit.MAGE_HAT.get());
+        ItemStack hatStack = new ItemStack(ModItems.MAGE_HAT.get());
         this.setItemSlot(EquipmentSlotType.HEAD, hatStack);
-        ItemStack chestStack = new ItemStack(ItemInit.MAGE_CHEST.get());
+        ItemStack chestStack = new ItemStack(ModItems.MAGE_CHEST.get());
         this.setItemSlot(EquipmentSlotType.CHEST, chestStack);
-        ItemStack legsStack = new ItemStack(ItemInit.MAGE_LEGS.get());
+        ItemStack legsStack = new ItemStack(ModItems.MAGE_LEGS.get());
         this.setItemSlot(EquipmentSlotType.LEGS, legsStack);
-        ItemStack feetStack = new ItemStack(ItemInit.MAGE_FEET.get());
+        ItemStack feetStack = new ItemStack(ModItems.MAGE_FEET.get());
         this.setItemSlot(EquipmentSlotType.FEET, feetStack);
 
         return spawnData;
     }
-     */
+     
 
 }

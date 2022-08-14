@@ -2,6 +2,7 @@ package com.yuanno.block_clover.entities.goals.attribute.wind;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.MonkeyEntity;
 import com.yuanno.block_clover.entities.goals.CooldownGoal;
 import com.yuanno.block_clover.entities.projectiles.wind.WindBladeProjectile;
 import com.yuanno.block_clover.init.ModDamageSource;
@@ -18,7 +19,7 @@ public class WindTornadoGoal extends CooldownGoal {
 
     public WindTornadoGoal(BCentity entity)
     {
-        super(entity, 90, entity.getRandom().nextInt(10));
+        super(entity, 110, entity.getRandom().nextInt(10));
         this.entity = entity;
         //this.entity.addThreat(3);
     }
@@ -53,13 +54,14 @@ public class WindTornadoGoal extends CooldownGoal {
 
         entities.forEach(entityi ->
         {
-            Vector3d speed = Beapi.Propulsion(this.entity, 5, 5, 5);
-            entityi.setDeltaMovement(speed.x, speed.y, speed.z);
-            entityi.hurtMarked = true;
-            entityi.hasImpulse = true;
-
-
-            entityi.hurt(ModDamageSource.causeAbilityDamage(this.entity, ToweringTornadoAbility.INSTANCE), 7);
+            if (!(entityi instanceof MonkeyEntity))
+            {
+                Vector3d speed = Beapi.Propulsion(this.entity, 5, 5, 5);
+                entityi.setDeltaMovement(speed.x, speed.y, speed.z);
+                entityi.hurtMarked = true;
+                entityi.hasImpulse = true;
+                entityi.hurt(ModDamageSource.causeAbilityDamage(this.entity, ToweringTornadoAbility.INSTANCE), 7);
+            }
         });
 
         if (this.entity.level instanceof ServerWorld)

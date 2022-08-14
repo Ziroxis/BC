@@ -34,6 +34,16 @@ public class AbilityCategories {
         return icon;
     };
 
+    private static final Function<PlayerEntity, ResourceLocation> GET_MISCELLANEOUS_ICON = (player) ->
+    {
+        IEntityStats props = EntityStatsCapability.get(player);
+        String iconName = props.getAttribute();
+        ResourceLocation icon = null;
+        icon = new ResourceLocation(Main.MODID, "textures/gui/attributes/misc.png");
+
+        return icon;
+    };
+
     private static final Function<PlayerEntity, ResourceLocation> GET_DEVIL_ICON = (player) ->
     {
         IEntityStats props = EntityStatsCapability.get(player);
@@ -61,6 +71,7 @@ public class AbilityCategories {
     public static enum AbilityCategory implements IExtensibleEnum
     {
         ATTRIBUTE(GET_ATTRIBUTE_ICON, GET_SECOND_ATTRIBUTE_ICON),
+        MISCELLANEOUS(GET_MISCELLANEOUS_ICON),
         SPIRIT,
         DEVIL,
         ALL;

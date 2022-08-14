@@ -44,8 +44,6 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         propsEntity.alterMana(-15);
-        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(LIGHTNING_SPEED);
-        player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(LIGHTNING_STEP);
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(LIGHTNING_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(LIGHTNING_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);

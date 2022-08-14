@@ -16,7 +16,8 @@ public enum AbilityCommandGroup implements IExtensibleEnum
 	LIGHT(() -> ModAbilities.LIGHT),
 	FIRE(() -> ModAbilities.FIRE),
 	EARTH(() -> ModAbilities.EARTH),
-	ANTIMAGIC(() -> ModAbilities.ANTIMAGIC);
+	ANTIMAGIC(() -> ModAbilities.ANTIMAGIC),
+	MISC(() -> ModAbilities.MISC);
 
 	
 	private Supplier<Ability[]> abilities;

@@ -108,7 +108,6 @@ public class AbilityProgressionEvents {
 
         if (props.getLevel() >= level && !abilityProps.hasUnlockedAbility(ability) )
         {
-            player.sendMessage(new StringTextComponent("You unlocked a new spell!."), player.getUUID());
             abilityProps.addUnlockedAbility(ability);
         }
         if ((props.getLevel() < level && abilityProps.hasUnlockedAbility(ability)))

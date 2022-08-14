@@ -10,6 +10,7 @@ import com.yuanno.block_clover.client.ClientHandler;
 import com.yuanno.block_clover.client.curios.*;
 import com.yuanno.block_clover.client.curios.gui.CuriosScreen;
 import com.yuanno.block_clover.client.curios.gui.GuiEventHandler;
+import com.yuanno.block_clover.client.gui.LevelUpOverlay;
 import com.yuanno.block_clover.client.gui.ManaBarOverlay;
 import com.yuanno.block_clover.curios.CuriosConfig;
 import com.yuanno.block_clover.curios.CuriosHelper;
@@ -159,6 +160,7 @@ public class Main
         ClientHandler.onSetup();
         ModKeyBinds.init();
         MinecraftForge.EVENT_BUS.register(new ManaBarOverlay());
+        MinecraftForge.EVENT_BUS.register(new LevelUpOverlay());
     }
     private void process(InterModProcessEvent evt) {
         SlotTypeManager.buildImcSlotTypes(evt.getIMCStream(SlotTypeMessage.REGISTER_TYPE::equals),

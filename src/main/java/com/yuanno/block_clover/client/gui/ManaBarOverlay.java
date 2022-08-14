@@ -1,11 +1,13 @@
 package com.yuanno.block_clover.client.gui;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -54,18 +56,20 @@ public class ManaBarOverlay {
                 Minecraft mc = Minecraft.getInstance();
 
 
-
+                String manaString = "" + entityStats.getMana();
                 int colour_x = ((mana * 8) + 9); // CORRECT FORMULA ((chakra.returncolorChakra() * 8) + 9)
                 mc.textureManager.bind(manaBar);
                 mc.gui.blit(event.getMatrixStack(), 20, 130, 0, 0, tex_width, tex_height);
                 if (entityStats.getMaxMana() <= 0) {
                     int set_height = tex_height;
                     mc.gui.blit(event.getMatrixStack(), 20, 130, colour_x, 0, tex_width, set_height); // set_height
+
                 } else {
                     float manaRatio = (entityStats.getMana() / entityStats.getMaxMana());
                     int set_height = (int) (tex_height * manaRatio);//(int) (bar_height * chakraratio)
                     int move_tex = (tex_height - set_height);
                     mc.gui.blit(event.getMatrixStack(), 20, 130 + move_tex, colour_x, move_tex, tex_width, set_height); // set_height
+                    Beapi.drawStringWithBorder(Minecraft.getInstance().font, event.getMatrixStack(), TextFormatting.ITALIC + manaString,  40, 220, Beapi.hexToRGB("#00FF00").getRGB());
                 }
             }
         }

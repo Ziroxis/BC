@@ -40,7 +40,7 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
             IEntityStats stats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
 
-            if (stats.hasSecondAttribute() || stats.getAttribute().equals(ModValues.ANTIMAGIC))
+            if (stats.hasSecondAttribute() && !stats.getAttribute().equals(ModValues.ANTIMAGIC))
             {
                 stats.alterExperience(3000);
                 ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, stats.getExperience());
@@ -48,7 +48,7 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
                     ActionResult.fail(itemStack);
                 AbilityProgressionEvents.onLevelGained(eventExperienceUp); //TODO give abilities with level up
             }
-            else
+            else if (!stats.getAttribute().equals(ModValues.ANTIMAGIC))
             {
                 do
                 {

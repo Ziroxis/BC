@@ -3,6 +3,7 @@ package com.yuanno.block_clover.client.gui;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.networking.CEquipAbilityPacket;
@@ -213,20 +214,38 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 			if(hoveredEntity == null || hoveredEntity.ability.getDescription() == null)
 				return;
 
-			String tooltip = hoveredEntity.ability.getDescription().getString();
 			double posX = this.parent.width - 220;
-			double posY = this.parent.height - 120;
 			double width = posX + 220;
-			double height = posY + 120;
 			int fgColor = 16777215;
 			int bgColor1 = Beapi.hexToRGB("#222222FF").getRGB();
 			int bgColor2 = Beapi.hexToRGB("#686868EE").getRGB();
+
+
+			double cooldown = hoveredEntity.ability.getMaxCooldown() / 20;
+			double posYCooldown = this.parent.height - 15;
+			double heightCooldown = posYCooldown + 120;
+			this.fillGradient(matrixStack, (int) posX, (int) posYCooldown, (int) width, (int) heightCooldown, bgColor1, bgColor2);
+			List<IReorderingProcessor> stringsCooldown = this.parent.getMinecraft().font.split(new StringTextComponent("Cooldown: " + cooldown), 210);
+
+			float manaCost = hoveredEntity.ability.getmanaCost();
+			double posYMana = this.parent.height - 30;
+			double heightMana = posYMana + 120;
+			this.fillGradient(matrixStack, (int) posX, (int) posYMana, (int) width, (int) heightMana, bgColor1, bgColor2);
+			List<IReorderingProcessor> stringsMana = this.parent.getMinecraft().font.split(new StringTextComponent("Mana cost: " + manaCost), 210);
+
+			String tooltip = hoveredEntity.ability.getDescription().getString();
+			double posY = this.parent.height - 120;
+			double height = posY + 120;
 			this.fillGradient(matrixStack, (int) posX, (int) posY, (int) width, (int) height, bgColor1, bgColor2);
 			List<IReorderingProcessor> strings = this.parent.getMinecraft().font.split(new StringTextComponent(tooltip), 210);
 			for (int b = 0; b < strings.size(); b++)
-			{
 				Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, strings.get(b), (int) posX + 5, 5 + (int) posY + 10 * b, fgColor);
-			}
+				//Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsMana.get(b), (int) posX + 5, 5 + (int) posYMana + 10 * b, fgColor);
+				//Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsCooldown.get(b), (int) posX + 5, 5 + (int) posYCooldown + 10 * b, fgColor);
+			for (int b = 0; b < stringsCooldown.size(); b++)
+				Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsCooldown.get(b), (int) posX + 5, 5 + (int) posYCooldown + 10 * b, fgColor);
+			for (int b = 0; b <stringsMana.size(); b++)
+				Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsMana.get(b), (int) posX + 5, 5 + (int) posYMana + 10 * b, fgColor);
 		}
     }
 

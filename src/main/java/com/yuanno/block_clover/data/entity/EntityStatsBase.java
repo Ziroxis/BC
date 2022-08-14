@@ -20,6 +20,8 @@ public class EntityStatsBase implements IEntityStats{
     private  float manaRegeneration;
     private boolean hasGrimoire = false;
     private int state = 0;
+    private String title = "";
+    private String rank = "";
 
 
     @Override
@@ -217,5 +219,41 @@ public class EntityStatsBase implements IEntityStats{
     public void setState(int value)
     {
         this.state = value;
+    }
+
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
+    @Override
+    public void setTitle(String value) {
+        this.title = value;
+    }
+
+    @Override
+    public boolean hasTitle() {
+        if (Beapi.isNullOrEmpty(this.title))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public String getRank() {
+        return this.rank;
+    }
+
+    @Override
+    public void setRank(String value) {
+        this.rank = value;
+    }
+
+    @Override
+    public boolean hasRank() {
+        if (Beapi.isNullOrEmpty(this.rank))
+            return false;
+
+        return true;
     }
 }

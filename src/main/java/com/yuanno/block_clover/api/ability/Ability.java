@@ -41,7 +41,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     private int experienceGainLevelCap = 50;
     private ITextComponent tooltip;
     protected double cooldown;
-    protected double maxCooldown;
+    public double maxCooldown;
     protected double disableTicks;
     protected double maxDisableTicks = 200;
     protected  ICheck check;

@@ -13,6 +13,7 @@ public class LightBladeAbility extends Ability {
     public LightBladeAbility()
     {
         super("Light Blade", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        this.setDescription("Shoots a blade made out of light");
         this.setmanaCost(10);
         this.setCooldown(2);
         this.setExperiencePoint(20);

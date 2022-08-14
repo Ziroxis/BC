@@ -54,4 +54,14 @@ public interface IEntityStats {
     void alterState(int value);
     void setState(int value);
 
+    //TITLES
+    String getTitle();
+    void setTitle(String value);
+    boolean hasTitle();
+
+    //RANKS
+    String getRank();
+    void setRank(String value);
+    boolean hasRank();
+
 }

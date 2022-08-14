@@ -33,6 +33,7 @@ public class ModEntities {
                     () -> EntityType.Builder.of(VolcanoMonsterEntity::new, EntityClassification.CREATURE)
                             .sized(1f, 2f)
                             .setTrackingRange(15)
+                            .fireImmune()
                             .build(new ResourceLocation(Main.MODID, "volcano_monster").toString()));
     public static final RegistryObject<EntityType<MonkeyEntity>> MONKEY_ENTITY = ENTITIES
             .register("monkey_entity",

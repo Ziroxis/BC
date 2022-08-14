@@ -1,11 +1,11 @@
 {
   "itemGroup.block_cloverModTabWeapons": "Block clover weapons",
+  "itemGroup.block_cloverModTabClothes": "Block clover clothes",
 
   "item.block_clover.demon_destroyer": "Demon destroyer",
   "item.block_clover.demon_dweller": "Demon dweller",
   "item.block_clover.yamis_katana": "Katana",
 
-  "itemGroup.block_cloverModTabClothes": "Block clover clothes",
 
   "item.block_clover.mage_hat": "Mage hat",
   "item.block_clover.mage_chest": "Mage chest",
@@ -32,6 +32,8 @@
 
 
   "gui.blackclover.stats.spells": "Spells",
+  "gui.blackclover.stats.stats": "Stats",
+  "gui.blackclover.stats.overview": "Overview",
 
   "Keys.block_clover.combat": "Combat keys",
   "Keys.block_clover.combat_1": "Combat key 1",

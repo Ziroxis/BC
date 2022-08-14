@@ -34,6 +34,8 @@ public class EntityStatsCapability {
                 props.putString("race", instance.getRace());
                 props.putBoolean("hasGrimoire", instance.hasGrimoire());
                 props.putInt("state", instance.getState());
+                props.putString("title", instance.getTitle());
+                props.putString("rank", instance.getRank());
 
                 return props;
             }
@@ -56,6 +58,8 @@ public class EntityStatsCapability {
                 instance.setRace(props.getString("race"));
                 instance.setGrimoire(props.getBoolean("hasGrimoire"));
                 instance.setState(props.getInt("state"));
+                instance.setTitle(props.getString("title"));
+                instance.setRank(props.getString("rank"));
 
             }
         }, () -> new EntityStatsBase());

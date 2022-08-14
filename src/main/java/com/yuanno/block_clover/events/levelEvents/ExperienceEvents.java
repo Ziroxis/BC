@@ -24,7 +24,6 @@ public class ExperienceEvents {
         {
             int currentExperience = statsProps.getExperience();
             int currentMaxExperience = statsProps.getMaxExperience();
-
             statsProps.alterLevel(1);
             LevelUpEvent eventLevelUp = new LevelUpEvent(player, statsProps.getLevel());
             if (MinecraftForge.EVENT_BUS.post(eventLevelUp))

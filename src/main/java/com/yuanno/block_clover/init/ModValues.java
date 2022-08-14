@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.init;
 
 
+import org.lwjgl.system.CallbackI;
+
 public class ModValues {
 
     public static final String NONE = "None";
@@ -30,4 +32,19 @@ public class ModValues {
     public static final String[] races = {
       ModValues.HUMAN, ModValues.ELF, ModValues.HYBRID
     };
+
+    //RANKS
+    public static final String EMPEROR = "Magic Emperor";
+    public static final String GRAND = "Grand Magic Knight";
+    public static final String SENIOR = "Senior Magic Knight";
+    public static final String INTERMEDIATE = "Intermediate Magic Knight";
+    public static final String JUNIOR = "Junior Magic Knight";
+
+    //TITLES
+    public static final String BEOSTI = "Almighty Captain of Yuanno";
+    public static final String SKYLING = "Engulfing sky";
+    public static final String CONZILLA = "Collected storm";
+    public static final String MADDOX = "Mad Goblin";
+    public static final String KAUSU = "Sage";
+    public static final String REDWOLF = "THE King";
 }

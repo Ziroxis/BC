@@ -39,6 +39,7 @@ public class AbilityProgressionEvents {
     {
         IEntityStats statsProps = EntityStatsCapability.get(event.getPlayer());
 
+        //TODO make this pop up on screen
         if (!statsProps.hasGrimoire())
             return;
         if (statsProps.getAttribute().equals(ModValues.WIND) || statsProps.getSecondAttribute().equals(ModValues.WIND))

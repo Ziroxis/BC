@@ -1,8 +1,8 @@
 package com.yuanno.block_clover.client.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -13,20 +13,17 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.system.CallbackI;
-
-import java.awt.*;
 
 import static net.minecraft.client.gui.screen.inventory.InventoryScreen.renderEntityInInventory;
 
 @OnlyIn(Dist.CLIENT)
-public class PlayerStatsScreen extends Screen {
+public class PlayerOverviewScreen extends Screen {
 
     float xMouse;
     float yMouse;
     private final PlayerEntity player;
 
-    public PlayerStatsScreen()
+    public PlayerOverviewScreen()
     {
         super(new StringTextComponent(""));
         this.player = Minecraft.getInstance().player;
@@ -44,14 +41,17 @@ public class PlayerStatsScreen extends Screen {
         int posX = ((this.width - 256) / 2) - 110;
         int posY = (this.height - 256) / 2;
 
-
         posX += 80;
-        this.addButton(new Button(posX, posY + 190, 70, 20, new TranslationTextComponent("gui.blackclover.stats.overview"), b ->
+        this.addButton(new Button(posX, posY + 190, 70, 20, new TranslationTextComponent("gui.blackclover.stats.spells"), b ->
         {
-            Minecraft.getInstance().setScreen(new PlayerOverviewScreen());
+            Minecraft.getInstance().setScreen(new SelectHotbarAbilitiesScreen(this.player));
         }));
 
-
+        posX += 240;
+        this.addButton(new Button(posX, posY + 190, 70, 20, new TranslationTextComponent("gui.blackclover.stats.stats"), b ->
+        {
+            Minecraft.getInstance().setScreen(new PlayerStatsScreen());
+        }));
 
     }
 
@@ -68,7 +68,7 @@ public class PlayerStatsScreen extends Screen {
         this.renderBackground(matrixStack);
         statsRendering(matrixStack);
 
-       // renderEntityInInventory(posX + 190, posY + 190, 70, (float)(posX + 190) - this.xMouse, (float)(posY + 190 - 120) - this.yMouse, this.minecraft.player);
+        renderEntityInInventory(posX + 190, posY + 190, 70, (float)(posX + 190) - this.xMouse, (float)(posY + 190 - 120) - this.yMouse, this.minecraft.player);
 
         super.render(matrixStack, x, y, f);
     }
@@ -84,14 +84,6 @@ public class PlayerStatsScreen extends Screen {
         int posY = (this.height - 256) / 2;
 
 
-        int level = props.getLevel();
-        float maxHealth = player.getMaxHealth();
-        float maxMana = props.getMaxMana();
-        float manaRegeneration = props.getManaRegeneration();
-        String title = props.getTitle();
-        String rank = props.getRank();
-
-/*
         String name = player.getName().getString();
         String race = props.getRace();
         String attribute = props.getAttribute();
@@ -100,7 +92,14 @@ public class PlayerStatsScreen extends Screen {
         int experience = props.getExperience();
         int maxExperience = props.getMaxExperience();
 
+        /*
+        String race = this.playerHandler.returnRace().getString().toLowerCase();
+        String magicAttribute = this.playerHandler.ReturnMagicAttribute().getString().toLowerCase();
+        String magicLevel = String.valueOf(this.playerHandler.ReturnMagicLevel());
+        String magicExp = ((int) (this.playerHandler.returnMagicExp() - BCMHelper.CalculateExp(this.playerHandler.ReturnMagicLevel()))) + " / " + ((int) (BCMHelper.CalculateExp(this.playerHandler.ReturnMagicLevel()+1) - BCMHelper.CalculateExp(this.playerHandler.ReturnMagicLevel())));
 
+         */
+        //TODO fix attribute
 
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Name: " + TextFormatting.RESET + name, posX - 30, posY + 50, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, posX - 30, posY + 70, -1);
@@ -110,16 +109,6 @@ public class PlayerStatsScreen extends Screen {
             drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute, posX - 30, posY + 90, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Race: " + TextFormatting.RESET + race, posX - 30, posY + 110, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Experience: " + TextFormatting.RESET + experience + "/" + maxExperience, posX - 30, posY + 130, -1);
- */
-        drawString(matrixStack, font, TextFormatting.GRAY + "INFO CARD", posX + 102, posY + 30, Color.GRAY.getRGB());
-        drawString(matrixStack, font, TextFormatting.BOLD + "Level: " + TextFormatting.RESET + level, posX - 30, posY + 50, -1);
-        drawString(matrixStack, font, TextFormatting.BOLD + "Max Health: " + TextFormatting.RESET + maxHealth, posX - 30, posY + 70, -1);
-        drawString(matrixStack, font, TextFormatting.BOLD + "Max Mana: " + TextFormatting.RESET + maxMana, posX - 30, posY + 90, -1);
-        drawString(matrixStack, font, TextFormatting.BOLD + "Mana Regeneration: " + TextFormatting.RESET + manaRegeneration, posX - 30, posY + 110, -1);
-        drawString(matrixStack, font, TextFormatting.BOLD + "Title: " + TextFormatting.RESET + title, posX - 30, posY + 130, -1);
-        drawString(matrixStack, font, TextFormatting.BOLD + "Rank: " + TextFormatting.RESET + rank, posX - 30, posY + 150, -1);
-
-
 
 
     }

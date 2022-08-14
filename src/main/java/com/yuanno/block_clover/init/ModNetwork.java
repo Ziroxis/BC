@@ -2,10 +2,7 @@ package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.networking.*;
 import com.yuanno.block_clover.networking.client.*;
-import com.yuanno.block_clover.networking.server.SOpenPlayerScreenPacket;
-import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
-import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
-import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.networking.server.*;
 
 public class ModNetwork {
 
@@ -21,6 +18,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(CTogglePassiveAbilityPacket.class, CTogglePassiveAbilityPacket::encode, CTogglePassiveAbilityPacket::decode, CTogglePassiveAbilityPacket::handle);
         PacketHandler.registerPacket(CEquipAbilityPacket.class, CEquipAbilityPacket::encode, CEquipAbilityPacket::decode, CEquipAbilityPacket::handle);
         PacketHandler.registerPacket(CGiveItemStackPacket.class, CGiveItemStackPacket::encode, CGiveItemStackPacket::decode, CGiveItemStackPacket::handle);
+        PacketHandler.registerPacket(COpenPlayerStatsScreenPacket.class, COpenPlayerStatsScreenPacket::encode, COpenPlayerStatsScreenPacket::decode, COpenPlayerStatsScreenPacket::handle);
 
 
         //SERVER PACKETS
@@ -28,6 +26,8 @@ public class ModNetwork {
         PacketHandler.registerPacket(SSyncAbilityDataPacket.class, SSyncAbilityDataPacket::encode, SSyncAbilityDataPacket::decode, SSyncAbilityDataPacket::handle);
         PacketHandler.registerPacket(SUpdateEquippedAbilityPacket.class, SUpdateEquippedAbilityPacket::encode, SUpdateEquippedAbilityPacket::decode, SUpdateEquippedAbilityPacket::handle);
         PacketHandler.registerPacket(SOpenPlayerScreenPacket.class, SOpenPlayerScreenPacket::encode, SOpenPlayerScreenPacket::decode, SOpenPlayerScreenPacket::handle);
+        PacketHandler.registerPacket(SOpenPlayerStatsScreenPacket.class, SOpenPlayerStatsScreenPacket::encode, SOpenPlayerStatsScreenPacket::decode, SOpenPlayerStatsScreenPacket::handle);
+
 
 
         //SYNC

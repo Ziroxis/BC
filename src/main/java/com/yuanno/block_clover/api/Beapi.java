@@ -364,6 +364,22 @@ public class Beapi
         RenderSystem.enableBlend();
     }
 
+    public static void drawStringWithBorderLingering(FontRenderer font, MatrixStack matrixStack, String text, int posX, int posY, int color)
+    {
+        matrixStack.pushPose();
+        String unformattedText = escapeTextFormattingChars(text);
+        font.drawShadow(matrixStack, unformattedText, posX, posY - 0.7f, 0);
+        font.drawShadow(matrixStack, unformattedText, posX, posY + 0.7f, 0);
+        font.drawShadow(matrixStack, unformattedText, posX + 0.7f, posY, 0);
+        font.drawShadow(matrixStack, unformattedText, posX - 0.7f, posY, 0);
+        matrixStack.translate(0, 0, 1);
+        font.draw(matrixStack, unformattedText, posX, posY, 10);
+        matrixStack.last();
+        matrixStack.popPose();
+        RenderSystem.enableAlphaTest();
+        RenderSystem.enableBlend();
+    }
+
     public static String escapeTextFormattingChars(String text)
     {
         return text.replaceAll("§[0-9a-f]", "");

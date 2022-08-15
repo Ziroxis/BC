@@ -2,6 +2,7 @@
   "replace": "false",
   "values": [
     "block_clover:fire_belt",
-    "block_clover:belt_air"
+    "block_clover:belt_air",
+    "block_clover:jump_artifact"
   ]
 }

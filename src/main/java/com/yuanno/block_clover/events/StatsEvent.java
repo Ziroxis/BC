@@ -24,10 +24,16 @@ import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine;
+
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class StatsEvent {
@@ -132,9 +138,15 @@ public class StatsEvent {
                 props.setMaxMana(0);
             }
         }
+        UUID uuid = player.getUUID();
+        if (uuid.toString().equals("b0515226-7ff3-4ab4-aa87-69179ee0e4ae"))
+            props.setTitle("\u00A71Almighty captain of Yuanno");
+        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984"))
+            props.setTitle("§aSage");
+        else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802"))
+            props.setTitle("§2Mad earth");
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
-
     }
 
     @SubscribeEvent

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "block_clover:magical_meat"
+  },
+  "result": "block_clover:cooked_magical_meat",
+  "experience": 1.200,
+  "cookingtime": 600
+}

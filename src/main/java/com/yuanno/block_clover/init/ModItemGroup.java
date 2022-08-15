@@ -25,4 +25,10 @@ public class ModItemGroup {
             return new ItemStack(CuriosRegistry.CROWN);
         }
     };
+    public static final ItemGroup BLOCK_CLOVER_MISC = new ItemGroup("block_cloverMisc") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ModItems.MAGICAL_MEAT.get());
+        }
+    };
 }

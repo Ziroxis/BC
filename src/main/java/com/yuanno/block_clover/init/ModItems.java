@@ -1,10 +1,14 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.items.CoockedMagicalBeastMeatItem;
+import com.yuanno.block_clover.items.MagicalBeastMeatItem;
 import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
 import com.yuanno.block_clover.items.weapons.*;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Food;
+import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -40,6 +44,8 @@ public class ModItems {
     public static final RegistryObject<Item> MANA_REGENERATION = ITEMS.register("mana_regeneration", ManaRegenerationArtifactItem::new);
     public static final RegistryObject<Item> BAG_GLUTTONY = ITEMS.register("bag_gluttony", BagOfGluttonyArtifactItem::new);
     public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
+    public static final RegistryObject<Item> JUMP_ARTIFACT = ITEMS.register("jump_artifact", JumpyArtifactItem::new);
+
 
     //WEAPONS
     public static final RegistryObject<Item> LIGHT_SWORD = ITEMS.register("light_sword", LightSwordItem::new);
@@ -47,6 +53,7 @@ public class ModItems {
     public static final RegistryObject<Item> KATANA = ITEMS.register("yamis_katana", KatanaItem::new);
     public static final RegistryObject<Item> DEMON_DESTROYER = ITEMS.register("demon_destroyer", DemonDestroyerItem::new);
     public static final RegistryObject<Item> DEMON_DWELLER = ITEMS.register("demon_dweller", DemonDwellerItem::new);
+
 
     //CLOTHES
     public static final RegistryObject<Item> MAGE_HAT = ITEMS.register("mage_hat", ()-> new MageArmorItem("mage", EquipmentSlotType.HEAD));
@@ -72,4 +79,7 @@ public class ModItems {
     public static final RegistryObject<Item> GOLDEN_DAWN_LEGS = ITEMS.register("golden_dawn_legs", ()-> new GoldenDawnUniArmorItem("golden_dawn", EquipmentSlotType.LEGS));
     public static final RegistryObject<Item> GOLDEN_DAWN_FEET = ITEMS.register("golden_dawn_feet", ()-> new GoldenDawnUniArmorItem("golden_dawn", EquipmentSlotType.FEET));
 
+    //MISC
+    public static final RegistryObject<Item> MAGICAL_MEAT = ITEMS.register("magical_meat", MagicalBeastMeatItem::new);
+    public static final RegistryObject<Item> COOKED_MAGICAL_MEAT = ITEMS.register("cooked_magical_meat", CoockedMagicalBeastMeatItem::new);
 }

@@ -3,6 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.items.CoockedMagicalBeastMeatItem;
 import com.yuanno.block_clover.items.MagicalBeastMeatItem;
+import com.yuanno.block_clover.items.ModSpawnEggItem;
 import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
 import com.yuanno.block_clover.items.weapons.*;
@@ -10,6 +11,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,7 +24,9 @@ public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID);
     public List<Supplier<Item>> items = new ArrayList<>();
+
     //ITEMS
+    public static final RegistryObject<Item> NIGHT_CROWN = ITEMS.register("night_crown", NightCrownItem::new);
     public static final RegistryObject<Item> LIGHT_WEIGHT_RING = ITEMS.register("light_weight_ring", LightWeightRingArtifactItem::new);
     public static final RegistryObject<Item> CHANGE_MAGIC_ITEM = ITEMS.register("artifact_change", MagicChangeArtifactItem::new);
     public static final RegistryObject<Item> SURPLUS_MAGIC_ITEM = ITEMS.register("artifact_surplus", MagicSurplusArtifactItem::new);
@@ -82,4 +86,13 @@ public class ModItems {
     //MISC
     public static final RegistryObject<Item> MAGICAL_MEAT = ITEMS.register("magical_meat", MagicalBeastMeatItem::new);
     public static final RegistryObject<Item> COOKED_MAGICAL_MEAT = ITEMS.register("cooked_magical_meat", CoockedMagicalBeastMeatItem::new);
+
+    //SPAWN EGGS
+    public static final RegistryObject<SpawnEggItem> VOLCANO_MONSTER_EGG = ITEMS.register("volcano_monster_egg",
+            () -> new ModSpawnEggItem(ModEntities.VOLCANO_MONSTER, 0x879995, 0x576ABC, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC)));
+    public static final RegistryObject<SpawnEggItem> MONKEY_EGG = ITEMS.register("monkey_egg",
+            () -> new ModSpawnEggItem(ModEntities.MONKEY_ENTITY, 0x879895, 0x577ABC, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC)));
+    public static final RegistryObject<SpawnEggItem> BANDIT_EGG = ITEMS.register("bandit_egg",
+            () -> new ModSpawnEggItem(ModEntities.BANDIT, 0x879895, 0x577ABC, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC)));
+
 }

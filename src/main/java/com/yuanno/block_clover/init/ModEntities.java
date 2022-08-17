@@ -31,14 +31,14 @@ public class ModEntities {
     public static final RegistryObject<EntityType<VolcanoMonsterEntity>> VOLCANO_MONSTER = ENTITIES
             .register("volcano_monster",
                     () -> EntityType.Builder.of(VolcanoMonsterEntity::new, EntityClassification.CREATURE)
-                            .sized(1f, 2f)
+                            .sized(3f, 6.5f)
                             .setTrackingRange(15)
                             .fireImmune()
                             .build(new ResourceLocation(Main.MODID, "volcano_monster").toString()));
     public static final RegistryObject<EntityType<MonkeyEntity>> MONKEY_ENTITY = ENTITIES
             .register("monkey_entity",
                     () -> EntityType.Builder.of(MonkeyEntity::new, EntityClassification.CREATURE)
-                            .sized(2f, 3f)
+                            .sized(1.55f, 2.2f)
                             .setTrackingRange(20)
                             .build(new ResourceLocation(Main.MODID, "monkey_entity").toString()));
     public static void register(IEventBus eventBus) {

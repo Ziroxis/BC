@@ -1,0 +1,125 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:night_crown"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:light_weight_ring"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:artifact_change"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:artifact_surplus"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:fire_belt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:gloves_impatience"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:rabbit_foot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:lucky_ring"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:mittens_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:bracelet_bravery"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:charm_protection"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:health_artifact"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:regen_artifact"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:necklace_agitation"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:cloak_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:belt_air"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:bracelet_push"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:rare_candy"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:mana_artifact"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:mana_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:bag_gluttony"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:green_thumb"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:jump_artifact"
+        }
+      ]
+    }
+  ]
+}

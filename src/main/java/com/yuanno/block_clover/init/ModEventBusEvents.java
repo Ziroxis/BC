@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.init;
 
+import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.entities.BanditEntity;
 import com.yuanno.block_clover.entities.GrimoireMagicianEntity;
 import com.yuanno.block_clover.entities.MonkeyEntity;
@@ -7,9 +8,15 @@ import com.yuanno.block_clover.entities.VolcanoMonsterEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthSummons;
+import com.yuanno.block_clover.events.loot.ArtifactAdditionModifier;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import javax.annotation.Nonnull;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
@@ -24,4 +31,6 @@ public class ModEventBusEvents {
         event.put(ModEntities.VOLCANO_MONSTER.get(), VolcanoMonsterEntity.setCustomAttributes().build());
         event.put(ModEntities.MONKEY_ENTITY.get(), MonkeyEntity.setCustomAttributes().build());
     }
+
+
 }

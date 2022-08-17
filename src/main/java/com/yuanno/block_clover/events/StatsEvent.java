@@ -139,12 +139,14 @@ public class StatsEvent {
             }
         }
         UUID uuid = player.getUUID();
-        if (uuid.toString().equals("b0515226-7ff3-4ab4-aa87-69179ee0e4ae"))
+        if (uuid.toString().equals("b0515226-7ff3-4ab4-aa87-69179ee0e4ae")) // -> Beosti
             props.setTitle("\u00A71Almighty captain of Yuanno");
-        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984"))
+        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> kausu
             props.setTitle("§aSage");
-        else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802"))
-            props.setTitle("§2Mad earth");
+        //else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802")) // -> maddox
+            //props.setTitle("§2Mad earth");
+        else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> redwolf
+            props.setTitle("§cThe king");
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }

@@ -21,10 +21,6 @@ package com.yuanno.block_clover.curios;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.curios.inventory.container.CuriosContainer;
-import com.yuanno.block_clover.curios.item.AmuletItem;
-import com.yuanno.block_clover.curios.item.CrownItem;
-import com.yuanno.block_clover.curios.item.KnucklesItem;
-import com.yuanno.block_clover.curios.item.RingItem;
 import com.yuanno.block_clover.curios.objects.FortuneBonusModifier;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -64,11 +60,7 @@ public class CuriosRegistry {
     CONTAINER_TYPE = null;
   }
 
-  @SubscribeEvent
-  public static void registerItems(RegistryEvent.Register<Item> evt) {
-    evt.getRegistry()
-        .registerAll(new RingItem(), new AmuletItem(), new CrownItem(), new KnucklesItem());
-  }
+
 
   @SubscribeEvent
   public static void registerContainer(RegistryEvent.Register<ContainerType<?>> evt) {

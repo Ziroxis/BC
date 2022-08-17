@@ -9,6 +9,8 @@ version="${file.jarVersion}" #mandatory
 displayName="Block Clover" #mandatory
 logoFile="examplemod.png" #optional
 credits="Thanks to your mother for physically supporting me through this project" #optional
-authors="Beo, Con, honorable mentions: Wynd" #optional
+authors="Beosti, Con, honorable mentions: Wynd" #optional
 description='''
-Black clover mod, big thanks to Jo for his original mod'''
+Black clover mod, big thanks to Jo for his original mod
+Big thanks to my patrons:
+Kausu, Maddox, Redwolf'''

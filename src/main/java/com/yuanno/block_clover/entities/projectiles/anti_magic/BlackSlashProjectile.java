@@ -11,10 +11,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class BlackSlashProjectile extends AbilityProjectileEntity {
-
+    int knockback;
     public BlackSlashProjectile(EntityType type, World world)
     {
         super(type, world);
@@ -31,16 +32,14 @@ public class BlackSlashProjectile extends AbilityProjectileEntity {
 
     private void onEntityImpactEvent(LivingEntity entity)
     {
-        double knockback = 1.5;
-        (entity).knockback((float)knockback * 0.5F, (double) MathHelper.sin(this.yRot * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(this.yRot * ((float)Math.PI / 180F))));
-
+        Vector3d vector3d = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale((double)this.knockback * 10);
+        entity.push(vector3d.x, 0.1, vector3d.z);
         if (entity instanceof PlayerEntity)
         {
             PlayerEntity player = (PlayerEntity) entity;
             IAbilityData abilityData = AbilityDataCapability.get(player);
             IEntityStats entityStats = EntityStatsCapability.get(player);
             entityStats.alterMana(-25);
-            (player).knockback((float)knockback * 0.5F, (double) MathHelper.sin(this.yRot * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(this.yRot * ((float)Math.PI / 180F))));
 
             for (Ability ability : abilityData.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
             {

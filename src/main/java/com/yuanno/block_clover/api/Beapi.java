@@ -49,6 +49,46 @@ import java.util.stream.Collectors;
 
 public class Beapi
 {
+
+    public static boolean loadNBTStructure(ServerWorld world, String name, BlockPos pos, PlacementSettings settings)
+    {
+        if (!world.isClientSide)
+        {
+            TemplateManager templatemanager = world.getStructureManager();
+            ResourceLocation res = new ResourceLocation(Main.MODID, name);
+
+            Template template;
+            try
+            {
+                template = templatemanager.get(res);
+            }
+            catch (ResourceLocationException ex)
+            {
+                ex.printStackTrace();
+                return false;
+            }
+
+            if (template == null)
+            {
+                return false;
+            }
+            else
+            {
+                BlockState blockstate = world.getBlockState(pos);
+                world.sendBlockUpdated(pos, blockstate, blockstate, 3);
+            }
+
+            //placementsettings.clearProcessors().addProcessor(new BlockIgnoreStructureProcessor(ImmutableList.of(Blocks.SAND)));
+
+            template.placeInWorldChunk(world, pos, settings, new Random(Util.getMillis()));
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public static Vector3d Propulsion(LivingEntity entity, double extraVelX, double extraVelY, double extraVelZ)
     {
         return entity.getLookAngle().multiply(extraVelX, extraVelY, extraVelZ);
@@ -356,6 +396,7 @@ public class Beapi
         font.drawShadow(matrixStack, unformattedText, posX, posY - 0.7f, 0);
         font.drawShadow(matrixStack, unformattedText, posX, posY + 0.7f, 0);
         font.drawShadow(matrixStack, unformattedText, posX + 0.7f, posY, 0);
+        font.drawShadow(matrixStack, unformattedText, posX + 0.7f, posY, 0);
         font.drawShadow(matrixStack, unformattedText, posX - 0.7f, posY, 0);
         matrixStack.translate(0, 0, 1);
         font.draw(matrixStack, unformattedText, posX, posY, -1);
@@ -459,7 +500,7 @@ public class Beapi
             Template template;
             try
             {
-                template = templatemanager.get(res);
+                template = templatemanager.getOrCreate(res);
             }
             catch (ResourceLocationException ex)
             {
@@ -468,9 +509,9 @@ public class Beapi
             }
 
             toIgnore.add(Blocks.STRUCTURE_VOID);
-            toIgnore.add(Blocks.BEDROCK);
-            //.add(Blocks.WATER);
+            //toIgnore.add(Blocks.BEDROCK);
             takeBlocksFromWorld(template, world, pos, size, toIgnore);
+            template.fillFromWorld(serverworld, pos, size, true, Blocks.STRUCTURE_VOID);
             template.setAuthor("?");
             try
             {

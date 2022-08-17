@@ -21,7 +21,8 @@ public class HealthArtifactItem extends ArtifactItem {
         if (!world.isClientSide)
         {
             float health = player.getMaxHealth();
-            player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(health + 2);
+            if (health < 40)
+                player.getAttribute(Attributes.MAX_HEALTH).setBaseValue(health + 2);
             ((ServerPlayerEntity) player).connection.send(new SUpdateHealthPacket(player.getHealth(), player.getFoodData().getFoodLevel(), player.getFoodData().getSaturationLevel()));
         }
         stack.shrink(1);

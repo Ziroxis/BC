@@ -20,5 +20,6 @@ public class ForgeSetup {
         AbilityCommand.register(dispatcher);
         LevelCommand.register(dispatcher);
         AttributeCommand.register(dispatcher);
+        StructureCommand.register(dispatcher);
     }
 }

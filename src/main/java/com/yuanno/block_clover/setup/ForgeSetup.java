@@ -15,11 +15,11 @@ public class ForgeSetup {
     {
         CommandDispatcher dispatcher = event.getServer().getCommands().getDispatcher();
 
-        TitleCommand.register(dispatcher);
         ExperienceCommand.register(dispatcher);
         AbilityCommand.register(dispatcher);
         LevelCommand.register(dispatcher);
         AttributeCommand.register(dispatcher);
         StructureCommand.register(dispatcher);
+        RaceCommand.register(dispatcher);
     }
 }

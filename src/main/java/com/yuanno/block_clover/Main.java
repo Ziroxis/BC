@@ -176,17 +176,5 @@ public class Main
         CuriosApi.setSlotHelper(null);
     }
 
-    @Mod.EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientProxy
-    {
-        @SubscribeEvent
-        public static void stitchTextures(TextureStitchEvent.Pre evt)
-        {
-            CuriosClientMod.stitch(evt);
-            evt.addSprite(new ResourceLocation(Main.MODID, "item/crown"));
-
-        }
-    }
-
 
 }

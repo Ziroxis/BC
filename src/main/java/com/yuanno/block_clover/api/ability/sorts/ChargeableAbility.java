@@ -122,9 +122,7 @@ public class ChargeableAbility extends Ability {
 
         if(!this.canUse(player))
         {
-            this.setChargeTime(this.getMaxChargeTime());
-            this.startCooldown(player);
-            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+            this.stopCharging(player);
             return;
         }
 
@@ -132,13 +130,13 @@ public class ChargeableAbility extends Ability {
 
         if(this.isCharging() && this.chargeTime > 0)
         {
-            this.chargeTime--;
+            this.chargeTime -= 1 * this.getTimeProgression();
             if(!player.level.isClientSide && !this.isStateForced())
                 this.duringChargingEvent.duringCharging(player, this.chargeTime);
         }
         else if(this.isCharging() && this.chargeTime <= 0)
         {
-            this.stopCharging(player);
+            this.endCharging(player);
         }
 
         player.level.getProfiler().pop();
@@ -162,6 +160,16 @@ public class ChargeableAbility extends Ability {
             this.chargeTime = this.maxChargeTime;
             this.startCooldown(player);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+        }
+    }
+
+    public void endCharging(PlayerEntity player)
+    {
+        if(player.level.isClientSide)
+            return;
+        if (!this.isStateForced() && this.onEndChargingEvent.onEndCharging(player))
+        {
+            this.stopCharging(player);
         }
     }
 

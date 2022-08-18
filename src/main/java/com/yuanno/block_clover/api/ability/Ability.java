@@ -36,6 +36,8 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     private String name = "";
     private String displayName;
     private String textureName = "";
+    protected double timeProgression = 1;
+
     private int manaCost = 1;
     private int experiencePoint = 0;
     private int experienceGainLevelCap = 50;
@@ -325,6 +327,11 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public float getmanaCost()
     {
         return this.manaCost;
+    }
+
+    public double getTimeProgression()
+    {
+        return this.timeProgression;
     }
 
     public void setDescription(String desc)

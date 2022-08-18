@@ -20,7 +20,7 @@ public class ExperienceEvents {
         PlayerEntity player = e.getPlayer();
         IEntityStats statsProps = EntityStatsCapability.get(player);
 
-        if (statsProps.getExperience() >= statsProps.getMaxExperience())
+        if (statsProps.getExperience() >= statsProps.getMaxExperience() && statsProps.getLevel() < 50)
         {
             int currentExperience = statsProps.getExperience();
             int currentMaxExperience = statsProps.getMaxExperience();

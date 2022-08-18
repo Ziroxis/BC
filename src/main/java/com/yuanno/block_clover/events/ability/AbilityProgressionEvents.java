@@ -20,10 +20,7 @@ import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
 import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
 import com.yuanno.block_clover.spells.light.LightSwordAbility;
-import com.yuanno.block_clover.spells.wind.ToweringTornadoAbility;
-import com.yuanno.block_clover.spells.wind.WindBladeShowerAbility;
-import com.yuanno.block_clover.spells.wind.WindCrescentAbility;
-import com.yuanno.block_clover.spells.wind.WindFlightAbility;
+import com.yuanno.block_clover.spells.wind.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.slash.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -48,6 +45,8 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 7, WindBladeShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ToweringTornadoAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, WindFlightAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, TornadoPiercingAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 30, WindGaleAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.LIGHT) || statsProps.getSecondAttribute().equals(ModValues.LIGHT))
         {

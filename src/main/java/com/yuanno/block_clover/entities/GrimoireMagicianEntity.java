@@ -87,6 +87,7 @@ public class GrimoireMagicianEntity extends CreatureEntity
                 {
                     player.displayClientMessage(new StringTextComponent("Here is your Grimoire! You seem mature enough"), false);
                     stats.setGrimoire(true);
+                    stats.setLevel(stats.getLevel());
                     PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
                     IAbilityData abilityData = AbilityDataCapability.get(player);
                     PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);

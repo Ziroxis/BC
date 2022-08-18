@@ -147,6 +147,14 @@ public class StatsEvent {
             //props.setTitle("§2Mad earth");
         else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> redwolf
             props.setTitle("§cThe king");
+        else if (uuid.toString().equals("9819c734-1928-4757-8724-801ced9218c6")) // -> skyling
+            props.setTitle("§3Engulfing sky");
+        else if (uuid.toString().equals("b462e469-19ce-40b6-9999-d74102623b7c")) // -> gingershadow
+            props.setTitle("§4The true");
+        else if (uuid.toString().equals("72336f87-461e-4e3b-a213-df3982241c39")) // -> apollo
+            props.setTitle("§0Wannabe rival");
+        else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
+            props.setTitle("§7Beggar");
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }

@@ -416,14 +416,11 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         // if(player.level.isClientSide)
         // return;
-        player.level.getProfiler().push(() ->
-        {
-            return Beapi.getResourceName(this.getName());
-        });
+        player.level.getProfiler().push(() -> Beapi.getResourceName(this.getName()));
 
         if (this.isOnCooldown() && this.cooldown > 0)
         {
-            this.cooldown--;
+            this.cooldown-= 1 * this.getTimeProgression();
             if (!player.level.isClientSide && this.getPreviousState() != State.DISABLED && !this.isStateForced())
                 this.duringCooldownEvent.duringCooldown(player, (int) this.cooldown);
         }

@@ -18,4 +18,5 @@ public class EarthChargeProjectile extends AbilityProjectileEntity {
         this.setDamage(7);
         this.setMaxLife(64);
         this.setPhysical(false);
-    }}
+    }
+}

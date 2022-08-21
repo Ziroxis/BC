@@ -26,6 +26,10 @@ import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
 import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import com.yuanno.block_clover.spells.lightning.*;
+import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
+import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
+import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
+import com.yuanno.block_clover.spells.sealing.UltimateSealAbility;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraft.command.CommandSource;
@@ -77,6 +81,13 @@ public class RaceCommand {
             abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
             if (statsProps.hasGrimoire()) 
             {
+                if (statsProps.getAttribute().equals(ModValues.SEALING))
+                {
+                    gainAbility(player, 5, SelfHealSealingAbility.INSTANCE);
+                    gainAbility(player, 10, SealingPunchAbility.INSTANCE);
+                    gainAbility(player, 15, OtherHealSealingAbility.INSTANCE);
+                    gainAbility(player, 20, UltimateSealAbility.INSTANCE);
+                }
                 if (statsProps.getAttribute().equals(ModValues.WIND)) {
                     gainAbility(player, 3, WindCrescentAbility.INSTANCE);
                     gainAbility(player, 7, WindBladeShowerAbility.INSTANCE);
@@ -129,7 +140,8 @@ public class RaceCommand {
                     gainAbility(player, 15, LunaticSlashAbility.INSTANCE);
                     gainAbility(player, 20, RoundLunaticSlashAbility.INSTANCE);
                 }
-            }        }
+            }
+        }
         switch (set)
         {
             case "ELF":

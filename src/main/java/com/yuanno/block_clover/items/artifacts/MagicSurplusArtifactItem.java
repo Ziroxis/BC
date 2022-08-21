@@ -20,6 +20,7 @@ import com.yuanno.block_clover.spells.earth.EarthChunkAbility;
 import com.yuanno.block_clover.spells.fire.FireBallAbility;
 import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
+import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -79,6 +80,9 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
                     case "Slash":
                         abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
                         break;
+                    case "Sealing":
+                        abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                        break;
                 }
                 switch (firstAttribute) {
                     case "Wind":
@@ -101,6 +105,9 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
                         break;
                     case "Slash":
                         abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                        break;
+                    case "Sealing":
+                        abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                         break;
                 }
                 stats.setLevel(1);

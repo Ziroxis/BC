@@ -10,6 +10,7 @@ import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
+import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraft.util.ResourceLocation;
@@ -35,6 +36,7 @@ public class ModAbilities {
     private static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(ABILITIES_REGISTRY, Main.MODID);
 
     public static final Ability[] MISC = {ManaSkinAbility.INSTANCE};
+    public static final Ability[] SEALING = {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE};
     public static final Ability[] ANTIMAGIC = {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE};
     public static final Ability[] EARTH = {EarthChunkAbility.INSTANCE, EarthChargeAbility.INSTANCE, EarthGlovesAbility.INSTANCE, EarthMinionAbility.INSTANCE, EarthManipulationAbility.INSTANCE, EarthGolemAbility.INSTANCE, EarthQuakeAbility.INSTANCE, EarthPassiveAbility.INSTANCE};
     public static final Ability[] FIRE = {FireBallAbility.INSTANCE, FlameRoarAbility.INSTANCE, SolLineaAbility.INSTANCE, SpiralFlameAbility.INSTANCE, LeoPalmaAbility.INSTANCE, WildBurstingFlamesAbility.INSTANCE};
@@ -42,7 +44,7 @@ public class ModAbilities {
     public static final Ability[] LIGHTNING = {ThunderGodBootsAbility.INSTANCE, ThunderGodGlovesAbility.INSTANCE, ThunderCrumblingOrbAbility.INSTANCE, ThunderCrumblingOrbMultiAbility.INSTANCE, ThunderDischargeAbility.INSTANCE, ThunderFiendAbility.INSTANCE, ThunderFiendMultiAbility.INSTANCE, ThunderSlashAbility.INSTANCE, ThunderChargeAbility.INSTANCE};
     public static final Ability[] LIGHT = {LightBladeAbility.INSTANCE, LightBladeShowerAbility.INSTANCE, LightHealingAbility.INSTANCE, LightMovementAbility.INSTANCE, LightSwordAbility.INSTANCE};
     public static final Ability[] DARKNESS = {DarkCloakedBladeAbility.INSTANCE, AvidyaSlashAbility.INSTANCE, AvidyaWildSlashAbility.INSTANCE, BluntStrikeAbility.INSTANCE, BlackHoleAbility.INSTANCE};
-    public static final Ability[] WIND = {WindBladeAbility.INSTANCE, WindCrescentAbility.INSTANCE, WindBladeShowerAbility.INSTANCE, ToweringTornadoAbility.INSTANCE, WindFlightAbility.INSTANCE, WindGaleAbility.INSTANCE, TornadoPiercingAbility.INSTANCE};
+    public static final Ability[] WIND = {WindBladeAbility.INSTANCE, WindCrescentAbility.INSTANCE, WindBladeShowerAbility.INSTANCE, ToweringTornadoAbility.INSTANCE, WindFlightAbility.INSTANCE, TornadoPiercingAbility.INSTANCE};
 
     private static Ability registerAbility(Ability ability)
     {
@@ -65,6 +67,7 @@ public class ModAbilities {
     public static void register(IEventBus eventBus)
     {
         registerAbilities(MISC);
+        registerAbilities(SEALING);
         registerAbilities(ANTIMAGIC);
         registerAbilities(EARTH);
         registerAbilities(FIRE);

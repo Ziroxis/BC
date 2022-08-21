@@ -19,6 +19,7 @@ import com.yuanno.block_clover.spells.earth.EarthChunkAbility;
 import com.yuanno.block_clover.spells.fire.FireBallAbility;
 import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
+import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,6 +48,7 @@ public class StatsEvent {
 
         if (!props.hasAttribute())
         {
+            //TODO don't spawn with anti-magic + second attribute
             props.setAttribute(Beapi.randomizer(ModValues.attributes));
             String attribute = props.getAttribute();
             switch (attribute)
@@ -71,6 +73,9 @@ public class StatsEvent {
                     break;
                 case "Slash":
                     abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                    break;
+                case "Sealing":
+                    abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                     break;
                 case "Anti-magic":
                     abilityProps.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
@@ -121,6 +126,9 @@ public class StatsEvent {
                         case "Slash":
                             abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
                             break;
+                        case "Sealing":
+                            abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            break;
                     }
                 }
             }
@@ -129,8 +137,16 @@ public class StatsEvent {
             props.setMaxExperience(100);
             if (!attribute.equals(ModValues.ANTIMAGIC))
             {
-                props.setMana(50);
-                props.setMaxMana(50);
+                if (!props.getRace().equals(ModValues.ELF))
+                {
+                    props.setMana(50);
+                    props.setMaxMana(50);
+                }
+                else
+                {
+                    props.setMaxMana(60);
+                    props.setMana(60);
+                }
             }
             else
             {
@@ -141,17 +157,17 @@ public class StatsEvent {
         UUID uuid = player.getUUID();
         if (uuid.toString().equals("b0515226-7ff3-4ab4-aa87-69179ee0e4ae")) // -> Beosti
             props.setTitle("\u00A71Almighty captain of Yuanno");
-        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> kausu
+        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> Kausu
             props.setTitle("§aSage");
-        //else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802")) // -> maddox
+        //else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802")) // -> Maddox
             //props.setTitle("§2Mad earth");
-        else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> redwolf
+        else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> Redwolf
             props.setTitle("§cThe king");
-        else if (uuid.toString().equals("9819c734-1928-4757-8724-801ced9218c6")) // -> skyling
+        else if (uuid.toString().equals("9819c734-1928-4757-8724-801ced9218c6")) // -> Skyling
             props.setTitle("§3Engulfing sky");
-        else if (uuid.toString().equals("b462e469-19ce-40b6-9999-d74102623b7c")) // -> gingershadow
+        else if (uuid.toString().equals("b462e469-19ce-40b6-9999-d74102623b7c")) // -> Gingershadow
             props.setTitle("§4The true");
-        else if (uuid.toString().equals("72336f87-461e-4e3b-a213-df3982241c39")) // -> apollo
+        else if (uuid.toString().equals("72336f87-461e-4e3b-a213-df3982241c39")) // -> Apollo
             props.setTitle("§0Wannabe rival");
         else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
             props.setTitle("§7Beggar");

@@ -1,15 +1,11 @@
 package com.yuanno.block_clover.spells.wind;
 
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
-import com.yuanno.block_clover.entities.projectiles.earth.EarthChargeProjectile;
 import com.yuanno.block_clover.entities.projectiles.wind.WindGaleProjectile;
 import com.yuanno.block_clover.init.ModEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.world.server.ServerWorld;
 
 public class WindGaleAbility extends ChargeableAbility {
     public static final WindGaleAbility INSTANCE = new WindGaleAbility();
@@ -18,17 +14,17 @@ public class WindGaleAbility extends ChargeableAbility {
     public WindGaleAbility()
     {
         super("Wind Gale", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("You charge up a wind gale and shoots it.");
-        this.setMaxCooldown(10);
-        this.setmanaCost(35);
+        this.setDescription("Send a shot of concentrated wind");
+        this.setMaxCooldown(12);
+        this.setMaxChargeTime(5);
+        this.setmanaCost(30);
         this.setExperiencePoint(20);
-        this.setCancelable();
 
         this.onStartChargingEvent = this::onStartChargingEvent;
         this.onEndChargingEvent = this::onEndChargingEvent;
         this.duringChargingEvent = this::duringChargingEvent;
-
     }
+
 
     private boolean onStartChargingEvent(PlayerEntity player)
     {
@@ -51,15 +47,13 @@ public class WindGaleAbility extends ChargeableAbility {
         if (this.cancelled)
             return true;
 
-
         int charge = this.getMaxChargeTime() - this.getChargeTime();
-
         if (charge < 20 * 5)
             return false;
 
         WindGaleProjectile projectile = new WindGaleProjectile(player.level, player);
-        projectile.setDamage(charge / 5f);
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1, 0.1f);
+        projectile.setDamage(charge / 10f);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 3, 0.1f);
         player.level.addFreshEntity(projectile);
         player.removeEffect(ModEffects.MOVEMENT_BLOCKED.get());
 

@@ -172,7 +172,7 @@ public class AbilityHelper {
         return blockPositions;
     }
 
-    public static List<BlockPos> createSphere(World world, BlockPos center, int radius, boolean hollow, final Block block, int flags, BlockProtectionRule rule)
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radius, boolean hollow, final Block block, int flags)
     {
         int x0 = center.getX();
         int y0 = center.getY();
@@ -190,7 +190,7 @@ public class AbilityHelper {
                     if (distance < radius * radius && !(hollow && distance < ((radius - 1) * (radius - 1))))
                     {
                         BlockPos pos = new BlockPos(x, y, z);
-                        if(placeBlockIfAllowed(world, pos.getX(), pos.getY(), pos.getZ(), block, flags, rule))
+                        if(true) //TODO add ability protection
                             blockPositions.add(pos);
                     }
                 }
@@ -233,15 +233,15 @@ public class AbilityHelper {
     }
 
     @Deprecated
-    public static List<BlockPos> createEmptySphere(World world, int posX, int posY, int posZ, int size, final Block block, BlockProtectionRule rule)
+    public static List<BlockPos> createEmptySphere(World world, int posX, int posY, int posZ, int size, final Block block)
     {
-        return AbilityHelper.createSphere(world, new BlockPos(posX, posY, posZ), size, true, block, 2, rule);
+        return AbilityHelper.createSphere(world, new BlockPos(posX, posY, posZ), size, true, block, 2);
     }
 
     @Deprecated
-    public static List<BlockPos> createFilledSphere(World world, int posX, int posY, int posZ, int size, final Block block, BlockProtectionRule rule)
+    public static List<BlockPos> createFilledSphere(World world, int posX, int posY, int posZ, int size, final Block block)
     {
-        return AbilityHelper.createSphere(world, new BlockPos(posX, posY, posZ), size, false, block, 2, rule);
+        return AbilityHelper.createSphere(world, new BlockPos(posX, posY, posZ), size, false, block, 2);
     }
 
     public static double[] propulsion(LivingEntity entity, double extraMX, double extraMZ)

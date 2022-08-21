@@ -109,6 +109,12 @@
   "ability.block_clover.bull_thrust": "Bull thrust",
   "ability.block_clover.demon_slayer": "Demon slayer",
 
+  "ability.block_clover.sealing_projectile": "Sealing projectile",
+  "ability.block_clover.sealing_punch": "Sealing punch",
+  "ability.block_clover.self_healing_seal": "Self healing sealing",
+  "ability.block_clover.other_heal_sealing": "Other healing sealing",
+  "ability.block_clover.ultimate_seal": "Ultimate sealing",
+
   "curios.slot": "Slot",
   "curios.identifier.head": "Head",
   "curios.identifier.necklace": "Necklace",

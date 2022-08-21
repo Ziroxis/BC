@@ -26,11 +26,11 @@ public class SUpdateEquippedAbilityPacket
 	private int abilityId;
 	private String customTexture = "";
 	private boolean isStateForced;
-	
+
 	private int abilityType = 0;
 
 	private CompoundNBT extraData;
-	
+
 	private double cooldown;
 	private double maxCooldown;
 	private double disableTicks;
@@ -44,6 +44,7 @@ public class SUpdateEquippedAbilityPacket
 	private double chargeTime;
 	private double maxChargeTime;
 
+	// Passives
 	private boolean isPaused;
 
 	public SUpdateEquippedAbilityPacket()
@@ -59,10 +60,10 @@ public class SUpdateEquippedAbilityPacket
 		this.customTexture = ability.getCustomTexture();
 		this.state = ability.getState().ordinal();
 		this.isStateForced = ability.isStateForced();
-		
+
 		if(ability instanceof IExtraUpdateData)
 			this.extraData = ((IExtraUpdateData)ability).getExtraData();
-				
+
 		if (this.state == Ability.State.COOLDOWN.ordinal())
 		{
 			this.cooldown = ability.getCooldown() / 20;
@@ -80,6 +81,11 @@ public class SUpdateEquippedAbilityPacket
 			this.abilityType = 2;
 			this.chargeTime = ((ChargeableAbility) ability).getChargeTime() / 20;
 			this.maxChargeTime = ((ChargeableAbility) ability).getMaxChargeTime() / 20;
+		}
+		else if (ability instanceof PassiveAbility)
+		{
+			this.abilityType = 3;
+			this.isPaused = ((PassiveAbility)ability).isPaused();
 		}
 	}
 

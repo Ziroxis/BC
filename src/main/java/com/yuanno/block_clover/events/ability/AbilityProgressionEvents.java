@@ -20,6 +20,10 @@ import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
 import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
 import com.yuanno.block_clover.spells.light.LightSwordAbility;
+import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
+import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
+import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
+import com.yuanno.block_clover.spells.sealing.UltimateSealAbility;
 import com.yuanno.block_clover.spells.wind.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.slash.*;
@@ -39,6 +43,13 @@ public class AbilityProgressionEvents {
         //TODO make this pop up on screen
         if (!statsProps.hasGrimoire())
             return;
+        if (statsProps.getAttribute().equals(ModValues.SEALING) || statsProps.getSecondAttribute().equals(ModValues.SEALING))
+        {
+            gainAbility(event.getPlayer(), 5, SelfHealSealingAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, SealingPunchAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, OtherHealSealingAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, UltimateSealAbility.INSTANCE);
+        }
         if (statsProps.getAttribute().equals(ModValues.WIND) || statsProps.getSecondAttribute().equals(ModValues.WIND))
         {
             gainAbility(event.getPlayer(), 3, WindCrescentAbility.INSTANCE);

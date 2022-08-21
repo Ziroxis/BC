@@ -79,6 +79,7 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
+        System.out.println("END");
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         propsEntity.setState(0);
         player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(ANTISTRENGTH);

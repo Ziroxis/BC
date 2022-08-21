@@ -19,7 +19,7 @@ public class EarthChargeAbility extends ChargeableAbility {
     public EarthChargeAbility()
     {
         super("Earth Charge", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Concetrates everything on throwing one big chunk of earth");
+        this.setDescription("Concentrates everything on throwing one big chunk of earth");
         this.setMaxCooldown(15);
         this.setMaxChargeTime(5);
         this.setmanaCost(20);

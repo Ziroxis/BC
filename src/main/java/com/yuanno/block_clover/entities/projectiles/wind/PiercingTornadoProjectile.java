@@ -37,8 +37,9 @@ public class PiercingTornadoProjectile extends AbilityProjectileEntity {
 
     private void onEntityImpactEvent(LivingEntity entity)
     {
-        Vector3d vector3d = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale((double)this.knockback * 35);
-        entity.push(vector3d.x, 0.2, vector3d.z);
+        knockback = 3;
+        Vector3d vector3d = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale((double)this.knockback);
+        entity.push(vector3d.x, 0.1, vector3d.z);
 
     }
 }

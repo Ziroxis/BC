@@ -19,7 +19,7 @@ public class MittensOfRegenerationArtifactItem extends ArtifactItem implements I
         PlayerEntity player = (PlayerEntity) livingEntity;
         if (!livingEntity.getEntity().level.isClientSide && livingEntity.tickCount % 20 == 0)
         {
-            livingEntity.addEffect(new EffectInstance(Effects.REGENERATION, 40, 0, true, true));
+            livingEntity.addEffect(new EffectInstance(Effects.REGENERATION, 40, 1, true, true));
             stack.hurtAndBreak(1, player,
                     damager -> CuriosApi.getCuriosHelper().onBrokenCurio(SlotTypePreset.RING.getIdentifier(), index, damager));
         }

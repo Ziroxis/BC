@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api;
 
 
+import com.yuanno.block_clover.BlockProtectionRule;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.init.ModRegistry;
 import com.google.common.collect.Lists;
@@ -46,6 +47,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
+import static com.yuanno.block_clover.api.ability.AbilityHelper.placeBlockIfAllowed;
 
 public class Beapi
 {
@@ -454,6 +457,69 @@ public class Beapi
 
     }
 
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, boolean hollow, final Block block, int flags, BlockProtectionRule rule)
+    {
+        return Beapi.createSphere(world, center, radiusXZ, radiusXZ, hollow, block, flags, rule);
+    }
+
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, int radiusY, boolean hollow, final Block block, int flags, BlockProtectionRule rule)
+    {
+        return Beapi.createSphere(world, center, radiusXZ, radiusY, hollow, block, null, flags, rule);
+    }
+
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, int radiusY, boolean hollow, final Block block, @Nullable BlockProtectionRule.IReplaceBlockRule replaceTest, int flags, BlockProtectionRule rule)
+    {
+        int x0 = center.getX();
+        int y0 = center.getY();
+        int z0 = center.getZ();
+
+        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
+        for (int y = y0 - radiusY; y <= y0 + radiusY; y++)
+        {
+            for (int x = x0 - radiusXZ; x <= x0 + radiusXZ; x++)
+            {
+                for (int z = z0 - radiusXZ; z <= z0 + radiusXZ; z++)
+                {
+                    double distance = ((x0 - x) * (x0 - x) + ((z0 - z) * (z0 - z)) + ((y0 - y) * (y0 - y)));
+
+                    if (distance < radiusXZ * radiusY && !(hollow && distance < ((radiusXZ - 1) * (radiusXZ - 1))))
+                    {
+                        BlockPos pos = new BlockPos(x, y, z);
+                        BlockState state = world.getBlockState(pos);
+
+//						BlockRayTraceResult result = WyHelper.rayTraceBlocks(world, new Vector3d(center), new Vector3d(pos));
+//						if(result.getType() == RayTraceResult.Type.BLOCK)
+//						{
+//							
+//						}
+
+                        if(replaceTest != null && !replaceTest.replace(world, pos, state))
+                            continue;
+
+                        if(placeBlockIfAllowed(world, pos.getX(), pos.getY(), pos.getZ(), block, flags, rule))
+                            blockPositions.add(pos);
+                    }
+                }
+            }
+        }
+
+        return blockPositions;
+    }
+
+
+
+    @Deprecated
+    public static List<BlockPos> createEmptySphere(World world, int posX, int posY, int posZ, int size, final Block block, BlockProtectionRule rule)
+    {
+        return Beapi.createSphere(world, new BlockPos(posX, posY, posZ), size, true, block, 2, rule);
+    }
+
+    @Deprecated
+    public static List<BlockPos> createFilledSphere(World world, int posX, int posY, int posZ, int size, final Block block, BlockProtectionRule rule)
+    {
+        return Beapi.createSphere(world, new BlockPos(posX, posY, posZ), size, false, block, 2, rule);
+    }
+    
     public static RayTraceResult rayTraceBlocksAndEntities(Entity entity, double distance, float entityBoxRange) {
         Vector3d lookVec = entity.getLookAngle();
         Vector3d startVec = entity.position().add(0, entity.getEyeHeight(), 0);

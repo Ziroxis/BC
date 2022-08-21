@@ -19,6 +19,7 @@ import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
+import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,14 +40,19 @@ public class RaceChangeArtifactItem extends ArtifactItem {
             IEntityStats statsProps = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
 
-            if (statsProps.getRace().equals(ModValues.ELF))
-                statsProps.alterManaRegeneration(-1);
-            else if (statsProps.getRace().equals(ModValues.HYBRID))
+            if (statsProps.getRace().equals(ModValues.HYBRID))
             {
                 statsProps.setSecondAttribute("");
                 abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
                 if (statsProps.hasGrimoire())
                 {
+                    if (statsProps.getSecondAttribute().equals(ModValues.SEALING))
+                    {
+                        gainAbility(player, 5, SelfHealSealingAbility.INSTANCE);
+                        gainAbility(player, 10, SealingPunchAbility.INSTANCE);
+                        gainAbility(player, 15, OtherHealSealingAbility.INSTANCE);
+                        gainAbility(player, 20, UltimateSealAbility.INSTANCE);
+                    }
                     if (statsProps.getAttribute().equals(ModValues.WIND)) {
                         gainAbility(player, 3, WindCrescentAbility.INSTANCE);
                         gainAbility(player, 7, WindBladeShowerAbility.INSTANCE);
@@ -102,8 +108,7 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                 }
                 else
                 {
-                    String secondAttribute = statsProps.getAttribute();
-                    switch (secondAttribute)
+                    switch (statsProps.getAttribute())
                     {
                         case "Wind":
                             abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
@@ -126,6 +131,9 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                         case "Slash":
                             abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
                             break;
+                        case "Sealing":
+                            abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            break;
                     }
                 }
             }
@@ -134,13 +142,32 @@ public class RaceChangeArtifactItem extends ArtifactItem {
             {
                 case (ModValues.ELF):
                     statsProps.setRace(ModValues.ELF);
-                    statsProps.alterManaRegeneration(1);
+                    if (statsProps.getLevel() > 1)
+                    {
+                    statsProps.setManaRegeneration(2 + statsProps.getLevel());
+                    statsProps.setMaxMana(50 + 10 * statsProps.getLevel());
+                    }
+                    else
+                    {
+                        statsProps.setManaRegeneration(2);
+                        statsProps.setMaxMana(50 + 10);
+                    }
                     break;
                 case (ModValues.HUMAN):
                     statsProps.setRace(ModValues.HUMAN);
+                    if (statsProps.getLevel() > 1)
+                     {
+                    statsProps.setManaRegeneration(1 + (float) statsProps.getLevel() / 2);
+                    statsProps.setMaxMana(50 + 5 * statsProps.getLevel());
+                     }
                     break;
                 case (ModValues.HYBRID):
                     statsProps.setRace(ModValues.HYBRID);
+                    if (statsProps.getLevel() > 1)
+                    {
+                    statsProps.setManaRegeneration(1 + (float) statsProps.getLevel() / 2);
+                    statsProps.setMaxMana(50 + 5 * statsProps.getLevel());
+                    }
                     do
                     {
                         statsProps.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
@@ -168,6 +195,9 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                             break;
                         case "Slash":
                             abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                            break;
+                        case "Sealing":
+                            abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                             break;
                     }
                     break;

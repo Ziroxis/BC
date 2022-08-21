@@ -3,6 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.effects.LeoPalmaEffect;
 import com.yuanno.block_clover.effects.MovementBlockedEffect;
+import com.yuanno.block_clover.effects.SealingEffect;
 import net.minecraft.potion.Effect;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,4 +14,5 @@ public class ModEffects {
 
     public static final RegistryObject<Effect> LEO_PALMA = EFFECTS.register("leo_palma", LeoPalmaEffect::new);
     public static final RegistryObject<Effect> MOVEMENT_BLOCKED = EFFECTS.register("movement_blocked", MovementBlockedEffect::new);
+    public static final RegistryObject<Effect> SEALING = EFFECTS.register("sealing", SealingEffect::new);
 }

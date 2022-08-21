@@ -19,7 +19,7 @@ import java.io.Serializable;
 /**
  * Class made for abilities that are active (for a time)
  */
-public class ContinuousAbility extends Ability {
+public abstract class ContinuousAbility extends Ability {
 
     private int threshold = 0;
     protected int continueTime = 0;
@@ -120,7 +120,7 @@ public class ContinuousAbility extends Ability {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.canUse(player))
         {
-            this.endContinuity(player);
+            this.stopContinuity(player);
             return;
         }
 
@@ -128,6 +128,12 @@ public class ContinuousAbility extends Ability {
 
         if(this.isContinuous())
         {
+            this.continueTime++;
+            if((this.isClientSide() || !player.level.isClientSide) && !this.isStateForced())
+                this.duringContinuityEvent.duringContinuity(player, this.continueTime);
+
+            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10)
+                this.endContinuity(player);
             if (player.tickCount % 20 == 0)
             {
                 if (propsEntity.getLevel() < getExperienceGainLevelCap())
@@ -138,17 +144,9 @@ public class ContinuousAbility extends Ability {
                 }
                 if (propsEntity.getMana() > getmanaCost())
                     propsEntity.alterMana((int) - getmanaCost());
-                else
-                    this.endContinuity(player);
             }
             PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
-            this.continueTime++;
-            if((this.isClientSide() || !player.level.isClientSide) && !this.isStateForced())
-                this.duringContinuityEvent.duringContinuity(player, this.continueTime);
-
-            if(this.threshold > 0 && this.continueTime >= this.threshold)
-                this.endContinuity(player);
         }
 
         player.level.getProfiler().pop();

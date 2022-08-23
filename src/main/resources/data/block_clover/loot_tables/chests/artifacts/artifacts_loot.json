@@ -7,6 +7,11 @@
         {
           "type": "minecraft:item",
           "weight": 1,
+          "name": "block_clover:race_change"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
           "name": "block_clover:night_crown"
         },
         {

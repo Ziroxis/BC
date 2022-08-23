@@ -20,8 +20,7 @@ public class DeathScytheAbility extends Ability {
         this.setDescription("Shoots a scythe of death");
         this.setMaxCooldown(5);
         this.setmanaCost(5);
-        this.setExperiencePoint(10);
-        this.setExperienceGainLevelCap(10);
+        this.setExperiencePoint(30);
         this.onUseEvent = this::onUseEvent;
     }
 

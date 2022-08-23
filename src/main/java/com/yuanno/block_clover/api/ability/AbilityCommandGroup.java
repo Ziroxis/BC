@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 public enum AbilityCommandGroup implements IExtensibleEnum
 {
 	WIND(() -> ModAbilities.WIND),
+	WATER(() -> ModAbilities.WATER),
 	LIGHTNING(() -> ModAbilities.LIGHTNING),
 	SLASH(() -> ModAbilities.SLASH),
 	DARKNESS(() -> ModAbilities.DARKNESS),

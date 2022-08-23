@@ -10,7 +10,7 @@ public abstract class ArtifactItem extends Item {
 
     public ArtifactItem()
     {
-        super(new Properties().durability(500).tab(ModItemGroup.BLOCK_CLOVER_ARTIFACTS));
+        super(new Properties().durability(2000).tab(ModItemGroup.BLOCK_CLOVER_ARTIFACTS));
     }
 
 

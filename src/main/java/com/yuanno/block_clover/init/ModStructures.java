@@ -6,6 +6,7 @@ import com.yuanno.block_clover.world.structure.structures.MagicTowerStructure;
 import com.yuanno.block_clover.world.structure.structures.MiniVolcano;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.yuanno.block_clover.world.structure.structures.UnderWaterDungeonStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -41,6 +42,7 @@ public class ModStructures
     public static final RegistryObject<Structure<NoFeatureConfig>> MAGICTOWER = DEFERRED_REGISTRY_STRUCTURE.register("magictower", MagicTowerStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> BANDIT_CAMP = DEFERRED_REGISTRY_STRUCTURE.register("bandit_camp", BanditCampStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> MINI_VOLCANO = DEFERRED_REGISTRY_STRUCTURE.register("mini_volcano", MiniVolcano::new);
+    public static final RegistryObject<Structure<NoFeatureConfig>> UNDERWATER_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("underwater_dungeon", UnderWaterDungeonStructure::new);
 
 
     /**
@@ -68,6 +70,15 @@ public class ModStructures
                         3 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
                         465132894 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 true);
+
+        setupMapSpacingAndLand(
+                UNDERWATER_DUNGEON.get(),
+                new StructureSeparationSettings(90,
+                        60,
+                        558932148
+
+                ), false
+        );
         // Add more structures here and so on
     }
 

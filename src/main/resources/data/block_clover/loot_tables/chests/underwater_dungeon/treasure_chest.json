@@ -1,0 +1,357 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 2.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:diamond"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 7.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:iron_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4.0,
+                "max": 7.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 6.0,
+                "max": 9.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:emerald"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:bone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:spider_eye"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:saddle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:iron_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:golden_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "minecraft:diamond_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 25,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:enchanted_golden_apple"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        }
+      ]
+    },
+    {
+      "rolls": 4,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 8.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:bone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 8.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:gunpowder"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "block_clover:magical_meat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "block_clover:cooked_magical_meat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 8.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:string"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:race_change"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:night_crown"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:light_weight_ring"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:artifact_change"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:artifact_surplus"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:fire_belt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:gloves_impatience"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:rabbit_foot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:lucky_ring"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:mittens_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:bracelet_bravery"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:charm_protection"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:health_artifact"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:regen_artifact"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:necklace_agitation"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:cloak_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:belt_air"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:bracelet_push"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:rare_candy"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:mana_artifact"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:mana_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:bag_gluttony"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:green_thumb"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "block_clover:jump_artifact"
+        }
+      ]
+    }
+  ]
+}

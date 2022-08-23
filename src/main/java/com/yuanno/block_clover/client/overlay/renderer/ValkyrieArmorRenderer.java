@@ -1,14 +1,12 @@
 package com.yuanno.block_clover.client.overlay.renderer;
 
-import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.api.ability.Ability;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
-import com.yuanno.block_clover.client.overlay.model.SlashBladesModel;
-import com.yuanno.block_clover.data.ability.AbilityDataCapability;
-import com.yuanno.block_clover.data.ability.IAbilityData;
-import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.client.overlay.model.ValkyrieArmorModel;
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.spells.water.ValkyrieArmorAbility;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -18,13 +16,13 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class SlashBladesRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+public class ValkyrieArmorRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/spells/slashblades.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/spells/waterarmor.png");
 
-    private SlashBladesModel model = new SlashBladesModel();
+    private ValkyrieArmorModel model = new ValkyrieArmorModel();
 
-    public SlashBladesRenderer(IEntityRenderer<T, M> entityRenderer)
+    public ValkyrieArmorRenderer(IEntityRenderer<T, M> entityRenderer)
     {
         super(entityRenderer);
     }
@@ -41,8 +39,8 @@ public class SlashBladesRenderer<T extends LivingEntity, M extends EntityModel<T
 
         IAbilityData abilityData = AbilityDataCapability.get(entitylivingbaseIn);
 
-        SlashBladesAbility slashBladesAbility = abilityData.getEquippedAbility(SlashBladesAbility.INSTANCE);
-        if (slashBladesAbility != null && slashBladesAbility.isContinuous())
+        ValkyrieArmorAbility valkyrieArmorAbility = abilityData.getEquippedAbility(ValkyrieArmorAbility.INSTANCE);
+        if (valkyrieArmorAbility != null && valkyrieArmorAbility.isContinuous())
         {
             matrixStackIn.pushPose();
             this.getParentModel().copyPropertiesTo(this.model);
@@ -53,4 +51,5 @@ public class SlashBladesRenderer<T extends LivingEntity, M extends EntityModel<T
 
         }
     }
+
 }

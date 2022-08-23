@@ -26,6 +26,10 @@ public class ModStructureGeneration
         {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_BANDIT_CAMP);
         }
+        if (types.contains(BiomeDictionary.Type.OCEAN))
+        {
+            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_UNDERWATER_DUNGEON);
+        }
         /*
         if (event.getName().equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get().getRegistryName()))
         {

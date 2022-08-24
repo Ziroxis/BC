@@ -15,7 +15,7 @@ public class WaterDragonProjectile extends AbilityProjectileEntity {
     public WaterDragonProjectile(World world, LivingEntity player)
     {
         super(WaterProjectiles.WATER_DRAGON.get(), world, player);
-        this.setDamage(10);
+        this.setDamage(20);
         this.setMaxLife(96);
         this.setPhysical(false);
     }}

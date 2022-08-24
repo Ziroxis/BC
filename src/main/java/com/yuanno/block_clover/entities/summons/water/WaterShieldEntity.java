@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.BlockPos;
@@ -71,6 +72,7 @@ public class WaterShieldEntity extends Entity {
             return;
         }
         //PARTICLES.spawn(this.level, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
+        this.yRot = (this.owner.getYHeadRot() - 90.0F) * -1;
         if(Math.round(this.getY()) > Math.round(owner.getY() + 3))
             this.move(MoverType.SELF, new Vector3d(0, -0.1, 0));
         else if (Math.round(this.getY()) < Math.round(owner.getY() + 3))
@@ -101,7 +103,7 @@ public class WaterShieldEntity extends Entity {
 
         this.move(MoverType.SELF, new Vector3d(-posX, 0, -posZ));
 
-        List<AbilityProjectileEntity> spellProjectiles = Beapi.getEntitiesNear(this.getOnPos(), this.level, 8, AbilityProjectileEntity.class);
+        List<AbilityProjectileEntity> spellProjectiles = Beapi.getEntitiesNear(this.getOnPos(), this.level, 16, AbilityProjectileEntity.class);
 
         spellProjectiles.forEach(spellProjectile -> {
 
@@ -165,5 +167,11 @@ public class WaterShieldEntity extends Entity {
     public IPacket<?> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    public void setRot(float yDirection, float xDirection) {
+        this.yRot = yDirection % 360.0F;
+        this.xRot = xDirection % 360.0F;
+
     }
 }

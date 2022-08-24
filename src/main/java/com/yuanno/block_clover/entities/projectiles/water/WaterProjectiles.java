@@ -28,7 +28,7 @@ public class WaterProjectiles {
                     .build(Main.MODID + ":water_ball"));
     public static final RegistryObject<EntityType<WaterDragonProjectile>> WATER_DRAGON = Beapi.registerEntityType("Water Dragon",
             () -> Beapi.createEntityType(WaterDragonProjectile::new)
-                    .sized(3f, 3f)
+                    .sized(5f, 5f)
                     .build(Main.MODID + ":water_dragon"));
     public static final RegistryObject<EntityType<PointBlankDragonProjectile>> POINT_BLANK_DRAGON = Beapi.registerEntityType("Point Blank Dragon",
             () -> Beapi.createEntityType(PointBlankDragonProjectile::new)

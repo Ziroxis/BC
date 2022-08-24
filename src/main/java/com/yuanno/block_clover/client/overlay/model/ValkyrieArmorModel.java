@@ -11,11 +11,13 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -89,11 +91,49 @@ public class ValkyrieArmorModel<T extends LivingEntity> extends BipedModel<T> {
 
 	@Override
 	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		ImmutableList.of(this.RightArm, this.LeftArm, this.rightLeg, this.leftLeg).forEach((modelRenderer) -> {
+		ImmutableList.of(this.RightArm, this.LeftArm, this.RightLeg, this.LeftLeg, this.Head, this.Body).forEach((modelRenderer) -> {
 			modelRenderer.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 		});
 	}
+	@Override
+	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
+		this.crouching = entityIn.isCrouching();
+
+		this.RightArm.copyFrom(this.rightArm);
+		this.LeftArm.copyFrom(this.leftArm);
+		this.Head.copyFrom(this.head);
+		this.Body.copyFrom(this.body);
+		this.LeftLeg.copyFrom(this.leftLeg);
+		this.RightLeg.copyFrom(this.rightLeg);
+
+		if(!(entityIn instanceof PlayerEntity))
+			return;
+
+		AbstractClientPlayerEntity clientPlayer = (AbstractClientPlayerEntity) entityIn;
+
+		ArmPose mainHandPos = armPose(clientPlayer, Hand.MAIN_HAND);
+		ArmPose offHandPos = armPose(clientPlayer, Hand.OFF_HAND);
+
+		this.swimAmount = clientPlayer.getSwimAmount(ageInTicks);
+
+		if (clientPlayer.getMainArm() == HandSide.RIGHT) {
+			this.rightArmPose = mainHandPos;
+			this.leftArmPose = offHandPos;
+		} else {
+			this.rightArmPose = offHandPos;
+			this.leftArmPose = mainHandPos;
+		}
+
+		this.RightArm.copyFrom(this.rightArm);
+		this.LeftArm.copyFrom(this.leftArm);
+		this.Head.copyFrom(this.head);
+		this.LeftArm.copyFrom(this.leftArm);
+		this.RightLeg.copyFrom(this.rightLeg);
+		this.Body.copyFrom(this.body);
+
+	}
 	private static ArmPose armPose(AbstractClientPlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.isEmpty()) {

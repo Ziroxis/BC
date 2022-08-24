@@ -7,8 +7,6 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.entities.projectiles.water.PointBlankDragonProjectile;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.play.server.SAnimateHandPacket;
-import net.minecraft.world.server.ServerWorld;
 
 public class PointBlankDragonAbility extends PunchAbility {
 

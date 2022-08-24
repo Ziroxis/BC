@@ -115,6 +115,13 @@
   "ability.block_clover.other_heal_sealing": "Other healing sealing",
   "ability.block_clover.ultimate_seal": "Ultimate sealing",
 
+  "ability.block_clover.water_ball": "Water ball",
+  "ability.block_clover.water_shield": "Water shield",
+  "ability.block_clover.water_dragon": "Water dragon",
+  "ability.block_clover.water_spear": "Water spear",
+  "ability.block_clover.valkyrie_armor": "Valkyrie armor",
+  "ability.block_clover.point_blank_dragon": "Point blank water dragon",
+
   "curios.slot": "Slot",
   "curios.identifier.head": "Head",
   "curios.identifier.necklace": "Necklace",

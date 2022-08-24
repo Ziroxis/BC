@@ -31,7 +31,7 @@ public class WaterSpearAbility extends ChargeableAbility {
     private boolean onStartChargingEvent(PlayerEntity player)
     {
         this.cancelled = false;
-        return false;
+        return true;
     }
 
     private void duringChargingEvent(PlayerEntity player, int chargeTimer)
@@ -46,6 +46,7 @@ public class WaterSpearAbility extends ChargeableAbility {
 
     private boolean onEndChargingEvent(PlayerEntity player)
     {
+
         if (this.cancelled)
             return true;
 

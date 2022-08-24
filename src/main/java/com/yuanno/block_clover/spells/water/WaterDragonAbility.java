@@ -15,7 +15,7 @@ public class WaterDragonAbility extends Ability {
     {
         super("Water Dragon", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Shoots a dragon made out of water");
-        this.setMaxCooldown(15);
+        this.setMaxCooldown(20);
         this.setmanaCost(35);
         this.setExperiencePoint(35);
         this.onUseEvent = this::onUseEvent;

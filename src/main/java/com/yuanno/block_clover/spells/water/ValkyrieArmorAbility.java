@@ -9,13 +9,16 @@ import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
+import net.minecraftforge.common.ForgeMod;
 
 import java.util.UUID;
 
 public class ValkyrieArmorAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
     public static final ValkyrieArmorAbility INSTANCE = new ValkyrieArmorAbility();
-
+    public int secondsActivated;
     public static final AttributeModifier WATER_ATTACK = new AttributeModifier(UUID.fromString("43beae28-231f-11ed-861d-0242ac120002"),
             "Water Attack", 3, AttributeModifier.Operation.ADDITION);
     public static final AttributeModifier WATER_DEFENSE = new AttributeModifier(UUID.fromString("5a476dd8-231f-11ed-861d-0242ac120002"),
@@ -29,8 +32,8 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
     {
         super("Valkyrie Armor", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Envelops yourself with an armor of water");
-        this.setMaxCooldown(120);
-        this.setmanaCost(10);
+        this.setMaxCooldown(0);
+        this.setmanaCost(0);
         this.setExperiencePoint(20);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
@@ -43,6 +46,10 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
         player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(WATER_ATTACK);
         player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(WATER_RANGE);
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(WATER_SPEED);
+        secondsActivated = 0;
+        player.abilities.mayfly = true;
+        if(player instanceof ServerPlayerEntity)
+            ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
 
         return true;
     }
@@ -52,6 +59,12 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
         player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(WATER_ATTACK);
         player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(WATER_RANGE);
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(WATER_SPEED);
+        if (!player.isCreative())
+        {
+            player.abilities.mayfly = false;
+            player.abilities.flying = false;
+            player.fallDistance = 0;
+        }
 
         return true;
     }

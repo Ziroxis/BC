@@ -37,26 +37,10 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CuriosRegistry {
 
-  @ObjectHolder("block_clover:ring")
-  public static final Item RING;
-
-  @ObjectHolder("block_clover:amulet")
-  public static final Item AMULET;
-
-  @ObjectHolder("block_clover:crown")
-  public static final Item CROWN;
-
-  @ObjectHolder("block_clover:knuckles")
-  public static final Item KNUCKLES;
-
   @ObjectHolder("block_clover:curios_container")
   public static final ContainerType<CuriosContainer> CONTAINER_TYPE;
 
   static {
-    RING = null;
-    AMULET = null;
-    CROWN = null;
-    KNUCKLES = null;
     CONTAINER_TYPE = null;
   }
 

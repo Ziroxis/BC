@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.client.curios;
 
+import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.curios.CuriosApi;
 import com.yuanno.block_clover.api.curios.SlotTypePreset;
 import net.minecraft.client.Minecraft;
@@ -36,8 +37,8 @@ public class CuriosClientMod {
         evt.addSprite(
             new ResourceLocation(CuriosApi.MODID, "item/empty_" + preset.getIdentifier() + "_slot"));
       }
-      evt.addSprite(new ResourceLocation(CuriosApi.MODID, "item/empty_cosmetic_slot"));
-      evt.addSprite(new ResourceLocation(CuriosApi.MODID, "item/empty_curio_slot"));
+      evt.addSprite(new ResourceLocation(Main.MODID, "item/empty_cosmetic_slot"));
+      evt.addSprite(new ResourceLocation(Main.MODID, "item/empty_curio_slot"));
 
       for (ResourceLocation sprite : SPRITE_LISTENER.getSprites()) {
         evt.addSprite(sprite);

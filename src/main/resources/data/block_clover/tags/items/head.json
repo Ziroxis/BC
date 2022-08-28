@@ -1,7 +1,7 @@
 {
   "replace": "false",
   "values": [
-    "block_clover:crown",
+    "block_clover:night_crown",
     "block_clover:mana_artifact"
   ]
 }

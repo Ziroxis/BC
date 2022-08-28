@@ -18,7 +18,7 @@ public class NightCrownItem extends ArtifactItem implements ICurioItem {
         PlayerEntity player = (PlayerEntity) livingEntity;
         if (!livingEntity.getEntity().level.isClientSide && livingEntity.tickCount % 20 == 0)
         {
-            livingEntity.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 40, 1, true, true));
+            livingEntity.addEffect(new EffectInstance(Effects.NIGHT_VISION, 40, 1, true, true));
             stack.hurtAndBreak(1, player,
                     damager -> CuriosApi.getCuriosHelper().onBrokenCurio(SlotTypePreset.RING.getIdentifier(), index, damager));
         }

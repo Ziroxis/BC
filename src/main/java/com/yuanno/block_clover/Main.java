@@ -82,12 +82,12 @@ public class Main
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        modEventBus.addListener(this::config);
+        modEventBus.addListener(this::enqueue);
         modEventBus.addListener(this::process);
         MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
         MinecraftForge.EVENT_BUS.addListener(this::serverStopped);
-        modEventBus.addListener(this::config);
-        modEventBus.addListener(this::enqueue);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -153,11 +153,7 @@ public class Main
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        CuriosApi.setIconHelper(new IconHelper());
-        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
-        MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
-        ScreenManager.register(CuriosRegistry.CONTAINER_TYPE, CuriosScreen::new);
-        KeyRegistry.registerKeys();
+
         ClientHandler.onSetup();
         ModKeyBinds.init();
         MinecraftForge.EVENT_BUS.register(new ManaBarOverlay());
@@ -175,6 +171,23 @@ public class Main
     private void serverStopped(FMLServerStoppedEvent evt) {
         CuriosApi.setSlotHelper(null);
     }
+    @Mod.EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientProxy
+    {
+        @SubscribeEvent
+        public static void stitchTextures(TextureStitchEvent.Pre evt)
+        {
+            CuriosClientMod.stitch(evt);
+        }
 
-
+        @SubscribeEvent
+        public static void setupClient(FMLClientSetupEvent event)
+        {
+            CuriosApi.setIconHelper(new IconHelper());
+            MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
+            MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
+            ScreenManager.register(CuriosRegistry.CONTAINER_TYPE, CuriosScreen::new);
+            KeyRegistry.registerKeys();
+        }
+    }
 }

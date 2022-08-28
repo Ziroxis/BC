@@ -84,7 +84,7 @@ public class ThunderChargeAbility extends ChargeableAbility implements IMultiTar
         if (charge < 20 * 5)
             return false;
         Vector3d speed = Beapi.propulsion(player, 15, 15);
-        player.setDeltaMovement(speed.x, 1, speed.z);
+        player.setDeltaMovement(speed.x, 0.1, speed.z);
         player.hurtMarked = true;
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
 

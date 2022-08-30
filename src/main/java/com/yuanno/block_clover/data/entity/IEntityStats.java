@@ -64,4 +64,9 @@ public interface IEntityStats {
     void setRank(String value);
     boolean hasRank();
 
+    //SPELL RELATED
+    int getTime();
+    void setTime(int value);
+    void alterTime(int value);
+
 }

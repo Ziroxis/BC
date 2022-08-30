@@ -33,6 +33,8 @@ import java.util.Random;
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
+    private int experience;
+    private boolean isEvolved;
     private String name = "";
     private String displayName;
     private String textureName = "";
@@ -211,6 +213,28 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         this.previousState = this.state;
         this.state = state;
+    }
+
+    public boolean isEvolved()
+    {
+        return this.isEvolved;
+    }
+    public void evolved(boolean isEvolved)
+    {
+        this.isEvolved = isEvolved;
+    }
+
+    public int getExperience()
+    {
+        return this.experience;
+    }
+    public void alterExperience(int experience)
+    {
+        this.experience = this.experience + experience;
+    }
+    public void setExperience(int experience)
+    {
+        this.experience = experience;
     }
 
     public State getState()

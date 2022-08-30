@@ -3,6 +3,7 @@ package com.yuanno.block_clover.entities.summons.earth;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.entities.*;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class EarthGolemEntity extends CreatureEntity {
+public class EarthGolemEntity extends BCsummon {
 
     private static final DataParameter<String> TEXTURE = EntityDataManager.defineId(EarthGolemEntity.class, DataSerializers.STRING);
     private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.defineId(EarthGolemEntity.class, DataSerializers.OPTIONAL_UUID);
@@ -137,7 +138,7 @@ public class EarthGolemEntity extends CreatureEntity {
                 this.setPos(this.getOwner().getX(), this.getOwner().getY(), this.getOwner().getZ());
 
             IEntityStats ownerProps = EntityStatsCapability.get(this.getOwner());
-            List<LivingEntity> earthMinionAttackList = this.isAggressive ? Beapi.getEntitiesNear(this.blockPosition(), this.level, 20, PlayerEntity.class, MonsterEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
+            List<LivingEntity> earthMinionAttackList = this.isAggressive ? Beapi.getEntitiesNear(this.blockPosition(), this.level, 20, PlayerEntity.class, MonsterEntity.class, VolcanoMonsterEntity.class, CloverSharkEntity.class, MonkeyEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
             LivingEntity target = null;
 
 

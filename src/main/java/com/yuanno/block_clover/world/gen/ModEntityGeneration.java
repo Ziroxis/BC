@@ -30,5 +30,9 @@ public class ModEntityGeneration {
         {
             event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.MONKEY_ENTITY.get(), 15, 2, 4));
         }
+        if (types.contains(BiomeDictionary.Type.OCEAN) || types.contains(BiomeDictionary.Type.BEACH))
+        {
+            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.CLOVER_SHARK.get(), 1, 1, 4));
+        }
     }
 }

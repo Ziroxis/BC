@@ -21,6 +21,7 @@ import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
+import com.yuanno.block_clover.spells.water.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -77,7 +78,10 @@ public class StatsEvent {
                 case "Sealing":
                     abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                     break;
-                case "Anti-magic":
+                case (ModValues.WATER):
+                    abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                    break;
+                case (ModValues.ANTIMAGIC):
                     abilityProps.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
                     abilityProps.addUnlockedAbility(BullThrustAbility.INSTANCE);
                     props.setRace(ModValues.HUMAN);
@@ -128,6 +132,9 @@ public class StatsEvent {
                             break;
                         case "Sealing":
                             abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            break;
+                        case (ModValues.WATER):
+                            abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);
                             break;
                     }
                 }

@@ -1,7 +1,9 @@
 package com.yuanno.block_clover.items.artifacts;
 
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -43,6 +45,14 @@ public class MagicChangeArtifactItem extends ArtifactItem {
             //TODO give abilities of the level
             IEntityStats stats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
+            abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
+            for (Ability ability : abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE))
+            {
+                if (ability instanceof ContinuousAbility && ability.isContinuous()) {
+                    ContinuousAbility continuousAbility = (ContinuousAbility) ability;
+                    continuousAbility.endContinuity(player);
+                }
+            }
             abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
             stats.setAttribute(Beapi.randomizer(ModValues.attributes));
             String attribute = stats.getAttribute();
@@ -81,6 +91,30 @@ public class MagicChangeArtifactItem extends ArtifactItem {
             {
                 stats.setMana(0);
                 stats.setMaxMana(0);
+            }
+            else
+            {
+                if (stats.getRace().equals(ModValues.ELF) && stats.getLevel() > 1)
+                {
+                    stats.setMaxMana(60 + 10 * stats.getLevel());
+                    stats.setManaRegeneration(2 + 1 * stats.getLevel());
+                }
+                else if (stats.getRace().equals(ModValues.ELF))
+                {
+                    stats.setMaxMana(60);
+                    stats.setManaRegeneration(2);
+                }
+                else if (stats.getLevel() > 1)
+                {
+                    stats.setMaxMana(50 + 5 * stats.getLevel());
+                    stats.setManaRegeneration((float) (1 + 0.5 * stats.getLevel()));
+                }
+                else
+                {
+                    stats.setMaxMana(50);
+                    stats.setManaRegeneration(1);
+                }
+
             }
             if (stats.hasSecondAttribute()) {
                 do

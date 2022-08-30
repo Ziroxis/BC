@@ -95,5 +95,7 @@ public class ModItems {
             () -> new ModSpawnEggItem(ModEntities.MONKEY_ENTITY, 0x879895, 0x577ABC, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC)));
     public static final RegistryObject<SpawnEggItem> BANDIT_EGG = ITEMS.register("bandit_egg",
             () -> new ModSpawnEggItem(ModEntities.BANDIT, 0x879895, 0x577ABC, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC)));
+    public static final RegistryObject<SpawnEggItem> CLOVER_SHARK = ITEMS.register("shark_egg",
+            () -> new ModSpawnEggItem(ModEntities.CLOVER_SHARK, 0x879992, 0x578ABC, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC)));
 
 }

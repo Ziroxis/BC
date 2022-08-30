@@ -25,7 +25,7 @@ public class ManaSkinAbility extends ContinuousAbility implements IParallelConti
     public ManaSkinAbility()
     {
         super("Mana Skin", AbilityCategories.AbilityCategory.MISCELLANEOUS);
-        this.setDescription("Envelops your skin with mana.\nGiving you resistance, auto-step and fall resistance");
+        this.setDescription("Envelops your skin with mana.\nGiving you resistance, auto-step");
         this.setmanaCost(8);
         this.setMaxCooldown(10);
         this.setExperiencePoint(0);

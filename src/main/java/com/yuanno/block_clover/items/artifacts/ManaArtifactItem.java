@@ -39,7 +39,8 @@ public class ManaArtifactItem extends ArtifactItem implements ICurioItem {
             if (!player.level.isClientSide)
             {
                 IEntityStats stats = EntityStatsCapability.get(player);
-                stats.alterManaRegeneration(-200);
+                stats.setMana(0);
+                stats.alterMaxMana(-200);
                 PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             }
         }

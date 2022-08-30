@@ -45,7 +45,10 @@ public class AbilityDataCapability
 					{
 						Ability ability = instance.getUnlockedAbilities(AbilityCategories.AbilityCategory.ALL).get(i);
 						String name = Beapi.getResourceName(ability.getName());
+
 						CompoundNBT nbtAbility = new CompoundNBT();
+						nbtAbility.putBoolean("evolved", instance.isEvolved());
+						nbtAbility.putInt("experience", instance.getExperience());
 						nbtAbility.putString("name", name);
 						nbtAbility.putString("displayName", Beapi.isNullOrEmpty(ability.getDisplayName()) ? "" : ability.getDisplayName());
 						nbtAbility.putInt("pool", ability.getPoolId());
@@ -121,6 +124,8 @@ public class AbilityDataCapability
 							Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(Main.MODID, nbtAbility.getString("name"))).create();
 							if(ability == null)
 								continue;
+							instance.evolve(nbtAbility.getBoolean("evolved"));
+							instance.setExperience(nbtAbility.getInt("experience"));
 							int poolId = nbtAbility.getInt("pool");
 							ability.setInPool(poolId);
 							AbilityUnlock unlockType = AbilityUnlock.valueOf(nbtAbility.getString("unlock"));

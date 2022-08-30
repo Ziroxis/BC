@@ -3,6 +3,8 @@ package com.yuanno.block_clover.entities.summons.earth;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.entities.BCsummon;
+import com.yuanno.block_clover.entities.goals.OwnerHurtTargetGoal;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -18,7 +20,7 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class EarthMinionEntity extends CreatureEntity {
+public class EarthMinionEntity extends BCsummon {
     private static final DataParameter<String> TEXTURE = EntityDataManager.defineId(EarthMinionEntity.class, DataSerializers.STRING);
     private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.defineId(EarthMinionEntity.class, DataSerializers.OPTIONAL_UUID);
     public boolean isAggressive = true;
@@ -58,6 +60,9 @@ public class EarthMinionEntity extends CreatureEntity {
         this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.8D));
         this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
+        this.targetSelector.addGoal(1, new com.yuanno.block_clover.entities.goals.OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+
 
         this.targetSelector.addGoal(0, new HurtByTargetGoal(this));
     }
@@ -89,30 +94,7 @@ public class EarthMinionEntity extends CreatureEntity {
         return super.hurt(damageSource, damageValue);
     }
 
-    @Override
-    public void addAdditionalSaveData(CompoundNBT compound)
-    {
-        super.addAdditionalSaveData(compound);
-        if (this.entityData.get(OWNER) != null)
-            compound.putString("OwnerUUID", this.entityData.get(OWNER).toString());
-    }
 
-    @Override
-    public void readAdditionalSaveData(CompoundNBT compound)
-    {
-        super.readAdditionalSaveData(compound);
-        this.entityData.set(OWNER, Optional.of(UUID.fromString(compound.getString("OwnerUUID"))));
-    }
-
-    public void setOwner(LivingEntity owner)
-    {
-        this.entityData.set(OWNER, Optional.of(owner.getUUID()));
-    }
-
-    public PlayerEntity getOwner()
-    {
-        return this.getEntityData().get(OWNER).isPresent() ? this.level.getPlayerByUUID(this.getEntityData().get(OWNER).get()) : null;
-    }
 
     @Override
     public void tick()

@@ -1,10 +1,8 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.BanditEntity;
-import com.yuanno.block_clover.entities.GrimoireMagicianEntity;
-import com.yuanno.block_clover.entities.MonkeyEntity;
-import com.yuanno.block_clover.entities.VolcanoMonsterEntity;
+import com.yuanno.block_clover.entities.*;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -41,6 +39,12 @@ public class ModEntities {
                             .sized(1.55f, 2.2f)
                             .setTrackingRange(20)
                             .build(new ResourceLocation(Main.MODID, "monkey_entity").toString()));
+    public static final RegistryObject<EntityType<CloverSharkEntity>> CLOVER_SHARK = ENTITIES
+            .register("clover_shark",
+                    () -> EntityType.Builder.of(CloverSharkEntity::new, EntityClassification.WATER_CREATURE)
+                            .sized(2f, 2f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "clover_shark").toString()));
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

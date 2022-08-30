@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.items.artifacts;
 
+import com.yuanno.block_clover.api.curios.CuriosApi;
 import com.yuanno.block_clover.api.curios.SlotContext;
+import com.yuanno.block_clover.api.curios.SlotTypePreset;
 import com.yuanno.block_clover.api.curios.type.capability.ICurioItem;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -24,8 +26,9 @@ public class ManaRegenerationArtifactItem extends ArtifactItem implements ICurio
             if (!player.level.isClientSide)
             {
                 IEntityStats stats = EntityStatsCapability.get(player);
-                stats.alterManaRegeneration(5);
+                stats.alterManaRegeneration(3);
                 PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+
             }
         }
     }
@@ -40,7 +43,7 @@ public class ManaRegenerationArtifactItem extends ArtifactItem implements ICurio
             if (!player.level.isClientSide)
             {
                 IEntityStats stats = EntityStatsCapability.get(player);
-                stats.alterManaRegeneration(-5);
+                stats.alterManaRegeneration(-3);
                 PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             }
         }

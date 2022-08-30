@@ -32,7 +32,7 @@ public class BlackTornadoAbility extends Ability implements IMultiTargetAbility 
         IEntityStats stats = EntityStatsCapability.get(player);
         if (stats.getState() == 1) {
             this.clearTargets();
-            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 7, LivingEntity.class);
+            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 12, LivingEntity.class);
             list.remove(player);
             list.stream().forEach(entity ->
             {

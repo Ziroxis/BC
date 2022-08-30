@@ -24,6 +24,7 @@ import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
 import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.UltimateSealAbility;
+import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.slash.*;
@@ -43,6 +44,14 @@ public class AbilityProgressionEvents {
         //TODO make this pop up on screen
         if (!statsProps.hasGrimoire())
             return;
+        if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
+        {
+            gainAbility(event.getPlayer(), 5, WaterShieldAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, WaterSpearAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, WaterDragonAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, ValkyrieArmorAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, PointBlankDragonAbility.INSTANCE);
+        }
         if (statsProps.getAttribute().equals(ModValues.SEALING) || statsProps.getSecondAttribute().equals(ModValues.SEALING))
         {
             gainAbility(event.getPlayer(), 5, SelfHealSealingAbility.INSTANCE);

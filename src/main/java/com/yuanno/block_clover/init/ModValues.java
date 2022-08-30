@@ -17,12 +17,12 @@ public class ModValues {
     public static final String SLASH = "Slash";
     public static final String WIND = "Wind";
     public static final String SEALING = "Sealing";
-    public static final String ANTIMAGIC = "Anti-magic";
+    public static final String ANTIMAGIC = "Anti_Magic";
     public static final String[] attributes = {
-            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING,ModValues.ANTIMAGIC
+            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.ANTIMAGIC
     };
     public static final String[] attributes_no_antimagic = {
-            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING
+            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER
     };
 
     //Races

@@ -18,10 +18,36 @@ public class AbilityDataBase implements IAbilityData
 
 	private Ability previouslyUsedAbility;
 	private int currentCombatBarSet = 0;
-	
+	private boolean isEvolved = false;
+	private int experience = 0;
 	/*
 	 * Unlocked Abilities
 	 */
+
+	@Override
+	public boolean isEvolved() {
+		return this.isEvolved;
+	}
+
+	@Override
+	public void evolve(boolean evolve) {
+		this.isEvolved = evolve;
+	}
+
+	@Override
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
+	@Override
+	public void alterExperience(int experience) {
+		this.experience = this.experience + experience;
+	}
+
+	@Override
+	public int getExperience() {
+		return this.experience;
+	}
 
 	@Override
 	public boolean addUnlockedAbility(Ability abl)

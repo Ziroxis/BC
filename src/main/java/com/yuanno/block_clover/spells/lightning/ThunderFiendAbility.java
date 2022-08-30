@@ -37,33 +37,21 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
         this.clearTargets();
 
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
+        ThunderGodGlovesAbility thunderGodGlovesAbility = abilityProps.getEquippedAbility(ThunderGodGlovesAbility.INSTANCE);
+        if (thunderGodGlovesAbility != null && thunderGodGlovesAbility.isContinuous())
         {
-            if (ability == null)
-                continue;
-
-            try
-            {
-                if (ability instanceof ThunderGodBootsAbility && ability.isContinuous())
-                {
-
-                    Vector3d speed = Beapi.propulsion(player, 9, 9);
-                    player.setDeltaMovement(speed.x, 0.2, speed.z);
-                    player.hurtMarked = true;
-                    ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-                    return true;
-                }
-                else
-                {
-                    player.sendMessage(new StringTextComponent("Need to put on your electric boots!"), Util.NIL_UUID);
-                    return false;
-                }
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            Vector3d speed = Beapi.propulsion(player, 9, 9);
+            player.setDeltaMovement(speed.x, 0.2, speed.z);
+            player.hurtMarked = true;
+            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+            return true;
         }
-        return false;
+        else
+        {
+            player.sendMessage(new StringTextComponent("Need to put on your electric boots!"), Util.NIL_UUID);
+            return false;
+
+        }
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {

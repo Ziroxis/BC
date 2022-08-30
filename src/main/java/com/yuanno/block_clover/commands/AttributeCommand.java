@@ -39,6 +39,8 @@ public class AttributeCommand {
         List<String> suggestions = new ArrayList<>();
         suggestions.add("WIND");
         suggestions.add("FIRE");
+        suggestions.add("SEALING");
+        suggestions.add("WATER");
         suggestions.add("LIGHT");
         suggestions.add("LIGHTNING");
         suggestions.add("DARKNESS");
@@ -53,6 +55,12 @@ public class AttributeCommand {
         IEntityStats statsProps = EntityStatsCapability.get(player);
         switch (set)
         {
+            case "SEALING":
+                statsProps.setAttribute(ModValues.SEALING);
+                break;
+            case "WATER":
+                statsProps.setAttribute(ModValues.WATER);
+                break;
             case "WIND":
                 statsProps.setAttribute(ModValues.WIND);
                 break;
@@ -61,6 +69,7 @@ public class AttributeCommand {
                 break;
             case "LIGHT":
                 statsProps.setAttribute(ModValues.LIGHT);
+                break;
             case "LIGHTNING":
                 statsProps.setAttribute(ModValues.LIGHTNING);
                 break;

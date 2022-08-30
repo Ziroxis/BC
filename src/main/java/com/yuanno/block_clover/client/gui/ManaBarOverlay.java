@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -37,9 +38,11 @@ public class ManaBarOverlay {
             case "Light":
                 mana = 7;
                 break;
+            case (ModValues.WATER):
             case "Lightning":
                 mana = 3;
                 break;
+            case (ModValues.SEALING):
             case "Darkness":
                 mana = 2;
                 break;
@@ -52,7 +55,7 @@ public class ManaBarOverlay {
             //ClientPlayerEntity player = Minecraft.getInstance().player;
             //IEntityStats entityStats = EntityStatsCapability.get(player);
 
-            if (entityStats.getMaxMana() > 0) {
+            if (entityStats.getMaxMana() > 0 && entityStats.isInCombatMode()) {
                 Minecraft mc = Minecraft.getInstance();
 
 

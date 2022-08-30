@@ -8,6 +8,11 @@ import java.util.function.Predicate;
 
 public interface IAbilityData
 {
+	boolean isEvolved();
+	void evolve(boolean evolve);
+	void setExperience(int experience);
+	void alterExperience(int experience);
+	int getExperience();
 	boolean addUnlockedAbility(Ability abl);
 	boolean setUnlockedAbility(int slot, Ability abl);
 	boolean removeUnlockedAbility(Ability abl);

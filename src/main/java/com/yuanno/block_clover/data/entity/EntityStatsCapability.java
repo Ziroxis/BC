@@ -36,6 +36,7 @@ public class EntityStatsCapability {
                 props.putInt("state", instance.getState());
                 props.putString("title", instance.getTitle());
                 props.putString("rank", instance.getRank());
+                props.putInt("time", instance.getTime());
 
                 return props;
             }
@@ -60,6 +61,7 @@ public class EntityStatsCapability {
                 instance.setState(props.getInt("state"));
                 instance.setTitle(props.getString("title"));
                 instance.setRank(props.getString("rank"));
+                instance.setTime(props.getInt("time"));
 
             }
         }, () -> new EntityStatsBase());

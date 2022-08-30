@@ -21,6 +21,7 @@ public class ClientHandler {
 
     public static void onSetup()
     {
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.CLOVER_SHARK.get(), new CloverSharkRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MONKEY_ENTITY.get(), new MonkeyEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOLCANO_MONSTER.get(), new VolcanoMonsterRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BANDIT.get(), new BanditEntityRenderer.Factory());
@@ -37,6 +38,7 @@ public class ClientHandler {
         List<LayerRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>>> layers = ObfuscationReflectionHelper.getPrivateValue(LivingRenderer.class, renderer, "field_177097_h");
         if(layers != null)
         {
+            layers.add(new GrimoirRenderer<>(renderer));
             layers.add(new BlackModeRenderer<>(renderer));
             layers.add(new EarthManipulationRenderer<>(renderer));
             layers.add(new LeoPalmaRenderer<>(renderer));

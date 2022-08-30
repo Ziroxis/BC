@@ -22,6 +22,7 @@ public class EntityStatsBase implements IEntityStats{
     private int state = 0;
     private String title = "";
     private String rank = "";
+    private int time;
 
 
     @Override
@@ -255,5 +256,20 @@ public class EntityStatsBase implements IEntityStats{
             return false;
 
         return true;
+    }
+
+    @Override
+    public int getTime() {
+        return this.time;
+    }
+
+    @Override
+    public void setTime(int value) {
+        this.time = value;
+    }
+
+    @Override
+    public void alterTime(int value) {
+        this.time = this.time + value;
     }
 }

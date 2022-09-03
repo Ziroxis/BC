@@ -34,7 +34,7 @@ public class UltimateSealAbility extends Ability {
         this.setMaxCooldown(30);
         this.setmanaCost(12);
         this.setExperiencePoint(50);
-        this.setDescription("Seals the enemy in a temporary seal as long the user holds the spell.");
+        this.setDescription("Seals the enemy in a temporary seal.");
 
         this.onUseEvent = this::onUseEvent;
 
@@ -59,6 +59,8 @@ public class UltimateSealAbility extends Ability {
         int z0 = (int) mop.getLocation().z();
         List<LivingEntity> targets = Beapi.getEntitiesNear(new BlockPos(x0, y0, z0), player.level, 1, LivingEntity.class);
         targets.remove(player);
+        if (targets.isEmpty())
+            return false;
         this.entities.addAll(targets);
         for (LivingEntity target : this.entities)
         {

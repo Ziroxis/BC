@@ -34,7 +34,7 @@ public class TimeStealAbility extends PunchAbility {
                 if (targetPlayer.getFoodData().getFoodLevel() > 0)
                     targetPlayer.getFoodData().setFoodLevel(targetPlayer.getFoodData().getFoodLevel() - 3);
                 else
-                    return 20;
+                    targetPlayer.kill();
             }
             else
               target.kill();

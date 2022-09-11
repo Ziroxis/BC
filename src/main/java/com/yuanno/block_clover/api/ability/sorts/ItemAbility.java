@@ -18,7 +18,6 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 		super(name, category);
 		
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
-		this.duringContinuityEvent = this::duringContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;
 	}
 
@@ -30,17 +29,6 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 		if (player.getItemInHand(player.getUsedItemHand()).isEmpty() && !this.getItemStack(player).isEmpty())
 		{
 			player.inventory.setItem(player.inventory.selected, this.getItemStack(player));
-			/*
-			IEntityStats playerStats = EntityStatsCapability.get(player);
-			playerStats.alterExperience(getExperiencePoint());
-			ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
-			MinecraftForge.EVENT_BUS.post(eventExperience);
-			playerStats.alterMana(getmanaCost());
-			PacketHandler.sendTo(new ManaSync(playerStats.getMana()), player);
-			PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), playerStats), player);
-
-			 */
-
 			return true;
 		}
 		else
@@ -51,20 +39,6 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 				player.sendMessage(new TranslationTextComponent("Cannot equip while holding another item in hand!"), Util.NIL_UUID);
 			return false;
 		}
-	}
-
-	private void duringContinuityEvent(PlayerEntity player, int timer)
-	{
-		/*
-		if (this.isLoseMana() && player.tickCount % 20 == 0)
-		{
-			IEntityStats playerStats = EntityStatsCapability.get(player);
-			playerStats.alterExperience(this.getPassiveExperience());
-			playerStats.alterMana(-this.getPassiveManaCost());
-			ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
-			MinecraftForge.EVENT_BUS.post(eventExperience);
-		}
-		 */
 	}
 
 	private boolean onEndContinuityEvent(PlayerEntity player)

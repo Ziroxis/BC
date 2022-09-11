@@ -32,7 +32,7 @@ public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements I
         this.setmanaCost(5);
         this.setMaxCooldown(5);
         this.setExperiencePoint(10);
-        this.setExperienceGainLevelCap(50);
+        this.setExperienceGainLevelCap(10);
 
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHit;

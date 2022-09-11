@@ -166,8 +166,8 @@ public class StatsEvent {
             props.setTitle("\u00A71Almighty captain of Yuanno");
         else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> Kausu
             props.setTitle("§aSage");
-        //else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802")) // -> Maddox
-            //props.setTitle("§2Mad earth");
+        else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802")) // -> Maddox
+            props.setTitle("§2Mad earth");
         else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> Redwolf
             props.setTitle("§cThe king");
         else if (uuid.toString().equals("9819c734-1928-4757-8724-801ced9218c6")) // -> Skyling
@@ -178,6 +178,8 @@ public class StatsEvent {
             props.setTitle("§0Wannabe rival");
         else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
             props.setTitle("§7Beggar");
+        else if (uuid.toString().equals("6e7290c6-550a-4db5-8b2d-406e36ac9834")) // -> Kiwi
+            props.setTitle("Determined Soul");
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }

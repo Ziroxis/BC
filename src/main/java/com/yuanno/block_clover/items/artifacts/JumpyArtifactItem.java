@@ -20,19 +20,18 @@ public class JumpyArtifactItem extends ArtifactItem implements ICurioItem {
     {
         PlayerEntity player = (PlayerEntity) livingEntity;
 
-        if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_SPACE) && !player.isOnGround() && !hasJumped && player.getDeltaMovement().y < 0.07 )
+        if (!livingEntity.getEntity().level.isClientSide)
         {
+            if (InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_SPACE) && !player.isOnGround() && !hasJumped && player.getDeltaMovement().y < 0.07) {
 
-            player.jumpFromGround();
-            player.fallDistance = 0;
-            hasJumped = true;
+                player.jumpFromGround();
+                player.fallDistance = 0;
+                hasJumped = true;
 
+            } else if (player.isOnGround()) {
+                hasJumped = false;
+            }
         }
-        else if (player.isOnGround())
-        {
-            hasJumped = false;
-        }
-        System.out.println(player.getDeltaMovement().y);
     }
 
 

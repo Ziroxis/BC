@@ -15,6 +15,7 @@ public class DemonSlayerAbility extends ItemAbility implements IParallelContinuo
     {
         super("Demon Slayer", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Takes the demon dweller sword out of your grimoire");
+
         this.setMaxCooldown(0);
         this.setmanaCost(0);
     }

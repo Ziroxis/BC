@@ -289,7 +289,7 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "block_clover:charm_protection"
+          "name": "block_clover:protecting_charm"
         },
         {
           "type": "minecraft:item",
@@ -314,7 +314,7 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "block_clover:belt_air"
+          "name": "block_clover:air_belt"
         },
         {
           "type": "minecraft:item",
@@ -329,7 +329,7 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "block_clover:mana_artifact"
+          "name": "block_clover:maximizing_mana"
         },
         {
           "type": "minecraft:item",

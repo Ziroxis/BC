@@ -132,7 +132,7 @@ public abstract class ContinuousAbility extends Ability {
             if((this.isClientSide() || !player.level.isClientSide) && !this.isStateForced())
                 this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 
-            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10)
+            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10 && !(getmanaCost() == 0))
                 this.endContinuity(player);
             if (player.tickCount % 20 == 0)
             {

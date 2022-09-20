@@ -35,7 +35,7 @@ public class TimeBarOverlay {
                 int colour_x = 0;
                 mc.textureManager.bind(timeBar);
                 mc.gui.blit(event.getMatrixStack(), 63, 130, 0, 0, tex_width, tex_height);
-                float timeRatio = (float) (entityStats.getTime() / 100.0f);
+                float timeRatio = (float) (entityStats.getTime() / 1000.0f);
                 System.out.println(entityStats.getTime());
                 int set_height = (int) (tex_height * timeRatio);
                 int move_tex = (tex_height - set_height);

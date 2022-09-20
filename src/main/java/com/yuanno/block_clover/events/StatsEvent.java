@@ -178,7 +178,7 @@ public class StatsEvent {
             props.setTitle("§0Wannabe rival");
         else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
             props.setTitle("§7Beggar");
-        else if (uuid.toString().equals("6e7290c6-550a-4db5-8b2d-406e36ac9834")) // -> Kiwi
+        else if (uuid.toString().equals("2f81171f-fbec-442b-9d6d-3b21cad56f09")) // -> Kiwi
             props.setTitle("Determined Soul");
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);

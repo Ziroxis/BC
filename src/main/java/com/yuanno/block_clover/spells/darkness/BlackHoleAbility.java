@@ -14,7 +14,7 @@ public class BlackHoleAbility extends ContinuousAbility {
         this.setDescription("Spawns in a black hole following you.\nThe black hole sucks all the enemy spells near it.");
         this.setmanaCost(10);
         this.setExperiencePoint(10);
-        this.setExperienceGainLevelCap(50);
+        this.setExperienceGainLevelCap(30);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }

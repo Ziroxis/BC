@@ -20,6 +20,7 @@ public class LightMovementAbility extends Ability {
     public LightMovementAbility()
     {
         super("Light Movement", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        this.setDescription("Moves as fast as light");
         this.setmanaCost(45);
         this.setMaxCooldown(4);
         this.setExperiencePoint(10);

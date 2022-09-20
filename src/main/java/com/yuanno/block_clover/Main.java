@@ -13,6 +13,7 @@ import com.yuanno.block_clover.client.curios.gui.GuiEventHandler;
 import com.yuanno.block_clover.client.gui.LevelUpOverlay;
 import com.yuanno.block_clover.client.gui.ManaBarOverlay;
 import com.yuanno.block_clover.client.gui.SpellUnlockOverlay;
+import com.yuanno.block_clover.client.gui.TimeBarOverlay;
 import com.yuanno.block_clover.curios.CuriosConfig;
 import com.yuanno.block_clover.curios.CuriosHelper;
 import com.yuanno.block_clover.curios.CuriosRegistry;
@@ -156,6 +157,7 @@ public class Main
 
         ClientHandler.onSetup();
         ModKeyBinds.init();
+        MinecraftForge.EVENT_BUS.register(new TimeBarOverlay());
         MinecraftForge.EVENT_BUS.register(new ManaBarOverlay());
         MinecraftForge.EVENT_BUS.register(new LevelUpOverlay());
         MinecraftForge.EVENT_BUS.register(new SpellUnlockOverlay());

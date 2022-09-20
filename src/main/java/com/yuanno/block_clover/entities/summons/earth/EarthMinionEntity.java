@@ -85,6 +85,17 @@ public class EarthMinionEntity extends BCsummon {
         this.getEntityData().define(TEXTURE, "");
     }
 
+
+    public void setOwner(LivingEntity owner)
+    {
+        this.entityData.set(OWNER, Optional.of(owner.getUUID()));
+    }
+
+    public PlayerEntity getOwner()
+    {
+        return this.getEntityData().get(OWNER).isPresent() ? this.level.getPlayerByUUID(this.getEntityData().get(OWNER).get()) : null;
+    }
+
     @Override
     public boolean hurt(DamageSource damageSource, float damageValue)
     {
@@ -94,7 +105,20 @@ public class EarthMinionEntity extends BCsummon {
         return super.hurt(damageSource, damageValue);
     }
 
+    @Override
+    public void addAdditionalSaveData(CompoundNBT compound)
+    {
+        super.addAdditionalSaveData(compound);
+        if (this.entityData.get(OWNER) != null)
+            compound.putString("OwnerUUID", this.entityData.get(OWNER).toString());
+    }
 
+    @Override
+    public void readAdditionalSaveData(CompoundNBT compound)
+    {
+        super.readAdditionalSaveData(compound);
+        this.entityData.set(OWNER, Optional.of(UUID.fromString(compound.getString("OwnerUUID"))));
+    }
 
     @Override
     public void tick()
@@ -144,8 +168,4 @@ public class EarthMinionEntity extends BCsummon {
 
         super.tick();
     }
-
-
-
-
 }

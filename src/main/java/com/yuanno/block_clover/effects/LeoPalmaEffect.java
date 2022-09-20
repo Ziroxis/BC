@@ -29,7 +29,10 @@ public class LeoPalmaEffect extends SpecialEffect {
     @Override
     public void applyEffectTick(LivingEntity livingEntity, int amplifier)
     {
-        PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+        if (!livingEntity.level.isClientSide)
+        {
+            PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+        }
     }
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier)

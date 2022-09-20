@@ -21,6 +21,7 @@ public class EarthMinionAbility extends ContinuousAbility implements IParallelCo
         this.setmanaCost(4);
         this.setExperiencePoint(3);
         this.setMaxCooldown(15);
+        this.setExperienceGainLevelCap(30);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }

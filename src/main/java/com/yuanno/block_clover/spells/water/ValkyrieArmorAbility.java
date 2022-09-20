@@ -26,15 +26,16 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
     public static final AttributeModifier WATER_RANGE = new AttributeModifier(UUID.fromString("c9b016d4-231f-11ed-861d-0242ac120002"),
             "Water Defense", 2, AttributeModifier.Operation.ADDITION);
     public static final AttributeModifier WATER_SPEED = new AttributeModifier(UUID.fromString("697c7d48-231f-11ed-861d-0242ac120002"),
-            "Water Speed", 1, AttributeModifier.Operation.ADDITION);
+            "Water Speed", 0.3, AttributeModifier.Operation.ADDITION);
 
     public ValkyrieArmorAbility()
     {
         super("Valkyrie Armor", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Envelops yourself with an armor of water");
-        this.setMaxCooldown(0);
-        this.setmanaCost(0);
-        this.setExperiencePoint(20);
+        this.setMaxCooldown(60);
+        this.setmanaCost(10);
+        this.setExperiencePoint(10);
+        this.setExperienceGainLevelCap(40);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }

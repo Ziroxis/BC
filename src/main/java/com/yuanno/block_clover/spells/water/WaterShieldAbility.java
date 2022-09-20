@@ -22,9 +22,10 @@ public class WaterShieldAbility extends Ability {
     {
         super("Water Shield", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Spawns a water shield, lingering for a few seconds blocking incoming spells");
-        this.setMaxCooldown(0);
-        this.setmanaCost(20);
+        this.setMaxCooldown(10);
+        this.setmanaCost(30);
         this.setExperiencePoint(20);
+        this.setExperienceGainLevelCap(30);
         this.onUseEvent = this::onUseEvent;
     }
 

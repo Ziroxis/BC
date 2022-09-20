@@ -21,7 +21,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
 
     public static final ThunderGodBootsAbility INSTANCE = new ThunderGodBootsAbility();
     private static final AttributeModifier LIGHTNING_SPEED = new AttributeModifier(UUID.fromString("47642942-fec9-11ec-b939-0242ac120002"),
-            "Lightning Speed", 0.5, AttributeModifier.Operation.ADDITION);
+            "Lightning Speed", 0.3, AttributeModifier.Operation.ADDITION);
     private static final AttributeModifier LIGHTNING_STEP = new AttributeModifier(UUID.fromString("25c5b788-fec9-11ec-b939-0242ac120002"),
             "Lightning Step", 1, AttributeModifier.Operation.ADDITION);
 

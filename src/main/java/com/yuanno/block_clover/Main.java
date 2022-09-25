@@ -75,6 +75,8 @@ public class Main
         MinecraftForge.EVENT_BUS.register(new AttachingCapabilities.Registry());
         ModAbilities.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModTileEntities.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
         ModEffects.EFFECTS.register(modEventBus);
         ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);

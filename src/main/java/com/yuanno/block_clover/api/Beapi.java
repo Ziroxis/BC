@@ -496,7 +496,7 @@ public class Beapi
                         if(replaceTest != null && !replaceTest.replace(world, pos, state))
                             continue;
 
-                        if(placeBlockIfAllowed(world, pos.getX(), pos.getY(), pos.getZ(), block, flags, rule))
+                        if(placeBlockIfAllowed(world, pos.getX(), pos.getY(), pos.getZ(), block, flags))
                             blockPositions.add(pos);
                     }
                 }

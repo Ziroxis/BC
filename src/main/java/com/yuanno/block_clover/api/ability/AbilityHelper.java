@@ -148,7 +148,7 @@ public class AbilityHelper {
                     if (x == -sizeX || x == sizeX || y == -sizeY || y == sizeY || z == -sizeZ || z == sizeZ)
                     {
                         BlockPos pos = new BlockPos(posX + x, posY + y, posZ + z);
-                        if(placeBlockIfAllowed(world, posX + x, posY + y, posZ + z, blockToPlace, rule))
+                        if(placeBlockIfAllowed(world, posX + x, posY + y, posZ + z, blockToPlace))
                             blockPositions.add(pos);
                     }
                 }
@@ -157,7 +157,7 @@ public class AbilityHelper {
         return blockPositions;
     }
 
-    public static List<BlockPos> createFilledCube(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, Block blockToPlace, BlockProtectionRule rule)
+    public static List<BlockPos> createFilledCube(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, Block blockToPlace)
     {
         List<BlockPos> blockPositions = new ArrayList<BlockPos>();
         for (int x = -sizeX; x <= sizeX; x++)
@@ -165,32 +165,50 @@ public class AbilityHelper {
                 for (int z = -sizeZ; z <= sizeZ; z++)
                 {
                     BlockPos pos = new BlockPos(posX + x, posY + y, posZ + z);
-                    if(placeBlockIfAllowed(world, posX + x, posY + y, posZ + z, blockToPlace, rule))
+                    if(placeBlockIfAllowed(world, posX + x, posY + y, posZ + z, blockToPlace))
                         blockPositions.add(pos);
                 }
 
         return blockPositions;
     }
-
-    public static List<BlockPos> createSphere(World world, BlockPos center, int radius, boolean hollow, final Block block, int flags)
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, boolean hollow, final Block block, int flags)
+    {
+        return AbilityHelper.createSphere(world, center, radiusXZ, radiusXZ, hollow, block, flags);
+    }
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, int radiusY, boolean hollow, final Block block, int flags)
+    {
+        return AbilityHelper.createSphere(world, center, radiusXZ, radiusY, hollow, block, null, flags);
+    }
+    public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, int radiusY, boolean hollow, final Block block, @Nullable BlockProtectionRule.IReplaceBlockRule replaceTest, int flags)
     {
         int x0 = center.getX();
         int y0 = center.getY();
         int z0 = center.getZ();
 
         List<BlockPos> blockPositions = new ArrayList<BlockPos>();
-        for (int y = y0 - radius; y <= y0 + radius; y++)
+        for (int y = y0 - radiusY; y <= y0 + radiusY; y++)
         {
-            for (int x = x0 - radius; x <= x0 + radius; x++)
+            for (int x = x0 - radiusXZ; x <= x0 + radiusXZ; x++)
             {
-                for (int z = z0 - radius; z <= z0 + radius; z++)
+                for (int z = z0 - radiusXZ; z <= z0 + radiusXZ; z++)
                 {
                     double distance = ((x0 - x) * (x0 - x) + ((z0 - z) * (z0 - z)) + ((y0 - y) * (y0 - y)));
 
-                    if (distance < radius * radius && !(hollow && distance < ((radius - 1) * (radius - 1))))
+                    if (distance < radiusXZ * radiusY && !(hollow && distance < ((radiusXZ - 1) * (radiusXZ - 1))))
                     {
                         BlockPos pos = new BlockPos(x, y, z);
-                        if(true) //TODO add ability protection
+                        BlockState state = world.getBlockState(pos);
+
+//						BlockRayTraceResult result = WyHelper.rayTraceBlocks(world, new Vector3d(center), new Vector3d(pos));
+//						if(result.getType() == RayTraceResult.Type.BLOCK)
+//						{
+//
+//						}
+
+                        if(replaceTest != null && !replaceTest.replace(world, pos, state))
+                            continue;
+
+                        if(placeBlockIfAllowed(world, pos.getX(), pos.getY(), pos.getZ(), block, flags))
                             blockPositions.add(pos);
                     }
                 }
@@ -200,12 +218,12 @@ public class AbilityHelper {
         return blockPositions;
     }
 
-    public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, BlockProtectionRule rule)
+    public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace)
     {
-        return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 2, rule);
+        return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 2);
     }
 
-    public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, int flag, BlockProtectionRule rule)
+    public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, BlockState toPlace, int flag)
     {
         BlockPos pos = new BlockPos(posX, posY, posZ);
         if(World.isOutsideBuildHeight(pos))
@@ -215,21 +233,20 @@ public class AbilityHelper {
 
         ExtendedWorldData worldData = ExtendedWorldData.get(world);
         boolean inProtectedAreaFlag = worldData.isInsideRestrictedArea((int) posX, (int) posY, (int) posZ);
-        boolean isGriefDisabled = false;
-        boolean isGriefBypass = rule.getBypassGriefRule();
 
-        if ((!isGriefBypass && inProtectedAreaFlag) || (!isGriefBypass && isGriefDisabled))
-            return false;
 
-        if (rule.check(world, pos, currentBlockState))
-        {
-            BlockState state = toPlace.defaultBlockState();
-            Beapi.setBlockStateInChunk(world, pos, state, flag);
-            //world.setBlockAndUpdate(pos, state, flag);
-            return true;
-        }
 
-        return false;
+        BlockState state = toPlace;
+        Beapi.setBlockStateInChunk(world, pos, state, flag);
+        //world.setBlockAndUpdate(pos, state, flag);
+        return true;
+
+
+    }
+
+    public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, int flag)
+    {
+        return placeBlockIfAllowed(world, posX, posY, posZ, toPlace.defaultBlockState(), flag);
     }
 
     @Deprecated

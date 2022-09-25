@@ -32,7 +32,7 @@ public class TimeBarOverlay {
             {
                 Minecraft mc = Minecraft.getInstance();
                 String time = "" + entityStats.getTime();
-                int colour_x = 0;
+                int colour_x = 9;
                 mc.textureManager.bind(timeBar);
                 mc.gui.blit(event.getMatrixStack(), 63, 130, 0, 0, tex_width, tex_height);
                 float timeRatio = (float) (entityStats.getTime() / 1000.0f);

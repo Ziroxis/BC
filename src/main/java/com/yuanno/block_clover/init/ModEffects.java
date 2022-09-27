@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.effects.GravityEffect;
 import com.yuanno.block_clover.effects.LeoPalmaEffect;
 import com.yuanno.block_clover.effects.MovementBlockedEffect;
 import com.yuanno.block_clover.effects.SealingEffect;
@@ -15,4 +16,5 @@ public class ModEffects {
     public static final RegistryObject<Effect> LEO_PALMA = EFFECTS.register("leo_palma", LeoPalmaEffect::new);
     public static final RegistryObject<Effect> MOVEMENT_BLOCKED = EFFECTS.register("movement_blocked", MovementBlockedEffect::new);
     public static final RegistryObject<Effect> SEALING = EFFECTS.register("sealing", SealingEffect::new);
+    public static final RegistryObject<Effect> GRAVITY = EFFECTS.register("gravity", GravityEffect::new);
 }

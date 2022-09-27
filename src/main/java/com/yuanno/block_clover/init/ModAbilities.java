@@ -7,6 +7,9 @@ import com.yuanno.block_clover.spells.antimagic.*;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
+import com.yuanno.block_clover.spells.gravity.GravitySingularityAbility;
+import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
+import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
@@ -40,7 +43,7 @@ public class ModAbilities {
     public static final Ability[] MISC = {ManaSkinAbility.INSTANCE};
     public static final Ability[] WATER = {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE};
     public static final Ability[] SEALING = {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE};
-    public static final Ability[] ANTIMAGIC = {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE, ManaZoneAbility.INSTANCE};
+    public static final Ability[] ANTIMAGIC = {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE, AntiMagicManaZoneAbility.INSTANCE};
     public static final Ability[] EARTH = {EarthChunkAbility.INSTANCE, EarthChargeAbility.INSTANCE, EarthGlovesAbility.INSTANCE, EarthMinionAbility.INSTANCE, EarthManipulationAbility.INSTANCE, EarthGolemAbility.INSTANCE, EarthQuakeAbility.INSTANCE, EarthPassiveAbility.INSTANCE};
     public static final Ability[] FIRE = {FireBallAbility.INSTANCE, FlameRoarAbility.INSTANCE, SolLineaAbility.INSTANCE, SpiralFlameAbility.INSTANCE, LeoPalmaAbility.INSTANCE, WildBurstingFlamesAbility.INSTANCE};
     public static final Ability[] SLASH = {SlashBladesAbility.INSTANCE, DeathScytheAbility.INSTANCE, DeathScytheShowerAbility.INSTANCE, ForwardThrustAbility.INSTANCE, LunaticSlashAbility.INSTANCE, RoundLunaticSlashAbility.INSTANCE};
@@ -48,7 +51,8 @@ public class ModAbilities {
     public static final Ability[] LIGHT = {LightBladeAbility.INSTANCE, LightBladeShowerAbility.INSTANCE, LightHealingAbility.INSTANCE, LightMovementAbility.INSTANCE, LightSwordAbility.INSTANCE};
     public static final Ability[] DARKNESS = {DarkCloakedBladeAbility.INSTANCE, AvidyaSlashAbility.INSTANCE, AvidyaWildSlashAbility.INSTANCE, BluntStrikeAbility.INSTANCE, BlackHoleAbility.INSTANCE};
     public static final Ability[] WIND = {WindBladeAbility.INSTANCE, WindCrescentAbility.INSTANCE, WindBladeShowerAbility.INSTANCE, ToweringTornadoAbility.INSTANCE, WindFlightAbility.INSTANCE, TornadoPiercingAbility.INSTANCE, WindGaleAbility.INSTANCE};
-    public static final Ability[] TIME = {TimeStealAbility.INSTANCE, TimeHealAbility.INSTANCE, ChronoStasisAbility.INSTANCE, TimeHopAbility.INSTANCE, ChronoStasisGrigoraAbility.INSTANCE};
+    public static final Ability[] TIME = {TimeStealAbility.INSTANCE, TimeHealAbility.INSTANCE, ChronoStasisAbility.INSTANCE, TimeHopAbility.INSTANCE, ChronoStasisGrigoraAbility.INSTANCE, TimeRessurectionAbility.INSTANCE};
+    public static final Ability[] GRAVITY = {GravitySingularityAbility.INSTANCE, HeavyInfightingAbility.INSTANCE, PresenceOfTheDemonKingAbility.INSTANCE};
 
     private static Ability registerAbility(Ability ability)
     {
@@ -70,6 +74,7 @@ public class ModAbilities {
 
     public static void register(IEventBus eventBus)
     {
+        registerAbilities(GRAVITY);
         registerAbilities(TIME);
         registerAbilities(WATER);
         registerAbilities(MISC);

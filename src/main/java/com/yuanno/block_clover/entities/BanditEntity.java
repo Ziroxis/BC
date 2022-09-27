@@ -36,30 +36,32 @@ public class BanditEntity extends BCentity {
     protected void registerGoals()
     {
         super.registerGoals();
-        int random = Beapi.RNG(4);
-        boolean randomStrength = Beapi.RNGboolean();
-        switch (random)
+        if (canUseMagic)
         {
-            case 0:
-                this.goalSelector.addGoal(5, new EarthChunkGoal(this));
-                if (randomStrength)
-                    this.goalSelector.addGoal(4, new EarthChargeGoal(this));
-                break;
-            case 1:
-                this.goalSelector.addGoal(5, new FireBallGoal(this));
-                if (randomStrength)
-                    this.goalSelector.addGoal(4, new FlameRoarGoal(this));
-                break;
-            case 2:
-                this.goalSelector.addGoal(5, new LightBladeGoal(this));
-                if (randomStrength)
-                    this.goalSelector.addGoal(4, new LightBladeShowerGoal(this));
-                break;
-            case 3:
-                this.goalSelector.addGoal(5, new WindBladeGoal(this));
-                if (randomStrength)
-                    this.goalSelector.addGoal(4, new WindBladeShowerGoal(this));
-                break;
+            int random = Beapi.RNG(4);
+            boolean randomStrength = Beapi.RNGboolean();
+            switch (random) {
+                case 0:
+                    this.goalSelector.addGoal(5, new EarthChunkGoal(this));
+                    if (randomStrength)
+                        this.goalSelector.addGoal(4, new EarthChargeGoal(this));
+                    break;
+                case 1:
+                    this.goalSelector.addGoal(5, new FireBallGoal(this));
+                    if (randomStrength)
+                        this.goalSelector.addGoal(4, new FlameRoarGoal(this));
+                    break;
+                case 2:
+                    this.goalSelector.addGoal(5, new LightBladeGoal(this));
+                    if (randomStrength)
+                        this.goalSelector.addGoal(4, new LightBladeShowerGoal(this));
+                    break;
+                case 3:
+                    this.goalSelector.addGoal(5, new WindBladeGoal(this));
+                    if (randomStrength)
+                        this.goalSelector.addGoal(4, new WindBladeShowerGoal(this));
+                    break;
+            }
         }
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1, true));
         this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 4));

@@ -126,6 +126,16 @@
   "ability.block_clover.valkyrie_armor": "Valkyrie armor",
   "ability.block_clover.point_blank_dragon": "Point blank water dragon",
 
+  "ability.block_clover.time_steal": "Time steal",
+  "ability.block_clover.chrono_stasis": "Chrono stasis",
+  "ability.block_clover.chrono_stasis_grigora": "Chrono stasis grigora",
+  "ability.block_clover.time_healing": "Time healing",
+  "ability.block_clover.time_hop": "Time hop",
+  "ability.block_clover.time_ressurection": "Time ressurection",
+
+
+
+
   "curios.slot": "Slot",
   "curios.identifier.head": "Head",
   "curios.identifier.necklace": "Necklace",

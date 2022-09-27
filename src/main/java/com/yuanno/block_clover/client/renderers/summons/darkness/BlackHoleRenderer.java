@@ -16,7 +16,7 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity> {
-    private static final ResourceLocation texture = new ResourceLocation("block_clover:textures/entities/projectiles/darkness/avidyaslash.png");
+    private static final ResourceLocation texture = new ResourceLocation("block_clover:textures/entities/projectiles/darkness/singularity.png");
 
     public BlackHoleRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);

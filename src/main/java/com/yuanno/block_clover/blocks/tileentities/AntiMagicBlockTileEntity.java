@@ -3,7 +3,7 @@ package com.yuanno.block_clover.blocks.tileentities;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.init.ModTileEntities;
-import com.yuanno.block_clover.spells.antimagic.ManaZoneAbility;
+import com.yuanno.block_clover.spells.antimagic.AntiMagicManaZoneAbility;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -38,7 +38,7 @@ public class AntiMagicBlockTileEntity extends TileEntity implements ITickableTil
             LivingEntity owner = this.getOwner();
             if(owner != null)
             {
-                ManaZoneAbility ability = AbilityDataCapability.get(owner).getEquippedAbility(ManaZoneAbility.INSTANCE);
+                AntiMagicManaZoneAbility ability = AbilityDataCapability.get(owner).getEquippedAbility(AntiMagicManaZoneAbility.INSTANCE);
 
                 if(ability != null)
                 {
@@ -56,9 +56,9 @@ public class AntiMagicBlockTileEntity extends TileEntity implements ITickableTil
     }
     public void clearRoom()
     {
-        for (int i = -ManaZoneAbility.MAX_ZONE_SIZE; i < ManaZoneAbility.MAX_ZONE_SIZE; i++)
-            for (int k = -ManaZoneAbility.MAX_ZONE_SIZE; k < ManaZoneAbility.MAX_ZONE_SIZE; k++)
-                for (int j = -ManaZoneAbility.MAX_ZONE_SIZE; j < ManaZoneAbility.MAX_ZONE_SIZE; j++)
+        for (int i = -AntiMagicManaZoneAbility.MAX_ZONE_SIZE; i < AntiMagicManaZoneAbility.MAX_ZONE_SIZE; i++)
+            for (int k = -AntiMagicManaZoneAbility.MAX_ZONE_SIZE; k < AntiMagicManaZoneAbility.MAX_ZONE_SIZE; k++)
+                for (int j = -AntiMagicManaZoneAbility.MAX_ZONE_SIZE; j < AntiMagicManaZoneAbility.MAX_ZONE_SIZE; j++)
                     if (this.level.getBlockState(new BlockPos(this.getBlockPos().getX() + i, this.getBlockPos().getY() + k, this.getBlockPos().getZ() + j)).getBlock() == ModBlocks.ANTIMAGIC.get())
                         this.level.setBlockAndUpdate(new BlockPos(this.getBlockPos().getX() + i, this.getBlockPos().getY() + k, this.getBlockPos().getZ() + j), Blocks.AIR.defaultBlockState());
         this.level.setBlockAndUpdate(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ()), Blocks.AIR.defaultBlockState());

@@ -35,7 +35,8 @@ public class MonkeyEntity extends BCentity{
         super.registerGoals();
 
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(5, new WindTornadoGoal(this));
+        if (canUseMagic)
+            this.goalSelector.addGoal(5, new WindTornadoGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, false));

@@ -14,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BCentity extends CreatureEntity {
     protected int xpDrop = 0;
+    public boolean canUseMagic = true;
     protected BCentity(EntityType<? extends CreatureEntity> p_i48575_1_, World p_i48575_2_) {
         super(p_i48575_1_, p_i48575_2_);
     }
@@ -48,5 +49,9 @@ public class BCentity extends CreatureEntity {
     public int getExperience()
     {
         return xpDrop;
+    }
+    public boolean canUseMagic()
+    {
+        return canUseMagic;
     }
 }

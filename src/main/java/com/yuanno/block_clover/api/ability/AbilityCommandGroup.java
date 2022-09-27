@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 
 public enum AbilityCommandGroup implements IExtensibleEnum
 {
+	GRAVITY(() -> ModAbilities.GRAVITY),
 	WIND(() -> ModAbilities.WIND),
 	TIME(() -> ModAbilities.TIME),
 	WATER(() -> ModAbilities.WATER),

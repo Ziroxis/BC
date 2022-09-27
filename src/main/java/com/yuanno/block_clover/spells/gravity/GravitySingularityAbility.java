@@ -14,7 +14,7 @@ public class GravitySingularityAbility extends Ability {
 
     public GravitySingularityAbility()
     {
-        super("Gravity singularity", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super("Gravity singularity", AbilityCategories.AbilityCategory.DEVIL);
         this.setDescription("Shoots a gravity ball. Sucking up nearby blocks.");
         this.setMaxCooldown(0);
         this.setmanaCost(0);

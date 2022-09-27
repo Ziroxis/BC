@@ -16,7 +16,7 @@ public class HeavyInfightingAbility extends ContinuousAbility {
 
     public HeavyInfightingAbility()
     {
-        super("Heavy infighting", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super("Heavy infighting", AbilityCategories.AbilityCategory.DEVIL);
         this.setDescription("Lowers the weight of your punches, giving attack speed.\nAugmenting the weight of your punches when hitting something, giving damage");
         this.setMaxCooldown(0);
         this.setmanaCost(0);

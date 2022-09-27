@@ -21,7 +21,7 @@ public class PresenceOfTheDemonKingAbility extends ContinuousAbility {
 
     public PresenceOfTheDemonKingAbility()
     {
-        super("Presence of the demon king", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super("Presence of the demon king", AbilityCategories.AbilityCategory.DEVIL);
         this.setDescription("Increases dramatically the gravity around you.\nAll entities and players won't be able to jump.\nProjectiles will fall to the ground.");
         this.setMaxCooldown(0);
         this.setmanaCost(0);

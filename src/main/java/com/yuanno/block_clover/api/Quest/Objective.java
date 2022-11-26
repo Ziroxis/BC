@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quest;
+package com.yuanno.block_clover.api.Quest;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;

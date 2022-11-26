@@ -2,8 +2,8 @@ package com.yuanno.block_clover.data.quest;
 
 
 
-import com.yuanno.block_clover.quest.Objective;
-import com.yuanno.block_clover.quest.Quest;
+import com.yuanno.block_clover.api.Quest.Objective;
+import com.yuanno.block_clover.api.Quest.Quest;
 
 import java.util.ArrayList;
 import java.util.Arrays;

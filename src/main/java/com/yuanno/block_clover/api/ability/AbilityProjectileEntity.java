@@ -369,6 +369,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 
 		if (!damageSource.isBypassArmor() && target.isBlocking() && flag)
 		{
+
 			Vector3d Vector3d2 = damageSource.getSourcePosition();
 			if (Vector3d2 != null)
 			{

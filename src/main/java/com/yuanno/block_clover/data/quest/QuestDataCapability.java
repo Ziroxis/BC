@@ -1,7 +1,7 @@
 package com.yuanno.block_clover.data.quest;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.quest.Quest;
+import com.yuanno.block_clover.api.Quest.Quest;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;

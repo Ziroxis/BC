@@ -82,6 +82,7 @@ public class Main
         ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+        ModQuests.QUESTS.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
 

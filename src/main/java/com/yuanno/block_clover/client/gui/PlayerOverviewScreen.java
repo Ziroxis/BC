@@ -40,19 +40,25 @@ public class PlayerOverviewScreen extends Screen {
 
         int posX = ((this.width - 256) / 2) - 110;
         int posY = (this.height - 256) / 2;
-
+        posY += 190;
         posX += 80;
-        this.addButton(new Button(posX, posY + 190, 70, 20, new TranslationTextComponent("gui.blackclover.stats.spells"), b ->
+        this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.spells"), b ->
         {
             Minecraft.getInstance().setScreen(new SelectHotbarAbilitiesScreen(this.player));
         }));
 
         posX += 240;
-        this.addButton(new Button(posX, posY + 190, 70, 20, new TranslationTextComponent("gui.blackclover.stats.stats"), b ->
+        this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.stats"), b ->
         {
             Minecraft.getInstance().setScreen(new PlayerStatsScreen());
         }));
 
+        //posX += 240;
+        posY -= 27;
+        this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.quests"), b ->
+        {
+           Minecraft.getInstance().setScreen(new QuestScreen());
+        }));
     }
 
 

@@ -179,7 +179,9 @@ public class StatsEvent {
         else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
             props.setTitle("§7Beggar");
         else if (uuid.toString().equals("2f81171f-fbec-442b-9d6d-3b21cad56f09")) // -> Kiwi
-            props.setTitle("Determined Soul");
+            props.setTitle("§7Determined Soul");
+        else if (uuid.toString().equals("2b01df92-48e7-4e6d-962d-c38e8e2a5fd0")) // -> Danal
+            props.setTitle("§2True farmer");
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }

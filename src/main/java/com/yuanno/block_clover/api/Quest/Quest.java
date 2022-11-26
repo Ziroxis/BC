@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quest;
+package com.yuanno.block_clover.api.Quest;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.quest.IQuestData;
@@ -25,6 +25,7 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 {
 	private String title;
 	private String description;
+	private String rank;
 	private boolean free;
 	
 	private List<Objective> objectives = new ArrayList<Objective>();
@@ -178,6 +179,7 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	{
 		this.description = desc;
 	}
+
 	
 	public String getDescription()
 	{
@@ -188,7 +190,16 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	{
 		return Beapi.getResourceName(this.title);
 	}
-	
+
+	public void setRank(String rank)
+	{
+		this.rank = rank;
+	}
+	public String getRank()
+	{
+		return this.rank;
+	}
+
 	public String getTitle()
 	{
 		return this.title;

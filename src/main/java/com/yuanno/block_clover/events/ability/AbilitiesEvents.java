@@ -7,6 +7,7 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.interfaces.IChangeDamageSourceAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IFallDamageBlockingAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IOnDamageAbility;
+import com.yuanno.block_clover.api.ability.interfaces.IOnDamageTakenAbility;
 import com.yuanno.block_clover.api.ability.sorts.*;
 import com.yuanno.block_clover.damagesource.AbilityDamageSource;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
@@ -230,10 +231,6 @@ public class AbilitiesEvents
 			LivingEntity entity = event.getEntityLiving();
 			IAbilityData ablProps = AbilityDataCapability.get(entity);
 
-
-
-
-			
 			for (Ability ability : ablProps.getUnlockedAbilities(AbilityCategories.AbilityCategory.ALL))
 			{
 				if (ability == null)
@@ -242,6 +239,11 @@ public class AbilitiesEvents
 				
 				try
 				{
+					if (ability instanceof IOnDamageTakenAbility)
+					{
+						boolean result = ((IOnDamageTakenAbility) ability).isDamageTaken(entity, event.getSource(), event.getAmount());
+						event.setCanceled(!result);
+					}
 					if (ability instanceof IOnDamageAbility && IOnDamageAbility.IS_ACTIVE.test(ability))
 					{
 						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());
@@ -266,6 +268,11 @@ public class AbilitiesEvents
 
 				try
 				{
+					if (ability instanceof IOnDamageTakenAbility)
+					{
+						boolean result = ((IOnDamageTakenAbility) ability).isDamageTaken(entity, event.getSource(), event.getAmount());
+						event.setCanceled(!result);
+					}
 					if (ability instanceof IOnDamageAbility && IOnDamageAbility.IS_ACTIVE.test(ability))
 					{
 						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());

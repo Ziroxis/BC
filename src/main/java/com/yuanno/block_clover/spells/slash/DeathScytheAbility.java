@@ -11,7 +11,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
-public class DeathScytheAbility extends Ability {
+public class    DeathScytheAbility extends Ability {
     public static final DeathScytheAbility INSTANCE = new DeathScytheAbility();
 
     public DeathScytheAbility()

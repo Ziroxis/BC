@@ -34,23 +34,30 @@ public class PassiveAbility extends Ability {
     @Override
     public void use(PlayerEntity player) {}
 
+
     public void tick(PlayerEntity player)
     {
-        if (!this.canUse(player))
+        if(!this.canUse(player))
             return;
-        if (this.isPaused)
-            return;
-        player.level.getProfiler().push(Beapi.getResourceName(this.getName()));
+
         this.duringPassiveEvent.duringPassive(player);
 
         if(this.isOnCooldown())
             this.cooldown(player);
-        player.level.getProfiler().pop();
+    }
+
+    @Override
+    public boolean canUse(PlayerEntity player)
+    {
+
+        if(this.isPaused)
+            return false;
+
+        return super.canUse(player);
     }
 
     public interface IDuringPassive extends Serializable
     {
         void duringPassive(PlayerEntity player);
     }
-
 }

@@ -18,6 +18,7 @@ public class ForgeSetup {
         ExperienceCommand.register(dispatcher);
         AbilityCommand.register(dispatcher);
         LevelCommand.register(dispatcher);
+        QuestCommand.register(dispatcher);
         AttributeCommand.register(dispatcher);
         StructureCommand.register(dispatcher);
         RaceCommand.register(dispatcher);

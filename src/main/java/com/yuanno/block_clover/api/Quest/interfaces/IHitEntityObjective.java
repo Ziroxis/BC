@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.data.quest.objectives;
+package com.yuanno.block_clover.api.Quest.interfaces;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

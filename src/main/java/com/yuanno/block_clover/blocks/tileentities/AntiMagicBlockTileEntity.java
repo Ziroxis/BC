@@ -29,7 +29,7 @@ public class AntiMagicBlockTileEntity extends TileEntity implements ITickableTil
     {
         super(ModTileEntities.ANTIMAGIC_TILEENTITY.get());
     }
-
+        //test
     @Override
     public void tick()
     {

@@ -7,6 +7,7 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.init.ModItems;
+import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
@@ -31,11 +32,23 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 
-public class GrimoireMagicianEntity extends CreatureEntity
+public class GrimoireMagicianEntity extends NPCentity
 {
     public GrimoireMagicianEntity(EntityType type, World world)
     {
         super(type, world);
+        this.preRequisite = true;
+        this.requisite = 1;
+        this.levelrequisites.add(10);
+        this.levelrequisites.add(30);
+        this.quests.add(ModQuests.MANASKIN);
+        this.quests.add(ModQuests.MANAZONEQUEST);
+        this.requisiteSpeech = "You'll need to be a bit stronger to learn the spells I want to teach you!";
+        this.questChoiceSpeech = "Would you like to learn the art of mana?";
+        this.acceptanceSpeech = "Fine... You'll have to meditate for that.";
+        this.declineSpeech = "Not everyone is ready for the path of strength";
+        this.waitingSpeech = "Have you done your meditation?";
+        this.doneSpeech = "My teachings end here for now";
     }
     @Override
     protected void registerGoals()
@@ -66,41 +79,7 @@ public class GrimoireMagicianEntity extends CreatureEntity
         return false;
     }
 
-    @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand)
-    {
-        if (hand != Hand.MAIN_HAND)
-            return ActionResultType.PASS;
 
-        if (!player.level.isClientSide)
-        {
-            IEntityStats stats = EntityStatsCapability.get(player);
-            int magicLevel = stats.getLevel();
-
-            if (stats.hasGrimoire())
-            {
-                player.displayClientMessage(new StringTextComponent("You already got your grimoire go away!"), false);
-
-            }
-            else {
-                if (magicLevel >= 5)
-                {
-                    player.displayClientMessage(new StringTextComponent("Here is your Grimoire! You seem mature enough"), false);
-                    stats.setGrimoire(true);
-                    stats.setLevel(stats.getLevel());
-                    PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
-                    IAbilityData abilityData = AbilityDataCapability.get(player);
-                    PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
-
-                } else
-                {
-                    player.displayClientMessage(new StringTextComponent("Come back when you're mature enough for a grimoire! Get at least level 5!"), false);
-                }
-            }
-
-        }
-        return ActionResultType.PASS;
-    }
 
     
     @Override

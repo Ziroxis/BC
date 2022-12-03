@@ -18,6 +18,9 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class QuestCommand
 {
 	public static void register(CommandDispatcher<CommandSource> dispatcher)
@@ -66,13 +69,29 @@ public class QuestCommand
 	private static int finishQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
 	{
 		IQuestData props = QuestDataCapability.get(player);
-		
+
+		/*
+		ArrayList<String> arrayListProgress = new ArrayList<String>();
+		for (int i = 0; i < props.getInProgressQuests().length; i++)
+		{
+			if (!arrayListProgress.contains(props.getInProgressQuest(i).getId()))
+				arrayListProgress.add(props.getInProgressQuest(i).getId());
+		}
+		System.out.println(arrayListProgress);
+		if (arrayListProgress.contains(quest.getId()))
+		{
+			props.addFinishedQuest(quest);
+			props.removeInProgressQuest(quest);
+			PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
+		}
+		 */
 		if(props.hasInProgressQuest(quest) && quest.triggerCompleteEvent(player))
 		{
 			props.addFinishedQuest(quest);
 			props.removeInProgressQuest(quest);
 			PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
 		}
+
 		else if(!props.hasInProgressQuest(quest))
 			player.sendMessage(new StringTextComponent("You don't have this quest!"), Util.NIL_UUID);
 		
@@ -82,7 +101,7 @@ public class QuestCommand
 	private static int giveQuest(CommandContext<CommandSource> context, Quest quest, ServerPlayerEntity player)
 	{
 		IQuestData props = QuestDataCapability.get(player);
-		
+		System.out.println(Arrays.toString(props.getInProgressQuests()));
 		if(!props.hasInProgressQuest(quest))
 		{
 			props.addInProgressQuest(quest.create());

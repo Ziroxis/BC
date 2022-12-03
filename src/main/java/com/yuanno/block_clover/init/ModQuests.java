@@ -5,6 +5,7 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestRegistry;
+import com.yuanno.block_clover.quests.ManaSkinQuest;
 import com.yuanno.block_clover.quests.ManaZoneQuest;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -20,8 +21,9 @@ public class ModQuests {
     }
     public static final DeferredRegister<Quest> QUESTS = DeferredRegister.create(QuestRegistry.QUESTS, Main.MODID);
 
+    public static final Quest MANASKIN = new ManaSkinQuest();
     public static final Quest MANAZONEQUEST = new ManaZoneQuest();
-    public static final Quest[] MANA = new Quest[] {MANAZONEQUEST};
+    public static final Quest[] MANA = new Quest[] {MANASKIN, MANAZONEQUEST};
 
     static
     {

@@ -20,6 +20,7 @@ import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
 import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
 import com.yuanno.block_clover.spells.light.LightSwordAbility;
+import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
 import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
@@ -44,6 +45,7 @@ public class AbilityProgressionEvents {
         //TODO make this pop up on screen
         if (!statsProps.hasGrimoire())
             return;
+        gainAbility(event.getPlayer(), 10, ManaReinforcement.INSTANCE);
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {
             gainAbility(event.getPlayer(), 5, WaterShieldAbility.INSTANCE);

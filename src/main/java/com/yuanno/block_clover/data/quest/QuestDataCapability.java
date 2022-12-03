@@ -39,7 +39,7 @@ public class QuestDataCapability
 						questsInTracker.add(quest.save());
 				}
 				props.put("quests_in_tracker", questsInTracker);
-				
+
 				ListNBT finishedQuests = new ListNBT();
 				for (int i = 0; i < instance.getFinishedQuests().size(); i++)
 				{
@@ -49,10 +49,10 @@ public class QuestDataCapability
 					finishedQuests.add(questNbt);
 				}
 				props.put("finished_quests", finishedQuests);
-				
+
 				return props;
 			}
-			
+
 			@Override
 			public void readNBT(Capability<IQuestData> capability, IQuestData instance, Direction side, INBT nbt)
 			{
@@ -60,7 +60,7 @@ public class QuestDataCapability
 
 				instance.clearInProgressQuests();
 				instance.clearFinishedQuests();
-				
+
 				ListNBT trackerQuests = props.getList("quests_in_tracker", Constants.NBT.TAG_COMPOUND);
 				for (int i = 0; i < trackerQuests.size(); i++)
 				{
@@ -78,7 +78,7 @@ public class QuestDataCapability
 						e.printStackTrace();
 					}
 				}
-				
+
 				ListNBT finishedQuests = props.getList("finished_quests", Constants.NBT.TAG_COMPOUND);
 				for (int i = 0; i < finishedQuests.size(); i++)
 				{
@@ -95,10 +95,10 @@ public class QuestDataCapability
 					}
 				}
 			}
-			
+
 		}, QuestDataBase::new);
 	}
-	
+
 	public static IQuestData get(final PlayerEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new QuestDataBase());

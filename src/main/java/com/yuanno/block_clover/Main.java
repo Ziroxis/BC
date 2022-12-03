@@ -164,6 +164,7 @@ public class Main
         MinecraftForge.EVENT_BUS.register(new ManaBarOverlay());
         MinecraftForge.EVENT_BUS.register(new LevelUpOverlay());
         MinecraftForge.EVENT_BUS.register(new SpellUnlockOverlay());
+        ModRenderers.registerRenderers();
     }
     private void process(InterModProcessEvent evt) {
         SlotTypeManager.buildImcSlotTypes(evt.getIMCStream(SlotTypeMessage.REGISTER_TYPE::equals),

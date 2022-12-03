@@ -12,6 +12,7 @@ import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
 import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
+import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
@@ -40,7 +41,7 @@ public class ModAbilities {
     public static final IForgeRegistry<Ability> ABILITIES_REGISTRY = RegistryManager.ACTIVE.getRegistry(Ability.class);
     private static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(ABILITIES_REGISTRY, Main.MODID);
 
-    public static final Ability[] MISC = {ManaSkinAbility.INSTANCE};
+    public static final Ability[] MISC = {ManaSkinAbility.INSTANCE, ManaReinforcement.INSTANCE};
     public static final Ability[] WATER = {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE};
     public static final Ability[] SEALING = {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE};
     public static final Ability[] ANTIMAGIC = {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE, AntiMagicManaZoneAbility.INSTANCE};

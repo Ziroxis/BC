@@ -68,7 +68,7 @@ public class SSyncQuestDataPacket
 				return;
 			
 			IQuestData props = QuestDataCapability.get((PlayerEntity) target);
-						
+			System.out.println(props);
 			QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);		
 		}
 	}

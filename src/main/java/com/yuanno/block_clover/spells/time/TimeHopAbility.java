@@ -29,12 +29,12 @@ public class TimeHopAbility extends Ability {
     public boolean onUseEvent(PlayerEntity player)
     {
         IEntityStats stats = EntityStatsCapability.get(player);
-        if (stats.getTime() > 50)
+        if (stats.getTime() > 20)
         {
-            stats.alterTime(-50);
+            stats.alterTime(-20);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             if (player.isCrouching())
-                distance = 50;
+                distance = 20;
             else
                 distance = 8;
             BlockPos pos = Beapi.rayTraceBlockSafe(player, distance);

@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.HumanoidRenderer;
+import com.yuanno.block_clover.client.overlay.renderer.CompleteRenderer;
 import com.yuanno.block_clover.client.overlay.renderer.ExclamationRenderer;
 import com.yuanno.block_clover.models.HumanoidModel;
 import net.minecraft.client.Minecraft;
@@ -26,6 +27,7 @@ public class ModRenderers {
             {
                 LivingRenderer renderer = (LivingRenderer) entityRenderer;
                 renderer.addLayer(new ExclamationRenderer(renderer));
+                renderer.addLayer(new CompleteRenderer(renderer));
 
             }
         }
@@ -34,6 +36,7 @@ public class ModRenderers {
         {
             PlayerRenderer renderer = entry.getValue();
             renderer.addLayer(new ExclamationRenderer(renderer));
+            renderer.addLayer(new CompleteRenderer(renderer));
 
         }
     }

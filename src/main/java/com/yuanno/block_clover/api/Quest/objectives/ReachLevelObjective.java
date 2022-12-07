@@ -13,11 +13,11 @@ public class ReachLevelObjective extends Objective implements IReachLevelObjecti
 {
 	private int level;
 	
-	public ReachLevelObjective(String title, int doriki)
+	public ReachLevelObjective(String title, int level)
 	{
 		super(title);
 		this.setMaxProgress(1);
-		this.level = doriki;
+		this.level = level;
 	}
 
 	@Override

@@ -19,6 +19,7 @@ public class ConfiguredStructures
     public static StructureFeature<?, ?> CONFIGURED_BANDIT_CAMP = ModStructures.BANDIT_CAMP.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_MINI_VOLCANO = ModStructures.MINI_VOLCANO.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_UNDERWATER_DUNGEON = ModStructures.UNDERWATER_DUNGEON.get().configured(IFeatureConfig.NONE);
+    public static StructureFeature<?, ?> CONFIGURED_FIRE_DUNGEON = ModStructures.FIRE_DUNGEON.get().configured(IFeatureConfig.NONE);
 
 
 
@@ -36,6 +37,7 @@ public class ConfiguredStructures
         Registry.register(registry, new ResourceLocation(Main.MODID, "bandit_camp"), CONFIGURED_BANDIT_CAMP);
         Registry.register(registry, new ResourceLocation(Main.MODID, "mini_volcano"), CONFIGURED_MINI_VOLCANO);
         Registry.register(registry, new ResourceLocation(Main.MODID, "underwater_dungeon"), CONFIGURED_UNDERWATER_DUNGEON);
+        Registry.register(registry, new ResourceLocation(Main.MODID, "fire_dungeon"), CONFIGURED_FIRE_DUNGEON);
 
 
         /* Ok so, this part may be hard to grasp but basically, just add your structure to this to
@@ -57,6 +59,7 @@ public class ConfiguredStructures
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.BANDIT_CAMP.get(), CONFIGURED_BANDIT_CAMP);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.MINI_VOLCANO.get(), CONFIGURED_MINI_VOLCANO);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.UNDERWATER_DUNGEON.get(), CONFIGURED_UNDERWATER_DUNGEON);
+        FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.FIRE_DUNGEON.get(), CONFIGURED_FIRE_DUNGEON);
 
     }
 }

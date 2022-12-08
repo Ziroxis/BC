@@ -26,6 +26,7 @@ import com.yuanno.block_clover.curios.server.command.CurioArgumentType;
 import com.yuanno.block_clover.curios.server.command.CuriosSelectorOptions;
 import com.yuanno.block_clover.curios.slottype.SlotTypeManager;
 import com.yuanno.block_clover.curios.triggers.EquipCurioTrigger;
+import com.yuanno.block_clover.world.biome.ModBiomes;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import com.yuanno.block_clover.init.*;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -83,6 +84,7 @@ public class Main
         ModEntities.ENTITIES.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModQuests.QUESTS.register(modEventBus);
+        ModBiomes.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
 

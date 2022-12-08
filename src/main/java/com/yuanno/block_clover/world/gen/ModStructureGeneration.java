@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.world.gen;
 
+import com.yuanno.block_clover.world.biome.ModBiomes;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
@@ -29,6 +30,10 @@ public class ModStructureGeneration
         if (types.contains(BiomeDictionary.Type.OCEAN))
         {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_UNDERWATER_DUNGEON);
+        }
+        if (types.contains(BiomeDictionary.Type.MESA) || types.contains(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO))
+        {
+            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_FIRE_DUNGEON);
         }
         /*
         if (event.getName().equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get().getRegistryName()))

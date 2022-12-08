@@ -1,12 +1,9 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.world.structure.structures.BanditCampStructure;
-import com.yuanno.block_clover.world.structure.structures.MagicTowerStructure;
-import com.yuanno.block_clover.world.structure.structures.MiniVolcano;
+import com.yuanno.block_clover.world.structure.structures.*;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.yuanno.block_clover.world.structure.structures.UnderWaterDungeonStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -43,6 +40,7 @@ public class ModStructures
     public static final RegistryObject<Structure<NoFeatureConfig>> BANDIT_CAMP = DEFERRED_REGISTRY_STRUCTURE.register("bandit_camp", BanditCampStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> MINI_VOLCANO = DEFERRED_REGISTRY_STRUCTURE.register("mini_volcano", MiniVolcano::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> UNDERWATER_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("underwater_dungeon", UnderWaterDungeonStructure::new);
+    public static final RegistryObject<Structure<NoFeatureConfig>> FIRE_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("fire_dungeon", VolcanoDungeonStructure::new);
 
 
     /**
@@ -73,6 +71,14 @@ public class ModStructures
 
         setupMapSpacingAndLand(
                 UNDERWATER_DUNGEON.get(),
+                new StructureSeparationSettings(90,
+                        60,
+                        558932148
+
+                ), false
+        );
+        setupMapSpacingAndLand(
+                FIRE_DUNGEON.get(),
                 new StructureSeparationSettings(90,
                         60,
                         558932148

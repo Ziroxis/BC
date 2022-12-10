@@ -19,6 +19,7 @@ public class GrimoireQuest extends Quest {
         this.setDescription("Reach level 5 to obtain your grimoire");
         this.setRank("");
         this.addObjective(this.levelObjective);
+        this.onCompleteEvent = this::giveReward;
     }
 
     public boolean giveReward(PlayerEntity player)

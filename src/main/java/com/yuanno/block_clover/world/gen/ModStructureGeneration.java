@@ -31,7 +31,7 @@ public class ModStructureGeneration
         {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_UNDERWATER_DUNGEON);
         }
-        if (types.contains(BiomeDictionary.Type.MESA) || types.contains(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO))
+        if (event.getName().equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get().getRegistryName()))
         {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_FIRE_DUNGEON);
         }

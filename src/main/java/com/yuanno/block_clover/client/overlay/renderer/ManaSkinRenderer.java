@@ -3,7 +3,6 @@ package com.yuanno.block_clover.client.overlay.renderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.client.overlay.model.ManaSkinModel;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;

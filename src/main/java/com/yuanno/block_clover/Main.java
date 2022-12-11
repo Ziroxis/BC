@@ -31,9 +31,12 @@ import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import com.yuanno.block_clover.init.*;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.command.arguments.ArgumentSerializer;
 import net.minecraft.command.arguments.ArgumentTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -160,6 +163,11 @@ public class Main
 
     private void doClientStuff(final FMLClientSetupEvent event) {
 
+        event.enqueueWork(() ->
+        {
+            RenderTypeLookup.setRenderLayer(ModBlocks.MOGURO_LEAF.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.MOGURO_SAPLING.get(), RenderType.cutout());
+        });
         ClientHandler.onSetup();
         ModKeyBinds.init();
         MinecraftForge.EVENT_BUS.register(new TimeBarOverlay());

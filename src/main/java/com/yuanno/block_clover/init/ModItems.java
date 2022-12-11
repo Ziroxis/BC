@@ -8,10 +8,7 @@ import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
 import com.yuanno.block_clover.items.weapons.*;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,6 +22,14 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID);
     public List<Supplier<Item>> items = new ArrayList<>();
 
+    //BLOCKS
+    public static final RegistryObject<BlockItem> MOGURO_LOG = ITEMS.register("moguro_log", () -> new BlockItem(ModBlocks.MOGURO_LOG.get(),
+            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_LEAF = ITEMS.register("moguro_leaf", () -> new BlockItem(ModBlocks.MOGURO_LEAF.get(),
+            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_SAPLING = ITEMS.register("moguro_sapling", () -> new BlockItem(ModBlocks.MOGURO_SAPLING.get(),
+            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    
     //ITEMS
     public static final RegistryObject<Item> NIGHT_CROWN = ITEMS.register("night_crown", NightCrownItem::new);
     public static final RegistryObject<Item> LIGHT_WEIGHT_RING = ITEMS.register("light_weight_ring", LightWeightRingArtifactItem::new);

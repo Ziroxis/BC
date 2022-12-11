@@ -2,6 +2,6 @@
   "parent": "minecraft:block/leaves",
   "textures":
   {
-    "all": "blackclover:blocks/moguro_leaf"
+    "all": "block_clover:blocks/moguro_leaf"
   }
 }

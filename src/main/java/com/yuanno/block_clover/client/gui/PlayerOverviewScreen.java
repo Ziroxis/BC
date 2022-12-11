@@ -59,6 +59,11 @@ public class PlayerOverviewScreen extends Screen {
         {
            Minecraft.getInstance().setScreen(new QuestScreen());
         }));
+        posX -= 240;
+        this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.guild"), b ->
+        {
+            Minecraft.getInstance().setScreen(new GuildScreen());
+        }));
     }
 
 

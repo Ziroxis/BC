@@ -46,6 +46,7 @@ public class ClientHandler {
             layers.add(new ThunderGodGearRenderer<>(renderer));
             layers.add(new EarthGlovesRenderer<>(renderer));
             layers.add(new ValkyrieArmorRenderer<>(renderer));
+            layers.add(new ManaSkinRenderer<>(renderer));
         }
     }
 }

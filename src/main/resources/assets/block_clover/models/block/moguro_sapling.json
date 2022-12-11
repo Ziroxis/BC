@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "textures":
   {
-    "cross": "blackclover:blocks/moguro_sapling"
+    "cross": "block_clover:blocks/moguro_sapling"
   }
 }

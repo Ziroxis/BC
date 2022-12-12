@@ -13,6 +13,7 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.structure.StructureFeatures;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilders;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,8 +26,48 @@ public class ModBiomes {
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Main.MODID);
 
     public static final RegistryObject<Biome> GRAND_MAGIC_ZONE_VOLCANO = BIOMES.register("volcano_zone", () -> makeVolcanoBiome(() -> ModConfiguredSurfaceBuilders.GRAND_MAGIC_ZONE_VOLCANO, 0.18f, 0.15f));
+    public static final RegistryObject<Biome> MOGURO_FOREST = BIOMES.register("moguro_forest", () -> makeMoguroBiome(() -> ModConfiguredSurfaceBuilders.MOGURO_FOREST, 0.18f, 0.15f));
+
+    public static Biome makeMoguroBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+        MobSpawnInfo.Builder lvt_3_1_ = new MobSpawnInfo.Builder();
+        DefaultBiomeFeatures.farmAnimals(lvt_3_1_);
+        DefaultBiomeFeatures.commonSpawns(lvt_3_1_);
+        BiomeGenerationSettings.Builder lvt_4_1_ = (new BiomeGenerationSettings.Builder()).surfaceBuilder(ConfiguredSurfaceBuilders.GRASS);
+        DefaultBiomeFeatures.addDefaultOverworldLandStructures(lvt_4_1_);
+        lvt_4_1_.addStructureStart(StructureFeatures.RUINED_PORTAL_STANDARD);
+        DefaultBiomeFeatures.addDefaultCarvers(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultLakes(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultMonsterRoom(lvt_4_1_);
+        DefaultBiomeFeatures.addForestFlowers(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultUndergroundVariety(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultOres(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultSoftDisks(lvt_4_1_);
 
 
+        DefaultBiomeFeatures.addDefaultFlowers(lvt_4_1_);
+        DefaultBiomeFeatures.addForestGrass(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultMushrooms(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultExtraVegetation(lvt_4_1_);
+        DefaultBiomeFeatures.addDefaultSprings(lvt_4_1_);
+        DefaultBiomeFeatures.addSurfaceFreezing(lvt_4_1_);
+        return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.FOREST)
+                .depth(depth)
+                .scale(scale)
+                .temperature(0.6F)
+                .downfall(0.6F)
+                .specialEffects((new BiomeAmbience.Builder())
+                        .waterColor(4159204)
+                        .waterFogColor(329011)
+                        .fogColor(12638463)
+                        .skyColor(calculateSkyColor())
+                        .ambientMoodSound(MoodSoundAmbience.LEGACY_CAVE_SETTINGS)
+                        .build()).mobSpawnSettings(lvt_3_1_.build()).generationSettings(lvt_4_1_.build()).build();
+    }
+    private static int calculateSkyColor() {
+        float lvt_1_1_ = (float) 0.6 / 3.0F;
+        lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
+        return MathHelper.hsvToRgb(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
+    }
 
     private static Biome makeVolcanoBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();

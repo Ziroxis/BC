@@ -14,6 +14,9 @@ public class ModConfiguredSurfaceBuilders {
     public static ConfiguredSurfaceBuilder<?> GRAND_MAGIC_ZONE_VOLCANO = register("volcano_zone", SurfaceBuilder.NETHER_FOREST.configured(new SurfaceBuilderConfig(
             Blocks.BASALT.defaultBlockState(), Blocks.MAGMA_BLOCK.defaultBlockState(), Blocks.NETHERRACK.defaultBlockState()
     )));
+    public static ConfiguredSurfaceBuilder<?> MOGURO_FOREST = register("moguro_forest", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
+            Blocks.GRASS_BLOCK.defaultBlockState(), Blocks.MYCELIUM.defaultBlockState(), Blocks.GRASS_BLOCK.defaultBlockState()
+    )));
 
     public static <SC extends ISurfaceBuilderConfig>ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> csb)
     {

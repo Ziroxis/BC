@@ -15,6 +15,7 @@ public class ModBiomeGeneration {
 
     public static void generateBiomes() {
         addBiome(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get(), BiomeManager.BiomeType.WARM, (int) 1, HOT, DEAD, DRY);
+        addBiome(ModBiomes.MOGURO_FOREST.get(), BiomeManager.BiomeType.COOL, 1, FOREST, FOREST, FOREST);
     }
 
     private static void addBiome(Biome biome, BiomeManager.BiomeType type, int weight, BiomeDictionary.Type... types) {

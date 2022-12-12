@@ -25,6 +25,13 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> ANTIMAGIC = BLOCKS.register("antimagic_block", AntiMagicBlock::new);
 
+    public static final RegistryObject<Block> MOGURO_PLANK = BLOCKS.register("moguro_plank",
+            () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
+                    .strength(1f, 3f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(2)
+                    .sound(SoundType.WOOD)));
+
     public static final RegistryObject<Block> MOGURO_LOG = BLOCKS.register("moguro_log",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
                     .strength(2f, 7f)

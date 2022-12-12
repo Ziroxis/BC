@@ -23,6 +23,8 @@ public class ModItems {
     public List<Supplier<Item>> items = new ArrayList<>();
 
     //BLOCKS
+    public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_plank", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
+            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_LOG = ITEMS.register("moguro_log", () -> new BlockItem(ModBlocks.MOGURO_LOG.get(),
             new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_LEAF = ITEMS.register("moguro_leaf", () -> new BlockItem(ModBlocks.MOGURO_LEAF.get(),

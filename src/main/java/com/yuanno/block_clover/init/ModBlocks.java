@@ -37,8 +37,7 @@ public class ModBlocks {
                     .strength(2f, 7f)
                     .harvestTool(ToolType.AXE)
                     .harvestLevel(2)
-                    .sound(SoundType.WOOD)
-                    .requiresCorrectToolForDrops()));
+                    .sound(SoundType.WOOD)));
 
     public static final RegistryObject<Block> MOGURO_LEAF = BLOCKS.register("moguro_leaf",
             () -> new Block(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_BLUE)

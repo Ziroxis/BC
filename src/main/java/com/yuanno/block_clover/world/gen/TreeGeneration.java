@@ -34,7 +34,7 @@ public class TreeGeneration {
             base.add(() -> ModConfiguredFeatures.MOGURO_TREE
                     .decorated(Features.Placements.HEIGHTMAP_SQUARE)
                     .decorated(Placement.COUNT_EXTRA.configured(
-                            new AtSurfaceWithExtraConfig(1, 0.25f, 1))));
+                            new AtSurfaceWithExtraConfig(8, 0.25f, 1))));
         }
     }
 }

@@ -23,6 +23,7 @@ public class EntityStatsBase implements IEntityStats{
     private String title = "";
     private String rank = "";
     private int time;
+    private float multiplier;
 
 
     @Override
@@ -83,6 +84,21 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public void setMaxExperience(int value) {
         this.maxExperience = value;
+    }
+
+    @Override
+    public float getMultiplier() {
+        return this.multiplier;
+    }
+
+    @Override
+    public void alterMultiplier(float value) {
+        this.multiplier = this.multiplier + value;
+    }
+
+    @Override
+    public void setMultiplier(float value) {
+        this.multiplier = value;
     }
 
     @Override

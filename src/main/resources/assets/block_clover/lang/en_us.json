@@ -1,4 +1,9 @@
 {
+  "block.block_clover.moguro_plank": "Moguro plank",
+  "block.block_clover.moguro_log": "Moguro log",
+  "block.block_clover.moguro_leaf": "Moguro leaf",
+  "block.block_clover.moguro_sapling": "Moguro sapling",
+
   "itemGroup.block_cloverModTabWeapons": "Block clover weapons",
   "itemGroup.block_cloverModTabClothes": "Block clover clothes",
 

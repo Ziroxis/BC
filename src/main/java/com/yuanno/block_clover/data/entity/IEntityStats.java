@@ -18,6 +18,12 @@ public interface IEntityStats {
     void alterMaxExperience(int value);
     void setMaxExperience(int value);
 
+    // MULTIPLIER
+    float getMultiplier();
+    void alterMultiplier(float value);
+    void setMultiplier(float value);
+
+
     // MANA
     float getMana();
     void alterMana(float value);

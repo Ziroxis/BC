@@ -38,7 +38,7 @@ public class BCentity extends CreatureEntity {
             PlayerEntity player = (PlayerEntity) cause.getEntity();
             IEntityStats props = EntityStatsCapability.get(player);
 
-            props.alterExperience(this.getExperience());
+            props.alterExperience((int) (this.getExperience() * props.getMultiplier()));
             ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, props.getExperience());
             if (MinecraftForge.EVENT_BUS.post(eventExperience))
                 return;

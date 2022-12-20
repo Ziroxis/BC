@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blackclover:moguro_leaf",
+          "name": "block_clover:moguro_leaf",
           "weight": 150,
           "functions":
           [
@@ -24,7 +24,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "blackclover:moguro_sapling",
+          "name": "block_clover:moguro_sapling",
           "weight": 50,
           "functions":
           [

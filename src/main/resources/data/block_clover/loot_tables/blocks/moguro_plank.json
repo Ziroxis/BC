@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "block_clover:moguro_log"
+          "name": "block_clover:moguro_plank"
         }
       ],
       "conditions": [

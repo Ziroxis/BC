@@ -94,14 +94,17 @@ public class StatsEvent {
                 if (race.equals(ModValues.HUMAN))
                 {
                     props.setManaRegeneration(1);
+                    props.setMultiplier(1.2f);
                 }
                 else if (race.equals(ModValues.ELF))
                 {
                     props.setManaRegeneration(2);
+                    props.setMultiplier(1);
                 }
                 if (race.equals(ModValues.HYBRID))
                 {
                     props.setManaRegeneration(1);
+                    props.setMultiplier(1);
                     do
                     {
                         props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
@@ -166,8 +169,6 @@ public class StatsEvent {
             props.setTitle("\u00A71Almighty captain of Yuanno");
         else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> Kausu
             props.setTitle("§aSage");
-        else if (uuid.toString().equals("a6a185bc-9584-41e9-8768-fb078dc83802")) // -> Maddox
-            props.setTitle("§2Mad earth");
         else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> Redwolf
             props.setTitle("§cThe king");
         else if (uuid.toString().equals("9819c734-1928-4757-8724-801ced9218c6")) // -> Skyling

@@ -28,7 +28,7 @@ public class ExperienceEvents {
             LevelUpEvent eventLevelUp = new LevelUpEvent(player, statsProps.getLevel());
             if (MinecraftForge.EVENT_BUS.post(eventLevelUp))
                 return;
-            statsProps.alterMaxExperience(100);
+            statsProps.alterMaxExperience(100 * statsProps.getLevel()/2);
             MaxExperienceUpEvent eventMaxExperienceUp = new MaxExperienceUpEvent(player, statsProps.getMaxExperience());
             if (MinecraftForge.EVENT_BUS.post(eventMaxExperienceUp))
                 return;
@@ -38,11 +38,11 @@ public class ExperienceEvents {
                 return;
             if (statsProps.getRace().equals(ModValues.ELF)) {
                 statsProps.alterMaxMana(10);
-                statsProps.alterManaRegeneration(1);
+                statsProps.alterManaRegeneration(0.5f);
             }
             else {
                 statsProps.alterMaxMana(5);
-                statsProps.alterManaRegeneration(0.5f);
+                statsProps.alterManaRegeneration(0.25f);
             }
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
             //player.sendMessage(new StringTextComponent("You leveled up to level " + statsProps.getLevel() + "!"), player.getUUID());

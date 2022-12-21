@@ -26,8 +26,6 @@ public class FireBallAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         FireBallProjectile projectile = new FireBallProjectile(player.level, player);
-        this.alterExperience(1);
-        System.out.println(this.getExperience());
         player.level.addFreshEntity(projectile);
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
 

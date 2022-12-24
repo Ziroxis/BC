@@ -1,11 +1,13 @@
-package com.yuanno.block_clover.spells.darkness;
+package com.yuanno.block_clover.spells.water;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityHelper;
+import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.blocks.tileentities.AntiMagicBlockTileEntity;
+import com.yuanno.block_clover.blocks.tileentities.LightningBlockTileEntity;
 import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
@@ -14,19 +16,23 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BlackMoonAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final BlackMoonAbility INSTANCE = new BlackMoonAbility();
+public class WaterManaZoneAbility extends ContinuousAbility implements IParallelContinuousAbility {
+    public static final WaterManaZoneAbility INSTANCE = new WaterManaZoneAbility();
 
-    public static final int MAX_ZONE_SIZE = 15;
+    public static final int MAX_ZONE_SIZE = 30;
     public static final int MAX_THRESHOLD = 2;
 
     private List<BlockPos> blockList = new ArrayList<>();
@@ -35,11 +41,12 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
     private int chargingTicks = 0;
     private BlockPos centerBlock;
     boolean zoneSet = false;
+    Entity entity;
 
-    public BlackMoonAbility()
+    public WaterManaZoneAbility()
     {
-        super("Black moon", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a dome of darkness, disabling all projectiles in the dome");
+        super("Water mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        this.setDescription("Teleports you into the air, creating a large dome of water around you and your enemy");
         this.setmanaCost(0);
         this.setMaxCooldown(180);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -54,9 +61,9 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
     }
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        this.chargingTicks = 10;
-        this.setThreshold(MAX_THRESHOLD);
-        return true;
+            this.chargingTicks = 10;
+            this.setThreshold(MAX_THRESHOLD);
+            return true;
     }
     public void duringContinuityEvent(PlayerEntity player, int timer)
     {
@@ -66,19 +73,25 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
         {
             if (this.blockList.isEmpty())
             {
-                this.blockList.addAll(AbilityHelper.createSphere(player.level, player.blockPosition(), this.roomSize, true, ModBlocks.ANTIMAGIC.get(), 0));
+                //player.teleportTo(player.getX(), player.getY() + 50, player.getZ());
+                //entity.teleportTo(player.getX() + 3, player.getY() + 50, player.getZ() + 3);
+                this.blockList.addAll(AbilityHelper.createSphere(player.level, player.blockPosition(), this.roomSize, false, Blocks.WATER, 0));
                 this.centerBlock = new BlockPos(player.getX(), player.getY(), player.getZ());
-                player.level.setBlockAndUpdate(this.centerBlock, ModBlocks.ANTIMAGIC.get().defaultBlockState());
+                player.level.setBlockAndUpdate(this.centerBlock, ModBlocks.LIGHTNING.get().defaultBlockState());
                 TileEntity tileEntity = player.level.getBlockEntity(this.centerBlock);
                 zoneSet = true;
-                if (tileEntity != null && tileEntity instanceof AntiMagicBlockTileEntity)
+
+                if (tileEntity != null && tileEntity instanceof LightningBlockTileEntity)
                 {
-                    ((AntiMagicBlockTileEntity)tileEntity).setOwner(player);
-                    ((AntiMagicBlockTileEntity)tileEntity).setChanged();
+                    ((LightningBlockTileEntity)tileEntity).setOwner(player);
+                    ((LightningBlockTileEntity)tileEntity).setChanged();
                 }
+
+
                 this.blockList.add(new BlockPos(MathHelper.floor(player.getX()), MathHelper.floor(player.getY()), MathHelper.floor(player.getZ())));
                 this.placedBlockList.addAll(this.blockList);
                 this.setThreshold(0);
+
             }
             else
             {
@@ -87,7 +100,7 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
                 while (iterator.hasNext())
                 {
                     BlockPos pos = iterator.next();
-                    player.level.sendBlockUpdated(pos, Blocks.AIR.defaultBlockState(), ModBlocks.ANTIMAGIC.get().defaultBlockState(), 0);
+                    player.level.sendBlockUpdated(pos, Blocks.AIR.defaultBlockState(), Blocks.WATER.defaultBlockState(), 0);
                     iterator.remove();
                     placedBlock++;
                     if (placedBlock > 500)
@@ -108,10 +121,11 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
         {
             if (!isEntityInThisRoom(player))
                 this.stopContinuity(player);
-            List<ProjectileEntity> entities = Beapi.getEntitiesAround(this.centerBlock, player.level, roomSize, ProjectileEntity.class);
-                entities.forEach(entity -> {
-                        entity.remove();
-                    });
+            if (!player.hasEffect(Effects.WATER_BREATHING))
+                player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 80, 0));
+            if (!player.hasEffect(Effects.DOLPHINS_GRACE))
+                player.addEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 80, 0));
+
         }
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
@@ -130,7 +144,7 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
         for (BlockPos pos : this.blockList)
         {
             Block currentBlock = player.level.getBlockState(pos).getBlock();
-            if (currentBlock == ModBlocks.ANTIMAGIC.get() || currentBlock == ModBlocks.ANTIMAGIC.get())
+            if (currentBlock == Blocks.WATER || currentBlock == Blocks.WATER)
                 player.level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
 //        player.level.setBlockAndUpdate(centerBlock, Blocks.AIR.defaultBlockState());
@@ -155,7 +169,7 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
                 for (int k = -roomSize; k < roomSize; k++)
                 {
                     BlockPos posCheck = pos.offset(i, j, k);
-                    if (world.getBlockState(posCheck).getBlock() == ModBlocks.ANTIMAGIC.get())
+                    if (world.getBlockState(posCheck).getBlock() == ModBlocks.LIGHTNING.get())
                     {
                         double distance = pos.distSqr(posCheck);
                         if(distance < (roomSize - 1) * (roomSize - 1))

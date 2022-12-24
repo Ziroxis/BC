@@ -3,6 +3,8 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.blocks.AntiMagicBlock;
+import com.yuanno.block_clover.blocks.LightningBlock;
+import com.yuanno.block_clover.blocks.WindBlock;
 import com.yuanno.block_clover.world.trees.MoguroTree;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -24,6 +26,8 @@ public class ModBlocks {
     public List<Supplier<Block>> blocks = new ArrayList<>();
 
     public static final RegistryObject<Block> ANTIMAGIC = BLOCKS.register("antimagic_block", AntiMagicBlock::new);
+    public static final RegistryObject<Block> LIGHTNING = BLOCKS.register("lightning_block", LightningBlock::new);
+    public static final RegistryObject<Block> WIND = BLOCKS.register("wind_block", WindBlock::new);
 
     public static final RegistryObject<Block> MOGURO_PLANK = BLOCKS.register("moguro_plank",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)

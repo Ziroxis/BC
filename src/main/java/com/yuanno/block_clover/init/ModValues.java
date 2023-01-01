@@ -18,11 +18,12 @@ public class ModValues {
     public static final String WIND = "Wind";
     public static final String SEALING = "Sealing";
     public static final String ANTIMAGIC = "Anti_Magic";
+    public static final String TIME = "Time";
     public static final String[] attributes = {
-            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.ANTIMAGIC
+            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME, ModValues.ANTIMAGIC
     };
     public static final String[] attributes_no_antimagic = {
-            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER
+            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME
     };
 
     //Races

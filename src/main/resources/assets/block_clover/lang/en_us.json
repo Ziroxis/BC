@@ -58,6 +58,9 @@
   "Keys.block_clover.gui": "Gui keys block clover",
   "Keys.block_clover.info_card": "Info card block clover",
 
+  "ability.block_clover.mana_skin": "Mana skin",
+  "ability.block_clover.mana_reinforcement": "Mana reinforcement",
+
   "item.block_clover.light_sword": "Light sword",
   "item.block_clover.demon_slayer_antimagic": "Demon slayer sword",
 
@@ -68,12 +71,14 @@
   "ability.block_clover.wind_flight": "Wind flight",
   "ability.block_clover.tornado_bullet": "Tornado bullet",
   "ability.block_clover.wind_gale": "Wind gale",
+  "ability.block_clover.wind_mana_zone": "Wind mana zone",
 
   "ability.block_clover.dark_cloaked_blade": "Darkness cloaked blade",
   "ability.block_clover.avidya_slash": "Avidya slash",
   "ability.block_clover.avidya_wild_slash": "Avidya wild slash",
   "ability.block_clover.blunt_strike": "Blunt strike",
   "ability.block_clover.black_hole": "Black hole",
+  "ability.block_clover.black_moon": "Black moon",
 
   "ability.block_clover.earth_chunk": "Earth chunk",
   "ability.block_clover.earth_charge": "Earth charge",
@@ -83,6 +88,7 @@
   "ability.block_clover.earth_golem": "Earth golem",
   "ability.block_clover.earth_quake": "Earthquake",
   "ability.block_clover.earth_shake": "Earth shake",
+  "ability.block_clover.earth_mana_zone": "Earth mana zone",
 
   "ability.block_clover.fire_ball": "Fire ball",
   "ability.block_clover.flame_roar": "Flame roar",
@@ -90,12 +96,14 @@
   "ability.block_clover.spiral_flame": "Spiral flame",
   "ability.block_clover.leo_palma": "Leo palma",
   "ability.block_clover.wild_bursting_flames": "Wild bursting flames",
+  "ability.block_clover.calidus_brachium_barrage": "Calidus Brachium Barrage",
 
   "ability.block_clover.light_blade": "Light blade",
   "ability.block_clover.light_blade_shower": "Light blade shower",
   "ability.block_clover.light_healing": "Light healing",
   "ability.block_clover.light_movement": "Light movement",
   "ability.block_clover.light_sword": "Light sword",
+  "ability.block_clover.arrows_of_judgement": "Arrows of judgement",
 
   "ability.block_clover.thunder_god_gloves": "Thunder god gloves",
   "ability.block_clover.thunder_god_boots": "Thunder god boots",
@@ -106,6 +114,7 @@
   "ability.block_clover.thunder_fiend_multi": "Thunder fiend multi",
   "ability.block_clover.thunder_slash": "Thunder slash",
   "ability.block_clover.thunder_charge": "Thunder charge",
+  "ability.block_clover.thunder_mana_zone": "Thunder mana zone",
 
   "ability.block_clover.slash_blades": "Slash blades",
   "ability.block_clover.death_scythe": "Death scythe",
@@ -125,6 +134,7 @@
   "ability.block_clover.self_healing_seal": "Self healing sealing",
   "ability.block_clover.other_heal_sealing": "Other healing sealing",
   "ability.block_clover.ultimate_seal": "Ultimate sealing",
+  "ability.block_clover.sealing_mana_zone": "Sealing mana zone",
 
   "ability.block_clover.water_ball": "Water ball",
   "ability.block_clover.water_shield": "Water shield",
@@ -132,6 +142,7 @@
   "ability.block_clover.water_spear": "Water spear",
   "ability.block_clover.valkyrie_armor": "Valkyrie armor",
   "ability.block_clover.point_blank_dragon": "Point blank water dragon",
+  "ability.block_clover.water_mana_zone": "Water mana zone",
 
   "ability.block_clover.time_steal": "Time steal",
   "ability.block_clover.chrono_stasis": "Chrono stasis",
@@ -139,6 +150,7 @@
   "ability.block_clover.time_healing": "Time healing",
   "ability.block_clover.time_hop": "Time hop",
   "ability.block_clover.time_ressurection": "Time ressurection",
+  "ability.block_clover.time_magic_zone": "Time magic zone",
 
 
 

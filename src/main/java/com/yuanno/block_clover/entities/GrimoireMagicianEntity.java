@@ -43,6 +43,7 @@ public class GrimoireMagicianEntity extends NPCentity
         this.levelrequisites.add(10);
         this.levelrequisites.add(30);
         this.quests.add(ModQuests.GRIMOIRE);
+        this.quests.add(ModQuests.REINFORCEMENT);
         this.quests.add(ModQuests.MANASKIN);
         this.quests.add(ModQuests.MANAZONEQUEST);
         this.requisiteSpeech = "You'll need to be a bit stronger to learn the spells I want to teach you!";

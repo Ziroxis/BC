@@ -1,21 +1,16 @@
 package com.yuanno.block_clover.spells.fire;
 
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.entities.projectiles.fire.FireBallProjectile;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 
 public class CalidusBrachiumBarrageAbility extends ContinuousAbility {
-    final double pullSpeed = 0.7;
     public static final CalidusBrachiumBarrageAbility INSTANCE = new CalidusBrachiumBarrageAbility();
     Entity entity;
     public CalidusBrachiumBarrageAbility()

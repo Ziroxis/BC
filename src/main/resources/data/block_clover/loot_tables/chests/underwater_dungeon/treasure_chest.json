@@ -209,6 +209,21 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 1.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "block_clover:modifying_crystal"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {

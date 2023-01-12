@@ -65,6 +65,7 @@ public class RaceCommand {
         suggestions.add("ELF");
         suggestions.add("HUMAN");
         suggestions.add("HYBRID");
+        suggestions.add("WITCH");
         return ISuggestionProvider.suggest(suggestions.stream(), builder);
     };
 
@@ -73,10 +74,15 @@ public class RaceCommand {
         IEntityStats statsProps = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
 
-        if (statsProps.getRace().equals(ModValues.ELF))
-            statsProps.alterManaRegeneration(-1);
+        if (statsProps.getRace().equals(ModValues.ELF)) {
+            statsProps.alterManaRegeneration(-1f);
+        }
+        else if (statsProps.getRace().equals(ModValues.WITCH)) {
+            statsProps.alterManaRegeneration(-0.5f);
+        }
         else if (statsProps.getRace().equals(ModValues.HYBRID))
         {
+            statsProps.setRace(ModValues.HYBRID);
             statsProps.setSecondAttribute("");
             abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
             if (statsProps.hasGrimoire()) 
@@ -142,6 +148,8 @@ public class RaceCommand {
                 }
             }
         }
+
+
         switch (set)
         {
             case "ELF":
@@ -153,6 +161,8 @@ public class RaceCommand {
             case "HYBRID":
                 statsProps.setRace(ModValues.HYBRID);
                 break;
+            case "WITCH":
+                statsProps.setRace(ModValues.WITCH);
         }
 
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);

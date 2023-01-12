@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.items.CoockedMagicalBeastMeatItem;
-import com.yuanno.block_clover.items.MagicalBeastMeatItem;
-import com.yuanno.block_clover.items.ModSpawnEggItem;
+import com.yuanno.block_clover.items.*;
 import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
 import com.yuanno.block_clover.items.weapons.*;
@@ -22,17 +20,28 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID);
     public List<Supplier<Item>> items = new ArrayList<>();
 
-    //BLOCKS
+    //TREES
+    //MOGURO
     public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_plank", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
-            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_LOG = ITEMS.register("moguro_log", () -> new BlockItem(ModBlocks.MOGURO_LOG.get(),
-            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_LEAF = ITEMS.register("moguro_leaf", () -> new BlockItem(ModBlocks.MOGURO_LEAF.get(),
-            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_SAPLING = ITEMS.register("moguro_sapling", () -> new BlockItem(ModBlocks.MOGURO_SAPLING.get(),
-            new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    //ELDER
+    public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_plank", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_LOG = ITEMS.register("elder_log", () -> new BlockItem(ModBlocks.ELDER_LOG.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_LEAF = ITEMS.register("elder_leaf", () -> new BlockItem(ModBlocks.ELDER_LEAF.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_SAPLING = ITEMS.register("elder_sapling", () -> new BlockItem(ModBlocks.ELDER_SAPLING.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+
     
-    //ITEMS
+    //ARTIFACTS
     public static final RegistryObject<Item> NIGHT_CROWN = ITEMS.register("night_crown", NightCrownItem::new);
     public static final RegistryObject<Item> LIGHT_WEIGHT_RING = ITEMS.register("light_weight_ring", LightWeightRingArtifactItem::new);
     public static final RegistryObject<Item> CHANGE_MAGIC_ITEM = ITEMS.register("artifact_change", MagicChangeArtifactItem::new);
@@ -57,6 +66,7 @@ public class ModItems {
     public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
     public static final RegistryObject<Item> JUMP_ARTIFACT = ITEMS.register("jump_artifact", JumpyArtifactItem::new);
     public static final RegistryObject<Item> RACE_CHANGE = ITEMS.register("race_change", RaceChangeArtifactItem::new);
+
 
 
     //WEAPONS
@@ -91,9 +101,17 @@ public class ModItems {
     public static final RegistryObject<Item> GOLDEN_DAWN_LEGS = ITEMS.register("golden_dawn_legs", ()-> new GoldenDawnUniArmorItem("golden_dawn", EquipmentSlotType.LEGS));
     public static final RegistryObject<Item> GOLDEN_DAWN_FEET = ITEMS.register("golden_dawn_feet", ()-> new GoldenDawnUniArmorItem("golden_dawn", EquipmentSlotType.FEET));
 
+     public static final RegistryObject<Item> WITCH_HAT = ITEMS.register("witch_hat", WitchHatItem::new);
+
     //MISC
     public static final RegistryObject<Item> MAGICAL_MEAT = ITEMS.register("magical_meat", MagicalBeastMeatItem::new);
     public static final RegistryObject<Item> COOKED_MAGICAL_MEAT = ITEMS.register("cooked_magical_meat", CoockedMagicalBeastMeatItem::new);
+    public static final RegistryObject<Item> WITCH_HAT_SHRED = ITEMS.register("witch_hat_shred",
+            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1).tab(ModItemGroup.BLOCK_CLOVER_MISC)));
+    public static final RegistryObject<Item> MAGIC_STAFF = ITEMS.register("magic_staff", MagicStaffItem::new);
+    public static final RegistryObject<Item> MODIFYING_CRYSTAL = ITEMS.register("modifying_crystal",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).tab(ModItemGroup.BLOCK_CLOVER_MISC)));
+    public static final RegistryObject<Item> MODIFIED_MAGIC_WAND = ITEMS.register("modified_magic_staff", ModifiedMagicStaffItem::new);
 
     //SPAWN EGGS
     public static final RegistryObject<SpawnEggItem> VOLCANO_MONSTER_EGG = ITEMS.register("volcano_monster_egg",

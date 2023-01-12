@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  x",
+    " x ",
+    "y  "
+  ],
+  "key": {
+    "x": {
+      "item": "block_clover:magic_staff"
+    },
+    "y": {
+      "item": "block_clover:modifying_crystal"
+    }
+  },
+  "result": {
+    "item": "block_clover:modified_magic_staff"
+  }
+}

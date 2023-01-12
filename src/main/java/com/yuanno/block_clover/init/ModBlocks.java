@@ -5,10 +5,12 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.blocks.AntiMagicBlock;
 import com.yuanno.block_clover.blocks.LightningBlock;
 import com.yuanno.block_clover.blocks.WindBlock;
+import com.yuanno.block_clover.world.trees.ElderTree;
 import com.yuanno.block_clover.world.trees.MoguroTree;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.ToolType;
@@ -29,6 +31,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> LIGHTNING = BLOCKS.register("lightning_block", LightningBlock::new);
     public static final RegistryObject<Block> WIND = BLOCKS.register("wind_block", WindBlock::new);
 
+    //Moguro Tree
     public static final RegistryObject<Block> MOGURO_PLANK = BLOCKS.register("moguro_plank",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
                     .strength(1f, 3f)
@@ -51,7 +54,33 @@ public class ModBlocks {
                     .sound(SoundType.GRASS)));
 
     public static final RegistryObject<Block> MOGURO_SAPLING = BLOCKS.register("moguro_sapling",
-            () -> new SaplingBlock(new MoguroTree(), AbstractBlock.Properties.of(Material.WOOD)));
+            () -> new SaplingBlock(new MoguroTree(), AbstractBlock.Properties.of(Material.WOOD).sound(SoundType.GRASS)));
+
+    //Elder Tree
+    public static final RegistryObject<Block> ELDER_PLANK = BLOCKS.register("elder_plank",
+            () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
+                    .strength(2f, 4f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(3)
+                    .sound(SoundType.WOOD)));
+
+    public static final RegistryObject<Block> ELDER_LOG = BLOCKS.register("elder_log",
+            () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
+                    .strength(3f, 8f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(3)
+                    .sound(SoundType.WOOD)));
+
+    public static final RegistryObject<Block> ELDER_LEAF = BLOCKS.register("elder_leaf",
+            () -> new Block(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_LIGHT_GRAY)
+                    .strength(1.5f, 1.5f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(2)
+                    .sound(SoundType.GRASS)));
+
+    public static final RegistryObject<Block> ELDER_SAPLING = BLOCKS.register("elder_sapling",
+            () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).sound(SoundType.ROOTS)));
+
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

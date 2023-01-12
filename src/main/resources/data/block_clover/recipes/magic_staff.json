@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  x",
+    " x ",
+    "x  "
+  ],
+  "key": {
+    "x": {
+      "item": "block_clover:elder_log"
+    }
+  },
+  "result": {
+    "item": "block_clover:magic_staff"
+  }
+}

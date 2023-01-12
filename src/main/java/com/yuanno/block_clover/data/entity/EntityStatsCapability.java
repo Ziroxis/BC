@@ -38,7 +38,8 @@ public class EntityStatsCapability {
                 props.putString("rank", instance.getRank());
                 props.putInt("time", instance.getTime());
                 props.putFloat("multiplier", instance.getMultiplier());
-
+		props.putBoolean("staffBoost", instance.getStaffBoost());
+                props.putBoolean("hatBoost", instance.getHatBoost());
                 return props;
             }
 
@@ -64,6 +65,8 @@ public class EntityStatsCapability {
                 instance.setRank(props.getString("rank"));
                 instance.setTime(props.getInt("time"));
                 instance.setMultiplier(props.getFloat("multiplier"));
+		instance.setStaffBoost(props.getBoolean("staffBoost"));
+                instance.setStaffBoost(props.getBoolean("hatBoost"));
 
             }
         }, () -> new EntityStatsBase());

@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.guild.Guild;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
@@ -75,7 +76,7 @@ public class GuildScreen extends Screen {
     {
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
-
+        ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
         drawString(matrixStack, font, TextFormatting.GRAY + "GUILD", posX + 102, posY + 30, Color.GRAY.getRGB());
     }
 

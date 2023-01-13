@@ -20,6 +20,13 @@ public class ModEntities {
                             .setTrackingRange(5)
                             .build(new ResourceLocation(Main.MODID, "grimoire_magician").toString()));
 
+    public static final RegistryObject<EntityType<GuildEntity>> GUILD_ENTITY = ENTITIES
+            .register("guild_entity",
+                    () -> EntityType.Builder.of(GuildEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "guild_entity").toString()));
+
     public static final RegistryObject<EntityType<BanditEntity>> BANDIT = ENTITIES
             .register("bandit",
                     () -> EntityType.Builder.of(BanditEntity::new, EntityClassification.CREATURE)

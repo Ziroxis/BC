@@ -1,21 +1,27 @@
 package com.yuanno.block_clover.data.world;
 
+import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.guild.Guild;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.util.Constants;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class ExtendedWorldData extends WorldSavedData {
 
     private static final String IDENTIFIER = "block_clover";
+    private HashMap<String, Guild> guilds = new HashMap<String, Guild>();
 
     public static Map<String, ExtendedWorldData> loadedExtWorlds = new HashMap<>();
     private List<int[][]> abilityProtections = new ArrayList<int[][]>();
+    private static final ExtendedWorldData CLIENT_DATA = new ExtendedWorldData();
 
     public ExtendedWorldData()
     {
@@ -27,7 +33,23 @@ public class ExtendedWorldData extends WorldSavedData {
     {
         super(identifier);
     }
+    public static ExtendedWorldData get(IWorld world)
+    {
+        if (world == null)
+            return null;
 
+        ExtendedWorldData worldExt = null;
+
+        if(world instanceof ServerWorld)
+        {
+            ServerWorld serverWorld = ((ServerWorld)world).getServer().getLevel(World.OVERWORLD);
+            worldExt = serverWorld.getDataStorage().computeIfAbsent(ExtendedWorldData::new, IDENTIFIER);
+        }
+        else
+            worldExt = CLIENT_DATA;
+
+        return worldExt;
+    }
 
     public boolean isInsideRestrictedArea(int posX, int posY, int posZ) {
         if (this.abilityProtections.size() <= 0)
@@ -119,6 +141,15 @@ public class ExtendedWorldData extends WorldSavedData {
                         });
             }
         }
+
+        ListNBT guilds = nbt.getList("guilds", Constants.NBT.TAG_COMPOUND);
+        this.guilds.clear();
+        for (int i = 0; i < guilds.size(); i++)
+        {
+            CompoundNBT compoundNBT = guilds.getCompound(i);
+            Guild guild = Guild.from(compoundNBT);
+            this.guilds.put(Beapi.getResourceName(guild.getName()), guild);
+        }
     }
 
     @Override
@@ -133,7 +164,67 @@ public class ExtendedWorldData extends WorldSavedData {
             }
         }
         nbt.put("protectedAreas", protectedAreas);
+
+        ListNBT guilds = new ListNBT();
+        for (Guild guild : this.guilds.values())
+        {
+            guilds.add(guild.write());
+        }
+        nbt.put("guilds", guilds);
         return nbt;
+    }
+
+    public List<Guild> getGuilds()
+    {
+        return new ArrayList<>(this.guilds.values());
+    }
+
+    @Nullable
+    public Guild getGuildWithMember(UUID memID)
+    {
+        for (Guild guild : this.guilds.values())
+        {
+            for (Guild.Member member : guild.getMembers())
+            {
+                if (member.getUUID().equals(memID))
+                    return guild;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    public Guild getCrewWithCaptain(UUID capId)
+    {
+        return this.guilds.values().stream().filter(crew -> crew.getCaptain() != null && crew.getCaptain().getUUID().equals(capId)).findFirst().orElse(null);
+    }
+
+    public void removeCrew(Guild crew)
+    {
+        String key = Beapi.getResourceName(crew.getName());
+        if(this.guilds.containsKey(key))
+            this.guilds.remove(key);
+        this.setDirty();
+    }
+
+    public void addCrew(Guild crew)
+    {
+        String key = Beapi.getResourceName(crew.getName());
+        if(!this.guilds.containsKey(key))
+            this.guilds.put(key, crew);
+        this.setDirty();
+    }
+
+    public void removeCrewMember(Guild crew, UUID uuid)
+    {
+        crew.removeMember(uuid);
+        this.setDirty();
+    }
+
+    public void addCrewMember(Guild crew, LivingEntity entity)
+    {
+        crew.addMember(entity);
+        this.setDirty();
     }
 }
 

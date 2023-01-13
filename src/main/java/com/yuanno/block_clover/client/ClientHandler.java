@@ -26,6 +26,8 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.VOLCANO_MONSTER.get(), new VolcanoMonsterRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BANDIT.get(), new BanditEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GRIMOIRE_MAGICIAN.get(), new GrimoireMagicianRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.GUILD_ENTITY.get(), new GuildEntityRenderer.Factory());
+
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
         ClientHandler.addPlayerLayers(playerSkinMap.get("slim"));

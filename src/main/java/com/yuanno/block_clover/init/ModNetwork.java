@@ -36,6 +36,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SSyncTriggerQuest.class, SSyncTriggerQuest::encode, SSyncTriggerQuest::decode, SSyncTriggerQuest::handle);
         PacketHandler.registerPacket(SOpenGuildScreenpacket.class, SOpenGuildScreenpacket::encode, SOpenGuildScreenpacket::decode, SOpenGuildScreenpacket::handle);
         PacketHandler.registerPacket(SSyncWorldDataPacket.class, SSyncWorldDataPacket::encode, SSyncWorldDataPacket::decode, SSyncWorldDataPacket::handle);
+        PacketHandler.registerPacket(SOpenGuildScreenInvitationpacket.class, SOpenGuildScreenInvitationpacket::encode, SOpenGuildScreenInvitationpacket::decode, SOpenGuildScreenInvitationpacket::handle);
 
 
 

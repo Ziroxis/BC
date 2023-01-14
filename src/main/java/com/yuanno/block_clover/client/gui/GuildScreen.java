@@ -14,6 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
+import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 public class GuildScreen extends Screen {
@@ -72,12 +73,33 @@ public class GuildScreen extends Screen {
 
     }
 
-    public void guildRendering(MatrixStack matrixStack)
-    {
+    public void guildRendering(MatrixStack matrixStack) {
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
+        boolean isInGuild = extendedWorldData.getGuildWithMember(player.getUUID()) != null;
+        String guildName = null;
+        String guildRank = null;
+        if (isInGuild) {
+            guildName = Objects.requireNonNull(extendedWorldData.getGuildWithMember(player.getUUID())).getName();
+            if (extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(player.getUUID()))
+                guildRank = "Captain";
+            else if (extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain().getUUID().equals(player.getUUID()))
+                guildRank = "Vice-captain";
+            else
+                guildRank = "Member";
+        }
         drawString(matrixStack, font, TextFormatting.GRAY + "GUILD", posX + 102, posY + 30, Color.GRAY.getRGB());
+        drawString(matrixStack, font, TextFormatting.BOLD + "Guild: ", posX - 20, posY + 45, Color.GRAY.getRGB());
+        drawString(matrixStack, font, TextFormatting.BOLD + "Guild rank: ", posX - 20, posY + 55, Color.GRAY.getRGB());
+
+        if (isInGuild) {
+            drawString(matrixStack, font, TextFormatting.GRAY + guildName, posX + 14, posY + 45, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + guildRank, posX + 45, posY + 55, Color.GRAY.getRGB());
+        }
+        else
+            drawString(matrixStack, font, TextFormatting.GRAY + "None", posX + 14, posY + 45, Color.GRAY.getRGB());
+
     }
 
     @Override

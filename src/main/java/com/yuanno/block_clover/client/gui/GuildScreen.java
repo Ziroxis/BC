@@ -2,7 +2,8 @@ package com.yuanno.block_clover.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
-import com.yuanno.block_clover.guild.Guild;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.client.CLeaveGuildPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -53,6 +54,12 @@ public class GuildScreen extends Screen {
         {
             Minecraft.getInstance().setScreen(new PlayerOverviewScreen());
         }));
+        posX += 240;
+        this.addButton(new Button(posX, posY + 190, 70, 20, new TranslationTextComponent("gui.blackclover.guild.leave"), b ->
+        {
+            PacketHandler.sendToServer(new CLeaveGuildPacket());
+            Minecraft.getInstance().setScreen(null);
+        }));
     }
 
     @Override
@@ -92,6 +99,11 @@ public class GuildScreen extends Screen {
         drawString(matrixStack, font, TextFormatting.GRAY + "GUILD", posX + 102, posY + 30, Color.GRAY.getRGB());
         drawString(matrixStack, font, TextFormatting.BOLD + "Guild: ", posX - 20, posY + 45, Color.GRAY.getRGB());
         drawString(matrixStack, font, TextFormatting.BOLD + "Guild rank: ", posX - 20, posY + 55, Color.GRAY.getRGB());
+        drawString(matrixStack, font, TextFormatting.BOLD + "Guild members: ", posX - 20, posY + 65, Color.GRAY.getRGB());
+        for (int i = 0; i < Objects.requireNonNull(extendedWorldData.getGuildWithMember(player.getUUID())).getMembers().size(); i++)
+        {
+            drawString(matrixStack, font, TextFormatting.WHITE + extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUsername(), posX - 20, posY + 75 + (i * 10), Color.GRAY.getRGB());
+        }
 
         if (isInGuild) {
             drawString(matrixStack, font, TextFormatting.GRAY + guildName, posX + 14, posY + 45, Color.GRAY.getRGB());

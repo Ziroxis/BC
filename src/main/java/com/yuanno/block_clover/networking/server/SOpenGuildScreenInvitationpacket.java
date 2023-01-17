@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.networking.server;
 
 import com.yuanno.block_clover.client.gui.GuildCreationScreen;
+import com.yuanno.block_clover.client.gui.GuildInviteScreen;
 import com.yuanno.block_clover.entities.BCentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -15,18 +16,24 @@ import java.util.function.Supplier;
 
 public class SOpenGuildScreenInvitationpacket {
 
+    private int playerCaptain;
     public SOpenGuildScreenInvitationpacket()
     {
 
     }
-
+    public SOpenGuildScreenInvitationpacket(int playerTarget)
+    {
+        this.playerCaptain = playerTarget;
+    }
     public void encode(PacketBuffer buffer)
     {
+        buffer.writeInt(this.playerCaptain);
     }
 
     public static SOpenGuildScreenInvitationpacket decode(PacketBuffer buffer)
     {
         SOpenGuildScreenInvitationpacket msg = new SOpenGuildScreenInvitationpacket();
+        msg.playerCaptain = buffer.readInt();
         return msg;
     }
 
@@ -42,8 +49,12 @@ public class SOpenGuildScreenInvitationpacket {
         @OnlyIn(Dist.CLIENT)
         public static void handle(SOpenGuildScreenInvitationpacket message)
         {
+            PlayerEntity playerTarget = Minecraft.getInstance().player;
+            Entity playerCaptain = Minecraft.getInstance().level.getEntity(message.playerCaptain);
+            if (!(playerCaptain instanceof PlayerEntity))
+                return;
 
-            Minecraft.getInstance().setScreen(new GuildCreationScreen());
+            Minecraft.getInstance().setScreen(new GuildInviteScreen(playerTarget, (PlayerEntity) playerCaptain));
         }
     }
 }

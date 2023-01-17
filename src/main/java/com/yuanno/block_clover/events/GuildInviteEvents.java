@@ -19,17 +19,21 @@ public class GuildInviteEvents {
         World world = event.getWorld();
         if (world.isClientSide)
             return;
-        ExtendedWorldData extendedWorldData = ExtendedWorldData.get(event.getPlayer().level);
-        boolean isInGuild = extendedWorldData.getGuildWithMember(event.getPlayer().getUUID()) != null;
+        ExtendedWorldData extendedWorldDataCaptain = ExtendedWorldData.get(event.getPlayer().level);
+        boolean isInGuildCaptain = extendedWorldDataCaptain.getGuildWithMember(event.getPlayer().getUUID()) != null;
         if (!(event.getEntityLiving() instanceof PlayerEntity))
             return;
-        if (!isInGuild)
+        if (!isInGuildCaptain)
             return;
-        if (!extendedWorldData.getGuildWithMember(event.getPlayer().getUUID()).getCaptain().getUUID().equals(event.getPlayer().getUUID())) // if he's not the captain return
+        if (!extendedWorldDataCaptain.getGuildWithMember(event.getPlayer().getUUID()).getCaptain().getUUID().equals(event.getPlayer().getUUID())) // if he's not the captain return
             return;
-        //TODO add check if you're not already in the guild
         // server side; right click entity; is in guild; is captain
         PlayerEntity playerTargeted = (PlayerEntity) event.getEntityLiving();
+        ExtendedWorldData extendedWorldDataTarget = ExtendedWorldData.get(playerTargeted.level);
+        boolean isInGuildTarget = extendedWorldDataTarget.getGuildWithMember(event.getPlayer().getUUID()) != null;
+        if (isInGuildTarget)
+            return;
+
         PacketHandler.sendTo(new SOpenGuildScreenInvitationpacket(), playerTargeted);
 
         System.out.println("RIGHT CLICKED");

@@ -7,11 +7,13 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.darkness.DarkCloakedBladeAbility;
@@ -46,6 +48,8 @@ public class StatsEvent {
         PlayerEntity player = event.getPlayer();
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
+        ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
+        PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
 
         if (!props.hasAttribute())
         {

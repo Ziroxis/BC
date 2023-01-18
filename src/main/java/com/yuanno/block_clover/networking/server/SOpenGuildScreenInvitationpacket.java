@@ -16,24 +16,29 @@ import java.util.function.Supplier;
 
 public class SOpenGuildScreenInvitationpacket {
 
+    private int playerTarget;
     private int playerCaptain;
     public SOpenGuildScreenInvitationpacket()
     {
 
     }
-    public SOpenGuildScreenInvitationpacket(int playerTarget)
+    public SOpenGuildScreenInvitationpacket(int playerTarget, int playerCaptain)
     {
-        this.playerCaptain = playerTarget;
+        this.playerTarget = playerTarget;
+        this.playerCaptain = playerCaptain;
     }
     public void encode(PacketBuffer buffer)
     {
+        buffer.writeInt(this.playerTarget);
         buffer.writeInt(this.playerCaptain);
     }
 
     public static SOpenGuildScreenInvitationpacket decode(PacketBuffer buffer)
     {
         SOpenGuildScreenInvitationpacket msg = new SOpenGuildScreenInvitationpacket();
+        msg.playerTarget = buffer.readInt();
         msg.playerCaptain = buffer.readInt();
+
         return msg;
     }
 
@@ -49,12 +54,14 @@ public class SOpenGuildScreenInvitationpacket {
         @OnlyIn(Dist.CLIENT)
         public static void handle(SOpenGuildScreenInvitationpacket message)
         {
-            PlayerEntity playerTarget = Minecraft.getInstance().player;
             Entity playerCaptain = Minecraft.getInstance().level.getEntity(message.playerCaptain);
             if (!(playerCaptain instanceof PlayerEntity))
                 return;
+            Entity playerTarget = Minecraft.getInstance().level.getEntity(message.playerTarget);
+            if (!(playerTarget instanceof PlayerEntity))
+                return;
 
-            Minecraft.getInstance().setScreen(new GuildInviteScreen(playerTarget, (PlayerEntity) playerCaptain));
+            Minecraft.getInstance().setScreen(new GuildInviteScreen((PlayerEntity) playerTarget,(PlayerEntity) playerCaptain));
         }
     }
 }

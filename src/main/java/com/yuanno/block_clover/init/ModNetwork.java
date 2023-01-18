@@ -24,6 +24,9 @@ public class ModNetwork {
         PacketHandler.registerPacket(CSyncQuestDataPacket.class, CSyncQuestDataPacket::encode, CSyncQuestDataPacket::decode, CSyncQuestDataPacket::handle);
         PacketHandler.registerPacket(CCreateGuildPacket.class, CCreateGuildPacket::encode, CCreateGuildPacket::decode, CCreateGuildPacket::handle);
         PacketHandler.registerPacket(CLeaveGuildPacket.class, CLeaveGuildPacket::encode, CLeaveGuildPacket::decode, CLeaveGuildPacket::handle);
+        PacketHandler.registerPacket(CKickFromGuildPacket.class, CKickFromGuildPacket::encode, CKickFromGuildPacket::decode, CKickFromGuildPacket::handle);
+        PacketHandler.registerPacket(CPromoteGuildPacket.class, CPromoteGuildPacket::encode, CPromoteGuildPacket::decode, CPromoteGuildPacket::handle);
+        PacketHandler.registerPacket(CRequestSyncWorldDataPacket.class, CRequestSyncWorldDataPacket::encode, CRequestSyncWorldDataPacket::decode, CRequestSyncWorldDataPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);

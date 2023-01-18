@@ -221,9 +221,9 @@ public class ExtendedWorldData extends WorldSavedData {
         this.setDirty();
     }
 
-    public void addCrewMember(Guild crew, LivingEntity entity)
+    public void addCrewMember(Guild guild, LivingEntity entity)
     {
-        crew.addMember(entity);
+        guild.addMember(entity);
         this.setDirty();
     }
 }

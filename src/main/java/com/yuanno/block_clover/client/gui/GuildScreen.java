@@ -112,24 +112,25 @@ public class GuildScreen extends Screen {
         drawString(matrixStack, font, TextFormatting.BOLD + "Guild members: ", posX - 20, posY + 65, Color.GRAY.getRGB());
 
 
-        if (isInGuild) {
+        if (isInGuild && extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(player.getUUID())) {
             for (int i = 0; i < Objects.requireNonNull(extendedWorldData.getGuildWithMember(player.getUUID())).getMembers().size(); i++)
             {
                 drawString(matrixStack, font, TextFormatting.WHITE + extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUsername(), posX - 20, posY + 75 + (i * 10), Color.GRAY.getRGB());
                 int finalI = i;
-                if (extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain() == null && !extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUUID()))
+                if (!extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(player.getUUID()))
                 {
-                    this.addButton(new Button(posX + 100, posY + 75 + (i * 10), 70, 20, new TranslationTextComponent("gui.blackclover.guild.promote"), button ->
-                    {
-                        PacketHandler.sendToServer(new CKickFromGuildPacket(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(finalI).getUUID()));
-                    }));
-                }
-                if (!extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUUID()))
-                {
-                    this.addButton(new Button(posX, posY + 75 + (i * 10), 70, 20, new TranslationTextComponent("gui.blackclover.guild.kick"), button ->
-                    {
-                        PacketHandler.sendToServer(new CKickFromGuildPacket(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(finalI).getUUID()));
-                    }));
+                    if (extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain() == null && !extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUUID())) {
+                        this.addButton(new Button(posX + 100, posY + 75 + (i * 10), 70, 20, new TranslationTextComponent("gui.blackclover.guild.promote"), button ->
+                        {
+                            PacketHandler.sendToServer(new CKickFromGuildPacket(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(finalI).getUUID()));
+                        }));
+                    }
+                    if (!extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUUID())) {
+                        this.addButton(new Button(posX, posY + 75 + (i * 10), 70, 20, new TranslationTextComponent("gui.blackclover.guild.kick"), button ->
+                        {
+                            PacketHandler.sendToServer(new CKickFromGuildPacket(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(finalI).getUUID()));
+                        }));
+                    }
                 }
             }
             drawString(matrixStack, font, TextFormatting.GRAY + guildName, posX + 14, posY + 45, Color.GRAY.getRGB());

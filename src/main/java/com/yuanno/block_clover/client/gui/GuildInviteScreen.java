@@ -6,6 +6,7 @@ import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.events.GuildEvents;
 import com.yuanno.block_clover.guild.Guild;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.client.CJoinGuildPacket;
 import com.yuanno.block_clover.networking.client.CRequestSyncWorldDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
 import net.minecraft.client.Minecraft;
@@ -94,6 +95,7 @@ public class GuildInviteScreen extends Screen {
     private void joinGuild()
     {
         // join guild
+        /*
         ExtendedWorldData extendedWorldDataCaptain = ExtendedWorldData.get(playerCaptain.level);
         Guild guild = extendedWorldDataCaptain.getCrewWithCaptain(playerCaptain.getUUID());
         GuildEvents.Join events = new GuildEvents.Join(playerTarget, guild);
@@ -102,9 +104,11 @@ public class GuildInviteScreen extends Screen {
             extendedWorldDataCaptain.addCrewMember(guild, playerTarget);
             FactionHelper.sendUpdateMessageToCrew(playerTarget.level, guild);
             FactionHelper.sendMessageToCrew(playerTarget.level, guild, new TranslationTextComponent("%s joined the guild!", playerTarget.getName().getString()));
-            PacketHandler.sendToAll(new SSyncWorldDataPacket(extendedWorldDataCaptain));
+            PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldDataCaptain), playerTarget);
             //PacketHandler.sendToAll(new SSyncWorldDataPacket(extendedWorldDataCaptain), playerTarget);
         }
+         */
+        PacketHandler.sendToServer(new CJoinGuildPacket(playerCaptain.getUUID()));
         this.onClose();
     }
 

@@ -51,7 +51,7 @@ public class CCreateGuildPacket {
             ctx.get().enqueueWork(() ->
             {
                 PlayerEntity player = ctx.get().getSender();
-                IEntityStats props = EntityStatsCapability.get(player);
+                //IEntityStats props = EntityStatsCapability.get(player);
                 ExtendedWorldData worldProps = ExtendedWorldData.get(player.level);
 
                 //boolean hasSakeBottle = !player.getMainHandItem().isEmpty() && player.getMainHandItem().getItem().equals(ModItems.SAKE_BOTTLE.get());

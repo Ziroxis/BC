@@ -31,5 +31,14 @@ public class ModEventBusEvents {
         event.put(ModEntities.CLOVER_SHARK.get(), CloverSharkEntity.setCustomAttributes().build());
     }
 
+    @SubscribeEvent
+    public static void registerModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+
+        event.getRegistry().registerAll(
+                new WitchHatShredAdditionModifier.Serializer().setRegistryName(new ResourceLocation(Main.MODID, "witch_hat_shred_from_witch"))
+
+        );
+    }
+
 
 }

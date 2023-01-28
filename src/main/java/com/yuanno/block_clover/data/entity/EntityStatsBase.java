@@ -24,7 +24,8 @@ public class EntityStatsBase implements IEntityStats{
     private String rank = "";
     private int time;
     private float multiplier;
-
+    private boolean staffBoost;
+    private boolean hatBoost;
 
     @Override
     public int getLevel() {
@@ -287,5 +288,25 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public void alterTime(int value) {
         this.time = this.time + value;
+    }
+
+    @Override
+    public void setStaffBoost(boolean boost) {
+        this.staffBoost = boost;
+    }
+
+    @Override
+    public boolean getStaffBoost() {
+        return this.staffBoost;
+    }
+
+    @Override
+    public void setHatBoost(boolean boost) {
+        this.hatBoost = boost;
+    }
+
+    @Override
+    public boolean getHatBoost() {
+        return this.hatBoost;
     }
 }

@@ -31,8 +31,9 @@ public class ModValues {
     public static final String ELF = "Elf";
     public static final String HYBRID = "Hybrid";
     public static final String DWARF = "Dwarf";
+    public static final String WITCH = "Witch";
     public static final String[] races = {
-      ModValues.HUMAN, ModValues.ELF, ModValues.HYBRID
+      ModValues.HUMAN, ModValues.ELF, ModValues.HYBRID, ModValues.WITCH
     };
 
     //RANKS

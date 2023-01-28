@@ -31,4 +31,10 @@ public class ModItemGroup {
             return new ItemStack(ModItems.MAGICAL_MEAT.get());
         }
     };
+    public static final ItemGroup BLOCK_CLOVER_BLOCKS = new ItemGroup("block_cloverBlocks") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ModItems.ELDER_SAPLING.get());
+        }
+    };
 }

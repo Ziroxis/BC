@@ -74,5 +74,10 @@ public interface IEntityStats {
     int getTime();
     void setTime(int value);
     void alterTime(int value);
-
+	
+    // Boosts
+    void setStaffBoost(boolean boost);
+    boolean getStaffBoost();
+    void setHatBoost(boolean boost);
+    boolean getHatBoost();
 }

@@ -5,6 +5,7 @@ import com.yuanno.block_clover.world.biome.ModBiomes;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Features;
@@ -30,11 +31,22 @@ public class TreeGeneration {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
-            //Tre to add
+            //Tree to add
             base.add(() -> ModConfiguredFeatures.MOGURO_TREE
                     .decorated(Features.Placements.HEIGHTMAP_SQUARE)
                     .decorated(Placement.COUNT_EXTRA.configured(
                             new AtSurfaceWithExtraConfig(8, 0.25f, 1))));
+
+
+        } else if (types.contains(BiomeDictionary.Type.SWAMP)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.ELDER_TREE
+                    .decorated(Features.Placements.HEIGHTMAP_SQUARE)
+                    .decorated(Placement.COUNT_EXTRA.configured(
+                            new AtSurfaceWithExtraConfig(0, 0.1f, 1))));
         }
+
     }
 }

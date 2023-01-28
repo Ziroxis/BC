@@ -50,6 +50,7 @@ public class Guild {
             memberNBT.putUUID("id", member.getUUID());
             memberNBT.putString("username", member.getUsername());
             memberNBT.putBoolean("isCaptain", member.isCaptain());
+            memberNBT.putBoolean("isViceCaptain", member.isViceCaptain());
             members.add(memberNBT);
         }
         crewNBT.put("members", members);
@@ -66,6 +67,7 @@ public class Guild {
             CompoundNBT memberNBT = members.getCompound(j);
             Guild.Member member = this.addMember(memberNBT.getUUID("id"), memberNBT.getString("username"));
             member.setIsCaptain(memberNBT.getBoolean("isCaptain"));
+            member.setIsViceCaptain(memberNBT.getBoolean("isViceCaptain"));
         }
 
     }
@@ -105,6 +107,12 @@ public class Guild {
     public Member getCaptain()
     {
         return this.members.stream().filter(member -> member.isCaptain()).findFirst().orElse(null);
+    }
+
+    @Nullable
+    public Member getViceCaptain()
+    {
+        return this.members.stream().filter(member -> member.isViceCaptain()).findFirst().orElse(null);
     }
 
     public List<Member> getMembers()

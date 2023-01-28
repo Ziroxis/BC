@@ -24,6 +24,7 @@ public class ModEventBusEvents {
         event.put(EarthSummons.EARTH_MINION.get(), EarthMinionEntity.setCustomAttributes().build());
         event.put(EarthSummons.EARTH_GOLEM.get(), EarthGolemEntity.setCustomAttributes().build());
         event.put(ModEntities.GRIMOIRE_MAGICIAN.get(), GrimoireMagicianEntity.setCustomAttributes().build());
+        event.put(ModEntities.GUILD_ENTITY.get(), GrimoireMagicianEntity.setCustomAttributes().build());
         event.put(ModEntities.BANDIT.get(), BanditEntity.setCustomAttributes().build());
         event.put(ModEntities.VOLCANO_MONSTER.get(), VolcanoMonsterEntity.setCustomAttributes().build());
         event.put(ModEntities.MONKEY_ENTITY.get(), MonkeyEntity.setCustomAttributes().build());

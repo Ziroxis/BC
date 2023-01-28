@@ -22,6 +22,12 @@ public class ModNetwork {
         PacketHandler.registerPacket(CSyncentityStatsPacket.class, CSyncentityStatsPacket::encode, CSyncentityStatsPacket::decode, CSyncentityStatsPacket::handle);
         PacketHandler.registerPacket(CUpdateQuestStatePacket.class, CUpdateQuestStatePacket::encode, CUpdateQuestStatePacket::decode, CUpdateQuestStatePacket::handle);
         PacketHandler.registerPacket(CSyncQuestDataPacket.class, CSyncQuestDataPacket::encode, CSyncQuestDataPacket::decode, CSyncQuestDataPacket::handle);
+        PacketHandler.registerPacket(CCreateGuildPacket.class, CCreateGuildPacket::encode, CCreateGuildPacket::decode, CCreateGuildPacket::handle);
+        PacketHandler.registerPacket(CLeaveGuildPacket.class, CLeaveGuildPacket::encode, CLeaveGuildPacket::decode, CLeaveGuildPacket::handle);
+        PacketHandler.registerPacket(CKickFromGuildPacket.class, CKickFromGuildPacket::encode, CKickFromGuildPacket::decode, CKickFromGuildPacket::handle);
+        PacketHandler.registerPacket(CPromoteGuildPacket.class, CPromoteGuildPacket::encode, CPromoteGuildPacket::decode, CPromoteGuildPacket::handle);
+        PacketHandler.registerPacket(CRequestSyncWorldDataPacket.class, CRequestSyncWorldDataPacket::encode, CRequestSyncWorldDataPacket::decode, CRequestSyncWorldDataPacket::handle);
+        PacketHandler.registerPacket(CJoinGuildPacket.class, CJoinGuildPacket::encode, CJoinGuildPacket::decode, CJoinGuildPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);
@@ -33,6 +39,10 @@ public class ModNetwork {
         PacketHandler.registerPacket(SSyncQuestDataPacket.class, SSyncQuestDataPacket::encode, SSyncQuestDataPacket::decode, SSyncQuestDataPacket::handle);
         PacketHandler.registerPacket(SOpenChatPromptScreenPacket.class, SOpenChatPromptScreenPacket::encode, SOpenChatPromptScreenPacket::decode, SOpenChatPromptScreenPacket::handle);
         PacketHandler.registerPacket(SSyncTriggerQuest.class, SSyncTriggerQuest::encode, SSyncTriggerQuest::decode, SSyncTriggerQuest::handle);
+        PacketHandler.registerPacket(SOpenGuildScreenpacket.class, SOpenGuildScreenpacket::encode, SOpenGuildScreenpacket::decode, SOpenGuildScreenpacket::handle);
+        PacketHandler.registerPacket(SSyncWorldDataPacket.class, SSyncWorldDataPacket::encode, SSyncWorldDataPacket::decode, SSyncWorldDataPacket::handle);
+        PacketHandler.registerPacket(SOpenGuildScreenInvitationpacket.class, SOpenGuildScreenInvitationpacket::encode, SOpenGuildScreenInvitationpacket::decode, SOpenGuildScreenInvitationpacket::handle);
+
 
 
         //SYNC

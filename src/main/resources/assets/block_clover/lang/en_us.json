@@ -206,6 +206,7 @@
   "item.block_clover.monkey_egg": "Magical Monkey egg",
   "item.block_clover.bandit_egg": "Bandit egg",
   "item.block_clover.shark_egg": "Shark egg",
+  
   "item.block_clover.witch_hat_shred": "Witch hat shred",
   "item.block_clover.modifying_crystal": "Modyfying crystal",
   "item.block_clover.magic_staff": "Magic wand",
@@ -217,4 +218,10 @@
   "entity.block_clover.monkey_entity": "Wind Monkey",
   "entity.block_clover.bandit": "Bandit",
   "entity.block_clover.clover_shark": "Shark"
+
+
+  "gui.blackclover.guild.leave": "Leave guild",
+  "gui.blackclover.guild.promote": "Promote",
+  "gui.blackclover.guild.kick": "Kick"
+
 }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "  x",
+    "  z",
     " x ",
     "y  "
   ],
@@ -11,6 +11,9 @@
     },
     "y": {
       "item": "block_clover:modifying_crystal"
+    },
+    "z": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {

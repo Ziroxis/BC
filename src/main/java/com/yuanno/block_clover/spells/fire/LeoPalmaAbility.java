@@ -51,7 +51,8 @@ public class LeoPalmaAbility extends Ability {
             double playerY = player.getY();
             double playerZ = player.getZ();
             double distance = Math.sqrt(Math.pow(targetX - playerX, 2) + Math.pow(targetZ - playerZ, 2));
-            target.addEffect(new EffectInstance(ModEffects.LEO_PALMA.get(), 80, 0));
+            target.addEffect(new EffectInstance(ModEffects.
+                    LEO_PALMA.get(), 80, 0));
         }
 
         return true;

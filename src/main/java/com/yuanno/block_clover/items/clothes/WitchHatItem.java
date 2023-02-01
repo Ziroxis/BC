@@ -1,18 +1,23 @@
 package com.yuanno.block_clover.items.clothes;
 
+import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModItemGroup;
 import com.yuanno.block_clover.init.ModValues;
+import com.yuanno.block_clover.models.clothes.AstaClothesModel;
+import com.yuanno.block_clover.models.clothes.WitchHatModel;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
-import com.yuanno.block_clover.items.clothes.WitchHatBase;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.Objects;
+import javax.annotation.Nullable;
 
 public class WitchHatItem extends ArmorItem {
 
@@ -42,6 +47,24 @@ public class WitchHatItem extends ArmorItem {
                 }
             }
         }
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    @Nullable
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
+    {
+
+        A armorModel = (A) new WitchHatModel(armorSlot);
+
+        return armorModel;
+    }
+
+    @Override
+    @Nullable
+    public String getArmorTexture(ItemStack itemStack, Entity entity, EquipmentSlotType slot, String type)
+    {
+        return Main.MODID+ ":textures/models/armor/witch_hat.png";
     }
 
 }

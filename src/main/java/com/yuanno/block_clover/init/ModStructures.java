@@ -55,6 +55,7 @@ public class ModStructures
                         1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 true);
 
+
         setupMapSpacingAndLand(
                 BANDIT_CAMP.get(), /* The instance of the structure */
                 new StructureSeparationSettings(20 /* average distance apart in chunks between spawn attempts */,

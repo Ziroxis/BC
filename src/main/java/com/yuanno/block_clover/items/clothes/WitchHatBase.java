@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.items.clothes;
 
+import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.init.ModItems;
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
@@ -8,6 +10,7 @@ import net.minecraft.util.LazyValue;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
+import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public enum WitchHatBase implements IArmorMaterial {
@@ -100,4 +103,6 @@ public enum WitchHatBase implements IArmorMaterial {
     public void setKnockbackResistance(float resistance) {
         this.knockbackResistance = resistance;
     }
+
+
 }

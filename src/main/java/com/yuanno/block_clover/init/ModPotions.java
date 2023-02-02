@@ -12,9 +12,9 @@ public class ModPotions {
 
     public static DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, Main.MODID);
 
-    public static final RegistryObject<Potion> MOGURO_POTION = POTIONS.register("moguro_potion", () -> new Potion(new EffectInstance(ModEffects.XP_MULTIPLIER.get(), 6000, 0)));
 
     public static void register(IEventBus eventBus) {
         POTIONS.register(eventBus);
     }
 }
+

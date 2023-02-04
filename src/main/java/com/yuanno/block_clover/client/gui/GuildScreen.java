@@ -117,7 +117,7 @@ public class GuildScreen extends Screen {
             {
                 drawString(matrixStack, font, TextFormatting.WHITE + extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUsername(), posX - 20, posY + 75 + (i * 10), Color.GRAY.getRGB());
                 int finalI = i;
-                if (!extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(player.getUUID()))
+                if (extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(player.getUUID()))
                 {
                     if (extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain() == null && !extendedWorldData.getGuildWithMember(player.getUUID()).getCaptain().getUUID().equals(extendedWorldData.getGuildWithMember(player.getUUID()).getMembers().get(i).getUUID())) {
                         this.addButton(new Button(posX + 100, posY + 75 + (i * 10), 70, 20, new TranslationTextComponent("gui.blackclover.guild.promote"), button ->
@@ -133,6 +133,11 @@ public class GuildScreen extends Screen {
                     }
                 }
             }
+            drawString(matrixStack, font, TextFormatting.GRAY + guildName, posX + 14, posY + 45, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + guildRank, posX + 45, posY + 55, Color.GRAY.getRGB());
+        }
+        else if (isInGuild)
+        {
             drawString(matrixStack, font, TextFormatting.GRAY + guildName, posX + 14, posY + 45, Color.GRAY.getRGB());
             drawString(matrixStack, font, TextFormatting.GRAY + guildRank, posX + 45, posY + 55, Color.GRAY.getRGB());
         }

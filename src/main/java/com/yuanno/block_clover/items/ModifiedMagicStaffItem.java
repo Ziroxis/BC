@@ -4,6 +4,8 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModItemGroup;
 import com.yuanno.block_clover.init.ModValues;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,6 +31,8 @@ public class ModifiedMagicStaffItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
+        if (entity.level.isClientSide)
+            return;
         if (entity instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entity;
             IEntityStats stats = EntityStatsCapability.get(player);
@@ -41,17 +45,21 @@ public class ModifiedMagicStaffItem extends Item {
     }
 
     private void testForItem(PlayerEntity player, IEntityStats stats, float manaBoost, float manaRegenBoost) {
+        if (player.level.isClientSide)
+            return;
         if (player.getOffhandItem().getItem().equals(this.getItem())) {
             if (!stats.getStaffBoost()) {
                 stats.alterManaRegeneration(manaRegenBoost);
                 stats.alterMana(manaBoost);
                 stats.setStaffBoost(true);
+                PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             }
         } else {
             if (stats.getStaffBoost()) {
                 stats.alterManaRegeneration(-manaRegenBoost);
                 stats.alterMana(-manaBoost);
                 stats.setStaffBoost(false);
+                PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
             }
         }
     }

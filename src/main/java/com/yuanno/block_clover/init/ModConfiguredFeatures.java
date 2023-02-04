@@ -26,4 +26,12 @@ public class ModConfiguredFeatures {
                     new BlobFoliagePlacer(FeatureSpread.fixed(2), FeatureSpread.fixed(0), 5), // how the tree will look like
                     new StraightTrunkPlacer(4, 1, 3), // no clue
                     new TwoLayerFeature(1, 0, 1))).ignoreVines().build())); // no clue
+
+    public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> ELDER_TREE =
+            register("elder_tree", Feature.TREE.configured((new BaseTreeFeatureConfig.Builder(
+                    new SimpleBlockStateProvider(ModBlocks.ELDER_LOG.get().defaultBlockState()), // log of the tree
+                    new SimpleBlockStateProvider(ModBlocks.ELDER_LEAF.get().defaultBlockState()), // leaf of the tree
+                    new BlobFoliagePlacer(FeatureSpread.fixed(1), FeatureSpread.fixed(0), 2), // how the tree will look like
+                    new StraightTrunkPlacer(4, 2, 2), // no clue
+                    new TwoLayerFeature(1, 0, 1))).ignoreVines().build())); // no clue
 }

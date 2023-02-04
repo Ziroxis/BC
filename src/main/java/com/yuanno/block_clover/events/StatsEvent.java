@@ -175,8 +175,6 @@ public class StatsEvent {
             props.setTitle("§aSage");
         else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> Redwolf
             props.setTitle("§cThe king");
-        else if (uuid.toString().equals("9819c734-1928-4757-8724-801ced9218c6")) // -> Skyling
-            props.setTitle("§3Engulfing sky");
         else if (uuid.toString().equals("b462e469-19ce-40b6-9999-d74102623b7c")) // -> Gingershadow
             props.setTitle("§4The true");
         else if (uuid.toString().equals("72336f87-461e-4e3b-a213-df3982241c39")) // -> Apollo

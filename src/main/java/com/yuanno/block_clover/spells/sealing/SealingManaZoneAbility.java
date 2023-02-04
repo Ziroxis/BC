@@ -29,7 +29,7 @@ public class SealingManaZoneAbility extends ContinuousAbility {
         if (entities.contains(player))
             entities.remove(player);
         entities.forEach(livingEntity -> {
-            if (livingEntity.hasEffect(ModEffects.MOVEMENT_BLOCKED.get()))
+            if (!livingEntity.hasEffect(ModEffects.MOVEMENT_BLOCKED.get()))
                 livingEntity.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 80, 0));
         });
 

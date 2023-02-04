@@ -109,6 +109,11 @@ public class StatsEvent {
                     props.setManaRegeneration(2);
                     props.setMultiplier(1);
                 }
+                else if (race.equals(ModValues.WITCH))
+                {
+                    props.setManaRegeneration(1);
+                    props.setMultiplier(1.3f);
+                }
                 if (race.equals(ModValues.HYBRID))
                 {
                     props.setManaRegeneration(1);

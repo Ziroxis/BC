@@ -78,7 +78,7 @@ public class AbilityHelper {
             {
                 ability.startCooldown(player);
                 if(!player.level.isClientSide)
-                    PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
+                     PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
             }
         }
     }

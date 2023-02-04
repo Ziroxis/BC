@@ -66,8 +66,8 @@ public class BanditCampStructure extends Structure<NoFeatureConfig>
         @Override
         public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config)
         {
-            int x = chunkX * 16;
-            int z = chunkZ * 16;
+            int x = (chunkX << 4) + 7;
+            int z = (chunkZ << 4) + 7;
             BlockPos blockpos = new BlockPos(x, 0, z);
 
             JigsawManager.addPieces(dynamicRegistryManager,

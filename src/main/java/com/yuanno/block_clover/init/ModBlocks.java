@@ -3,6 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.blocks.AntiMagicBlock;
+import com.yuanno.block_clover.blocks.JuicerBlock;
 import com.yuanno.block_clover.blocks.LightningBlock;
 import com.yuanno.block_clover.blocks.WindBlock;
 import com.yuanno.block_clover.world.trees.ElderTree;
@@ -31,6 +32,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> LIGHTNING = BLOCKS.register("lightning_block", LightningBlock::new);
     public static final RegistryObject<Block> WIND = BLOCKS.register("wind_block", WindBlock::new);
 
+    public static final RegistryObject<Block> JUICER = BLOCKS.register("juicer_block", JuicerBlock::new);
+
     //Moguro Tree
     public static final RegistryObject<Block> MOGURO_PLANK = BLOCKS.register("moguro_plank",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
@@ -47,14 +50,16 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)));
 
     public static final RegistryObject<Block> MOGURO_LEAF = BLOCKS.register("moguro_leaf",
-            () -> new Block(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_BLUE)
+            () -> new LeavesBlock(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_BLUE)
                     .strength(0.5f, 0.5f)
                     .harvestTool(ToolType.AXE)
                     .harvestLevel(0)
+                    .randomTicks()
+                    .noOcclusion()
                     .sound(SoundType.GRASS)));
 
     public static final RegistryObject<Block> MOGURO_SAPLING = BLOCKS.register("moguro_sapling",
-            () -> new SaplingBlock(new MoguroTree(), AbstractBlock.Properties.of(Material.WOOD).sound(SoundType.GRASS)));
+            () -> new SaplingBlock(new MoguroTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.GRASS)));
 
     //Elder Tree
     public static final RegistryObject<Block> ELDER_PLANK = BLOCKS.register("elder_plank",
@@ -72,14 +77,17 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)));
 
     public static final RegistryObject<Block> ELDER_LEAF = BLOCKS.register("elder_leaf",
-            () -> new Block(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_LIGHT_GRAY)
+            () -> new LeavesBlock(AbstractBlock.Properties.of(Material.LEAVES, MaterialColor.COLOR_LIGHT_GRAY)
                     .strength(1.5f, 1.5f)
                     .harvestTool(ToolType.AXE)
                     .harvestLevel(2)
-                    .sound(SoundType.GRASS)));
+                    .randomTicks()
+                    .noOcclusion()
+                    .sound(SoundType.GRASS)
+                    ));
 
     public static final RegistryObject<Block> ELDER_SAPLING = BLOCKS.register("elder_sapling",
-            () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).sound(SoundType.ROOTS)));
+            () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.ROOTS)));
 
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {

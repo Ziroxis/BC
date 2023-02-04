@@ -26,6 +26,8 @@ import com.yuanno.block_clover.curios.server.command.CurioArgumentType;
 import com.yuanno.block_clover.curios.server.command.CuriosSelectorOptions;
 import com.yuanno.block_clover.curios.slottype.SlotTypeManager;
 import com.yuanno.block_clover.curios.triggers.EquipCurioTrigger;
+import com.yuanno.block_clover.data.recipes.ModRecipes;
+import com.yuanno.block_clover.screens.JuicerScreen;
 import com.yuanno.block_clover.world.biome.ModBiomes;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import com.yuanno.block_clover.init.*;
@@ -35,8 +37,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.command.arguments.ArgumentSerializer;
 import net.minecraft.command.arguments.ArgumentTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -75,18 +75,21 @@ public class Main
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CuriosClientMod::init);
 
+        ModEffects.EFFECTS.register(modEventBus);
         ModRegistry.ENTITY_TYPES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(new AttachingCapabilities.Registry());
         ModAbilities.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModTileEntities.register(modEventBus);
+        ModContainers.register(modEventBus);
         ModAttributes.ATTRIBUTES.register(modEventBus);
-        ModEffects.EFFECTS.register(modEventBus);
         ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
         ModQuests.QUESTS.register(modEventBus);
+        ModPotions.register(modEventBus);
+        ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
@@ -167,6 +170,10 @@ public class Main
         {
             RenderTypeLookup.setRenderLayer(ModBlocks.MOGURO_LEAF.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MOGURO_SAPLING.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.ELDER_LEAF.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.ELDER_SAPLING.get(), RenderType.cutout());
+
+            ScreenManager.register(ModContainers.JUICER_CONTAINER.get(), JuicerScreen::new);
         });
         ClientHandler.onSetup();
         ModKeyBinds.init();

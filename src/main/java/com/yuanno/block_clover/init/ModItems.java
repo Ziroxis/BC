@@ -20,6 +20,10 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID);
     public List<Supplier<Item>> items = new ArrayList<>();
 
+    //BLOCKS
+    public static final RegistryObject<BlockItem> JUICER_BLOCK = ITEMS.register("juicer_block", () -> new BlockItem(ModBlocks.JUICER.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+
     //TREES
     //MOGURO
     public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_plank", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
@@ -112,6 +116,7 @@ public class ModItems {
     public static final RegistryObject<Item> MODIFYING_CRYSTAL = ITEMS.register("modifying_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).tab(ModItemGroup.BLOCK_CLOVER_MISC)));
     public static final RegistryObject<Item> MODIFIED_MAGIC_WAND = ITEMS.register("modified_magic_staff", ModifiedMagicStaffItem::new);
+    public static final RegistryObject<Item> MOGURO_JUICE = ITEMS.register("moguro_juice", MoguroJuiceItem::new);
 
     //SPAWN EGGS
     public static final RegistryObject<SpawnEggItem> VOLCANO_MONSTER_EGG = ITEMS.register("volcano_monster_egg",

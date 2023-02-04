@@ -1,0 +1,17 @@
+{
+  "type": "block_clover:juicer",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "block_clover:moguro_leaf"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "output": {
+    "item": "block_clover:moguro_juice"
+  }
+}

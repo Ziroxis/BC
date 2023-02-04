@@ -8,6 +8,7 @@
   "block.block_clover.elder_log": "Elder log",
   "block.block_clover.elder_leaf": "Elder leaf",
   "block.block_clover.elder_sapling": "Elder sapling",
+  "block.block_clover.juicer_block": "Juicer",
 
   "itemGroup.block_cloverModTabWeapons": "Block clover weapons",
   "itemGroup.block_cloverModTabClothes": "Block clover clothes",
@@ -41,6 +42,7 @@
   "item.block_clover.golden_dawn_feet": "Golden dawn feet",
 
   "item.block_clover.witch_hat": "Witch hat",
+  "item.block_clover.moguro_juice":  "Moguro juice",
 
 
   "gui.blackclover.stats.spells": "Spells",
@@ -48,6 +50,7 @@
   "gui.blackclover.stats.overview": "Overview",
   "gui.blackclover.stats.quests": "Quests",
   "gui.blackclover.stats.guild": "Guild",
+  "screen.block_clover.juicer":  "Juicer",
 
   "Keys.block_clover.combat": "Combat keys",
   "Keys.block_clover.combat_1": "Combat key 1",
@@ -217,7 +220,7 @@
 
   "entity.block_clover.monkey_entity": "Wind Monkey",
   "entity.block_clover.bandit": "Bandit",
-  "entity.block_clover.clover_shark": "Shark"
+  "entity.block_clover.clover_shark": "Shark",
 
 
   "gui.blackclover.guild.leave": "Leave guild",

@@ -1,11 +1,9 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.effects.GravityEffect;
-import com.yuanno.block_clover.effects.LeoPalmaEffect;
-import com.yuanno.block_clover.effects.MovementBlockedEffect;
-import com.yuanno.block_clover.effects.SealingEffect;
+import com.yuanno.block_clover.effects.*;
 import net.minecraft.potion.Effect;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,4 +15,11 @@ public class ModEffects {
     public static final RegistryObject<Effect> MOVEMENT_BLOCKED = EFFECTS.register("movement_blocked", MovementBlockedEffect::new);
     public static final RegistryObject<Effect> SEALING = EFFECTS.register("sealing", SealingEffect::new);
     public static final RegistryObject<Effect> GRAVITY = EFFECTS.register("gravity", GravityEffect::new);
+    public static final RegistryObject<Effect> XP_MULTIPLIER =  EFFECTS.register("xp_multiplier", XpMultiplierEffect::new);
+
+    public static void register(IEventBus eventBus) {
+        EFFECTS.register(eventBus);
+
+    }
+
 }

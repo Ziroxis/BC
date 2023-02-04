@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "block_clover:moguro_log"
+    "block_clover:moguro_log",
+    "block_clover:elder_log"
   ]
 }

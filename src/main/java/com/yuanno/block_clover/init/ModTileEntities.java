@@ -3,6 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.blocks.tileentities.AntiMagicBlockTileEntity;
+import com.yuanno.block_clover.blocks.tileentities.JuicerBlockTileEntity;
 import com.yuanno.block_clover.blocks.tileentities.LightningBlockTileEntity;
 import com.yuanno.block_clover.blocks.tileentities.WindBlockTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -21,6 +22,7 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<AntiMagicBlockTileEntity>> ANTIMAGIC_TILEENTITY = registerTileEntity("antimagic_tile", () -> TileEntityType.Builder.of(AntiMagicBlockTileEntity::new, ModBlocks.ANTIMAGIC.get()).build(null));
     public static final RegistryObject<TileEntityType<LightningBlockTileEntity>> LIGHTNING_TILEENTITY = registerTileEntity("lightning_tile", () -> TileEntityType.Builder.of(LightningBlockTileEntity::new, ModBlocks.LIGHTNING.get()).build(null));
     public static final RegistryObject<TileEntityType<WindBlockTileEntity>> WIND_TILEENTITY = registerTileEntity("wind_tile", () -> TileEntityType.Builder.of(WindBlockTileEntity::new, ModBlocks.WIND.get()).build(null));
+    public static final RegistryObject<TileEntityType<JuicerBlockTileEntity>> JUICER_TILEENTITY = registerTileEntity("juicer_tile", () -> TileEntityType.Builder.of(JuicerBlockTileEntity::new, ModBlocks.JUICER.get()).build(null));
 
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> registerTileEntity(String localizedName, Supplier<TileEntityType<T>> type)
     {

@@ -5,7 +5,7 @@ import com.yuanno.block_clover.entities.*;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthSummons;
-import com.yuanno.block_clover.events.loot.ArtifactAdditionModifier;
+import com.yuanno.block_clover.events.loot.WitchHatShredAdditionModifier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "block_clover:moguro_leaf"
+    "block_clover:moguro_leaf",
+    "block_clover:elder_leaf"
   ]
 }

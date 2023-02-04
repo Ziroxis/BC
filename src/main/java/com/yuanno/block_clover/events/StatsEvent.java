@@ -23,6 +23,7 @@ import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
+import com.yuanno.block_clover.spells.time.TimeStealAbility;
 import com.yuanno.block_clover.spells.water.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -81,6 +82,9 @@ public class StatsEvent {
                     break;
                 case "Sealing":
                     abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                    break;
+                case (ModValues.TIME):
+                        abilityProps.addUnlockedAbility(TimeStealAbility.INSTANCE);
                     break;
                 case (ModValues.WATER):
                     abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);

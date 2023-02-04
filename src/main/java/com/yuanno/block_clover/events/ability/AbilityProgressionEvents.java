@@ -25,6 +25,7 @@ import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
 import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.UltimateSealAbility;
+import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
 import com.yuanno.block_clover.spells.lightning.*;
@@ -119,6 +120,15 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 10, ForwardThrustAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, LunaticSlashAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, RoundLunaticSlashAbility.INSTANCE);
+        }
+        if (statsProps.getAttribute().equals(ModValues.TIME) || statsProps.getSecondAttribute().equals(ModValues.TIME))
+        {
+            gainAbility(event.getPlayer(), 5, ChronoStasisAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, TimeHealAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, ChronoStasisGrigoraAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, TimeHopAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, TimeRessurectionAbility.INSTANCE);
+
         }
     }
 

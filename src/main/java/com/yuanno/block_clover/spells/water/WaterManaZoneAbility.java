@@ -35,7 +35,8 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
     public static final int MAX_ZONE_SIZE = 30;
     public static final int MAX_THRESHOLD = 2;
 
-    private List<BlockPos> blockList = new ArrayList<>();
+    private List<BlockPos> blockListCreate = new ArrayList<>();
+    private List<BlockPos> blockListDelete = new ArrayList<>();
     public List<BlockPos> placedBlockList = new ArrayList<>();
     private int roomSize = 0;
     private int chargingTicks = 0;
@@ -71,11 +72,11 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
             this.stopContinuity(player);
         if (this.getThreshold() == 0)
         {
-            if (this.blockList.isEmpty())
+            if (this.blockListCreate.isEmpty())
             {
                 //player.teleportTo(player.getX(), player.getY() + 50, player.getZ());
                 //entity.teleportTo(player.getX() + 3, player.getY() + 50, player.getZ() + 3);
-                this.blockList.addAll(AbilityHelper.createSphere(player.level, player.blockPosition(), this.roomSize, false, Blocks.WATER, 0));
+                this.blockListCreate.addAll(AbilityHelper.createSphere(player.level, player.blockPosition(), this.roomSize, false, Blocks.WATER, 0));
                 this.centerBlock = new BlockPos(player.getX(), player.getY(), player.getZ());
                 player.level.setBlockAndUpdate(this.centerBlock, ModBlocks.LIGHTNING.get().defaultBlockState());
                 TileEntity tileEntity = player.level.getBlockEntity(this.centerBlock);
@@ -88,8 +89,8 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
                 }
 
 
-                this.blockList.add(new BlockPos(MathHelper.floor(player.getX()), MathHelper.floor(player.getY()), MathHelper.floor(player.getZ())));
-                this.placedBlockList.addAll(this.blockList);
+                this.blockListCreate.add(new BlockPos(MathHelper.floor(player.getX()), MathHelper.floor(player.getY()), MathHelper.floor(player.getZ())));
+                this.placedBlockList.addAll(this.blockListCreate);
                 this.setThreshold(0);
 
             }
@@ -100,7 +101,8 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
                 while (iterator.hasNext())
                 {
                     BlockPos pos = iterator.next();
-                    player.level.sendBlockUpdated(pos, Blocks.AIR.defaultBlockState(), Blocks.WATER.defaultBlockState(), 0);
+                    if (!(player.level.getBlockState(pos).getBlock() == Blocks.AIR))
+                        player.level.sendBlockUpdated(pos, Blocks.AIR.defaultBlockState(), Blocks.WATER.defaultBlockState(), 0);
                     iterator.remove();
                     placedBlock++;
                     if (placedBlock > 500)
@@ -141,16 +143,20 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
     }
     private boolean onStopContinuityEvent(PlayerEntity player)
     {
-        for (BlockPos pos : this.blockList)
+        this.roomSize = this.roomSize + 28;
+        this.blockListDelete.addAll(AbilityHelper.createSphere(player.level, player.blockPosition(), this.roomSize, false, Blocks.WATER, 0));
+        this.blockListDelete.add(new BlockPos(MathHelper.floor(player.getX()), MathHelper.floor(player.getY()), MathHelper.floor(player.getZ())));
+        for (BlockPos pos : this.blockListDelete)
         {
             Block currentBlock = player.level.getBlockState(pos).getBlock();
-            if (currentBlock == Blocks.WATER || currentBlock == Blocks.WATER)
+            if (currentBlock == Blocks.WATER || currentBlock == Blocks.AIR)
                 player.level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
 //        player.level.setBlockAndUpdate(centerBlock, Blocks.AIR.defaultBlockState());
         this.zoneSet = false;
-        this.blockList.clear();
+        this.blockListCreate.clear();
         this.placedBlockList.clear();
+        this.blockListDelete.clear();
         this.setMaxCooldown(0);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;

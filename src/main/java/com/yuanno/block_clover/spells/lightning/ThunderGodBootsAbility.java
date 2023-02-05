@@ -38,6 +38,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::onDuringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
+        this.onStopContinuityEvent = this::onStopContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)
@@ -56,6 +57,13 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
             PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
+    {
+        player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(LIGHTNING_SPEED);
+        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(LIGHTNING_STEP);
+        return true;
+    }
+
+    private boolean onStopContinuityEvent(PlayerEntity player)
     {
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(LIGHTNING_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(LIGHTNING_STEP);

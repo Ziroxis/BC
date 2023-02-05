@@ -83,10 +83,10 @@ public class StatsEvent {
                 case "Sealing":
                     abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                     break;
-                case (ModValues.TIME):
+                case "Time":
                         abilityProps.addUnlockedAbility(TimeStealAbility.INSTANCE);
                     break;
-                case (ModValues.WATER):
+                case "Water":
                     abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);
                     break;
                 case (ModValues.ANTIMAGIC):

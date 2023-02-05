@@ -115,8 +115,8 @@ public abstract class ContinuousAbility extends Ability {
         /*
         if(player.level.isClientSide)
         	return;
-        	
-         */
+        */
+
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.canUse(player))
         {
@@ -132,8 +132,10 @@ public abstract class ContinuousAbility extends Ability {
             if((this.isClientSide() || !player.level.isClientSide) && !this.isStateForced())
                 this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 
-            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10 && !(getmanaCost() == 0))
+            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10 && !(getmanaCost() == 0)) {
                 this.endContinuity(player);
+                System.out.println("TEST 1");
+            }
             if (player.tickCount % 20 == 0)
             {
                 if (propsEntity.getLevel() < getExperienceGainLevelCap())

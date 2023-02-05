@@ -16,7 +16,7 @@ public class WindGaleAbility extends ChargeableAbility {
         super("Wind Gale", AbilityCategories.AbilityCategory.ATTRIBUTE);
         this.setDescription("Concentrate the wind while being unable to move.\nRight after, shooting a wind blast.");
         this.setMaxCooldown(12);
-        this.setMaxChargeTime(3);
+        this.setMaxChargeTime(5);
         this.setmanaCost(30);
         this.setExperiencePoint(20);
         this.setCancelable();

@@ -65,6 +65,9 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
             player.abilities.mayfly = false;
             player.abilities.flying = false;
             player.fallDistance = 0;
+            if(player instanceof ServerPlayerEntity)
+                ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
+
         }
 
         return true;

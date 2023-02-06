@@ -24,6 +24,8 @@ import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
+import com.yuanno.block_clover.spells.time.TimeStealAbility;
+import com.yuanno.block_clover.spells.water.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -81,7 +83,13 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                 case "Sealing":
                     abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                     break;
-                case "Anti-magic":
+                case "Time":
+                    abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                    break;
+                case "Water":
+                    abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                    break;
+                case "Anti_magic":
                     abilityData.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
                     abilityData.addUnlockedAbility(BullThrustAbility.INSTANCE);
                     stats.setRace(ModValues.HUMAN);
@@ -143,6 +151,12 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                         break;
                     case "Slash":
                         abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                        break;
+                    case "Time":
+                        abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                        break;
+                    case "Water":
+                        abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
                         break;
                     case "Sealing":
                         abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);

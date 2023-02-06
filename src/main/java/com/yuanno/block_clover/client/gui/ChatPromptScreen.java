@@ -114,6 +114,7 @@ public class ChatPromptScreen extends Screen {
         }
         int finalAmountDone = amountDone;
         Quest questGiver = npCentity.quests.get(finalAmountDone);
+        /*
         for(int i = 0; i < questData.getInProgressQuests().length; i++)
         {
             System.out.println(questData.getInProgressQuest(i));
@@ -121,7 +122,7 @@ public class ChatPromptScreen extends Screen {
             {
                 for (int ia = 0; ia < npCentity.quests.size(); i++)
                 {
-                    if (npCentity.quests.get(ia).getId().equals(questData.getInProgressQuest(i).getId()))
+                    if (npCentity.quests.get(ia) != null && npCentity.quests.get(ia).getTitle().equals(questData.getInProgressQuest(i).getTitle()))
                     {
                         Quest quest = npCentity.quests.get(ia);
                         questData.addFinishedQuest(quest);
@@ -134,6 +135,37 @@ public class ChatPromptScreen extends Screen {
                 return;
             }
         }
+        */
+
+        for (int i = 0; i < questData.getInProgressQuests().length; i++)
+        {
+            if (questData.getInProgressQuest(i) != null)
+            {
+                for (int ia = 0; ia < npCentity.quests.size(); ia++)
+                {
+                    if (npCentity.quests.get(ia) != null && questData.getInProgressQuest(i).getId().equals(npCentity.quests.get(ia).getId()))
+                    {
+                        if (npCentity.quests.get(ia) != null && !questData.hasFinishedQuest(npCentity.quests.get(ia)) && npCentity.quests.get(ia).isComplete())
+                        {
+                            questData.addFinishedQuest(npCentity.quests.get(ia));
+                            questData.removeFinishedQuest(npCentity.quests.get(ia));
+                            questData.removeInProgressQuest(npCentity.quests.get(ia));
+                            PacketHandler.sendToServer(new CUpdateQuestStatePacket(npCentity.quests.get(ia)));
+                            this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
+                            return;
+                        }
+                        else
+                        {
+                            this.message = new SequencedString(npCentity.waitingSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+                break;
+        }
+
         if (npCentity.preRequisite)
         {
             if (npCentity.requisite == 1 && entityStats.getLevel() < npCentity.levelrequisites.get(amountDone))

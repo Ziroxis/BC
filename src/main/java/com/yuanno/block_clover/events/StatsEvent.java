@@ -84,7 +84,7 @@ public class StatsEvent {
                     abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
                     break;
                 case "Time":
-                        abilityProps.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(TimeStealAbility.INSTANCE);
                     break;
                 case "Water":
                     abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);

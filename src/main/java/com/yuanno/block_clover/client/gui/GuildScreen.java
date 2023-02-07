@@ -63,13 +63,12 @@ public class GuildScreen extends Screen {
         {
             boolean isInGuild = extendedWorldData.getGuildWithMember(player.getUUID()) != null;
             if (isInGuild) {
+                if (extendedWorldData.getGuildWithMember(player.getUUID()).getMember(player.getUUID()).isCaptain() && extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain() != null) // if you have a vice captain and you're captain, the vice captain becomes captain
+                    extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain().setIsCaptain(true);
+                PacketHandler.sendToServer(new CLeaveGuildPacket());
                 Minecraft.getInstance().setScreen(null);
                 return;
             }
-            if (extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain() != null)
-                extendedWorldData.getGuildWithMember(player.getUUID()).getViceCaptain().setIsCaptain(true);
-            PacketHandler.sendToServer(new CLeaveGuildPacket());
-            Minecraft.getInstance().setScreen(null);
         }));
     }
 

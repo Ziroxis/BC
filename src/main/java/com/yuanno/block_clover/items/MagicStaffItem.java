@@ -6,6 +6,8 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.events.StatsEvent;
 import com.yuanno.block_clover.init.ModItemGroup;
 import com.yuanno.block_clover.init.ModValues;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,12 +45,14 @@ public class MagicStaffItem extends Item {
                         stats.alterManaRegeneration(0.2f);
                         stats.alterMana(20f);
                         stats.setStaffBoost(true);
-                    }
+                            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+                        }
                 } else {
                     if (stats.getStaffBoost()) {
                         stats.alterManaRegeneration(-0.2f);
                         stats.alterMana(-20f);
                         stats.setStaffBoost(false);
+                        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
                     }
                 }
             }

@@ -26,6 +26,8 @@ public class ManaEvents {
         if (player.tickCount % 20 == 0 && propsEntity.getMana() < propsEntity.getMaxMana())
         {
             propsEntity.alterMana(regen);
+            if (propsEntity.getAttribute().equals(ModValues.TIME) || propsEntity.getSecondAttribute().equals(ModValues.TIME) && propsEntity.getTime() < 1000)
+                propsEntity.alterTime(1);
         }
     }
 }

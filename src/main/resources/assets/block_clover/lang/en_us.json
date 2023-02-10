@@ -1,170 +1,233 @@
 {
-  "itemGroup.block_cloverBlocks": "Block clover blocks",
-  "block.block_clover.moguro_plank": "Moguro plank",
-  "block.block_clover.moguro_log": "Moguro log",
-  "block.block_clover.moguro_leaf": "Moguro leaf",
-  "block.block_clover.moguro_sapling": "Moguro sapling",
-  "block.block_clover.elder_plank": "Elder plank",
-  "block.block_clover.elder_log": "Elder log",
-  "block.block_clover.elder_leaf": "Elder leaf",
-  "block.block_clover.elder_sapling": "Elder sapling",
+  //Blocks
   "block.block_clover.juicer_block": "Juicer",
 
-  "itemGroup.block_cloverModTabWeapons": "Block clover weapons",
-  "itemGroup.block_cloverModTabClothes": "Block clover clothes",
+  //Tree
+  //Moguro
+  "block.block_clover.moguro_plank": "Moguro Plank",
+  "block.block_clover.moguro_log": "Moguro Log",
+  "block.block_clover.moguro_leaf": "Moguro Leaf",
+  "block.block_clover.moguro_sapling": "Moguro Sapling",
 
-  "item.block_clover.demon_destroyer": "Demon destroyer",
-  "item.block_clover.demon_dweller": "Demon dweller",
+  //Elder
+  "block.block_clover.elder_plank": "Elder Plank",
+  "block.block_clover.elder_log": "Elder Log",
+  "block.block_clover.elder_leaf": "Elder Leaf",
+  "block.block_clover.elder_sapling": "Elder Sapling",
+
+
+  //ItemGroups
+  "itemGroup.block_cloverBlocks": "Block Clover Blocks",
+  "itemGroup.block_cloverModTabWeapons": "Block Clover Weapons",
+  "itemGroup.block_cloverModTabClothes": "Block Clover Clothes",
+  "itemGroup.block_cloverModTabArtifacts": "Block Clover Artifacts",
+
+
+  //Weapons
+  "item.block_clover.demon_destroyer": "Demon Destroyer",
+  "item.block_clover.demon_dweller": "Demon Dweller",
   "item.block_clover.yamis_katana": "Katana",
+  "item.block_clover.light_sword": "Light Sword",
+  "item.block_clover.demon_slayer_antimagic": "Demon Slayer Sword",
+
+  //Armor
+  "item.block_clover.witch_hat": "Witch Hat",
+
+  //Mage
+  "item.block_clover.mage_hat": "Mage Hat",
+  "item.block_clover.mage_chest": "Mage Chest",
+  "item.block_clover.mage_legs": "Mage Legs",
+  "item.block_clover.mage_feet": "Mage Feet",
+
+  //Asta
+  "item.block_clover.asta_hat": "Asta Bandana",
+  "item.block_clover.asta_chest": "Asta Chest",
+  "item.block_clover.asta_legs": "Asta Legs",
+  "item.block_clover.asta_feet": "Asta Feet",
+
+  "item.block_clover.asta_2_hat": "Asta Bandana",
+  "item.block_clover.asta_2_chest": "Asta Chest",
+  "item.block_clover.asta_2_legs": "Asta Legs",
+  "item.block_clover.asta_2_feet": "Asta Feet",
+
+  //Yuno
+  "item.block_clover.yuno_chest": "Yuno Chest",
+  "item.block_clover.yuno_legs": "Yuno Legs",
+  "item.block_clover.yuno_feet": "Yuno Feet",
+
+  //GoldenDawn
+  "item.block_clover.golden_dawn_chest": "Golden Dawn Chest",
+  "item.block_clover.golden_dawn_legs": "Golden Dawn Legs",
+  "item.block_clover.golden_dawn_feet": "Golden Dawn Feet",
 
 
-  "item.block_clover.mage_hat": "Mage hat",
-  "item.block_clover.mage_chest": "Mage chest",
-  "item.block_clover.mage_legs": "Mage legs",
-  "item.block_clover.mage_feet": "Mage feet",
+  //Items
+  "item.block_clover.moguro_juice":  "Moguro Juice",
+  "itemGroup.block_cloverMisc": "Block Clover Miscellaneous",
+  "item.block_clover.magical_meat": "Magical Meat",
+  "item.block_clover.cooked_magical_meat": "Cooked Magical Meat",
+  "item.block_clover.witch_hat_shred": "Witch Hat Shred",
+  "item.block_clover.modifying_crystal": "Modifying Crystal",
+  "item.block_clover.magic_staff": "Magic Wand",
+  "item.block_clover.modified_magic_staff": "Modified Magic Wand",
 
-  "item.block_clover.asta_hat": "Asta bandana",
-  "item.block_clover.asta_chest": "Asta chest",
-  "item.block_clover.asta_legs": "Asta legs",
-  "item.block_clover.asta_feet": "Asta feet",
-
-  "item.block_clover.asta_2_hat": "Asta bandana",
-  "item.block_clover.asta_2_chest": "Asta chest",
-  "item.block_clover.asta_2_legs": "Asta legs",
-  "item.block_clover.asta_2_feet": "Asta feet",
-
-  "item.block_clover.yuno_chest": "Yuno chest",
-  "item.block_clover.yuno_legs": "Yuno legs",
-  "item.block_clover.yuno_feet": "Yuno feet",
-
-  "item.block_clover.golden_dawn_chest": "Golden dawn chest",
-  "item.block_clover.golden_dawn_legs": "Golden dawn legs",
-  "item.block_clover.golden_dawn_feet": "Golden dawn feet",
-
-  "item.block_clover.witch_hat": "Witch hat",
-  "item.block_clover.moguro_juice":  "Moguro juice",
+  //Effects
+  "effect.block_clover.xp_multiplier": "Xp Multiplier",
 
 
+  //Entities
+  "entity.block_clover.monkey_entity": "Wind Monkey",
+  "entity.block_clover.bandit": "Bandit",
+  "entity.block_clover.clover_shark": "Shark",
+  "entity.block_clover.volcano_monster": "Volcano Monster",
+
+  "item.block_clover.volcano_monster_egg": "Volcano Monster Egg",
+  "item.block_clover.monkey_egg": "Magical Monkey Egg",
+  "item.block_clover.bandit_egg": "Bandit Egg",
+  "item.block_clover.shark_egg": "Shark Egg",
+
+  //GUI
   "gui.blackclover.stats.spells": "Spells",
   "gui.blackclover.stats.stats": "Stats",
   "gui.blackclover.stats.overview": "Overview",
   "gui.blackclover.stats.quests": "Quests",
   "gui.blackclover.stats.guild": "Guild",
+  "gui.blackclover.guild.leave": "Leave Guild",
+  "gui.blackclover.guild.promote": "Promote",
+  "gui.blackclover.guild.kick": "Kick",
+
+
   "screen.block_clover.juicer":  "Juicer",
 
-  "Keys.block_clover.combat": "Combat keys",
-  "Keys.block_clover.combat_1": "Combat key 1",
-  "Keys.block_clover.combat_2": "Combat key 2",
-  "Keys.block_clover.combat_3": "Combat key 3",
-  "Keys.block_clover.combat_4": "Combat key 4",
-  "Keys.block_clover.combat_5": "Combat key 5",
-  "Keys.block_clover.combat_6": "Combat key 6",
-  "Keys.block_clover.combat_7": "Combat key 7",
-  "Keys.block_clover.combat_8": "Combat key 8",
-  "Keys.block_clover.combat_mode": "Combat mode",
-  "Keys.block_clover.next_bar": "Next combat bar",
-  "Keys.block_clover.previous_bar": "Previous combat bar",
+  //Tooltip
+  "tooltip.block_clover.magic_staff_witch": "Put this item in your offhand to get a stats boost!",
+  "tooltip.block_clover.magic_staff": "You can only use this item as witch!",
 
-  "Keys.block_clover.gui": "Gui keys block clover",
-  "Keys.block_clover.info_card": "Info card block clover",
 
-  "ability.block_clover.mana_skin": "Mana skin",
-  "ability.block_clover.mana_reinforcement": "Mana reinforcement",
 
-  "item.block_clover.light_sword": "Light sword",
-  "item.block_clover.demon_slayer_antimagic": "Demon slayer sword",
+  //Keys
+  "Keys.block_clover.combat": "Combat Keys",
+  "Keys.block_clover.combat_1": "Combat Key 1",
+  "Keys.block_clover.combat_2": "Combat Key 2",
+  "Keys.block_clover.combat_3": "Combat Key 3",
+  "Keys.block_clover.combat_4": "Combat Key 4",
+  "Keys.block_clover.combat_5": "Combat Key 5",
+  "Keys.block_clover.combat_6": "Combat Key 6",
+  "Keys.block_clover.combat_7": "Combat Key 7",
+  "Keys.block_clover.combat_8": "Combat Key 8",
+  "Keys.block_clover.combat_mode": "Combat Mode",
+  "Keys.block_clover.next_bar": "Next Combat Bar",
+  "Keys.block_clover.previous_bar": "Previous Combat Bar",
+  "Keys.block_clover.gui": "Gui Keys Block Clover",
+  "Keys.block_clover.info_card": "Info Card Block Clover",
 
-  "ability.block_clover.wind_blade": "Wind blade",
-  "ability.block_clover.wind_crescent": "Wind crescent",
-  "ability.block_clover.wind_blade_shower": "Wind blade shower",
-  "ability.block_clover.towering_tornado": "Towering tornado",
-  "ability.block_clover.wind_flight": "Wind flight",
-  "ability.block_clover.tornado_bullet": "Tornado bullet",
-  "ability.block_clover.wind_gale": "Wind gale",
-  "ability.block_clover.wind_mana_zone": "Wind mana zone",
 
-  "ability.block_clover.dark_cloaked_blade": "Darkness cloaked blade",
-  "ability.block_clover.avidya_slash": "Avidya slash",
-  "ability.block_clover.avidya_wild_slash": "Avidya wild slash",
-  "ability.block_clover.blunt_strike": "Blunt strike",
-  "ability.block_clover.black_hole": "Black hole",
-  "ability.block_clover.black_moon": "Black moon",
+  //Abilities
+  "ability.block_clover.mana_skin": "Mana Skin",
+  "ability.block_clover.mana_reinforcement": "Mana Reinforcement",
 
-  "ability.block_clover.earth_chunk": "Earth chunk",
-  "ability.block_clover.earth_charge": "Earth charge",
-  "ability.block_clover.earth_gloves": "Earth gloves",
-  "ability.block_clover.earth_minion": "Earth minions",
+
+  //Wind
+  "ability.block_clover.wind_blade": "Wind Blade",
+  "ability.block_clover.wind_crescent": "Wind Crescent",
+  "ability.block_clover.wind_blade_shower": "Wind Blade Shower",
+  "ability.block_clover.towering_tornado": "Towering Tornado",
+  "ability.block_clover.wind_flight": "Wind Flight",
+  "ability.block_clover.tornado_bullet": "Tornado Bullet",
+  "ability.block_clover.wind_gale": "Wind Gale",
+  "ability.block_clover.wind_mana_zone": "Wind Mana Zone",
+
+  //Darkness
+  "ability.block_clover.dark_cloaked_blade": "Darkness Cloaked Blade",
+  "ability.block_clover.avidya_slash": "Avidya Slash",
+  "ability.block_clover.avidya_wild_slash": "Avidya Wild Slash",
+  "ability.block_clover.blunt_strike": "Blunt Strike",
+  "ability.block_clover.black_hole": "Black Hole",
+  "ability.block_clover.black_moon": "Black Moon",
+
+  //Earth
+  "ability.block_clover.earth_chunk": "Earth Chunk",
+  "ability.block_clover.earth_charge": "Earth Charge",
+  "ability.block_clover.earth_gloves": "Earth Gloves",
+  "ability.block_clover.earth_minion": "Earth Minions",
   "ability.block_clover.earth_manipulation": "Earth Manipulation",
-  "ability.block_clover.earth_golem": "Earth golem",
+  "ability.block_clover.earth_golem": "Earth Golem",
   "ability.block_clover.earth_quake": "Earthquake",
-  "ability.block_clover.earth_shake": "Earth shake",
-  "ability.block_clover.earth_mana_zone": "Earth mana zone",
+  "ability.block_clover.earth_shake": "Earth Shake",
+  "ability.block_clover.earth_mana_zone": "Earth Mana Zone",
 
-  "ability.block_clover.fire_ball": "Fire ball",
-  "ability.block_clover.flame_roar": "Flame roar",
-  "ability.block_clover.sol_linea": "Sol linea",
-  "ability.block_clover.spiral_flame": "Spiral flame",
-  "ability.block_clover.leo_palma": "Leo palma",
-  "ability.block_clover.wild_bursting_flames": "Wild bursting flames",
+  //Fire
+  "ability.block_clover.fire_ball": "Fire Ball",
+  "ability.block_clover.flame_roar": "Flame Roar",
+  "ability.block_clover.sol_linea": "Sol Linea",
+  "ability.block_clover.spiral_flame": "Spiral Flame",
+  "ability.block_clover.leo_palma": "Leo Palma",
+  "ability.block_clover.wild_bursting_flames": "Wild Bursting Flames",
   "ability.block_clover.calidus_brachium_barrage": "Calidus Brachium Barrage",
 
-  "ability.block_clover.light_blade": "Light blade",
-  "ability.block_clover.light_blade_shower": "Light blade shower",
-  "ability.block_clover.light_healing": "Light healing",
-  "ability.block_clover.light_movement": "Light movement",
-  "ability.block_clover.light_sword": "Light sword",
-  "ability.block_clover.arrows_of_judgement": "Arrows of judgement",
+  //Light
+  "ability.block_clover.light_blade": "Light Blade",
+  "ability.block_clover.light_blade_shower": "Light Blade Shower",
+  "ability.block_clover.light_healing": "Light Healing",
+  "ability.block_clover.light_movement": "Light Movement",
+  "ability.block_clover.light_sword": "Light Sword",
+  "ability.block_clover.arrows_of_judgement": "Arrows Of Judgement",
 
-  "ability.block_clover.thunder_god_gloves": "Thunder god gloves",
-  "ability.block_clover.thunder_god_boots": "Thunder god boots",
-  "ability.block_clover.thunder_crumbling_orb": "Thunder crumbling orb",
-  "ability.block_clover.thunder_crumbling_orb_multi": "Thunder crumbling orb multi",
-  "ability.block_clover.thunder_discharge": "Thunder discharge",
-  "ability.block_clover.thunder_fiend": "Thunder fiend",
-  "ability.block_clover.thunder_fiend_multi": "Thunder fiend multi",
-  "ability.block_clover.thunder_slash": "Thunder slash",
-  "ability.block_clover.thunder_charge": "Thunder charge",
-  "ability.block_clover.thunder_mana_zone": "Thunder mana zone",
+  //Thunder
+  "ability.block_clover.thunder_god_gloves": "Thunder God Gloves",
+  "ability.block_clover.thunder_god_boots": "Thunder God Boots",
+  "ability.block_clover.thunder_crumbling_orb": "Thunder Crumbling Orb",
+  "ability.block_clover.thunder_crumbling_orb_multi": "Thunder Crumbling Orb Multi",
+  "ability.block_clover.thunder_discharge": "Thunder Discharge",
+  "ability.block_clover.thunder_fiend": "Thunder Fiend",
+  "ability.block_clover.thunder_fiend_multi": "Thunder Fiend Multi",
+  "ability.block_clover.thunder_slash": "Thunder Slash",
+  "ability.block_clover.thunder_charge": "Thunder Charge",
+  "ability.block_clover.thunder_mana_zone": "Thunder Mana Zone",
 
-  "ability.block_clover.slash_blades": "Slash blades",
-  "ability.block_clover.death_scythe": "Death scythe",
-  "ability.block_clover.death_scythe_shower": "Death scythe shower",
-  "ability.block_clover.forward_thrust": "Forward thrust",
-  "ability.block_clover.lunatic_slash": "Lunatic slash",
-  "ability.block_clover.round_lunatic_slash": "Round lunatic slash",
+  //Slash
+  "ability.block_clover.slash_blades": "Slash Blades",
+  "ability.block_clover.death_scythe": "Death Scythe",
+  "ability.block_clover.death_scythe_shower": "Death Scythe Shower",
+  "ability.block_clover.forward_thrust": "Forward Thrust",
+  "ability.block_clover.lunatic_slash": "Lunatic Slash",
+  "ability.block_clover.round_lunatic_slash": "Round lunatic Slash",
 
-  "ability.block_clover.demon_state": "Demon state",
-  "ability.block_clover.black_slash": "Black slash",
-  "ability.block_clover.black_tornado": "Black tornado",
-  "ability.block_clover.bull_thrust": "Bull thrust",
-  "ability.block_clover.demon_slayer": "Demon slayer",
+  //AntiMagic
+  "ability.block_clover.demon_state": "Demon State",
+  "ability.block_clover.black_slash": "Black Slash",
+  "ability.block_clover.black_tornado": "Black Tornado",
+  "ability.block_clover.bull_thrust": "Bull Thrust",
+  "ability.block_clover.demon_slayer": "Demon Slayer",
 
-  "ability.block_clover.sealing_projectile": "Sealing projectile",
-  "ability.block_clover.sealing_punch": "Sealing punch",
-  "ability.block_clover.self_healing_seal": "Self healing sealing",
-  "ability.block_clover.other_heal_sealing": "Other healing sealing",
-  "ability.block_clover.ultimate_seal": "Ultimate sealing",
-  "ability.block_clover.sealing_mana_zone": "Sealing mana zone",
+  //Sealing
+  "ability.block_clover.sealing_projectile": "Sealing Projectile",
+  "ability.block_clover.sealing_punch": "Sealing Punch",
+  "ability.block_clover.self_healing_seal": "Self Healing Sealing",
+  "ability.block_clover.other_heal_sealing": "Other Healing Sealing",
+  "ability.block_clover.ultimate_seal": "Ultimate Sealing",
+  "ability.block_clover.sealing_mana_zone": "Sealing Mana Zone",
 
-  "ability.block_clover.water_ball": "Water ball",
-  "ability.block_clover.water_shield": "Water shield",
-  "ability.block_clover.water_dragon": "Water dragon",
-  "ability.block_clover.water_spear": "Water spear",
-  "ability.block_clover.valkyrie_armor": "Valkyrie armor",
-  "ability.block_clover.point_blank_dragon": "Point blank water dragon",
-  "ability.block_clover.water_mana_zone": "Water mana zone",
+  //Water
+  "ability.block_clover.water_ball": "Water bBll",
+  "ability.block_clover.water_shield": "Water Shield",
+  "ability.block_clover.water_dragon": "Water Dragon",
+  "ability.block_clover.water_spear": "Water Spear",
+  "ability.block_clover.valkyrie_armor": "Valkyrie Armor",
+  "ability.block_clover.point_blank_dragon": "Point Blank Water Dragon",
+  "ability.block_clover.water_mana_zone": "Water Mana Zone",
 
-  "ability.block_clover.time_steal": "Time steal",
-  "ability.block_clover.chrono_stasis": "Chrono stasis",
-  "ability.block_clover.chrono_stasis_grigora": "Chrono stasis grigora",
-  "ability.block_clover.time_healing": "Time healing",
-  "ability.block_clover.time_hop": "Time hop",
-  "ability.block_clover.time_ressurection": "Time ressurection",
-  "ability.block_clover.time_magic_zone": "Time magic zone",
+  //Time
+  "ability.block_clover.time_steal": "Time Steal",
+  "ability.block_clover.chrono_stasis": "Chrono Stasis",
+  "ability.block_clover.chrono_stasis_grigora": "Chrono Stasis Grigora",
+  "ability.block_clover.time_healing": "Time Healing",
+  "ability.block_clover.time_hop": "Time Hop",
+  "ability.block_clover.time_ressurection": "Time Ressurection",
+  "ability.block_clover.time_magic_zone": "Time Magic Zone",
 
 
-
-
+  //Curios
   "curios.slot": "Slot",
   "curios.identifier.head": "Head",
   "curios.identifier.necklace": "Necklace",
@@ -176,55 +239,29 @@
   "curios.identifier.belt": "Belt",
   "curios.identifier.slot": "Bracelet",
 
-  "itemGroup.block_cloverModTabArtifacts": "Block clover artifacts",
-  "item.block_clover.night_crown": "Night crown",
-  "item.block_clover.light_weight_ring": "Light weight ring",
-  "item.block_clover.artifact_change": "Artifact of change",
-  "item.block_clover.artifact_surplus": "Artifact of surplus",
-  "item.block_clover.fire_belt": "Fire belt",
-  "item.block_clover.gloves_impatience": "Gloves of impatience",
-  "item.block_clover.rabbit_foot": "Rabbit foot",
-  "item.block_clover.lucky_ring": "Lucky ring",
-  "item.block_clover.mittens_regeneration": "Mittens of regeneration",
-  "item.block_clover.bracelet_bravery": "Bracelet of bravery",
-  "item.block_clover.protecting_charm": "Protecting charm",
-  "item.block_clover.health_artifact": "Stone of health",
-  "item.block_clover.regen_artifact": "Regenerating stone",
-  "item.block_clover.necklace_agitation": "Agitating necklace",
-  "item.block_clover.cloak_invisibility": "Invisible cloak",
-  "item.block_clover.air_belt": "Air belt",
-  "item.block_clover.bracelet_push": "Push bracelet",
-  "item.block_clover.rare_candy": "Rare candy",
-  "item.block_clover.maximizing_mana": "Maximizing mana",
-  "item.block_clover.mana_regeneration": "Regenerating mana",
-  "item.block_clover.bag_gluttony": "Gluttonous bag",
-  "item.block_clover.green_thumb": "Green thumbs",
-  "item.block_clover.jump_artifact": "Jump artifact",
-  "item.block_clover.race_change": "Race change",
-
-  "itemGroup.block_cloverMisc": "Block clover Miscellaneous",
-  "item.block_clover.magical_meat": "Magical meat",
-  "item.block_clover.cooked_magical_meat": "Cooked magical meat",
-  "item.block_clover.volcano_monster_egg": "Volcano monster egg",
-  "item.block_clover.monkey_egg": "Magical Monkey egg",
-  "item.block_clover.bandit_egg": "Bandit egg",
-  "item.block_clover.shark_egg": "Shark egg",
-  
-  "item.block_clover.witch_hat_shred": "Witch hat shred",
-  "item.block_clover.modifying_crystal": "Modyfying crystal",
-  "item.block_clover.magic_staff": "Magic wand",
-  "item.block_clover.modified_magic_staff": "Modified magic wand",
-
-  "tooltip.block_clover.magic_staff_witch": "Put this item in your offhand to get a stats boost!",
-  "tooltip.block_clover.magic_staff": "You can only use this item as witch!",
-
-  "entity.block_clover.monkey_entity": "Wind Monkey",
-  "entity.block_clover.bandit": "Bandit",
-  "entity.block_clover.clover_shark": "Shark",
-
-
-  "gui.blackclover.guild.leave": "Leave guild",
-  "gui.blackclover.guild.promote": "Promote",
-  "gui.blackclover.guild.kick": "Kick"
-
+  //Artifacts
+  "item.block_clover.night_crown": "Night Crown",
+  "item.block_clover.light_weight_ring": "Light Weight Ring",
+  "item.block_clover.artifact_change": "Artifact Of Change",
+  "item.block_clover.artifact_surplus": "Artifact Of Surplus",
+  "item.block_clover.fire_belt": "Fire Belt",
+  "item.block_clover.gloves_impatience": "Gloves Of Impatience",
+  "item.block_clover.rabbit_foot": "Rabbit Foot",
+  "item.block_clover.lucky_ring": "Lucky Ring",
+  "item.block_clover.mittens_regeneration": "Mittens Of Regeneration",
+  "item.block_clover.bracelet_bravery": "Bracelet Of Bravery",
+  "item.block_clover.protecting_charm": "Protecting Charm",
+  "item.block_clover.health_artifact": "Stone Of Health",
+  "item.block_clover.regen_artifact": "Regenerating Stone",
+  "item.block_clover.necklace_agitation": "Agitating Necklace",
+  "item.block_clover.cloak_invisibility": "Invisible Cloak",
+  "item.block_clover.air_belt": "Air Belt",
+  "item.block_clover.bracelet_push": "Push Bracelet",
+  "item.block_clover.rare_candy": "Rare Candy",
+  "item.block_clover.maximizing_mana": "Maximizing Mana",
+  "item.block_clover.mana_regeneration": "Regenerating Mana",
+  "item.block_clover.bag_gluttony": "Gluttonous Bag",
+  "item.block_clover.green_thumb": "Green Thumbs",
+  "item.block_clover.jump_artifact": "Jump Artifact",
+  "item.block_clover.race_change": "Race Change"
 }

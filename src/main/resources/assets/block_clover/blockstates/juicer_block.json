@@ -1,5 +1,19 @@
 {
   "variants": {
-    "": [ {"model": "block_clover:block/juicer_block"} ]
+  "facing=east": {
+    "model": "block_clover:block/juicer_block",
+    "y": 90
+  },
+  "facing=north": {
+    "model": "block_clover:block/juicer_block"
+  },
+  "facing=south": {
+    "model": "block_clover:block/juicer_block",
+    "y": 180
+  },
+  "facing=west": {
+    "model": "block_clover:block/juicer_block",
+    "y": 270
   }
+}
 }

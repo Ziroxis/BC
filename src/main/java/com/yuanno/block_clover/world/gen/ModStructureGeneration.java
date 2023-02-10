@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.world.gen;
 
+import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.world.biome.ModBiomes;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import net.minecraft.util.RegistryKey;
@@ -34,6 +35,10 @@ public class ModStructureGeneration
         if (event.getName().equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get().getRegistryName()))
         {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_FIRE_DUNGEON);
+        }
+        if (event.getName().equals(ModBiomes.MOGURO_FOREST.get().getRegistryName()))
+        {
+            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_GUILD_TOWER);
         }
         /*
         if (event.getName().equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get().getRegistryName()))

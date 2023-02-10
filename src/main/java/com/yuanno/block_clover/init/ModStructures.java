@@ -41,6 +41,7 @@ public class ModStructures
     public static final RegistryObject<Structure<NoFeatureConfig>> MINI_VOLCANO = DEFERRED_REGISTRY_STRUCTURE.register("mini_volcano", MiniVolcano::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> UNDERWATER_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("underwater_dungeon", UnderWaterDungeonStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> FIRE_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("fire_dungeon", VolcanoDungeonStructure::new);
+    public static final RegistryObject<Structure<NoFeatureConfig>> GUILD_TOWER = DEFERRED_REGISTRY_STRUCTURE.register("guild_tower", GuildTowerStructure::new);
 
 
     /**
@@ -52,7 +53,7 @@ public class ModStructures
                 MAGICTOWER.get(), /* The instance of the structure */
                 new StructureSeparationSettings(30 /* average distance apart in chunks between spawn attempts */,
                         10 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
-                        1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
+                        224558173 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 true);
 
 
@@ -74,7 +75,7 @@ public class ModStructures
                 UNDERWATER_DUNGEON.get(),
                 new StructureSeparationSettings(90,
                         60,
-                        558932148
+                        626645425
 
                 ), false
         );
@@ -82,7 +83,15 @@ public class ModStructures
                 FIRE_DUNGEON.get(),
                 new StructureSeparationSettings(90,
                         60,
-                        558932148
+                        574814420
+
+                ), false
+        );
+        setupMapSpacingAndLand(
+                GUILD_TOWER.get(),
+                new StructureSeparationSettings(30,
+                        10,
+                        156523685
 
                 ), false
         );

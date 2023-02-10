@@ -23,9 +23,9 @@ public class JuicerRecipeCategory implements IRecipeCategory<JuicerRecipe> {
     private final IDrawableStatic progressBar;
 
     public JuicerRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0,0,256,256);
+        this.background = helper.createDrawable(TEXTURE, 6,6,130,70);
         this.icon = helper.createDrawableIngredient(new ItemStack(ModBlocks.JUICER.get()));
-        this.progressBar = helper.createDrawable(TEXTURE, 176, 0, 13, 17);
+        this.progressBar = helper.createDrawable(TEXTURE, 176, 0, 29, 12);
     }
     @Override
     public ResourceLocation getUid() {
@@ -60,11 +60,11 @@ public class JuicerRecipeCategory implements IRecipeCategory<JuicerRecipe> {
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, JuicerRecipe recipe, IIngredients ingredients) {
-    recipeLayout.getItemStacks().init(0, true,80,10);
-    recipeLayout.getItemStacks().init(1, true,80,32);
-    recipeLayout.getItemStacks().init(2, true,150,54);
+    recipeLayout.getItemStacks().init(0, true,41,28);
+    recipeLayout.getItemStacks().init(1, true,53,7);
+    recipeLayout.getItemStacks().init(2, true,53,49);
 
-    recipeLayout.getItemStacks().init(3, false,80,66);
+    recipeLayout.getItemStacks().init(3, false,101,28);
 
     recipeLayout.getItemStacks().set(ingredients);
     }

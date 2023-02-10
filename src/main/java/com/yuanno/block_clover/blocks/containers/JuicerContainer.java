@@ -18,7 +18,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 
 public class JuicerContainer extends Container {
-    private final TileEntity tileEntity;
+    public final TileEntity tileEntity;
     private final PlayerEntity player;
     private final IItemHandler hander;
     public static final int SLOTS = 4;
@@ -29,14 +29,14 @@ public class JuicerContainer extends Container {
         this.tileEntity = world.getBlockEntity(pos);
         this.player = player;
         this.hander = new InvWrapper(inventory);
-        layoutPlayerInventorySlots(8, 86);
+        layoutPlayerInventorySlots(8, 84);
 
         if(tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h,0,80,10));
-                addSlot(new SlotItemHandler(h,1,80,32));
-                addSlot(new SlotItemHandler(h,2,150,54));
-                addSlot(new SlotItemHandler(h,3,80,66));
+                addSlot(new SlotItemHandler(h,0,48,35));
+                addSlot(new SlotItemHandler(h,1,60,14));
+                addSlot(new SlotItemHandler(h,2,60,56));
+                addSlot(new SlotItemHandler(h,3,108,35));
 
             });
         }

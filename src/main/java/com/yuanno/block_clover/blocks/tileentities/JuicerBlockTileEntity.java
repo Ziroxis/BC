@@ -40,12 +40,14 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
     private final ItemStackHandler stackHandler = createStackHandler(this);
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> stackHandler);
     //time it needs to process the leaf
-    private short processTime = (short) 1200;
+    private short processTime = (short) 2400;
     //time the leaf has already been processing
     private short workTime;
     //needed for atomisation with hoppers
     private static final int[] SLOTS_FOR_INPUTS = new int[]{0, 1, 2};
     private static final int[] SLOTS_FOR_DOWN = new int[]{3};
+
+    public boolean isOn = false;
 
     protected NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
 
@@ -57,10 +59,15 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
         this(ModTileEntities.JUICER_TILEENTITY.get());
     }
 
+    public int getWorkTime() {
+        return workTime;
+    }
+
     @Override
     public void load(BlockState state, CompoundNBT nbt) {
-        this.processTime = (short) 1200;
-        this.workTime = nbt.getShort("WorkTime");
+        this.processTime = (short) 2400;
+        this.workTime = nbt.getShort("workTime");
+        this.isOn = nbt.getBoolean("isOn");
         stackHandler.deserializeNBT(nbt.getCompound("inv"));
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(nbt, this.items);
@@ -71,7 +78,8 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
     @Override
     public CompoundNBT save(CompoundNBT nbt) {
         nbt.put("inv", stackHandler.serializeNBT());
-        nbt.putShort("WorkTime", this.workTime);
+        nbt.putShort("workTime", this.workTime);
+        nbt.putBoolean("isOn", this.isOn);
         ItemStackHelper.saveAllItems(nbt, this.items);
         return super.save(nbt);
     }
@@ -163,40 +171,26 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
                 if (this.hasFire()) {
                     // ads 1 to the time for every tick and if the time is reached finishes the recipe
                     this.workTime += 1;
+                    isOn = true;
                     if (this.workTime >= this.processTime) {
                         //waits until the slot is empty before putting in the new item
                         if (this.stackHandler.getStackInSlot(3).getCount() == 0) {
                             createJuice(recipe.get().getResultItem());
+                            isOn = false;
                             this.workTime = 0;
                             setChanged();
                         }
                     }
                 } else {
+                    isOn = false;
                     this.workTime = 0;
-
 
                     setChanged();
                 }
+        } else {
+            this.workTime = 0;
+            isOn = false;
         }
-        recipe.ifPresent(iRecipe -> {
-
-            if (this.hasFire()) {
-                // ads 1 to the time for every tick and if the time is reached finishes the recipe
-                this.workTime += 1;
-                if (this.workTime >= this.processTime) {
-                    //waits until the slot is empty before putting in the new item
-                    if (this.stackHandler.getStackInSlot(3).getCount() == 0) {
-                        createJuice(iRecipe.getResultItem());
-                        this.workTime = 0;
-                    }
-                }
-            } else {
-                this.workTime = 0;
-            }
-
-
-            setChanged();
-        });
     }
 
     @Override

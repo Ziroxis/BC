@@ -3,10 +3,7 @@ package com.yuanno.block_clover.blocks;
 import com.yuanno.block_clover.blocks.containers.JuicerContainer;
 import com.yuanno.block_clover.blocks.tileentities.JuicerBlockTileEntity;
 import com.yuanno.block_clover.init.ModTileEntities;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,8 +13,11 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.stats.Stats;
+import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -26,15 +26,18 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class JuicerBlock extends ContainerBlock {
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
     public JuicerBlock() {
-        super(Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GREEN).requiresCorrectToolForDrops().strength(4F));
+        super(Properties.of(Material.HEAVY_METAL, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(4F));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
@@ -42,6 +45,20 @@ public class JuicerBlock extends ContainerBlock {
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
+
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    public int getAnalogOutputSignal(BlockState state, World p_180641_2_, BlockPos pos) {
+        return Container.getRedstoneSignalFromBlockEntity(p_180641_2_.getBlockEntity(pos));
+    }
+
+    @Override
+    public BlockRenderType getRenderShape(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
 
     @Nullable
     @Override
@@ -97,6 +114,7 @@ public class JuicerBlock extends ContainerBlock {
             super.onRemove(state, world, pos, newstate, sim);
         }
     }
+
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
@@ -117,4 +135,28 @@ public class JuicerBlock extends ContainerBlock {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+        if (world.getBlockEntity(pos) instanceof JuicerBlockTileEntity) {
+            JuicerBlockTileEntity tileEntity = (JuicerBlockTileEntity) world.getBlockEntity(pos);
+            if (tileEntity.isOn) {
+                //copied from furnace no clue what the args
+                double d0 = (double) pos.getX() + 0.5D;
+                double d1 = (double) pos.getY() + 1.0D;
+                double d2 = (double) pos.getZ() + 0.5D;
+                if (rand.nextDouble() < 0.2D) {
+                    world.playLocalSound(d0, d1, d2, SoundEvents.AMBIENT_UNDERWATER_LOOP_ADDITIONS, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                }
+                Direction direction = state.getValue(FACING);
+                Direction.Axis direction$axis = direction.getAxis();
+                double d3 = 0.52D;
+                double d4 = rand.nextDouble() * 0.6D - 0.3D;
+                double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : d4;
+                double d6 = rand.nextDouble() * 6.0D / 16.0D;
+                double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : d4;
+                world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+            }
+        }
+    }
 }

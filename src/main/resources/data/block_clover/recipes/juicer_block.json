@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "whw",
-    "scs",
+    "bcb",
     "wiw"
   ],
   "key": {
@@ -15,8 +15,8 @@
     "h": {
       "item": "minecraft:hopper"
     },
-    "s": {
-      "tag": "minecraft:stone_bricks"
+    "b": {
+      "tag": "minecraft:iron_bars"
     },
     "w": {
       "tag": "minecraft:planks"

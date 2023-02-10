@@ -21,7 +21,11 @@ public class MoguroJuiceItem extends Item {
                 .food(new Food.Builder()
                         .nutrition(8)
                         .saturationMod(1.2f)
-                       //TODO .effect(new EffectInstance(ModEffects.XP_MULTIPLIER.get(), 40, 0), 1f)
+                        .effect(() -> {
+                            Supplier<EffectInstance> sup; {
+                                return new EffectInstance(ModEffects.XP_MULTIPLIER.get(), 6000, 0);
+                            }
+                        }, 1f)
                         .alwaysEat()
                         .build()));
 

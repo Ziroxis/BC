@@ -96,7 +96,7 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
                 if (slot == 0) {
                     return stack.getItem() == Items.WATER_BUCKET || stack.getItem() == Items.BUCKET;
                 } else if (slot == 1) {
-                    return stack.getItem() != Items.GLASS_BOTTLE && stack.getItem() != Items.WATER_BUCKET;
+                    return stack.getItem() != Items.GLASS_BOTTLE && stack.getItem() != Items.WATER_BUCKET && stack.getItem() != Items.BUCKET;
                 } else if (slot == 2) {
                     return stack.getItem() == Items.GLASS_BOTTLE;
                 } else {

@@ -22,7 +22,7 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event)
     {
-        //CURSED SPIRITS
+        //MOBS
         event.put(EarthSummons.EARTH_MINION.get(), EarthMinionEntity.setCustomAttributes().build());
         event.put(EarthSummons.EARTH_GOLEM.get(), EarthGolemEntity.setCustomAttributes().build());
         event.put(ModEntities.GRIMOIRE_MAGICIAN.get(), GrimoireMagicianEntity.setCustomAttributes().build());
@@ -37,7 +37,8 @@ public class ModEventBusEvents {
     public static void registerModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
 
         event.getRegistry().registerAll(
-                new WitchHatShredAdditionModifier.Serializer().setRegistryName(new ResourceLocation(Main.MODID, "witch_hat_shred_from_witch"))
+                new WitchHatShredAdditionModifier.Serializer().setRegistryName
+                        (new ResourceLocation(Main.MODID, "witch_hat_shred_from_witch"))
 
         );
     }

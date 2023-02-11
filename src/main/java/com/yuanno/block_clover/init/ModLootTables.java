@@ -1,8 +1,11 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.loot.*;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -12,6 +15,12 @@ public class ModLootTables {
     @SubscribeEvent
     public static void onVanillaLootLoading(LootTableLoadEvent event)
     {
+        if (event.getName().toString().equals("minecraft:entities/witch"))
+        {
+            TableLootEntry.Builder lootEntry = TableLootEntry.lootTableReference(new ResourceLocation(Main.MODID, "entities/inject/witch"));
+            event.getTable().removePool("main");
+            event.getTable().addPool(LootPool.lootPool().add(lootEntry).build());
+        }
         if (event.getName().equals(LootTables.DESERT_PYRAMID) || event.getName().equals(LootTables.PIGLIN_BARTERING) || event.getName().equals(LootTables.BURIED_TREASURE))
         {
             LootPool artifacts = constructLootPool("artifacts", -2F, 1F,

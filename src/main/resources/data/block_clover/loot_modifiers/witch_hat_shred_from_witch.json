@@ -2,7 +2,7 @@
   "conditions": [
     {
       "condition": "entity_properties",
-      "entity": "minecraft:witch"
+      "entity": "witch"
     }
   ],
   "addition": "block_clover:witch_hat_shred"

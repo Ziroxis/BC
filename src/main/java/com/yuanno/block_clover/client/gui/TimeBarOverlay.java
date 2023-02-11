@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -28,7 +29,7 @@ public class TimeBarOverlay {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT)
         {
-            if (entityStats.getTime() > 0 && entityStats.isInCombatMode())
+            if (entityStats.getAttribute().equals(ModValues.TIME) || entityStats.getSecondAttribute().equals(ModValues.TIME) && entityStats.getTime() > 0 && entityStats.isInCombatMode())
             {
                 Minecraft mc = Minecraft.getInstance();
                 String time = "" + entityStats.getTime();

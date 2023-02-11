@@ -89,7 +89,7 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                 case "Water":
                     abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
                     break;
-                case "Anti_magic":
+                case "Anti_Magic":
                     abilityData.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
                     abilityData.addUnlockedAbility(BullThrustAbility.INSTANCE);
                     stats.setRace(ModValues.HUMAN);

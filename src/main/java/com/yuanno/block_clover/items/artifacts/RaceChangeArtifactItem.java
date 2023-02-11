@@ -14,6 +14,8 @@ import com.yuanno.block_clover.items.ArtifactItem;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
+import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
@@ -21,6 +23,8 @@ import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
+import com.yuanno.block_clover.spells.time.*;
+import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -105,6 +109,20 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                         gainAbility(player, 15, LunaticSlashAbility.INSTANCE);
                         gainAbility(player, 20, RoundLunaticSlashAbility.INSTANCE);
                     }
+                    if (statsProps.getAttribute().equals(ModValues.WATER)) {
+                        gainAbility(player, 5, WaterShieldAbility.INSTANCE);
+                        gainAbility(player, 10, WaterSpearAbility.INSTANCE);
+                        gainAbility(player, 15, WaterDragonAbility.INSTANCE);
+                        gainAbility(player, 20, ValkyrieArmorAbility.INSTANCE);
+                        gainAbility(player, 25, PointBlankDragonAbility.INSTANCE);
+                    }
+                    if (statsProps.getAttribute().equals(ModValues.TIME)) {
+                        gainAbility(player, 5, ChronoStasisAbility.INSTANCE);
+                        gainAbility(player, 10, TimeHealAbility.INSTANCE);
+                        gainAbility(player, 15, ChronoStasisGrigoraAbility.INSTANCE);
+                        gainAbility(player, 20, TimeHopAbility.INSTANCE);
+                        gainAbility(player, 25, TimeRessurectionAbility.INSTANCE);
+                    }
                 }
                 else
                 {
@@ -133,6 +151,12 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                             break;
                         case "Sealing":
                             abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            break;
+                        case "Time":
+                            abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                            break;
+                        case "Water":
+                            abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
                             break;
                     }
                 }
@@ -198,6 +222,12 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                             break;
                         case "Sealing":
                             abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            break;
+                        case "Time":
+                            abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                            break;
+                        case "Water":
+                            abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
                             break;
                     }
                     break;

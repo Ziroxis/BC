@@ -128,7 +128,6 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 15, ChronoStasisGrigoraAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, TimeHopAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, TimeRessurectionAbility.INSTANCE);
-
         }
     }
 

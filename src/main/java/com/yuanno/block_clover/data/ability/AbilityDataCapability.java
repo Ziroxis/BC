@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityUnlock;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
@@ -47,12 +48,7 @@ public class AbilityDataCapability
 						String name = Beapi.getResourceName(ability.getName());
 
 						CompoundNBT nbtAbility = new CompoundNBT();
-						nbtAbility.putBoolean("evolved", instance.isEvolved());
-						nbtAbility.putInt("experience", instance.getExperience());
-						nbtAbility.putString("name", name);
-						nbtAbility.putString("displayName", Beapi.isNullOrEmpty(ability.getDisplayName()) ? "" : ability.getDisplayName());
-						nbtAbility.putInt("pool", ability.getPoolId());
-						nbtAbility.putString("unlock", ability.getUnlockType().name());
+						nbtAbility = ability.save(nbtAbility);
 						if(ability instanceof PassiveAbility)
 						{
 							nbtAbility.putBoolean("isPaused", ((PassiveAbility)ability).isPaused());
@@ -69,13 +65,11 @@ public class AbilityDataCapability
 						{
 							String name = Beapi.getResourceName(ability.getName());
 							CompoundNBT nbtAbility = new CompoundNBT();
-							nbtAbility.putString("name", name);
-							nbtAbility.putString("displayName", ability.getDisplayName() == null ? "" : ability.getDisplayName());
+							nbtAbility = ability.save(nbtAbility);
 							nbtAbility.putInt("pos", i);
-							nbtAbility.putString("state", ability.getState().toString());
-							nbtAbility.putInt("pool", ability.getPoolId());
 							nbtAbility.putDouble("cooldown", ability.getCooldown());
 							nbtAbility.putDouble("maxCooldown", ability.getMaxCooldown());
+							nbtAbility.putBoolean("isForced", ability.isStateForced());
 							if(ability instanceof ContinuousAbility)
 							{
 								nbtAbility.putDouble("continueTimer", ((ContinuousAbility)ability).getContinueTime());
@@ -121,22 +115,16 @@ public class AbilityDataCapability
 
 						try
 						{
-							Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(Main.MODID, nbtAbility.getString("name"))).create();
-							if(ability == null)
+							AbilityCore core = (AbilityCore) GameRegistry.findRegistry(AbilityCore.class).getValue(new ResourceLocation(nbtAbility.getString("id")));
+							if(core == null)
 								continue;
-							instance.evolve(nbtAbility.getBoolean("evolved"));
-							instance.setExperience(nbtAbility.getInt("experience"));
-							int poolId = nbtAbility.getInt("pool");
-							ability.setInPool(poolId);
-							AbilityUnlock unlockType = AbilityUnlock.valueOf(nbtAbility.getString("unlock"));
-							ability.setUnlockType(unlockType);
-							String displayName = nbtAbility.getString("displayName");
-							ability.setDisplayName(displayName);
+							Ability ability = core.createAbility();
+							ability.load(nbtAbility);
 							if(ability instanceof PassiveAbility)
 							{
 								((PassiveAbility)ability).setPause(nbtAbility.getBoolean("isPaused"));
 							}
-							instance.addUnlockedAbility(ability);
+							instance.loadUnlockedAbility(ability);
 						}
 						catch(Exception e)
 						{
@@ -150,44 +138,36 @@ public class AbilityDataCapability
 					for (int i = 0; i < equippedAbilities.size(); i++)
 					{
 						CompoundNBT nbtAbility = equippedAbilities.getCompound(i);
-						Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(Main.MODID, nbtAbility.getString("name")));
-						if (ability != null)
+						AbilityCore core = (AbilityCore) GameRegistry.findRegistry(AbilityCore.class).getValue(new ResourceLocation(nbtAbility.getString("id")));
+						if (core != null)
 						{
-							for(Ability abl : activeAbilitiesUnlocked)
+							Ability ability = core.createAbility();
+							if (activeAbilitiesUnlocked.contains(ability))
 							{
-								if(abl.equals(ability))
+								ability.load(nbtAbility);
+								int cooldown = (int) (nbtAbility.getDouble("cooldown") / 20);
+								int maxCooldown = (int) (nbtAbility.getDouble("maxCooldown") / 20);
+								int pos = nbtAbility.getInt("pos");
+								boolean isForced = nbtAbility.getBoolean("isForced");
+								ability.setMaxCooldown(maxCooldown);
+								ability.setCooldown(cooldown);
+								ability.setForcedState(isForced);
+								if (ability instanceof ContinuousAbility)
 								{
-									Ability.State state = Ability.State.valueOf(nbtAbility.getString("state"));
-									int cooldown = (int) (nbtAbility.getDouble("cooldown") / 20);
-									int maxCooldown = (int) (nbtAbility.getDouble("maxCooldown") / 20);
-									int pos = nbtAbility.getInt("pos");
-									int poolId = nbtAbility.getInt("pool");
-									String displayName = nbtAbility.getString("displayName");
-									if (state == null)
-										state = Ability.State.STANDBY;
-									abl.setState(state);
-									abl.setMaxCooldown(maxCooldown);
-									abl.setCooldown(cooldown);
-									abl.setInPool(poolId);
-									abl.setDisplayName(displayName);
-									if(abl instanceof ContinuousAbility)
-									{
-										int continueTime = (int) (nbtAbility.getDouble("continueTime") / 20);
-										((ContinuousAbility)abl).setContinueTime(continueTime);
-										int threshold = (int) (nbtAbility.getDouble("threshold") / 20);
-										((ContinuousAbility)abl).setThreshold(threshold);
-									}
-									if(abl instanceof ChargeableAbility)
-									{
-										int chargeTime = (int) (nbtAbility.getDouble("chargeTime") / 20);
-										((ChargeableAbility)abl).setChargeTime(chargeTime);
-									}
-									
-									instance.setEquippedAbility(pos, abl);
+									int continueTime = (int) (nbtAbility.getDouble("continueTime") / 20.0);
+									((ContinuousAbility) ability).setContinueTime(continueTime);
+									int threshold = (int) (nbtAbility.getDouble("threshold") / 20.0);
+									((ContinuousAbility) ability).setThreshold(threshold);
 								}
+								if (ability instanceof ChargeableAbility)
+								{
+									int chargeTime = (int) (nbtAbility.getDouble("chargeTime") / 20.0);
+									((ChargeableAbility) ability).setChargeTime(chargeTime);
+								}
+								instance.setEquippedAbility(pos, ability);
 							}
 						}
-						else if(ability == null)
+						else if(core == null)
 						{
 							int pos = nbtAbility.getInt("pos");
 							instance.setEquippedAbility(pos, null);

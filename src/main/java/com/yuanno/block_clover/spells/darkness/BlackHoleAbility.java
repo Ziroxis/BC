@@ -1,17 +1,21 @@
 package com.yuanno.block_clover.spells.darkness;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.entities.summons.darkness.BlackHoleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class BlackHoleAbility extends ContinuousAbility {
-    public static final BlackHoleAbility INSTANCE = new BlackHoleAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Black hole", AbilityCategories.AbilityCategory.ATTRIBUTE, BlackHoleAbility.class)
+            .setDescription("Spawns in a black hole following you.\nThe black hole sucks all the enemy spells near it.")
+            .setDamageKind(AbilityDamageKind.GUARD)
+            .build();
     private BlackHoleEntity blackHoleEntity = null;
     public BlackHoleAbility()
     {
-        super("Black Hole", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Spawns in a black hole following you.\nThe black hole sucks all the enemy spells near it.");
+        super(INSTANCE);
         this.setmanaCost(10);
         this.setExperiencePoint(10);
         this.setExperienceGainLevelCap(30);

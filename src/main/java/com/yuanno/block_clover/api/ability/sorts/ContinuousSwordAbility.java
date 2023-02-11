@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -11,9 +12,9 @@ public abstract class ContinuousSwordAbility extends ContinuousAbility {
     // Setting the defaults so that no crash occurs and so they will be null safe.
     protected IOnHitEntity onHitEntityEvent = (player, target) -> { return 0; };
 
-    public ContinuousSwordAbility(String name, AbilityCategories.AbilityCategory category)
+    public ContinuousSwordAbility(AbilityCore core)
     {
-        super(name, category);
+        super(core);
     }
 
 

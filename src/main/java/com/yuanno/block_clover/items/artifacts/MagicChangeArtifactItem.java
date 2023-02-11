@@ -60,38 +60,38 @@ public class MagicChangeArtifactItem extends ArtifactItem {
             String attribute = stats.getAttribute();
             switch (attribute) {
                 case "Wind":
-                    abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                     break;
                 case "Fire":
-                    abilityData.addUnlockedAbility(FireBallAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, FireBallAbility.INSTANCE);
                     break;
                 case "Light":
-                    abilityData.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
                     break;
                 case "Lightning":
-                    abilityData.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
                     break;
                 case "Darkness":
-                    abilityData.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
                     break;
                 case "Earth":
-                    abilityData.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
                     break;
                 case "Slash":
-                    abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
                     break;
                 case "Sealing":
-                    abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
                     break;
                 case "Time":
-                    abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
                     break;
                 case "Water":
-                    abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                     break;
                 case "Anti_Magic":
-                    abilityData.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
-                    abilityData.addUnlockedAbility(BullThrustAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
+                    abilityData.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
                     stats.setRace(ModValues.HUMAN);
                     break;
             }
@@ -132,34 +132,34 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                 String secondAttribute = stats.getSecondAttribute();
                 switch (secondAttribute) {
                     case "Wind":
-                        abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                         break;
                     case "Fire":
-                        abilityData.addUnlockedAbility(FireBallAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, FireBallAbility.INSTANCE);
                         break;
                     case "Light":
-                        abilityData.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
                         break;
                     case "Lightning":
-                        abilityData.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
                         break;
                     case "Darkness":
-                        abilityData.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
                         break;
                     case "Earth":
-                        abilityData.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
                         break;
                     case "Slash":
-                        abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
                         break;
                     case "Time":
-                        abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
                         break;
                     case "Water":
-                        abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                         break;
                     case "Sealing":
-                        abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                        abilityData.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
                         break;
                 }
             }

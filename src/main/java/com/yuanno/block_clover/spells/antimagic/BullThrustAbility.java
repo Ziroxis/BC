@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.antimagic;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.init.ModItems;
@@ -18,12 +20,14 @@ import java.util.List;
 
 public class BullThrustAbility extends Ability implements IMultiTargetAbility {
 
-    public static final BullThrustAbility INSTANCE = new BullThrustAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Bull Thrust", AbilityCategories.AbilityCategory.ATTRIBUTE, BullThrustAbility.class)
+            .setDescription("The user thrusts forward with their anti magic sword")
+            .setDamageKind(AbilityDamageKind.PIERCING)
+            .build();
 
     public BullThrustAbility()
     {
-        super("Bull Thrust", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("The user thrusts forward with their anti magic sword");
+        super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(0);
         this.onUseEvent = this::onUseEvent;

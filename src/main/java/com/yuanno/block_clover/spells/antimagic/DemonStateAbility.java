@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.antimagic;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -23,7 +25,10 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
 
     private static final ParticleEffect PARTICLES = new DemonStateParticleEffect();
 
-    public static final DemonStateAbility INSTANCE = new DemonStateAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Demon State", AbilityCategories.AbilityCategory.DEVIL, DemonStateAbility.class)
+            .setDescription("Puts the user into a state of demon for for an amount of time.\n The amount of time scales of experience.")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
     public int secondsActivated = 0;
     public static final AttributeModifier ANTISTRENGTH = new AttributeModifier(UUID.fromString("416c3548-0e0a-11ed-861d-0242ac120002"),
             "Anti Strength", 1.5, AttributeModifier.Operation.ADDITION);
@@ -33,8 +38,7 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
             "Anti Jump", 0.5, AttributeModifier.Operation.ADDITION);
     public DemonStateAbility()
     {
-        super("Demon State", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Puts the user into a state of demon for for an amount of time.\n The amount of time scales of experience.");
+        super(INSTANCE);
         this.setMaxCooldown(120);
         this.setmanaCost(0);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

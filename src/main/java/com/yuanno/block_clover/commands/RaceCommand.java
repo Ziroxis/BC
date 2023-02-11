@@ -178,7 +178,7 @@ public class RaceCommand {
 
         if (props.getLevel() >= level && !abilityProps.hasUnlockedAbility(ability) )
         {
-            abilityProps.addUnlockedAbility(ability);
+            abilityProps.addUnlockedAbility(player, ability);
         }
         if ((props.getLevel() < level && abilityProps.hasUnlockedAbility(ability)))
             abilityProps.removeUnlockedAbility(ability);

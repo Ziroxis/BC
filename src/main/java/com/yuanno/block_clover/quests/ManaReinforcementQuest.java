@@ -30,7 +30,7 @@ public class ManaReinforcementQuest extends Quest {
     public boolean giveReward(PlayerEntity player)
     {
         IAbilityData abilityData = AbilityDataCapability.get(player);
-        abilityData.addUnlockedAbility(ManaReinforcement.INSTANCE);
+        abilityData.addUnlockedAbility(player, ManaReinforcement.INSTANCE);
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
         return true;
     }

@@ -74,7 +74,7 @@ public class AbilityCommand
 				if(op == 1)
 				{
 					abl.setUnlockType(AbilityUnlock.COMMAND);
-					abilityProps.addUnlockedAbility(abl);
+					abilityProps.addUnlockedAbility(player, abl);
 				}
 				else
 					abilityProps.removeUnlockedAbility(abl);
@@ -121,7 +121,7 @@ public class AbilityCommand
 			IAbilityData props = AbilityDataCapability.get(player);
 			
 			ability.setUnlockType(AbilityUnlock.COMMAND);
-			props.addUnlockedAbility(ability);
+			props.addUnlockedAbility(player, ability);
 			
 			if(BeoDebug.isDebug())
 				player.sendMessage(new StringTextComponent(TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] " + ability.getName() + " unlocked for " + player.getName().getString()), Util.NIL_UUID);

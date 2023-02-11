@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.antimagic;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ItemAbility;
 import com.yuanno.block_clover.init.ModItems;
@@ -9,12 +11,14 @@ import net.minecraft.item.ItemStack;
 
 public class DemonSlayerAbility extends ItemAbility implements IParallelContinuousAbility {
 
-    public static final DemonSlayerAbility INSTANCE = new DemonSlayerAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Demon Slayer", AbilityCategories.AbilityCategory.ATTRIBUTE, DemonSlayerAbility.class)
+            .setDescription("Takes the demon dweller out of your grimoire")
+            .setDamageKind(AbilityDamageKind.ITEM)
+            .build();
 
     public DemonSlayerAbility()
     {
-        super("Demon Slayer", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Takes the demon dweller sword out of your grimoire");
+        super(INSTANCE);
 
         this.setMaxCooldown(0);
         this.setmanaCost(0);

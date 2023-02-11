@@ -29,7 +29,7 @@ public class ManaSkinQuest extends Quest {
     public boolean giveReward(PlayerEntity player)
     {
         IAbilityData abilityData = AbilityDataCapability.get(player);
-        abilityData.addUnlockedAbility(ManaSkinAbility.INSTANCE);
+        abilityData.addUnlockedAbility(player, ManaSkinAbility.INSTANCE);
         System.out.println("GOT IT");
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
         return true;

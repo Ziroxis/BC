@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.darkness;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.AbilityHelper;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
@@ -24,7 +26,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class BlackMoonAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final BlackMoonAbility INSTANCE = new BlackMoonAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Black moon", AbilityCategories.AbilityCategory.ATTRIBUTE, BlackMoonAbility.class)
+            .setDescription("Creates a dome of darkness, disabling all projectiles in the dome")
+            .setDamageKind(AbilityDamageKind.GUARD)
+            .build();
 
     public static final int MAX_ZONE_SIZE = 15;
     public static final int MAX_THRESHOLD = 2;
@@ -38,8 +43,7 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
 
     public BlackMoonAbility()
     {
-        super("Black moon", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a dome of darkness, disabling all projectiles in the dome");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(180);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

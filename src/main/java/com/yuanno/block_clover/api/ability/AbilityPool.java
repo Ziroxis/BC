@@ -2,18 +2,15 @@ package com.yuanno.block_clover.api.ability;
 
 public enum AbilityPool {
 
-    TECHNIQUE(1),
-    OVERALL(2);
+    GEPPO_LIKE,
+    TEKKAI_LIKE,
+    SIMPLE_BUSOSHOKU_HAKI,
+    MINK_ELECTRO,
+    WEATHER_BALLS,
+    OTO_ABILITY,
+    ADVANCED_BUSOSHOKU_HAKI;
 
-    private int id;
-
-    private AbilityPool(int id)
+    public int id()
     {
-        this.id = id;
-    }
-
-    public int getId()
-    {
-        return this.id;
-    }
-}
+        return ordinal() + 1;
+    }}

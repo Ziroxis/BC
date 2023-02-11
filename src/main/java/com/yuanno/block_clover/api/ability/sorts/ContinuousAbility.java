@@ -3,6 +3,7 @@ package com.yuanno.block_clover.api.ability.sorts;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityUseEvent;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -32,9 +33,9 @@ public abstract class ContinuousAbility extends Ability {
     protected IOnStopContinuity onStopContinuityEvent = (player) -> {};
 
 
-    public ContinuousAbility(String name, AbilityCategories.AbilityCategory category)
+    public ContinuousAbility(AbilityCore core)
     {
-        super(name, category);
+        super(core);
     }
 
 

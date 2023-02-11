@@ -1,0 +1,25 @@
+package com.yuanno.block_clover.spells;
+
+import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
+import com.yuanno.block_clover.data.ability.AbilityDataBase;
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
+import net.minecraft.entity.player.PlayerEntity;
+
+public class PassiveDataAbility extends PassiveAbility {
+    private float experience = 0;
+    public PassiveDataAbility()
+    {
+        super("Passive Data", AbilityCategories.AbilityCategory.MISCELLANEOUS);
+        this.hideInGUI(true);
+        this.duringPassiveEvent = this::duringPassiveEvent;
+    }
+
+    public void duringPassiveEvent(PlayerEntity player)
+    {
+        IAbilityData abilityData = AbilityDataCapability.get(player);
+        abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
+    }
+
+}

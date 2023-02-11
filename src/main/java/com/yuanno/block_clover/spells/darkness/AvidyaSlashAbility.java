@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.darkness;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.entities.projectiles.darkness.AvidyaSlashProjectile;
@@ -13,12 +15,14 @@ import net.minecraft.world.server.ServerWorld;
 
 public class AvidyaSlashAbility extends Ability {
 
-    public static final AvidyaSlashAbility INSTANCE = new AvidyaSlashAbility();
+    public static final AbilityCore INSTNANCE = new AbilityCore.Builder("Avidya Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, AvidyaSlashAbility.class)
+            .setDescription("Shoot a slash of darkness")
+            .setDamageKind(AbilityDamageKind.SLASH)
+            .build();
 
     public AvidyaSlashAbility()
     {
-        super("Avidya Slash", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoot a slash of darkness");
+        super(INSTNANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(20);

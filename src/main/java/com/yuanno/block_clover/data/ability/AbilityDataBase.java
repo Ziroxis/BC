@@ -2,11 +2,15 @@ package com.yuanno.block_clover.data.ability;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
+import net.minecraft.entity.player.PlayerEntity;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,7 +54,28 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public boolean addUnlockedAbility(Ability abl)
+	public boolean addUnlockedAbility(PlayerEntity player, Ability abl)
+	{
+		if(abl == null || this.hasUnlockedAbility(abl))
+			return false;
+
+		this.unlockedAbilities.add(abl);
+
+		//if (player instanceof ServerPlayerEntity)
+			//ModAdvancements.UNLOCK_ABILITY.trigger((ServerPlayerEntity)player, abl.getCore());
+
+		return true;
+	}
+
+	@Override
+	public boolean addUnlockedAbility(PlayerEntity player, AbilityCore core)
+	{
+		Ability abl = core.createAbility();
+		return this.addUnlockedAbility(player, abl);
+	}
+
+	@Override
+	public boolean loadUnlockedAbility(Ability abl)
 	{
 		Ability ogAbl = this.getUnlockedAbility(abl);
 		if (ogAbl == null)
@@ -89,17 +114,40 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
+	public boolean removeUnlockedAbility(AbilityCore core)
+	{
+		Ability abl = this.getUnlockedAbility(core);
+		if (abl != null)
+		{
+			this.unlockedAbilities.remove(abl);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean hasUnlockedAbility(Ability abl)
 	{
-		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return this.unlockedAbilities.parallelStream().anyMatch(ability -> ability.equals(abl));
+		return this.getUnlockedAbilities().stream().anyMatch(ability -> ability.equals(abl));
+	}
+
+	@Override
+	public boolean hasUnlockedAbility(AbilityCore core)
+	{
+		return this.getUnlockedAbilities().stream().anyMatch(ability -> ability.getCore().equals(core));
 	}
 
 	@Override
 	public <T extends Ability> T getUnlockedAbility(T abl)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return (T) this.unlockedAbilities.parallelStream().filter(ability -> ability.equals(abl)).findFirst().orElse(null);
+		return (T) this.unlockedAbilities.stream().filter(ability -> ability.equals(abl)).findFirst().orElse(null);
+	}
+
+	@Override
+	public <T extends Ability> T getUnlockedAbility(AbilityCore core)
+	{
+		return (T) this.getUnlockedAbilities().stream().filter(ability -> ability.getCore().equals(core)).findFirst().orElse(null);
 	}
 
 	@Override
@@ -110,24 +158,44 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public <T extends Ability> List<T> getUnlockedAbilities(AbilityCategories.AbilityCategory category)
+	public <T extends Ability> List<T> getUnlockedAbilities()
 	{
-		this.unlockedAbilities.removeIf(ability -> ability == null);
-		return (List<T>) this.unlockedAbilities.parallelStream().filter(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL).collect(Collectors.toList());
+		return (List<T>) this.unlockedAbilities.stream()
+				.filter(Objects::nonNull)
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public void clearUnlockedAbilities(AbilityCategories.AbilityCategory category)
+	public <T extends Ability> List<T> getUnlockedAbilities(Predicate<Ability> check)
 	{
-		this.unlockedAbilities.removeIf(ability -> ability == null);
-		this.unlockedAbilities.removeIf(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL);
+		return (List<T>) this.getUnlockedAbilities().stream()
+				.filter(check)
+				.collect(Collectors.toList());
 	}
-	
+
 	@Override
-	public void clearUnlockedAbilities(Predicate<Ability> check)
+	public <T extends Ability> List<T> getUnlockedAbilities(AbilityCategories.AbilityCategory category)
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
-		this.unlockedAbilities.removeIf(check);
+		return (List<T>) this.unlockedAbilities.stream().filter(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL).collect(Collectors.toList());
+	}
+
+	@Override
+	public <T extends Ability> List<T> clearUnlockedAbilities(AbilityCategories.AbilityCategory category)
+	{
+		return this.clearUnlockedAbilities(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL);
+	}
+
+	@Override
+	public <T extends Ability> List<T> clearUnlockedAbilities(Predicate<T> check)
+	{
+		List<T> removed = (List<T>) this.unlockedAbilities.stream()
+				.filter(ability -> ability == null || check.test((T) ability))
+				.collect(Collectors.toList());
+
+		this.unlockedAbilities.removeAll(removed);
+
+		return removed;
 	}
 
 	@Override
@@ -141,10 +209,10 @@ public class AbilityDataBase implements IAbilityData
 	{
 		this.unlockedAbilities.removeIf(ability -> ability == null);
 		return this.unlockedAbilities
-			.parallelStream()
-			.filter(ability -> !(ability instanceof PassiveAbility))
-			.filter(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL)
-			.collect(Collectors.toList()).size();
+				.stream()
+				.filter(ability -> !(ability instanceof PassiveAbility))
+				.filter(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL)
+				.collect(Collectors.toList()).size();
 	}
 
 	/*
@@ -159,8 +227,8 @@ public class AbilityDataBase implements IAbilityData
 			Ability ability = this.equippedAbilities[i];
 			if(ability == null)
 			{
-				 this.equippedAbilities[i] = abl;
-				 return true;
+				this.equippedAbilities[i] = abl;
+				return true;
 			}
 		}
 		return false;
@@ -170,7 +238,7 @@ public class AbilityDataBase implements IAbilityData
 	public boolean setEquippedAbility(int slot, Ability abl)
 	{
 		Ability ogAbl = this.getEquippedAbility(abl);
-		if (ogAbl == null && slot <= 16)
+		if (ogAbl == null)
 		{
 			this.equippedAbilities[slot] = abl;
 			return true;
@@ -183,14 +251,33 @@ public class AbilityDataBase implements IAbilityData
 	{
 		Ability ogAbl = this.getUnlockedAbility(abl);
 		if (ogAbl != null)
-		{		
+		{
 			for(int i = 0; i < this.equippedAbilities.length; i++)
 			{
 				Ability ability = this.equippedAbilities[i];
 				if(ability != null)
 				{
-					 this.equippedAbilities[i] = null;
-					 return true;
+					this.equippedAbilities[i] = null;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeEquippedAbility(AbilityCore abl)
+	{
+		Ability ogAbl = this.getUnlockedAbility(abl);
+		if (ogAbl != null)
+		{
+			for(int i = 0; i < this.equippedAbilities.length; i++)
+			{
+				Ability ability = this.equippedAbilities[i];
+				if(ability != null)
+				{
+					this.equippedAbilities[i] = null;
+					return true;
 				}
 			}
 		}
@@ -201,11 +288,18 @@ public class AbilityDataBase implements IAbilityData
 	public boolean hasEquippedAbility(Ability abl)
 	{
 		return Arrays.stream(this.equippedAbilities)
-				.parallel()
 				.filter(ability -> ability != null)
 				.anyMatch(ability -> ability.equals(abl));
 	}
-	
+
+	@Override
+	public boolean hasEquippedAbility(AbilityCore core)
+	{
+		return Arrays.stream(this.equippedAbilities)
+				.filter(ability -> ability != null)
+				.anyMatch(ability -> ability.getCore().equals(core));
+	}
+
 	@Override
 	public int getEquippedAbilitySlot(Ability abl)
 	{
@@ -215,20 +309,29 @@ public class AbilityDataBase implements IAbilityData
 			if(ability != null && ability.equals(abl))
 				return i;
 		}
-		
+
 		return -1;
 	}
 
+	@Nullable
 	@Override
 	public <T extends Ability> T getEquippedAbility(T abl)
 	{
 		return (T) Arrays.stream(this.equippedAbilities)
-				.parallel()
-				.filter(ability -> ability != null)
-				.filter(ability -> ability.equals(abl))
+				.filter(ability -> ability != null && ability.equals(abl))
 				.findFirst().orElse(null);
 	}
 
+	@Nullable
+	@Override
+	public <T extends Ability> T getEquippedAbility(AbilityCore<T> core)
+	{
+		return (T) Arrays.stream(this.equippedAbilities)
+				.filter(ability -> ability != null && ability.getCore().equals(core))
+				.findFirst().orElse(null);
+	}
+
+	@Nullable
 	@Override
 	public <T extends Ability> T getEquippedAbility(int slot)
 	{
@@ -238,26 +341,41 @@ public class AbilityDataBase implements IAbilityData
 	@Override
 	public<T extends Ability> T[] getEquippedAbilities()
 	{
-		return (T[]) this.equippedAbilities;
+		Stream<Ability> stream = Arrays.stream(this.equippedAbilities);
+		List<Ability> list1 = stream.collect(Collectors.toList());
+		Ability list2[] = new Ability[list1.size()];
+		return (T[]) list1.toArray(list2);
 	}
-	
+
 	@Override
 	public <T extends Ability> T[] getEquippedAbilities(Predicate<Ability> check)
 	{
 		Stream<Ability> stream = Arrays.stream(this.equippedAbilities);
-		stream = stream.filter((ability) -> ability != null);
 		stream = stream.filter(check);
 		List<Ability> list1 = stream.collect(Collectors.toList());
 		Ability list2[] = new Ability[list1.size()];
 		return (T[]) list1.toArray(list2);
 	}
-	
+
 	@Override
 	public <T extends Ability> T[] getEquippedAbilities(AbilityCategories.AbilityCategory category)
 	{
 		List<Ability> list1 = Arrays.stream(this.equippedAbilities).filter(ability -> (ability != null && ability.getCategory() == category) || category == AbilityCategories.AbilityCategory.ALL).collect(Collectors.toList());
 		Ability list2[] = new Ability[list1.size()];
 		return (T[]) list1.toArray(list2);
+	}
+
+	@Override
+	public void clearEquippedAbilities(Predicate<Ability> predicate)
+	{
+		for(int i = 0; i < this.equippedAbilities.length; i++)
+		{
+			Ability ability = this.equippedAbilities[i];
+			if(ability != null && predicate.test(ability))
+			{
+				this.equippedAbilities[i] = null;
+			}
+		}
 	}
 
 	@Override
@@ -290,10 +408,7 @@ public class AbilityDataBase implements IAbilityData
 	public int countEquippedAbilities(AbilityCategories.AbilityCategory category)
 	{
 		return Arrays.stream(this.equippedAbilities)
-				.parallel()
-				.filter(ability -> ability != null)
-				.filter(ability -> ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL)
-				.filter(ability -> !(ability instanceof PassiveAbility))
+				.filter(ability -> ability != null && (ability.getCategory() == category || category == AbilityCategories.AbilityCategory.ALL) && !(ability instanceof PassiveAbility))
 				.collect(Collectors.toList())
 				.size();
 	}
@@ -314,7 +429,7 @@ public class AbilityDataBase implements IAbilityData
 		this.previouslyUsedAbility = abl;
 	}
 
-	
+
 	@Override
 	public int getCombatBarSet()
 	{
@@ -332,7 +447,7 @@ public class AbilityDataBase implements IAbilityData
 	{
 		this.currentCombatBarSet--;
 	}
-	
+
 	@Override
 	public void setCombatBarSet(int set)
 	{

@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.darkness;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.init.ModEffects;
@@ -19,12 +21,14 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
-    public static final BluntStrikeAbility INSTANCE = new BluntStrikeAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Blunt strike", AbilityCategories.AbilityCategory.ATTRIBUTE, BluntStrikeAbility.class)
+            .setDescription("Dashes forward striking your enemies with the blunt side of your sword.\n The enemies hit will be unconscious for a few seconds")
+            .setDamageKind(AbilityDamageKind.PHYSICAL)
+            .build();
 
     public BluntStrikeAbility()
     {
-        super("Blunt Strike", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Dashes forward striking your enemies with the blunt side of your sword.\n The enemies hit will be unconscious for a few seconds");
+        super(INSTANCE);
         this.setmanaCost(15);
         this.setMaxCooldown(10);
         this.setExperiencePoint(15);

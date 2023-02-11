@@ -48,12 +48,12 @@ public class ObtainDemonStateEvent {
         int random = Beapi.RNG(3);
         if (random == 0)
         {
-            abilityProps.addUnlockedAbility(DemonStateAbility.INSTANCE);
-            abilityProps.addUnlockedAbility(BlackSlashAbility.INSTANCE);
-            abilityProps.addUnlockedAbility(BlackTornadoAbility.INSTANCE);
-            abilityProps.setEquippedAbility(3, DemonStateAbility.INSTANCE);
-            abilityProps.setEquippedAbility(4, BlackSlashAbility.INSTANCE);
-            abilityProps.setEquippedAbility(5, BlackTornadoAbility.INSTANCE);
+            abilityProps.addUnlockedAbility(player, DemonStateAbility.INSTANCE);
+            abilityProps.addUnlockedAbility(player,BlackSlashAbility.INSTANCE);
+            abilityProps.addUnlockedAbility(player,BlackTornadoAbility.INSTANCE);
+            abilityProps.setEquippedAbility(3, DemonStateAbility.INSTANCE.createAbility());
+            abilityProps.setEquippedAbility(4, BlackSlashAbility.INSTANCE.createAbility());
+            abilityProps.setEquippedAbility(5, BlackTornadoAbility.INSTANCE.createAbility());
             player.addEffect(new EffectInstance(Effects.ABSORPTION, 80, 6));
             player.sendMessage(new StringTextComponent("You unlocked your demon form!"), player.getUUID());
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);

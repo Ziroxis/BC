@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "whw",
+    "bcb",
+    "wiw"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_block"
+    },
+    "c": {
+      "item": "minecraft:cauldron"
+    },
+    "h": {
+      "item": "minecraft:hopper"
+    },
+    "b": {
+      "tag": "minecraft:iron_bars"
+    },
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "block_clover:juicer_block"
+  }
+}

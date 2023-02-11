@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @JeiPlugin
-public class ModJeiRecipesJei implements IModPlugin {
+public class ModRecipesJei implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
         return new ResourceLocation(Main.MODID, "jei_integration");

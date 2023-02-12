@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.gravity;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.gravity.SingularityProjectile;
 import com.yuanno.block_clover.entities.projectiles.slash.DeathScytheProjectile;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,12 +12,14 @@ import net.minecraft.world.server.ServerWorld;
 
 public class GravitySingularityAbility extends Ability {
 
-    public static final GravitySingularityAbility INSTANCE = new GravitySingularityAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Gravity singularity", AbilityCategories.AbilityCategory.DEVIL, GravitySingularityAbility.class)
+            .setDescription("Shoots a gravity ball. Sucking up nearby blocks.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
 
     public GravitySingularityAbility()
     {
-        super("Gravity singularity", AbilityCategories.AbilityCategory.DEVIL);
-        this.setDescription("Shoots a gravity ball. Sucking up nearby blocks.");
+        super(INSTANCE);
         this.setMaxCooldown(0);
         this.setmanaCost(0);
 

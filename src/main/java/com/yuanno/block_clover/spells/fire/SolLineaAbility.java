@@ -2,18 +2,22 @@ package com.yuanno.block_clover.spells.fire;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.fire.SolLineaProjectile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class SolLineaAbility extends Ability {
-    public static final Ability INSTANCE = new SolLineaAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Sol linea", AbilityCategories.AbilityCategory.ATTRIBUTE, SolLineaAbility.class)
+            .setDescription("Shoots a concentrated amount of fire at one point")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
 
     public SolLineaAbility()
     {
-        super("Sol Linea", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a concentrated amount of fire at one point");
+        super(INSTANCE);
         this.setMaxCooldown(20);
         this.setmanaCost(30);
         this.setExperiencePoint(30);

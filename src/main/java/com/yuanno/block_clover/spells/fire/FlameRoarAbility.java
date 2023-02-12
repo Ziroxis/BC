@@ -2,18 +2,22 @@ package com.yuanno.block_clover.spells.fire;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.fire.FlameRoarProjectile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class FlameRoarAbility extends Ability {
-    public static final Ability INSTANCE = new FlameRoarAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Flame roar", AbilityCategories.AbilityCategory.ATTRIBUTE, FlameRoarAbility.class)
+            .setDescription("Shoots roar of fire")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
 
     public FlameRoarAbility()
     {
-        super("Flame Roar", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots roar of fire");
+        super(INSTANCE);
         this.setMaxCooldown(10);
         this.setmanaCost(15);
         this.setExperiencePoint(15);

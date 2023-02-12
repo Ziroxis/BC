@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.entities.projectiles.earth.EarthChargeProjectile;
 import com.yuanno.block_clover.init.ModEffects;
@@ -12,14 +14,16 @@ import net.minecraft.potion.EffectInstance;
 public class EarthChargeAbility extends ChargeableAbility {
 
 
-    public static final EarthChargeAbility INSTANCE = new EarthChargeAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth charge", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthChargeAbility.class)
+            .setDescription("Concentrates everything on throwing one big chunk of earth")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private boolean cancelled = false;
     private static final ParticleEffect PARTICLES = new EarthChargeParticleEffect();
 
     public EarthChargeAbility()
     {
-        super("Earth Charge", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Concentrates everything on throwing one big chunk of earth");
+        super(INSTANCE);
         this.setMaxCooldown(15);
         this.setMaxChargeTime(5);
         this.setmanaCost(20);

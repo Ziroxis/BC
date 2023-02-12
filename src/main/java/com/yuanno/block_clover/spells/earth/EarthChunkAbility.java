@@ -2,18 +2,22 @@ package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.earth.EarthChunkProjectile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class EarthChunkAbility extends Ability {
-    public static final Ability INSTANCE = new EarthChunkAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Eartch chunk", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthChunkAbility.class)
+            .setDescription("Shoots a chunk of earth")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
 
     public EarthChunkAbility()
     {
-        super("Earth chunk", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a chunk of earth");
+        super(INSTANCE);
         this.setMaxCooldown(4);
         this.setmanaCost(15);
         this.setExperiencePoint(20);

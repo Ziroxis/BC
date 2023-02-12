@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
@@ -8,7 +10,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class EarthMinionAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final EarthMinionAbility INSTANCE = new EarthMinionAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth minion", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthMinionAbility.class)
+            .setDescription("Creates a living earth minion that serves you")
+            .setDamageKind(AbilityDamageKind.MINION)
+            .build();
     
     private EarthMinionEntity earthMinion = null;
     private EarthMinionEntity earthMinion1 = null;
@@ -16,8 +21,7 @@ public class EarthMinionAbility extends ContinuousAbility implements IParallelCo
 
     public EarthMinionAbility()
     {
-        super("Earth Minion", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a living earth minion that serves you");
+        super(INSTANCE);
         this.setmanaCost(4);
         this.setExperiencePoint(3);
         this.setMaxCooldown(15);

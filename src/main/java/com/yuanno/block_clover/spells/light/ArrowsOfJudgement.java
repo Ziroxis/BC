@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.light;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.light.LightMovementParticleEffect;
@@ -14,13 +16,15 @@ import net.minecraft.util.math.RayTraceResult;
 import java.util.List;
 
 public class ArrowsOfJudgement extends Ability {
-    public static final ArrowsOfJudgement INSTANCE = new ArrowsOfJudgement();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Arrows of judgement", AbilityCategories.AbilityCategory.ATTRIBUTE, ArrowsOfJudgement.class)
+            .setDescription("Shoots a massive amount of arrows from above towards your enemies")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private static final ParticleEffect PARTICLES = new LightMovementParticleEffect();
 
     public ArrowsOfJudgement()
     {
-        super("Arrows of judgement", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a massive amount of arrows from above towards your enemies");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(180);
 

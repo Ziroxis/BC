@@ -3,6 +3,7 @@ package com.yuanno.block_clover.api.ability.sorts;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityUseEvent;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -27,9 +28,9 @@ public class ChargeableAbility extends Ability {
     protected IOnEndCharging onEndChargingEvent = (player) -> { return true; };
     protected IDuringCharging duringChargingEvent = (player, chargeTime) -> {};
 
-    public ChargeableAbility(String name, AbilityCategories.AbilityCategory category)
+    public ChargeableAbility(AbilityCore core)
     {
-        super(name, category);
+        super(core);
     }
 
     /*

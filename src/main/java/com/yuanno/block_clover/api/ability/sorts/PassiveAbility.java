@@ -3,6 +3,7 @@ package com.yuanno.block_clover.api.ability.sorts;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.Serializable;
@@ -15,9 +16,9 @@ public class PassiveAbility extends Ability {
 
     private boolean isPaused = false;
 
-    public PassiveAbility(String name, AbilityCategories.AbilityCategory category)
+    public PassiveAbility(AbilityCore core)
     {
-        super(name, category);
+        super(core);
         this.hideInGUI(true);
     }
 

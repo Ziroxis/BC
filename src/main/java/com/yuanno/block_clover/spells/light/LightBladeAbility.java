@@ -2,18 +2,22 @@ package com.yuanno.block_clover.spells.light;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class LightBladeAbility extends Ability {
-    public static final LightBladeAbility INSTANCE = new LightBladeAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Light blade", AbilityCategories.AbilityCategory.ATTRIBUTE, LightBladeAbility.class)
+            .setDescription("Shoots a blade made out of light")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
 
     public LightBladeAbility()
     {
-        super("Light Blade", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a blade made out of light");
+        super(INSTANCE);
         this.setmanaCost(10);
         this.setCooldown(2);
         this.setExperiencePoint(20);

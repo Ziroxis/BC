@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -14,9 +15,9 @@ public abstract class ContinuousPunchAbility extends ContinuousAbility
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IOnHitEntity onHitEntityEvent = (player, target) -> { return 0; };
 	
-	public ContinuousPunchAbility(String name, AbilityCategories.AbilityCategory category)
+	public ContinuousPunchAbility(AbilityCore core)
 	{
-		super(name, category);
+		super(core);
 	}
 	
 	

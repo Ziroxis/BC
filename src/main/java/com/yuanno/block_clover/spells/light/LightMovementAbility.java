@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.light;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.particles.ParticleEffect;
@@ -14,13 +16,15 @@ import net.minecraft.util.math.BlockPos;
 import java.util.Collections;
 
 public class LightMovementAbility extends Ability {
-    public static final LightMovementAbility INSTANCE = new LightMovementAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Light movement", AbilityCategories.AbilityCategory.ATTRIBUTE, LightMovementAbility.class)
+            .setDescription("Moves as fast as light")
+            .setDamageKind(AbilityDamageKind.MOVEMENT)
+            .build();
     private static final ParticleEffect PARTICLES = new LightMovementParticleEffect();
 
     public LightMovementAbility()
     {
-        super("Light Movement", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Moves as fast as light");
+        super(INSTANCE);
         this.setmanaCost(45);
         this.setMaxCooldown(4);
         this.setExperiencePoint(10);

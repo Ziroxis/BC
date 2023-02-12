@@ -26,7 +26,6 @@ public class XpMultiplierEffect extends Effect {
             if(props.getMultiplier() <= 1) {
                 props.alterMultiplier(0.2F);
             }
-            entity.heal(1F);
         }
         super.applyEffectTick(entity, p_76394_2_);
     }
@@ -44,4 +43,5 @@ public class XpMultiplierEffect extends Effect {
             return false;
         }
     }
+
 }

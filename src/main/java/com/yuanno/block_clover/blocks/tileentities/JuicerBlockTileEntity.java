@@ -45,7 +45,7 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
     private short workTime;
     //needed for atomisation with hoppers
     private static final int[] SLOTS_FOR_INPUTS = new int[]{0, 1, 2};
-    private static final int[] SLOTS_FOR_DOWN = new int[]{3};
+    private static final int[] SLOTS_FOR_DOWN = new int[]{0, 3};
 
     public boolean isOn = false;
 
@@ -168,25 +168,25 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
 
         if (recipe.isPresent()) {
 
-                if (this.hasFire()) {
-                    // ads 1 to the time for every tick and if the time is reached finishes the recipe
-                    this.workTime += 1;
-                    isOn = true;
-                    if (this.workTime >= this.processTime) {
-                        //waits until the slot is empty before putting in the new item
-                        if (this.stackHandler.getStackInSlot(3).getCount() == 0) {
-                            createJuice(recipe.get().getResultItem());
-                            isOn = false;
-                            this.workTime = 0;
-                            setChanged();
-                        }
+            if (this.hasFire()) {
+                // ads 1 to the time for every tick and if the time is reached finishes the recipe
+                this.workTime += 1;
+                isOn = true;
+                if (this.workTime >= this.processTime) {
+                    //waits until the slot is empty before putting in the new item
+                    if (this.stackHandler.getStackInSlot(3).getCount() == 0) {
+                        createJuice(recipe.get().getResultItem());
+                        isOn = false;
+                        this.workTime = 0;
+                        setChanged();
                     }
-                } else {
-                    isOn = false;
-                    this.workTime = 0;
-
-                    setChanged();
                 }
+            } else {
+                isOn = false;
+                this.workTime = 0;
+
+                setChanged();
+            }
         } else {
             this.workTime = 0;
             isOn = false;
@@ -215,8 +215,12 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
 
     @Override
     public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-        if (direction == Direction.DOWN && index == 3) {
-            return true;
+        if (direction == Direction.DOWN) {
+            if(index == 3) {
+                return true;
+            } else if (index == 0 && this.stackHandler.getStackInSlot(0).getItem() == Items.BUCKET) {
+                return true;
+            }
         }
         return false;
     }

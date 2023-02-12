@@ -101,7 +101,9 @@
 
   //Tooltip
   "tooltip.block_clover.magic_staff_witch": "Put this item in your offhand to get a stats boost!",
-  "tooltip.block_clover.magic_staff": "You can only use this item as witch!",
+  "tooltip.block_clover.juicer_block_shift": "This block needs fire beneath it in order to work!",
+  "tooltip.block_clover.juicer_block": "Press SHIFT for more information!",
+
 
 
 

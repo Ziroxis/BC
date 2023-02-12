@@ -21,8 +21,7 @@ public class ModItems {
     public List<Supplier<Item>> items = new ArrayList<>();
 
     //BLOCKS
-    public static final RegistryObject<BlockItem> JUICER_BLOCK = ITEMS.register("juicer_block", () -> new BlockItem(ModBlocks.JUICER.get(),
-            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> JUICER_BLOCK = ITEMS.register("juicer_block", JuicerBlockItem::new);
 
     //TREES
     //MOGURO

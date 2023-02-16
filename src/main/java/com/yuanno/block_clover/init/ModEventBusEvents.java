@@ -33,6 +33,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.CLOVER_SHARK.get(), CloverSharkEntity.setCustomAttributes().build());
     }
 
+    /*
     @SubscribeEvent
     public static void registerModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
 
@@ -43,5 +44,7 @@ public class ModEventBusEvents {
         );
     }
 
+
+     */
 
 }

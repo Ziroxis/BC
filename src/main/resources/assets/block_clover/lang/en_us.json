@@ -1,45 +1,36 @@
 {
-  //Blocks
   "block.block_clover.juicer_block": "Juicer",
 
-  //Tree
-  //Moguro
   "block.block_clover.moguro_plank": "Moguro Plank",
   "block.block_clover.moguro_log": "Moguro Log",
   "block.block_clover.moguro_leaf": "Moguro Leaf",
   "block.block_clover.moguro_sapling": "Moguro Sapling",
 
-  //Elder
   "block.block_clover.elder_plank": "Elder Plank",
   "block.block_clover.elder_log": "Elder Log",
   "block.block_clover.elder_leaf": "Elder Leaf",
   "block.block_clover.elder_sapling": "Elder Sapling",
 
 
-  //ItemGroups
   "itemGroup.block_cloverBlocks": "Block Clover Blocks",
   "itemGroup.block_cloverModTabWeapons": "Block Clover Weapons",
   "itemGroup.block_cloverModTabClothes": "Block Clover Clothes",
   "itemGroup.block_cloverModTabArtifacts": "Block Clover Artifacts",
 
 
-  //Weapons
   "item.block_clover.demon_destroyer": "Demon Destroyer",
   "item.block_clover.demon_dweller": "Demon Dweller",
   "item.block_clover.yamis_katana": "Katana",
   "item.block_clover.light_sword": "Light Sword",
   "item.block_clover.demon_slayer_antimagic": "Demon Slayer Sword",
 
-  //Armor
   "item.block_clover.witch_hat": "Witch Hat",
 
-  //Mage
   "item.block_clover.mage_hat": "Mage Hat",
   "item.block_clover.mage_chest": "Mage Chest",
   "item.block_clover.mage_legs": "Mage Legs",
   "item.block_clover.mage_feet": "Mage Feet",
 
-  //Asta
   "item.block_clover.asta_hat": "Asta Bandana",
   "item.block_clover.asta_chest": "Asta Chest",
   "item.block_clover.asta_legs": "Asta Legs",
@@ -50,18 +41,15 @@
   "item.block_clover.asta_2_legs": "Asta Legs",
   "item.block_clover.asta_2_feet": "Asta Feet",
 
-  //Yuno
   "item.block_clover.yuno_chest": "Yuno Chest",
   "item.block_clover.yuno_legs": "Yuno Legs",
   "item.block_clover.yuno_feet": "Yuno Feet",
 
-  //GoldenDawn
   "item.block_clover.golden_dawn_chest": "Golden Dawn Chest",
   "item.block_clover.golden_dawn_legs": "Golden Dawn Legs",
   "item.block_clover.golden_dawn_feet": "Golden Dawn Feet",
 
 
-  //Items
   "item.block_clover.moguro_juice":  "Moguro Juice",
   "itemGroup.block_cloverMisc": "Block Clover Miscellaneous",
   "item.block_clover.magical_meat": "Magical Meat",
@@ -71,11 +59,9 @@
   "item.block_clover.magic_staff": "Magic Wand",
   "item.block_clover.modified_magic_staff": "Modified Magic Wand",
 
-  //Effects
   "effect.block_clover.xp_multiplier": "Xp Multiplier",
 
 
-  //Entities
   "entity.block_clover.monkey_entity": "Wind Monkey",
   "entity.block_clover.bandit": "Bandit",
   "entity.block_clover.clover_shark": "Shark",
@@ -86,7 +72,6 @@
   "item.block_clover.bandit_egg": "Bandit Egg",
   "item.block_clover.shark_egg": "Shark Egg",
 
-  //GUI
   "gui.blackclover.stats.spells": "Spells",
   "gui.blackclover.stats.stats": "Stats",
   "gui.blackclover.stats.overview": "Overview",
@@ -99,7 +84,6 @@
 
   "screen.block_clover.juicer":  "Juicer",
 
-  //Tooltip
   "tooltip.block_clover.magic_staff_witch": "Put this item in your offhand to get a stats boost!",
   "tooltip.block_clover.juicer_block_shift": "This block needs fire beneath it in order to work!",
   "tooltip.block_clover.juicer_block": "Press SHIFT for more information!",
@@ -107,7 +91,6 @@
 
 
 
-  //Keys
   "Keys.block_clover.combat": "Combat Keys",
   "Keys.block_clover.combat_1": "Combat Key 1",
   "Keys.block_clover.combat_2": "Combat Key 2",
@@ -124,12 +107,10 @@
   "Keys.block_clover.info_card": "Info Card Block Clover",
 
 
-  //Abilities
   "ability.block_clover.mana_skin": "Mana Skin",
   "ability.block_clover.mana_reinforcement": "Mana Reinforcement",
 
 
-  //Wind
   "ability.block_clover.wind_blade": "Wind Blade",
   "ability.block_clover.wind_crescent": "Wind Crescent",
   "ability.block_clover.wind_blade_shower": "Wind Blade Shower",
@@ -139,7 +120,6 @@
   "ability.block_clover.wind_gale": "Wind Gale",
   "ability.block_clover.wind_mana_zone": "Wind Mana Zone",
 
-  //Darkness
   "ability.block_clover.dark_cloaked_blade": "Darkness Cloaked Blade",
   "ability.block_clover.avidya_slash": "Avidya Slash",
   "ability.block_clover.avidya_wild_slash": "Avidya Wild Slash",
@@ -147,7 +127,6 @@
   "ability.block_clover.black_hole": "Black Hole",
   "ability.block_clover.black_moon": "Black Moon",
 
-  //Earth
   "ability.block_clover.earth_chunk": "Earth Chunk",
   "ability.block_clover.earth_charge": "Earth Charge",
   "ability.block_clover.earth_gloves": "Earth Gloves",
@@ -158,7 +137,6 @@
   "ability.block_clover.earth_shake": "Earth Shake",
   "ability.block_clover.earth_mana_zone": "Earth Mana Zone",
 
-  //Fire
   "ability.block_clover.fire_ball": "Fire Ball",
   "ability.block_clover.flame_roar": "Flame Roar",
   "ability.block_clover.sol_linea": "Sol Linea",
@@ -167,7 +145,6 @@
   "ability.block_clover.wild_bursting_flames": "Wild Bursting Flames",
   "ability.block_clover.calidus_brachium_barrage": "Calidus Brachium Barrage",
 
-  //Light
   "ability.block_clover.light_blade": "Light Blade",
   "ability.block_clover.light_blade_shower": "Light Blade Shower",
   "ability.block_clover.light_healing": "Light Healing",
@@ -175,7 +152,6 @@
   "ability.block_clover.light_sword": "Light Sword",
   "ability.block_clover.arrows_of_judgement": "Arrows Of Judgement",
 
-  //Thunder
   "ability.block_clover.thunder_god_gloves": "Thunder God Gloves",
   "ability.block_clover.thunder_god_boots": "Thunder God Boots",
   "ability.block_clover.thunder_crumbling_orb": "Thunder Crumbling Orb",
@@ -187,7 +163,6 @@
   "ability.block_clover.thunder_charge": "Thunder Charge",
   "ability.block_clover.thunder_mana_zone": "Thunder Mana Zone",
 
-  //Slash
   "ability.block_clover.slash_blades": "Slash Blades",
   "ability.block_clover.death_scythe": "Death Scythe",
   "ability.block_clover.death_scythe_shower": "Death Scythe Shower",
@@ -195,14 +170,12 @@
   "ability.block_clover.lunatic_slash": "Lunatic Slash",
   "ability.block_clover.round_lunatic_slash": "Round lunatic Slash",
 
-  //AntiMagic
   "ability.block_clover.demon_state": "Demon State",
   "ability.block_clover.black_slash": "Black Slash",
   "ability.block_clover.black_tornado": "Black Tornado",
   "ability.block_clover.bull_thrust": "Bull Thrust",
   "ability.block_clover.demon_slayer": "Demon Slayer",
 
-  //Sealing
   "ability.block_clover.sealing_projectile": "Sealing Projectile",
   "ability.block_clover.sealing_punch": "Sealing Punch",
   "ability.block_clover.self_healing_seal": "Self Healing Sealing",
@@ -210,7 +183,6 @@
   "ability.block_clover.ultimate_seal": "Ultimate Sealing",
   "ability.block_clover.sealing_mana_zone": "Sealing Mana Zone",
 
-  //Water
   "ability.block_clover.water_ball": "Water Ball",
   "ability.block_clover.water_shield": "Water Shield",
   "ability.block_clover.water_dragon": "Water Dragon",
@@ -219,7 +191,6 @@
   "ability.block_clover.point_blank_dragon": "Point Blank Water Dragon",
   "ability.block_clover.water_mana_zone": "Water Mana Zone",
 
-  //Time
   "ability.block_clover.time_steal": "Time Steal",
   "ability.block_clover.chrono_stasis": "Chrono Stasis",
   "ability.block_clover.chrono_stasis_grigora": "Chrono Stasis Grigora",
@@ -229,7 +200,6 @@
   "ability.block_clover.time_magic_zone": "Time Magic Zone",
 
 
-  //Curios
   "curios.slot": "Slot",
   "curios.identifier.head": "Head",
   "curios.identifier.necklace": "Necklace",
@@ -241,7 +211,6 @@
   "curios.identifier.belt": "Belt",
   "curios.identifier.slot": "Bracelet",
 
-  //Artifacts
   "item.block_clover.night_crown": "Night Crown",
   "item.block_clover.light_weight_ring": "Light Weight Ring",
   "item.block_clover.artifact_change": "Artifact Of Change",

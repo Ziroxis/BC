@@ -16,7 +16,7 @@
       "item": "minecraft:hopper"
     },
     "b": {
-      "tag": "minecraft:iron_bars"
+      "item": "minecraft:iron_bars"
     },
     "w": {
       "tag": "minecraft:planks"

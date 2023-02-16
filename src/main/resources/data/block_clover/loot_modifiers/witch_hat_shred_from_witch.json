@@ -1,9 +1,3 @@
 {
-  "conditions": [
-    {
-      "condition": "entity_properties",
-      "entity": "witch"
-    }
-  ],
-  "addition": "block_clover:witch_hat_shred"
+
 }

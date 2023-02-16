@@ -360,11 +360,6 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "block_clover:green_thumb"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "block_clover:jump_artifact"
         }
       ]
     }

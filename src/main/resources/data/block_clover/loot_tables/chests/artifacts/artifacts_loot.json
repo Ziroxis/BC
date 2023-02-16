@@ -62,11 +62,6 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "block_clover:charm_protection"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
           "name": "block_clover:health_artifact"
         },
         {

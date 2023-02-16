@@ -27,7 +27,7 @@ public class QuestArgument implements ArgumentType<Quest>
 	{
 		return new QuestArgument();
 	}
-	
+
 	public static <S> Quest getQuest(CommandContext<S> context, String name)
 	{
 		return context.getArgument(name, Quest.class);

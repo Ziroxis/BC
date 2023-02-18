@@ -2,6 +2,7 @@ package com.yuanno.block_clover.spells.lightning;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class ThunderChargeAbility extends ChargeableAbility implements IMultiTargetAbility, IParallelContinuousAbility {
 
-    public static final ThunderChargeAbility INSTANCE = new ThunderChargeAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("");
     private boolean cancelled = false;
     private ParticleEffect PARTICLES = new GlovesParticleEffect();
 

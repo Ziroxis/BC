@@ -82,11 +82,6 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "block_clover:belt_air"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
           "name": "block_clover:bracelet_push"
         },
         {

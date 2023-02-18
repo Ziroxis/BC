@@ -105,10 +105,10 @@ public class JuicerRecipe implements IJuicerRecipe {
             NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
-                inputs.set(i, Ingredient.fromNetwork(buffer));
+                inputs.set(i, Ingredient.fromNetwork(buffer)); // reads ingredient
             }
 
-            ItemStack output = buffer.readItem();
+            ItemStack output = buffer.readItem(); // reads stack
             return new JuicerRecipe(recipeId, output,
                     inputs);
         }

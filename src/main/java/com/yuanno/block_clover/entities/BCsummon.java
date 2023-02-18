@@ -18,7 +18,7 @@ public class BCsummon extends CreatureEntity {
     protected BCsummon(EntityType<? extends CreatureEntity> p_i48575_1_, World p_i48575_2_) {
         super(p_i48575_1_, p_i48575_2_);
     }
-    private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.defineId(EarthMinionEntity.class, DataSerializers.OPTIONAL_UUID);
+    private static final DataParameter<Optional<UUID>> OWNER = EntityDataManager.defineId(BCsummon.class, DataSerializers.OPTIONAL_UUID);
 
     @Override
     public void addAdditionalSaveData(CompoundNBT compound)

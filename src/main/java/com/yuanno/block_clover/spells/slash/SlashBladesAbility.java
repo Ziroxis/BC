@@ -25,6 +25,8 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
     private static final AttributeModifier SLASH_BLADES = new AttributeModifier(UUID.fromString("114e0640-feea-11ec-b939-0242ac120002"),
             "Slash Blades", 2, AttributeModifier.Operation.ADDITION);
 
+    // TODO xp multiplication glitch
+
     public SlashBladesAbility()
     {
         super("Slash Blades", AbilityCategories.AbilityCategory.ATTRIBUTE);

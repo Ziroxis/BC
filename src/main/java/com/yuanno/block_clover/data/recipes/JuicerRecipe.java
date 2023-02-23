@@ -102,25 +102,31 @@ public class JuicerRecipe implements IJuicerRecipe {
         @Nullable
         @Override
         public JuicerRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
+            int numIngredients = buffer.readVarInt(); // reads number of ingredients
+
+            NonNullList<Ingredient> inputs = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buffer)); // reads ingredient
             }
 
             ItemStack output = buffer.readItem(); // reads stack
-            return new JuicerRecipe(recipeId, output,
-                    inputs);
+            return new JuicerRecipe(recipeId, output, inputs); // returns
         }
 
         @Override
         public void toNetwork(PacketBuffer buffer, JuicerRecipe recipe) {
-            buffer.writeInt(recipe.getIngredients().size());
-            for (Ingredient ing : recipe.getIngredients()) {
+            NonNullList<Ingredient> inputs = recipe.getIngredients();
+
+            buffer.writeVarInt(inputs.size()); // writes number of ingredients
+
+            for (Ingredient ing : inputs) {
                 ing.toNetwork(buffer);
             }
+
             buffer.writeItemStack(recipe.getResultItem(), false);
         }
+
     }
 
 }

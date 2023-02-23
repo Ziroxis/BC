@@ -17,6 +17,8 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -155,7 +157,7 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
+    //@OnlyIn(Dist.CLIENT)
     public void tick() {
         Inventory inv = new Inventory(stackHandler.getSlots());
         for (int i = 0; i < stackHandler.getSlots(); i++) {
@@ -283,7 +285,11 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
         }
     }
 
-
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt)
+    {
+        this.load(null, pkt.getTag());
+    }
     @Override
     public void clearContent() {
         this.items.clear();

@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.interfaces.IChangeDamageSourceAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IFallDamageBlockingAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IOnDamageAbility;
@@ -212,7 +213,7 @@ public class AbilitiesEvents
 					
 					if(ability instanceof PunchAbility && event.getSource().msgId.equalsIgnoreCase("ability") && ability.isContinuous())
 					{
-						Ability source = ((AbilityDamageSource)event.getSource()).getAbilitySource();
+						AbilityCore source = ((AbilityDamageSource)event.getSource()).getAbilitySource();
 						if(source != null)
 						{
 							((PunchAbility)ability).hitEffect(player, entity);
@@ -248,12 +249,17 @@ public class AbilitiesEvents
 					{
 						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());
 						event.setCanceled(!result);
-					}	
+					}
+					// TODO replace with IHitAbility
+					/*
 					if (ability instanceof DamagedPassiveAbility)
 					{
 						boolean result = ((DamagedPassiveAbility) ablProps.getUnlockedAbility(ability)).damage(entity, event.getSource());
-						event.setCanceled(!result);
+						eve
+						nt.setCanceled(!result);
+
 					}
+					 */
 				}
 				catch (Exception e)
 				{
@@ -278,7 +284,7 @@ public class AbilitiesEvents
 						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());
 						event.setCanceled(!result);
 					}
-					
+					/*
 					if (ability instanceof DamagedContinuousAbility && ability.isContinuous())
 					{
 						if(event.getSource() instanceof ModDamageSource && !((ModDamageSource)event.getSource()).isInternalDamage())
@@ -287,6 +293,8 @@ public class AbilitiesEvents
 							event.setCanceled(!result);
 						}
 					}
+
+					 */
 					
 					if (ability instanceof IFallDamageBlockingAbility && event.getSource() == DamageSource.FALL)
 					{

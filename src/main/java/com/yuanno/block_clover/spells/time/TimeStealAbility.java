@@ -2,23 +2,27 @@ package com.yuanno.block_clover.spells.time;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class TimeStealAbility extends PunchAbility {
 
-    public static final TimeStealAbility INSTANCE = new TimeStealAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Time steal", AbilityCategories.AbilityCategory.ATTRIBUTE, TimeStealAbility.class)
+            .setDescription("Touches an entity, stealing it's time.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public TimeStealAbility()
     {
-        super("Time steal", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Touches an entity, stealing it's time.");
+        super(INSTANCE);
         this.setmanaCost(10);
         this.setMaxCooldown(3);
         this.setExperiencePoint(3);

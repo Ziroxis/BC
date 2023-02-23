@@ -1,11 +1,14 @@
 package com.yuanno.block_clover.spells.slash;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -20,15 +23,16 @@ import java.util.UUID;
 
 public class SlashBladesAbility extends ContinuousPunchAbility implements IParallelContinuousAbility {
 
-    public static final SlashBladesAbility INSTANCE = new SlashBladesAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Slash Blades", AbilityCategories.AbilityCategory.ATTRIBUTE, SlashBladesAbility.class)
+            .setDescription("Makes slash blades out of magic.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private static final AttributeModifier SLASH_BLADES = new AttributeModifier(UUID.fromString("114e0640-feea-11ec-b939-0242ac120002"),
             "Slash Blades", 2, AttributeModifier.Operation.ADDITION);
 
     public SlashBladesAbility()
     {
-        super("Slash Blades", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Makes slash blades out of magic");
+        super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(6);
         this.setExperiencePoint(7);

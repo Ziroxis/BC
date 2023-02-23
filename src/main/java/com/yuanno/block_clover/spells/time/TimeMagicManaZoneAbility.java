@@ -2,12 +2,15 @@ package com.yuanno.block_clover.spells.time;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IOnDamageTakenAbility;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -18,8 +21,10 @@ import java.util.List;
 
 public class TimeMagicManaZoneAbility extends PassiveAbility implements IOnDamageTakenAbility {
 
-    public static final TimeMagicManaZoneAbility INSTANCE = new TimeMagicManaZoneAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Time magic zone", AbilityCategories.AbilityCategory.ATTRIBUTE, TimeMagicManaZoneAbility.class)
+            .setDescription("Creates a zone around you accelerated in time, sensing future incoming attacks.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     IEntityStats entityStats;
     private BlockPos centerBlock;
 
@@ -27,8 +32,7 @@ public class TimeMagicManaZoneAbility extends PassiveAbility implements IOnDamag
 
     public TimeMagicManaZoneAbility()
     {
-        super("Time magic zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a zone around you accelerated in time, sensing future incoming attacks");
+        super(INSTANCE);
         //this.setmanaCost(0);
         this.hideInGUI(false);
         this.setMaxCooldown(180);

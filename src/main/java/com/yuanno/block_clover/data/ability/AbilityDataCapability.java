@@ -45,7 +45,6 @@ public class AbilityDataCapability
 					for (int i = 0; i < instance.getUnlockedAbilities(AbilityCategories.AbilityCategory.ALL).size(); i++)
 					{
 						Ability ability = instance.getUnlockedAbilities(AbilityCategories.AbilityCategory.ALL).get(i);
-						String name = Beapi.getResourceName(ability.getName());
 
 						CompoundNBT nbtAbility = new CompoundNBT();
 						nbtAbility = ability.save(nbtAbility);

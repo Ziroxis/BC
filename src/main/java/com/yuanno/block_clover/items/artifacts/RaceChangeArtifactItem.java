@@ -3,6 +3,7 @@ package com.yuanno.block_clover.items.artifacts;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -241,7 +242,7 @@ public class RaceChangeArtifactItem extends ArtifactItem {
         return ActionResult.sidedSuccess(itemStack, world.isClientSide());
     }
 
-    private static void gainAbility(PlayerEntity player, int level, Ability ability)
+    private static void gainAbility(PlayerEntity player, int level, AbilityCore ability)
     {
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);

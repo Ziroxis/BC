@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.time;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.api.data.IExtraUpdateData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -10,21 +12,23 @@ import com.yuanno.block_clover.init.ModEffects;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 
 public class TimeRessurectionAbility extends PassiveAbility implements IExtraUpdateData {
 
-    public static final TimeRessurectionAbility INSTANCE = new TimeRessurectionAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Time ressurection", AbilityCategories.AbilityCategory.ATTRIBUTE, TimeRessurectionAbility.class)
+            .setDescription("Consumes all your time, giving yourself another chance.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private double strain = 180 * 20;
     private int healTicks = 0;
     private int outTicks = 0;
     public TimeRessurectionAbility()
     {
-        super("Time ressurection", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Consumes all your time, giving yourself another chance.");
+        super(INSTANCE);
         this.hideInGUI(false);
         this.setMaxCooldown(180);
         this.setCooldown(180);

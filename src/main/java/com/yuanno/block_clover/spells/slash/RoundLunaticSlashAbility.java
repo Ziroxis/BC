@@ -3,11 +3,14 @@ package com.yuanno.block_clover.spells.slash;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModDamageSource;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -19,12 +22,13 @@ import java.util.List;
 
 public class RoundLunaticSlashAbility extends Ability {
 
-    public static final RoundLunaticSlashAbility INSTANCE = new RoundLunaticSlashAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Round Lunatic Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, RoundLunaticSlashAbility.class)
+            .setDescription("Slashes around you")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public RoundLunaticSlashAbility()
     {
-        super("Round Lunatic Slash", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Slashes around you");
+        super(INSTANCE);
         this.setmanaCost(30);
         this.setMaxCooldown(20);
         this.setExperiencePoint(25);

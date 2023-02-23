@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.commands;
 
+import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.BeoDebug;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -69,17 +70,18 @@ public class AbilityCommand
 		{
 			IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-			for(Ability abl : group.getAbilities())
+			for(AbilityCore core : group.getAbilities())
 			{
 				if(op == 1)
 				{
+					Ability abl = core.createAbility();
 					abl.setUnlockType(AbilityUnlock.COMMAND);
 					abilityProps.addUnlockedAbility(player, abl);
 				}
 				else
-					abilityProps.removeUnlockedAbility(abl);
+					abilityProps.removeUnlockedAbility(core);
 			}
-			
+
 			PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
 		}
 		return 1;
@@ -89,7 +91,8 @@ public class AbilityCommand
 	{
 		return Lists.newArrayList(context.getSource().getPlayerOrException());
 	}
-	
+
+
 	private static int resetCooldown(CommandContext<CommandSource> context, Collection<ServerPlayerEntity> players)
 	{
 		for (ServerPlayerEntity player : players)
@@ -114,12 +117,13 @@ public class AbilityCommand
 		return 1;
 	}
 
-	private static int addAbility(CommandContext<CommandSource> context, Ability ability, Collection<ServerPlayerEntity> targets)
+	private static int addAbility(CommandContext<CommandSource> context, AbilityCore core, Collection<ServerPlayerEntity> targets)
 	{
 		for (ServerPlayerEntity player : targets)
 		{
 			IAbilityData props = AbilityDataCapability.get(player);
-			
+			Ability ability = core.createAbility();
+
 			ability.setUnlockType(AbilityUnlock.COMMAND);
 			props.addUnlockedAbility(player, ability);
 			
@@ -131,21 +135,21 @@ public class AbilityCommand
 		
 		return 1;
 	}
-	
-	private static int removeAbility(CommandContext<CommandSource> context, Ability ability, Collection<ServerPlayerEntity> targets)
-	{		
+
+	private static int removeAbility(CommandContext<CommandSource> context, AbilityCore ability, Collection<ServerPlayerEntity> targets)
+	{
 		for (ServerPlayerEntity player : targets)
 		{
 			IAbilityData props = AbilityDataCapability.get(player);
-			
+
 			props.removeUnlockedAbility(ability);
-			
-			if(BeoDebug.isDebug())
-				player.sendMessage(new StringTextComponent(TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] " + ability.getName() + " removed for " + player.getName().getString()), Util.NIL_UUID); 
+
+			if(Beapi.isDebug())
+				player.sendMessage(new StringTextComponent(TextFormatting.GREEN + "" + TextFormatting.ITALIC + "[DEBUG] " + ability.getName() + " removed for " + player.getName().getString()), Util.NIL_UUID);
 
 			PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), props), player);
 		}
-		
+
 		return 1;
 	}
 }

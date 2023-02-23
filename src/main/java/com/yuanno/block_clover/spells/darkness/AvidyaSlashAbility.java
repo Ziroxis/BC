@@ -15,14 +15,15 @@ import net.minecraft.world.server.ServerWorld;
 
 public class AvidyaSlashAbility extends Ability {
 
-    public static final AbilityCore INSTNANCE = new AbilityCore.Builder("Avidya Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, AvidyaSlashAbility.class)
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Avidya Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, AvidyaSlashAbility.class)
             .setDescription("Shoot a slash of darkness")
             .setDamageKind(AbilityDamageKind.SLASH)
+            .setDependencies(DarkCloakedBladeAbility.INSTANCE)
             .build();
 
     public AvidyaSlashAbility()
     {
-        super(INSTNANCE);
+        super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(20);
@@ -32,19 +33,10 @@ public class AvidyaSlashAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        DarkCloakedBladeAbility darkCloakedBladeAbility = abilityProps.getEquippedAbility(DarkCloakedBladeAbility.INSTANCE);
-        if (darkCloakedBladeAbility.isContinuous())
-        {
-            AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
-            return true;
-        }
-        else
-        {
-            player.sendMessage(new StringTextComponent("Need to cloak your sword with darkness!"), Util.NIL_UUID);
-            return false;
-        }
+        AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
+        player.level.addFreshEntity(projectile);
+        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
+        return true;
     }
 }

@@ -39,7 +39,7 @@ public class ValkyrieArmorRenderer<T extends LivingEntity, M extends EntityModel
 
         IAbilityData abilityData = AbilityDataCapability.get(entitylivingbaseIn);
 
-        ValkyrieArmorAbility valkyrieArmorAbility = abilityData.getEquippedAbility(ValkyrieArmorAbility.INSTANCE);
+        ValkyrieArmorAbility valkyrieArmorAbility = (ValkyrieArmorAbility) abilityData.getEquippedAbility(ValkyrieArmorAbility.INSTANCE);
         if (valkyrieArmorAbility != null && valkyrieArmorAbility.isContinuous())
         {
             matrixStackIn.pushPose();

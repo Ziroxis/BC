@@ -36,7 +36,7 @@ public class ManaSkinRenderer<T extends LivingEntity, M extends EntityModel<T>> 
         IEntityStats entityStats = EntityStatsCapability.get(entityLivingBase);
         TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/manaskin/manaskin_" + entityStats.getAttribute().toLowerCase() + ".png");
         IAbilityData abilityData = AbilityDataCapability.get(entityLivingBase);
-        ManaSkinAbility manaSkinAbility = abilityData.getEquippedAbility(ManaSkinAbility.INSTANCE);
+        ManaSkinAbility manaSkinAbility = (ManaSkinAbility) abilityData.getEquippedAbility(ManaSkinAbility.INSTANCE);
         if (manaSkinAbility != null && manaSkinAbility.isContinuous())
         {
             matrixStack.pushPose();

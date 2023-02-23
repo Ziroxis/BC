@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.misc;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -8,6 +10,7 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +19,10 @@ import java.util.UUID;
 
 public class ManaSkinAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
-    public static final ManaSkinAbility INSTANCE = new ManaSkinAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Mana Skin", AbilityCategories.AbilityCategory.ATTRIBUTE, ManaSkinAbility.class)
+            .setDescription("Envelops your skin with mana.\nGiving you resistance, auto-step.")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
     private static final AttributeModifier MANA_RESISTANCE = new AttributeModifier(UUID.fromString("6a626026-1bca-11ed-861d-0242ac120002"),
             "Mana Resistance", 1, AttributeModifier.Operation.ADDITION);
     private static final AttributeModifier MANA_STEP = new AttributeModifier(UUID.fromString("b6abbc2a-1bca-11ed-861d-0242ac120002"),
@@ -24,8 +30,7 @@ public class ManaSkinAbility extends ContinuousAbility implements IParallelConti
 
     public ManaSkinAbility()
     {
-        super("Mana Skin", AbilityCategories.AbilityCategory.MISCELLANEOUS);
-        this.setDescription("Envelops your skin with mana.\nGiving you resistance, auto-step");
+        super(INSTANCE);
         this.setmanaCost(8);
         this.setMaxCooldown(10);
         this.setExperiencePoint(0);

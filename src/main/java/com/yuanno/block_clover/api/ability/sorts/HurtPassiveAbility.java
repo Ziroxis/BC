@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 
@@ -12,10 +13,10 @@ public class HurtPassiveAbility extends PassiveAbility
 	protected IOnHurt onHurtEvent = (player, attacker) -> { return true; };
 	
 	private float amount;
-	
-	public HurtPassiveAbility(String name, AbilityCategories.AbilityCategory category)
+
+	public HurtPassiveAbility(AbilityCore core)
 	{
-		super(name, category);
+		super(core);
 	}
 	
 	public boolean hurt(LivingEntity entity, Entity source, float amount)

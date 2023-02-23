@@ -4,7 +4,9 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
+import com.yuanno.block_clover.init.ModAdvancements;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -61,8 +63,8 @@ public class AbilityDataBase implements IAbilityData
 
 		this.unlockedAbilities.add(abl);
 
-		//if (player instanceof ServerPlayerEntity)
-			//ModAdvancements.UNLOCK_ABILITY.trigger((ServerPlayerEntity)player, abl.getCore());
+		if (player instanceof ServerPlayerEntity)
+			ModAdvancements.UNLOCK_ABILITY.trigger((ServerPlayerEntity)player, abl.getCore());
 
 		return true;
 	}

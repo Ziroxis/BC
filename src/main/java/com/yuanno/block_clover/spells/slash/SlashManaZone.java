@@ -2,18 +2,22 @@ package com.yuanno.block_clover.spells.slash;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.entities.projectiles.slash.DeathScytheProjectile;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class SlashManaZone extends ContinuousAbility {
-    
-    public static final SlashManaZone INSTANCE = new SlashManaZone();
-    
+
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Slash mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE, SlashManaZone.class)
+            .setDescription("Throws a multitude of slashes around you in a zone.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public SlashManaZone()
     {
-        super("Slash mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Throws a multitude of slashes around you in a zone");
+        super(INSTANCE);
         this.setMaxCooldown(0);
         this.setmanaCost(0);
         this.duringContinuityEvent = this::duringContinuityEvent;

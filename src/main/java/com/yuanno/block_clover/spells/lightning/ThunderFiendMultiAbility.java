@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.lightning;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
@@ -19,12 +21,13 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class ThunderFiendMultiAbility extends RepeaterAbility implements IMultiTargetAbility {
-    public static final ThunderFiendMultiAbility INSTANCE = new ThunderFiendMultiAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder Fiend multi", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderFiendMultiAbility.class)
+            .setDescription("Shoots yourself multiple times forward with your boots.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public ThunderFiendMultiAbility()
     {
-        super("Thunder Fiend Multi", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots yourself multiple times forward with your boots");
+        super(INSTANCE);
         this.setmanaCost(20);
         this.setMaxCooldown(10);
         this.setExperiencePoint(10);

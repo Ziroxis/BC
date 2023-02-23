@@ -3,7 +3,10 @@ package com.yuanno.block_clover.spells.sealing;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.init.ModEffects;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,8 +20,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UltimateSealAbility extends Ability {
-    public static final UltimateSealAbility INSTANCE = new UltimateSealAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Ultimate Seal", AbilityCategories.AbilityCategory.ATTRIBUTE, UltimateSealAbility.class)
+            .setDescription("Seals the enemy in a temporary seal.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private List<BlockPos> blockList = new ArrayList<>();
     private List<BlockPos> placedBlockList = new ArrayList<>();
     public static final int MAX_THRESHOLD = 2;
@@ -30,11 +35,10 @@ public class UltimateSealAbility extends Ability {
 
     public UltimateSealAbility()
     {
-        super("Ultimate Seal", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super(INSTANCE);
         this.setMaxCooldown(30);
         this.setmanaCost(12);
         this.setExperiencePoint(50);
-        this.setDescription("Seals the enemy in a temporary seal.");
 
         this.onUseEvent = this::onUseEvent;
 

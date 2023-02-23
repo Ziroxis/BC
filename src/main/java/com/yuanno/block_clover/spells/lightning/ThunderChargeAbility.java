@@ -3,6 +3,7 @@ package com.yuanno.block_clover.spells.lightning;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
@@ -25,14 +26,17 @@ import java.util.List;
 
 public class ThunderChargeAbility extends ChargeableAbility implements IMultiTargetAbility, IParallelContinuousAbility {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("");
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder Charge", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderChargeAbility.class)
+            .setDescription("Charges up before dashing forward with speed dealing massive damage to enemies in your way.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .setDependencies(ThunderGodBootsAbility.INSTANCE)
+            .build();
     private boolean cancelled = false;
     private ParticleEffect PARTICLES = new GlovesParticleEffect();
 
     public ThunderChargeAbility()
     {
-        super("Thunder Charge", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Charges up before dashing forward with speed dealing massive damage to enemies in your way.");
+        super(INSTANCE);
         this.setMaxCooldown(15);
         this.setMaxChargeTime(7);
         this.setmanaCost(20);
@@ -50,18 +54,11 @@ public class ThunderChargeAbility extends ChargeableAbility implements IMultiTar
     private boolean onStartChargingEvent(PlayerEntity player)
     {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        ThunderGodBootsAbility thunderGodBootsAbility = abilityProps.getEquippedAbility(ThunderGodBootsAbility.INSTANCE);
-        if (thunderGodBootsAbility != null && thunderGodBootsAbility.isContinuous())
-        {
+
             this.clearTargets();
             this.cancelled = false;
             return true;
-        }
-        else
-        {
-            player.sendMessage(new StringTextComponent("Need to put on your thunder god boots!"), Util.NIL_UUID);
-            return false;
-        }
+
     }
 
     private void duringChargingEvent(PlayerEntity player, int chargeTimer)

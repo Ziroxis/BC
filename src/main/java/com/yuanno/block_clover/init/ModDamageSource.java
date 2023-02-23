@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.damagesource.AbilityDamageSource;
 import com.yuanno.block_clover.damagesource.ModEntityDamageSource;
 import com.yuanno.block_clover.damagesource.ModIndirectEntityDamageSource;
@@ -90,18 +91,23 @@ public class ModDamageSource extends DamageSource
     }
 
     @Override
-    public ModDamageSource setProjectile() {
+    public DamageSource setProjectile()
+    {
         return this.setSourceProprieties((ModDamageSource) super.setProjectile());
     }
-    
-	public static AbilityDamageSource causeAbilityDamage(LivingEntity player, Ability ability)
-	{
-		return new AbilityDamageSource("ability", player, ability);
-	}
 
+    public static AbilityDamageSource causeAbilityDamage(LivingEntity player, AbilityCore ability)
+    {
+        return new AbilityDamageSource("ability", player, ability);
+    }
+
+    public static AbilityDamageSource causeAbilityDamage(LivingEntity player, Ability ability)
+    {
+        return new AbilityDamageSource("ability", player, ability.getCore());
+    }
 
     public static AbilityDamageSource causeAbilityDamage(LivingEntity player, Ability ability, String damageType)
     {
-        return new AbilityDamageSource(damageType, player, ability);
+        return new AbilityDamageSource(damageType, player, ability.getCore());
     }
 }

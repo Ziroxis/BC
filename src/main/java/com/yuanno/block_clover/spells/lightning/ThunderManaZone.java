@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.lightning;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.AbilityHelper;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
@@ -9,6 +11,7 @@ import com.yuanno.block_clover.blocks.tileentities.LightningBlockTileEntity;
 import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -27,8 +30,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ThunderManaZone extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final ThunderManaZone INSTANCE = new ThunderManaZone();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder Mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderManaZone.class)
+            .setDescription("Creates a dome of lightning, repeatedly hitting entities with lightning in it.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public static final int MAX_ZONE_SIZE = 40;
     public static final int MAX_THRESHOLD = 2;
 
@@ -41,8 +46,7 @@ public class ThunderManaZone extends ContinuousAbility implements IParallelConti
 
     public ThunderManaZone()
     {
-        super("Thunder Mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a dome of lightning, repeatedly hitting entities with lightning in it");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(180);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

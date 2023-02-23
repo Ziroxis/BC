@@ -1,21 +1,26 @@
 package com.yuanno.block_clover.spells.water;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.entities.projectiles.water.WaterSpearProjectile;
 import com.yuanno.block_clover.init.ModEffects;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 
 public class WaterSpearAbility extends ChargeableAbility {
 
-    public static final WaterSpearAbility INSTANCE = new WaterSpearAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Spear", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterSpearAbility.class)
+            .setDescription("Shoots a water spear.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private boolean cancelled = false;
 
     public WaterSpearAbility()
     {
-        super("Water Spear", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a water spear");
+        super(INSTANCE);
         this.setMaxCooldown(7);
         this.setMaxChargeTime(5);
         this.setmanaCost(20);

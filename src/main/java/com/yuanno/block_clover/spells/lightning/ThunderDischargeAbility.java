@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.lightning;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModDamageSource;
@@ -19,14 +21,16 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class ThunderDischargeAbility extends Ability {
-    
-    public static final ThunderDischargeAbility INSTANCE = new ThunderDischargeAbility();
+
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder Discharge", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderDischargeAbility.class)
+            .setDescription("Discharges all your electricity.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public static final ParticleEffect PARTICLES = new DischargeParticleEffect();
 
     public ThunderDischargeAbility()
     {
-        super("Thunder Discharge", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Discharges all your electricity!");
+        super(INSTANCE);
         this.setmanaCost(50);
         this.setMaxCooldown(25);
         this.setExperiencePoint(25);

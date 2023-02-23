@@ -1,11 +1,14 @@
 package com.yuanno.block_clover.spells.misc;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,14 +17,16 @@ import java.util.UUID;
 
 public class ManaReinforcement extends ContinuousAbility implements IParallelContinuousAbility {
 
-    public static final ManaReinforcement INSTANCE = new ManaReinforcement();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Mana Reinforcement", AbilityCategories.AbilityCategory.MISCELLANEOUS, ManaReinforcement.class)
+            .setDescription("Envelops your arm with mana.\nGiving you damage.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private static final AttributeModifier MANA_REINFORCEMENT = new AttributeModifier(UUID.fromString("e6499c7c-724b-11ed-a1eb-0242ac120002"),
             "Mana Reinforcement", 5, AttributeModifier.Operation.ADDITION);
 
     public ManaReinforcement()
     {
-        super("Mana Reinforcement", AbilityCategories.AbilityCategory.MISCELLANEOUS);
-        this.setDescription("Envelops your arm with mana.\nGiving you damage");
+        super(INSTANCE);
         this.setmanaCost(8);
         this.setMaxCooldown(10);
         this.setExperiencePoint(0);

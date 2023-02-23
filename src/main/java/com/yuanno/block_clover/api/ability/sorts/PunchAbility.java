@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.init.ModDamageSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,9 +15,9 @@ public class PunchAbility extends ContinuousAbility{
     protected IOnHitEntity onHitEntityEvent = (player, target) -> { return 0; };
     protected IOnHitEffect onHitEffectEvent = (player, target) -> {};
 
-    public PunchAbility(String name, AbilityCategories.AbilityCategory category)
+    public PunchAbility(AbilityCore core)
     {
-        super(name, category);
+        super(core);
     }
 
     public void hitEffect(PlayerEntity player, LivingEntity target)

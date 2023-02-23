@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.wind;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -9,20 +11,23 @@ import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.wind.WindFlightParticleEffect;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
 
 public class WindFlightAbility extends PassiveAbility {
-    public static final WindFlightAbility INSTANCE = new WindFlightAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Wind Flight", AbilityCategories.AbilityCategory.ATTRIBUTE, WindFlightAbility.class)
+            .setDescription("Makes you fly with your wind.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public float speed = 0;
     private static final ParticleEffect PARTICLES = new WindFlightParticleEffect();
 
     public WindFlightAbility()
     {
-        super("Wind Flight", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Makes you fly with your wind");
+        super(INSTANCE);
         this.hideInGUI(false);
         this.duringPassiveEvent = this::duringPassiveEvent;
     }

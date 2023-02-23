@@ -23,20 +23,20 @@ public enum AbilityCommandGroup implements IExtensibleEnum
 	ANTIMAGIC(() -> ModAbilities.ANTIMAGIC),
 	MISC(() -> ModAbilities.MISC);
 
-	
-	private Supplier<Ability[]> abilities;
-	
-	private AbilityCommandGroup(Supplier<Ability[]> abilities)
+
+	private Supplier<AbilityCore[]> abilities;
+
+	private AbilityCommandGroup(Supplier<AbilityCore[]> abilities)
 	{
 		this.abilities = abilities;
 	}
-	
-	public List<Ability> getAbilities()
+
+	public List<AbilityCore> getAbilities()
 	{
 		return Arrays.asList(this.abilities.get());
 	}
-	
-	public static AbilityCommandGroup create(String name, Supplier<Ability[]> abilities)
+
+	public static AbilityCommandGroup create(String name, Supplier<AbilityCore[]> abilities)
 	{
 		throw new IllegalStateException("Enum not extended");
 	}

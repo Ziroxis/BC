@@ -38,7 +38,7 @@ public class WindBlockTileEntity extends TileEntity implements ITickableTileEnti
             LivingEntity owner = this.getOwner();
             if(owner != null)
             {
-                AntiMagicManaZoneAbility ability = AbilityDataCapability.get(owner).getEquippedAbility(AntiMagicManaZoneAbility.INSTANCE);
+                AntiMagicManaZoneAbility ability = (AntiMagicManaZoneAbility) AbilityDataCapability.get(owner).getEquippedAbility(AntiMagicManaZoneAbility.INSTANCE);
 
                 if(ability != null)
                 {

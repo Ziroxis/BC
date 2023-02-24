@@ -6,6 +6,7 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.spells.antimagic.*;
+import com.yuanno.block_clover.spells.copy.CopyAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
@@ -14,6 +15,9 @@ import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
 import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
+import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
+import com.yuanno.block_clover.spells.mercury.MercuryBulletBarrageAbility;
+import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
 import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
@@ -47,7 +51,8 @@ public class ModAbilities {
     public static final AbilityCore[] WIND = new AbilityCore[] {WindBladeAbility.INSTANCE, WindCrescentAbility.INSTANCE, WindBladeShowerAbility.INSTANCE, ToweringTornadoAbility.INSTANCE, WindFlightAbility.INSTANCE, TornadoPiercingAbility.INSTANCE, WindGaleAbility.INSTANCE, WindManaZoneAbility.INSTANCE};
     public static final AbilityCore[] TIME = new AbilityCore[] {TimeStealAbility.INSTANCE, TimeHealAbility.INSTANCE, ChronoStasisAbility.INSTANCE, TimeHopAbility.INSTANCE, ChronoStasisGrigoraAbility.INSTANCE, TimeRessurectionAbility.INSTANCE, TimeMagicManaZoneAbility.INSTANCE};
     public static final AbilityCore[] GRAVITY = new AbilityCore[] {GravitySingularityAbility.INSTANCE, HeavyInfightingAbility.INSTANCE, PresenceOfTheDemonKingAbility.INSTANCE};
-
+    public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE};
+    public static final AbilityCore[] COPY = new AbilityCore[]{CopyAbility.INSTANCE};
 
     private static void registerAbilities(AbilityCore[] abilities)
     {
@@ -69,5 +74,7 @@ public class ModAbilities {
         registerAbilities(LIGHT);
         registerAbilities(DARKNESS);
         registerAbilities(WIND);
+        registerAbilities(MERCURY);
+        registerAbilities(COPY);
     }
 }

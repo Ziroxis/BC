@@ -37,6 +37,7 @@ import java.util.Random;
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
+    //TODO check with the other ability class
     private int experience = 0;
     private boolean isEvolved;
     private String name = "";
@@ -45,6 +46,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     protected double timeProgression = 1;
     private AbilityCore core;
     private int[] pools = new int[0];
+    private ResourceLocation customTexture;
 
     private int manaCost = 1;
     private int experiencePoint = 0;
@@ -261,9 +263,9 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.forcedState;
     }
 
-    public void hideInGUI(boolean flag)
+    public void hideInGUI()
     {
-        this.hideInGUI = flag;
+        this.getCore().isHidden();
     }
 
     public boolean isHideInGUI()
@@ -371,12 +373,12 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public ITextComponent getDescription()
     {
-        return this.tooltip;
+        return this.getCore().getDescription();
     }
 
     public String getName()
     {
-        return this.name;
+        return this.getCore().getName();
     }
 
     public String getI18nKey()
@@ -395,14 +397,27 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         this.displayName = name;
     }
 
-    public boolean hasCustomTexture()
+    public boolean hasCustomIcon()
     {
-        return !Beapi.isNullOrEmpty(this.textureName);
+        return this.customTexture != null;
     }
 
-    public String getCustomTexture()
+    public ResourceLocation getIcon()
     {
-        return this.textureName;
+        return this.hasCustomIcon() ? this.customTexture : this.getCore().getIcon();
+    }
+
+    public void setCustomIcon(ResourceLocation texture)
+    {
+        this.customTexture = texture;
+    }
+
+    public void setCustomIcon(String texture)
+    {
+        if(Strings.isNullOrEmpty(texture))
+            this.customTexture = null;
+        else
+            this.customTexture = new ResourceLocation(this.getCore().getIcon().getNamespace(), "textures/abilities/" + Beapi.getResourceName(texture) + ".png");
     }
 
     public void setCustomTexture(String texture)
@@ -412,7 +427,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public AbilityCategories.AbilityCategory getCategory()
     {
-        return this.category;
+        return this.getCore().getCategory();
     }
 
     public void setUnlockType(AbilityUnlock unlockType)
@@ -582,7 +597,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         boolean check(PlayerEntity player);
     }
 
-
     public interface IOnUse extends Serializable
     {
         boolean onUse(PlayerEntity player);
@@ -598,11 +612,10 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         void onEndCooldown(PlayerEntity player);
     }
 
-    public interface IFactory<A extends Ability>
+    public AbilityDamageKind getDamageKind()
     {
-        A create(AbilityCore<A> ability);
+        return this.getCore().getDamageKind();
     }
-
     public CompoundNBT save(CompoundNBT nbt)
     {
         nbt.putString("id", this.core.getRegistryName().toString());
@@ -651,5 +664,10 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public void addInPool(int... pools)
     {
         this.pools = pools;
+    }
+
+    public interface IFactory<A extends Ability>
+    {
+        A create(AbilityCore<A> ability);
     }
 }

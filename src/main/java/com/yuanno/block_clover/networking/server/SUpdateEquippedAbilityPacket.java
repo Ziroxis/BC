@@ -13,6 +13,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
@@ -24,7 +25,7 @@ public class SUpdateEquippedAbilityPacket
 {
 	private int entityId;
 	private int abilityId;
-	private String customTexture = "";
+	private ResourceLocation customTexture;
 	private boolean isStateForced;
 
 	private int abilityType = 0;
@@ -57,7 +58,7 @@ public class SUpdateEquippedAbilityPacket
 
 		this.entityId = player.getId();
 		this.abilityId = props.getEquippedAbilitySlot(ability);
-		this.customTexture = ability.getCustomTexture();
+		this.customTexture = ability.getIcon();
 		this.state = ability.getState().ordinal();
 		this.isStateForced = ability.isStateForced();
 
@@ -95,7 +96,7 @@ public class SUpdateEquippedAbilityPacket
 
 		this.entityId = player.getId();
 		this.abilityId = props.getEquippedAbilitySlot(ability);
-		this.customTexture = ability.getCustomTexture();
+		this.customTexture = ability.getIcon();
 		this.state = state.ordinal();
 		this.isStateForced = ability.isStateForced();
 
@@ -129,9 +130,7 @@ public class SUpdateEquippedAbilityPacket
 	{
 		buffer.writeInt(this.entityId);
 		buffer.writeInt(this.abilityId);
-		int textureLen = this.customTexture.length();
-		buffer.writeInt(textureLen);
-		buffer.writeUtf(this.customTexture, textureLen);
+		buffer.writeResourceLocation(this.customTexture);
 		buffer.writeInt(this.abilityType);
 		buffer.writeBoolean(this.isStateForced);
 
@@ -165,8 +164,7 @@ public class SUpdateEquippedAbilityPacket
 		SUpdateEquippedAbilityPacket msg = new SUpdateEquippedAbilityPacket();
 		msg.entityId = buffer.readInt();
 		msg.abilityId = buffer.readInt();
-		int textureLen = buffer.readInt();
-		msg.customTexture = buffer.readUtf(textureLen);
+		msg.customTexture = buffer.readResourceLocation();
 		msg.abilityType = buffer.readInt();
 		msg.isStateForced = buffer.readBoolean();
 
@@ -225,7 +223,7 @@ public class SUpdateEquippedAbilityPacket
 				return;
 
 			Ability.State state = Ability.State.values()[message.state];
-			ability.setCustomTexture(message.customTexture);
+			ability.setCustomIcon(message.customTexture);
 			ability.setState(state);
 
 			ability.setForcedState(message.isStateForced);

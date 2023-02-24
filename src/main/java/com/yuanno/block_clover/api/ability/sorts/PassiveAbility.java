@@ -19,7 +19,7 @@ public class PassiveAbility extends Ability {
     public PassiveAbility(AbilityCore core)
     {
         super(core);
-        this.hideInGUI(true);
+        //this.hideInGUI(true);
     }
 
     public void setPause(boolean flag)

@@ -13,6 +13,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IReorderingProcessor;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -99,11 +100,14 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 
 			if (this.props.hasEquippedAbility(entry.ability))
 				flag = true;
-			
-			String abilityName = Beapi.isNullOrEmpty(entry.ability.getDisplayName()) ? entry.ability.getName() : entry.ability.getDisplayName();
-			Minecraft.getInstance().font.drawShadow(matrixStack, new TranslationTextComponent("ability." + Main.MODID + "." + Beapi.getResourceName(abilityName)), x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
-			Beapi.drawAbilityIcon(Beapi.getResourceName(entry.ability.getName()), MathHelper.floor(x) - 30, MathHelper.floor(y), 16, 16);
-			
+
+			ResourceLocation rs = entry.ability.getCore().getRegistryName();
+			TranslationTextComponent abilityName = new TranslationTextComponent("ability." + rs.getNamespace() + "." + rs.getPath());
+			Minecraft.getInstance().font.drawShadow(matrixStack, abilityName, x, y + 4, flag ? 0xFF0000 : 0xFFFFFF);
+
+			Beapi.drawIcon(entry.ability.getIcon(), MathHelper.floor(x) - 30, MathHelper.floor(y), 1, 16, 16, 1, 1, 1);
+
+
 			y += ENTRY_HEIGHT * 1.25;
 		}
 		
@@ -118,25 +122,19 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 			{
 				if(entry == null)
 					continue;
-	
+
 				Color textColor = Beapi.hexToRGB("#aaff77");
 				Color iconColor = Beapi.hexToRGB("#FFFFFF");
-				
+
 				if(entry.ability instanceof PassiveAbility && ((PassiveAbility)entry.ability).isPaused())
 					textColor = iconColor = Beapi.hexToRGB("#FF0000");
-				
-				if(false)
-					textColor = Beapi.hexToRGB("#8B8B8B");
-				
-				String abilityName = Beapi.isNullOrEmpty(entry.ability.getDisplayName()) ? entry.ability.getName() : entry.ability.getDisplayName();
-				Minecraft.getInstance().font.drawShadow(matrixStack, new TranslationTextComponent("ability." + Main.MODID + "." + Beapi.getResourceName(abilityName)), x, y + 4, textColor.getRGB());
-				
-				String texture;
-				if(entry.ability.hasCustomTexture())
-					texture = Beapi.getResourceName(entry.ability.getCustomTexture());
-				else
-					texture = Beapi.getResourceName(entry.ability.getName());
-				Beapi.drawAbilityIcon(texture, MathHelper.floor(x) - 30, MathHelper.floor(y), 1, 16, 16, iconColor.getRed() / 255.0f, iconColor.getGreen() / 255.0f, iconColor.getBlue() / 255.0f);
+
+
+				ResourceLocation rs = entry.ability.getCore().getRegistryName();
+				TranslationTextComponent abilityName = new TranslationTextComponent("ability." + rs.getNamespace() + "." + rs.getPath());
+				Minecraft.getInstance().font.drawShadow(matrixStack, abilityName, x, y + 4, textColor.getRGB());
+
+				Beapi.drawIcon(entry.ability.getIcon(), MathHelper.floor(x) - 30, MathHelper.floor(y), 1, 16, 16, iconColor.getRed() / 255.0f, iconColor.getGreen() / 255.0f, iconColor.getBlue() / 255.0f);
 				
 				y += ENTRY_HEIGHT * 1.25;
 			}

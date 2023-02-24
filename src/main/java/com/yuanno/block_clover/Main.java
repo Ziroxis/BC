@@ -81,7 +81,6 @@ public class Main
 
         BeRegistry.ABILITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
-        ModAdvancements.register(modEventBus);
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
@@ -95,6 +94,7 @@ public class Main
         ModPotions.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);
+        ModAdvancements.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
 

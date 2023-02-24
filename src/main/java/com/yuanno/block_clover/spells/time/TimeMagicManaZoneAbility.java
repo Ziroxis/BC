@@ -34,7 +34,7 @@ public class TimeMagicManaZoneAbility extends PassiveAbility implements IOnDamag
     {
         super(INSTANCE);
         //this.setmanaCost(0);
-        this.hideInGUI(false);
+        //this.hideInGUI(false);
         this.setMaxCooldown(180);
 
     }

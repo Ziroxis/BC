@@ -15,7 +15,7 @@ public class EarthPassiveAbility extends PassiveAbility {
     {
         super(INSTANCE);
         this.setDescription("Every time you fall, you do damage around you depending on how high you fall. \nIf you fall on dirt, stone or cobble. Your fall damage is negated.");
-        this.hideInGUI(false);
+        //this.hideInGUI(false);
 
     }
 

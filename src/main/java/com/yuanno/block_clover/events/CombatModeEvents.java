@@ -209,14 +209,7 @@ public class CombatModeEvents
 											
 						// Drawing the ability icons
 						if(!abl.isDisabled())
-						{
-							String texture;
-							if(abl.hasCustomTexture())
-								texture = Beapi.getResourceName(abl.getCustomTexture());
-							else
-								texture = Beapi.getResourceName(abl.getName());
-							Beapi.drawAbilityIcon(texture, (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
-						}
+							Beapi.drawIcon(abl.getIcon(), (posX - 192 + (i * 50)) / 2, posY - 19, 1, 16, 16, 1F, 1F, 1F);
 						event.getMatrixStack().translate(0, 0, 2);
 						if(false)
 							Beapi.drawStringWithBorder(mc.font, event.getMatrixStack(), number, (posX - 172 + (i * 50)) / 2 - mc.font.width(number) / 2, posY - 14, Beapi.hexToRGB("#FFFFFF").getRGB());

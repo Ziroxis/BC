@@ -10,7 +10,7 @@ import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class EarthChunkAbility extends Ability {
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Eartch chunk", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthChunkAbility.class)
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth chunk", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthChunkAbility.class)
             .setDescription("Shoots a chunk of earth")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();

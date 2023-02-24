@@ -28,7 +28,7 @@ public class WindFlightAbility extends PassiveAbility {
     public WindFlightAbility()
     {
         super(INSTANCE);
-        this.hideInGUI(false);
+        //this.hideInGUI(false);
         this.duringPassiveEvent = this::duringPassiveEvent;
     }
 

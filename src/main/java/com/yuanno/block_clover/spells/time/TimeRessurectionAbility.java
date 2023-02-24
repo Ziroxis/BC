@@ -29,7 +29,7 @@ public class TimeRessurectionAbility extends PassiveAbility implements IExtraUpd
     public TimeRessurectionAbility()
     {
         super(INSTANCE);
-        this.hideInGUI(false);
+        //this.hideInGUI(false);
         this.setMaxCooldown(180);
         this.setCooldown(180);
         this.duringPassiveEvent = this::duringPassiveEvent;

@@ -19,7 +19,7 @@ public class PassiveDataAbility extends PassiveAbility {
     public PassiveDataAbility()
     {
         super(INSTANCE);
-        this.hideInGUI(true);
+        //this.hideInGUI(true);
         this.duringPassiveEvent = this::duringPassiveEvent;
     }
 

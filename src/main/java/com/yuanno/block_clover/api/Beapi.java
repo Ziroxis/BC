@@ -53,6 +53,20 @@ import static com.yuanno.block_clover.api.ability.AbilityHelper.placeBlockIfAllo
 public class Beapi
 {
 
+    public static void drawIcon(ResourceLocation rs, int x, int y, int z, int u, int v, float red, float green, float blue)
+    {
+        RenderSystem.enableAlphaTest();
+        RenderSystem.enableBlend();
+        Minecraft.getInstance().getTextureManager().bind(rs);
+        BufferBuilder bufferbuilder = Tessellator.getInstance().getBuilder();
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR_TEX);
+        bufferbuilder.vertex(x, y + v, z).color(red, green, blue, 1f).uv(0.0f, 1.0f).endVertex();
+        bufferbuilder.vertex(x + u, y + v, z).color(red, green, blue, 1f).uv(1.0f, 1.0f).endVertex();
+        bufferbuilder.vertex(x + u, y, z).color(red, green, blue, 1f).uv(1.0f, 0.0f).endVertex();
+        bufferbuilder.vertex(x, y, z).color(red, green, blue, 1f).uv(0f, 0f).endVertex();
+        Tessellator.getInstance().end();
+    }
+
     public static boolean loadNBTStructure(ServerWorld world, String name, BlockPos pos, PlacementSettings settings)
     {
         if (!world.isClientSide)

@@ -1,9 +1,11 @@
 package com.yuanno.block_clover.api.ability;
 
+import com.google.common.base.Strings;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
+import com.yuanno.block_clover.api.data.IExtraUpdateData;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -15,6 +17,7 @@ import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
@@ -26,6 +29,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -33,12 +37,16 @@ import java.util.Random;
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
-    private int experience;
+    //TODO check with the other ability class
+    private int experience = 0;
     private boolean isEvolved;
     private String name = "";
     private String displayName;
     private String textureName = "";
     protected double timeProgression = 1;
+    private AbilityCore core;
+    private int[] pools = new int[0];
+    private ResourceLocation customTexture;
 
     private int manaCost = 1;
     private int experiencePoint = 0;
@@ -66,10 +74,8 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     protected IDuringCooldown duringCooldownEvent = (player, cooldown) -> {};
     protected IOnEndCooldown onEndCooldownEvent = (player) -> {};
 
-    public Ability(String name, AbilityCategories.AbilityCategory category)
-    {
-        this.name = name;
-        this.category = category;
+    public Ability(AbilityCore core) {
+    this.core = core;
     }
 
     /*
@@ -257,9 +263,9 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.forcedState;
     }
 
-    public void hideInGUI(boolean flag)
+    public void hideInGUI()
     {
-        this.hideInGUI = flag;
+        this.getCore().isHidden();
     }
 
     public boolean isHideInGUI()
@@ -277,10 +283,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.needsClientSide;
     }
 
-    public void setInPool(AbilityPool pool)
-    {
-        this.setInPool(pool.getId());
-    }
+
 
     public void setInPool(int poolId)
     {
@@ -370,12 +373,12 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public ITextComponent getDescription()
     {
-        return this.tooltip;
+        return this.getCore().getDescription();
     }
 
     public String getName()
     {
-        return this.name;
+        return this.getCore().getName();
     }
 
     public String getI18nKey()
@@ -394,14 +397,27 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         this.displayName = name;
     }
 
-    public boolean hasCustomTexture()
+    public boolean hasCustomIcon()
     {
-        return !Beapi.isNullOrEmpty(this.textureName);
+        return this.customTexture != null;
     }
 
-    public String getCustomTexture()
+    public ResourceLocation getIcon()
     {
-        return this.textureName;
+        return this.hasCustomIcon() ? this.customTexture : this.getCore().getIcon();
+    }
+
+    public void setCustomIcon(ResourceLocation texture)
+    {
+        this.customTexture = texture;
+    }
+
+    public void setCustomIcon(String texture)
+    {
+        if(Strings.isNullOrEmpty(texture))
+            this.customTexture = null;
+        else
+            this.customTexture = new ResourceLocation(this.getCore().getIcon().getNamespace(), "textures/abilities/" + Beapi.getResourceName(texture) + ".png");
     }
 
     public void setCustomTexture(String texture)
@@ -411,7 +427,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public AbilityCategories.AbilityCategory getCategory()
     {
-        return this.category;
+        return this.getCore().getCategory();
     }
 
     public void setUnlockType(AbilityUnlock unlockType)
@@ -581,7 +597,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         boolean check(PlayerEntity player);
     }
 
-
     public interface IOnUse extends Serializable
     {
         boolean onUse(PlayerEntity player);
@@ -597,4 +612,62 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         void onEndCooldown(PlayerEntity player);
     }
 
+    public AbilityDamageKind getDamageKind()
+    {
+        return this.getCore().getDamageKind();
+    }
+    public CompoundNBT save(CompoundNBT nbt)
+    {
+        nbt.putString("id", this.core.getRegistryName().toString());
+        nbt.putString("displayName", Strings.isNullOrEmpty(this.getDisplayName()) ? "" : this.getDisplayName());
+        nbt.putInt("experience", this.experience);
+        nbt.putIntArray("pools", this.getPools());
+        nbt.putString("unlock", this.getUnlockType().name());
+        nbt.putString("state", this.getState().toString());
+
+        if (this instanceof IExtraUpdateData)
+        {
+            CompoundNBT extraData = ((IExtraUpdateData) this).getExtraData();
+            nbt.put("extraData", extraData);
+        }
+
+        return nbt;
+    }
+    public AbilityCore getCore()
+    {
+        return this.core;
+    }
+    public int[] getPools()
+    {
+        return this.pools;
+    }
+    public void load(CompoundNBT nbt)
+    {
+        this.addInPool(nbt.getIntArray("pools"));
+        this.setUnlockType(AbilityUnlock.valueOf(nbt.getString("unlock")));
+        this.setDisplayName(nbt.getString("displayName"));
+        this.setState(Ability.State.valueOf(nbt.getString("state")));
+        this.setExperience(nbt.getInt("experience"));
+
+        if (this instanceof IExtraUpdateData)
+        {
+            CompoundNBT extraData = nbt.getCompound("extraData");
+            ((IExtraUpdateData) this).setExtraData(extraData);
+        }
+    }
+    public void addInPool(AbilityPool... pools)
+    {
+        int[] intPools = Arrays.stream(pools).mapToInt(AbilityPool::id).toArray();
+        this.addInPool(intPools);
+    }
+
+    public void addInPool(int... pools)
+    {
+        this.pools = pools;
+    }
+
+    public interface IFactory<A extends Ability>
+    {
+        A create(AbilityCore<A> ability);
+    }
 }

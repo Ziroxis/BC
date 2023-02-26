@@ -3,6 +3,7 @@ package com.yuanno.block_clover.items.artifacts;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -129,34 +130,34 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                     switch (statsProps.getAttribute())
                     {
                         case "Wind":
-                            abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                             break;
                         case "Fire":
-                            abilityData.addUnlockedAbility(FireBallAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, FireBallAbility.INSTANCE);
                             break;
                         case "Light":
-                            abilityData.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
                             break;
                         case "Lightning":
-                            abilityData.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
                             break;
                         case "Darkness":
-                            abilityData.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
                             break;
                         case "Earth":
-                            abilityData.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
                             break;
                         case "Slash":
-                            abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
                             break;
                         case "Sealing":
-                            abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
                             break;
                         case "Time":
-                            abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
                             break;
                         case "Water":
-                            abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                             break;
                     }
                 }
@@ -200,34 +201,34 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                     switch (secondAttribute)
                     {
                         case "Wind":
-                            abilityData.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                             break;
                         case "Fire":
-                            abilityData.addUnlockedAbility(FireBallAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, FireBallAbility.INSTANCE);
                             break;
                         case "Light":
-                            abilityData.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
                             break;
                         case "Lightning":
-                            abilityData.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
                             break;
                         case "Darkness":
-                            abilityData.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
                             break;
                         case "Earth":
-                            abilityData.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
                             break;
                         case "Slash":
-                            abilityData.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
                             break;
                         case "Sealing":
-                            abilityData.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
                             break;
                         case "Time":
-                            abilityData.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
                             break;
                         case "Water":
-                            abilityData.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                            abilityData.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                             break;
                     }
                     break;
@@ -241,14 +242,14 @@ public class RaceChangeArtifactItem extends ArtifactItem {
         return ActionResult.sidedSuccess(itemStack, world.isClientSide());
     }
 
-    private static void gainAbility(PlayerEntity player, int level, Ability ability)
+    private static void gainAbility(PlayerEntity player, int level, AbilityCore ability)
     {
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
 
         if (props.getLevel() >= level && !abilityProps.hasUnlockedAbility(ability) )
         {
-            abilityProps.addUnlockedAbility(ability);
+            abilityProps.addUnlockedAbility(player, ability);
         }
         if ((props.getLevel() < level && abilityProps.hasUnlockedAbility(ability)))
             abilityProps.removeUnlockedAbility(ability);

@@ -2,18 +2,22 @@ package com.yuanno.block_clover.spells.sealing;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.sealing.SealingProjectile;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class SealingProjectileAbility extends Ability {
-    public static final Ability INSTANCE = new SealingProjectileAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Sealing Projectile", AbilityCategories.AbilityCategory.ATTRIBUTE, SealingProjectileAbility.class)
+            .setDescription("Sends a magic projectile sealing the first enemy hit.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public SealingProjectileAbility()
     {
-        super("Sealing Projectile", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Sends a magic projectile sealing the first enemy hit.");
+        super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(25);

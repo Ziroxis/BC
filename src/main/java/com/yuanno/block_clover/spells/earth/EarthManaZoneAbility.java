@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -18,13 +20,15 @@ import net.minecraft.util.math.vector.Vector3d;
 import java.util.List;
 
 public class EarthManaZoneAbility extends ContinuousAbility {
-    public static final EarthManaZoneAbility INSTANCE = new EarthManaZoneAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthManaZoneAbility.class)
+            .setDescription("Increases dramatically the gravity around you.\nAll entities and players won't be able to jump.\nProjectiles will fall to the ground")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
 
     public EarthManaZoneAbility()
     {
-        super("Earth mana zone", AbilityCategories.AbilityCategory.DEVIL);
-        this.setDescription("Increases dramatically the gravity around you.\nAll entities and players won't be able to jump.\nProjectiles will fall to the ground.");
-        this.setMaxCooldown(0);
+        super(INSTANCE);
+        this.setMaxCooldown(180);
         this.setmanaCost(0);
 
 

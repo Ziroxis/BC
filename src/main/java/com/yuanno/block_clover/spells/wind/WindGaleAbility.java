@@ -1,20 +1,24 @@
 package com.yuanno.block_clover.spells.wind;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.entities.projectiles.wind.WindGaleProjectile;
 import com.yuanno.block_clover.init.ModEffects;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 
 public class WindGaleAbility extends ChargeableAbility {
-    public static final WindGaleAbility INSTANCE = new WindGaleAbility();
-    private boolean cancelled = false;
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Wind Gale", AbilityCategories.AbilityCategory.ATTRIBUTE, WindGaleAbility.class)
+            .setDescription("Concentrate the wind while being unable to move.\nRight after, shooting a wind blast.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();    private boolean cancelled = false;
 
     public WindGaleAbility()
     {
-        super("Wind Gale", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Concentrate the wind while being unable to move.\nRight after, shooting a wind blast.");
+        super(INSTANCE);
         this.setMaxCooldown(12);
         this.setMaxChargeTime(5);
         this.setmanaCost(30);

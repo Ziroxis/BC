@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,9 +14,9 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 	boolean loseMana = false;
 	int passiveManaCost = 0;
 	int passiveExperience = 0;
-	public ItemAbility(String name, AbilityCategories.AbilityCategory category)
+	public ItemAbility(AbilityCore core)
 	{
-		super(name, category);
+		super(core);
 		
 		this.onStartContinuityEvent = this::onStartContinuityEvent;
 		this.onEndContinuityEvent = this::onEndContinuityEvent;

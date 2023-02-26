@@ -3,6 +3,7 @@ package com.yuanno.block_clover.networking;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
@@ -18,29 +19,27 @@ import java.util.function.Supplier;
 public class CEquipAbilityPacket
 {
 	private int slot;
-	private String abilityName;
+	private ResourceLocation abilityId;
 	
 	public CEquipAbilityPacket() {}
 	
 	public CEquipAbilityPacket(int id, Ability ability)
 	{
 		this.slot = id;
-		this.abilityName = Beapi.getResourceName(ability.getName());
+		this.abilityId = ability.getCore().getRegistryName();
 	}
 	
 	public void encode(PacketBuffer buffer)
 	{
 		buffer.writeInt(this.slot);
-		buffer.writeInt(this.abilityName.length());
-		buffer.writeUtf(this.abilityName, this.abilityName.length());
+		buffer.writeResourceLocation(this.abilityId);
 	}
 	
 	public static CEquipAbilityPacket decode(PacketBuffer buffer)
 	{
 		CEquipAbilityPacket msg = new CEquipAbilityPacket();
 		msg.slot = buffer.readInt();
-		int len = buffer.readInt();
-		msg.abilityName = buffer.readUtf(len);
+		msg.abilityId = buffer.readResourceLocation();
 		return msg;
 	}
 
@@ -53,8 +52,8 @@ public class CEquipAbilityPacket
 				PlayerEntity player = ctx.get().getSender();
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 
-				Ability ability = GameRegistry.findRegistry(Ability.class).getValue(new ResourceLocation(Main.MODID, message.abilityName)).create();
-				
+				Ability ability = ((AbilityCore)GameRegistry.findRegistry(AbilityCore.class).getValue(message.abilityId)).createAbility();
+
 				abilityDataProps.setEquippedAbility(message.slot, ability);
 				PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
 			});	

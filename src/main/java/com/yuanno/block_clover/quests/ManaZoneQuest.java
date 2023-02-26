@@ -47,34 +47,34 @@ public class ManaZoneQuest extends Quest {
             case (ModValues.ANTIMAGIC):
 
             case (ModValues.WIND):
-                abilityData.addUnlockedAbility(ManaReinforcement.INSTANCE);
+                abilityData.addUnlockedAbility(player, ManaReinforcement.INSTANCE);
                 break;
             case (ModValues.DARKNESS):
-                abilityData.addUnlockedAbility(BlackMoonAbility.INSTANCE);
+                abilityData.addUnlockedAbility(player, BlackMoonAbility.INSTANCE);
                 break;
             case (ModValues.EARTH):
-                abilityData.addUnlockedAbility(EarthManaZoneAbility.INSTANCE);
+                abilityData.addUnlockedAbility(player, EarthManaZoneAbility.INSTANCE);
                 break;
             case (ModValues.FIRE):
-                abilityData.addUnlockedAbility(CalidusBrachiumBarrageAbility.INSTANCE);
+                abilityData.addUnlockedAbility(player, CalidusBrachiumBarrageAbility.INSTANCE);
                 break;
             case (ModValues.LIGHT):
-                abilityData.addUnlockedAbility(ArrowsOfJudgement.INSTANCE);
+                abilityData.addUnlockedAbility(player, ArrowsOfJudgement.INSTANCE);
                 break;
             case (ModValues.LIGHTNING):
-                abilityData.addUnlockedAbility(ThunderManaZone.INSTANCE);
+                abilityData.addUnlockedAbility(player, ThunderManaZone.INSTANCE);
                 break;
             case (ModValues.SLASH):
-                abilityData.addUnlockedAbility(SlashManaZone.INSTANCE);
+                abilityData.addUnlockedAbility(player, SlashManaZone.INSTANCE);
                 break;
             case (ModValues.SEALING):
-                abilityData.addUnlockedAbility(SealingManaZoneAbility.INSTANCE);
+                abilityData.addUnlockedAbility(player, SealingManaZoneAbility.INSTANCE);
                 break;
             case (ModValues.WATER):
-                abilityData.addUnlockedAbility(WaterManaZoneAbility.INSTANCE);
+                abilityData.addUnlockedAbility(player, WaterManaZoneAbility.INSTANCE);
                 break;
             case (ModValues.TIME):
-                abilityData.addUnlockedAbility(TimeMagicManaZoneAbility.INSTANCE);
+                abilityData.addUnlockedAbility(player, TimeMagicManaZoneAbility.INSTANCE);
                 break;
         }
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));

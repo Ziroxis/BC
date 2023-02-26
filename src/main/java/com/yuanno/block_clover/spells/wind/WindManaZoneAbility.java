@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.spells.wind;
 
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
-import com.yuanno.block_clover.api.ability.AbilityHelper;
-import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
+import com.yuanno.block_clover.api.ability.*;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.blocks.tileentities.WindBlockTileEntity;
@@ -11,6 +9,7 @@ import com.yuanno.block_clover.blocks.tileentities.WindBlockTileEntity;
 import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -27,8 +26,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class WindManaZoneAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final WindManaZoneAbility INSTANCE = new WindManaZoneAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Wind mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE, WindManaZoneAbility.class)
+            .setDescription("Creates a dome of wind, making all your projectiles hit.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public static final int MAX_ZONE_SIZE = 50;
     public static final int MAX_THRESHOLD = 2;
 
@@ -41,8 +42,7 @@ public class WindManaZoneAbility extends ContinuousAbility implements IParallelC
     Entity entityGoal;
     public WindManaZoneAbility()
     {
-        super("Wind mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a dome of wind, making all your projectiles hit");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(180);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

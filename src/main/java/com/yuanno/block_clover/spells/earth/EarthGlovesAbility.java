@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -16,15 +18,17 @@ import java.util.UUID;
 
 public class EarthGlovesAbility extends ContinuousPunchAbility implements IParallelContinuousAbility {
 
-    public static final EarthGlovesAbility INSTANCE = new EarthGlovesAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth gloves", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthGlovesAbility.class)
+            .setDescription("Makes gloves out of earth")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
 
     private static final AttributeModifier EARTH_GLOVES = new AttributeModifier(UUID.fromString("60fbf220-0222-11ed-b939-0242ac120002"),
             "Earth Gloves", 5, AttributeModifier.Operation.ADDITION);
 
     public EarthGlovesAbility()
     {
-        super("Earth Gloves", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Makes gloves out of earth");
+        super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(5);
         this.setExperiencePoint(10);

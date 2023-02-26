@@ -3,10 +3,13 @@ package com.yuanno.block_clover.spells.time;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -15,11 +18,14 @@ import java.util.Collections;
 
 public class TimeHopAbility extends Ability {
 
-    public static final TimeHopAbility INSTANCE = new TimeHopAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Time hop", AbilityCategories.AbilityCategory.ATTRIBUTE, TimeHopAbility.class)
+            .setDescription("Hops in time teleporting somewhere else.\nCrouch for a further distance.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     int distance;
     public TimeHopAbility()
     {
-        super("Time hop", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super(INSTANCE);
         this.setDescription("Hops in time teleporting somewhere else.\nCrouch for a further distance");
         this.setmanaCost(20);
         this.setMaxCooldown(2);

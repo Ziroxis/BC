@@ -1,11 +1,14 @@
 package com.yuanno.block_clover.spells.water;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,7 +20,11 @@ import java.util.UUID;
 
 public class ValkyrieArmorAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
-    public static final ValkyrieArmorAbility INSTANCE = new ValkyrieArmorAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Valkyrie Armor", AbilityCategories.AbilityCategory.ATTRIBUTE, ValkyrieArmorAbility.class)
+            .setDescription("Envelops yourself with an armor of water.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
+
     public int secondsActivated;
     public static final AttributeModifier WATER_ATTACK = new AttributeModifier(UUID.fromString("43beae28-231f-11ed-861d-0242ac120002"),
             "Water Attack", 3, AttributeModifier.Operation.ADDITION);
@@ -30,8 +37,7 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
 
     public ValkyrieArmorAbility()
     {
-        super("Valkyrie Armor", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Envelops yourself with an armor of water");
+        super(INSTANCE);
         this.setMaxCooldown(60);
         this.setmanaCost(10);
         this.setExperiencePoint(10);

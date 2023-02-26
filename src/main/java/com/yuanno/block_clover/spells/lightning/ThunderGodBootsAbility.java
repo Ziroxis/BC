@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.lightning;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.curios.network.NetworkHandler;
@@ -11,6 +13,7 @@ import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.lightning.BootsParticleEffect;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +22,10 @@ import java.util.UUID;
 
 public class ThunderGodBootsAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
-    public static final ThunderGodBootsAbility INSTANCE = new ThunderGodBootsAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder God boots", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderGodBootsAbility.class)
+            .setDescription("The user gets speed by enveloping himself with lightning boots.")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
     private static final AttributeModifier LIGHTNING_SPEED = new AttributeModifier(UUID.fromString("47642942-fec9-11ec-b939-0242ac120002"),
             "Lightning Speed", 0.3, AttributeModifier.Operation.ADDITION);
     private static final AttributeModifier LIGHTNING_STEP = new AttributeModifier(UUID.fromString("25c5b788-fec9-11ec-b939-0242ac120002"),
@@ -28,8 +34,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     private static final ParticleEffect PARTICLES = new BootsParticleEffect();
     public ThunderGodBootsAbility()
     {
-        super("Thunder God Boots", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("The user gets speed by enveloping himself with lightning boots");
+        super(INSTANCE);
         this.setmanaCost(5);
         this.setMaxCooldown(5);
         this.setExperiencePoint(7);

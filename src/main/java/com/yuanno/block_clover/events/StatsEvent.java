@@ -60,38 +60,38 @@ public class StatsEvent {
             switch (attribute)
             {
                 case "Wind":
-                    abilityProps.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                     break;
                 case "Fire":
-                    abilityProps.addUnlockedAbility(FireBallAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, FireBallAbility.INSTANCE);
                     break;
                 case "Light":
-                    abilityProps.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
                     break;
                 case "Lightning":
-                    abilityProps.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
                     break;
                 case "Darkness":
-                    abilityProps.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
                     break;
                 case "Earth":
-                    abilityProps.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
                     break;
                 case "Slash":
-                    abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
                     break;
                 case "Sealing":
-                    abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
                     break;
                 case "Time":
-                    abilityProps.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
                     break;
                 case "Water":
-                    abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                     break;
                 case (ModValues.ANTIMAGIC):
-                    abilityProps.addUnlockedAbility(DemonSlayerAbility.INSTANCE);
-                    abilityProps.addUnlockedAbility(BullThrustAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
+                    abilityProps.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
                     props.setRace(ModValues.HUMAN);
                     break;
             }
@@ -126,34 +126,34 @@ public class StatsEvent {
                     switch (secondAttribute)
                     {
                         case "Wind":
-                            abilityProps.addUnlockedAbility(WindBladeAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                             break;
                         case "Fire":
-                            abilityProps.addUnlockedAbility(FireBallAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, FireBallAbility.INSTANCE);
                             break;
                         case "Light":
-                            abilityProps.addUnlockedAbility(LightBladeAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
                             break;
                         case "Lightning":
-                            abilityProps.addUnlockedAbility(ThunderGodBootsAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
                             break;
                         case "Darkness":
-                            abilityProps.addUnlockedAbility(DarkCloakedBladeAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
                             break;
                         case "Earth":
-                            abilityProps.addUnlockedAbility(EarthChunkAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
                             break;
                         case "Slash":
-                            abilityProps.addUnlockedAbility(SlashBladesAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
                             break;
                         case "Sealing":
-                            abilityProps.addUnlockedAbility(SealingProjectileAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
                             break;
                         case "Time":
-                            abilityProps.addUnlockedAbility(TimeStealAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
                             break;
                         case (ModValues.WATER):
-                            abilityProps.addUnlockedAbility(WaterBallAbility.INSTANCE);
+                            abilityProps.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                             break;
                     }
                 }

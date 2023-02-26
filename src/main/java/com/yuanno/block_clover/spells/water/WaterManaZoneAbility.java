@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.spells.water;
 
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
-import com.yuanno.block_clover.api.ability.AbilityHelper;
-import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
+import com.yuanno.block_clover.api.ability.*;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.blocks.tileentities.AntiMagicBlockTileEntity;
@@ -11,6 +9,7 @@ import com.yuanno.block_clover.blocks.tileentities.LightningBlockTileEntity;
 import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -30,8 +29,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class WaterManaZoneAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final WaterManaZoneAbility INSTANCE = new WaterManaZoneAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterManaZoneAbility.class)
+            .setDescription("Teleports you into the air, creating a large dome of water around you and your enemy.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public static final int MAX_ZONE_SIZE = 30;
     public static final int MAX_THRESHOLD = 2;
 
@@ -46,8 +47,7 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
 
     public WaterManaZoneAbility()
     {
-        super("Water mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Teleports you into the air, creating a large dome of water around you and your enemy");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(180);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

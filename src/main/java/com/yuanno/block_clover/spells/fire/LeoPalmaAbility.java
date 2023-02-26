@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.fire;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.init.ModEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,14 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeoPalmaAbility extends Ability {
-    public static final LeoPalmaAbility INSTANCE = new LeoPalmaAbility();
 
     private List<LivingEntity> entities = new ArrayList<LivingEntity>();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Leo Palma", AbilityCategories.AbilityCategory.ATTRIBUTE, LeoPalmaAbility.class)
+            .setDescription("Engulfs the entity you're looking at with flames.\n The entity engulfed by the flames cannot move.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public LeoPalmaAbility()
     {
-        super("Leo Palma", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Engulfs the entity you're looking at with flames.\n The entity engulfed by the flames cannot move.");
+        super(INSTANCE);
         this.setMaxCooldown(10);
         this.setmanaCost(30);
         this.setExperiencePoint(30);

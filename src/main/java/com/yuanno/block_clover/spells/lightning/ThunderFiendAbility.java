@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.lightning;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -19,12 +21,14 @@ import java.util.List;
 
 
 public class ThunderFiendAbility extends Ability implements IMultiTargetAbility {
-    public static final ThunderFiendAbility INSTANCE = new ThunderFiendAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder Fiend", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderFiendAbility.class)
+            .setDescription("Shoots yourself forward with your boots.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .setDependencies(ThunderGodBootsAbility.INSTANCE)
+            .build();
     public ThunderFiendAbility()
     {
-        super("Thunder Fiend", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots yourself forward with your boots");
+        super(INSTANCE);
         this.setmanaCost(20);
         this.setMaxCooldown(10);
         this.setExperiencePoint(10);
@@ -36,22 +40,13 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
     {
         this.clearTargets();
 
-        IAbilityData abilityProps = AbilityDataCapability.get(player);
-        ThunderGodGlovesAbility thunderGodGlovesAbility = abilityProps.getEquippedAbility(ThunderGodGlovesAbility.INSTANCE);
-        if (thunderGodGlovesAbility != null && thunderGodGlovesAbility.isContinuous())
-        {
+
             Vector3d speed = Beapi.propulsion(player, 9, 9);
             player.setDeltaMovement(speed.x, 0.2, speed.z);
             player.hurtMarked = true;
             ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
             return true;
-        }
-        else
-        {
-            player.sendMessage(new StringTextComponent("Need to put on your electric boots!"), Util.NIL_UUID);
-            return false;
 
-        }
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {

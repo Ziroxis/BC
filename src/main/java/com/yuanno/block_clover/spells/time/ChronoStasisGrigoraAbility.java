@@ -1,14 +1,13 @@
 package com.yuanno.block_clover.spells.time;
 
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.Ability;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
-import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
+import com.yuanno.block_clover.api.ability.*;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModEffects;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
@@ -21,11 +20,13 @@ import java.util.List;
 
 public class ChronoStasisGrigoraAbility extends Ability {
 
-    public static final Ability INSTANCE = new ChronoStasisGrigoraAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Chrono stasis grigora", AbilityCategories.AbilityCategory.ATTRIBUTE, ChronoStasisGrigoraAbility.class)
+            .setDescription("Consumes time, freezing the time of every entity around you.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public ChronoStasisGrigoraAbility()
     {
-        super("Chrono stasis grigora", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super(INSTANCE);
         this.setDescription("Consumes time, freezing the time of every entity around you");
         this.setMaxCooldown(10);
         this.onUseEvent = this::onUseEvent;

@@ -1,12 +1,15 @@
 package com.yuanno.block_clover.spells.lightning;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.lightning.GlovesParticleEffect;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -17,7 +20,10 @@ import java.util.UUID;
 
 public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements IParallelContinuousAbility {
 
-    public static final ThunderGodGlovesAbility INSTANCE = new ThunderGodGlovesAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder God Gloves", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderGodGlovesAbility.class)
+            .setDescription("The user gets speed by enveloping himself with lightning gloves.")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
     private ParticleEffect PARTICLES = new GlovesParticleEffect();
 
     private static final AttributeModifier LIGHTNING_ATTACK = new AttributeModifier(UUID.fromString("e63c1084-fec9-11ec-b939-0242ac120002"),
@@ -27,8 +33,7 @@ public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements I
 
     public ThunderGodGlovesAbility()
     {
-        super("Thunder God Gloves", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("The user gets speed by enveloping himself with lightning gloves");
+        super(INSTANCE);
         this.setmanaCost(5);
         this.setMaxCooldown(5);
         this.setExperiencePoint(10);

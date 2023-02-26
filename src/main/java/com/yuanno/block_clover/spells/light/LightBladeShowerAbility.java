@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.light;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,12 +10,14 @@ import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
 public class LightBladeShowerAbility extends RepeaterAbility {
-    public static final LightBladeShowerAbility INSTANCE = new LightBladeShowerAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Light blade shower", AbilityCategories.AbilityCategory.ATTRIBUTE, LightBladeShowerAbility.class)
+            .setDescription("Shoots a big amount of light blades")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
 
     public LightBladeShowerAbility()
     {
-        super("Light Blade Shower", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a big amount of light blades");
+        super(INSTANCE);
         this.setMaxCooldown(12);
         this.setmanaCost(25);
         this.setExperiencePoint(25);

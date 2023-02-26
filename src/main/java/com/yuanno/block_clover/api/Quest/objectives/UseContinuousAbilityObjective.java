@@ -3,6 +3,7 @@ package com.yuanno.block_clover.api.Quest.objectives;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.interfaces.IContinuousAbilityObjective;
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,11 +13,11 @@ import net.minecraft.util.math.BlockPos;
 public class UseContinuousAbilityObjective extends Objective implements IContinuousAbilityObjective {
     
     private int timer;
-    private Ability ability;
+    private AbilityCore ability;
     private BlockPos blockPos;
     private boolean meditation;
 
-    public UseContinuousAbilityObjective(String title, int count, Ability ability, boolean meditation)
+    public UseContinuousAbilityObjective(String title, int count, AbilityCore ability, boolean meditation)
     {
         super(title);
         this.timer = count;

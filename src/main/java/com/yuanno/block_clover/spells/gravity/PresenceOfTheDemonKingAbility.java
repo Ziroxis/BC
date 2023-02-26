@@ -1,7 +1,10 @@
 package com.yuanno.block_clover.spells.gravity;
 
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -17,12 +20,14 @@ import net.minecraft.util.math.vector.Vector3d;
 import java.util.List;
 
 public class PresenceOfTheDemonKingAbility extends ContinuousAbility {
-    public static final PresenceOfTheDemonKingAbility INSTANCE = new PresenceOfTheDemonKingAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Presence of the demon king", AbilityCategories.AbilityCategory.DEVIL, PresenceOfTheDemonKingAbility.class)
+            .setDescription("Increases dramatically the gravity around you.\nAll entities and players won't be able to jump.\nProjectiles will fall to the ground")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
 
     public PresenceOfTheDemonKingAbility()
     {
-        super("Presence of the demon king", AbilityCategories.AbilityCategory.DEVIL);
-        this.setDescription("Increases dramatically the gravity around you.\nAll entities and players won't be able to jump.\nProjectiles will fall to the ground.");
+        super(INSTANCE);
         this.setMaxCooldown(0);
         this.setmanaCost(0);
 

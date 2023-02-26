@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,13 +11,15 @@ import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
 
 public class EarthManipulationAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
-    public static final EarthManipulationAbility INSTANCE = new EarthManipulationAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth manipulation", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthManipulationAbility.class)
+            .setDescription("Manipulates the earth giving you the ability to fly")
+            .setDamageKind(AbilityDamageKind.BUFF)
+            .build();
     public int secondsActivated = 0;
 
     public EarthManipulationAbility()
     {
-        super("Earth Manipulation", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Manipulates the earth giving you the ability to fly");
+        super(INSTANCE);
         this.setMaxCooldown(15);
         this.setmanaCost(5);
         this.onStartContinuityEvent = this::onStartContinuityEvent;

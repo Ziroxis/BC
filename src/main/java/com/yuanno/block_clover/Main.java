@@ -79,7 +79,10 @@ public class Main
         ModEffects.EFFECTS.register(modEventBus);
         ModRegistry.ENTITY_TYPES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(new AttachingCapabilities.Registry());
+
+        BeRegistry.ABILITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
+
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModTileEntities.register(modEventBus);
@@ -92,6 +95,7 @@ public class Main
         ModPotions.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);
+        ModAdvancements.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
 

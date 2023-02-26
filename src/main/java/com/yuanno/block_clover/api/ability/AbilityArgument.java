@@ -12,13 +12,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
-public class AbilityArgument implements ArgumentType<Ability>
+public class AbilityArgument implements ArgumentType<AbilityCore>
 {
 	@Override
-	public Ability parse(StringReader reader) throws CommandSyntaxException
+	public AbilityCore parse(StringReader reader) throws CommandSyntaxException
 	{
 		ResourceLocation resourcelocation = ResourceLocation.read(reader);
-		Ability ability = GameRegistry.findRegistry(Ability.class).getValue(resourcelocation);
+		AbilityCore ability = (AbilityCore) GameRegistry.findRegistry(AbilityCore.class).getValue(resourcelocation);
 		return ability;
 	}
 
@@ -26,10 +26,10 @@ public class AbilityArgument implements ArgumentType<Ability>
 	{
 		return new AbilityArgument();
 	}
-	
-	public static <S> Ability getAbility(CommandContext<S> context, String name)
+
+	public static <S> AbilityCore getAbility(CommandContext<S> context, String name)
 	{
-		return context.getArgument(name, Ability.class);
+		return context.getArgument(name, AbilityCore.class);
 	}
 
 	@Override
@@ -43,6 +43,6 @@ public class AbilityArgument implements ArgumentType<Ability>
 
 	private CompletableFuture<Suggestions> suggestAbility(SuggestionsBuilder builder)
 	{
-		return ISuggestionProvider.suggestResource(GameRegistry.findRegistry(Ability.class).getKeys(), builder);
+		return ISuggestionProvider.suggestResource(GameRegistry.findRegistry(AbilityCore.class).getKeys(), builder);
 	}
 }

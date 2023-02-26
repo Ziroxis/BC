@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.antimagic;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.entities.projectiles.anti_magic.BlackSlashProjectile;
@@ -12,12 +14,15 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
 public class BlackSlashAbility extends Ability {
-    public static final BlackSlashAbility INSTANCE = new BlackSlashAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Black Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, BlackSlashAbility.class)
+            .setDescription("Shoots a slash of anti-magic which shoots the entity backwards\n if hit on another player, deactivates his ongoing magic and sucks out mana")
+            .setDamageKind(AbilityDamageKind.SLASH)
+            .build();
+
 
     public BlackSlashAbility()
     {
-        super("Black Slash", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Shoots a slash of anti-magic which shoots the entity backwards\n if hit on another player, deactivates his ongoing magic and sucks out mana");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(3);
         this.onUseEvent = this::onUseEvent;

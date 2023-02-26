@@ -2,6 +2,7 @@ package com.yuanno.block_clover.events.ability;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -131,14 +132,14 @@ public class AbilityProgressionEvents {
         }
     }
 
-    private static void gainAbility(PlayerEntity player, int level, Ability ability)
+    private static void gainAbility(PlayerEntity player, int level, AbilityCore ability)
     {
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
 
         if (props.getLevel() >= level && !abilityProps.hasUnlockedAbility(ability) )
         {
-            abilityProps.addUnlockedAbility(ability);
+            abilityProps.addUnlockedAbility(player, ability);
         }
         if ((props.getLevel() < level && abilityProps.hasUnlockedAbility(ability)))
             abilityProps.removeUnlockedAbility(ability);

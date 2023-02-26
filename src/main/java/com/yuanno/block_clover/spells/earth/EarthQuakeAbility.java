@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.earth;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModDamageSource;
@@ -16,13 +18,15 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class EarthQuakeAbility extends Ability {
-    public static final EarthQuakeAbility INSTANCE = new EarthQuakeAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth quake", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthQuakeAbility.class)
+            .setDescription("Causes an earthquake, damaging every enemy on the ground around you")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     private static final ParticleEffect PARTICLES = new EarthQuakeParticleEffect();
 
     public EarthQuakeAbility()
     {
-        super("Earth Quake", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Causes an earthquake, damaging every enemy on the ground around you");
+        super(INSTANCE);
         this.setmanaCost(40);
         this.setMaxCooldown(25);
         this.setExperiencePoint(20);

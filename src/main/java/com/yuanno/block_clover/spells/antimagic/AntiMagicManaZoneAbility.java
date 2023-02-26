@@ -2,6 +2,8 @@ package com.yuanno.block_clover.spells.antimagic;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.AbilityHelper;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
@@ -26,7 +28,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AntiMagicManaZoneAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final AntiMagicManaZoneAbility INSTANCE = new AntiMagicManaZoneAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Anti magic mana zone", AbilityCategories.AbilityCategory.ATTRIBUTE, AntiMagicManaZoneAbility.class)
+            .setDescription("Creates a dome of anti magic, disabling everything mana related in the dome.")
+            .setDamageKind(AbilityDamageKind.GUARD)
+            .build();
 
     public static final int MAX_ZONE_SIZE = 30;
     public static final int MAX_THRESHOLD = 2;
@@ -40,8 +45,7 @@ public class AntiMagicManaZoneAbility extends ContinuousAbility implements IPara
     boolean zoneSet = false;
     public AntiMagicManaZoneAbility()
     {
-        super("Anti magic zone", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a dome of anti magic, disabling everything mana related in the dome.");
+        super(INSTANCE);
         this.setmanaCost(0);
         this.setMaxCooldown(180);
 

@@ -3,7 +3,10 @@ package com.yuanno.block_clover.spells.wind;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.init.ModDamageSource;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -13,12 +16,13 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class ToweringTornadoAbility extends Ability {
-    public static final Ability INSTANCE = new ToweringTornadoAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Towering Tornado", AbilityCategories.AbilityCategory.ATTRIBUTE, ToweringTornadoAbility.class)
+            .setDescription("Pushes enemies away from you with wind")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .build();
     public ToweringTornadoAbility()
     {
-        super("Towering Tornado", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Pushes enemies away from you with wind");
+        super(INSTANCE);
         this.setMaxCooldown(10);
         this.setmanaCost(15);
         this.setExperiencePoint(15);

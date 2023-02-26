@@ -41,7 +41,7 @@ public class SlashBladesRenderer<T extends LivingEntity, M extends EntityModel<T
 
         IAbilityData abilityData = AbilityDataCapability.get(entitylivingbaseIn);
 
-        SlashBladesAbility slashBladesAbility = abilityData.getEquippedAbility(SlashBladesAbility.INSTANCE);
+        SlashBladesAbility slashBladesAbility = (SlashBladesAbility) abilityData.getEquippedAbility(SlashBladesAbility.INSTANCE);
         if (slashBladesAbility != null && slashBladesAbility.isContinuous())
         {
             matrixStackIn.pushPose();

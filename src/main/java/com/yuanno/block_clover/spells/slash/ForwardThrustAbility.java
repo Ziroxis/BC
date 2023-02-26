@@ -3,10 +3,13 @@ package com.yuanno.block_clover.spells.slash;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModDamageSource;
+import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
@@ -19,11 +22,14 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class ForwardThrustAbility extends Ability implements IMultiTargetAbility {
-    public static final ForwardThrustAbility INSTANCE = new ForwardThrustAbility();
-
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Forward Thrust", AbilityCategories.AbilityCategory.ATTRIBUTE, ForwardThrustAbility.class)
+            .setDescription("Thrusts forward dealing damage.")
+            .setDamageKind(AbilityDamageKind.ELEMENTAL)
+            .setDependencies(SlashBladesAbility.INSTANCE)
+            .build();
     public ForwardThrustAbility()
     {
-        super("Forward Thrust", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super(INSTANCE);
         this.setDescription("Thrusts forward dealing damage");
         this.setmanaCost(20);
         this.setMaxCooldown(10);
@@ -36,9 +42,7 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
     {
 
         IAbilityData abilityProps = AbilityDataCapability.get(player);
-        SlashBladesAbility slashBladesAbility = abilityProps.getEquippedAbility(SlashBladesAbility.INSTANCE);
-        if (slashBladesAbility != null && slashBladesAbility.isContinuous())
-        {
+
             this.clearTargets();
 
             Vector3d speed = Beapi.propulsion(player, 5, 5);
@@ -47,12 +51,7 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
             ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
 
             return true;
-        }
-        else
-        {
-            player.sendMessage(new StringTextComponent("Need to put on your slash blades!"), Util.NIL_UUID);
-            return false;
-        }
+
 
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)

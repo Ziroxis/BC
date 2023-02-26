@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -20,9 +21,9 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
     private int maxRepeaterCount;
     private int repeaterInterval;
 
-    public RepeaterAbility(String name, AbilityCategories.AbilityCategory category)
+    public RepeaterAbility(AbilityCore core)
     {
-        super(name, category);
+        super(core);
     }
 
     /*

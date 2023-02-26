@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.spells.earth;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
@@ -8,14 +10,16 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class EarthGolemAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final EarthGolemAbility INSTANCE = new EarthGolemAbility();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth golem", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthGolemAbility.class)
+            .setDescription("Creates a living earth golem that serves you")
+            .setDamageKind(AbilityDamageKind.MINION)
+            .build();
     
     private EarthGolemEntity earthGolem = null;
     
     public EarthGolemAbility()
     {
-        super("Earth Golem", AbilityCategories.AbilityCategory.ATTRIBUTE);
-        this.setDescription("Creates a living earth golem that serves you");
+        super(INSTANCE);
         this.setmanaCost(5);
         this.setExperiencePoint(4);
         this.setMaxCooldown(20);

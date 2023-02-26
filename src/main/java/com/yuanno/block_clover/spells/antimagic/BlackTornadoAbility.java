@@ -3,6 +3,8 @@ package com.yuanno.block_clover.spells.antimagic;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -18,11 +20,14 @@ import net.minecraft.util.text.StringTextComponent;
 import java.util.List;
 
 public class BlackTornadoAbility extends Ability implements IMultiTargetAbility {
-    public static final BlackTornadoAbility INSTANCE = new BlackTornadoAbility();
     public static final ParticleEffect PARTICLES = new BlackTornadoParticleEffect();
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Black Tornado", AbilityCategories.AbilityCategory.ATTRIBUTE, BlackTornadoAbility.class)
+            .setDescription("Circle around you extending your sword")
+            .setDamageKind(AbilityDamageKind.SLASH)
+            .build();
 
     public BlackTornadoAbility() {
-        super("Black Tornado", AbilityCategories.AbilityCategory.ATTRIBUTE);
+        super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(0);
         this.onUseEvent = this::onUseEvent;

@@ -229,6 +229,11 @@
         {
           "type": "minecraft:item",
           "weight": 1,
+          "name": "block_clover:demon_dweller_black"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
           "name": "block_clover:fire_belt"
         },
         {

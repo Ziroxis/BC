@@ -9,14 +9,14 @@ import com.yuanno.block_clover.init.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-public class DemonSlayerAbility extends ItemAbility implements IParallelContinuousAbility {
+public class DemonDwellerAbility extends ItemAbility implements IParallelContinuousAbility {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Demon Slayer", AbilityCategories.AbilityCategory.ATTRIBUTE, DemonSlayerAbility.class)
-            .setDescription("Takes the demon slayer out of your grimoire")
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Demon dweller", AbilityCategories.AbilityCategory.ATTRIBUTE, DemonDwellerAbility.class)
+            .setDescription("Takes the demon dweller of your grimoire")
             .setDamageKind(AbilityDamageKind.ITEM)
             .build();
 
-    public DemonSlayerAbility()
+    public DemonDwellerAbility()
     {
         super(INSTANCE);
 
@@ -25,9 +25,8 @@ public class DemonSlayerAbility extends ItemAbility implements IParallelContinuo
     }
 
     @Override
-    public ItemStack getItemStack(PlayerEntity player)
-    {
-        return new ItemStack(ModItems.DEMON_SLAYER.get());
+    public ItemStack getItemStack(PlayerEntity player) {
+        return new ItemStack(ModItems.DEMON_DWELLER_ANTIMAGIC.get());
     }
 
     @Override

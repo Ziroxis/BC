@@ -76,7 +76,12 @@ public class ModItems {
     public static final RegistryObject<Item> DEMON_SLAYER = ITEMS.register("demon_slayer_antimagic", DemonSlayerItem::new);
     public static final RegistryObject<Item> KATANA = ITEMS.register("yamis_katana", KatanaItem::new);
     public static final RegistryObject<Item> DEMON_DESTROYER = ITEMS.register("demon_destroyer", DemonDestroyerItem::new);
+    public static final RegistryObject<Item> DEMON_DESTROYER_BLACK = ITEMS.register("demon_destroyer_black", DemonDestroyerItem::new);
+    public static final RegistryObject<Item> DEMON_DESTROYER_ANTIMAGIC = ITEMS.register("demon_destroyer_antimagic", DemonDestroyerItem::new);
+
     public static final RegistryObject<Item> DEMON_DWELLER = ITEMS.register("demon_dweller", DemonDwellerItem::new);
+    public static final RegistryObject<Item> DEMON_DWELLER_BLACK = ITEMS.register("demon_dweller_black", DemonDwellerItem::new);
+    public static final RegistryObject<Item> DEMON_DWELLER_ANTIMAGIC = ITEMS.register("demon_dweller_antimagic", DemonDwellerRustyItem::new);
 
 
     //CLOTHES

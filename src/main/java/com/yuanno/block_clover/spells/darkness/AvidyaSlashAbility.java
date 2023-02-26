@@ -32,7 +32,6 @@ public class AvidyaSlashAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        IAbilityData abilityProps = AbilityDataCapability.get(player);
         AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
         player.level.addFreshEntity(projectile);
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));

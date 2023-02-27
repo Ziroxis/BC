@@ -74,6 +74,7 @@ public class ModItems {
     //WEAPONS
     public static final RegistryObject<Item> LIGHT_SWORD = ITEMS.register("light_sword", LightSwordItem::new);
     public static final RegistryObject<Item> DEMON_SLAYER = ITEMS.register("demon_slayer_antimagic", DemonSlayerItem::new);
+    public static final RegistryObject<Item> DEMON_SLAYER_CLEAN = ITEMS.register("demon_slayer", DemonSlayerItem::new);
     public static final RegistryObject<Item> KATANA = ITEMS.register("yamis_katana", KatanaItem::new);
     public static final RegistryObject<Item> DEMON_DESTROYER = ITEMS.register("demon_destroyer", DemonDestroyerItem::new);
     public static final RegistryObject<Item> DEMON_DESTROYER_BLACK = ITEMS.register("demon_destroyer_black", DemonDestroyerItem::new);

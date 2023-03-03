@@ -4,7 +4,7 @@ license="All rights reserved"
 [[mods]] #mandatory
 # The modid of the mod
 modId="block_clover" #mandatory
-version="0.3.0" #mandatory
+version="0.5.0" #mandatory
  # A display name for the mod
 displayName="Block Clover" #mandatory
 logoFile="examplemod.png" #optional

@@ -33,6 +33,22 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_SAPLING = ITEMS.register("moguro_sapling", () -> new BlockItem(ModBlocks.MOGURO_SAPLING.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_STAIRS = ITEMS.register("moguro_stairs", () -> new BlockItem(ModBlocks.MOGURO_STAIRS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_SLABS = ITEMS.register("moguro_slabs", () -> new BlockItem(ModBlocks.MOGURO_SLABS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_FENCE = ITEMS.register("moguro_fence", () -> new BlockItem(ModBlocks.MOGURO_FENCE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_FENCE_GATE = ITEMS.register("moguro_fence_gate", () -> new BlockItem(ModBlocks.MOGURO_FENCE_GATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_PRESSURE_PLATE = ITEMS.register("moguro_pressure_plate", () -> new BlockItem(ModBlocks.MOGURO_PRESSURE_PLATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_BUTTON = ITEMS.register("moguro_button", () -> new BlockItem(ModBlocks.MOGURO_BUTTON.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_DOOR = ITEMS.register("moguro_door", () -> new BlockItem(ModBlocks.MOGURO_DOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_TRAPDOOR = ITEMS.register("moguro_trapdoor", () -> new BlockItem(ModBlocks.MOGURO_TRAPDOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     //ELDER
     public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_plank", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -41,6 +57,22 @@ public class ModItems {
     public static final RegistryObject<BlockItem> ELDER_LEAF = ITEMS.register("elder_leaf", () -> new BlockItem(ModBlocks.ELDER_LEAF.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_SAPLING = ITEMS.register("elder_sapling", () -> new BlockItem(ModBlocks.ELDER_SAPLING.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_STAIRS = ITEMS.register("elder_stairs", () -> new BlockItem(ModBlocks.ELDER_STAIRS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_SLABS = ITEMS.register("elder_slabs", () -> new BlockItem(ModBlocks.ELDER_SLABS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_FENCE = ITEMS.register("elder_fence", () -> new BlockItem(ModBlocks.ELDER_FENCE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_FENCE_GATE = ITEMS.register("elder_fence_gate", () -> new BlockItem(ModBlocks.ELDER_FENCE_GATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_PRESSURE_PLATE = ITEMS.register("elder_pressure_plate", () -> new BlockItem(ModBlocks.ELDER_PRESSURE_PLATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_BUTTON = ITEMS.register("elder_button", () -> new BlockItem(ModBlocks.ELDER_BUTTON.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_DOOR = ITEMS.register("elder_door", () -> new BlockItem(ModBlocks.ELDER_DOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_TRAPDOOR = ITEMS.register("elder_trapdoor", () -> new BlockItem(ModBlocks.ELDER_TRAPDOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
 
     

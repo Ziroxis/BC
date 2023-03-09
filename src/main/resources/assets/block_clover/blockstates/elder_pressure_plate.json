@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "block_clover:block/elder_pressure_plate"
+    },
+    "powered=true": {
+      "model": "block_clover:block/elder_pressure_plate_down"
+    }
+  }
+}

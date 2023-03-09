@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "block_clover:block/elder_slab"
+    },
+    "type=double": {
+      "model": "block_clover:block/elder_planks"
+    },
+    "type=top": {
+      "model": "block_clover:block/elder_slab_top"
+    }
+  }
+}

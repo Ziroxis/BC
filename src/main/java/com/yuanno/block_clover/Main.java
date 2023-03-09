@@ -33,7 +33,9 @@ import com.yuanno.block_clover.world.biome.ModBiomes;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import com.yuanno.block_clover.init.*;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.WoodType;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.command.arguments.ArgumentSerializer;
@@ -83,6 +85,7 @@ public class Main
         BeRegistry.ABILITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
 
+        addModWoodTypes();
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModTileEntities.register(modEventBus);
@@ -95,6 +98,7 @@ public class Main
         ModPotions.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);
+
         ModAdvancements.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
@@ -218,5 +222,10 @@ public class Main
             ScreenManager.register(CuriosRegistry.CONTAINER_TYPE, CuriosScreen::new);
             KeyRegistry.registerKeys();
         }
+    }
+
+    private void addModWoodTypes() {
+        Atlases.addWoodType(WoodType.create("elder"));
+        Atlases.addWoodType(WoodType.create("moguro"));
     }
 }

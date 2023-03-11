@@ -2,7 +2,7 @@ package com.yuanno.block_clover.data.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.yuanno.block_clover.data.recipes.jei.IJuicerRecipe;
+import com.yuanno.block_clover.data.recipes.jei.IBakingOvenRecipe;
 import com.yuanno.block_clover.init.ModBlocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 
-public class BakingOvenRecipe implements IJuicerRecipe {
+public class BakingOvenRecipe implements IBakingOvenRecipe {
 
     private final ResourceLocation id;
     private final ItemStack output;
@@ -74,18 +74,18 @@ public class BakingOvenRecipe implements IJuicerRecipe {
         return ModRecipes.JUICER_SERIALIZER.get();
     }
 
-    public static class BakingOvenRecipeType implements IRecipeType<JuicerRecipe> {
+    public static class BakingOvenRecipeType implements IRecipeType<BakingOvenRecipe> {
         @Override
         public String toString() {
-            return JuicerRecipe.ID.toString();
+            return BakingOvenRecipe.ID.toString();
         }
     }
 
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<JuicerRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<BakingOvenRecipe> {
 
         @Override
-        public JuicerRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+        public BakingOvenRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack output = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "output"));
 
             JsonArray ingredients = JSONUtils.getAsJsonArray(json, "ingredients");
@@ -95,13 +95,13 @@ public class BakingOvenRecipe implements IJuicerRecipe {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new JuicerRecipe(recipeId, output,
+            return new BakingOvenRecipe(recipeId, output,
                     inputs);
         }
 
         @Nullable
         @Override
-        public JuicerRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        public BakingOvenRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
             int numIngredients = buffer.readVarInt(); // reads number of ingredients
 
             NonNullList<Ingredient> inputs = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
@@ -111,11 +111,11 @@ public class BakingOvenRecipe implements IJuicerRecipe {
             }
 
             ItemStack output = buffer.readItem(); // reads stack
-            return new JuicerRecipe(recipeId, output, inputs); // returns
+            return new BakingOvenRecipe(recipeId, output, inputs); // returns
         }
 
         @Override
-        public void toNetwork(PacketBuffer buffer, JuicerRecipe recipe) {
+        public void toNetwork(PacketBuffer buffer, BakingOvenRecipe recipe) {
             NonNullList<Ingredient> inputs = recipe.getIngredients();
 
             buffer.writeVarInt(inputs.size()); // writes number of ingredients

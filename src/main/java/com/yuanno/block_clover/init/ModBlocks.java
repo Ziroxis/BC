@@ -2,10 +2,7 @@ package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.blocks.AntiMagicBlock;
-import com.yuanno.block_clover.blocks.JuicerBlock;
-import com.yuanno.block_clover.blocks.LightningBlock;
-import com.yuanno.block_clover.blocks.WindBlock;
+import com.yuanno.block_clover.blocks.*;
 import com.yuanno.block_clover.world.trees.ElderTree;
 import com.yuanno.block_clover.world.trees.MoguroTree;
 import net.minecraft.block.*;
@@ -33,6 +30,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WIND = BLOCKS.register("wind_block", WindBlock::new);
 
     public static final RegistryObject<Block> JUICER = BLOCKS.register("juicer_block", JuicerBlock::new);
+    public static final RegistryObject<Block> BAKING_OVEN = BLOCKS.register("baking_oven_block", BakingOvenBlock::new);
 
     //Moguro Tree
     public static final RegistryObject<Block> MOGURO_LOG = BLOCKS.register("moguro_log",

@@ -1,20 +1,14 @@
 package com.yuanno.block_clover.effects;
 
-import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.data.entity.EntityStatsBase;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import net.minecraft.client.gui.fonts.TexturedGlyph;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectType;
 
-import javax.annotation.Nullable;
-
-public class XpMultiplierEffect extends Effect {
+public class ManaRegenerationEffect extends Effect {
     private LivingEntity entity;
-    public XpMultiplierEffect() {
+    public ManaRegenerationEffect() {
         super(EffectType.BENEFICIAL, 3381504);
     }
 
@@ -23,7 +17,9 @@ public class XpMultiplierEffect extends Effect {
         if(!entity.level.isClientSide()) {
             this.entity = entity;
             IEntityStats props = EntityStatsCapability.get(entity);
-            props.alterManaRegeneration(0.2f);
+            if(props.getMultiplier() <= 1) {
+                props.alterMultiplier(0.2F);
+            }
         }
         super.applyEffectTick(entity, p_76394_2_);
     }
@@ -36,10 +32,9 @@ public class XpMultiplierEffect extends Effect {
         } else {
             if(entity != null) {
                 IEntityStats props = EntityStatsCapability.get(entity);
-                props.alterManaRegeneration(-0.2F);
+                props.alterMultiplier(-0.2F);
             }
             return false;
         }
     }
-
 }

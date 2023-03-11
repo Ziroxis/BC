@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/fence_side",
   "textures": {
-    "texture": "block_clover:block/moguro_planks"
+    "texture": "block_clover:block/elder_planks"
   }
 }

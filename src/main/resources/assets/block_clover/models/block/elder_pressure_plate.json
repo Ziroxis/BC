@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/pressure_plate_up",
   "textures": {
-    "texture": "block_clover:block/elder_planks"
+    "texture": "block_clover:blocks/elder_planks"
   }
 }

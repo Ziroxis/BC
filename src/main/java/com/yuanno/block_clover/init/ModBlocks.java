@@ -52,7 +52,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> MOGURO_SAPLING = BLOCKS.register("moguro_sapling",
             () -> new SaplingBlock(new MoguroTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.GRASS)));
 
-    public static final RegistryObject<Block> MOGURO_PLANK = BLOCKS.register("moguro_plank",
+    public static final RegistryObject<Block> MOGURO_PLANK = BLOCKS.register("moguro_planks",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
                     .strength(1f, 3f)
                     .harvestTool(ToolType.AXE)
@@ -137,7 +137,7 @@ public class ModBlocks {
                     .sound(SoundType.GRASS)
             ));
 
-    public static final RegistryObject<Block> ELDER_PLANK = BLOCKS.register("elder_plank",
+    public static final RegistryObject<Block> ELDER_PLANK = BLOCKS.register("elder_planks",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
                     .strength(2f, 4f)
                     .harvestTool(ToolType.AXE)
@@ -151,7 +151,7 @@ public class ModBlocks {
                     .harvestLevel(3)
                     .sound(SoundType.WOOD)));
 
-    public static final RegistryObject<Block> ELDER_SLABS = BLOCKS.register("elder_slabs",
+    public static final RegistryObject<Block> ELDER_SLABS = BLOCKS.register("elder_slab",
             () -> new SlabBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
                     .strength(2f, 4f)
                     .harvestTool(ToolType.AXE)

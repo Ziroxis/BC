@@ -1,29 +1,31 @@
 {
   "block.block_clover.juicer_block": "Juicer",
 
-  "block.block_clover.moguro_plank": "Moguro Plank",
+  "block.block_clover.moguro_planks": "Moguro Plank",
   "block.block_clover.moguro_log": "Moguro Log",
   "block.block_clover.moguro_leaf": "Moguro Leaf",
   "block.block_clover.moguro_sapling": "Moguro Sapling",
   "block.block_clover.moguro_stairs": "Moguro Stairs",
-  "block.block_clover.moguro_slabs": "Moguro Slabs",
+  "block.block_clover.moguro_slab": "Moguro Slabs",
   "block.block_clover.moguro_fence": "Moguro Fence",
   "block.block_clover.moguro_fence_gate": "Moguro Fence Gate",
   "block.block_clover.moguro_button": "Moguro Button",
   "block.block_clover.moguro_door": "Moguro Door",
   "block.block_clover.moguro_trapdoor": "Moguro Trapdoor",
+  "block.block_clover.moguro_pressure_plate": "Moguro Pressure Plate",
 
-  "block.block_clover.elder_plank": "Elder Plank",
+  "block.block_clover.elder_planks": "Elder Plank",
   "block.block_clover.elder_log": "Elder Log",
   "block.block_clover.elder_leaf": "Elder Leaf",
   "block.block_clover.elder_sapling": "Elder Sapling",
   "block.block_clover.elder_stairs": "Elder Stairs",
-  "block.block_clover.elder_slabs": "Elder Slabs",
+  "block.block_clover.elder_slab": "Elder Slabs",
   "block.block_clover.elder_fence": "Elder Fence",
   "block.block_clover.elder_fence_gate": "Elder Fence Gate",
   "block.block_clover.elder_button": "Elder Button",
   "block.block_clover.elder_door": "Elder Door",
   "block.block_clover.elder_trapdoor": "Elder Trapdoor",
+  "block.block_clover.elder_pressure_plate": "Elder Pressure Plate",
 
 
   "itemGroup.block_cloverBlocks": "Block Clover Blocks",
@@ -248,5 +250,6 @@
   "item.block_clover.bag_gluttony": "Gluttonous Bag",
   "item.block_clover.green_thumb": "Green Thumbs",
   "item.block_clover.jump_artifact": "Jump Artifact",
-  "item.block_clover.race_change": "Race Change"
+  "item.block_clover.race_change": "Race Change",
+  "item.block_clover.mana_link": "Mana Link Artifact"
 }

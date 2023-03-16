@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_fence_gate_open",
   "textures": {
-    "texture": "block_clover:block/moguro_planks"
+    "texture": "block_clover:blocks/moguro_planks"
   }
 }

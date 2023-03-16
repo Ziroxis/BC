@@ -25,7 +25,7 @@ public class ModItems {
 
     //TREES
     //MOGURO
-    public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_plank", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
+    public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_planks", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_LOG = ITEMS.register("moguro_log", () -> new BlockItem(ModBlocks.MOGURO_LOG.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -35,7 +35,7 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_STAIRS = ITEMS.register("moguro_stairs", () -> new BlockItem(ModBlocks.MOGURO_STAIRS.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
-    public static final RegistryObject<BlockItem> MOGURO_SLABS = ITEMS.register("moguro_slabs", () -> new BlockItem(ModBlocks.MOGURO_SLABS.get(),
+    public static final RegistryObject<BlockItem> MOGURO_SLABS = ITEMS.register("moguro_slab", () -> new BlockItem(ModBlocks.MOGURO_SLABS.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_FENCE = ITEMS.register("moguro_fence", () -> new BlockItem(ModBlocks.MOGURO_FENCE.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -50,7 +50,7 @@ public class ModItems {
     public static final RegistryObject<BlockItem> MOGURO_TRAPDOOR = ITEMS.register("moguro_trapdoor", () -> new BlockItem(ModBlocks.MOGURO_TRAPDOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     //ELDER
-    public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_plank", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
+    public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_planks", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_LOG = ITEMS.register("elder_log", () -> new BlockItem(ModBlocks.ELDER_LOG.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -60,7 +60,7 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_STAIRS = ITEMS.register("elder_stairs", () -> new BlockItem(ModBlocks.ELDER_STAIRS.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
-    public static final RegistryObject<BlockItem> ELDER_SLABS = ITEMS.register("elder_slabs", () -> new BlockItem(ModBlocks.ELDER_SLABS.get(),
+    public static final RegistryObject<BlockItem> ELDER_SLABS = ITEMS.register("elder_slab", () -> new BlockItem(ModBlocks.ELDER_SLABS.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_FENCE = ITEMS.register("elder_fence", () -> new BlockItem(ModBlocks.ELDER_FENCE.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -100,6 +100,7 @@ public class ModItems {
     public static final RegistryObject<Item> BAG_GLUTTONY = ITEMS.register("bag_gluttony", BagOfGluttonyArtifactItem::new);
     public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
     public static final RegistryObject<Item> RACE_CHANGE = ITEMS.register("race_change", RaceChangeArtifactItem::new);
+    public static final RegistryObject<Item> MANA_LINK = ITEMS.register("mana_link", ManaLinkArtifact::new);
 
 
 

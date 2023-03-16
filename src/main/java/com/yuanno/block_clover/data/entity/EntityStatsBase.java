@@ -26,6 +26,7 @@ public class EntityStatsBase implements IEntityStats{
     private float multiplier;
     private boolean staffBoost;
     private boolean hatBoost;
+    private boolean canLink;
 
     @Override
     public int getLevel() {
@@ -308,5 +309,15 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public boolean getHatBoost() {
         return this.hatBoost;
+    }
+
+    @Override
+    public boolean getLinkAbility() {
+        return canLink;
+    }
+
+    @Override
+    public void setLinkAbility(boolean can) {
+        this.canLink = can;
     }
 }

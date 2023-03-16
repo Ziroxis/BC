@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_fence_gate_wall",
   "textures": {
-    "texture": "block_clover:block/elder_planks"
+    "texture": "block_clover:blocks/elder_planks"
   }
 }

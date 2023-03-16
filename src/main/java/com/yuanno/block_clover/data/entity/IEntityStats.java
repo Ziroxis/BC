@@ -80,4 +80,7 @@ public interface IEntityStats {
     boolean getStaffBoost();
     void setHatBoost(boolean boost);
     boolean getHatBoost();
+
+    boolean getLinkAbility();
+    void setLinkAbility(boolean can);
 }

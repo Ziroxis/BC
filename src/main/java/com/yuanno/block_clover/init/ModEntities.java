@@ -52,6 +52,12 @@ public class ModEntities {
                             .sized(2f, 2f)
                             .setTrackingRange(15)
                             .build(new ResourceLocation(Main.MODID, "clover_shark").toString()));
+    public static final RegistryObject<EntityType<FlameBoarEntity>> FLAME_BOAR = ENTITIES
+            .register("flame_boar",
+                    () -> EntityType.Builder.of(FlameBoarEntity::new, EntityClassification.CREATURE)
+                            .sized(2f, 2f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "flame_boar").toString()));
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

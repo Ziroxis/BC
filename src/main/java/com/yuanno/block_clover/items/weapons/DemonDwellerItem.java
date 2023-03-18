@@ -22,9 +22,6 @@ public class DemonDwellerItem extends MagicWeapon {
     public DemonDwellerItem() {
         super(ModTiers.WEAPON, 7, 1f, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_WEAPONS).stacksTo(1));
     }
-    // just use chatgpt
-    @Override
-    public boolean canHarvestBlock(BlockState blockIn) {
-        return blockIn.getBlock().getHarvestTool(blockIn) == "sword";
-    }
+    // todo make it able to block
+
 }

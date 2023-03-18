@@ -61,6 +61,8 @@ public class ModItems {
     public static final RegistryObject<Item> NECKLACE_AGITATION = ITEMS.register("necklace_agitation", NecklaceOfAgitationArtifactItem::new);
     public static final RegistryObject<Item> CLOAK_INVISIBILITY = ITEMS.register("cloak_invisibility", CloakOfInvisibilityArtifactItem::new);
     public static final RegistryObject<Item> BELT_AIR = ITEMS.register("air_belt", BeltOfAirArtifactItem::new);
+    public static final RegistryObject<Item> CROWN_LIGHT = ITEMS.register("crown_light", CrownOfLightItem::new);
+    public static final RegistryObject<Item> ABYSSAL_SCYTHE = ITEMS.register("abyssal_scythe", AbyssalScytheItem::new);
     public static final RegistryObject<Item> BRACELET_PUSH = ITEMS.register("bracelet_push", BraceletOfPushArtifactItem::new);
     public static final RegistryObject<Item> RARE_CANDY = ITEMS.register("rare_candy", RareCandyArtifactItem::new);
     public static final RegistryObject<Item> MANA_ARTIFACT = ITEMS.register("maximizing_mana", ManaArtifactItem::new);

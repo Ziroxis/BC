@@ -13,6 +13,11 @@ import java.util.UUID;
 
 public class BraceletOfPushArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public BraceletOfPushArtifactItem()
+    {
+        this.artifactInformation = "This bracelet pushes anyone that you touch with";
+    }
+
     private static final AttributeModifier KNOCKBACK = new AttributeModifier(UUID.fromString("999d353c-1af3-11ed-861d-0242ac120002"),
             "Lightning Attack", 2, AttributeModifier.Operation.ADDITION);
     @Override

@@ -12,8 +12,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
-public class FireBallAbility extends Ability{
-    int i = 0;
+public class FireBallAbility extends Ability {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Fire Ball", AbilityCategories.AbilityCategory.ATTRIBUTE, FireBallAbility.class)
             .setDescription("Shoots a ball of flame")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)

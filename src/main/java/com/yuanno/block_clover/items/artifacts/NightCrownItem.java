@@ -12,6 +12,11 @@ import net.minecraft.potion.Effects;
 
 public class NightCrownItem extends ArtifactItem implements ICurioItem {
 
+    public NightCrownItem()
+    {
+        this.artifactInformation = "The crown of the night is made to be used in the night";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
 

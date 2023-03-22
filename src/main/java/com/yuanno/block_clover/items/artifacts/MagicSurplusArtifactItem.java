@@ -32,6 +32,11 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class MagicSurplusArtifactItem extends ArtifactItem {
 
+    public MagicSurplusArtifactItem()
+    {
+        this.artifactInformation = "It gives a surplus of magic, to the user with an already surplus of magic gives experience";
+    }
+
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {

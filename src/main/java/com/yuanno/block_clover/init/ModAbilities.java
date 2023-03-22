@@ -5,7 +5,10 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.spells.PassiveDataAbility;
 import com.yuanno.block_clover.spells.antimagic.*;
+import com.yuanno.block_clover.spells.beast.BearClawAbility;
+import com.yuanno.block_clover.spells.beast.RhinocerosArmorAbility;
 import com.yuanno.block_clover.spells.copy.CopyAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.earth.*;
@@ -22,6 +25,10 @@ import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
+import com.yuanno.block_clover.spells.sword.AirDashAbility;
+import com.yuanno.block_clover.spells.sword.MagicDestroyer;
+import com.yuanno.block_clover.spells.sword.MagicDwellerCleanAbility;
+import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
@@ -37,7 +44,7 @@ public class ModAbilities {
 
 
 
-
+    public static final AbilityCore[] PASSIVE = new AbilityCore[] {PassiveDataAbility.INSTANCE};
     public static final AbilityCore[] MISC = new AbilityCore[] {ManaSkinAbility.INSTANCE, ManaReinforcement.INSTANCE};
     public static final AbilityCore[] WATER = new AbilityCore[] {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterManaZoneAbility.INSTANCE};
     public static final AbilityCore[] SEALING = new AbilityCore[] {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE, SealingManaZoneAbility.INSTANCE};
@@ -52,8 +59,9 @@ public class ModAbilities {
     public static final AbilityCore[] TIME = new AbilityCore[] {TimeStealAbility.INSTANCE, TimeHealAbility.INSTANCE, ChronoStasisAbility.INSTANCE, TimeHopAbility.INSTANCE, ChronoStasisGrigoraAbility.INSTANCE, TimeRessurectionAbility.INSTANCE, TimeMagicManaZoneAbility.INSTANCE};
     public static final AbilityCore[] GRAVITY = new AbilityCore[] {GravitySingularityAbility.INSTANCE, HeavyInfightingAbility.INSTANCE, PresenceOfTheDemonKingAbility.INSTANCE};
     public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE};
-    public static final AbilityCore[] COPY = new AbilityCore[]{CopyAbility.INSTANCE};
-
+    public static final AbilityCore[] COPY = new AbilityCore[] {CopyAbility.INSTANCE};
+    public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE};
+    public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyer.INSTANCE, AirDashAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));
@@ -76,5 +84,8 @@ public class ModAbilities {
         registerAbilities(WIND);
         registerAbilities(MERCURY);
         registerAbilities(COPY);
+        registerAbilities(BEAST);
+        registerAbilities(SWORD);
+        registerAbilities(PASSIVE);
     }
 }

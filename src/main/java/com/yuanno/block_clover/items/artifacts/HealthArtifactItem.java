@@ -15,6 +15,12 @@ import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public class HealthArtifactItem extends ArtifactItem {
+
+    public HealthArtifactItem()
+    {
+        this.artifactInformation = "Using this artifact you gain more max health";
+    }
+
     public static UUID healthUUIDAttribute = UUID.fromString("135d510d-26c6-403e-8615-899862332e86");
 
     @Override

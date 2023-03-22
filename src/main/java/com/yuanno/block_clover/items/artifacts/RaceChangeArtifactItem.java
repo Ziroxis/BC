@@ -36,6 +36,11 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class RaceChangeArtifactItem extends ArtifactItem {
 
+    public RaceChangeArtifactItem()
+    {
+        this.artifactInformation = "Changes the race of the user of the artifact";
+    }
+
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {

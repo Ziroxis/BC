@@ -25,7 +25,7 @@ public class MagicWeapon extends SwordItem {
         }
         return super.hurtEnemy(itemStack, target, attacker);
     }
-     */
+    */
 
     @Override
     public int getEnchantmentValue()

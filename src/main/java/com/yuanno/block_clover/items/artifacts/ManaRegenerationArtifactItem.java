@@ -16,6 +16,11 @@ import net.minecraft.item.ItemStack;
 
 public class ManaRegenerationArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public ManaRegenerationArtifactItem()
+    {
+        this.artifactInformation = "This artifact takes natural mana to give off to you";
+    }
+
     @Override
     public void onEquip(SlotContext slotContext, ItemStack previousStack, ItemStack currentStack)
     {

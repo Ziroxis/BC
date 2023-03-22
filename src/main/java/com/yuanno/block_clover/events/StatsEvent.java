@@ -14,6 +14,7 @@ import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
+import com.yuanno.block_clover.spells.PassiveDataAbility;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.darkness.DarkCloakedBladeAbility;
@@ -57,6 +58,7 @@ public class StatsEvent {
             //TODO don't spawn with anti-magic + second attribute
             props.setAttribute(Beapi.randomizer(ModValues.attributes));
             String attribute = props.getAttribute();
+            abilityProps.addUnlockedAbility(player, PassiveDataAbility.INSTANCE);
             switch (attribute)
             {
                 case "Wind":

@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 
 public class LuckyRingArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public LuckyRingArtifactItem()
+    {
+        this.artifactInformation = "You truly feel like a lucky guy wearing this ring";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

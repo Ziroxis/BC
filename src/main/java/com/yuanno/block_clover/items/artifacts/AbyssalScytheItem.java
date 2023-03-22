@@ -25,9 +25,9 @@ public class AbyssalScytheItem extends MagicWeapon {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(new TranslationTextComponent("Hold \\u00A7eSHIFT\\u00A7r for more Information!"));
-        } else {
             tooltip.add(new TranslationTextComponent("An old scythe found in the abyss"));
+        } else {
+            tooltip.add(new TranslationTextComponent("Hold " + "§dSHIFT" + " §ffor more Information!"));
         }
         super.appendHoverText(stack, world, tooltip, flagIn);
     }

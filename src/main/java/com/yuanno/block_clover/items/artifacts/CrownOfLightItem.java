@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 
 public class CrownOfLightItem extends ArtifactItem implements ICurioItem {
 
+    public CrownOfLightItem()
+    {
+        this.artifactInformation = "A crown that grants power to the healthy";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

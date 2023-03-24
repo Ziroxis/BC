@@ -38,6 +38,7 @@ import java.util.Random;
 public class Ability extends ForgeRegistryEntry<Ability> {
 
     //TODO check with the other ability class
+    private boolean assignedExperience = false;
     private int experience = 0;
     private boolean isEvolved;
     private String name = "";
@@ -228,6 +229,15 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public void evolved(boolean isEvolved)
     {
         this.isEvolved = isEvolved;
+    }
+
+    public boolean hasBeenAssignedExperience()
+    {
+        return this.assignedExperience;
+    }
+    public void assignExperience(boolean flag)
+    {
+        this.assignedExperience = flag;
     }
 
     public int getExperience()

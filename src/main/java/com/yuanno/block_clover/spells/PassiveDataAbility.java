@@ -22,6 +22,8 @@ public class PassiveDataAbility extends PassiveAbility {
             .setDescription("")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    Map<Ability, Integer> experienceMap = new HashMap<>();
+
     public PassiveDataAbility()
     {
         super(INSTANCE);
@@ -31,37 +33,38 @@ public class PassiveDataAbility extends PassiveAbility {
 
     public void duringPassiveEvent(PlayerEntity player)
     {
-        IAbilityData abilityData = AbilityDataCapability.get(player);
-        List<Ability> abilityListUnlocked = abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
-        Ability[] abilityListEquipped = abilityData.getEquippedAbilities();
-        Map<Ability, Integer> experienceMap = new HashMap<>();
-        boolean containsMyAbility = false;
-        for (Ability ability : abilityListUnlocked)
+        if (!player.level.isClientSide)
         {
-            if (abilityListEquipped != null)
-            {
-                for (Ability abilityEquip : abilityListEquipped) {
-                    if (abilityEquip != null && abilityEquip.equals(ability)) {
-                        containsMyAbility = true;
-                        break;
+            IAbilityData abilityData = AbilityDataCapability.get(player);
+            List<Ability> abilityListUnlocked = abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
+            Ability[] abilityListEquipped = abilityData.getEquippedAbilities();
+            boolean containsMyAbility = false;
+            for (Ability ability : abilityListUnlocked) {
+                if (abilityListEquipped != null) {
+                    for (Ability abilityEquip : abilityListEquipped) {
+                        if (abilityEquip != null && abilityEquip.equals(ability)) {
+                            containsMyAbility = true;
+                            break;
+                        }
                     }
                 }
-            }
 
-            // The else statement works, but it's giving the xp back when reequiped that is simply not happening
-            if (abilityListEquipped != null && containsMyAbility) {
-                if (experienceMap.get(ability) != null && ability.getExperience() == 0) // does not happen
-                {
-                    ability.setExperience(experienceMap.get(ability));
-                    PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
-                    System.out.println("the experience has been set to the ability from the hashmap");
-                }
-                else {
-                    experienceMap.put(ability, ability.getExperience()); // does happen
-                    System.out.println("The experience of the ability has been put in hashmap");
+                // The else statement works, but it's giving the xp back when reequiped that is simply not happening
+                if (abilityListEquipped != null && containsMyAbility) {
+                    System.out.println(ability.getName());
+                    if (experienceMap.get(ability) != null && !ability.hasBeenAssignedExperience()) // does not happen
+                    {
+                        ability.setExperience(experienceMap.get(ability));
+                        //PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
+                        System.out.println(experienceMap.get(ability) + " retrieved from hashmap");
+                        ability.assignExperience(true);
+                    } else {
+                        experienceMap.put(ability, ability.getExperience()); // does happen
+                        System.out.println(experienceMap.get(ability) + " put in hashmap");
+
+                    }
                 }
             }
         }
     }
-
 }

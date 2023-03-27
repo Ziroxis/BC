@@ -14,13 +14,10 @@ public class FireBallAbility extends Ability {
             .setDescription("Shoots a ball of flame")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
-    public int testExperience;
-    //private Optional<PassiveDataAbility> passiveDataAbility = Optional.empty();
-    //private PassiveDataAbility passiveDataAbility;
     public FireBallAbility()
     {
         super(INSTANCE);
-        this.setEvolutionCost(3);
+        this.setEvolutionCost(30);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(25);

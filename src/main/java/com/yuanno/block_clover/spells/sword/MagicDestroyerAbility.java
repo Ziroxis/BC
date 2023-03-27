@@ -9,14 +9,14 @@ import com.yuanno.block_clover.init.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-public class MagicDestroyer extends ItemAbility implements IParallelContinuousAbility {
+public class MagicDestroyerAbility extends ItemAbility implements IParallelContinuousAbility {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Original Demon destroyer", AbilityCategories.AbilityCategory.ATTRIBUTE, MagicDestroyer.class)
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Original Demon destroyer", AbilityCategories.AbilityCategory.ATTRIBUTE, MagicDestroyerAbility.class)
             .setDescription("Takes the demon destroyer sword out of your grimoire")
             .setDamageKind(AbilityDamageKind.ITEM)
             .build();
 
-    public MagicDestroyer()
+    public MagicDestroyerAbility()
     {
         super(INSTANCE);
 

@@ -21,6 +21,10 @@ public enum AbilityCommandGroup implements IExtensibleEnum
 	EARTH(() -> ModAbilities.EARTH),
 	SEALING(() -> ModAbilities.SEALING),
 	ANTIMAGIC(() -> ModAbilities.ANTIMAGIC),
+	SWORD(() -> ModAbilities.SWORD),
+	MERCURY(() -> ModAbilities.MERCURY),
+	BEAST(() -> ModAbilities.BEAST),
+	COPY(() -> ModAbilities.COPY),
 	MISC(() -> ModAbilities.MISC);
 
 

@@ -22,16 +22,13 @@ import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.sword.AirDashAbility;
-import com.yuanno.block_clover.spells.sword.MagicDestroyer;
+import com.yuanno.block_clover.spells.sword.MagicDestroyerAbility;
 import com.yuanno.block_clover.spells.sword.MagicDwellerCleanAbility;
 import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.*;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -56,7 +53,7 @@ public class ModAbilities {
     public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE};
     public static final AbilityCore[] COPY = new AbilityCore[] {CopyAbility.INSTANCE};
     public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE};
-    public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyer.INSTANCE, AirDashAbility.INSTANCE};
+    public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyerAbility.INSTANCE, AirDashAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));

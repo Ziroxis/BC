@@ -23,6 +23,10 @@ public class FireProjectiles {
             () -> Beapi.createEntityType(FireBallProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":fire_ball"));
+    public static final RegistryObject<EntityType<GiantFireBallProjectile>> GIANT_FIRE_BALL = Beapi.registerEntityType("Giant Fire Ball",
+            () -> Beapi.createEntityType(GiantFireBallProjectile::new)
+                    .sized(3f, 3f)
+                    .build(Main.MODID + ":giant_fire_ball"));
     public static final RegistryObject<EntityType<FlameRoarProjectile>> FLAME_ROAR = Beapi.registerEntityType("Flame Roar",
             () -> Beapi.createEntityType(FlameRoarProjectile::new)
                     .sized(4f, 4f)
@@ -44,6 +48,8 @@ public class FireProjectiles {
     {
         RenderingRegistry.registerEntityRenderingHandler(FIRE_BALL.get(), new AbilityProjectileRenderer.Factory(new FireBallModel())
                 .setTexture("fire", "fireball").setScale(1));
+        RenderingRegistry.registerEntityRenderingHandler(GIANT_FIRE_BALL.get(), new AbilityProjectileRenderer.Factory(new FireBallModel())
+                .setTexture("fire", "fireball").setScale(9));
         RenderingRegistry.registerEntityRenderingHandler(FLAME_ROAR.get(), new AbilityProjectileRenderer.Factory(new FlameRoarModel())
                 .setTexture("fire", "flameroar").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(SOL_LINEA.get(), new AbilityProjectileRenderer.Factory(new SolLineaModel())

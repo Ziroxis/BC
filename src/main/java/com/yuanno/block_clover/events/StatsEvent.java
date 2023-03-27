@@ -14,7 +14,6 @@ import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
-import com.yuanno.block_clover.spells.PassiveDataAbility;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.darkness.DarkCloakedBladeAbility;
@@ -30,14 +29,10 @@ import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
 import java.util.UUID;
 
@@ -58,7 +53,6 @@ public class StatsEvent {
             //TODO don't spawn with anti-magic + second attribute
             props.setAttribute(Beapi.randomizer(ModValues.attributes));
             String attribute = props.getAttribute();
-            abilityProps.addUnlockedAbility(player, PassiveDataAbility.INSTANCE);
             switch (attribute)
             {
                 case "Wind":

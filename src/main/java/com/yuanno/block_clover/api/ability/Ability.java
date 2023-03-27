@@ -39,8 +39,8 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     //TODO check with the other ability class
     private boolean assignedExperience = false;
-    private int experience = 0;
     private boolean isEvolved;
+    private int evolutionCost;
     private String name = "";
     private String displayName;
     private String textureName = "";
@@ -101,7 +101,9 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
         if (!this.isOnStandby())
             return;
-
+        IEntityStats propsEntity = EntityStatsCapability.get(player);
+        if ((int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
+            this.evolved(true);
         AbilityUseEvent event = new AbilityUseEvent(player, this);
         if (MinecraftForge.EVENT_BUS.post(event))
             return;
@@ -111,8 +113,20 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             IAbilityData props = AbilityDataCapability.get(player);
             this.checkAbilityPool(player, State.COOLDOWN);
 
-            IEntityStats propsEntity = EntityStatsCapability.get(player);
+            //IEntityStats propsEntity = EntityStatsCapability.get(player);
+
             propsEntity.alterMana(-manaCost);
+
+            // experience of the spell
+            if (propsEntity.hasExperienceSpell(this.getName())) {
+                int experience = propsEntity.getExperienceSpell(this.getName());
+                propsEntity.setExperienceSpells(this.getName(), experience + 1);
+
+            }
+            else
+                propsEntity.setExperienceSpells(this.getName(), 1);
+
+            // experience of player
             if (propsEntity.getLevel() < experienceGainLevelCap)
             {
                 propsEntity.alterExperience(experiencePoint);
@@ -233,27 +247,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         this.isEvolved = isEvolved;
     }
 
-    public boolean hasBeenAssignedExperience()
-    {
-        return this.assignedExperience;
-    }
-    public void assignExperience(boolean flag)
-    {
-        this.assignedExperience = flag;
-    }
-
-    public int getExperience()
-    {
-        return this.experience;
-    }
-    public void alterExperience(int experience)
-    {
-        this.experience = this.experience + experience;
-    }
-    public void setExperience(int experience)
-    {
-        this.experience = experience;
-    }
 
     public State getState()
     {
@@ -335,6 +328,16 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public double getCooldown()
     {
         return this.cooldown;
+    }
+
+    public void setEvolutionCost(int evolutionCost)
+    {
+        this.evolutionCost = evolutionCost;
+    }
+
+    public int getEvolutionCost()
+    {
+        return this.evolutionCost;
     }
 
     public void setExperienceGainLevelCap(int experienceGainLevelCap)
@@ -632,7 +635,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         nbt.putString("id", this.core.getRegistryName().toString());
         nbt.putString("displayName", Strings.isNullOrEmpty(this.getDisplayName()) ? "" : this.getDisplayName());
-        nbt.putInt("experience", this.experience);
         nbt.putIntArray("pools", this.getPools());
         nbt.putString("unlock", this.getUnlockType().name());
         nbt.putString("state", this.getState().toString());
@@ -659,7 +661,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         this.setUnlockType(AbilityUnlock.valueOf(nbt.getString("unlock")));
         this.setDisplayName(nbt.getString("displayName"));
         this.setState(Ability.State.valueOf(nbt.getString("state")));
-        this.setExperience(nbt.getInt("experience"));
 
         if (this instanceof IExtraUpdateData)
         {

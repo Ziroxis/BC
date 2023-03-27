@@ -31,7 +31,32 @@ public class EntityStatsBase implements IEntityStats{
     private boolean staffBoost;
     private boolean hatBoost;
 
+    private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
 
+    @Override
+    public HashMap<String, Integer> getExperienceSpells() {
+        return experienceSpells;
+    }
+
+    @Override
+    public void setExperienceSpells(HashMap<String, Integer> experienceSpells) {
+        this.experienceSpells = experienceSpells;
+    }
+
+    @Override
+    public void setExperienceSpells(String key, Integer value) {
+        experienceSpells.put(key, value);
+    }
+
+    @Override
+    public <T> T getExperienceSpell(String key) {
+        return (T) experienceSpells.get(key);
+    }
+
+    @Override
+    public boolean hasExperienceSpell(String key) {
+        return experienceSpells.containsKey(key);
+    }
 
     @Override
     public int getLevel() {

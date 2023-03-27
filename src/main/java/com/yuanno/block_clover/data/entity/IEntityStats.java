@@ -1,11 +1,16 @@
 package com.yuanno.block_clover.data.entity;
 
-import com.yuanno.block_clover.api.ability.Ability;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public interface IEntityStats {
+
+    // SPELL EXPERIENCE
+    HashMap<String, Integer> getExperienceSpells();
+    void setExperienceSpells(HashMap<String, Integer> experienceSpells);
+    void setExperienceSpells(String key, Integer value);
+    <T> T getExperienceSpell(String key);
+    boolean hasExperienceSpell(String key);
 
     // LEVEL
     int getLevel();

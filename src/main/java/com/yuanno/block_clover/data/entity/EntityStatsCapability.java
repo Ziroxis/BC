@@ -8,6 +8,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
+import java.util.HashMap;
+
 public class EntityStatsCapability {
 
     @CapabilityInject(IEntityStats.class)
@@ -21,6 +23,7 @@ public class EntityStatsCapability {
             public INBT writeNBT(Capability<IEntityStats> capability, IEntityStats instance, Direction side)
             {
                 CompoundNBT props = new CompoundNBT();
+
                 props.putBoolean("isInCombatMode", instance.isInCombatMode());
                 props.putInt("level", instance.getLevel());
                 props.putInt("maxLevel", instance.getMaxLevel());
@@ -40,6 +43,14 @@ public class EntityStatsCapability {
                 props.putFloat("multiplier", instance.getMultiplier());
 		props.putBoolean("staffBoost", instance.getStaffBoost());
                 props.putBoolean("hatBoost", instance.getHatBoost());
+
+                // Save the HashMap
+                CompoundNBT hashMapNBT = new CompoundNBT();
+                HashMap<String, Integer> hashMap = instance.getExperienceSpells();
+                for (String key : hashMap.keySet()) {
+                    hashMapNBT.putInt(key, hashMap.get(key));
+                }
+                props.put("experience_spells", hashMapNBT);
                 return props;
             }
 
@@ -68,6 +79,12 @@ public class EntityStatsCapability {
 		instance.setStaffBoost(props.getBoolean("staffBoost"));
                 instance.setStaffBoost(props.getBoolean("hatBoost"));
 
+                CompoundNBT hashMapNBT = props.getCompound("experience_spells");
+                HashMap<String, Integer> hashMap = new HashMap<>();
+                for (String key : hashMapNBT.getAllKeys()) {
+                    hashMap.put(key, hashMapNBT.getInt(key));
+                }
+                instance.setExperienceSpells(hashMap);
             }
         }, () -> new EntityStatsBase());
 

@@ -1,11 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.BeRegistry;
-import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.spells.PassiveDataAbility;
 import com.yuanno.block_clover.spells.antimagic.*;
 import com.yuanno.block_clover.spells.beast.BearClawAbility;
 import com.yuanno.block_clover.spells.beast.RhinocerosArmorAbility;
@@ -44,7 +40,6 @@ public class ModAbilities {
 
 
 
-    public static final AbilityCore[] PASSIVE = new AbilityCore[] {PassiveDataAbility.INSTANCE};
     public static final AbilityCore[] MISC = new AbilityCore[] {ManaSkinAbility.INSTANCE, ManaReinforcement.INSTANCE};
     public static final AbilityCore[] WATER = new AbilityCore[] {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterManaZoneAbility.INSTANCE};
     public static final AbilityCore[] SEALING = new AbilityCore[] {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE, SealingManaZoneAbility.INSTANCE};
@@ -86,6 +81,5 @@ public class ModAbilities {
         registerAbilities(COPY);
         registerAbilities(BEAST);
         registerAbilities(SWORD);
-        registerAbilities(PASSIVE);
     }
 }

@@ -83,11 +83,13 @@ public class Ability extends ForgeRegistryEntry<Ability> {
      * Event Starters
      */
 
-    public void use(PlayerEntity player) //Is called when player uses any ability
+    //Is called when player uses any ability
+    public void use(PlayerEntity player)
     {
         if (player.level.isClientSide)
             return;
 
+        //TODO try to do here the experience stuff
 
         player.level.getProfiler().push(() ->
         {

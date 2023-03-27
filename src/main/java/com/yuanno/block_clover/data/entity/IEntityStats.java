@@ -1,5 +1,10 @@
 package com.yuanno.block_clover.data.entity;
 
+import com.yuanno.block_clover.api.ability.Ability;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public interface IEntityStats {
 
     // LEVEL
@@ -17,6 +22,7 @@ public interface IEntityStats {
     int getMaxExperience();
     void alterMaxExperience(int value);
     void setMaxExperience(int value);
+
 
     // MULTIPLIER
     float getMultiplier();

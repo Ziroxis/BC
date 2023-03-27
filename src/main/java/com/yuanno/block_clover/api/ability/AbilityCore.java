@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 
+//TODO put experience in here
 public class AbilityCore<A extends Ability> extends ForgeRegistryEntry<AbilityCore<?>>
 {
 	private Class<? extends A> clazz;

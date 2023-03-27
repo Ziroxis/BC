@@ -66,6 +66,7 @@ public class AbilityDataCapability
 							CompoundNBT nbtAbility = new CompoundNBT();
 							nbtAbility = ability.save(nbtAbility);
 							nbtAbility.putInt("pos", i);
+							nbtAbility.putInt("experience", ability.getExperience());
 							nbtAbility.putDouble("cooldown", ability.getCooldown());
 							nbtAbility.putDouble("maxCooldown", ability.getMaxCooldown());
 							nbtAbility.putBoolean("isForced", ability.isStateForced());
@@ -148,6 +149,8 @@ public class AbilityDataCapability
 								int maxCooldown = (int) (nbtAbility.getDouble("maxCooldown") / 20);
 								int pos = nbtAbility.getInt("pos");
 								boolean isForced = nbtAbility.getBoolean("isForced");
+								int experience = nbtAbility.getInt("experience");
+								ability.setExperience(experience);
 								ability.setMaxCooldown(maxCooldown);
 								ability.setCooldown(cooldown);
 								ability.setForcedState(isForced);

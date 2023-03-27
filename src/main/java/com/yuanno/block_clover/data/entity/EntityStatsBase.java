@@ -2,6 +2,10 @@ package com.yuanno.block_clover.data.entity;
 
 
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.Ability;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EntityStatsBase implements IEntityStats{
 
@@ -26,6 +30,8 @@ public class EntityStatsBase implements IEntityStats{
     private float multiplier;
     private boolean staffBoost;
     private boolean hatBoost;
+
+
 
     @Override
     public int getLevel() {

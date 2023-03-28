@@ -66,7 +66,7 @@ public class ModBlocks {
             .harvestLevel(2)
             .sound(SoundType.WOOD)));
 
-    public static final RegistryObject<Block> MOGURO_SLABS = BLOCKS.register("moguro_slabs",
+    public static final RegistryObject<Block> MOGURO_SLABS = BLOCKS.register("moguro_slab",
             () -> new SlabBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
                     .strength(1f, 3f)
                     .harvestTool(ToolType.AXE)
@@ -201,7 +201,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ELDER_SAPLING = BLOCKS.register("elder_sapling",
             () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.ROOTS)));
 
-
+    public static final RegistryObject<Block> NOMOTATO_BLOCK = BLOCKS.register("nomotato_block", NomotatoBlock::new);
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

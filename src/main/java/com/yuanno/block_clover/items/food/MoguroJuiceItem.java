@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.items;
+package com.yuanno.block_clover.items.food;
 
 import com.yuanno.block_clover.init.ModEffects;
 import com.yuanno.block_clover.init.ModItemGroup;
@@ -17,15 +17,13 @@ public class MoguroJuiceItem extends Item {
 
 
     public MoguroJuiceItem() {
-        super(new Properties().tab(ModItemGroup.BLOCK_CLOVER_MISC).stacksTo(1)
+        super(new Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD).stacksTo(1)
                 .food(new Food.Builder()
                         .nutrition(2)
                         .saturationMod(0.5f)
                         .effect(() -> {
-                            Supplier<EffectInstance> sup; {
+                            Supplier<EffectInstance> sup;
                                return new EffectInstance(ModEffects.XP_MULTIPLIER.get(), 6000, 0);
-                            }
-
                         }, 1f)
                         .effect(new EffectInstance(Effects.REGENERATION, 20, 0), 1F)
                         .alwaysEat()

@@ -37,4 +37,11 @@ public class ModItemGroup {
             return new ItemStack(ModItems.ELDER_SAPLING.get());
         }
     };
+
+    public static final ItemGroup BLOCK_CLOVER_FOOD = new ItemGroup("block_cloverModTabFood") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ModItems.NOMOTATO.get());
+        }
+    };
 }

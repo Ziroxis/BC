@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "textures":
   {
-    "all": "block_clover:blocks/moguro_plank"
+    "all": "block_clover:blocks/moguro_planks"
   }
 }

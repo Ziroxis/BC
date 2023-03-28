@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "block_clover:block/nomotato_block_stage0"
+    },
+    "age=1": {
+      "model": "block_clover:block/nomotato_block_stage0"
+    },
+    "age=2": {
+      "model": "block_clover:block/nomotato_block_stage1"
+    },
+    "age=3": {
+      "model": "block_clover:block/nomotato_block_stage1"
+    },
+    "age=4": {
+      "model": "block_clover:block/nomotato_block_stage2"
+    },
+    "age=5": {
+      "model": "block_clover:block/nomotato_block_stage2"
+    },
+    "age=6": {
+      "model": "block_clover:block/nomotato_block_stage2"
+    },
+    "age=7": {
+      "model": "block_clover:block/nomotato_block_stage3"
+    }
+  }
+}

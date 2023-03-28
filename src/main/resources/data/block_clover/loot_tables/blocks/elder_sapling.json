@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "block_clover:elder_plank"
+          "name": "block_clover:elder_sapling"
         }
       ],
       "conditions": [

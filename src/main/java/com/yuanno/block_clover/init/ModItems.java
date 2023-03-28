@@ -4,6 +4,8 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.items.*;
 import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
+import com.yuanno.block_clover.items.food.MoguroJuiceItem;
+import com.yuanno.block_clover.items.food.RegenerativeFood;
 import com.yuanno.block_clover.items.weapons.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -152,7 +154,14 @@ public class ModItems {
     public static final RegistryObject<Item> MODIFYING_CRYSTAL = ITEMS.register("modifying_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).tab(ModItemGroup.BLOCK_CLOVER_MISC)));
     public static final RegistryObject<Item> MODIFIED_MAGIC_WAND = ITEMS.register("modified_magic_staff", ModifiedMagicStaffItem::new);
+
+    //food
     public static final RegistryObject<Item> MOGURO_JUICE = ITEMS.register("moguro_juice", MoguroJuiceItem::new);
+    public static final RegistryObject<Item> NOMOTATO = ITEMS.register("nomotato", () -> new BlockItem(ModBlocks.NOMOTATO_BLOCK.get(), new Item.Properties()
+            .tab(ModItemGroup.BLOCK_CLOVER_MISC).food(new Food.Builder().nutrition(2).saturationMod(0.2f).build())));
+    public static final RegistryObject<Item> BAKED_NOMOTATO = ITEMS.register("baked_nomotato",() -> new RegenerativeFood(0.6f,5,10));
+    public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD)));
+    public static final RegistryObject<Item> NOMOTATO_PUREY = ITEMS.register("nomotato_purey", () -> new RegenerativeFood(0.8f, 6, 12));
 
     //SPAWN EGGS
     public static final RegistryObject<SpawnEggItem> VOLCANO_MONSTER_EGG = ITEMS.register("volcano_monster_egg",

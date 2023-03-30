@@ -36,7 +36,7 @@ public class RhinocerosArmorRenderer<T extends LivingEntity, M extends EntityMod
     {
         IEntityStats entityStats = EntityStatsCapability.get(entityLivingBase);
         IAbilityData abilityData = AbilityDataCapability.get(entityLivingBase);
-        RhinocerosArmorAbility manaSkinAbility = (RhinocerosArmorAbility) abilityData.getEquippedAbility(ManaSkinAbility.INSTANCE);
+        RhinocerosArmorAbility manaSkinAbility = (RhinocerosArmorAbility) abilityData.getEquippedAbility(RhinocerosArmorAbility.INSTANCE);
         if (manaSkinAbility != null && manaSkinAbility.isContinuous())
         {
             matrixStack.pushPose();

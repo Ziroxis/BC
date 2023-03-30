@@ -4,6 +4,7 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -42,11 +43,15 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 		}
 	}
 
-	private boolean onEndContinuityEvent(PlayerEntity player)
+	private boolean onEndContinuityEvent(PlayerEntity player) // TODO make it so it also takes it off the off hand
 	{
 
 		for (int i = 0; i < 35; i++)
 		{
+			if (player.getOffhandItem().getItem().asItem().equals(getItemStack(player).getItem()))
+			{
+				player.getOffhandItem().shrink(1);
+			}
 			if (player.inventory.getItem(i).getItem().equals(this.getItemStack(player).getItem()))
 				player.inventory.getItem(i).shrink(1);
 		}

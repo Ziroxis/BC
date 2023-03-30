@@ -6,6 +6,7 @@ import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.entities.projectiles.sword.OriginalSlashProjectile;
 import com.yuanno.block_clover.init.ModItems;
+import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
 import com.yuanno.block_clover.items.weapons.DemonSlayerItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -38,7 +39,8 @@ public class OriginalSlashesAbility extends RepeaterAbility {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (player.getMainHandItem().getItem().getItem() instanceof DemonSlayerItem || player.getOffhandItem().getItem().getItem() instanceof DemonSlayerItem)
+        System.out.println(player.getMainHandItem().getItem().asItem());
+        if (player.getMainHandItem().getItem().asItem() instanceof DemonDwellerItem || player.getOffhandItem().getItem().asItem() instanceof DemonDwellerItem)
         {
             OriginalSlashProjectile projectile = new OriginalSlashProjectile(player.level, player);
             player.level.addFreshEntity(projectile);

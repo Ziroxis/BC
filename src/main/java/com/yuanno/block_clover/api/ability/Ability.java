@@ -102,7 +102,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (!this.isOnStandby())
             return;
         IEntityStats propsEntity = EntityStatsCapability.get(player);
-        if ((int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
+        if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
             this.evolved(true);
         AbilityUseEvent event = new AbilityUseEvent(player, this);
         if (MinecraftForge.EVENT_BUS.post(event))

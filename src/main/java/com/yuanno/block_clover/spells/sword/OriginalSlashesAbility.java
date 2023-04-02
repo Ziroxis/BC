@@ -39,7 +39,6 @@ public class OriginalSlashesAbility extends RepeaterAbility {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        System.out.println(player.getMainHandItem().getItem().asItem());
         if (player.getMainHandItem().getItem().asItem() instanceof DemonDwellerItem || player.getOffhandItem().getItem().asItem() instanceof DemonDwellerItem)
         {
             OriginalSlashProjectile projectile = new OriginalSlashProjectile(player.level, player);

@@ -9,6 +9,7 @@ import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModDamageSource;
+import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
 import com.yuanno.block_clover.spells.slash.ForwardThrustAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import net.minecraft.entity.LivingEntity;
@@ -23,11 +24,10 @@ import java.util.List;
 public class AirDashAbility extends Ability implements IMultiTargetAbility {
 
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Air dash", AbilityCategories.AbilityCategory.ATTRIBUTE, AirDashAbility.class)
-            .setDescription("Thrusts forwards with your sword dealing damage.")
+            .setDescription("Thrusts forwards if you have your sword, dealing damage.")
             .setDamageKind(AbilityDamageKind.SLASH)
-            .setDependencies(DemonSlayerCleanAbility.INSTANCE) // TODO make it so if you don't have the sword in hand the ability deactivates
             .build();
-
+    boolean hasSword = false;
     public AirDashAbility()
     {
         super(INSTANCE);
@@ -38,6 +38,7 @@ public class AirDashAbility extends Ability implements IMultiTargetAbility {
     }
     private boolean onUseEvent(PlayerEntity player)
     {
+        hasSword = player.getMainHandItem().getItem().asItem() instanceof DemonDwellerItem || player.getOffhandItem().getItem().asItem() instanceof DemonDwellerItem;
         this.clearTargets();
 
         Vector3d speed = Beapi.propulsion(player, 5, 5);
@@ -59,11 +60,13 @@ public class AirDashAbility extends Ability implements IMultiTargetAbility {
 
             list.forEach(entity ->
             {
-                ((ServerWorld) player.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY(),
+                if (hasSword)
+                    ((ServerWorld) player.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY(),
                         entity.getZ(), (int) 10, 3, 3, 3, 0.1);
 
                 if(this.isTarget(entity) && player.canSee(entity)) {
-                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
+                    if (hasSword)
+                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
                     Vector3d speed = Beapi.propulsion(player, 5, 5);
                     entity.setDeltaMovement(speed.x, 0.3, speed.z);
                 }

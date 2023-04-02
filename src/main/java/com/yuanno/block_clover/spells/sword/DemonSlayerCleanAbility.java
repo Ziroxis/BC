@@ -27,7 +27,7 @@ public class DemonSlayerCleanAbility extends ItemAbility implements IParallelCon
     @Override
     public ItemStack getItemStack(PlayerEntity player)
     {
-        return new ItemStack(ModItems.DEMON_SLAYER_CLEAN.get());
+        return new ItemStack(ModItems.DEMON_DWELLER.get());
     }
 
     @Override

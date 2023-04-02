@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 
 public class DemonSlayerItem extends MagicWeapon {
 
+    // big bulky sword asta has
     public DemonSlayerItem() {
         super(ModTiers.WEAPON, 7, 0.1f, new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_WEAPONS).stacksTo(1));
     }

@@ -1,5 +1,7 @@
 package com.yuanno.block_clover.items.weapons;
 
+import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
 import com.yuanno.block_clover.init.ModItemGroup;
 import com.yuanno.block_clover.init.ModTiers;
 import com.yuanno.block_clover.items.MagicWeapon;
@@ -34,7 +36,7 @@ public class DemonDwellerItem extends MagicWeapon {
     private static final int MAX_STORED_PROJECTILES = 1; // Only store 1 projectile at a time
     private List<ProjectileEntity> storedProjectiles = new ArrayList<>();
     public boolean isBeingUsed = false;
-    public ProjectileEntity projectile;
+    public AbilityProjectileEntity projectile;
     public int currentCooldownTicks;
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {

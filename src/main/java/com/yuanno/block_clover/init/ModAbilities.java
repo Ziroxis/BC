@@ -3,8 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.BeRegistry;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.spells.antimagic.*;
-import com.yuanno.block_clover.spells.beast.BearClawAbility;
-import com.yuanno.block_clover.spells.beast.RhinocerosArmorAbility;
+import com.yuanno.block_clover.spells.beast.*;
 import com.yuanno.block_clover.spells.copy.CopyAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.earth.*;
@@ -14,9 +13,7 @@ import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
 import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
-import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
-import com.yuanno.block_clover.spells.mercury.MercuryBulletBarrageAbility;
-import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
+import com.yuanno.block_clover.spells.mercury.*;
 import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
@@ -50,9 +47,9 @@ public class ModAbilities {
     public static final AbilityCore[] WIND = new AbilityCore[] {WindBladeAbility.INSTANCE, WindCrescentAbility.INSTANCE, WindBladeShowerAbility.INSTANCE, ToweringTornadoAbility.INSTANCE, WindFlightAbility.INSTANCE, TornadoPiercingAbility.INSTANCE, WindGaleAbility.INSTANCE, WindManaZoneAbility.INSTANCE};
     public static final AbilityCore[] TIME = new AbilityCore[] {TimeStealAbility.INSTANCE, TimeHealAbility.INSTANCE, ChronoStasisAbility.INSTANCE, TimeHopAbility.INSTANCE, ChronoStasisGrigoraAbility.INSTANCE, TimeRessurectionAbility.INSTANCE, TimeMagicManaZoneAbility.INSTANCE};
     public static final AbilityCore[] GRAVITY = new AbilityCore[] {GravitySingularityAbility.INSTANCE, HeavyInfightingAbility.INSTANCE, PresenceOfTheDemonKingAbility.INSTANCE};
-    public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE};
+    public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE, MercuryRainAbility.INSTANCE, MercuryBubbleAbility.INSTANCE};
     public static final AbilityCore[] COPY = new AbilityCore[] {CopyAbility.INSTANCE};
-    public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE};
+    public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE, BeastRegenerationPassiveAbility.INSTANCE, CheetaChargeAbility.INSTANCE, JaguarsHunt.INSTANCE, LionsHowlAbility.INSTANCE, HippopotamusBiteAbility.INSTANCE};
     public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyerAbility.INSTANCE, AirDashAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {

@@ -11,15 +11,20 @@ import net.minecraft.entity.Entity;
 
 public class MercuryRainModel extends EntityModel {
 	private final ModelRenderer MercuryRain;
-
+	private final ModelRenderer MercuryRain_r1;
 	public MercuryRainModel() {
 		texWidth = 16;
 		texHeight = 16;
 
 		MercuryRain = new ModelRenderer(this);
-		MercuryRain.setPos(0.0F, 24.0F, 0.0F);
-		MercuryRain.texOffs(0, 0).addBox(-1.0F, -20.0F, -1.0F, 0.0F, 11.0F, 2.0F, 0.0F, false);
-	}
+		MercuryRain.setPos(0.0F, 10.0F, 0.0F);
+
+
+		MercuryRain_r1 = new ModelRenderer(this);
+		MercuryRain_r1.setPos(0.0F, -1.0F, 0.0F);
+		MercuryRain.addChild(MercuryRain_r1);
+		setRotationAngle(MercuryRain_r1, -1.6144F, 0.0F, 0.0F);
+		MercuryRain_r1.texOffs(0, 0).addBox(-1.0F, -5.0F, -1.0F, 0.0F, 11.0F, 2.0F, 0.0F, false);	}
 
 	@Override
 	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue,

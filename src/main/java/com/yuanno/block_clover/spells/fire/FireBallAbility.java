@@ -33,7 +33,6 @@ public class FireBallAbility extends Ability {
             FireBallProjectile projectile = new FireBallProjectile(player.level, player);
             player.level.addFreshEntity(projectile);
             projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
-            return true;
         }
         else
         {
@@ -41,8 +40,8 @@ public class FireBallAbility extends Ability {
             player.level.addFreshEntity(projectile);
             projectile.shootFromRotation(player, player.xRot , player.yRot , 0, 1f, 5);
 
-            return true;
         }
+        return true;
     }
 
 }

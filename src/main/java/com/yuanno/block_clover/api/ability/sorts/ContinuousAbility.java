@@ -135,7 +135,6 @@ public abstract class ContinuousAbility extends Ability {
 
             if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10 && !(getmanaCost() == 0)) {
                 this.endContinuity(player);
-                System.out.println("TEST 1");
             }
             if (player.tickCount % 20 == 0)
             {

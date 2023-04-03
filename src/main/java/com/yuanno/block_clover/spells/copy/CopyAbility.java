@@ -8,6 +8,7 @@ import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.entities.MonkeyEntity;
+import com.yuanno.block_clover.init.ModAbilities;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.spells.wind.*;

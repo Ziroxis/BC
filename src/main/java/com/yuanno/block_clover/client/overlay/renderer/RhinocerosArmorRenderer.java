@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.client.overlay.model.ManaSkinModel;
+import com.yuanno.block_clover.client.overlay.model.RhinocerosModel;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -21,9 +22,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RhinocerosArmorRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
 
-    private ResourceLocation TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/manaskin/rhinocerosarmor.png");
+    private ResourceLocation TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/spells/rhinocerosarmor.png");
 
-    private ManaSkinModel model = new ManaSkinModel();
+    private RhinocerosModel model = new RhinocerosModel();
 
     public RhinocerosArmorRenderer(IEntityRenderer<T, M> entityRenderer)
     {

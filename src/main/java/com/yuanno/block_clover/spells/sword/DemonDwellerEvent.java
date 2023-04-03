@@ -1,24 +1,10 @@
 package com.yuanno.block_clover.spells.sword;
 
-import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
 import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -29,7 +15,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = "block_clover", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DemonDwellerEvent {
-    //TODO sucking up part works just the rethrowing parts needs some work
+    //TODO test it out with abilities
     private boolean isBlocking = false;
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
@@ -38,19 +24,18 @@ public class DemonDwellerEvent {
         if (event.getSource().getEntity() == null)
             return;
         PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-        if (event.getSource().getDirectEntity() instanceof ProjectileEntity) {
+        if (event.getSource().getDirectEntity() instanceof AbilityProjectileEntity) {
             if (player.getMainHandItem().getItem().asItem() instanceof DemonDwellerItem) {
                 DemonDwellerItem demonDwellerItem = (DemonDwellerItem) player.getMainHandItem().getItem();
                 System.out.println(demonDwellerItem.currentCooldownTicks);
                 if (demonDwellerItem.isBeingUsed)
                 // sucks up arrow if cooldown = 0 and the item is being used
                 {
-                    demonDwellerItem.projectile = (ProjectileEntity) event.getSource().getDirectEntity();
+                    demonDwellerItem.projectile = (AbilityProjectileEntity) event.getSource().getDirectEntity();
                     event.getSource().getDirectEntity().remove();
                     event.setCanceled(true);
                     demonDwellerItem.currentCooldownTicks = 60;
                 }
-
             }
             else if (player.getOffhandItem().getItem().asItem() instanceof DemonDwellerItem)
 
@@ -59,7 +44,9 @@ public class DemonDwellerEvent {
                 if (demonDwellerItem.isBeingUsed)
                 // sucks up arrow if cooldown = 0 and the item is being used
                 {
-                    demonDwellerItem.projectile = (ProjectileEntity) event.getSource().getDirectEntity();
+                    AbilityProjectileEntity originalProjectile = (AbilityProjectileEntity) event.getSource().getDirectEntity();
+                    AbilityProjectileEntity copiedProjectile = new AbilityProjectileEntity(originalProjectile.getType(), player.level, player);
+                    demonDwellerItem.projectile = copiedProjectile;
                     event.getSource().getDirectEntity().remove();
                     event.setCanceled(true);
                     demonDwellerItem.currentCooldownTicks = 60;
@@ -83,9 +70,10 @@ public class DemonDwellerEvent {
             if (demonDwellerItem.projectile != null && demonDwellerItem.currentCooldownTicks == 0)
             // shoots projectile that you sucked up if cooldown is ready
             {
-                ProjectileEntity projectile = demonDwellerItem.projectile;
+                System.out.println("shoots projectile");
+                AbilityProjectileEntity projectile = demonDwellerItem.projectile;
                 player.level.addFreshEntity(projectile);
-                demonDwellerItem.projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
+                projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
                 demonDwellerItem.projectile = null;
                 demonDwellerItem.currentCooldownTicks = 60;
                 return;
@@ -104,9 +92,9 @@ public class DemonDwellerEvent {
             if (demonDwellerItem.projectile != null && demonDwellerItem.currentCooldownTicks == 0)
             // when projectile sucked up and cooldown ready
             {
-                ProjectileEntity projectile = demonDwellerItem.projectile;
+                AbilityProjectileEntity projectile = demonDwellerItem.projectile;
                 player.level.addFreshEntity(projectile);
-                demonDwellerItem.projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
+                projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
                 demonDwellerItem.projectile = null;
                 demonDwellerItem.currentCooldownTicks = 60;
                 return;
@@ -119,10 +107,5 @@ public class DemonDwellerEvent {
             demonDwellerItem.isBeingUsed = true;
         }
     }
-
-
-
-
-
 
 }

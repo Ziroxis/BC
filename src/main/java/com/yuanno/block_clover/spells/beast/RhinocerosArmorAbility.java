@@ -20,10 +20,10 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
             .setDescription("Envelops your skin with mana of a rhinoceros.\nGiving you resistance, auto-step.")
             .setDamageKind(AbilityDamageKind.BUFF)
             .build();
-    private static final AttributeModifier MANA_RESISTANCE = new AttributeModifier(UUID.fromString("0fe609ae-c5b1-11ed-afa1-0242ac120002"),
-            "Mana Resistance", 1, AttributeModifier.Operation.ADDITION);
-    private static final AttributeModifier MANA_STEP = new AttributeModifier(UUID.fromString("127ff724-c5b1-11ed-afa1-0242ac120002"),
-            "Mana Step", 1, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier RHINOCEROS_RESISTANCE = new AttributeModifier(UUID.fromString("0fe609ae-c5b1-11ed-afa1-0242ac120002"),
+            "Rhinoceros Resistance", 3, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier RHINOCEROS_STEP = new AttributeModifier(UUID.fromString("127ff724-c5b1-11ed-afa1-0242ac120002"),
+            "Rhinoceros Step", 1, AttributeModifier.Operation.ADDITION);
 
     public RhinocerosArmorAbility()
     {
@@ -37,18 +37,18 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).addTransientModifier(MANA_RESISTANCE);
-        player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).addTransientModifier(MANA_RESISTANCE);
-        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(MANA_STEP);
+        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
+        player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
+        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(RHINOCEROS_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(MANA_RESISTANCE);
-        player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).removeModifier(MANA_RESISTANCE);
-        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(MANA_STEP);
+        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE);
+        player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).removeModifier(RHINOCEROS_RESISTANCE);
+        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(RHINOCEROS_STEP);
         return true;
     }
 }

@@ -10,6 +10,7 @@ public enum AbilityDamageKind
 	PIERCING,
 	ITEM,
 	BUFF,
+	DEBUFF,
 	MINION,
 	MOVEMENT,
 	GUARD

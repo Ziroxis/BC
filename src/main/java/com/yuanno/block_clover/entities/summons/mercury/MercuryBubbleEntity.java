@@ -68,49 +68,30 @@ public class MercuryBubbleEntity extends Entity {
             this.owner = (LivingEntity) ((ServerWorld) this.level).getEntity(this.ownerUUID);
             return;
         }
-        //PARTICLES.spawn(this.level, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
-        /*
+
         this.yRot = (this.owner.getYHeadRot() - 90.0F) * -1;
         if(Math.round(this.getY()) > Math.round(owner.getY() + 3))
             this.move(MoverType.SELF, new Vector3d(0, -0.1, 0));
         else if (Math.round(this.getY()) < Math.round(owner.getY() + 3))
             this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
 
-        Vector3d lookingAngle = this.owner.getLookAngle();
-        if(this.owner.getHealth() <= 0)
-            this.remove();
-        if (this.tickCount > 120)
-            this.remove();
 
-        double posX = 0;
-        double posZ = 0;
+        double posX = this.getX() - this.owner.getX();
+        double posZ = this.getZ() - this.owner.getZ();
+        double posY = this.getY() - this.owner.getY();
 
-            posX = this.getX() - this.owner.getX() - 2 * lookingAngle.x;
-            posZ = this.getZ() - this.owner.getZ() - 2 * lookingAngle.z;
-
-
-        posX = this.owner.getX();
-        posZ = this.owner.getZ();
-
-
+        if(posX > this.speedLimit)
+            posX = this.speedLimit;
+        else if(posX < 0 && posX < -this.speedLimit)
+            posX = -this.speedLimit;
 
         if(posZ > this.speedLimit)
             posZ = this.speedLimit;
         else if(posZ < 0 && posZ < -this.speedLimit)
             posZ = -this.speedLimit;
 
-        */
-        this.yRot = (this.owner.getYHeadRot() - 90.0F) * -1;
-        if(Math.round(this.getY()) > Math.round(owner.getY() + 3))
-            this.move(MoverType.SELF, new Vector3d(0, -0.1, 0));
-        else if (Math.round(this.getY()) < Math.round(owner.getY() + 3))
-            this.move(MoverType.SELF, new Vector3d(0, 0.1, 0));
+        this.move(MoverType.SELF, new Vector3d(-posX, -posY + 1.2, -posZ));
 
-
-        double posX = this.owner.getX();
-        double posZ = this.owner.getZ();
-        double posY = this.owner.getY() + 2;
-        this.move(MoverType.SELF, new Vector3d(posX, posY, posZ));
 
         if(this.owner.getHealth() <= 0)
             this.remove();

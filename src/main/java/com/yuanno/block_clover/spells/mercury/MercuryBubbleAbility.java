@@ -7,7 +7,6 @@ import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.summons.mercury.MercuryBubbleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
 
 public class MercuryBubbleAbility extends Ability {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Mercury Bubble", AbilityCategories.AbilityCategory.ATTRIBUTE, MercuryBubbleAbility.class)
@@ -20,7 +19,7 @@ public class MercuryBubbleAbility extends Ability {
     {
         super(INSTANCE);
         this.setMaxCooldown(10);
-        this.setmanaCost(30);
+        this.setmanaCost(0);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(30);
         this.onUseEvent = this::onUseEvent;
@@ -29,7 +28,6 @@ public class MercuryBubbleAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         this.mercuryBubbleEntity = new MercuryBubbleEntity(player.level, player);
-        Vector3d lookAngle = player.getLookAngle();
         BlockPos pos = player.blockPosition();
         double goToX = pos.getX();
         double goToY = pos.getY();

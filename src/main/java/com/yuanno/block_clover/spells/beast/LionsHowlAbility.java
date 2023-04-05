@@ -17,6 +17,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LionsHowlAbility extends Ability {
@@ -24,11 +25,15 @@ public class LionsHowlAbility extends Ability {
             .setDescription("Howl as a unchained beast of a lion, giving nearby enemies negative effects")
             .setDamageKind(AbilityDamageKind.DEBUFF)
             .build();
-
+    int minimumDiameter = 10;
+    int durationEffects = 120;
+    int effectStrenght = 0;
+    boolean doDamage = false;
     public LionsHowlAbility()
     {
         super(INSTANCE);
         this.setmanaCost(30);
+        this.setEvolutionCost(50);
         this.setMaxCooldown(25);
         this.setExperiencePoint(25);
     }
@@ -36,7 +41,15 @@ public class LionsHowlAbility extends Ability {
     public boolean onUseEvent(PlayerEntity player)
     {
         IEntityStats stats = EntityStatsCapability.get(player);
-        List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 10 + (float) stats.getLevel() / 2);
+        List<Entity> entities = new ArrayList<>();
+        if (this.isEvolved()) {
+            minimumDiameter = 20;
+            durationEffects = 180;
+            effectStrenght = 1;
+            doDamage = true;
+        }
+        entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, minimumDiameter + (float) stats.getLevel() / 2);
+
         //PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (entities.contains(player))
         {
@@ -46,12 +59,13 @@ public class LionsHowlAbility extends Ability {
 
                 if (entity instanceof LivingEntity)
                 {
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 120, 0));
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.BLINDNESS, 120, 0));
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.CONFUSION, 120, 0));
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 120, 0));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, durationEffects, effectStrenght));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.BLINDNESS, durationEffects, effectStrenght));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.CONFUSION, durationEffects, effectStrenght));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, durationEffects, effectStrenght));
 
-                    //entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 10);
+                    if (doDamage)
+                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 5);
                     ((ServerWorld) player.level).sendParticles(ParticleTypes.END_ROD, entity.getX(), entity.getY(),
                             entity.getZ(), (int) 10, 3, 3, 3, 0.1);
                 }            });

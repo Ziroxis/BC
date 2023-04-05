@@ -20,6 +20,10 @@ public class DarknessProjectiles {
             () -> Beapi.createEntityType(AvidyaSlashProjectile::new)
                     .sized(2f, 1f)
                     .build(Main.MODID + ":avidya_slash"));
+    public static final RegistryObject<EntityType<AvidyaSlashEvolvedProjectile>> AVIDYA_SLASH_EVOLVED = Beapi.registerEntityType("Avidya Slash evolved",
+            () -> Beapi.createEntityType(AvidyaSlashEvolvedProjectile::new)
+                    .sized(6f, 1f)
+                    .build(Main.MODID + ":avidya_slash"));
 
 
     @OnlyIn(Dist.CLIENT)
@@ -28,5 +32,7 @@ public class DarknessProjectiles {
     {
         RenderingRegistry.registerEntityRenderingHandler(AVIDYA_SLASH.get(), new AbilityProjectileRenderer.Factory(new WindCrescentModel())
                 .setTexture("darkness", "avidyaslash"));
+        RenderingRegistry.registerEntityRenderingHandler(AVIDYA_SLASH_EVOLVED.get(), new AbilityProjectileRenderer.Factory(new WindCrescentModel())
+                .setTexture("darkness", "avidyaslash").setScale(9));
     }
 }

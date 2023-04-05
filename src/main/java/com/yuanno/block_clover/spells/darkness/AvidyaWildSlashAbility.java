@@ -6,6 +6,7 @@ import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.entities.projectiles.darkness.AvidyaSlashEvolvedProjectile;
 import com.yuanno.block_clover.entities.projectiles.darkness.AvidyaSlashProjectile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
@@ -32,11 +33,21 @@ public class AvidyaWildSlashAbility extends RepeaterAbility {
     private boolean onUseEvent(PlayerEntity player)
     {
 
+        if (!this.isEvolved())
+        {
             AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
             player.level.addFreshEntity(projectile);
             ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
             projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 10);
-        return false;
+        }
+        else
+        {
+            AvidyaSlashEvolvedProjectile projectile = new AvidyaSlashEvolvedProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 10);
+
+        }        return false;
 
     }
 }

@@ -181,22 +181,40 @@ public class StatsEvent {
             }
         }
         UUID uuid = player.getUUID();
-        if (uuid.toString().equals("b0515226-7ff3-4ab4-aa87-69179ee0e4ae")) // -> Beosti
-            props.setTitle("\u00A71Almighty captain of Yuanno");
-        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> Kausu
-            props.setTitle("§aSage");
-        else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> Redwolf
-            props.setTitle("§cThe king");
-        else if (uuid.toString().equals("b462e469-19ce-40b6-9999-d74102623b7c")) // -> Gingershadow
-            props.setTitle("§4The true");
-        else if (uuid.toString().equals("72336f87-461e-4e3b-a213-df3982241c39")) // -> Apollo
-            props.setTitle("§0Wannabe rival");
-        else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
-            props.setTitle("§7Beggar");
-        else if (uuid.toString().equals("2f81171f-fbec-442b-9d6d-3b21cad56f09")) // -> Kiwi
-            props.setTitle("§7Determined Soul");
-        else if (uuid.toString().equals("2b01df92-48e7-4e6d-962d-c38e8e2a5fd0")) // -> Danal
-            props.setTitle("§2True farmer");
+        switch (uuid.toString()) {
+            case "b0515226-7ff3-4ab4-aa87-69179ee0e4ae":
+// -> Beosti
+                props.setTitle("\u00A71Almighty captain of Yuanno");
+                break;
+            case "df9f1a55-1cff-43ad-9e3d-3bc03b6bd984":
+// -> Kausu
+                props.setTitle("§aSage");
+                break;
+            case "649d12e3-da8c-4a30-b7b5-1c99376d261e":
+// -> Redwolf
+                props.setTitle("§cThe king");
+                break;
+            case "b462e469-19ce-40b6-9999-d74102623b7c":
+// -> Gingershadow
+                props.setTitle("§4The true");
+                break;
+            case "72336f87-461e-4e3b-a213-df3982241c39":
+// -> Apollo
+                props.setTitle("§0Wannabe rival");
+                break;
+            case "0226c610-b3a4-4de0-b63a-2e5599b843f2":
+// -> Blank
+                props.setTitle("§7Beggar");
+                break;
+            case "2f81171f-fbec-442b-9d6d-3b21cad56f09":
+// -> Kiwi
+                props.setTitle("§7Determined Soul");
+                break;
+            case "2b01df92-48e7-4e6d-962d-c38e8e2a5fd0":
+// -> Danal
+                props.setTitle("§2True farmer");
+                break;
+        }
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }

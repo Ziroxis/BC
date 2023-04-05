@@ -25,7 +25,7 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
             .setDescription("Dashes forward striking your enemies with the blunt side of your sword.\n The enemies hit will be unconscious for a few seconds")
             .setDamageKind(AbilityDamageKind.PHYSICAL)
             .build();
-
+    // todo needs an evolved state
     public BluntStrikeAbility()
     {
         super(INSTANCE);

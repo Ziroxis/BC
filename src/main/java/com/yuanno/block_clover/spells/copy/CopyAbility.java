@@ -53,7 +53,7 @@ public class CopyAbility extends PunchAbility {
         {
             BanditEntity targetEntity = (BanditEntity) target;
             int amountAbility = targetEntity.getAbilityList().size();
-            int random = Beapi.RNG(amountAbility) + 1;
+            int random = Beapi.RNG(amountAbility);
             abilityDataPlayer.addUnlockedAbility(player, targetEntity.getAbilityList().get(random));
         }
         // TODO link this with bandits

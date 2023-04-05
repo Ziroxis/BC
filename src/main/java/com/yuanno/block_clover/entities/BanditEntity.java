@@ -41,62 +41,58 @@ import java.util.List;
 
 public class BanditEntity extends BCentity {
 
-    List<AbilityCore> abilityList;
+    List<AbilityCore> abilityList = new ArrayList<>();
     public BanditEntity(EntityType type, World world)
     {
         super(type, world);
         this.xpDrop = 20;
         this.canUseMagic = true;
         abilityList = new ArrayList<>();
+        int random = Beapi.RNG(4);
+        boolean randomStrength = Beapi.RNGboolean();
+        switch (random)
+        {
+            case 0:
+                this.goalSelector.addGoal(5, new EarthChunkGoal(this));
+                abilityList.add(EarthChunkAbility.INSTANCE);
+                if (randomStrength) {
+                    this.goalSelector.addGoal(4, new EarthChargeGoal(this));
+                    abilityList.add(EarthChargeAbility.INSTANCE);
+                }
+                break;
+            case 1:
+                this.goalSelector.addGoal(5, new FireBallGoal(this));
+                abilityList.add(FireBallAbility.INSTANCE);
+                if (randomStrength) {
+                    this.goalSelector.addGoal(4, new FlameRoarGoal(this));
+                    abilityList.add(FlameRoarAbility.INSTANCE);
+                }
+                break;
+            case 2:
+                this.goalSelector.addGoal(5, new LightBladeGoal(this));
+                abilityList.add(LightBladeAbility.INSTANCE);
+                if (randomStrength) {
+                    this.goalSelector.addGoal(4, new LightBladeShowerGoal(this));
+                    abilityList.add(LightBladeShowerAbility.INSTANCE);
+                }
+                break;
+            case 3:
+                this.goalSelector.addGoal(5, new WindBladeGoal(this));
+                abilityList.add(WindBladeAbility.INSTANCE);
+                if (randomStrength) {
+                    this.goalSelector.addGoal(4, new WindBladeShowerGoal(this));
+                    abilityList.add(WindBladeShowerAbility.INSTANCE);
+                }
+                break;
+        }
+        //registerGoals();
     }
 
     @Override
     protected void registerGoals()
     {
         super.registerGoals();
-        canUseMagic = true;
-        //List<AbilityCore> earthList = Arrays.asList(ModAbilities.EARTH);
-        //TODO gives an error
-        if (canUseMagic)
-        {
-            int random = Beapi.RNG(4);
-            boolean randomStrength = Beapi.RNGboolean();
-            switch (random)
-            {
-                case 0:
-                    this.goalSelector.addGoal(5, new EarthChunkGoal(this));
-                    abilityList.add(EarthChunkAbility.INSTANCE);
-                    if (randomStrength) {
-                        this.goalSelector.addGoal(4, new EarthChargeGoal(this));
-                        abilityList.add(EarthChargeAbility.INSTANCE);
-                    }
-                    break;
-                case 1:
-                    this.goalSelector.addGoal(5, new FireBallGoal(this));
-                    abilityList.add(FireBallAbility.INSTANCE);
-                    if (randomStrength) {
-                        this.goalSelector.addGoal(4, new FlameRoarGoal(this));
-                        abilityList.add(FlameRoarAbility.INSTANCE);
-                    }
-                    break;
-                case 2:
-                    this.goalSelector.addGoal(5, new LightBladeGoal(this));
-                    abilityList.add(LightBladeAbility.INSTANCE);
-                    if (randomStrength) {
-                        this.goalSelector.addGoal(4, new LightBladeShowerGoal(this));
-                        abilityList.add(LightBladeShowerAbility.INSTANCE);
-                    }
-                    break;
-                case 3:
-                    this.goalSelector.addGoal(5, new WindBladeGoal(this));
-                    abilityList.add(WindBladeAbility.INSTANCE);
-                    if (randomStrength) {
-                        this.goalSelector.addGoal(4, new WindBladeShowerGoal(this));
-                        abilityList.add(WindBladeShowerAbility.INSTANCE);
-                    }
-                    break;
-            }
-        }
+
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1, true));
         this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 4));
         this.goalSelector.addGoal(3, new LookRandomlyGoal(this));

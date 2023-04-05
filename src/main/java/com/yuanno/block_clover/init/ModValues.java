@@ -19,6 +19,10 @@ public class ModValues {
     public static final String SEALING = "Sealing";
     public static final String ANTIMAGIC = "Anti_Magic";
     public static final String TIME = "Time";
+    public static final String BEAST = "Beast";
+    public static final String MERCURY = "Mercury";
+    public static final String SWORD = "Sword";
+    public static final String COPY = "Copy";
     public static final String[] attributes = {
             ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME, ModValues.ANTIMAGIC
     };

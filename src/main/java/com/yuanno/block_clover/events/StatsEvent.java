@@ -34,6 +34,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
@@ -51,7 +55,7 @@ public class StatsEvent {
         if (!props.hasAttribute())
         {
             //TODO don't spawn with anti-magic + second attribute
-            props.setAttribute(Beapi.randomizer(ModValues.attributes));
+            props.setAttribute(randomAttributeString());
             String attribute = props.getAttribute();
             switch (attribute)
             {
@@ -116,7 +120,7 @@ public class StatsEvent {
                     props.setMultiplier(1);
                     do
                     {
-                        props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                        props.setSecondAttribute(randomAttributeString());
                     }   while (props.getSecondAttribute().equals(props.getAttribute()));
                     String secondAttribute = props.getSecondAttribute();
                     switch (secondAttribute)
@@ -275,4 +279,58 @@ public class StatsEvent {
         }
     }
 
+    public static String randomAttributeString()
+    {
+        String attribute = "";
+
+        List<List<String>> elementalAttributes = new ArrayList<>();
+
+        List<String> elemental = Arrays.asList(ModValues.DARKNESS, ModValues.EARTH, ModValues.FIRE, ModValues.LIGHT, ModValues.WATER, ModValues.WIND);
+        elementalAttributes.add(elemental);
+        List<String> subElemental = Arrays.asList(ModValues.LIGHTNING, ModValues.MERCURY);
+        elementalAttributes.add(subElemental);
+
+        List<List<String>> arcaneAttributes = new ArrayList<>();
+        List<String> normalArcane = Arrays.asList(ModValues.BEAST, ModValues.SEALING, ModValues.SLASH);
+        arcaneAttributes.add(normalArcane);
+        List<String> specialArcane = Arrays.asList(ModValues.COPY, ModValues.SWORD, ModValues.TIME);
+        arcaneAttributes.add(specialArcane);
+
+        List<String> specialCase = Arrays.asList(ModValues.ANTIMAGIC);
+
+        List<List<String>> allMixedAttributes = new ArrayList<>();
+        allMixedAttributes.addAll(elementalAttributes);
+        allMixedAttributes.addAll(arcaneAttributes);
+
+        double groupElementalWeight = 0.5;
+        double groupArcaneWeight = 0.5;
+
+        // randomly select between group A and group B based on their weights
+        List<List<String>> chosenGroup = Math.random() < groupElementalWeight ? elementalAttributes : arcaneAttributes;
+
+        // set weights for each subgroup
+        double subgroupNormalArcaneWeight = 0.7;
+        double subgroupSpecialArcaneWeight = 0.3;
+        double subgroupElementalWeight = 0.6;
+        double subgroupSubElementalWeight = 0.4;
+
+        // randomly select between the two subgroups within the chosen group based on their weights
+        List<String> chosenSubgroup;
+        if (chosenGroup == arcaneAttributes) {
+            chosenSubgroup = Math.random() < subgroupNormalArcaneWeight ? normalArcane : specialArcane;
+        } else {
+            chosenSubgroup = Math.random() < subgroupElementalWeight ? elemental : subElemental;
+        }
+
+        // randomly select an attribute from the chosen subgroup
+        String chosenAttribute = chosenSubgroup.get((int) (Math.random() * chosenSubgroup.size()));
+
+        // randomly select an attribute from the specialCase list with a 5% chance
+        if (Math.random() < 0.05) {
+            chosenAttribute = specialCase.get((int) (Math.random() * specialCase.size()));
+        }
+
+        attribute = chosenAttribute;
+        return attribute;
+    }
 }

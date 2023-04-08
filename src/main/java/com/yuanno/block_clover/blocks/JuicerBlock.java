@@ -28,6 +28,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -35,6 +36,7 @@ import java.util.Random;
 
 public class JuicerBlock extends ContainerBlock {
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
+    public PlayerEntity player;
 
     public JuicerBlock() {
         super(Properties.of(Material.HEAVY_METAL, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(4F));
@@ -59,6 +61,9 @@ public class JuicerBlock extends ContainerBlock {
         return BlockRenderType.MODEL;
     }
 
+    public PlayerEntity getPlayer() {
+        return player;
+    }
 
     @Nullable
     @Override
@@ -69,6 +74,7 @@ public class JuicerBlock extends ContainerBlock {
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         if (!world.isClientSide()) {
             TileEntity tileEntity = world.getBlockEntity(pos);
+            this.player = player;
             if (tileEntity instanceof JuicerBlockTileEntity) {
                 INamedContainerProvider containerProvider = createContainerProvider(world, pos);
 

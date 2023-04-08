@@ -2,8 +2,12 @@ package com.yuanno.block_clover.data.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.yuanno.block_clover.data.entity.EntityStatsBase;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.recipes.jei.IJuicerRecipe;
 import com.yuanno.block_clover.init.ModBlocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -24,11 +28,15 @@ public class JuicerRecipe implements IJuicerRecipe {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> input;
+    private final int level;
+    private final int experience;
 
-    public JuicerRecipe(ResourceLocation id, ItemStack out, NonNullList<Ingredient> in) {
+    public JuicerRecipe(ResourceLocation id, ItemStack out, NonNullList<Ingredient> in, int level, int experience) {
         this.id = id;
         this.output = out;
         this.input = in;
+        this.level = level;
+        this.experience = experience;
     }
 
     @Override
@@ -41,6 +49,11 @@ public class JuicerRecipe implements IJuicerRecipe {
             return false;
         }
 
+    }
+
+    public boolean canUseRecipe(PlayerEntity player) {
+        IEntityStats props = EntityStatsCapability.get(player);
+        return props.getCookingLevel() >= level;
     }
 
     @Override
@@ -81,6 +94,14 @@ public class JuicerRecipe implements IJuicerRecipe {
         }
     }
 
+    public int getREquiredLevel() {
+        return this.level;
+    }
+
+    public int getExperience() {
+        return this.experience;
+    }
+
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<JuicerRecipe> {
 
@@ -88,6 +109,8 @@ public class JuicerRecipe implements IJuicerRecipe {
         public JuicerRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack output = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "output"));
 
+            int levelreq = JSONUtils.getAsInt(json, "level");
+            int experience = JSONUtils.getAsInt(json, "xp");
             JsonArray ingredients = JSONUtils.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
 
@@ -95,8 +118,7 @@ public class JuicerRecipe implements IJuicerRecipe {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new JuicerRecipe(recipeId, output,
-                    inputs);
+            return new JuicerRecipe(recipeId, output, inputs, levelreq, experience);
         }
 
         @Nullable
@@ -105,13 +127,13 @@ public class JuicerRecipe implements IJuicerRecipe {
             int numIngredients = buffer.readVarInt(); // reads number of ingredients
 
             NonNullList<Ingredient> inputs = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
-
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buffer)); // reads ingredient
             }
 
             ItemStack output = buffer.readItem(); // reads stack
-            return new JuicerRecipe(recipeId, output, inputs); // returns
+            //TODO get level & experience into data
+            return new JuicerRecipe(recipeId, output, inputs, 3, 25); // returns
         }
 
         @Override

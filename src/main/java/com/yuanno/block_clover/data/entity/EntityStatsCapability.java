@@ -41,6 +41,10 @@ public class EntityStatsCapability {
 		        props.putBoolean("staffBoost", instance.getStaffBoost());
                 props.putBoolean("hatBoost", instance.getHatBoost());
                 props.putBoolean("canLink", instance.getLinkAbility());
+                props.putInt("cookingLevel", instance.getCookingLevel());
+                props.putInt("maxCookingLevel", instance.getMaxCookingLevel());
+                props.putInt("cookingExperience", instance.getCookingExperience());
+                props.putInt("maxCookingExperience", instance.getMaxCookingExperience());
                 return props;
             }
 
@@ -69,6 +73,10 @@ public class EntityStatsCapability {
 		        instance.setStaffBoost(props.getBoolean("staffBoost"));
                 instance.setStaffBoost(props.getBoolean("hatBoost"));
                 instance.setLinkAbility(props.getBoolean("canLink"));
+                instance.setCookingLevel(props.getInt("cookingLevel"));
+                instance.setMaxCookingLevel(props.getInt("maxCookingLevel"));
+                instance.setCookingExperience(props.getInt("cookingExperience"));
+                instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
 
             }
         }, () -> new EntityStatsBase());

@@ -21,6 +21,10 @@ public class EarthProjectiles {
             () -> Beapi.createEntityType(EarthChunkProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":earth_chunk"));
+    public static final RegistryObject<EntityType<GiantEarthChunkProjectile>> GIANT_EARTH_CHUNK = Beapi.registerEntityType("Giant Earth Chunk",
+            () -> Beapi.createEntityType(GiantEarthChunkProjectile::new)
+                    .sized(3f, 3f)
+                    .build(Main.MODID + ":giant_earth_chunk"));
     public static final RegistryObject<EntityType<EarthChargeProjectile>> EARTH_CHARGE = Beapi.registerEntityType("Earth Charge",
             () -> Beapi.createEntityType(EarthChargeProjectile::new)
                     .sized(2f, 1f)
@@ -33,6 +37,8 @@ public class EarthProjectiles {
     {
         RenderingRegistry.registerEntityRenderingHandler(EARTH_CHUNK.get(), new AbilityProjectileRenderer.Factory(new EarthChunkModel())
                 .setTexture("earth", "earthchunk"));
+        RenderingRegistry.registerEntityRenderingHandler(GIANT_EARTH_CHUNK.get(), new AbilityProjectileRenderer.Factory(new EarthChunkModel())
+                .setTexture("earth", "earthchunk").setScale(9));
         RenderingRegistry.registerEntityRenderingHandler(EARTH_CHARGE.get(), new AbilityProjectileRenderer.Factory(new EarthChargeModel())
                 .setTexture("earth", "earthcharge"));
 

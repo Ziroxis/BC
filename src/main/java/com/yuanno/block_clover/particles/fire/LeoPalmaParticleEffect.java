@@ -12,11 +12,7 @@ public class LeoPalmaParticleEffect extends ParticleEffect {
     public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
         for (int i = 0; i < 20; i++)
         {
-            /*
-            double offsetX = Beapi.randomDouble() / 1.25;
-            double offsetY = Beapi.randomDouble() / 1.25;
-            double offsetZ = Beapi.randomDouble() / 1.25;
-             */
+
             double offsetX = Beapi.randomDouble();
             double offsetY = Beapi.randomDouble();
             double offsetZ = Beapi.randomDouble();

@@ -87,7 +87,8 @@ public class WindFlightAbility extends PassiveAbility {
 
         player.fallDistance = 0;
         player.causeFoodExhaustion(isSprinting ? 0.015F : 0.01F);
-        PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
+        if (!player.level.isClientSide)
+            PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
 
     }
 }

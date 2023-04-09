@@ -1,6 +1,9 @@
 package com.yuanno.block_clover.entities.projectiles.wind;
 
 import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.fire.FireBallParticleEffect;
+import com.yuanno.block_clover.particles.wind.WindBladeParticleEffect;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,6 +12,9 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
 public class WindBladeProjectile extends AbilityProjectileEntity {
+
+    private static final ParticleEffect PARTICLES = new WindBladeParticleEffect();
+
 
     public WindBladeProjectile(EntityType type, World world)
     {
@@ -22,6 +28,14 @@ public class WindBladeProjectile extends AbilityProjectileEntity {
         this.setMaxLife(32);
         this.setPhysical(false);
         this.onBlockImpactEvent = this::onHitBlock;
+    }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+        if (!this.level.isClientSide)
+            PARTICLES.spawn(this.level, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
     }
 
     private void onHitBlock(BlockPos hit)

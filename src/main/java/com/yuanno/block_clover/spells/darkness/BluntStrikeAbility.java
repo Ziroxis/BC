@@ -25,13 +25,17 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
             .setDescription("Dashes forward striking your enemies with the blunt side of your sword.\n The enemies hit will be unconscious for a few seconds")
             .setDamageKind(AbilityDamageKind.PHYSICAL)
             .build();
-    // todo needs an evolved state
+    double MOVEMENT_SPEED;
+    double RADIUS;
+    float DAMAGE;
+    int STUN_COOLDOWN;
     public BluntStrikeAbility()
     {
         super(INSTANCE);
         this.setmanaCost(15);
         this.setMaxCooldown(10);
         this.setExperiencePoint(15);
+        this.setEvolutionCost(30);
         this.onUseEvent = this::onUseEvent;
         this.duringCooldownEvent = this::duringCooldown;
     }
@@ -44,9 +48,12 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
             return false;
         }
         this.clearTargets();
-
+        if (!this.isEvolved())
+            MOVEMENT_SPEED = 0.3;
+        else
+            MOVEMENT_SPEED = 0.6;
         Vector3d speed = Beapi.propulsion(player, 5, 5);
-        player.setDeltaMovement(speed.x, 0.3, speed.z);
+        player.setDeltaMovement(speed.x, MOVEMENT_SPEED, speed.z);
         player.hurtMarked = true;
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
         return true;
@@ -54,16 +61,28 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
 
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
+        if (!this.isEvolved())
+        {
+            RADIUS = 1.5;
+            DAMAGE = 5;
+            STUN_COOLDOWN = 80;
+        }
+        else
+        {
+            RADIUS = 3;
+            DAMAGE = 10;
+            STUN_COOLDOWN = 120;
+        }
         if (this.canDealDamage())
         {
-            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 1.5, LivingEntity.class);
+            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, RADIUS, LivingEntity.class);
             list.remove(player);
 
             list.forEach(entity ->
             {
-                entity.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 80, 0));
+                entity.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), STUN_COOLDOWN, 0));
                 if(this.isTarget(entity) && player.canSee(entity))
-                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
+                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), DAMAGE);
             });
         }
     }

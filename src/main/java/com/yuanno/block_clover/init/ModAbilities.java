@@ -23,6 +23,8 @@ import com.yuanno.block_clover.spells.sword.MagicDestroyerAbility;
 import com.yuanno.block_clover.spells.sword.MagicDwellerCleanAbility;
 import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import com.yuanno.block_clover.spells.time.*;
+import com.yuanno.block_clover.spells.undead.UndeadRecruitAbility;
+import com.yuanno.block_clover.spells.undead.UnleashUndeadAbility;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -51,6 +53,7 @@ public class ModAbilities {
     public static final AbilityCore[] COPY = new AbilityCore[] {CopyAbility.INSTANCE};
     public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE, BeastRegenerationPassiveAbility.INSTANCE, CheetaChargeAbility.INSTANCE, JaguarsHunt.INSTANCE, LionsHowlAbility.INSTANCE, HippopotamusBiteAbility.INSTANCE};
     public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyerAbility.INSTANCE, AirDashAbility.INSTANCE};
+    public static final AbilityCore[] UNDEAD = new AbilityCore[] {UndeadRecruitAbility.INSTANCE, UnleashUndeadAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));
@@ -75,5 +78,6 @@ public class ModAbilities {
         registerAbilities(COPY);
         registerAbilities(BEAST);
         registerAbilities(SWORD);
+        registerAbilities(UNDEAD);
     }
 }

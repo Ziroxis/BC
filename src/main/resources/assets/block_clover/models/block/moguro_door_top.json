@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "block_clover:block/moguro_door_top",
+    "bottom": "block_clover:block/moguro_door_bottom"
+  }
+}

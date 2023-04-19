@@ -1,5 +1,9 @@
 package com.yuanno.block_clover.blocks.tileentities;
 
+import com.yuanno.block_clover.blocks.JuicerBlock;
+import com.yuanno.block_clover.data.entity.EntityStatsBase;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.recipes.JuicerRecipe;
 import com.yuanno.block_clover.data.recipes.ModRecipes;
 import com.yuanno.block_clover.init.ModItems;
@@ -168,9 +172,10 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
         IRecipeType<JuicerRecipe> juicerRecipe = ModRecipes.JUICER_RECIPE;
         Optional<JuicerRecipe> recipe = rm.getRecipeFor(juicerRecipe, inv, level);
 
-        if (recipe.isPresent()) {
+        JuicerBlock block = (JuicerBlock) this.getBlockState().getBlock();
+        // IEntityStats props = EntityStatsCapability.get(block.getPlayer());
+        if (recipe.isPresent()&& this.hasFire()) {
 
-            if (this.hasFire()) {
                 // ads 1 to the time for every tick and if the time is reached finishes the recipe
                 this.workTime += 1;
                 isOn = true;
@@ -182,7 +187,6 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
                         this.workTime = 0;
                         setChanged();
                     }
-                }
             } else {
                 isOn = false;
                 this.workTime = 0;

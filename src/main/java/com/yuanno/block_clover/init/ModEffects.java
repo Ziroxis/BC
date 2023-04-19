@@ -16,6 +16,7 @@ public class ModEffects {
     public static final RegistryObject<Effect> SEALING = EFFECTS.register("sealing", SealingEffect::new);
     public static final RegistryObject<Effect> GRAVITY = EFFECTS.register("gravity", GravityEffect::new);
     public static final RegistryObject<Effect> XP_MULTIPLIER =  EFFECTS.register("xp_multiplier", XpMultiplierEffect::new);
+    public static final RegistryObject<Effect> MANA_REGENERATION = EFFECTS.register("mana_regeneration", ManaRegenerationEffect::new);
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

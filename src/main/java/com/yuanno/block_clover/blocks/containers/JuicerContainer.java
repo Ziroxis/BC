@@ -19,24 +19,24 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class JuicerContainer extends Container {
     public final TileEntity tileEntity;
-    private final PlayerEntity player;
+    public final PlayerEntity player;
     private final IItemHandler hander;
     public static final int SLOTS = 4;
 
 
-    public JuicerContainer(int windowID, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player ) {
+    public JuicerContainer(int windowID, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
         super(ModContainers.JUICER_CONTAINER.get(), windowID);
         this.tileEntity = world.getBlockEntity(pos);
         this.player = player;
         this.hander = new InvWrapper(inventory);
         layoutPlayerInventorySlots(8, 84);
 
-        if(tileEntity != null) {
+        if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-                addSlot(new SlotItemHandler(h,0,48,35));
-                addSlot(new SlotItemHandler(h,1,60,14));
-                addSlot(new SlotItemHandler(h,2,60,56));
-                addSlot(new SlotItemHandler(h,3,108,35));
+                addSlot(new SlotItemHandler(h, 0, 48, 35));
+                addSlot(new SlotItemHandler(h, 1, 60, 14));
+                addSlot(new SlotItemHandler(h, 2, 60, 56));
+                addSlot(new SlotItemHandler(h, 3, 108, 35));
 
             });
         }
@@ -78,7 +78,6 @@ public class JuicerContainer extends Container {
     public boolean stillValid(PlayerEntity player) {
         return true;
     }
-
 
 
     @Override

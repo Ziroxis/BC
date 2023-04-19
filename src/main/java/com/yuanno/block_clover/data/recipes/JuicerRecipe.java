@@ -2,8 +2,12 @@ package com.yuanno.block_clover.data.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.yuanno.block_clover.data.entity.EntityStatsBase;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.recipes.jei.IJuicerRecipe;
 import com.yuanno.block_clover.init.ModBlocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -42,6 +46,7 @@ public class JuicerRecipe implements IJuicerRecipe {
         }
 
     }
+
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -82,6 +87,7 @@ public class JuicerRecipe implements IJuicerRecipe {
     }
 
 
+
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<JuicerRecipe> {
 
         @Override
@@ -95,8 +101,7 @@ public class JuicerRecipe implements IJuicerRecipe {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new JuicerRecipe(recipeId, output,
-                    inputs);
+            return new JuicerRecipe(recipeId, output, inputs);
         }
 
         @Nullable
@@ -105,12 +110,12 @@ public class JuicerRecipe implements IJuicerRecipe {
             int numIngredients = buffer.readVarInt(); // reads number of ingredients
 
             NonNullList<Ingredient> inputs = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
-
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buffer)); // reads ingredient
             }
 
             ItemStack output = buffer.readItem(); // reads stack
+            //TODO get level & experience into data
             return new JuicerRecipe(recipeId, output, inputs); // returns
         }
 

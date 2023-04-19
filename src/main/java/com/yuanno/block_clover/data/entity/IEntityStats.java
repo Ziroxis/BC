@@ -28,6 +28,20 @@ public interface IEntityStats {
     void alterMaxExperience(int value);
     void setMaxExperience(int value);
 
+    //COOKING
+    int getCookingLevel();
+    void setCookingLevel(int value);
+    int getMaxCookingLevel();
+    void setMaxCookingLevel(int value);
+    void alterCookingLevel(int value);
+    int getCookingExperience();
+    void setCookingExperience(int value);
+    int getMaxCookingExperience();
+    void setMaxCookingExperience(int value);
+    void alterCookingExperience(int value);
+
+
+
 
     // MULTIPLIER
     float getMultiplier();
@@ -91,4 +105,7 @@ public interface IEntityStats {
     boolean getStaffBoost();
     void setHatBoost(boolean boost);
     boolean getHatBoost();
+
+    boolean getLinkAbility();
+    void setLinkAbility(boolean can);
 }

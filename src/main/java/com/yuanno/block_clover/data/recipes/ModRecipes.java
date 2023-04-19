@@ -17,8 +17,10 @@ public class ModRecipes {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Main.MODID);
 
     public static final RegistryObject<JuicerRecipe.Serializer> JUICER_SERIALIZER = RECIPE_SERIALIZER.register("juicer", JuicerRecipe.Serializer::new);
+    public static final RegistryObject<BakingOvenRecipe.Serializer> BAKING_OVEN_SERIALIZER = RECIPE_SERIALIZER.register("baking_oven", BakingOvenRecipe.Serializer::new);
 
     public static final IRecipeType<JuicerRecipe> JUICER_RECIPE = new JuicerRecipe.JuicerRecipeType();
+    public static final IRecipeType<BakingOvenRecipe> BAKING_OVEN_RECIPE = new BakingOvenRecipe.BakingOvenRecipeType();
 
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZER.register(eventBus);

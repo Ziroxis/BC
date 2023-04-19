@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "block_clover:block/moguro_slab"
+    },
+    "type=double": {
+      "model": "block_clover:block/moguro_planks"
+    },
+    "type=top": {
+      "model": "block_clover:block/moguro_slab_top"
+    }
+  }
+}

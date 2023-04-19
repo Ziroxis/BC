@@ -1,15 +1,20 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.blocks.DevilAltarBlock;
 import com.yuanno.block_clover.items.*;
 import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
+import com.yuanno.block_clover.items.food.MoguroJuiceItem;
+import com.yuanno.block_clover.items.food.RegenerativeFood;
 import com.yuanno.block_clover.items.weapons.*;
+import net.minecraft.block.Block;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +27,12 @@ public class ModItems {
 
     //BLOCKS
     public static final RegistryObject<BlockItem> JUICER_BLOCK = ITEMS.register("juicer_block", JuicerBlockItem::new);
+    public static final RegistryObject<BlockItem> DEVIL_ALTAR_BLOCK = ITEMS.register("devil_altar_block", () -> new BlockItem(ModBlocks.DEVIL_ALTAR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.UNCOMMON)));
 
     //TREES
     //MOGURO
-    public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_plank", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
+    public static final RegistryObject<BlockItem> MOGURO_PLANK = ITEMS.register("moguro_planks", () -> new BlockItem(ModBlocks.MOGURO_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_LOG = ITEMS.register("moguro_log", () -> new BlockItem(ModBlocks.MOGURO_LOG.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -33,8 +40,26 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_SAPLING = ITEMS.register("moguro_sapling", () -> new BlockItem(ModBlocks.MOGURO_SAPLING.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_STAIRS = ITEMS.register("moguro_stairs", () -> new BlockItem(ModBlocks.MOGURO_STAIRS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_SLABS = ITEMS.register("moguro_slab", () -> new BlockItem(ModBlocks.MOGURO_SLABS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_FENCE = ITEMS.register("moguro_fence", () -> new BlockItem(ModBlocks.MOGURO_FENCE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_FENCE_GATE = ITEMS.register("moguro_fence_gate", () -> new BlockItem(ModBlocks.MOGURO_FENCE_GATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_PRESSURE_PLATE = ITEMS.register("moguro_pressure_plate", () -> new BlockItem(ModBlocks.MOGURO_PRESSURE_PLATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_BUTTON = ITEMS.register("moguro_button", () -> new BlockItem(ModBlocks.MOGURO_BUTTON.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_DOOR = ITEMS.register("moguro_door", () -> new BlockItem(ModBlocks.MOGURO_DOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_TRAPDOOR = ITEMS.register("moguro_trapdoor", () -> new BlockItem(ModBlocks.MOGURO_TRAPDOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_SIGN = ITEMS.register("moguro_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(16)
+            , ModBlocks.MOGURO_SIGN.get(), ModBlocks.MOGURO_WALL_SIGN.get()));
     //ELDER
-    public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_plank", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
+    public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_planks", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_LOG = ITEMS.register("elder_log", () -> new BlockItem(ModBlocks.ELDER_LOG.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -42,6 +67,24 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_SAPLING = ITEMS.register("elder_sapling", () -> new BlockItem(ModBlocks.ELDER_SAPLING.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_STAIRS = ITEMS.register("elder_stairs", () -> new BlockItem(ModBlocks.ELDER_STAIRS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_SLABS = ITEMS.register("elder_slab", () -> new BlockItem(ModBlocks.ELDER_SLABS.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_FENCE = ITEMS.register("elder_fence", () -> new BlockItem(ModBlocks.ELDER_FENCE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_FENCE_GATE = ITEMS.register("elder_fence_gate", () -> new BlockItem(ModBlocks.ELDER_FENCE_GATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_PRESSURE_PLATE = ITEMS.register("elder_pressure_plate", () -> new BlockItem(ModBlocks.ELDER_PRESSURE_PLATE.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_BUTTON = ITEMS.register("elder_button", () -> new BlockItem(ModBlocks.ELDER_BUTTON.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_DOOR = ITEMS.register("elder_door", () -> new BlockItem(ModBlocks.ELDER_DOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_TRAPDOOR = ITEMS.register("elder_trapdoor", () -> new BlockItem(ModBlocks.ELDER_TRAPDOOR.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_SIGN = ITEMS.register("elder_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(16)
+            , ModBlocks.ELDER_SIGN.get(), ModBlocks.ELDER_WALL_SIGN.get()));
 
     
     //ARTIFACTS
@@ -70,6 +113,7 @@ public class ModItems {
     public static final RegistryObject<Item> BAG_GLUTTONY = ITEMS.register("bag_gluttony", BagOfGluttonyArtifactItem::new);
     public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
     public static final RegistryObject<Item> RACE_CHANGE = ITEMS.register("race_change", RaceChangeArtifactItem::new);
+    public static final RegistryObject<Item> MANA_LINK = ITEMS.register("mana_link", ManaLinkArtifact::new);
 
 
 
@@ -128,7 +172,14 @@ public class ModItems {
     public static final RegistryObject<Item> MODIFYING_CRYSTAL = ITEMS.register("modifying_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).tab(ModItemGroup.BLOCK_CLOVER_MISC)));
     public static final RegistryObject<Item> MODIFIED_MAGIC_WAND = ITEMS.register("modified_magic_staff", ModifiedMagicStaffItem::new);
+
+    //food
     public static final RegistryObject<Item> MOGURO_JUICE = ITEMS.register("moguro_juice", MoguroJuiceItem::new);
+    public static final RegistryObject<Item> NOMOTATO = ITEMS.register("nomotato", () -> new BlockItem(ModBlocks.NOMOTATO_BLOCK.get(), new Item.Properties()
+            .tab(ModItemGroup.BLOCK_CLOVER_MISC).food(new Food.Builder().nutrition(2).saturationMod(0.2f).build())));
+    public static final RegistryObject<Item> BAKED_NOMOTATO = ITEMS.register("baked_nomotato",() -> new RegenerativeFood(0.6f,5,10));
+    public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD)));
+    public static final RegistryObject<Item> NOMOTATO_PUREY = ITEMS.register("nomotato_purey", () -> new RegenerativeFood(0.8f, 6, 12));
 
     //SPAWN EGGS
     public static final RegistryObject<SpawnEggItem> VOLCANO_MONSTER_EGG = ITEMS.register("volcano_monster_egg",

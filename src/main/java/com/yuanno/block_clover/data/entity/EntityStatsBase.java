@@ -30,6 +30,11 @@ public class EntityStatsBase implements IEntityStats{
     private float multiplier;
     private boolean staffBoost;
     private boolean hatBoost;
+    private boolean canLink;
+    private int cookingLevel;
+    private int maxCookingLevel;
+    private int cookingExperience;
+    private int maxCookingExperience;
 
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
 
@@ -116,6 +121,56 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public void setMaxExperience(int value) {
         this.maxExperience = value;
+    }
+
+    @Override
+    public int getCookingLevel() {
+        return this.cookingLevel;
+    }
+
+    @Override
+    public void setCookingLevel(int value) {
+        this.cookingLevel = value;
+    }
+
+    @Override
+    public int getMaxCookingLevel() {
+        return this.maxCookingLevel;
+    }
+
+    @Override
+    public void setMaxCookingLevel(int value) {
+        this.maxCookingLevel = value;
+    }
+
+    @Override
+    public void alterCookingLevel(int value) {
+        this.maxCookingLevel += value;
+    }
+
+    @Override
+    public int getCookingExperience() {
+        return this.cookingExperience;
+    }
+
+    @Override
+    public void setCookingExperience(int value) {
+        this.cookingExperience = value;
+    }
+
+    @Override
+    public int getMaxCookingExperience() {
+        return this.maxCookingExperience;
+    }
+
+    @Override
+    public void setMaxCookingExperience(int value) {
+        this.maxCookingExperience = value;
+    }
+
+    @Override
+    public void alterCookingExperience(int value) {
+        this.cookingExperience += value;
     }
 
     @Override
@@ -339,5 +394,15 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public boolean getHatBoost() {
         return this.hatBoost;
+    }
+
+    @Override
+    public boolean getLinkAbility() {
+        return canLink;
+    }
+
+    @Override
+    public void setLinkAbility(boolean can) {
+        this.canLink = can;
     }
 }

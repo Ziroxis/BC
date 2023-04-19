@@ -28,12 +28,16 @@ import com.yuanno.block_clover.curios.server.command.CuriosSelectorOptions;
 import com.yuanno.block_clover.curios.slottype.SlotTypeManager;
 import com.yuanno.block_clover.curios.triggers.EquipCurioTrigger;
 import com.yuanno.block_clover.data.recipes.ModRecipes;
+import com.yuanno.block_clover.screens.BakingOvenScreen;
+import com.yuanno.block_clover.screens.DevilAltarScreen;
 import com.yuanno.block_clover.screens.JuicerScreen;
 import com.yuanno.block_clover.world.biome.ModBiomes;
 import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import com.yuanno.block_clover.init.*;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.WoodType;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.command.arguments.ArgumentSerializer;
@@ -95,6 +99,7 @@ public class Main
         ModPotions.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);
+
         ModAdvancements.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CuriosConfig.SERVER_SPEC);
@@ -162,6 +167,9 @@ public class Main
         {
            ModStructures.setupStructures();
             ConfiguredStructures.registerConfiguredStructures();
+            WoodType.register(ModWoodTypes.ELDER);
+            WoodType.register(ModWoodTypes.MOGURO);
+
         });
 
         ArgumentTypes.register("quest", QuestArgument.class, new ArgumentSerializer<>(QuestArgument::quest));
@@ -178,8 +186,11 @@ public class Main
             RenderTypeLookup.setRenderLayer(ModBlocks.MOGURO_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ELDER_LEAF.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ELDER_SAPLING.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.NOMOTATO_BLOCK.get(), RenderType.cutout());
 
             ScreenManager.register(ModContainers.JUICER_CONTAINER.get(), JuicerScreen::new);
+            ScreenManager.register(ModContainers.DEVIL_ALTAR_CONTAINER.get(), DevilAltarScreen::new);
+            ScreenManager.register(ModContainers.BAKING_OVEN_CONTAINER.get(), BakingOvenScreen::new);
         });
         ClientHandler.onSetup();
         ModKeyBinds.init();
@@ -187,7 +198,10 @@ public class Main
         MinecraftForge.EVENT_BUS.register(new ManaBarOverlay());
         MinecraftForge.EVENT_BUS.register(new LevelUpOverlay());
         MinecraftForge.EVENT_BUS.register(new SpellUnlockOverlay());
+        Atlases.addWoodType(ModWoodTypes.ELDER);
+        Atlases.addWoodType(ModWoodTypes.MOGURO);
         ModRenderers.registerRenderers();
+
     }
     private void process(InterModProcessEvent evt) {
         SlotTypeManager.buildImcSlotTypes(evt.getIMCStream(SlotTypeMessage.REGISTER_TYPE::equals),
@@ -219,4 +233,5 @@ public class Main
             KeyRegistry.registerKeys();
         }
     }
+
 }

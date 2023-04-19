@@ -41,8 +41,14 @@ public class EntityStatsCapability {
                 props.putString("rank", instance.getRank());
                 props.putInt("time", instance.getTime());
                 props.putFloat("multiplier", instance.getMultiplier());
-		props.putBoolean("staffBoost", instance.getStaffBoost());
+		        props.putBoolean("staffBoost", instance.getStaffBoost());
+            
                 props.putBoolean("hatBoost", instance.getHatBoost());
+                props.putBoolean("canLink", instance.getLinkAbility());
+                props.putInt("cookingLevel", instance.getCookingLevel());
+                props.putInt("maxCookingLevel", instance.getMaxCookingLevel());
+                props.putInt("cookingExperience", instance.getCookingExperience());
+                props.putInt("maxCookingExperience", instance.getMaxCookingExperience());
 
                 // Save the HashMap
                 CompoundNBT hashMapNBT = new CompoundNBT();
@@ -76,8 +82,13 @@ public class EntityStatsCapability {
                 instance.setRank(props.getString("rank"));
                 instance.setTime(props.getInt("time"));
                 instance.setMultiplier(props.getFloat("multiplier"));
-		instance.setStaffBoost(props.getBoolean("staffBoost"));
+		        instance.setStaffBoost(props.getBoolean("staffBoost"));
                 instance.setStaffBoost(props.getBoolean("hatBoost"));
+                instance.setLinkAbility(props.getBoolean("canLink"));
+                instance.setCookingLevel(props.getInt("cookingLevel"));
+                instance.setMaxCookingLevel(props.getInt("maxCookingLevel"));
+                instance.setCookingExperience(props.getInt("cookingExperience"));
+                instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
 
                 CompoundNBT hashMapNBT = props.getCompound("experience_spells");
                 HashMap<String, Integer> hashMap = new HashMap<>();

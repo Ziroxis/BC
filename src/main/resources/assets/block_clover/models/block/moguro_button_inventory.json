@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "block_clover:blocks/moguro_planks"
+  }
+}

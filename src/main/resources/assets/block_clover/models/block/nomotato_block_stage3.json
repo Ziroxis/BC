@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "block_clover:blocks/nomotato_block_stage3"
+  }
+}

@@ -28,15 +28,11 @@ public class JuicerRecipe implements IJuicerRecipe {
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> input;
-    private final int level;
-    private final int experience;
 
-    public JuicerRecipe(ResourceLocation id, ItemStack out, NonNullList<Ingredient> in, int level, int experience) {
+    public JuicerRecipe(ResourceLocation id, ItemStack out, NonNullList<Ingredient> in) {
         this.id = id;
         this.output = out;
         this.input = in;
-        this.level = level;
-        this.experience = experience;
     }
 
     @Override
@@ -51,10 +47,6 @@ public class JuicerRecipe implements IJuicerRecipe {
 
     }
 
-    public boolean canUseRecipe(PlayerEntity player) {
-        IEntityStats props = EntityStatsCapability.get(player);
-        return props.getCookingLevel() >= level;
-    }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -94,13 +86,6 @@ public class JuicerRecipe implements IJuicerRecipe {
         }
     }
 
-    public int getREquiredLevel() {
-        return this.level;
-    }
-
-    public int getExperience() {
-        return this.experience;
-    }
 
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<JuicerRecipe> {
@@ -109,8 +94,6 @@ public class JuicerRecipe implements IJuicerRecipe {
         public JuicerRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ItemStack output = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "output"));
 
-            int levelreq = JSONUtils.getAsInt(json, "level");
-            int experience = JSONUtils.getAsInt(json, "xp");
             JsonArray ingredients = JSONUtils.getAsJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
 
@@ -118,7 +101,7 @@ public class JuicerRecipe implements IJuicerRecipe {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new JuicerRecipe(recipeId, output, inputs, levelreq, experience);
+            return new JuicerRecipe(recipeId, output, inputs);
         }
 
         @Nullable
@@ -133,7 +116,7 @@ public class JuicerRecipe implements IJuicerRecipe {
 
             ItemStack output = buffer.readItem(); // reads stack
             //TODO get level & experience into data
-            return new JuicerRecipe(recipeId, output, inputs, 3, 25); // returns
+            return new JuicerRecipe(recipeId, output, inputs); // returns
         }
 
         @Override

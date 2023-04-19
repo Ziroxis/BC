@@ -2,6 +2,7 @@ package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.blocks.tileentities.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -14,8 +15,11 @@ import java.util.function.Supplier;
 
 public class ModTileEntities {
 
+
     private static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Main.MODID);
 
+    public static final RegistryObject<TileEntityType<DevilAltarTileEntity>> DEVIL_ALTAR_TILEENTITY =  registerTileEntity("devil_altar_tile",
+            () -> TileEntityType.Builder.of(DevilAltarTileEntity::new, ModBlocks.DEVIL_ALTAR.get()).build(null));
     public static final RegistryObject<TileEntityType<AntiMagicBlockTileEntity>> ANTIMAGIC_TILEENTITY = registerTileEntity("antimagic_tile",
             () -> TileEntityType.Builder.of(AntiMagicBlockTileEntity::new, ModBlocks.ANTIMAGIC.get()).build(null));
     public static final RegistryObject<TileEntityType<LightningBlockTileEntity>> LIGHTNING_TILEENTITY = registerTileEntity("lightning_tile",

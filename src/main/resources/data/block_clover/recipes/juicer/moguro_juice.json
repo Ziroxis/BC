@@ -1,7 +1,5 @@
 {
   "type": "block_clover:juicer",
-  "level": "3",
-  "xp": "25",
   "ingredients": [
     {
       "item": "minecraft:water_bucket"

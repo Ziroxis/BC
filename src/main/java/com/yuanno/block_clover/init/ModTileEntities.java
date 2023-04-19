@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -30,6 +31,8 @@ public class ModTileEntities {
             () -> TileEntityType.Builder.of(JuicerBlockTileEntity::new, ModBlocks.JUICER.get()).build(null));
     public static final RegistryObject<TileEntityType<BakingOvenBlockTileEntity>> BAKING_OVEN_TILEENTITY = registerTileEntity("baking_oven_tile",
             () -> TileEntityType.Builder.of(BakingOvenBlockTileEntity::new, ModBlocks.BAKING_OVEN.get()).build(null));
+    public static final RegistryObject<TileEntityType<ModSignTileEntity>> SIGN_TILEENTITIES = TILE_ENTITIES.register("sign_tile", () -> TileEntityType.Builder.of
+            (ModSignTileEntity::new, ModBlocks.MOGURO_SIGN.get(), ModBlocks.MOGURO_WALL_SIGN.get(), ModBlocks.ELDER_SIGN.get(), ModBlocks.ELDER_WALL_SIGN.get()).build(null));
 
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> registerTileEntity(String localizedName, Supplier<TileEntityType<T>> type)
     {

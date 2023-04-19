@@ -23,7 +23,7 @@ public class DevilAltarContainer extends Container{
     public final PlayerEntity player;
     private final IItemHandler hander;
     public DevilAltarContainer(int windowID, World world, BlockPos pos, PlayerInventory inventory, PlayerEntity player) {
-        super(ModContainers.JUICER_CONTAINER.get(), windowID);
+        super(ModContainers.DEVIL_ALTAR_CONTAINER.get(), windowID);
         this.tileEntity = world.getBlockEntity(pos);
         this.player = player;
         this.hander = new InvWrapper(inventory);
@@ -75,6 +75,7 @@ public class DevilAltarContainer extends Container{
     @Override
     public ItemStack quickMoveStack(PlayerEntity player, int index) {
         // 36 is the number of slots in the inventory of the player
+        /*
         ItemStack itemstack1 = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
@@ -95,5 +96,7 @@ public class DevilAltarContainer extends Container{
         }
 
         return itemstack1;
+         */
+        return super.quickMoveStack(player, index);
     }
 }

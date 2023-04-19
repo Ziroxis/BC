@@ -173,9 +173,8 @@ public class JuicerBlockTileEntity extends TileEntity implements ITickableTileEn
         Optional<JuicerRecipe> recipe = rm.getRecipeFor(juicerRecipe, inv, level);
 
         JuicerBlock block = (JuicerBlock) this.getBlockState().getBlock();
-        IEntityStats props = EntityStatsCapability.get(block.getPlayer());
-        int levelReq = 1;
-        if (recipe.isPresent()&& this.hasFire() && props.getCookingLevel() > levelReq) {
+        // IEntityStats props = EntityStatsCapability.get(block.getPlayer());
+        if (recipe.isPresent()&& this.hasFire()) {
 
                 // ads 1 to the time for every tick and if the time is reached finishes the recipe
                 this.workTime += 1;

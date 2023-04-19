@@ -56,6 +56,8 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_TRAPDOOR = ITEMS.register("moguro_trapdoor", () -> new BlockItem(ModBlocks.MOGURO_TRAPDOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> MOGURO_SIGN = ITEMS.register("moguro_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(16)
+            , ModBlocks.MOGURO_SIGN.get(), ModBlocks.MOGURO_WALL_SIGN.get()));
     //ELDER
     public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_planks", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -81,6 +83,8 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_TRAPDOOR = ITEMS.register("elder_trapdoor", () -> new BlockItem(ModBlocks.ELDER_TRAPDOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    public static final RegistryObject<BlockItem> ELDER_SIGN = ITEMS.register("elder_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(16)
+            , ModBlocks.ELDER_SIGN.get(), ModBlocks.ELDER_WALL_SIGN.get()));
 
     
     //ARTIFACTS

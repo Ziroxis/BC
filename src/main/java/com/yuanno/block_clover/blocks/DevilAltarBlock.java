@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.blocks;
 
 import com.yuanno.block_clover.blocks.containers.DevilAltarContainer;
-import com.yuanno.block_clover.blocks.containers.JuicerContainer;
 import com.yuanno.block_clover.blocks.tileentities.DevilAltarTileEntity;
-import com.yuanno.block_clover.blocks.tileentities.JuicerBlockTileEntity;
 import com.yuanno.block_clover.init.ModTileEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;

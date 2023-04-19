@@ -3,6 +3,8 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.blocks.*;
+import com.yuanno.block_clover.blocks.wood.ModStandingSignBlock;
+import com.yuanno.block_clover.blocks.wood.ModWallSignBlock;
 import com.yuanno.block_clover.world.trees.ElderTree;
 import com.yuanno.block_clover.world.trees.MoguroTree;
 import net.minecraft.block.*;
@@ -114,11 +116,17 @@ public class ModBlocks {
             .harvestLevel(2)
             .sound(SoundType.WOOD)));
 
- //   public static final RegistryObject<Block> MOGURO_SIGN = BLOCKS.register("moguro_sign",() -> new StandingSignBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
- //           .strength(1f, 3f)
- //           .harvestTool(ToolType.AXE)
-    //          .harvestLevel(2)
-   //         .sound(SoundType.WOOD), WoodType.));
+    public static final RegistryObject<Block> MOGURO_SIGN = BLOCKS.register("moguro_sign",
+            () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD).strength(1f, 3f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(2)
+                    .sound(SoundType.WOOD), ModWoodTypes.MOGURO));
+
+    public static final RegistryObject<Block> MOGURO_WALL_SIGN = BLOCKS.register("moguro_wall_sign",
+            () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD).strength(1f, 3f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(2)
+                    .sound(SoundType.WOOD), ModWoodTypes.MOGURO));
 
     //Elder Tree
     public static final RegistryObject<Block> ELDER_LOG = BLOCKS.register("elder_log",
@@ -198,6 +206,18 @@ public class ModBlocks {
             .harvestTool(ToolType.AXE)
             .harvestLevel(3)
             .sound(SoundType.WOOD)));
+
+    public static final RegistryObject<Block> ELDER_SIGN = BLOCKS.register("elder_sign",
+            () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD).strength(2f, 4f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(3)
+                    .sound(SoundType.WOOD), ModWoodTypes.ELDER));
+
+    public static final RegistryObject<Block> ELDER_WALL_SIGN = BLOCKS.register("elder_wall_sign",
+            () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD).strength(2f, 4f)
+                    .harvestTool(ToolType.AXE)
+                    .harvestLevel(3)
+                    .sound(SoundType.WOOD), ModWoodTypes.ELDER));
 
     public static final RegistryObject<Block> ELDER_SAPLING = BLOCKS.register("elder_sapling",
             () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.ROOTS)));

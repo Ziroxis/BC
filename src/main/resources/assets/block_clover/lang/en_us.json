@@ -1,5 +1,6 @@
 {
   "block.block_clover.juicer_block": "Juicer",
+  "block.block_clover.devil_altar_block": "Devil Binding Altar Block",
 
   "block.block_clover.moguro_planks": "Moguro Plank",
   "block.block_clover.moguro_log": "Moguro Log",
@@ -13,6 +14,7 @@
   "block.block_clover.moguro_door": "Moguro Door",
   "block.block_clover.moguro_trapdoor": "Moguro Trapdoor",
   "block.block_clover.moguro_pressure_plate": "Moguro Pressure Plate",
+  "block.block_clover.moguro_sign": "Moguro Sign",
 
   "block.block_clover.elder_planks": "Elder Plank",
   "block.block_clover.elder_log": "Elder Log",
@@ -26,6 +28,7 @@
   "block.block_clover.elder_door": "Elder Door",
   "block.block_clover.elder_trapdoor": "Elder Trapdoor",
   "block.block_clover.elder_pressure_plate": "Elder Pressure Plate",
+  "block.block_clover.elder_sign": "Elder Sign",
 
 
   "itemGroup.block_cloverBlocks": "Block Clover Blocks",
@@ -99,6 +102,7 @@
 
 
   "screen.block_clover.juicer":  "Juicer",
+  "screen.block_clover.devil_altar": "Devil Binding Ritual",
 
   "tooltip.block_clover.magic_staff_witch": "Put this item in your offhand to get a stats boost!",
   "tooltip.block_clover.juicer_block_shift": "This block needs fire beneath it in order to work!",

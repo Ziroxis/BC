@@ -2,6 +2,10 @@ package com.yuanno.block_clover.data.entity;
 
 
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.Ability;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EntityStatsBase implements IEntityStats{
 
@@ -31,6 +35,33 @@ public class EntityStatsBase implements IEntityStats{
     private int maxCookingLevel;
     private int cookingExperience;
     private int maxCookingExperience;
+
+    private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
+
+    @Override
+    public HashMap<String, Integer> getExperienceSpells() {
+        return experienceSpells;
+    }
+
+    @Override
+    public void setExperienceSpells(HashMap<String, Integer> experienceSpells) {
+        this.experienceSpells = experienceSpells;
+    }
+
+    @Override
+    public void setExperienceSpells(String key, Integer value) {
+        experienceSpells.put(key, value);
+    }
+
+    @Override
+    public <T> T getExperienceSpell(String key) {
+        return (T) experienceSpells.get(key);
+    }
+
+    @Override
+    public boolean hasExperienceSpell(String key) {
+        return experienceSpells.containsKey(key);
+    }
 
     @Override
     public int getLevel() {

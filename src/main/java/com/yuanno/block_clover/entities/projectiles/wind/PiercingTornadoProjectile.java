@@ -1,6 +1,9 @@
 package com.yuanno.block_clover.entities.projectiles.wind;
 
 import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.earth.EarthQuakeParticleEffect;
+import com.yuanno.block_clover.particles.wind.TornadoPiercingParticleEffect;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +13,7 @@ import net.minecraft.world.World;
 
 public class PiercingTornadoProjectile extends AbilityProjectileEntity {
     int knockback;
+    private static final ParticleEffect PARTICLES = new TornadoPiercingParticleEffect();
 
     public PiercingTornadoProjectile(EntityType type, World world)
     {
@@ -40,6 +44,7 @@ public class PiercingTornadoProjectile extends AbilityProjectileEntity {
         knockback = 3;
         Vector3d vector3d = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale((double)this.knockback);
         entity.push(vector3d.x, 0.1, vector3d.z);
-
+        if (!entity.level.isClientSide)
+            PARTICLES.spawn(entity.level, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
     }
 }

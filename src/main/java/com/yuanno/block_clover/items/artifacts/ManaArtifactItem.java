@@ -13,6 +13,11 @@ import net.minecraft.item.ItemStack;
 
 public class ManaArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public ManaArtifactItem()
+    {
+        this.artifactInformation = "Feels like an extra pool of mana in your pocket";
+    }
+
     @Override
     public void onEquip(SlotContext slotContext, ItemStack previousStack, ItemStack currentStack)
     {

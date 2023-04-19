@@ -23,20 +23,35 @@ public class EarthQuakeAbility extends Ability {
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
     private static final ParticleEffect PARTICLES = new EarthQuakeParticleEffect();
-
+    int damage;
+    int diameter;
+    int jump;
     public EarthQuakeAbility()
     {
         super(INSTANCE);
         this.setmanaCost(40);
         this.setMaxCooldown(25);
+        this.setEvolutionCost(50);
         this.setExperiencePoint(20);
         this.onUseEvent = this::onUseEvent;
     }
 
     public boolean onUseEvent(PlayerEntity player)
     {
+        if (this.isEvolved())
+        {
+            damage = 20;
+            diameter = 16;
+            jump = 12;
+        }
+        else
+        {
+            damage = 12;
+            diameter = 8;
+            jump = 5;
+        }
         IEntityStats stats = EntityStatsCapability.get(player);
-        List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 10 + (float) stats.getLevel() / 2);
+        List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, diameter + (float) stats.getLevel() / 2);
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (entities.contains(player))
         {
@@ -46,8 +61,8 @@ public class EarthQuakeAbility extends Ability {
 
                 if (entity.isOnGround())
                 {
-                    entity.setDeltaMovement(0, 5, 0);
-                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 17);
+                    entity.setDeltaMovement(0, jump, 0);
+                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this), damage);
                     ((ServerWorld) player.level).sendParticles(ParticleTypes.EXPLOSION, entity.getX(), entity.getY(),
                             entity.getZ(), (int) 10, 3, 3, 3, 0.1);
                 }

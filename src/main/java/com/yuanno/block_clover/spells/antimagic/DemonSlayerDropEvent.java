@@ -5,7 +5,11 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
-import com.yuanno.block_clover.init.ModItems;
+import com.yuanno.block_clover.items.weapons.DemonDestroyerItem;
+import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
+import com.yuanno.block_clover.items.weapons.DemonSlayerItem;
+import com.yuanno.block_clover.spells.sword.DemonSlayerCleanAbility;
+import com.yuanno.block_clover.spells.sword.MagicDestroyerAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DemonSlayerDropEvent {
     @SubscribeEvent
-    public static void onDemonSLayerDropEvent(ItemTossEvent event)
+    public static void onDemonSlayerDropEvent(ItemTossEvent event)
     {
         PlayerEntity player = event.getPlayer();
         IAbilityData abilityData = AbilityDataCapability.get(player);
@@ -24,18 +28,23 @@ public class DemonSlayerDropEvent {
                 continue;
 
             try {
-                if (ability instanceof DemonSlayerAbility && ability.isContinuous())
+                if (ability.isContinuous())
                 {
-                    if (event.getEntityItem().getItem().getItem().equals(ModItems.DEMON_SLAYER.get()))
+                    if (event.getEntityItem().getItem().getItem() instanceof DemonSlayerItem
+                            || event.getEntityItem().getItem().getItem() instanceof DemonDestroyerItem
+                            || event.getEntityItem().getItem().getItem() instanceof DemonDwellerItem)
                     {
                         event.getEntityItem().remove();
-                        ((DemonSlayerAbility) ability).stopContinuity(player);
+                        if (ability instanceof DemonSlayerAbility)
+                            ((DemonSlayerAbility) ability).stopContinuity(player);
+                        else if (ability instanceof DemonSlayerCleanAbility)
+                            ((DemonSlayerCleanAbility) ability).stopContinuity(player);
+                        else if (ability instanceof MagicDestroyerAbility)
+                            ((MagicDestroyerAbility) ability).stopContinuity(player);
+                        else if (ability instanceof DemonDwellerAbility)
+                            ((DemonDwellerAbility) ability).stopContinuity(player);
                     }
-                    else
-                        return;
                 }
-                else
-                    return;
             }
             catch (Exception e)
             {

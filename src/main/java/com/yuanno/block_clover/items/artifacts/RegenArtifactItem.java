@@ -11,6 +11,11 @@ import net.minecraft.world.World;
 
 public class RegenArtifactItem extends ArtifactItem {
 
+    public RegenArtifactItem()
+    {
+        this.artifactInformation = "An artifact that regenerates all your health upon use";
+    }
+
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {

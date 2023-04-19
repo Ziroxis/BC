@@ -14,6 +14,10 @@ import javax.annotation.Nonnull;
 
 public class CloakOfInvisibilityArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public CloakOfInvisibilityArtifactItem()
+    {
+        this.artifactInformation = "This cloak seems to come from another place with magicians?";
+    }
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

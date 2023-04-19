@@ -30,7 +30,6 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
     public ForwardThrustAbility()
     {
         super(INSTANCE);
-        this.setDescription("Thrusts forward dealing damage");
         this.setmanaCost(20);
         this.setMaxCooldown(10);
         this.setExperiencePoint(10);
@@ -41,16 +40,15 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
     private boolean onUseEvent(PlayerEntity player)
     {
 
-        IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-            this.clearTargets();
+        this.clearTargets();
 
-            Vector3d speed = Beapi.propulsion(player, 5, 5);
-            player.setDeltaMovement(speed.x, 0.3, speed.z);
-            player.hurtMarked = true;
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+        Vector3d speed = Beapi.propulsion(player, 5, 5);
+        player.setDeltaMovement(speed.x, 0.3, speed.z);
+        player.hurtMarked = true;
+        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
 
-            return true;
+        return true;
 
 
     }

@@ -43,20 +43,6 @@ public class WaterShieldAbility extends Ability {
         double goToY = pos.getY() + lookAngle.y;
         double goToZ = pos.getZ() + lookAngle.z;
         waterShieldEntity.setPos(goToX, goToY, goToZ);
-        /*
-        waterShieldEntity.rotate(player.getDirection().getClockWise());
-        Vector2f vector2f = player.getRotationVector();
-        player.getDirection().getClockWise();
-        waterShieldEntity.set()
-
-         */
-        /*
-        if (player.getYHeadRot() > 0)
-            waterShieldEntity.yRot = player.getYHeadRot() - 90;
-        else
-            waterShieldEntity.yRot = player.getYHeadRot() + 90;
-
-         */
 
         player.level.addFreshEntity(waterShieldEntity);
 

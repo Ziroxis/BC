@@ -1,11 +1,9 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.BeRegistry;
-import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.spells.antimagic.*;
+import com.yuanno.block_clover.spells.beast.*;
 import com.yuanno.block_clover.spells.copy.CopyAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.earth.*;
@@ -15,26 +13,26 @@ import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
 import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
-import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
-import com.yuanno.block_clover.spells.mercury.MercuryBulletBarrageAbility;
-import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
+import com.yuanno.block_clover.spells.mercury.*;
 import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
+import com.yuanno.block_clover.spells.sword.AirDashAbility;
+import com.yuanno.block_clover.spells.sword.MagicDestroyerAbility;
+import com.yuanno.block_clover.spells.sword.MagicDwellerCleanAbility;
+import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import com.yuanno.block_clover.spells.time.*;
+import com.yuanno.block_clover.spells.undead.UndeadRecruitAbility;
+import com.yuanno.block_clover.spells.undead.UnleashUndeadAbility;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.*;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class ModAbilities {
-
 
 
 
@@ -51,9 +49,11 @@ public class ModAbilities {
     public static final AbilityCore[] WIND = new AbilityCore[] {WindBladeAbility.INSTANCE, WindCrescentAbility.INSTANCE, WindBladeShowerAbility.INSTANCE, ToweringTornadoAbility.INSTANCE, WindFlightAbility.INSTANCE, TornadoPiercingAbility.INSTANCE, WindGaleAbility.INSTANCE, WindManaZoneAbility.INSTANCE};
     public static final AbilityCore[] TIME = new AbilityCore[] {TimeStealAbility.INSTANCE, TimeHealAbility.INSTANCE, ChronoStasisAbility.INSTANCE, TimeHopAbility.INSTANCE, ChronoStasisGrigoraAbility.INSTANCE, TimeRessurectionAbility.INSTANCE, TimeMagicManaZoneAbility.INSTANCE};
     public static final AbilityCore[] GRAVITY = new AbilityCore[] {GravitySingularityAbility.INSTANCE, HeavyInfightingAbility.INSTANCE, PresenceOfTheDemonKingAbility.INSTANCE};
-    public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE};
-    public static final AbilityCore[] COPY = new AbilityCore[]{CopyAbility.INSTANCE};
-
+    public static final AbilityCore[] MERCURY = new AbilityCore[] {MercuryBulletAbility.INSTANCE, MercurySpearAbility.INSTANCE, MercuryBulletBarrageAbility.INSTANCE, MercuryRainAbility.INSTANCE, MercuryBubbleAbility.INSTANCE};
+    public static final AbilityCore[] COPY = new AbilityCore[] {CopyAbility.INSTANCE};
+    public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE, BeastRegenerationPassiveAbility.INSTANCE, CheetaChargeAbility.INSTANCE, JaguarsHunt.INSTANCE, LionsHowlAbility.INSTANCE, HippopotamusBiteAbility.INSTANCE};
+    public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyerAbility.INSTANCE, AirDashAbility.INSTANCE};
+    public static final AbilityCore[] UNDEAD = new AbilityCore[] {UndeadRecruitAbility.INSTANCE, UnleashUndeadAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));
@@ -76,5 +76,8 @@ public class ModAbilities {
         registerAbilities(WIND);
         registerAbilities(MERCURY);
         registerAbilities(COPY);
+        registerAbilities(BEAST);
+        registerAbilities(SWORD);
+        registerAbilities(UNDEAD);
     }
 }

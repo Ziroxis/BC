@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 
 public class NecklaceOfAgitationArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public NecklaceOfAgitationArtifactItem()
+    {
+        this.artifactInformation = "The necklace has a feeling of agitation to it, that gives the vibes off to the wearer";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

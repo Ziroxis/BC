@@ -28,6 +28,7 @@ public class NPCentity extends BCentity implements IDynamicRenderer {
     public String declineSpeech;
     public String waitingSpeech;
     public String doneSpeech;
+
     protected NPCentity(EntityType type, World world) {
         super(type, world);
     }

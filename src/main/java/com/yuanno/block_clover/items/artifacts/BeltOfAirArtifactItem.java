@@ -13,6 +13,12 @@ import net.minecraft.potion.Effects;
 import javax.annotation.Nonnull;
 
 public class BeltOfAirArtifactItem extends ArtifactItem implements ICurioItem {
+
+    public BeltOfAirArtifactItem()
+    {
+        this.artifactInformation = "The belt feels very light and full of air under water";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

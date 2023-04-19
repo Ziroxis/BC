@@ -12,6 +12,12 @@ import net.minecraft.potion.Effects;
 
 
 public class BeltOfFireArtifactItem extends ArtifactItem implements ICurioItem {
+
+    public BeltOfFireArtifactItem()
+    {
+        this.artifactInformation = "The belt is filled with essence of fire, filling you with determination against it";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

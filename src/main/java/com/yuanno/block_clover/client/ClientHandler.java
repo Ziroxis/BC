@@ -27,6 +27,7 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BANDIT.get(), new BanditEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GRIMOIRE_MAGICIAN.get(), new GrimoireMagicianRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GUILD_ENTITY.get(), new GuildEntityRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FLAME_BOAR.get(), new FlameBoarRenderer.Factory());
 
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
@@ -49,6 +50,8 @@ public class ClientHandler {
             layers.add(new EarthGlovesRenderer<>(renderer));
             layers.add(new ValkyrieArmorRenderer<>(renderer));
             layers.add(new ManaSkinRenderer<>(renderer));
+            layers.add(new BearClawRenderer<>(renderer));
+            layers.add(new RhinocerosArmorRenderer<>(renderer));
         }
     }
 }

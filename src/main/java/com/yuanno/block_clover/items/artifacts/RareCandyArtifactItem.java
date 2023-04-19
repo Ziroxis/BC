@@ -13,6 +13,11 @@ import net.minecraft.world.World;
 
 public class RareCandyArtifactItem extends ArtifactItem {
 
+    public RareCandyArtifactItem()
+    {
+        this.artifactInformation = "A candy that gives you sudden strength";
+    }
+
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
     {

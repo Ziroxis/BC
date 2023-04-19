@@ -37,6 +37,10 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class MagicChangeArtifactItem extends ArtifactItem {
 
+    public MagicChangeArtifactItem()
+    {
+        this.artifactInformation = "This artifact makes you able to change your magic";
+    }
 
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)

@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 
 public class RabbitFootArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public RabbitFootArtifactItem()
+    {
+        this.artifactInformation = "The dried up foot of the rabbit makes you jump higher once equiped";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

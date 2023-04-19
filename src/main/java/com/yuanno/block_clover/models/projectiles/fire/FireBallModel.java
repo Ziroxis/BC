@@ -24,7 +24,7 @@ public class FireBallModel extends EntityModel {
 		texHeight = 64;
 
 		ExplodingFireBallMain = new ModelRenderer(this);
-		ExplodingFireBallMain.setPos(0.0F, 15.0F, 0.0F);
+		ExplodingFireBallMain.setPos(0.0F, -10.0F, 0.0F);
 		setRotationAngle(ExplodingFireBallMain, 0.0F, 1.5708F, 0.0F);
 
 

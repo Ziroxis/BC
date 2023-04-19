@@ -29,15 +29,15 @@ import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
@@ -55,7 +55,7 @@ public class StatsEvent {
         if (!props.hasAttribute())
         {
             //TODO don't spawn with anti-magic + second attribute
-            props.setAttribute(Beapi.randomizer(ModValues.attributes));
+            props.setAttribute(randomAttributeString());
             String attribute = props.getAttribute();
             switch (attribute)
             {
@@ -120,7 +120,7 @@ public class StatsEvent {
                     props.setMultiplier(1);
                     do
                     {
-                        props.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                        props.setSecondAttribute(randomAttributeString());
                     }   while (props.getSecondAttribute().equals(props.getAttribute()));
                     String secondAttribute = props.getSecondAttribute();
                     switch (secondAttribute)
@@ -181,22 +181,40 @@ public class StatsEvent {
             }
         }
         UUID uuid = player.getUUID();
-        if (uuid.toString().equals("b0515226-7ff3-4ab4-aa87-69179ee0e4ae")) // -> Beosti
-            props.setTitle("\u00A71Almighty captain of Yuanno");
-        else if (uuid.toString().equals("df9f1a55-1cff-43ad-9e3d-3bc03b6bd984")) // -> Kausu
-            props.setTitle("§aSage");
-        else if (uuid.toString().equals("649d12e3-da8c-4a30-b7b5-1c99376d261e")) // -> Redwolf
-            props.setTitle("§cThe king");
-        else if (uuid.toString().equals("b462e469-19ce-40b6-9999-d74102623b7c")) // -> Gingershadow
-            props.setTitle("§4The true");
-        else if (uuid.toString().equals("72336f87-461e-4e3b-a213-df3982241c39")) // -> Apollo
-            props.setTitle("§0Wannabe rival");
-        else if (uuid.toString().equals("0226c610-b3a4-4de0-b63a-2e5599b843f2")) // -> Blank
-            props.setTitle("§7Beggar");
-        else if (uuid.toString().equals("2f81171f-fbec-442b-9d6d-3b21cad56f09")) // -> Kiwi
-            props.setTitle("§7Determined Soul");
-        else if (uuid.toString().equals("2b01df92-48e7-4e6d-962d-c38e8e2a5fd0")) // -> Danal
-            props.setTitle("§2True farmer");
+        switch (uuid.toString()) {
+            case "b0515226-7ff3-4ab4-aa87-69179ee0e4ae":
+// -> Beosti
+                props.setTitle("\u00A71Almighty captain of Yuanno");
+                break;
+            case "df9f1a55-1cff-43ad-9e3d-3bc03b6bd984":
+// -> Kausu
+                props.setTitle("§aSage");
+                break;
+            case "649d12e3-da8c-4a30-b7b5-1c99376d261e":
+// -> Redwolf
+                props.setTitle("§cThe king");
+                break;
+            case "b462e469-19ce-40b6-9999-d74102623b7c":
+// -> Gingershadow
+                props.setTitle("§4The true");
+                break;
+            case "72336f87-461e-4e3b-a213-df3982241c39":
+// -> Apollo
+                props.setTitle("§0Wannabe rival");
+                break;
+            case "0226c610-b3a4-4de0-b63a-2e5599b843f2":
+// -> Blank
+                props.setTitle("§7Beggar");
+                break;
+            case "2f81171f-fbec-442b-9d6d-3b21cad56f09":
+// -> Kiwi
+                props.setTitle("§7Determined Soul");
+                break;
+            case "2b01df92-48e7-4e6d-962d-c38e8e2a5fd0":
+// -> Danal
+                props.setTitle("§2True farmer");
+                break;
+        }
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }
@@ -279,4 +297,58 @@ public class StatsEvent {
         }
     }
 
+    public static String randomAttributeString()
+    {
+        String attribute = "";
+
+        List<List<String>> elementalAttributes = new ArrayList<>();
+
+        List<String> elemental = Arrays.asList(ModValues.DARKNESS, ModValues.EARTH, ModValues.FIRE, ModValues.LIGHT, ModValues.WATER, ModValues.WIND);
+        elementalAttributes.add(elemental);
+        List<String> subElemental = Arrays.asList(ModValues.LIGHTNING, ModValues.MERCURY);
+        elementalAttributes.add(subElemental);
+
+        List<List<String>> arcaneAttributes = new ArrayList<>();
+        List<String> normalArcane = Arrays.asList(ModValues.BEAST, ModValues.SEALING, ModValues.SLASH);
+        arcaneAttributes.add(normalArcane);
+        List<String> specialArcane = Arrays.asList(ModValues.COPY, ModValues.SWORD, ModValues.TIME);
+        arcaneAttributes.add(specialArcane);
+
+        List<String> specialCase = Arrays.asList(ModValues.ANTIMAGIC);
+
+        List<List<String>> allMixedAttributes = new ArrayList<>();
+        allMixedAttributes.addAll(elementalAttributes);
+        allMixedAttributes.addAll(arcaneAttributes);
+
+        double groupElementalWeight = 0.5;
+        double groupArcaneWeight = 0.5;
+
+        // randomly select between group A and group B based on their weights
+        List<List<String>> chosenGroup = Math.random() < groupElementalWeight ? elementalAttributes : arcaneAttributes;
+
+        // set weights for each subgroup
+        double subgroupNormalArcaneWeight = 0.7;
+        double subgroupSpecialArcaneWeight = 0.3;
+        double subgroupElementalWeight = 0.6;
+        double subgroupSubElementalWeight = 0.4;
+
+        // randomly select between the two subgroups within the chosen group based on their weights
+        List<String> chosenSubgroup;
+        if (chosenGroup == arcaneAttributes) {
+            chosenSubgroup = Math.random() < subgroupNormalArcaneWeight ? normalArcane : specialArcane;
+        } else {
+            chosenSubgroup = Math.random() < subgroupElementalWeight ? elemental : subElemental;
+        }
+
+        // randomly select an attribute from the chosen subgroup
+        String chosenAttribute = chosenSubgroup.get((int) (Math.random() * chosenSubgroup.size()));
+
+        // randomly select an attribute from the specialCase list with a 5% chance
+        if (Math.random() < 0.05) {
+            chosenAttribute = specialCase.get((int) (Math.random() * specialCase.size()));
+        }
+
+        attribute = chosenAttribute;
+        return attribute;
+    }
 }

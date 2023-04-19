@@ -14,6 +14,10 @@ import javax.annotation.Nonnull;
 
 public class CharmOfProtectionArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public CharmOfProtectionArtifactItem()
+    {
+        this.artifactInformation = "This charm protects you from outsiders";
+    }
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

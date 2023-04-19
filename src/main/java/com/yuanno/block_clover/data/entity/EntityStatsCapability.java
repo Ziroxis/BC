@@ -8,6 +8,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
+import java.util.HashMap;
+
 public class EntityStatsCapability {
 
     @CapabilityInject(IEntityStats.class)
@@ -21,6 +23,7 @@ public class EntityStatsCapability {
             public INBT writeNBT(Capability<IEntityStats> capability, IEntityStats instance, Direction side)
             {
                 CompoundNBT props = new CompoundNBT();
+
                 props.putBoolean("isInCombatMode", instance.isInCombatMode());
                 props.putInt("level", instance.getLevel());
                 props.putInt("maxLevel", instance.getMaxLevel());
@@ -39,12 +42,21 @@ public class EntityStatsCapability {
                 props.putInt("time", instance.getTime());
                 props.putFloat("multiplier", instance.getMultiplier());
 		        props.putBoolean("staffBoost", instance.getStaffBoost());
+            
                 props.putBoolean("hatBoost", instance.getHatBoost());
                 props.putBoolean("canLink", instance.getLinkAbility());
                 props.putInt("cookingLevel", instance.getCookingLevel());
                 props.putInt("maxCookingLevel", instance.getMaxCookingLevel());
                 props.putInt("cookingExperience", instance.getCookingExperience());
                 props.putInt("maxCookingExperience", instance.getMaxCookingExperience());
+
+                // Save the HashMap
+                CompoundNBT hashMapNBT = new CompoundNBT();
+                HashMap<String, Integer> hashMap = instance.getExperienceSpells();
+                for (String key : hashMap.keySet()) {
+                    hashMapNBT.putInt(key, hashMap.get(key));
+                }
+                props.put("experience_spells", hashMapNBT);
                 return props;
             }
 
@@ -78,6 +90,12 @@ public class EntityStatsCapability {
                 instance.setCookingExperience(props.getInt("cookingExperience"));
                 instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
 
+                CompoundNBT hashMapNBT = props.getCompound("experience_spells");
+                HashMap<String, Integer> hashMap = new HashMap<>();
+                for (String key : hashMapNBT.getAllKeys()) {
+                    hashMap.put(key, hashMapNBT.getInt(key));
+                }
+                instance.setExperienceSpells(hashMap);
             }
         }, () -> new EntityStatsBase());
 

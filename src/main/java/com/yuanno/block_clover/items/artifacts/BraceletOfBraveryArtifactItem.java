@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 
 public class BraceletOfBraveryArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public BraceletOfBraveryArtifactItem()
+    {
+        this.artifactInformation = "This bracelet gives great strength to the user";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

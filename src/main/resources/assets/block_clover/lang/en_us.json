@@ -37,11 +37,19 @@
   "itemGroup.block_cloverModTabArtifacts": "Block Clover Artifacts",
 
 
-  "item.block_clover.demon_destroyer": "Demon Destroyer",
-  "item.block_clover.demon_dweller": "Demon Dweller",
   "item.block_clover.yamis_katana": "Katana",
   "item.block_clover.light_sword": "Light Sword",
-  "item.block_clover.demon_slayer_antimagic": "Demon Slayer Sword",
+
+  "item.block_clover.demon_slayer_antimagic": "Rusty demon slayer",
+  "item.block_clover.demon_slayer": "Demon slayer",
+
+  "item.block_clover.demon_destroyer": "Demon destroyer",
+  "item.block_clover.demon_destroyer_black": "Demon destroyer anti magic",
+  "item.block_clover.demon_destroyer_antimagic": "Rusty demon destroyer",
+
+  "item.block_clover.demon_dweller": "Demon dweller",
+  "item.block_clover.demon_dweller_black": "Demon dweller anti magic",
+  "item.block_clover.demon_dweller_anti_magic": "Rusty demon dweller",
 
   "item.block_clover.witch_hat": "Witch Hat",
 

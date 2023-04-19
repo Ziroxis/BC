@@ -14,6 +14,10 @@ import javax.annotation.Nonnull;
 
 public class LightWeightRingArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public LightWeightRingArtifactItem()
+    {
+        this.artifactInformation = "This ring makes you feel like a true lightweight";
+    }
 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)

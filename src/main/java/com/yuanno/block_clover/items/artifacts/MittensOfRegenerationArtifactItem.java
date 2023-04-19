@@ -13,6 +13,12 @@ import net.minecraft.potion.Effects;
 import javax.annotation.Nonnull;
 
 public class MittensOfRegenerationArtifactItem extends ArtifactItem implements ICurioItem {
+
+    public MittensOfRegenerationArtifactItem()
+    {
+        this.artifactInformation = "The mittens have a warm feeling almost healing";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

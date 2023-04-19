@@ -10,6 +10,8 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.time.TimeStealParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +22,7 @@ public class TimeStealAbility extends PunchAbility {
             .setDescription("Touches an entity, stealing it's time.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    private static final ParticleEffect PARTICLES = new TimeStealParticleEffect();
     public TimeStealAbility()
     {
         super(INSTANCE);
@@ -45,13 +48,19 @@ public class TimeStealAbility extends PunchAbility {
             if (target instanceof PlayerEntity)
             {
                 PlayerEntity targetPlayer = (PlayerEntity) target;
+                if (!targetPlayer.level.isClientSide)
+                    PARTICLES.spawn(targetPlayer.level, targetPlayer.getX(), targetPlayer.getY(), targetPlayer.getZ(), 0, 0, 0);
                 if (targetPlayer.getFoodData().getFoodLevel() > 0)
                     targetPlayer.getFoodData().setFoodLevel(targetPlayer.getFoodData().getFoodLevel() - 3);
                 else
                     targetPlayer.kill();
             }
-            else
-              target.kill();
+            else {
+                target.kill();
+                if (!target.level.isClientSide)
+                    PARTICLES.spawn(target.level, target.getX(), target.getY(), target.getZ(), 0, 0, 0);
+
+            }
             return 1;
         }
         else

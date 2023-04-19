@@ -104,6 +104,8 @@ public class ModItems {
     public static final RegistryObject<Item> NECKLACE_AGITATION = ITEMS.register("necklace_agitation", NecklaceOfAgitationArtifactItem::new);
     public static final RegistryObject<Item> CLOAK_INVISIBILITY = ITEMS.register("cloak_invisibility", CloakOfInvisibilityArtifactItem::new);
     public static final RegistryObject<Item> BELT_AIR = ITEMS.register("air_belt", BeltOfAirArtifactItem::new);
+    public static final RegistryObject<Item> CROWN_LIGHT = ITEMS.register("crown_light", CrownOfLightItem::new);
+    public static final RegistryObject<Item> ABYSSAL_SCYTHE = ITEMS.register("abyssal_scythe", AbyssalScytheItem::new);
     public static final RegistryObject<Item> BRACELET_PUSH = ITEMS.register("bracelet_push", BraceletOfPushArtifactItem::new);
     public static final RegistryObject<Item> RARE_CANDY = ITEMS.register("rare_candy", RareCandyArtifactItem::new);
     public static final RegistryObject<Item> MANA_ARTIFACT = ITEMS.register("maximizing_mana", ManaArtifactItem::new);
@@ -117,15 +119,22 @@ public class ModItems {
 
     //WEAPONS
     public static final RegistryObject<Item> LIGHT_SWORD = ITEMS.register("light_sword", LightSwordItem::new);
-    public static final RegistryObject<Item> DEMON_SLAYER = ITEMS.register("demon_slayer_antimagic", DemonSlayerItem::new);
-    public static final RegistryObject<Item> KATANA = ITEMS.register("yamis_katana", KatanaItem::new);
-    public static final RegistryObject<Item> DEMON_DESTROYER = ITEMS.register("demon_destroyer", DemonDestroyerItem::new);
-    public static final RegistryObject<Item> DEMON_DESTROYER_BLACK = ITEMS.register("demon_destroyer_black", DemonDestroyerItem::new);
-    public static final RegistryObject<Item> DEMON_DESTROYER_ANTIMAGIC = ITEMS.register("demon_destroyer_antimagic", DemonDestroyerItem::new);
 
-    public static final RegistryObject<Item> DEMON_DWELLER = ITEMS.register("demon_dweller", DemonDwellerItem::new);
-    public static final RegistryObject<Item> DEMON_DWELLER_BLACK = ITEMS.register("demon_dweller_black", DemonDwellerItem::new);
-    public static final RegistryObject<Item> DEMON_DWELLER_ANTIMAGIC = ITEMS.register("demon_dweller_antimagic", DemonDwellerRustyItem::new);
+    // asta sword
+    public static final RegistryObject<Item> DEMON_SLAYER = ITEMS.register("demon_slayer_antimagic", DemonSlayerItem::new); // black
+    public static final RegistryObject<Item> DEMON_SLAYER_CLEAN = ITEMS.register("demon_slayer", DemonSlayerItem::new); // clean
+
+    public static final RegistryObject<Item> KATANA = ITEMS.register("yamis_katana", KatanaItem::new);
+
+    // bulky sword
+    public static final RegistryObject<Item> DEMON_DESTROYER = ITEMS.register("demon_destroyer", DemonDestroyerItem::new); // clean
+    public static final RegistryObject<Item> DEMON_DESTROYER_BLACK = ITEMS.register("demon_destroyer_black", DemonDestroyerItem::new); // black
+    public static final RegistryObject<Item> DEMON_DESTROYER_ANTIMAGIC = ITEMS.register("demon_destroyer_antimagic", DemonDestroyerItem::new); // rusty
+
+    // absorb spells sword
+    public static final RegistryObject<Item> DEMON_DWELLER = ITEMS.register("demon_dweller", DemonDwellerItem::new); // clean
+    public static final RegistryObject<Item> DEMON_DWELLER_BLACK = ITEMS.register("demon_dweller_black", DemonDwellerItem::new); // black
+    public static final RegistryObject<Item> DEMON_DWELLER_ANTIMAGIC = ITEMS.register("demon_dweller_antimagic", DemonDwellerRustyItem::new); // rusty
 
 
     //CLOTHES

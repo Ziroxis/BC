@@ -31,6 +31,8 @@ public class ModEventBusEvents {
         event.put(ModEntities.VOLCANO_MONSTER.get(), VolcanoMonsterEntity.setCustomAttributes().build());
         event.put(ModEntities.MONKEY_ENTITY.get(), MonkeyEntity.setCustomAttributes().build());
         event.put(ModEntities.CLOVER_SHARK.get(), CloverSharkEntity.setCustomAttributes().build());
+        event.put(ModEntities.FLAME_BOAR.get(), FlameBoarEntity.setCustomAttributes().build());
+
     }
 
     /*

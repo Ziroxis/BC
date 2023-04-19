@@ -1,6 +1,16 @@
 package com.yuanno.block_clover.data.entity;
 
+
+import java.util.HashMap;
+
 public interface IEntityStats {
+
+    // SPELL EXPERIENCE
+    HashMap<String, Integer> getExperienceSpells();
+    void setExperienceSpells(HashMap<String, Integer> experienceSpells);
+    void setExperienceSpells(String key, Integer value);
+    <T> T getExperienceSpell(String key);
+    boolean hasExperienceSpell(String key);
 
     // LEVEL
     int getLevel();
@@ -29,6 +39,7 @@ public interface IEntityStats {
     int getMaxCookingExperience();
     void setMaxCookingExperience(int value);
     void alterCookingExperience(int value);
+
 
 
 

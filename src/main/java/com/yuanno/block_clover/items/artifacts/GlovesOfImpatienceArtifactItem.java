@@ -14,6 +14,11 @@ import javax.annotation.Nonnull;
 
 public class GlovesOfImpatienceArtifactItem extends ArtifactItem implements ICurioItem {
 
+    public GlovesOfImpatienceArtifactItem()
+    {
+        this.artifactInformation = "The gloves giving you a haste of digging stuff";
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack)
     {

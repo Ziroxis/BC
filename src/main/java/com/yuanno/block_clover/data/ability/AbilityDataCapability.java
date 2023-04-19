@@ -148,6 +148,7 @@ public class AbilityDataCapability
 								int maxCooldown = (int) (nbtAbility.getDouble("maxCooldown") / 20);
 								int pos = nbtAbility.getInt("pos");
 								boolean isForced = nbtAbility.getBoolean("isForced");
+								int experience = nbtAbility.getInt("experience");
 								ability.setMaxCooldown(maxCooldown);
 								ability.setCooldown(cooldown);
 								ability.setForcedState(isForced);

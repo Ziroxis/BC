@@ -40,6 +40,7 @@ public class UndeadRecruitAbility extends PunchAbility {
         if (!(target instanceof MobEntity && ((MobEntity) target).getMobType() == CreatureAttribute.UNDEAD)) {
             player.sendMessage(new StringTextComponent("Need to touch a corpse!"), Util.NIL_UUID);
             this.stopContinuity(player);
+            return 0;
         }
         MobEntity undeadEntity = (MobEntity) target;
         MobEntity copy = (MobEntity) undeadEntity.getType().create(player.level);

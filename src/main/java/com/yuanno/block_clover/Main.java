@@ -76,7 +76,7 @@ public class Main
 
 
     public Main() {
-
+        // test
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CuriosClientMod::init);
 

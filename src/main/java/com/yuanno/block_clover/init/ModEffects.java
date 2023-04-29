@@ -17,6 +17,10 @@ public class ModEffects {
     public static final RegistryObject<Effect> GRAVITY = EFFECTS.register("gravity", GravityEffect::new);
     public static final RegistryObject<Effect> XP_MULTIPLIER =  EFFECTS.register("xp_multiplier", XpMultiplierEffect::new);
     public static final RegistryObject<Effect> MANA_REGENERATION = EFFECTS.register("mana_regeneration", ManaRegenerationEffect::new);
+    public static final RegistryObject<Effect> LIFE_CURSE = EFFECTS.register("life_curse", LifeCurseEffect::new);
+    public static final RegistryObject<Effect> MAGIC_CURSE = EFFECTS.register("magic_curse", MagicCurseEffect::new);
+    public static final RegistryObject<Effect> POISONOUS_CURSE = EFFECTS.register("poisonous_curse", PoisonousCurseEffect::new);
+    public static final RegistryObject<Effect> HEALING_CURSE = EFFECTS.register("healing_curse", HealingCurseEffect::new);
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

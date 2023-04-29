@@ -13,5 +13,6 @@ public enum AbilityDamageKind
 	DEBUFF,
 	MINION,
 	MOVEMENT,
-	GUARD
+	GUARD,
+	CURSE
 }

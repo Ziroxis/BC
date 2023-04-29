@@ -52,6 +52,7 @@ public class ClientHandler {
             layers.add(new ManaSkinRenderer<>(renderer));
             layers.add(new BearClawRenderer<>(renderer));
             layers.add(new RhinocerosArmorRenderer<>(renderer));
+            layers.add(new DevilFamiliarRenderer<>(renderer));
         }
     }
 }

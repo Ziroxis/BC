@@ -13,6 +13,7 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -124,7 +125,30 @@ public class DevilAltarBlock extends ContainerBlock {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+        @OnlyIn(Dist.CLIENT)
+        public void animateTick(BlockState p_180655_1_, World p_180655_2_, BlockPos p_180655_3_, Random p_180655_4_) {
+            super.animateTick(p_180655_1_, p_180655_2_, p_180655_3_, p_180655_4_);
+
+            for(int i = -2; i <= 2; ++i) {
+                for(int j = -2; j <= 2; ++j) {
+                    if (i > -2 && i < 2 && j == -1) {
+                        j = 2;
+                    }
+
+                    if (p_180655_4_.nextInt(16) == 0) {
+                        for(int k = 0; k <= 1; ++k) {
+                            BlockPos blockpos = p_180655_3_.offset(i, k, j);
+                            if (p_180655_2_.getBlockState(blockpos).getEnchantPowerBonus(p_180655_2_, blockpos) > 0) {
+                                if (!p_180655_2_.isEmptyBlock(p_180655_3_.offset(i / 2, 0, j / 2))) {
+                                    break;
+                                }
+
+                                p_180655_2_.addParticle(ParticleTypes.ENCHANT, (double)p_180655_3_.getX() + 0.5D, (double)p_180655_3_.getY() + 2.0D, (double)p_180655_3_.getZ() + 0.5D, (double)((float)i + p_180655_4_.nextFloat()) - 0.5D, (double)((float)k - p_180655_4_.nextFloat() - 1.0F), (double)((float)j + p_180655_4_.nextFloat()) - 0.5D);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
     }
-}

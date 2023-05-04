@@ -1,8 +1,8 @@
-package com.yuanno.block_clover.client;
+package com.yuanno.block_clover.client.renderers.entities.humanoid;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.BanditEntity;
-import com.yuanno.block_clover.models.HumanoidModel;
+import com.yuanno.block_clover.entities.humanoid.BanditEntity;
+import com.yuanno.block_clover.models.entities.npc.HumanoidModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

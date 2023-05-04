@@ -1,6 +1,9 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.misc;
 
-import com.yuanno.block_clover.entities.goals.attribute.wind.WindTornadoGoal;
+import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.goals.attribute.fire.FireBallGoal;
+import com.yuanno.block_clover.entities.goals.attribute.fire.SpiralFlameGoal;
+import com.yuanno.block_clover.entities.goals.attribute.fire.WildBurstingFlamesGoal;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -19,9 +22,10 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class FlameBoarEntity extends BCentity{
+public class VolcanoMonsterEntity extends BCentity
+{
 
-    public FlameBoarEntity(EntityType type, World world)
+    public VolcanoMonsterEntity(EntityType type, World world)
     {
         super(type, world);
         this.xpDrop = 500;
@@ -31,9 +35,12 @@ public class FlameBoarEntity extends BCentity{
     {
         super.registerGoals();
 
-        this.goalSelector.addGoal(1, new SwimGoal(this));
         if (canUseMagic)
-            this.goalSelector.addGoal(5, new WindTornadoGoal(this));
+        {
+            this.goalSelector.addGoal(6, new SpiralFlameGoal(this));
+            this.goalSelector.addGoal(5, new WildBurstingFlamesGoal(this));
+            this.goalSelector.addGoal(5, new FireBallGoal(this));
+        }
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, false));
@@ -48,11 +55,11 @@ public class FlameBoarEntity extends BCentity{
     public static AttributeModifierMap.MutableAttribute setCustomAttributes()
     {
         return MobEntity.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 5)
+                .add(Attributes.ATTACK_DAMAGE, 7)
                 .add(Attributes.ARMOR, 10)
                 .add(Attributes.MAX_HEALTH, 50)
                 .add(Attributes.FOLLOW_RANGE, 20)
-                .add(Attributes.MOVEMENT_SPEED, 0.27)
+                .add(Attributes.MOVEMENT_SPEED, 0.05)
                 .add(ModAttributes.FALL_RESISTANCE.get(), 50);
 
     }
@@ -70,7 +77,7 @@ public class FlameBoarEntity extends BCentity{
 
     @Override
     public boolean isSensitiveToWater() {
-        return false;
+        return true;
     }
 
 
@@ -83,5 +90,6 @@ public class FlameBoarEntity extends BCentity{
         return spawnData;
 
     }
+
 
 }

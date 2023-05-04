@@ -1,6 +1,14 @@
 package com.yuanno.block_clover.client;
 
 import com.yuanno.block_clover.client.overlay.renderer.*;
+import com.yuanno.block_clover.client.renderers.entities.beastial.CloverSharkRenderer;
+import com.yuanno.block_clover.client.renderers.entities.beastial.FlameBoarRenderer;
+import com.yuanno.block_clover.client.renderers.entities.beastial.MonkeyEntityRenderer;
+import com.yuanno.block_clover.client.renderers.entities.devils.WalgnerDevilEntityRenderer;
+import com.yuanno.block_clover.client.renderers.entities.humanoid.BanditEntityRenderer;
+import com.yuanno.block_clover.client.renderers.entities.humanoid.GrimoireMagicianRenderer;
+import com.yuanno.block_clover.client.renderers.entities.humanoid.GuildEntityRenderer;
+import com.yuanno.block_clover.client.renderers.entities.misc.VolcanoMonsterRenderer;
 import com.yuanno.block_clover.init.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
@@ -28,6 +36,7 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GRIMOIRE_MAGICIAN.get(), new GrimoireMagicianRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GUILD_ENTITY.get(), new GuildEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FLAME_BOAR.get(), new FlameBoarRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.WALGNER_DEVIL.get(), new WalgnerDevilEntityRenderer.Factory());
 
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));

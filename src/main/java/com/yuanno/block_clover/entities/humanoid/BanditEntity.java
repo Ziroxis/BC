@@ -1,10 +1,11 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.humanoid;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.entities.BCentity;
 import com.yuanno.block_clover.entities.goals.attribute.earth.EarthChargeGoal;
 import com.yuanno.block_clover.entities.goals.attribute.earth.EarthChunkGoal;
 import com.yuanno.block_clover.entities.goals.attribute.fire.FireBallGoal;

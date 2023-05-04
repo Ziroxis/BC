@@ -1,5 +1,9 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.beastial;
 
+import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.goals.attribute.fire.FireBallGoal;
+import com.yuanno.block_clover.entities.goals.attribute.fire.SpiralFlameGoal;
+import com.yuanno.block_clover.entities.goals.attribute.fire.WildBurstingFlamesGoal;
 import com.yuanno.block_clover.entities.goals.attribute.wind.WindTornadoGoal;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.EntityType;
@@ -10,40 +14,38 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
-import net.minecraft.entity.monster.GuardianEntity;
-import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeMod;
 
 import javax.annotation.Nullable;
 
-public class CloverSharkEntity extends BCWaterEntity{
-    public CloverSharkEntity(EntityType type, World world) {
-        super(type, world);
-        this.xpDrop = 100;
-    }
+public class MonkeyEntity extends BCentity {
 
+    public MonkeyEntity(EntityType type, World world)
+    {
+        super(type, world);
+        this.xpDrop = 500;
+    }
     @Override
     protected void registerGoals()
     {
         super.registerGoals();
 
-        this.goalSelector.addGoal(0, new BreatheAirGoal(this));
-        this.goalSelector.addGoal(0, new FindWaterGoal(this));
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 10));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.addGoal(1, new SwimGoal(this));
+        if (canUseMagic)
+            this.goalSelector.addGoal(5, new WindTornadoGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, false));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 0.5, true));
-        this.goalSelector.addGoal(8, new FollowBoatGoal(this));
-        this.goalSelector.addGoal(9, new AvoidEntityGoal(this, GuardianEntity.class, 8.0F, 1.0, 1.0));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1, true));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 4));
+        this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
 
     }
 
@@ -55,7 +57,6 @@ public class CloverSharkEntity extends BCWaterEntity{
                 .add(Attributes.MAX_HEALTH, 50)
                 .add(Attributes.FOLLOW_RANGE, 20)
                 .add(Attributes.MOVEMENT_SPEED, 0.27)
-                .add(ForgeMod.SWIM_SPEED.get(), 0.30)
                 .add(ModAttributes.FALL_RESISTANCE.get(), 50);
 
     }
@@ -76,6 +77,8 @@ public class CloverSharkEntity extends BCWaterEntity{
         return false;
     }
 
+
+
     @Override
     @Nullable
     public ILivingEntityData finalizeSpawn(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, @Nullable ILivingEntityData spawnData, @Nullable CompoundNBT dataTag)
@@ -84,4 +87,5 @@ public class CloverSharkEntity extends BCWaterEntity{
         return spawnData;
 
     }
+
 }

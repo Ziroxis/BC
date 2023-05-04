@@ -1,8 +1,14 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.*;
-import net.minecraft.block.Blocks;
+import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
+import com.yuanno.block_clover.entities.beastial.FlameBoarEntity;
+import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
+import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
+import com.yuanno.block_clover.entities.humanoid.BanditEntity;
+import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
+import com.yuanno.block_clover.entities.humanoid.GuildEntity;
+import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -58,6 +64,12 @@ public class ModEntities {
                             .sized(2f, 2f)
                             .setTrackingRange(15)
                             .build(new ResourceLocation(Main.MODID, "flame_boar").toString()));
+    public static final RegistryObject<EntityType<WalgnerDevilEntity>> WALGNER_DEVIL = ENTITIES
+            .register("walgner_devil",
+                    () -> EntityType.Builder.of(WalgnerDevilEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 3f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "walgner_devil").toString()));
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

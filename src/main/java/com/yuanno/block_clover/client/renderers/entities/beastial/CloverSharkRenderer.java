@@ -1,9 +1,9 @@
-package com.yuanno.block_clover.client;
+package com.yuanno.block_clover.client.renderers.entities.beastial;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.CloverSharkEntity;
-import com.yuanno.block_clover.models.entities.CloverSharkModel;
+import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
+import com.yuanno.block_clover.models.entities.beastial.CloverSharkModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -12,7 +12,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import org.lwjgl.system.CallbackI;
 
 @OnlyIn(Dist.CLIENT)
 public class CloverSharkRenderer extends MobRenderer<CloverSharkEntity, CloverSharkModel<CloverSharkEntity>> {

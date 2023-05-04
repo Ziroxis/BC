@@ -12,6 +12,7 @@ import com.yuanno.block_clover.spells.curse.LifeCurseAbility;
 import com.yuanno.block_clover.spells.curse.MagicCurseAbility;
 import com.yuanno.block_clover.spells.curse.PoisonousCurseAbility;
 import com.yuanno.block_clover.spells.darkness.*;
+import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.gravity.GravitySingularityAbility;
@@ -61,6 +62,7 @@ public class ModAbilities {
     public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyerAbility.INSTANCE, AirDashAbility.INSTANCE};
     public static final AbilityCore[] UNDEAD = new AbilityCore[] {UndeadRecruitAbility.INSTANCE, UnleashUndeadAbility.INSTANCE};
     public static final AbilityCore[] CURSE = new AbilityCore[] {PoisonousCurseAbility.INSTANCE, MagicCurseAbility.INSTANCE, LifeCurseAbility.INSTANCE, HealingCurseAbility.INSTANCE};
+    public static final AbilityCore[] DEVIL = new AbilityCore[] {CrowAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));
@@ -87,5 +89,6 @@ public class ModAbilities {
         registerAbilities(SWORD);
         registerAbilities(UNDEAD);
         registerAbilities(CURSE);
+        registerAbilities(DEVIL);
     }
 }

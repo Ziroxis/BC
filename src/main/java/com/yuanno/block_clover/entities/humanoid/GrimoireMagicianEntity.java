@@ -1,10 +1,11 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.humanoid;
 
 import com.yuanno.block_clover.data.ability.AbilityDataBase;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.entities.NPCentity;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.init.ModQuests;

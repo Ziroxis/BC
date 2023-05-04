@@ -44,7 +44,6 @@ public class ModLootTables {
             ItemLootEntry.lootTableItem(ModItems.RARE_CANDY.get()).setWeight(1),
             ItemLootEntry.lootTableItem(ModItems.MANA_ARTIFACT.get()).setWeight(1),
             ItemLootEntry.lootTableItem(ModItems.MANA_REGENERATION.get()).setWeight(1),
-            ItemLootEntry.lootTableItem(ModItems.BAG_GLUTTONY.get()).setWeight(1),
             ItemLootEntry.lootTableItem(ModItems.GREEN_THUMB.get()).setWeight(1));
 
             event.getTable().addPool(artifacts);
@@ -72,7 +71,6 @@ public class ModLootTables {
                     ItemLootEntry.lootTableItem(ModItems.RARE_CANDY.get()).setWeight(1),
                     ItemLootEntry.lootTableItem(ModItems.MANA_ARTIFACT.get()).setWeight(1),
                     ItemLootEntry.lootTableItem(ModItems.MANA_REGENERATION.get()).setWeight(1),
-                    ItemLootEntry.lootTableItem(ModItems.BAG_GLUTTONY.get()).setWeight(1),
                     ItemLootEntry.lootTableItem(ModItems.GREEN_THUMB.get()).setWeight(1));
 
             event.getTable().addPool(artifacts);
@@ -101,7 +99,6 @@ public class ModLootTables {
                     ItemLootEntry.lootTableItem(ModItems.RARE_CANDY.get()).setWeight(1),
                     ItemLootEntry.lootTableItem(ModItems.MANA_ARTIFACT.get()).setWeight(1),
                     ItemLootEntry.lootTableItem(ModItems.MANA_REGENERATION.get()).setWeight(1),
-                    ItemLootEntry.lootTableItem(ModItems.BAG_GLUTTONY.get()).setWeight(1),
                     ItemLootEntry.lootTableItem(ModItems.GREEN_THUMB.get()).setWeight(1));
 
             event.getTable().addPool(artifacts);

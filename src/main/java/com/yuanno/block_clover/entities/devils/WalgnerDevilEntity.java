@@ -1,9 +1,7 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.devils;
 
-import com.yuanno.block_clover.entities.goals.attribute.fire.FireBallGoal;
-import com.yuanno.block_clover.entities.goals.attribute.fire.SpiralFlameGoal;
-import com.yuanno.block_clover.entities.goals.attribute.fire.WildBurstingFlamesGoal;
-import com.yuanno.block_clover.entities.goals.attribute.wind.WindTornadoGoal;
+import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.goals.spells.CrowSpellGoal;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -22,21 +20,19 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class MonkeyEntity extends BCentity{
+public class WalgnerDevilEntity extends BCentity {
 
-    public MonkeyEntity(EntityType type, World world)
+    public WalgnerDevilEntity(EntityType type, World world)
     {
         super(type, world);
-        this.xpDrop = 500;
+        this.canUseMagic = true;
+        this.goalSelector.addGoal(5, new CrowSpellGoal(this));
     }
+
     @Override
     protected void registerGoals()
     {
         super.registerGoals();
-
-        this.goalSelector.addGoal(1, new SwimGoal(this));
-        if (canUseMagic)
-            this.goalSelector.addGoal(5, new WindTornadoGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, false));
@@ -45,7 +41,12 @@ public class MonkeyEntity extends BCentity{
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 4));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(1, new SwimGoal(this));
+        /*
+        if (canUseMagic)
+            this.goalSelector.addGoal(5, new CrowSpellGoal(this));
 
+         */
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes()
@@ -86,5 +87,4 @@ public class MonkeyEntity extends BCentity{
         return spawnData;
 
     }
-
 }

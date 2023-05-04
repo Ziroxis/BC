@@ -1,9 +1,9 @@
-package com.yuanno.block_clover.client;
+package com.yuanno.block_clover.client.renderers.entities.misc;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.VolcanoMonsterEntity;
-import com.yuanno.block_clover.models.entities.VolcanoMonsterModel;
+import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
+import com.yuanno.block_clover.models.entities.misc.VolcanoMonsterModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

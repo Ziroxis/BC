@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.models;
+package com.yuanno.block_clover.models.entities.npc;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

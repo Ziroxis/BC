@@ -1,11 +1,11 @@
-package com.yuanno.block_clover.models.entities;// Made with Blockbench 4.2.4
+package com.yuanno.block_clover.models.entities.beastial;// Made with Blockbench 4.2.4
 // Exported for Minecraft version 1.15 - 1.16 with MCP mappings
 // Paste this class into your mod and generate all required imports
 
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.yuanno.block_clover.entities.MonkeyEntity;
+import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;

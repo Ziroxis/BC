@@ -3,6 +3,8 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
 import com.yuanno.block_clover.entities.beastial.FlameBoarEntity;
 import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
+import com.yuanno.block_clover.entities.devils.LilithDevilEntity;
+import com.yuanno.block_clover.entities.devils.NahamanDevilEntity;
 import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
 import com.yuanno.block_clover.entities.humanoid.BanditEntity;
 import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
@@ -30,6 +32,8 @@ public class ModEventBusEvents {
         event.put(ModEntities.CLOVER_SHARK.get(), CloverSharkEntity.setCustomAttributes().build());
         event.put(ModEntities.FLAME_BOAR.get(), FlameBoarEntity.setCustomAttributes().build());
         event.put(ModEntities.WALGNER_DEVIL.get(), WalgnerDevilEntity.setCustomAttributes().build());
+        event.put(ModEntities.LILITH_DEVIL.get(), LilithDevilEntity.setCustomAttributes().build());
+        event.put(ModEntities.NAHAMAN_DEVIL.get(), NahamanDevilEntity.setCustomAttributes().build());
 
     }
 

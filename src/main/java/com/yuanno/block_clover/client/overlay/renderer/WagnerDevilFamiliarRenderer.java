@@ -3,7 +3,7 @@ package com.yuanno.block_clover.client.overlay.renderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.client.overlay.model.DevilFamiliarModel;
+import com.yuanno.block_clover.client.overlay.model.WagnerDevilFamiliarModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -13,12 +13,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class DevilFamiliarRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/devilfamiliar_texture.png");
+public class WagnerDevilFamiliarRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MODID + ":textures/entities/layers/devils/wagnerdevilfamiliar_texture.png");
 
-    private DevilFamiliarModel model = new DevilFamiliarModel();
+    private WagnerDevilFamiliarModel model = new WagnerDevilFamiliarModel();
 
-    public DevilFamiliarRenderer(IEntityRenderer<T, M> entityRenderer)
+    public WagnerDevilFamiliarRenderer(IEntityRenderer<T, M> entityRenderer)
     {
         super(entityRenderer);
     }

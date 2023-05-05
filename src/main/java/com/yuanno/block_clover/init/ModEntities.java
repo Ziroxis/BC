@@ -5,6 +5,7 @@ import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
 import com.yuanno.block_clover.entities.beastial.FlameBoarEntity;
 import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
 import com.yuanno.block_clover.entities.devils.LilithDevilEntity;
+import com.yuanno.block_clover.entities.devils.NahamanDevilEntity;
 import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
 import com.yuanno.block_clover.entities.humanoid.BanditEntity;
 import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
@@ -77,6 +78,12 @@ public class ModEntities {
                             .sized(1f, 3f)
                             .setTrackingRange(15)
                             .build(new ResourceLocation(Main.MODID, "lilith_devil").toString()));
+    public static final RegistryObject<EntityType<NahamanDevilEntity>> NAHAMAN_DEVIL = ENTITIES
+            .register("nahaman_devil",
+                    () -> EntityType.Builder.of(NahamanDevilEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 3f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "nahaman_devil").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);

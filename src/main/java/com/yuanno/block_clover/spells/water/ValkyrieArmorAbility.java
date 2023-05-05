@@ -8,6 +8,9 @@ import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.fire.LeoPalmaParticleEffect;
+import com.yuanno.block_clover.particles.water.ValkyrieArmorParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -24,6 +27,9 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
             .setDescription("Envelops yourself with an armor of water.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+
+    private static final ParticleEffect PARTICLES = new ValkyrieArmorParticleEffect();
+
 
     public int secondsActivated;
     public static final AttributeModifier WATER_ATTACK = new AttributeModifier(UUID.fromString("43beae28-231f-11ed-861d-0242ac120002"),
@@ -59,6 +65,14 @@ public class ValkyrieArmorAbility extends ContinuousAbility implements IParallel
             ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
 
         return true;
+    }
+
+    private void duringContinuityEvent(PlayerEntity player, int timer)
+    {
+        if (!player.level.isClientSide)
+        {
+            PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
+        }
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)

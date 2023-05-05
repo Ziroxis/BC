@@ -12,6 +12,9 @@ import com.yuanno.block_clover.init.ModEffects;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.time.TimeHopParticleEffect;
+import com.yuanno.block_clover.particles.time.TimeResurrectionParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -26,6 +29,8 @@ public class TimeRessurectionAbility extends PassiveAbility implements IExtraUpd
     private double strain = 180 * 20;
     private int healTicks = 0;
     private int outTicks = 0;
+    private static final ParticleEffect PARTICLES = new TimeResurrectionParticleEffect();
+
     public TimeRessurectionAbility()
     {
         super(INSTANCE);
@@ -45,6 +50,8 @@ public class TimeRessurectionAbility extends PassiveAbility implements IExtraUpd
             IEntityStats entityStats = EntityStatsCapability.get(user);
             if (entityStats.getTime() > 300)
             {
+                if (!user.level.isClientSide)
+                    PARTICLES.spawn(user.level, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
                 user.heal(user.getMaxHealth() - user.getHealth());
                 entityStats.setTime(0);
                 strain = 0;

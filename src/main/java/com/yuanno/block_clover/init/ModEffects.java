@@ -11,6 +11,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModEffects {
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, Main.MODID);
 
+    public static final RegistryObject<Effect> ELECTROCUTED = EFFECTS.register("electrocuted", ElectrocutedEffect::new);
+    public static final RegistryObject<Effect> CHRONO_STASIS = EFFECTS.register("chrono_stasis", ChronoStasisEffect::new);
     public static final RegistryObject<Effect> LEO_PALMA = EFFECTS.register("leo_palma", LeoPalmaEffect::new);
     public static final RegistryObject<Effect> MOVEMENT_BLOCKED = EFFECTS.register("movement_blocked", MovementBlockedEffect::new);
     public static final RegistryObject<Effect> SEALING = EFFECTS.register("sealing", SealingEffect::new);

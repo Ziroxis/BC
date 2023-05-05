@@ -24,7 +24,6 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
-import java.util.Random;
 
 public class RuinsStructure extends Structure<NoFeatureConfig> {
 

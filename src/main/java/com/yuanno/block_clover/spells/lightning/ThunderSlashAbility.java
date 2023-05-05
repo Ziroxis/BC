@@ -10,6 +10,8 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModEffects;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.darkness.BluntStrikeParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +25,8 @@ public class ThunderSlashAbility extends PunchAbility implements IParallelContin
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .setDependencies(ThunderGodGlovesAbility.INSTANCE)
             .build();
+    private static final ParticleEffect PARTICLES = new BluntStrikeParticleEffect();
+
     public ThunderSlashAbility()
     {
         super(INSTANCE);
@@ -35,17 +39,16 @@ public class ThunderSlashAbility extends PunchAbility implements IParallelContin
 
     private boolean onStartEvent(PlayerEntity player)
     {
-
-
-            return true;
-
+        return true;
     }
 
     private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
     {
+        if (!player.level.isClientSide)
+            PARTICLES.spawn(player.level, target.getX(), target.getY(), target.getZ(), 0, 0, 0);
         IEntityStats stats = EntityStatsCapability.get(player);
         stats.alterMana(-15);
-        target.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 60,0));
+        target.addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 60,0));
         return 5;
     }
 }

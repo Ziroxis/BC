@@ -52,8 +52,8 @@ public class ChronoStasisGrigoraAbility extends Ability {
                     else if (entity instanceof LivingEntity)
                     {
                         LivingEntity livingEntity = (LivingEntity) entity;
-                        if (!livingEntity.hasEffect(ModEffects.MOVEMENT_BLOCKED.get()))
-                            livingEntity.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 100, 0));
+                        if (!livingEntity.hasEffect(ModEffects.CHRONO_STASIS.get()))
+                            livingEntity.addEffect(new EffectInstance(ModEffects.CHRONO_STASIS.get(), 100, 0));
                     }
                 });
             }

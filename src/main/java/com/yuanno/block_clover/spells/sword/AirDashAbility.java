@@ -10,6 +10,8 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.sword.OriginalSlashParticleEffect;
 import com.yuanno.block_clover.spells.slash.ForwardThrustAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import net.minecraft.entity.LivingEntity;
@@ -28,6 +30,8 @@ public class AirDashAbility extends Ability implements IMultiTargetAbility {
             .setDamageKind(AbilityDamageKind.SLASH)
             .build();
     boolean hasSword = false;
+    private static final ParticleEffect PARTICLES = new OriginalSlashParticleEffect();
+
     public AirDashAbility()
     {
         super(INSTANCE);
@@ -60,9 +64,10 @@ public class AirDashAbility extends Ability implements IMultiTargetAbility {
 
             list.forEach(entity ->
             {
-                if (hasSword)
+                if (hasSword) {
                     ((ServerWorld) player.level).sendParticles(ParticleTypes.SWEEP_ATTACK, entity.getX(), entity.getY(),
-                        entity.getZ(), (int) 10, 3, 3, 3, 0.1);
+                            entity.getZ(), (int) 10, 3, 3, 3, 0.1);
+                }
 
                 if(this.isTarget(entity) && player.canSee(entity)) {
                     if (hasSword)

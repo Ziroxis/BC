@@ -10,6 +10,8 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.time.TimeHopParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,6 +29,7 @@ public class TimeMagicManaZoneAbility extends PassiveAbility implements IOnDamag
             .build();
     IEntityStats entityStats;
     private BlockPos centerBlock;
+    private static final ParticleEffect PARTICLES = new TimeHopParticleEffect();
 
     boolean zoneSet = false;
 
@@ -58,6 +61,9 @@ public class TimeMagicManaZoneAbility extends PassiveAbility implements IOnDamag
         if (!result)
         {
             livingEntity.teleportTo(livingEntity.getX() + Beapi.RNG(2) + 1, livingEntity.getY(), livingEntity.getZ() + Beapi.RNG(2) + 1);
+            if (!livingEntity.level.isClientSide)
+                PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+
         }
         return result;
     }

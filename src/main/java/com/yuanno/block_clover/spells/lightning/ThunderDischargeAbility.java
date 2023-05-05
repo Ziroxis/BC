@@ -50,7 +50,7 @@ public class ThunderDischargeAbility extends Ability {
 
                 if (entity instanceof LivingEntity)
                 {
-                    ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 80, 0));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 80, 0));
                     entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 10);
                     ((ServerWorld) player.level).sendParticles(ParticleTypes.END_ROD, entity.getX(), entity.getY(),
                             entity.getZ(), (int) 10, 3, 3, 3, 0.1);

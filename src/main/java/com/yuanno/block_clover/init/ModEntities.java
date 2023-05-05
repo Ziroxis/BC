@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
 import com.yuanno.block_clover.entities.beastial.FlameBoarEntity;
 import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
+import com.yuanno.block_clover.entities.devils.LilithDevilEntity;
 import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
 import com.yuanno.block_clover.entities.humanoid.BanditEntity;
 import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
@@ -70,6 +71,13 @@ public class ModEntities {
                             .sized(1f, 3f)
                             .setTrackingRange(15)
                             .build(new ResourceLocation(Main.MODID, "walgner_devil").toString()));
+    public static final RegistryObject<EntityType<LilithDevilEntity>> LILITH_DEVIL = ENTITIES
+            .register("lilith_devil",
+                    () -> EntityType.Builder.of(LilithDevilEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 3f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "lilith_devil").toString()));
+
     public static void register(IEventBus eventBus) {
         ENTITIES.register(eventBus);
     }

@@ -24,27 +24,29 @@ public class CheetaChargeAbility extends Ability implements IMultiTargetAbility 
             .setDamageKind(AbilityDamageKind.SLASH)
             .build();
     private int damage;
+    private double radius;
     public CheetaChargeAbility()
     {
         super(INSTANCE);
         this.setmanaCost(20);
         this.setMaxCooldown(10);
         this.setExperiencePoint(10);
+        this.setEvolutionCost(30);
         this.onUseEvent = this::onUseEvent;
         this.duringCooldownEvent = this::duringCooldown;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
-
-
         this.clearTargets();
         IAbilityData abilityData = AbilityDataCapability.get(player);
         BearClawAbility bearClawAbility = (BearClawAbility) abilityData.getEquippedAbility(BearClawAbility.INSTANCE);
-        if (bearClawAbility != null && bearClawAbility.isContinuous())
+        if (this.isEvolved())
             this.damage = 10;
         else
             this.damage = 5;
+        if (bearClawAbility != null && bearClawAbility.isContinuous())
+            this.damage += 5;
         Vector3d speed = Beapi.propulsion(player, 5, 5);
         player.setDeltaMovement(speed.x, 0.3, speed.z);
         player.hurtMarked = true;
@@ -56,10 +58,14 @@ public class CheetaChargeAbility extends Ability implements IMultiTargetAbility 
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
+        if (this.isEvolved())
+            this.radius = 3;
+        else
+            this.radius = 1.5;
         if (this.canDealDamage())
         {
 
-            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 1.5, LivingEntity.class);
+            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, radius, LivingEntity.class);
             list.remove(player);
 
             list.forEach(entity ->

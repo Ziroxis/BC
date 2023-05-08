@@ -87,7 +87,7 @@ public class ModAbilities {
         registerAbilities(COPY);
         registerAbilities(BEAST);
         registerAbilities(SWORD);
-        registerAbilities(UNDEAD);
+        //registerAbilities(UNDEAD);
         registerAbilities(CURSE);
         registerAbilities(DEVIL);
     }

@@ -20,6 +20,7 @@ public class SolLineaAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(20);
         this.setmanaCost(30);
+        this.setEvolutionCost(30);
         this.setExperiencePoint(30);
         this.onUseEvent = this::onUseEvent;
     }
@@ -27,6 +28,12 @@ public class SolLineaAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         SolLineaProjectile projectile = new SolLineaProjectile(player.level, player);
+        if (this.isEvolved()) {
+            projectile.setDamage(20);
+            projectile.setArmorPiercing();
+            projectile.setMaxLife(164);
+            projectile.setPassThroughEntities();
+        }
         player.level.addFreshEntity(projectile);
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 5f, 1);

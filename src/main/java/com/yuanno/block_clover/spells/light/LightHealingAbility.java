@@ -20,8 +20,9 @@ public class LightHealingAbility extends Ability {
     public LightHealingAbility()
     {
         super(INSTANCE);
-        this.setmanaCost(25);
+        this.setmanaCost(30);
         this.setMaxCooldown(20);
+        this.setEvolutionCost(50);
         this.setExperiencePoint(10);
         this.onUseEvent = this::onUseEvent;
     }
@@ -29,7 +30,15 @@ public class LightHealingAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         //TODO make a special effect just for lighthealing
-        player.addEffect(new EffectInstance(Effects.REGENERATION, 80, 3));
+        if (this.isEvolved()) {
+            player.addEffect(new EffectInstance(Effects.REGENERATION, 120, 3));
+            player.addEffect(new EffectInstance(Effects.ABSORPTION, 2000, 4));
+
+        }
+        else
+        {
+            player.addEffect(new EffectInstance(Effects.REGENERATION, 80, 2));
+        }
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
 
         return true;

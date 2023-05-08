@@ -33,7 +33,7 @@ public class BearClawAbility extends ContinuousPunchAbility implements IParallel
         super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(5);
-        this.setExperiencePoint(10);
+        this.setExperiencePoint(5);
         this.setExperienceGainLevelCap(30);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;

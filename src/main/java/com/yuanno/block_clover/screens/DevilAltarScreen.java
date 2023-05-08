@@ -39,9 +39,9 @@ public class DevilAltarScreen extends ContainerScreen<DevilAltarContainer> {
     protected void renderBg(MatrixStack matrix, float ticks, int x, int y) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
         this.minecraft.getTextureManager().bind(GUI_LOC);
-        int left = this.getGuiLeft();
-        int top = this.getGuiTop();
+        int left = this.getGuiLeft() - 60;
+        int top = this.getGuiTop() + 0;
 
-        this.blit(matrix, left, top, 0, 0, this.getXSize(), this.getYSize());
+        this.blit(matrix, left, top, 0, 0, 256, 256);
     }
 }

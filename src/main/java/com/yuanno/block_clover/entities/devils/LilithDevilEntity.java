@@ -26,7 +26,6 @@ public class LilithDevilEntity extends BCentity {
     {
         super(type, world);
         this.canUseMagic = true;
-        this.goalSelector.addGoal(5, new CrowSpellGoal(this));
     }
 
     @Override
@@ -42,11 +41,7 @@ public class LilithDevilEntity extends BCentity {
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 4));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        /*
-        if (canUseMagic)
-            this.goalSelector.addGoal(5, new CrowSpellGoal(this));
 
-         */
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes()

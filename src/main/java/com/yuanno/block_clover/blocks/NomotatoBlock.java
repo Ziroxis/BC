@@ -24,7 +24,7 @@ public class NomotatoBlock extends CropsBlock {
 
 
     public NomotatoBlock() {
-        super(AbstractBlock.Properties.of(Material.PLANT));
+        super(AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
     }
 
 

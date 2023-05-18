@@ -175,7 +175,7 @@ public class ModItems {
 
     //food
     public static final RegistryObject<Item> MOGURO_JUICE = ITEMS.register("moguro_juice", MoguroJuiceItem::new);
-    public static final RegistryObject<Item> NOMOTATO = ITEMS.register("nomotato", () -> new BlockItem(ModBlocks.NOMOTATO_BLOCK.get(), new Item.Properties()
+    public static final RegistryObject<Item> NOMOTATO = ITEMS.register("nomotato", () -> new BlockNamedItem(ModBlocks.NOMOTATO_BLOCK.get(), new Item.Properties()
             .tab(ModItemGroup.BLOCK_CLOVER_MISC).food(new Food.Builder().nutrition(2).saturationMod(0.2f).build())));
     public static final RegistryObject<Item> BAKED_NOMOTATO = ITEMS.register("baked_nomotato",() -> new RegenerativeFood(0.6f,5,10));
     public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD)));

@@ -17,7 +17,7 @@ public class FireBallAbility extends Ability {
     public FireBallAbility()
     {
         super(INSTANCE);
-        this.setEvolutionCost(30);
+        this.setEvolutionCost(50);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(25);
@@ -27,7 +27,6 @@ public class FireBallAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        //System.out.println(this.isEvolved());
         if (!this.isEvolved())
         {
             FireBallProjectile projectile = new FireBallProjectile(player.level, player);
@@ -39,7 +38,6 @@ public class FireBallAbility extends Ability {
             GiantFireBallProjectile projectile = new GiantFireBallProjectile(player.level, player);
             player.level.addFreshEntity(projectile);
             projectile.shootFromRotation(player, player.xRot , player.yRot , 0, 1f, 5);
-
         }
         return true;
     }

@@ -20,7 +20,7 @@ public class TornadoPiercingAbility extends Ability {
     {
         super(INSTANCE);
         this.setMaxCooldown(5);
-        this.setmanaCost(15);
+        this.setmanaCost(20);
         this.setExperiencePoint(20);
         this.onUseEvent = this::onUseEvent;
     }

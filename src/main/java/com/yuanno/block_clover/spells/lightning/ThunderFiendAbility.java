@@ -30,13 +30,15 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
             .setDependencies(ThunderGodBootsAbility.INSTANCE)
             .build();
     private static final ParticleEffect PARTICLES = new ThunderFiendParticleEffect();
-
+    double radius = 1.5;
+    int damage = 10;
     public ThunderFiendAbility()
     {
         super(INSTANCE);
         this.setmanaCost(20);
         this.setMaxCooldown(10);
         this.setExperiencePoint(10);
+        this.setEvolutionCost(50);
         this.onUseEvent = this::onUseEvent;
         this.duringCooldownEvent = this::duringCooldown;
     }
@@ -46,18 +48,22 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
         this.clearTargets();
 
 
-            Vector3d speed = Beapi.propulsion(player, 9, 9);
-            player.setDeltaMovement(speed.x, 0.2, speed.z);
-            player.hurtMarked = true;
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            return true;
+        Vector3d speed = Beapi.propulsion(player, 9, 9);
+        player.setDeltaMovement(speed.x, 0.2, speed.z);
+        player.hurtMarked = true;
+        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+        return true;
 
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
+        if (this.isEvolved()) {
+            radius = 3;
+            damage = 14;
+        }
         if (this.canDealDamage())
         {
-            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 1.5, LivingEntity.class);
+            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, radius, LivingEntity.class);
             list.remove(player);
 
             list.forEach(entity ->
@@ -65,7 +71,7 @@ public class ThunderFiendAbility extends Ability implements IMultiTargetAbility 
                 if (!player.level.isClientSide)
                     PARTICLES.spawn(player.level, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
                 if(this.isTarget(entity) && player.canSee(entity))
-                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
+                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), damage);
             });
         }
     }

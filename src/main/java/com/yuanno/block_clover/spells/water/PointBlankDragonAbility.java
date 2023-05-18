@@ -21,7 +21,7 @@ public class PointBlankDragonAbility extends PunchAbility {
     {
         super(INSTANCE);
         this.setMaxCooldown(30);
-        this.setmanaCost(0);
+        this.setmanaCost(50);
         this.setExperiencePoint(0);
         this.onHitEntityEvent = this::onHitEntityEvent;
     }

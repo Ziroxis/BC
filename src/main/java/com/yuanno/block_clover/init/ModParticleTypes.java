@@ -31,6 +31,8 @@ public class ModParticleTypes {
     public static final RegistryObject<ParticleType<GenericParticleData>> EARTH = PARTICLE_TYPES.register("earth", GenericParticleData::new);
     public static final RegistryObject<ParticleType<GenericParticleData>> ANTI_MAGIC = PARTICLE_TYPES.register("anti_magic", GenericParticleData::new);
     public static final RegistryObject<ParticleType<GenericParticleData>> TIME = PARTICLE_TYPES.register("time", GenericParticleData::new);
+    public static final RegistryObject<ParticleType<GenericParticleData>> SEALING = PARTICLE_TYPES.register("sealing", GenericParticleData::new);
+
 
 
     @OnlyIn(Dist.CLIENT)
@@ -49,6 +51,7 @@ public class ModParticleTypes {
         manager.register(ModParticleTypes.EARTH.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/earth_particle.png")));
         manager.register(ModParticleTypes.ANTI_MAGIC.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/anti_magic_particle.png")));
         manager.register(ModParticleTypes.TIME.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/time_particle.png")));
+        manager.register(ModParticleTypes.SEALING.get(), new SimpleParticle.Factory(new ResourceLocation(Main.MODID, "textures/particle/sealing_particle.png")));
 
     }
 

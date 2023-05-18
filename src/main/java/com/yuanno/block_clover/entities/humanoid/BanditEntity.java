@@ -46,7 +46,7 @@ public class BanditEntity extends BCentity {
     public BanditEntity(EntityType type, World world)
     {
         super(type, world);
-        this.xpDrop = 20;
+        this.xpDrop = 40;
         this.canUseMagic = true;
         abilityList = new ArrayList<>();
         int random = Beapi.RNG(4);

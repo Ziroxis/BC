@@ -4,6 +4,7 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
+import com.yuanno.block_clover.entities.projectiles.sealing.EvolvedSealingProjectile;
 import com.yuanno.block_clover.entities.projectiles.sealing.SealingProjectile;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +19,8 @@ public class SealingProjectileAbility extends Ability {
     public SealingProjectileAbility()
     {
         super(INSTANCE);
+        this.setEvolutionCost(50);
+        this.setEvolvedManaCost(10);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(25);
@@ -27,11 +30,20 @@ public class SealingProjectileAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        SealingProjectile projectile = new SealingProjectile(player.level, player);
-        player.level.addFreshEntity(projectile);
-        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
-
+        if (!this.isEvolved())
+        {
+            SealingProjectile projectile = new SealingProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
+        }
+        else
+        {
+            EvolvedSealingProjectile projectile = new EvolvedSealingProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
+        }
         return true;
     }
 }

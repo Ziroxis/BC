@@ -1,5 +1,7 @@
 package com.yuanno.block_clover.client.gui;
 
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import net.minecraft.client.Minecraft;
@@ -15,6 +17,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class LevelUpOverlay extends AbstractGui {
     int previousLevel = 1;
     int tickCount;
+    int tickCountSpell;
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent.Post event)
     {
@@ -34,7 +37,29 @@ public class LevelUpOverlay extends AbstractGui {
         else
         {
             tickCount = player.tickCount;
-
+        }
+    }
+    @SubscribeEvent
+    public void renderOverlaySpell(RenderGameOverlayEvent.Post event)
+    {
+        ClientPlayerEntity player = Minecraft.getInstance().player;
+        assert player != null;
+        IEntityStats propsEntity = EntityStatsCapability.get(player);
+        IAbilityData abilityData = AbilityDataCapability.get(player);
+        String spellEvolution = "";
+        for (int i = 0; i < abilityData.getEquippedAbilities().length; i++)
+        {
+            if (abilityData.getEquippedAbility(i) != null && abilityData.getEquippedAbility(i).isOnCooldown()
+                    && (int) propsEntity.getExperienceSpell(abilityData.getEquippedAbility(i).getName()) == abilityData.getEquippedAbility(i).getEvolutionCost()
+                    && !abilityData.getEquippedAbility(i).isEvolved())
+            {
+                spellEvolution = abilityData.getEquippedAbility(i).getName() + " has evolved!";
+                drawString(event.getMatrixStack(), Minecraft.getInstance().font, TextFormatting.BOLD + spellEvolution, 30, 30, -1);
+                System.out.println(spellEvolution);
+                int tickCountEvolution = player.tickCount + 80;
+                if (player.tickCount > tickCountEvolution)
+                    abilityData.getEquippedAbility(i).evolved(true);
+            }
         }
     }
 }

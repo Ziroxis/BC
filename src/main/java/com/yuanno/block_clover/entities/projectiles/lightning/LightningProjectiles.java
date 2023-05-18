@@ -20,12 +20,20 @@ public class LightningProjectiles {
             () -> Beapi.createEntityType(LightningOrbProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":lightning_orb"));
+    public static final RegistryObject<EntityType<GiantLightningOrbProjectile>> GIANT_LIGHTNING_ORB = Beapi.registerEntityType("Giant Lightning Orb",
+            () -> Beapi.createEntityType(GiantLightningOrbProjectile::new)
+                    .sized(3f, 3f)
+                    .build(Main.MODID + ":giant_lightning_orb"));
+
 
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerEntityRenderers(FMLClientSetupEvent event)
     {
+        RenderingRegistry.registerEntityRenderingHandler(GIANT_LIGHTNING_ORB.get(), new AbilityProjectileRenderer.Factory(new ThunderOrbModel())
+                .setTexture("lightning", "lightning_orb").setScale(9));
+
         RenderingRegistry.registerEntityRenderingHandler(LIGHTNING_ORB.get(), new AbilityProjectileRenderer.Factory(new ThunderOrbModel())
                 .setTexture("lightning", "lightning_orb").setScale(1));
     }

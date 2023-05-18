@@ -20,13 +20,18 @@ public class SealingProjectiles {
             () -> Beapi.createEntityType(SealingProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":sealing_projectile"));
+    public static final RegistryObject<EntityType<EvolvedSealingProjectile>> EVOLVED_SEALING_PROJECTILE = Beapi.registerEntityType("Evolved Sealing Projectile",
+            () -> Beapi.createEntityType(EvolvedSealingProjectile::new)
+                    .sized(0.5f, 0.5f)
+                    .build(Main.MODID + ":evolved_sealing_projectile"));
+
 
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerEntityRenderers(FMLClientSetupEvent event)
     {
-        RenderingRegistry.registerEntityRenderingHandler(SEALING_PROJECTILE.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
+        RenderingRegistry.registerEntityRenderingHandler(EVOLVED_SEALING_PROJECTILE.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
                 .setTexture("sealing", "sealing_texture").setScale(1));
     }
 }

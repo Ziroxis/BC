@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.particles.lightning;
+package com.yuanno.block_clover.particles.sealing;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.init.ModParticleTypes;
@@ -9,14 +9,14 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
-public class DischargeParticleEffect extends ParticleEffect {
+public class SealingDischargeParticleEffect extends ParticleEffect {
 
     @Override
     public void spawn(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
     {
         double phi = 0;
         double x, y, z;
-        double radius = 0.2;
+        double radius = 0.4;
         Random random = world.random;
         int i = 0;
 
@@ -43,9 +43,9 @@ public class DischargeParticleEffect extends ParticleEffect {
 
                 GenericParticleData data;
                 if(i % 3 == 0)
-                    data = new GenericParticleData(ModParticleTypes.LIGHTNING.get());
+                    data = new GenericParticleData(ModParticleTypes.SEALING.get());
                 else
-                    data = new GenericParticleData(ModParticleTypes.LIGHTNING.get());
+                    data = new GenericParticleData(ModParticleTypes.SEALING.get());
                 data.setLife(7);
                 data.setSize(8F);
                 data.setMotion(motionX, motionY / 2, motionZ);

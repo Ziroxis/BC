@@ -20,6 +20,8 @@ public class WindBladeAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(15);
+        this.setEvolutionCost(50);
+        this.setEvolvedManaCost(5);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
@@ -28,8 +30,14 @@ public class WindBladeAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         WindBladeProjectile projectile = new WindBladeProjectile(player.level, player);
+        if (this.isEvolved())
+        {
+            projectile.setDamage(8);
+            projectile.setArmorPiercing();
+            projectile.setPassThroughEntities();
+            projectile.setLife(128);
+        }
         player.level.addFreshEntity(projectile);
-        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
 
         return true;

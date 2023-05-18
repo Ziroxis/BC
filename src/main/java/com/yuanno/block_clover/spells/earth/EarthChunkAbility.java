@@ -21,7 +21,7 @@ public class EarthChunkAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(4);
         this.setmanaCost(15);
-        this.setEvolutionCost(2);
+        this.setEvolutionCost(30);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;

@@ -20,6 +20,10 @@ public class LightProjectiles {
             () -> Beapi.createEntityType(LightBladeProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":light_blade"));
+    public static final RegistryObject<EntityType<GiantLightBladeProjectile>> GIANT_LIGHT_BLADE = Beapi.registerEntityType("Giant Light Blade",
+            () -> Beapi.createEntityType(GiantLightBladeProjectile::new)
+                    .sized(1.5f, 1.5f)
+                    .build(Main.MODID + ":giant_light_blade"));
 
 
     @OnlyIn(Dist.CLIENT)
@@ -28,5 +32,8 @@ public class LightProjectiles {
     {
         RenderingRegistry.registerEntityRenderingHandler(LIGHT_BLADE.get(), new AbilityProjectileRenderer.Factory(new LightBladeModel())
                 .setTexture("light", "light_blade").setScale(1));
+        RenderingRegistry.registerEntityRenderingHandler(GIANT_LIGHT_BLADE.get(), new AbilityProjectileRenderer.Factory(new LightBladeModel())
+                .setTexture("light", "light_blade").setScale(9));
+
     }
 }

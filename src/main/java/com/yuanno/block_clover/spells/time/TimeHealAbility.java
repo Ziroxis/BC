@@ -8,6 +8,8 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.light.LightHealingParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -17,6 +19,8 @@ public class TimeHealAbility extends Ability {
             .setDescription("Consumes time, healing yourself.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    private static final ParticleEffect PARTICLES = new LightHealingParticleEffect();
+
     public TimeHealAbility()
     {
         super(INSTANCE);
@@ -27,11 +31,12 @@ public class TimeHealAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
-        if (entityStats.getTime() > 15)
+        if (entityStats.getTime() > 30)
         {
-            entityStats.alterTime(-15);
+            entityStats.alterTime(-30);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
-            player.heal(5);
+            player.heal(10);
+            PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
             return true;
         }
         return false;

@@ -51,7 +51,7 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
         PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
-
+        //TODO add the new attribute starting spells
         if (!props.hasAttribute())
         {
             //TODO don't spawn with anti-magic + second attribute

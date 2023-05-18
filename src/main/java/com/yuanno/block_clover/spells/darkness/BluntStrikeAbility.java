@@ -8,6 +8,9 @@ import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IMultiTargetAbility;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.init.ModEffects;
+import com.yuanno.block_clover.init.ModParticleTypes;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.darkness.BluntStrikeParticleEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.SwordItem;
@@ -25,6 +28,7 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
             .setDescription("Dashes forward striking your enemies with the blunt side of your sword.\n The enemies hit will be unconscious for a few seconds")
             .setDamageKind(AbilityDamageKind.PHYSICAL)
             .build();
+    private static final ParticleEffect PARTICLES = new BluntStrikeParticleEffect();
     double MOVEMENT_SPEED;
     double RADIUS;
     float DAMAGE;
@@ -80,6 +84,8 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
 
             list.forEach(entity ->
             {
+                if (!player.level.isClientSide)
+                    PARTICLES.spawn(player.level, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
                 entity.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), STUN_COOLDOWN, 0));
                 if(this.isTarget(entity) && player.canSee(entity))
                     entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), DAMAGE);

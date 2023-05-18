@@ -1,7 +1,5 @@
 package com.yuanno.block_clover.effects;
 
-import com.yuanno.block_clover.data.entity.EntityStatsCapability;
-import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModDamageSource;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;

@@ -42,6 +42,7 @@ public class ModStructures
     public static final RegistryObject<Structure<NoFeatureConfig>> UNDERWATER_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("underwater_dungeon", UnderWaterDungeonStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> FIRE_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("fire_dungeon", VolcanoDungeonStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> GUILD_TOWER = DEFERRED_REGISTRY_STRUCTURE.register("guild_tower", GuildTowerStructure::new);
+    public static final RegistryObject<Structure<NoFeatureConfig>> RUINS = DEFERRED_REGISTRY_STRUCTURE.register("ruins", RuinsStructure::new);
 
 
     /**
@@ -92,6 +93,14 @@ public class ModStructures
                 new StructureSeparationSettings(30,
                         10,
                         156523685
+
+                ), false
+        );
+        setupMapSpacingAndLand(
+                RUINS.get(),
+                new StructureSeparationSettings(10,
+                        5,
+                        156794685
 
                 ), false
         );

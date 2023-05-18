@@ -68,7 +68,7 @@ public class ThunderChargeAbility extends ChargeableAbility implements IMultiTar
             this.cancelled = true;
             this.stopCharging(player);
         }
-        player.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 200, 10));
+        player.addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 200, 10));
     }
     private boolean onEndChargingEvent(PlayerEntity player)
     {
@@ -86,7 +86,7 @@ public class ThunderChargeAbility extends ChargeableAbility implements IMultiTar
         player.hurtMarked = true;
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
 
-        player.removeEffect(ModEffects.MOVEMENT_BLOCKED.get());
+        player.removeEffect(ModEffects.ELECTROCUTED.get());
 
         int cooldown = (int) Math.round(charge / 20.0) + 5;
         this.setMaxCooldown(cooldown);

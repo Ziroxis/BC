@@ -30,7 +30,6 @@ public class HealingCurseAbility extends Ability {
     {
         super(INSTANCE);
         this.setmanaCost(30);
-        this.setEvolutionCost(50);
         this.setMaxCooldown(25);
         this.setExperiencePoint(25);
     }

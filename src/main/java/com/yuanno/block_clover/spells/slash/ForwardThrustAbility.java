@@ -27,20 +27,22 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .setDependencies(SlashBladesAbility.INSTANCE)
             .build();
+    double radius = 1.5;
+    int damage = 10;
     public ForwardThrustAbility()
     {
         super(INSTANCE);
-        this.setmanaCost(20);
+        this.setmanaCost(30);
         this.setMaxCooldown(10);
+        this.setmanaCost(10);
         this.setExperiencePoint(10);
+        this.setEvolutionCost(100);
         this.onUseEvent = this::onUseEvent;
         this.duringCooldownEvent = this::duringCooldown;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
-
-
         this.clearTargets();
 
         Vector3d speed = Beapi.propulsion(player, 5, 5);
@@ -54,10 +56,14 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
+        if (this.isEvolved()) {
+            radius = 3;
+            damage = 14;
+        }
         if (this.canDealDamage())
         {
 
-            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 1.5, LivingEntity.class);
+            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, radius, LivingEntity.class);
             list.remove(player);
 
             list.forEach(entity ->
@@ -66,7 +72,7 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
                         entity.getZ(), (int) 10, 3, 3, 3, 0.1);
 
                 if(this.isTarget(entity) && player.canSee(entity))
-                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
+                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), damage);
             });
         }
     }

@@ -19,17 +19,23 @@ public class WindCrescentAbility extends Ability {
     {
         super(INSTANCE);
         this.setMaxCooldown(7);
-        this.setmanaCost(15);
+        this.setmanaCost(25);
         this.setExperiencePoint(15);
         this.setExperienceGainLevelCap(15);
+        this.setEvolutionCost(50);
         this.onUseEvent = this::onUseEvent;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
         WindCrescentProjectile projectile = new WindCrescentProjectile(player.level, player);
+        if (this.isEvolved())
+        {
+            projectile.setDamage(14);
+            projectile.setArmorPiercing();
+            projectile.setPassThroughEntities();
+        }
         player.level.addFreshEntity(projectile);
-        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
 
         return true;

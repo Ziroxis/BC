@@ -27,20 +27,25 @@ public class ThunderDischargeAbility extends Ability {
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
     public static final ParticleEffect PARTICLES = new DischargeParticleEffect();
-
+    int diameter;
     public ThunderDischargeAbility()
     {
         super(INSTANCE);
         this.setmanaCost(50);
         this.setMaxCooldown(25);
         this.setExperiencePoint(25);
+        this.setEvolutionCost(100);
         this.onUseEvent = this::onUseEvent;
     }
     
     public boolean onUseEvent(PlayerEntity player)
     {
         IEntityStats stats = EntityStatsCapability.get(player);
-        List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 10 + (float) stats.getLevel() / 2);
+        if (!this.isEvolved())
+            diameter = 10;
+        else
+            diameter = 16;
+        List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, diameter + (float) stats.getLevel() / 2);
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (entities.contains(player))
         {
@@ -50,8 +55,16 @@ public class ThunderDischargeAbility extends Ability {
 
                 if (entity instanceof LivingEntity)
                 {
-                    ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 80, 0));
-                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 10);
+                    if (!this.isEvolved()) {
+                        ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 80, 0));
+                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 10);
+                    }
+                    else
+                    {
+                        ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 120, 0));
+                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 14);
+
+                    }
                     ((ServerWorld) player.level).sendParticles(ParticleTypes.END_ROD, entity.getX(), entity.getY(),
                             entity.getZ(), (int) 10, 3, 3, 3, 0.1);
                 }            });

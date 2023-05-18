@@ -6,6 +6,8 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
@@ -51,10 +53,13 @@ public class CEquipAbilityPacket
 			{
 				PlayerEntity player = ctx.get().getSender();
 				IAbilityData abilityDataProps = AbilityDataCapability.get(player);
+				IEntityStats propsEntity = EntityStatsCapability.get(player);
 
 				Ability ability = ((AbilityCore)GameRegistry.findRegistry(AbilityCore.class).getValue(message.abilityId)).createAbility();
 
 				abilityDataProps.setEquippedAbility(message.slot, ability);
+				if (propsEntity.getExperienceSpell(ability.getName()) != null && (int) propsEntity.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost() && !ability.isEvolved())
+					ability.evolved(true);
 				PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
 			});	
 		}

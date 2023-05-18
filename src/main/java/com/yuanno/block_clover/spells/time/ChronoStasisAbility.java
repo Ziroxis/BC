@@ -41,14 +41,14 @@ public class ChronoStasisAbility extends PunchAbility {
             if (target instanceof PlayerEntity)
             {
                 PlayerEntity targetPlayer = (PlayerEntity) target;
-                if (!targetPlayer.hasEffect(ModEffects.MOVEMENT_BLOCKED.get()))
-                    targetPlayer.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 100, 0));
+                if (!targetPlayer.hasEffect(ModEffects.CHRONO_STASIS.get()))
+                    targetPlayer.addEffect(new EffectInstance(ModEffects.CHRONO_STASIS.get(), 100, 0));
                 return 1;
             }
             else
             {
-                if (!target.hasEffect(ModEffects.MOVEMENT_BLOCKED.get()))
-                    target.addEffect(new EffectInstance(ModEffects.MOVEMENT_BLOCKED.get(), 100, 0));
+                if (!target.hasEffect(ModEffects.CHRONO_STASIS.get()))
+                    target.addEffect(new EffectInstance(ModEffects.CHRONO_STASIS.get(), 100, 0));
                 return 1;
             }
         }

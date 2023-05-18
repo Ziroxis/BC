@@ -6,6 +6,7 @@ import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.entities.projectiles.mercury.MercuryBulletProjectile;
 import com.yuanno.block_clover.entities.projectiles.slash.DeathScytheProjectile;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,18 +25,25 @@ public class DeathScytheAbility extends Ability {
     {
         super(INSTANCE);
         this.setMaxCooldown(5);
-        this.setmanaCost(5);
+        this.setmanaCost(15);
+        this.setEvolutionCost(50);
+        this.setEvolvedManaCost(5);
         this.setExperiencePoint(30);
         this.onUseEvent = this::onUseEvent;
     }
 
     private boolean onUseEvent(PlayerEntity player) {
-        IAbilityData abilityProps = AbilityDataCapability.get(player);
 
         DeathScytheProjectile projectile = new DeathScytheProjectile(player.level, player);
+        if (this.isEvolved()) {
+            projectile.setDamage(12);
+            projectile.setArmorPiercing();
+            projectile.setPassThroughEntities();
+            projectile.setPassThroughBlocks();
+            projectile.setLife(128);
+        }
         player.level.addFreshEntity(projectile);
-        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1.5f);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 2f);
         return true;
     }
 }

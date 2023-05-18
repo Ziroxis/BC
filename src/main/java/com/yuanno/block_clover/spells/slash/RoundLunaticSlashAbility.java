@@ -26,17 +26,24 @@ public class RoundLunaticSlashAbility extends Ability {
             .setDescription("Slashes around you")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    int radius = 10;
     public RoundLunaticSlashAbility()
     {
         super(INSTANCE);
-        this.setmanaCost(30);
+        this.setmanaCost(50);
         this.setMaxCooldown(20);
+        this.setEvolutionCost(100);
+        this.setEvolvedManaCost(30);
         this.setExperiencePoint(25);
         this.onUseEvent = this::onUseEvent;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
+        if (this.isEvolved())
+        {
+            radius = 30;
+        }
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
         {
@@ -48,7 +55,7 @@ public class RoundLunaticSlashAbility extends Ability {
                 if (ability instanceof SlashBladesAbility && ability.isContinuous())
                 {
                     IEntityStats stats = EntityStatsCapability.get(player);
-                    List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 10 + (float) stats.getLevel() / 2);
+                    List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, radius + (float) stats.getLevel() / 2);
                     if (entities.contains(player)) {
                         entities.remove(player);
 

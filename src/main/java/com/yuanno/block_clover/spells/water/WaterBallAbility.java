@@ -20,6 +20,8 @@ public class WaterBallAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
+        this.setEvolutionCost(50);
+        this.setEvolvedManaCost(5);
         this.setExperiencePoint(25);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
@@ -28,11 +30,31 @@ public class WaterBallAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        WaterBallProjectile projectile = new WaterBallProjectile(player.level, player);
-        player.level.addFreshEntity(projectile);
-        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
+        if (this.isEvolved())
+        {
+            WaterBallProjectile projectile = new WaterBallProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
 
+            int tickCount = player.tickCount + 60;
+            if (tickCount < player.tickCount) {
+                WaterBallProjectile projectile1 = new WaterBallProjectile(player.level, player);
+                player.level.addFreshEntity(projectile1);
+                projectile1.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
+            }
+            int tickCountAgain = player.tickCount + 120;
+            if (tickCountAgain < player.tickCount) {
+                WaterBallProjectile projectile2 = new WaterBallProjectile(player.level, player);
+                player.level.addFreshEntity(projectile2);
+                projectile2.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
+            }
+        }
+        else
+        {
+            WaterBallProjectile projectile = new WaterBallProjectile(player.level, player);
+            player.level.addFreshEntity(projectile);
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
+        }
         return true;
     }
 }

@@ -1,21 +1,20 @@
 package com.yuanno.block_clover.init;
 
-import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.*;
+import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
+import com.yuanno.block_clover.entities.beastial.FlameBoarEntity;
+import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
+import com.yuanno.block_clover.entities.devils.LilithDevilEntity;
+import com.yuanno.block_clover.entities.devils.NahamanDevilEntity;
+import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
+import com.yuanno.block_clover.entities.humanoid.BanditEntity;
+import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
+import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthSummons;
-import com.yuanno.block_clover.events.loot.WitchHatShredAdditionModifier;
-import com.yuanno.block_clover.events.loot.ArtifactAdditionModifier;
-import com.yuanno.block_clover.events.loot.WitchHatShredAdditionModifier;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import javax.annotation.Nonnull;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
@@ -32,6 +31,9 @@ public class ModEventBusEvents {
         event.put(ModEntities.MONKEY_ENTITY.get(), MonkeyEntity.setCustomAttributes().build());
         event.put(ModEntities.CLOVER_SHARK.get(), CloverSharkEntity.setCustomAttributes().build());
         event.put(ModEntities.FLAME_BOAR.get(), FlameBoarEntity.setCustomAttributes().build());
+        event.put(ModEntities.WALGNER_DEVIL.get(), WalgnerDevilEntity.setCustomAttributes().build());
+        event.put(ModEntities.LILITH_DEVIL.get(), LilithDevilEntity.setCustomAttributes().build());
+        event.put(ModEntities.NAHAMAN_DEVIL.get(), NahamanDevilEntity.setCustomAttributes().build());
 
     }
 

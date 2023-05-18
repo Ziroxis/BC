@@ -10,6 +10,8 @@ import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModDamageSource;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.lightning.ThunderFiendParticleEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
@@ -25,6 +27,8 @@ public class ThunderFiendMultiAbility extends RepeaterAbility implements IMultiT
             .setDescription("Shoots yourself multiple times forward with your boots.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    private static final ParticleEffect PARTICLES = new ThunderFiendParticleEffect();
+
     public ThunderFiendMultiAbility()
     {
         super(INSTANCE);
@@ -79,6 +83,8 @@ public class ThunderFiendMultiAbility extends RepeaterAbility implements IMultiT
 
             list.forEach(entity ->
             {
+                if (!player.level.isClientSide)
+                    PARTICLES.spawn(player.level, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
                 if(this.isTarget(entity) && player.canSee(entity))
                     entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player"), 10);
             });

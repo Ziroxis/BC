@@ -4,12 +4,17 @@ import com.yuanno.block_clover.api.ability.AbilityHelper;
 import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
 import com.yuanno.block_clover.api.ability.sorts.ExplosionAbility;
 import com.yuanno.block_clover.particles.CommonExplosionParticleEffect;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.fire.GiantFirebalParticleEffect;
+import com.yuanno.block_clover.particles.wind.TornadoPiercingParticleEffect;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class GiantFireBallProjectile extends AbilityProjectileEntity {
+
+    private static final ParticleEffect PARTICLES = new GiantFirebalParticleEffect();
 
     public GiantFireBallProjectile(EntityType type, World world)
     {
@@ -38,6 +43,9 @@ public class GiantFireBallProjectile extends AbilityProjectileEntity {
         explosion.setSmokeParticles(new CommonExplosionParticleEffect(3));
         explosion.setDamageEntities(true);
         explosion.doExplosion();
+        if (!entity.level.isClientSide)
+            PARTICLES.spawn(entity.level, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
+
     }
 
     private void onHitImpactEvent(BlockPos hit)
@@ -51,5 +59,6 @@ public class GiantFireBallProjectile extends AbilityProjectileEntity {
         explosion.setSmokeParticles(new CommonExplosionParticleEffect(3));
         explosion.setDamageEntities(true);
         explosion.doExplosion();
+
     }
 }

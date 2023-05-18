@@ -6,6 +6,9 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.fire.LeoPalmaParticleEffect;
+import com.yuanno.block_clover.particles.sealing.SealingParticleEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -17,6 +20,7 @@ import net.minecraftforge.common.ForgeMod;
 
 
 public class SealingEffect extends Effect {
+    private static final ParticleEffect PARTICLES = new SealingParticleEffect();
 
     public SealingEffect()
     {
@@ -42,6 +46,10 @@ public class SealingEffect extends Effect {
                 if (!ability.isDisabled())
                     ability.startDisable();
             }
+        }
+        if (!livingEntity.level.isClientSide)
+        {
+            PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
         }
     }
 

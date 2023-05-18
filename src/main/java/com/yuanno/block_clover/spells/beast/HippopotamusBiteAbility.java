@@ -21,6 +21,7 @@ public class HippopotamusBiteAbility extends PunchAbility implements IParallelCo
         super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(10);
+        this.setEvolutionCost(50);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(50);
         this.onHitEntityEvent = this::onHitEntityEvent;
@@ -28,8 +29,13 @@ public class HippopotamusBiteAbility extends PunchAbility implements IParallelCo
 
     private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
     {
+        int damage;
+        if (this.isEvolved())
+            damage = 30;
+        else
+            damage = 15;
         double knockback = 1.5;
         ((LivingEntity)target).knockback((float)knockback * 0.5F, (double) MathHelper.sin(player.yRot * ((float)Math.PI / 180F)), (double)(-MathHelper.cos(player.yRot * ((float)Math.PI / 180F))));
-        return 15;
+        return damage;
     }
 }

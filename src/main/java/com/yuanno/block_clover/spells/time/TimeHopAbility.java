@@ -9,6 +9,9 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.particles.ParticleEffect;
+import com.yuanno.block_clover.particles.light.LightMovementParticleEffect;
+import com.yuanno.block_clover.particles.time.TimeHopParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -23,6 +26,8 @@ public class TimeHopAbility extends Ability {
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
     int distance;
+    private static final ParticleEffect PARTICLES = new TimeHopParticleEffect();
+
     public TimeHopAbility()
     {
         super(INSTANCE);
@@ -47,8 +52,11 @@ public class TimeHopAbility extends Ability {
             player.teleportTo(pos.getX(), pos.getY(), pos.getZ());
             if (player instanceof ServerPlayerEntity)
             {
+                PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
                 ((ServerPlayerEntity) player).connection.teleport(pos.getX(), pos.getY(), pos.getZ(), player.yRot,
                         player.xRot, Collections.emptySet());
+                PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
+
             }
             return true;
         }

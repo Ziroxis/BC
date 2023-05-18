@@ -3,7 +3,7 @@ package com.yuanno.block_clover.init;
 import com.yuanno.block_clover.HumanoidRenderer;
 import com.yuanno.block_clover.client.overlay.renderer.CompleteRenderer;
 import com.yuanno.block_clover.client.overlay.renderer.ExclamationRenderer;
-import com.yuanno.block_clover.models.HumanoidModel;
+import com.yuanno.block_clover.models.entities.npc.HumanoidModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingRenderer;

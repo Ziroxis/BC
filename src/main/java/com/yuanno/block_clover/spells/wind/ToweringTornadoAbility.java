@@ -20,6 +20,9 @@ public class ToweringTornadoAbility extends Ability {
             .setDescription("Pushes enemies away from you with wind")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    int diameter = 12;
+    int propulsion = 5;
+    int damage = 7;
     public ToweringTornadoAbility()
     {
         super(INSTANCE);
@@ -27,24 +30,30 @@ public class ToweringTornadoAbility extends Ability {
         this.setmanaCost(15);
         this.setExperiencePoint(15);
         this.setExperienceGainLevelCap(30);
-
+        this.setEvolutionCost(50);
         this.onUseEvent = this::onUseEvent;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        List<LivingEntity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, 12F, LivingEntity.class);
+        if (this.isEvolved())
+        {
+            diameter = 20;
+            propulsion = 7;
+            damage = 10;
+        }
+        List<LivingEntity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, diameter, LivingEntity.class);
         entities.remove(player);
 
         entities.forEach(entityi ->
         {
-            Vector3d speed = Beapi.Propulsion(player, 5, 5, 5);
+            Vector3d speed = Beapi.Propulsion(player, propulsion, propulsion, propulsion);
             entityi.setDeltaMovement(speed.x, speed.y, speed.z);
             entityi.hurtMarked = true;
             entityi.hasImpulse = true;
 
 
-            entityi.hurt(ModDamageSource.causeAbilityDamage(player, this), 7);
+            entityi.hurt(ModDamageSource.causeAbilityDamage(player, this), damage);
         });
 
         if (player.level instanceof ServerWorld)

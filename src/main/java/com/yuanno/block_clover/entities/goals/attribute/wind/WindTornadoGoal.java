@@ -2,9 +2,8 @@ package com.yuanno.block_clover.entities.goals.attribute.wind;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.entities.BCentity;
-import com.yuanno.block_clover.entities.MonkeyEntity;
+import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
 import com.yuanno.block_clover.entities.goals.CooldownGoal;
-import com.yuanno.block_clover.entities.projectiles.wind.WindBladeProjectile;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.spells.wind.ToweringTornadoAbility;
 import net.minecraft.entity.LivingEntity;

@@ -22,12 +22,16 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
 
     private static final AttributeModifier JAGUAR_SPEED = new AttributeModifier(UUID.fromString("74203b02-d21c-11ed-afa1-0242ac120002"),
             "Jaguar speed", 2, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier JAGUAR_STEP = new AttributeModifier(UUID.fromString("7846ec3c-ed81-11ed-a05b-0242ac120003"),
+            "Jaguar step", 1, AttributeModifier.Operation.ADDITION);
+
     public JaguarsHunt()
     {
         super(INSTANCE);
         this.setmanaCost(8);
         this.setMaxCooldown(10);
-        this.setExperiencePoint(0);
+        this.setExperiencePoint(10);
+        this.setExperienceGainLevelCap(40);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
@@ -35,6 +39,7 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(JAGUAR_SPEED);
+        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(JAGUAR_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
     }
@@ -42,6 +47,8 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(JAGUAR_SPEED);
+        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(JAGUAR_STEP);
+        PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
     }
 }

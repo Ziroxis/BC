@@ -22,10 +22,13 @@ public class ArtifactEvents {
     public static void bagOfGluttony(ItemTossEvent event)
     {
         PlayerEntity player = event.getPlayer();
+        /*
         if (CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.BAG_GLUTTONY.get(), player).isPresent())
         {
             event.getEntityItem().remove();
         }
+
+         */
     }
 
     @SubscribeEvent

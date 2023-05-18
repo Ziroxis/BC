@@ -50,6 +50,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     private ResourceLocation customTexture;
 
     private int manaCost = 1;
+    private int evolvedManaCost = 1;
     private int experiencePoint = 0;
     private int experienceGainLevelCap = 50;
     private ITextComponent tooltip;
@@ -102,8 +103,10 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (!this.isOnStandby())
             return;
         IEntityStats propsEntity = EntityStatsCapability.get(player);
+
         if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
             this.evolved(true);
+
         AbilityUseEvent event = new AbilityUseEvent(player, this);
         if (MinecraftForge.EVENT_BUS.post(event))
             return;
@@ -114,9 +117,10 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             this.checkAbilityPool(player, State.COOLDOWN);
 
             //IEntityStats propsEntity = EntityStatsCapability.get(player);
-
-            propsEntity.alterMana(-manaCost);
-
+            if (!this.isEvolved)
+                propsEntity.alterMana(-manaCost);
+            else
+                propsEntity.alterMana(-evolvedManaCost);
             // experience of the spell
             if (propsEntity.hasExperienceSpell(this.getName())) {
                 int experience = propsEntity.getExperienceSpell(this.getName());
@@ -360,6 +364,10 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.experiencePoint;
     }
 
+    public void setEvolvedManaCost(int value)
+    {
+        this.evolvedManaCost = value;
+    }
 
     public void setmanaCost(int value)
     {

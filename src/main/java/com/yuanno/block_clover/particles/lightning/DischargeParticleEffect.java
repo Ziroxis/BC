@@ -16,7 +16,7 @@ public class DischargeParticleEffect extends ParticleEffect {
     {
         double phi = 0;
         double x, y, z;
-        double radius = 0.4;
+        double radius = 0.2;
         Random random = world.random;
         int i = 0;
 

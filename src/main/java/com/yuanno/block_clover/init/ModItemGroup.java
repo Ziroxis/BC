@@ -22,7 +22,7 @@ public class ModItemGroup {
     public static final ItemGroup BLOCK_CLOVER_ARTIFACTS = new ItemGroup("block_cloverModTabArtifacts") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.BAG_GLUTTONY.get());
+            return new ItemStack(ModItems.RABBIT_FOOT.get());
         }
     };
     public static final ItemGroup BLOCK_CLOVER_MISC = new ItemGroup("block_cloverMisc") {

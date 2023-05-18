@@ -16,19 +16,24 @@ public class SelfHealSealingAbility extends Ability {
             .setDescription("Seals your wounds, healing yourself.\nThe amount healed depends on your level.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
+    int healAmount = 5;
     public SelfHealSealingAbility()
     {
         super(INSTANCE);
         this.setMaxCooldown(10);
-        this.setmanaCost(25);
+        this.setEvolutionCost(70);
+        this.setEvolvedManaCost(20);
+        this.setmanaCost(30);
         this.setExperiencePoint(35);
         this.onUseEvent = this::onUseEvent;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
+        if (this.isEvolved())
+            healAmount = 10;
         IEntityStats stats = EntityStatsCapability.get(player);
-        player.heal(5 + ((float) stats.getLevel()/5));
+        player.heal(healAmount + ((float) stats.getLevel()/5));
         ((ServerPlayerEntity) player).connection.send(new SUpdateHealthPacket(player.getHealth(), player.getFoodData().getFoodLevel(), player.getFoodData().getSaturationLevel()));
 
         return true;

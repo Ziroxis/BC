@@ -9,6 +9,7 @@ import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.fire.LeoPalmaParticleEffect;
 import com.yuanno.block_clover.particles.sealing.SealingParticleEffect;
+import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -16,10 +17,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeMod;
 
 
-public class SealingEffect extends Effect {
+public class SealingEffect extends SpecialEffect {
     private static final ParticleEffect PARTICLES = new SealingParticleEffect();
 
     public SealingEffect()
@@ -52,11 +54,42 @@ public class SealingEffect extends Effect {
             PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
         }
     }
-
+    @Override
+    public boolean isDurationEffectTick(int duration, int amplifier)
+    {
+        return true;
+    }
     @Override
     public boolean shouldRender(EffectInstance effect)
     {
         return false;
+    }
+
+    @Override
+    public float[] getOverlayColor()
+    {
+        return new float[] { 0.0f, 0.0f, 0.0f, 1f };
+    }
+
+
+    @Override
+    public boolean hasBodyOverlayColor() {
+        return false;
+    }
+
+    @Override
+    public Block getBlockOverlay() {
+        return null;
+    }
+
+    @Override
+    public boolean isBlockingMovement() {
+        return true;
+    }
+
+    @Override
+    public ResourceLocation getResourceLocation(int duration) {
+        return null;
     }
 
     @Override

@@ -31,6 +31,8 @@ public class SealingProjectiles {
     @SubscribeEvent
     public static void registerEntityRenderers(FMLClientSetupEvent event)
     {
+        RenderingRegistry.registerEntityRenderingHandler(SEALING_PROJECTILE.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
+                .setTexture("sealing", "sealing_texture").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(EVOLVED_SEALING_PROJECTILE.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
                 .setTexture("sealing", "sealing_texture").setScale(1));
     }

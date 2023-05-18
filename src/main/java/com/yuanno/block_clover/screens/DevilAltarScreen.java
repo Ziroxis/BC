@@ -9,15 +9,19 @@ import com.yuanno.block_clover.blocks.tileentities.DevilAltarTileEntity;
 import com.yuanno.block_clover.blocks.tileentities.JuicerBlockTileEntity;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+
+import java.awt.*;
 
 public class DevilAltarScreen extends ContainerScreen<DevilAltarContainer> {
     private DevilAltarTileEntity tileEntity;
     private DevilAltarContainer container;
     // Location for texture
     private final ResourceLocation GUI_LOC = new ResourceLocation(Main.MODID, "textures/gui/devil_altar_gui.png");
+    private final ResourceLocation BUTTON_TEX = new ResourceLocation(Main.MODID, "textures/gui/devil_altar_button.png");
 
     public DevilAltarScreen(DevilAltarContainer container, PlayerInventory inv, ITextComponent text) {
         super(container, inv, text);
@@ -25,6 +29,13 @@ public class DevilAltarScreen extends ContainerScreen<DevilAltarContainer> {
             this.tileEntity = (DevilAltarTileEntity) container.tileEntity;
             this.container = container;
         }
+    }
+
+    public void init() {
+        super.init();
+        this.addButton(new ImageButton(this.leftPos+50,this.height/2+10,10,10,0,0,10,BUTTON_TEX, (p_214087_1_) -> {
+            //TODO put the code here for what the button should do
+        }));
     }
 
     @Override

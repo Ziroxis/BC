@@ -23,7 +23,6 @@ public class WildBurstingFlamesAbility extends RepeaterAbility {
         this.setMaxCooldown(15);
         this.setmanaCost(20);
         this.setMaxRepeaterCount(15, 4);
-        this.setEvolutionCost(50);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(20);
         this.onUseEvent = this::onUseEvent;

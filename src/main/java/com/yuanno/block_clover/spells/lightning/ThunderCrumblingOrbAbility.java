@@ -39,7 +39,7 @@ public class ThunderCrumblingOrbAbility extends Ability {
             LightningOrbProjectile projectile = new LightningOrbProjectile(player.level, player);
             player.level.addFreshEntity(projectile);
             ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1.5f, 1);
+            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
         }
         else
         {

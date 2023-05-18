@@ -17,7 +17,7 @@ public class FireBallAbility extends Ability {
     public FireBallAbility()
     {
         super(INSTANCE);
-        this.setEvolutionCost(50);
+        this.setEvolutionCost(3);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(25);

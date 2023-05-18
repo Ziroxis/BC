@@ -25,8 +25,8 @@ public class GiantEarthChunkProjectile extends AbilityProjectileEntity {
 
     public GiantEarthChunkProjectile(World world, LivingEntity player)
     {
-        super(EarthProjectiles.EARTH_CHUNK.get(), world, player);
-        this.setDamage(5);
+        super(EarthProjectiles.GIANT_EARTH_CHUNK.get(), world, player);
+        this.setDamage(8);
         this.setMaxLife(64);
         this.setPhysical(false);
         this.onEntityImpactEvent = this::onEntityImpactEvent;

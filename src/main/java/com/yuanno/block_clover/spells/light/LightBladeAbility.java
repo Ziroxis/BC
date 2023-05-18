@@ -40,7 +40,7 @@ public class LightBladeAbility extends Ability {
         LightBladeProjectile projectile = new LightBladeProjectile(player.level, player);
         player.level.addFreshEntity(projectile);
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 4f, 1);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 3f, 1);
         return true;
 
     }

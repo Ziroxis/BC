@@ -227,6 +227,26 @@
   "ability.block_clover.time_ressurection": "Time Ressurection",
   "ability.block_clover.time_magic_zone": "Time Magic Zone",
 
+  "ability.block_clover.bear_claw": "Bear claw",
+  "ability.block_clover.rhinoceros_armor": "Rhinoceros armor",
+  "ability.block_clover.cheeta_charge": "Cheetah charge",
+  "ability.block_clover.jaguars_hunt": "Jaguars hunt",
+  "ability.block_clover.lions_howl": "Lions howl",
+  "ability.block_clover.hippopotamus_bite": "Hippopotamus bite",
+  "ability.block_clover.ferral_regeneration": "Feral regeneration",
+
+  "ability.block_clover.copy": "Copy",
+
+  "ability.block_clover.mercury_bullet": "Silver bullet",
+  "ability.block_clover.mercury_spear": "Silver spear",
+  "ability.block_clover.mercury_rain": "Silver rain",
+  "ability.block_clover.mercury_bubble": "Silver shield",
+
+  "ability.block_clover.original_demon_slayer": "Original demon slayer",
+  "ability.block_clover.original_slashes": "Original slashes",
+  "ability.block_clover.original_demon_dweller": "Original demon dweller",
+  "ability.block_clover.original_demon_destroyer": "Original demon destroyer",
+  "ability.block_clover.air_dash": "Air dash",
 
   "curios.slot": "Slot",
   "curios.identifier.head": "Head",

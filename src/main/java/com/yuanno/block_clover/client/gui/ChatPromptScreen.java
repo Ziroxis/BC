@@ -4,13 +4,23 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.SequencedString;
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.entities.NPCentity;
+import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
+import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.networking.client.CUpdateQuestStatePacket;
+import com.yuanno.block_clover.spells.antimagic.DemonDwellerAbility;
+import com.yuanno.block_clover.spells.sword.DemonSlayerCleanAbility;
+import com.yuanno.block_clover.spells.sword.MagicDestroyerAbility;
+import com.yuanno.block_clover.spells.sword.MagicDwellerCleanAbility;
+import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -74,6 +84,24 @@ public class ChatPromptScreen extends Screen {
     public void loop(int posX, int posY)
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
+        if (entityStats.getAttribute().equals(ModValues.SWORD) && !entityStats.hasGrimoire())
+        {
+            this.message = new SequencedString("Huh??? I've never seen this before, a grimoire randomly chose you! It's yours!", 245, this.font.width(npCentity.doneSpeech) / 2, 2000);
+            entityStats.setGrimoire(true);
+            IAbilityData abilityData = AbilityDataCapability.get(player);
+            abilityData.addUnlockedAbility(player, DemonSlayerCleanAbility.INSTANCE);
+            abilityData.addUnlockedAbility(player, MagicDwellerCleanAbility.INSTANCE);
+            abilityData.addUnlockedAbility(player, MagicDestroyerAbility.INSTANCE);
+            abilityData.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
+            PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
+            PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
+            return;
+        }
+        else if (entityStats.getAttribute().equals(ModValues.SWORD) && entityStats.hasGrimoire())
+        {
+            this.message = new SequencedString("You must be a prodigy! Go make good use of your grimoire", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
+            return;
+        }
         ArrayList<String> alreadyDoneQuestID = new ArrayList<String>();
         ArrayList<String> inProgressQuestID = new ArrayList<String>();
         int amountDone = 0;

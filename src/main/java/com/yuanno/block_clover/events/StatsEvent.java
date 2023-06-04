@@ -16,13 +16,17 @@ import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
+import com.yuanno.block_clover.spells.beast.BearClawAbility;
+import com.yuanno.block_clover.spells.copy.CopyAbility;
 import com.yuanno.block_clover.spells.darkness.DarkCloakedBladeAbility;
 import com.yuanno.block_clover.spells.earth.EarthChunkAbility;
 import com.yuanno.block_clover.spells.fire.FireBallAbility;
 import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
+import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
 import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
+import com.yuanno.block_clover.spells.sword.AirDashAbility;
 import com.yuanno.block_clover.spells.time.TimeStealAbility;
 import com.yuanno.block_clover.spells.water.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
@@ -89,6 +93,18 @@ public class StatsEvent {
                 case "Water":
                     abilityProps.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
                     break;
+                case (ModValues.MERCURY):
+                    abilityProps.addUnlockedAbility(player, MercuryBulletAbility.INSTANCE);
+                    break;
+                case (ModValues.BEAST):
+                    abilityProps.addUnlockedAbility(player, BearClawAbility.INSTANCE);
+                    break;
+                case (ModValues.COPY):
+                    abilityProps.addUnlockedAbility(player, CopyAbility.INSTANCE);
+                    break;
+                case (ModValues.SWORD):
+                    abilityProps.addUnlockedAbility(player, AirDashAbility.INSTANCE);
+                    break;
                 case (ModValues.ANTIMAGIC):
                     abilityProps.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
                     abilityProps.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
@@ -154,6 +170,18 @@ public class StatsEvent {
                             break;
                         case (ModValues.WATER):
                             abilityProps.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
+                            break;
+                        case (ModValues.MERCURY):
+                            abilityProps.addUnlockedAbility(player, MercuryBulletAbility.INSTANCE);
+                            break;
+                        case (ModValues.BEAST):
+                            abilityProps.addUnlockedAbility(player, BearClawAbility.INSTANCE);
+                            break;
+                        case (ModValues.COPY):
+                            abilityProps.addUnlockedAbility(player, CopyAbility.INSTANCE);
+                            break;
+                        case (ModValues.SWORD):
+                            abilityProps.addUnlockedAbility(player, AirDashAbility.INSTANCE);
                             break;
                     }
                 }

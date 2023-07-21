@@ -112,23 +112,30 @@ public class StatsEvent {
             {
                 props.setRace(Beapi.randomizer(ModValues.races));
                 String race = props.getRace();
-                if (race.equals(ModValues.HUMAN)) // Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1
-                {
-                    props.setManaRegeneration(1);
-                    props.setMultiplier(1.2f);
-                    int chanceDevil = Beapi.RNG(5);
-                    if (chanceDevil == 0)
-                        props.setInnateDevil(true);
-                }
-                else if (race.equals(ModValues.ELF)) // Elf get mana regeneration = 2; multiplier = 1
-                {
-                    props.setManaRegeneration(2);
-                    props.setMultiplier(1);
-                }
-                else if (race.equals(ModValues.WITCH)) // Witch get mana regeneration = 1; xp multiplier = 0.3
-                {
-                    props.setManaRegeneration(1);
-                    props.setMultiplier(1.3f);
+                switch (race) {
+                    case ModValues.HUMAN:
+// Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1
+
+                        props.setManaRegeneration(1);
+                        props.setMultiplier(1.2f);
+                        int chanceDevil = Beapi.RNG(5);
+                        if (chanceDevil == 0) {
+                            props.setInnateDevil(true);
+                            props.setDevil(Beapi.randomizer(ModValues.devils));
+                        }
+                        break;
+                    case ModValues.ELF:
+// Elf get mana regeneration = 2; multiplier = 1
+
+                        props.setManaRegeneration(2);
+                        props.setMultiplier(1);
+                        break;
+                    case ModValues.WITCH:
+// Witch get mana regeneration = 1; xp multiplier = 0.3
+
+                        props.setManaRegeneration(1);
+                        props.setMultiplier(1.3f);
+                        break;
                 }
                 if (race.equals(ModValues.HYBRID)) // Hybrid get mana regeneration = 1; multiplier = 1; got 2 attributes at the same time
                 {

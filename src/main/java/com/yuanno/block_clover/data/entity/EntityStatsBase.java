@@ -36,6 +36,7 @@ public class EntityStatsBase implements IEntityStats{
     private int cookingExperience;
     private int maxCookingExperience;
     private boolean innateDevil;
+    private String devil;
 
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
 
@@ -413,8 +414,21 @@ public class EntityStatsBase implements IEntityStats{
         this.innateDevil = flag;
     }
 
+    @Override
     public boolean getInnateDevil()
     {
         return this.innateDevil;
+    }
+
+    @Override
+    public void setDevil(String devil)
+    {
+        this.devil = devil;
+    }
+
+    @Override
+    public String getDevil()
+    {
+        return this.getDevil();
     }
 }

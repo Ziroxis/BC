@@ -111,4 +111,7 @@ public interface IEntityStats {
 
     void setInnateDevil(boolean flag);
     boolean getInnateDevil();
+
+    void setDevil(String devil);
+    String getDevil();
 }

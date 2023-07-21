@@ -39,10 +39,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class StatsEvent {
@@ -115,22 +112,25 @@ public class StatsEvent {
             {
                 props.setRace(Beapi.randomizer(ModValues.races));
                 String race = props.getRace();
-                if (race.equals(ModValues.HUMAN))
+                if (race.equals(ModValues.HUMAN)) // Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1
                 {
                     props.setManaRegeneration(1);
                     props.setMultiplier(1.2f);
+                    int chanceDevil = Beapi.RNG(5);
+                    if (chanceDevil == 0)
+                        props.setInnateDevil(true);
                 }
-                else if (race.equals(ModValues.ELF))
+                else if (race.equals(ModValues.ELF)) // Elf get mana regeneration = 2; multiplier = 1
                 {
                     props.setManaRegeneration(2);
                     props.setMultiplier(1);
                 }
-                else if (race.equals(ModValues.WITCH))
+                else if (race.equals(ModValues.WITCH)) // Witch get mana regeneration = 1; xp multiplier = 0.3
                 {
                     props.setManaRegeneration(1);
                     props.setMultiplier(1.3f);
                 }
-                if (race.equals(ModValues.HYBRID))
+                if (race.equals(ModValues.HYBRID)) // Hybrid get mana regeneration = 1; multiplier = 1; got 2 attributes at the same time
                 {
                     props.setManaRegeneration(1);
                     props.setMultiplier(1);

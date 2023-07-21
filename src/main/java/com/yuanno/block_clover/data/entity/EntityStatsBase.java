@@ -35,6 +35,7 @@ public class EntityStatsBase implements IEntityStats{
     private int maxCookingLevel;
     private int cookingExperience;
     private int maxCookingExperience;
+    private boolean innateDevil;
 
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
 
@@ -404,5 +405,16 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public void setLinkAbility(boolean can) {
         this.canLink = can;
+    }
+
+    @Override
+    public void setInnateDevil(boolean flag)
+    {
+        this.innateDevil = flag;
+    }
+
+    public boolean getInnateDevil()
+    {
+        return this.innateDevil;
     }
 }

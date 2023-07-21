@@ -108,4 +108,7 @@ public interface IEntityStats {
 
     boolean getLinkAbility();
     void setLinkAbility(boolean can);
+
+    void setInnateDevil(boolean flag);
+    boolean getInnateDevil();
 }

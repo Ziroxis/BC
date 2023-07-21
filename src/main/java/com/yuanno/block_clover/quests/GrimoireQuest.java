@@ -8,6 +8,8 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Util;
+import net.minecraft.util.text.StringTextComponent;
 
 public class GrimoireQuest extends Quest {
 
@@ -26,8 +28,11 @@ public class GrimoireQuest extends Quest {
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         entityStats.setGrimoire(true);
+        if (entityStats.getInnateDevil())
+            player.sendMessage(new StringTextComponent("test"), Util.NIL_UUID);
         System.out.println("GOT IT");
         PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
+
         return true;
     }
 }

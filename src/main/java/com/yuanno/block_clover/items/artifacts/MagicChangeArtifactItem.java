@@ -62,7 +62,7 @@ public class MagicChangeArtifactItem extends ArtifactItem {
             abilityData.clearUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
             stats.setAttribute(Beapi.randomizer(ModValues.attributes));
             String attribute = stats.getAttribute();
-            switch (attribute) {
+            switch (attribute) { //TODO need to add the new magics
                 case "Wind":
                     abilityData.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
                     break;

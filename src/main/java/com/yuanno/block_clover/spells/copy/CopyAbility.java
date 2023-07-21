@@ -52,7 +52,6 @@ public class CopyAbility extends PunchAbility {
             int random = Beapi.RNG(amountAbility);
             abilityDataPlayer.addUnlockedAbility(player, targetEntity.getAbilityList().get(random));
         }
-        // TODO link this with bandits
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataPlayer), player);
         player.sendMessage(new TranslationTextComponent("You copied a spell!"), Util.NIL_UUID);
         return 0;

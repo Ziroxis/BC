@@ -11,6 +11,7 @@ import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
+import com.yuanno.block_clover.spells.beast.*;
 import com.yuanno.block_clover.spells.darkness.AvidyaSlashAbility;
 import com.yuanno.block_clover.spells.darkness.AvidyaWildSlashAbility;
 import com.yuanno.block_clover.spells.darkness.BlackHoleAbility;
@@ -21,6 +22,10 @@ import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
 import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
 import com.yuanno.block_clover.spells.light.LightSwordAbility;
+import com.yuanno.block_clover.spells.mercury.MercuryBubbleAbility;
+import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
+import com.yuanno.block_clover.spells.mercury.MercuryRainAbility;
+import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
 import com.yuanno.block_clover.spells.misc.ManaReinforcement;
 import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
@@ -129,6 +134,22 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 15, ChronoStasisGrigoraAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, TimeHopAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, TimeRessurectionAbility.INSTANCE);
+        }
+        if (statsProps.getAttribute().equals(ModValues.BEAST) || statsProps.getSecondAttribute().equals(ModValues.BEAST))
+        {
+            gainAbility(event.getPlayer(), 5, BeastRegenerationPassiveAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, CheetaChargeAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, JaguarsHunt.INSTANCE);
+            gainAbility(event.getPlayer(), 20, HippopotamusBiteAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, RhinocerosArmorAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 30, LionsHowlAbility.INSTANCE);
+        }
+        if (statsProps.getAttribute().equals(ModValues.MERCURY) || statsProps.getSecondAttribute().equals(ModValues.MERCURY))
+        {
+            gainAbility(event.getPlayer(), 5, MercurySpearAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, MercuryBulletAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, MercuryBubbleAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, MercuryRainAbility.INSTANCE);
         }
     }
 

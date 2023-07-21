@@ -2,7 +2,9 @@ package com.yuanno.block_clover.events;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -56,66 +58,48 @@ public class StatsEvent {
         if (!props.hasAttribute())
         {
             //TODO don't spawn with anti-magic + second attribute
-            props.setAttribute(randomAttributeString());
-            String attribute = props.getAttribute();
-            switch (attribute)
-            {
-                case "Wind":
-                    abilityProps.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
-                    break;
-                case "Fire":
-                    abilityProps.addUnlockedAbility(player, FireBallAbility.INSTANCE);
-                    break;
-                case "Light":
-                    abilityProps.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
-                    break;
-                case "Lightning":
-                    abilityProps.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
-                    break;
-                case "Darkness":
-                    abilityProps.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
-                    break;
-                case "Earth":
-                    abilityProps.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
-                    break;
-                case "Slash":
-                    abilityProps.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
-                    break;
-                case "Sealing":
-                    abilityProps.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
-                    break;
-                case "Time":
-                    abilityProps.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
-                    break;
-                case "Water":
-                    abilityProps.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
-                    break;
-                case (ModValues.MERCURY):
-                    abilityProps.addUnlockedAbility(player, MercuryBulletAbility.INSTANCE);
-                    break;
-                case (ModValues.BEAST):
-                    abilityProps.addUnlockedAbility(player, BearClawAbility.INSTANCE);
-                    break;
-                case (ModValues.COPY):
-                    abilityProps.addUnlockedAbility(player, CopyAbility.INSTANCE);
-                    break;
-                case (ModValues.SWORD):
-                    abilityProps.addUnlockedAbility(player, AirDashAbility.INSTANCE);
-                    break;
-                case (ModValues.ANTIMAGIC):
+            String attribute = randomAttributeString();
+            props.setAttribute(attribute);
+            // Create a HashMap to store the mapping between attribute values and abilities
+            Map<String, AbilityCore> abilityMap = new HashMap<>();
+            abilityMap.put(ModValues.WIND, WindBladeAbility.INSTANCE);
+            abilityMap.put(ModValues.FIRE, FireBallAbility.INSTANCE);
+            abilityMap.put(ModValues.LIGHT, LightBladeAbility.INSTANCE);
+            abilityMap.put(ModValues.LIGHTNING, ThunderGodBootsAbility.INSTANCE);
+            abilityMap.put(ModValues.DARKNESS, DarkCloakedBladeAbility.INSTANCE);
+            abilityMap.put(ModValues.EARTH, EarthChunkAbility.INSTANCE);
+            abilityMap.put(ModValues.SLASH, SlashBladesAbility.INSTANCE);
+            abilityMap.put(ModValues.SEALING, SealingProjectileAbility.INSTANCE);
+            abilityMap.put(ModValues.TIME, TimeStealAbility.INSTANCE);
+            abilityMap.put(ModValues.WATER, WaterBallAbility.INSTANCE);
+            abilityMap.put(ModValues.MERCURY, MercuryBulletAbility.INSTANCE);
+            abilityMap.put(ModValues.BEAST, BearClawAbility.INSTANCE);
+            abilityMap.put(ModValues.COPY, CopyAbility.INSTANCE);
+            abilityMap.put(ModValues.SWORD, AirDashAbility.INSTANCE);
+            abilityMap.put(ModValues.ANTIMAGIC, null); // Placeholder, as this case has multiple abilities
+
+            // Get the ability based on the attribute value from the HashMap
+            AbilityCore ability = abilityMap.get(attribute);
+
+            // Add the unlocked ability to the player
+            if (ability != null) {
+                abilityProps.addUnlockedAbility(player, ability);
+
+                // Additional operations for specific cases
+                if (attribute.equals(ModValues.ANTIMAGIC)) {
                     abilityProps.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
                     abilityProps.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
                     props.setRace(ModValues.HUMAN);
-                    break;
+                }
             }
+
             if (!attribute.equals(ModValues.ANTIMAGIC))
             {
                 props.setRace(Beapi.randomizer(ModValues.races));
                 String race = props.getRace();
                 switch (race) {
+                    // Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1
                     case ModValues.HUMAN:
-// Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1
-
                         props.setManaRegeneration(1);
                         props.setMultiplier(1.2f);
                         int chanceDevil = Beapi.RNG(5);
@@ -124,74 +108,60 @@ public class StatsEvent {
                             props.setDevil(Beapi.randomizer(ModValues.devils));
                         }
                         break;
+                    // Elf get mana regeneration = 2; multiplier = 1
                     case ModValues.ELF:
-// Elf get mana regeneration = 2; multiplier = 1
-
                         props.setManaRegeneration(2);
                         props.setMultiplier(1);
                         break;
+                    // Witch get mana regeneration = 1; xp multiplier = 0.3
                     case ModValues.WITCH:
-// Witch get mana regeneration = 1; xp multiplier = 0.3
-
                         props.setManaRegeneration(1);
                         props.setMultiplier(1.3f);
                         break;
                 }
-                if (race.equals(ModValues.HYBRID)) // Hybrid get mana regeneration = 1; multiplier = 1; got 2 attributes at the same time
-                {
+                if (race.equals(ModValues.HYBRID)) {
                     props.setManaRegeneration(1);
                     props.setMultiplier(1);
-                    do
-                    {
-                        props.setSecondAttribute(randomAttributeString());
-                    }   while (props.getSecondAttribute().equals(props.getAttribute()));
-                    String secondAttribute = props.getSecondAttribute();
-                    switch (secondAttribute)
-                    {
-                        case "Wind":
-                            abilityProps.addUnlockedAbility(player, WindBladeAbility.INSTANCE);
-                            break;
-                        case "Fire":
-                            abilityProps.addUnlockedAbility(player, FireBallAbility.INSTANCE);
-                            break;
-                        case "Light":
-                            abilityProps.addUnlockedAbility(player, LightBladeAbility.INSTANCE);
-                            break;
-                        case "Lightning":
-                            abilityProps.addUnlockedAbility(player, ThunderGodBootsAbility.INSTANCE);
-                            break;
-                        case "Darkness":
-                            abilityProps.addUnlockedAbility(player, DarkCloakedBladeAbility.INSTANCE);
-                            break;
-                        case "Earth":
-                            abilityProps.addUnlockedAbility(player, EarthChunkAbility.INSTANCE);
-                            break;
-                        case "Slash":
-                            abilityProps.addUnlockedAbility(player, SlashBladesAbility.INSTANCE);
-                            break;
-                        case "Sealing":
-                            abilityProps.addUnlockedAbility(player, SealingProjectileAbility.INSTANCE);
-                            break;
-                        case "Time":
-                            abilityProps.addUnlockedAbility(player, TimeStealAbility.INSTANCE);
-                            break;
-                        case (ModValues.WATER):
-                            abilityProps.addUnlockedAbility(player, WaterBallAbility.INSTANCE);
-                            break;
-                        case (ModValues.MERCURY):
-                            abilityProps.addUnlockedAbility(player, MercuryBulletAbility.INSTANCE);
-                            break;
-                        case (ModValues.BEAST):
-                            abilityProps.addUnlockedAbility(player, BearClawAbility.INSTANCE);
-                            break;
-                        case (ModValues.COPY):
-                            abilityProps.addUnlockedAbility(player, CopyAbility.INSTANCE);
-                            break;
-                        case (ModValues.SWORD):
-                            abilityProps.addUnlockedAbility(player, AirDashAbility.INSTANCE);
-                            break;
+
+                    // Create a list of available attributes (excluding the current attribute)
+                    List<String> availableAttributes = new ArrayList<>(Arrays.asList(
+                            ModValues.WIND, ModValues.FIRE, ModValues.LIGHT, ModValues.LIGHTNING, ModValues.DARKNESS,
+                            ModValues.EARTH, ModValues.SLASH, ModValues.SEALING, ModValues.TIME,
+                            ModValues.WATER, ModValues.MERCURY, ModValues.BEAST, ModValues.COPY, ModValues.SWORD
+                    ));
+
+                    // Remove the current attribute from the available attributes list
+                    availableAttributes.remove(props.getAttribute());
+
+                    // Randomly select the second attribute from the remaining available attributes
+                    String secondAttribute = availableAttributes.get(new Random().nextInt(availableAttributes.size()));
+
+                    // Map secondAttribute to its corresponding ability using a HashMap
+                    Map<String, AbilityCore> abilityMapSecond = new HashMap<>();
+                    abilityMapSecond.put(ModValues.WIND, WindBladeAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.FIRE, FireBallAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.LIGHT, LightBladeAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.LIGHTNING, ThunderGodBootsAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.DARKNESS, DarkCloakedBladeAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.EARTH, EarthChunkAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.SLASH, SlashBladesAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.SEALING, SealingProjectileAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.TIME, TimeStealAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.WATER, WaterBallAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.MERCURY, MercuryBulletAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.BEAST, BearClawAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.COPY, CopyAbility.INSTANCE);
+                    abilityMapSecond.put(ModValues.SWORD, AirDashAbility.INSTANCE);
+
+                    // Get the ability based on the secondAttribute value from the HashMap
+                    AbilityCore abilitySecond = abilityMapSecond.get(secondAttribute);
+
+                    // Add the unlocked ability to the player
+                    if (abilitySecond != null) {
+                        abilityProps.addUnlockedAbility(player, abilitySecond);
                     }
                 }
+
             }
             props.setLevel(1);
             props.setExperience(0);

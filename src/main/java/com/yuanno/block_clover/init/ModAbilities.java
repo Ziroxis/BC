@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.BeRegistry;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.effects.LifeCurseEffect;
 import com.yuanno.block_clover.spells.antimagic.*;
 import com.yuanno.block_clover.spells.beast.*;
 import com.yuanno.block_clover.spells.copy.CopyAbility;
@@ -13,11 +11,14 @@ import com.yuanno.block_clover.spells.curse.MagicCurseAbility;
 import com.yuanno.block_clover.spells.curse.PoisonousCurseAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
+import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.gravity.GravitySingularityAbility;
 import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
 import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
+import com.yuanno.block_clover.spells.ice.DarkIceAbility;
+import com.yuanno.block_clover.spells.ice.IceBallAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.mercury.*;
@@ -60,9 +61,10 @@ public class ModAbilities {
     public static final AbilityCore[] COPY = new AbilityCore[] {CopyAbility.INSTANCE};
     public static final AbilityCore[] BEAST = new AbilityCore[] {BearClawAbility.INSTANCE, RhinocerosArmorAbility.INSTANCE, BeastRegenerationPassiveAbility.INSTANCE, CheetaChargeAbility.INSTANCE, JaguarsHunt.INSTANCE, LionsHowlAbility.INSTANCE, HippopotamusBiteAbility.INSTANCE};
     public static final AbilityCore[] SWORD = new AbilityCore[] {MagicDwellerCleanAbility.INSTANCE, OriginalSlashesAbility.INSTANCE, MagicDestroyerAbility.INSTANCE, AirDashAbility.INSTANCE};
+    public static final AbilityCore[] ICE = new AbilityCore[] {IceBallAbility.INSTANCE};
     public static final AbilityCore[] UNDEAD = new AbilityCore[] {UndeadRecruitAbility.INSTANCE, UnleashUndeadAbility.INSTANCE};
     public static final AbilityCore[] CURSE = new AbilityCore[] {PoisonousCurseAbility.INSTANCE, MagicCurseAbility.INSTANCE, LifeCurseAbility.INSTANCE, HealingCurseAbility.INSTANCE};
-    public static final AbilityCore[] DEVIL = new AbilityCore[] {CrowAbility.INSTANCE};
+    public static final AbilityCore[] DEVIL = new AbilityCore[] {CrowAbility.INSTANCE, DarkFireBallAbility.INSTANCE, DarkIceAbility.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));
@@ -88,6 +90,7 @@ public class ModAbilities {
         registerAbilities(BEAST);
         registerAbilities(SWORD);
         //registerAbilities(UNDEAD);
+        registerAbilities(ICE);
         registerAbilities(CURSE);
         registerAbilities(DEVIL);
     }

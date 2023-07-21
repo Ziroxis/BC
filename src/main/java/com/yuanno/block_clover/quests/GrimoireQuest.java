@@ -1,18 +1,19 @@
 package com.yuanno.block_clover.quests;
 
-import com.sun.tools.jdi.Packet;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.objectives.ReachLevelObjective;
-import com.yuanno.block_clover.data.ability.AbilityDataBase;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
+import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
+import com.yuanno.block_clover.spells.ice.DarkIceAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
@@ -39,13 +40,13 @@ public class GrimoireQuest extends Quest {
             IAbilityData abilityDataBase = AbilityDataCapability.get(player);
             switch (entityStats.getDevil())
             {
-                case "Lilith":
-                    //give ability;
+                case (ModValues.LILITH):
+                    abilityDataBase.addUnlockedAbility(player, DarkIceAbility.INSTANCE);
                     break;
-                case "Nahaman":
-                    //give ability
+                case (ModValues.NAHAMAN):
+                    abilityDataBase.addUnlockedAbility(player, DarkFireBallAbility.INSTANCE);
                     break;
-                case "Walgner":
+                case (ModValues.WALGNER):
                     abilityDataBase.addUnlockedAbility(player, CrowAbility.INSTANCE);
                     break;
             }

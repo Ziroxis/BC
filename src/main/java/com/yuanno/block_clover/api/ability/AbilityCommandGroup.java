@@ -25,8 +25,10 @@ public enum AbilityCommandGroup implements IExtensibleEnum
 	MERCURY(() -> ModAbilities.MERCURY),
 	BEAST(() -> ModAbilities.BEAST),
 	COPY(() -> ModAbilities.COPY),
+	ICE(() -> ModAbilities.ICE),
 	UNDEAD(() -> ModAbilities.UNDEAD),
 	CURSE(() -> ModAbilities.CURSE),
+	DEVIL(() -> ModAbilities.DEVIL),
 	MISC(() -> ModAbilities.MISC);
 
 

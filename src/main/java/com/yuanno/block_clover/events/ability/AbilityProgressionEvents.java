@@ -105,7 +105,6 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.EARTH) || statsProps.getSecondAttribute().equals(ModValues.EARTH))
         {
-            gainAbility(event.getPlayer(), 3, EarthPassiveAbility.INSTANCE);
             gainAbility(event.getPlayer(), 5, EarthChargeAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, EarthGlovesAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, EarthMinionAbility.INSTANCE);

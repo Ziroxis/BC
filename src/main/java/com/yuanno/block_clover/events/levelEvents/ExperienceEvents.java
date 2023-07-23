@@ -37,12 +37,12 @@ public class ExperienceEvents {
             if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
                 return;
             if (statsProps.getRace().equals(ModValues.ELF)) {
-                statsProps.alterMaxMana(10);
-                statsProps.alterManaRegeneration(0.5f);
+                statsProps.alterMaxMana(100);
+                statsProps.alterManaRegeneration(0.1f);
             }
             else {
-                statsProps.alterMaxMana(5);
-                statsProps.alterManaRegeneration(0.25f);
+                statsProps.alterMaxMana(50);
+                statsProps.alterManaRegeneration(0.05f);
             }
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
             //player.sendMessage(new StringTextComponent("You leveled up to level " + statsProps.getLevel() + "!"), player.getUUID());

@@ -51,6 +51,7 @@ public class EntityStatsCapability {
                 props.putInt("maxCookingExperience", instance.getMaxCookingExperience());
 
                 props.putBoolean("innateDevil", instance.getInnateDevil());
+                props.putString("devil", instance.getDevil());
 
                 // Save the HashMap
                 CompoundNBT hashMapNBT = new CompoundNBT();
@@ -93,6 +94,7 @@ public class EntityStatsCapability {
                 instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
 
                 instance.setInnateDevil(props.getBoolean("innateDevil"));
+                instance.setDevil(props.getString("devil"));
 
                 CompoundNBT hashMapNBT = props.getCompound("experience_spells");
                 HashMap<String, Integer> hashMap = new HashMap<>();

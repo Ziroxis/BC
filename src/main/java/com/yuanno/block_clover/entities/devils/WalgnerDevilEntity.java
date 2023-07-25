@@ -1,8 +1,13 @@
 package com.yuanno.block_clover.entities.devils;
 
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.entities.BCentity;
 import com.yuanno.block_clover.entities.goals.spells.CrowSpellGoal;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
+import com.yuanno.block_clover.spells.devil.CrowAbility;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.MobEntity;
@@ -14,6 +19,7 @@ import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -86,5 +92,20 @@ public class WalgnerDevilEntity extends BCentity {
         spawnData = super.finalizeSpawn(world, difficulty, reason, spawnData, dataTag);
         return spawnData;
 
+    }
+
+    @Override
+    public void die(DamageSource source)
+    {
+        super.die(source);
+        if (source.getEntity() instanceof PlayerEntity)
+        {
+            PlayerEntity player = (PlayerEntity) source.getEntity();
+            IAbilityData abilityData = AbilityDataCapability.get(player);
+            abilityData.addUnlockedAbility(player, CrowAbility.INSTANCE);
+            // add the other abilities that you get from walgner
+            PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+
+        }
     }
 }

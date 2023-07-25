@@ -29,7 +29,12 @@ public class ModValues {
     public static final String[] attributes_no_antimagic = {
             ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME
     };
-
+    public static final String NAHAMAN = "Nahaman";
+    public static final String WALGNER = "Walgner";
+    public static final String LILITH = "Lilith";
+    public static final String[] devils = {
+            ModValues.NAHAMAN, ModValues.WALGNER, ModValues.LILITH
+    };
     //Races
     public static final String HUMAN = "Human";
     public static final String ELF = "Elf";

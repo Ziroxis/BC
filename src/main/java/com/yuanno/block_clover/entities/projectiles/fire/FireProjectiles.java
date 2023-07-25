@@ -23,6 +23,10 @@ public class FireProjectiles {
             () -> Beapi.createEntityType(FireBallProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":fire_ball"));
+    public static final RegistryObject<EntityType<FireBallDarkProjectile>> FIRE_BALL_DARK = Beapi.registerEntityType("Fire Ball Dark",
+            () -> Beapi.createEntityType(FireBallDarkProjectile::new)
+                    .sized(1f, 1f)
+                    .build(Main.MODID + ":fire_ball_dark"));
     public static final RegistryObject<EntityType<GiantFireBallProjectile>> GIANT_FIRE_BALL = Beapi.registerEntityType("Giant Fire Ball",
             () -> Beapi.createEntityType(GiantFireBallProjectile::new)
                     .sized(3f, 3f)
@@ -46,6 +50,8 @@ public class FireProjectiles {
     @SubscribeEvent
     public static void registerEntityRenderers(FMLClientSetupEvent event)
     {
+        RenderingRegistry.registerEntityRenderingHandler(FIRE_BALL_DARK.get(), new AbilityProjectileRenderer.Factory(new FireBallModel())
+                .setTexture("fire", "fireball_dark").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(FIRE_BALL.get(), new AbilityProjectileRenderer.Factory(new FireBallModel())
                 .setTexture("fire", "fireball").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(GIANT_FIRE_BALL.get(), new AbilityProjectileRenderer.Factory(new FireBallModel())

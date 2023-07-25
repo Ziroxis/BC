@@ -90,7 +90,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (player.level.isClientSide)
             return;
 
-        //TODO try to do here the experience stuff
+        //TODO put the multiplier here
 
         player.level.getProfiler().push(() ->
         {

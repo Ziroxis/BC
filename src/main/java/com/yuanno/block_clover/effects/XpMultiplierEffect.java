@@ -18,28 +18,8 @@ public class XpMultiplierEffect extends Effect {
         super(EffectType.BENEFICIAL, 3381504);
     }
 
-    @Override
-    public void applyEffectTick(LivingEntity entity, int p_76394_2_) {
-        if(!entity.level.isClientSide()) {
-            this.entity = entity;
-            IEntityStats props = EntityStatsCapability.get(entity);
-            props.alterManaRegeneration(0.2f);
-        }
-        super.applyEffectTick(entity, p_76394_2_);
-    }
 
 
-    @Override
-    public boolean isDurationEffectTick(int duration, int p_76397_2_) {
-        if(duration > 20) {
-            return true;
-        } else {
-            if(entity != null) {
-                IEntityStats props = EntityStatsCapability.get(entity);
-                props.alterManaRegeneration(-0.2F);
-            }
-            return false;
-        }
-    }
+
 
 }

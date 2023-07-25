@@ -35,7 +35,7 @@ public class MercuryBulletAbility extends Ability {
             projectile.setLife(128);
         }
         player.level.addFreshEntity(projectile);
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2, 1);
         return true;
     }
 }

@@ -49,9 +49,10 @@ public class LevelUpOverlay extends AbstractGui {
         String spellEvolution = "";
         for (int i = 0; i < abilityData.getEquippedAbilities().length; i++)
         {
-            if (abilityData.getEquippedAbility(i) != null && abilityData.getEquippedAbility(i).isOnCooldown()
-                    && abilityData.getEquippedAbility(i).getEvolutionCost() != 0 &&
-                    (int) propsEntity.getExperienceSpell(abilityData.getEquippedAbility(i).getName()) == abilityData.getEquippedAbility(i).getEvolutionCost()
+            if (abilityData.getEquippedAbility(i) != null
+                    && abilityData.getEquippedAbility(i).isOnCooldown()
+                    && abilityData.getEquippedAbility(i).getEvolutionCost() != 0
+                    && (int) propsEntity.getExperienceSpell(abilityData.getEquippedAbility(i).getName()) == abilityData.getEquippedAbility(i).getEvolutionCost()
                     && !abilityData.getEquippedAbility(i).isEvolved())
             {
                 spellEvolution = abilityData.getEquippedAbility(i).getName() + " has evolved!";

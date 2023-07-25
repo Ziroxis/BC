@@ -25,9 +25,9 @@ public class LionsHowlAbility extends Ability {
             .setDescription("Howl as a unchained beast of a lion, giving nearby enemies negative effects")
             .setDamageKind(AbilityDamageKind.DEBUFF)
             .build();
-    int minimumDiameter = 10;
+    int minimumDiameter = 20;
     int durationEffects = 120;
-    int effectStrenght = 0;
+    int effectStrength = 0;
     boolean doDamage = false;
     public LionsHowlAbility()
     {
@@ -36,6 +36,8 @@ public class LionsHowlAbility extends Ability {
         this.setEvolutionCost(50);
         this.setMaxCooldown(25);
         this.setExperiencePoint(25);
+
+        this.onUseEvent = this::onUseEvent;
     }
 
     public boolean onUseEvent(PlayerEntity player)
@@ -43,9 +45,9 @@ public class LionsHowlAbility extends Ability {
         IEntityStats stats = EntityStatsCapability.get(player);
         List<Entity> entities = new ArrayList<>();
         if (this.isEvolved()) {
-            minimumDiameter = 20;
+            minimumDiameter = 30;
             durationEffects = 180;
-            effectStrenght = 1;
+            effectStrength = 1;
             doDamage = true;
         }
         entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, minimumDiameter + (float) stats.getLevel() / 2);
@@ -59,10 +61,10 @@ public class LionsHowlAbility extends Ability {
 
                 if (entity instanceof LivingEntity)
                 {
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, durationEffects, effectStrenght));
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.BLINDNESS, durationEffects, effectStrenght));
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.CONFUSION, durationEffects, effectStrenght));
-                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, durationEffects, effectStrenght));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, durationEffects, effectStrength));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.BLINDNESS, durationEffects, effectStrength));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.CONFUSION, durationEffects, effectStrength));
+                    ((LivingEntity) entity).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, durationEffects, effectStrength));
 
                     if (doDamage)
                         entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 5);

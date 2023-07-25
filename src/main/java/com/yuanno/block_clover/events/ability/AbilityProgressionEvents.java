@@ -151,7 +151,6 @@ public class AbilityProgressionEvents {
         if (statsProps.getAttribute().equals(ModValues.MERCURY) || statsProps.getSecondAttribute().equals(ModValues.MERCURY))
         {
             gainAbility(event.getPlayer(), 5, MercurySpearAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 15, MercuryBulletAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, MercuryBubbleAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, MercuryRainAbility.INSTANCE);
         }

@@ -21,7 +21,6 @@ public class HippopotamusBiteAbility extends PunchAbility implements IParallelCo
         super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(10);
-        this.setEvolutionCost(50);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(50);
         this.onHitEntityEvent = this::onHitEntityEvent;

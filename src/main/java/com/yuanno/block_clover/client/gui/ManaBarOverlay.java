@@ -62,7 +62,7 @@ public class ManaBarOverlay {
                 Minecraft mc = Minecraft.getInstance();
 
 
-                String manaString = "" + entityStats.getMana();
+                String manaString = "" + (int) entityStats.getMana();
                 int colour_x = ((mana * 8) + 9);
                 mc.textureManager.bind(manaBar);
                 mc.gui.blit(event.getMatrixStack(), 20, 130, 0, 0, tex_width, tex_height);

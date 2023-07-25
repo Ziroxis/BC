@@ -22,7 +22,7 @@ public class MercuryRainAbility extends ContinuousAbility {
     {
         super(INSTANCE);
         this.setMaxCooldown(20);
-        this.setmanaCost(0);
+        this.setmanaCost(10);
         this.setExperiencePoint(25);
         this.setExperienceGainLevelCap(40);
         this.duringContinuityEvent = this::duringContinuityEvent;

@@ -21,7 +21,7 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.List;
 
 public class LunaticSlashAbility extends RepeaterAbility {
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Lunatic Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, LeoPalmaAbility.class)
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Lunatic Slash", AbilityCategories.AbilityCategory.ATTRIBUTE, LunaticSlashAbility.class)
             .setDescription("Slashes the enemies in front of you.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .setDependencies(SlashBladesAbility.INSTANCE)

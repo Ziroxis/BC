@@ -9,12 +9,16 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.data.quest.IQuestData;
+import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
@@ -43,6 +47,8 @@ import net.minecraftforge.fml.common.Mod;
 import java.lang.reflect.Array;
 import java.util.*;
 
+import static com.yuanno.block_clover.api.Beapi.randomAttributeString;
+
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class StatsEvent {
 
@@ -52,7 +58,10 @@ public class StatsEvent {
         PlayerEntity player = event.getPlayer();
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
+        IQuestData questData = QuestDataCapability.get(player);
+        questData.addInProgressQuest(ModQuests.GRIMOIRE);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
+        props.setMultiplier(1);
         PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
         if (!props.hasAttribute())
         {
@@ -220,6 +229,7 @@ public class StatsEvent {
                 props.setTitle("§2True farmer");
                 break;
         }
+        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }
@@ -302,58 +312,4 @@ public class StatsEvent {
         }
     }
 
-    public static String randomAttributeString()
-    {
-        String attribute = "";
-
-        List<List<String>> elementalAttributes = new ArrayList<>();
-
-        List<String> elemental = Arrays.asList(ModValues.DARKNESS, ModValues.EARTH, ModValues.FIRE, ModValues.LIGHT, ModValues.WATER, ModValues.WIND);
-        elementalAttributes.add(elemental);
-        List<String> subElemental = Arrays.asList(ModValues.LIGHTNING, ModValues.MERCURY);
-        elementalAttributes.add(subElemental);
-
-        List<List<String>> arcaneAttributes = new ArrayList<>();
-        List<String> normalArcane = Arrays.asList(ModValues.BEAST, ModValues.SEALING, ModValues.SLASH);
-        arcaneAttributes.add(normalArcane);
-        List<String> specialArcane = Arrays.asList(ModValues.COPY, ModValues.SWORD, ModValues.TIME);
-        arcaneAttributes.add(specialArcane);
-
-        List<String> specialCase = Arrays.asList(ModValues.ANTIMAGIC);
-
-        List<List<String>> allMixedAttributes = new ArrayList<>();
-        allMixedAttributes.addAll(elementalAttributes);
-        allMixedAttributes.addAll(arcaneAttributes);
-
-        double groupElementalWeight = 0.5;
-        double groupArcaneWeight = 0.5;
-
-        // randomly select between group A and group B based on their weights
-        List<List<String>> chosenGroup = Math.random() < groupElementalWeight ? elementalAttributes : arcaneAttributes;
-
-        // set weights for each subgroup
-        double subgroupNormalArcaneWeight = 0.7;
-        double subgroupSpecialArcaneWeight = 0.3;
-        double subgroupElementalWeight = 0.6;
-        double subgroupSubElementalWeight = 0.4;
-
-        // randomly select between the two subgroups within the chosen group based on their weights
-        List<String> chosenSubgroup;
-        if (chosenGroup == arcaneAttributes) {
-            chosenSubgroup = Math.random() < subgroupNormalArcaneWeight ? normalArcane : specialArcane;
-        } else {
-            chosenSubgroup = Math.random() < subgroupElementalWeight ? elemental : subElemental;
-        }
-
-        // randomly select an attribute from the chosen subgroup
-        String chosenAttribute = chosenSubgroup.get((int) (Math.random() * chosenSubgroup.size()));
-
-        // randomly select an attribute from the specialCase list with a 5% chance
-        if (Math.random() < 0.05) {
-            chosenAttribute = specialCase.get((int) (Math.random() * specialCase.size()));
-        }
-
-        attribute = chosenAttribute;
-        return attribute;
-    }
 }

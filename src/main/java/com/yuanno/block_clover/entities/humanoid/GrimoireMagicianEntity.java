@@ -49,7 +49,7 @@ public class GrimoireMagicianEntity extends NPCentity
         this.quests.add(ModQuests.MANAZONEQUEST);
         this.requisiteSpeech = "You'll need to be a bit stronger to learn the spells I want to teach you!";
         this.questChoiceSpeech = "Would you like to learn the art of mana?";
-        this.acceptanceSpeech = "Fine... You'll have to meditate for that.";
+        this.acceptanceSpeech = "Fine... You'll have to do the quest I've given you for that. Check your quests for more information!";
         this.declineSpeech = "Not everyone is ready for the path of strength";
         this.waitingSpeech = "Have you done your meditation?";
         this.doneSpeech = "My teachings end here for now";

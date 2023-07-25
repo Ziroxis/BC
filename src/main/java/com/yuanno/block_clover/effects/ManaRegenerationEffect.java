@@ -18,7 +18,7 @@ public class ManaRegenerationEffect extends Effect {
             this.entity = entity;
             IEntityStats props = EntityStatsCapability.get(entity);
             if(props.getMultiplier() <= 1) {
-                props.alterMultiplier(0.2F);
+                props.alterManaRegeneration(0.2F);
             }
         }
         super.applyEffectTick(entity, p_76394_2_);
@@ -32,7 +32,7 @@ public class ManaRegenerationEffect extends Effect {
         } else {
             if(entity != null) {
                 IEntityStats props = EntityStatsCapability.get(entity);
-                props.alterMultiplier(-0.2F);
+                props.alterManaRegeneration(-0.2F);
             }
             return false;
         }

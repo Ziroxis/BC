@@ -2,7 +2,6 @@ package com.yuanno.block_clover.quests;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
-import com.yuanno.block_clover.api.Quest.objectives.UseAbilityObjective;
 import com.yuanno.block_clover.api.Quest.objectives.UseContinuousAbilityObjective;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -16,7 +15,7 @@ import com.yuanno.block_clover.spells.earth.EarthManaZoneAbility;
 import com.yuanno.block_clover.spells.fire.CalidusBrachiumBarrageAbility;
 import com.yuanno.block_clover.spells.light.ArrowsOfJudgement;
 import com.yuanno.block_clover.spells.lightning.ThunderManaZone;
-import com.yuanno.block_clover.spells.misc.ManaReinforcement;
+import com.yuanno.block_clover.spells.misc.ManaReinforcementAbility;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.SealingManaZoneAbility;
 import com.yuanno.block_clover.spells.slash.SlashManaZone;
@@ -47,7 +46,7 @@ public class ManaZoneQuest extends Quest {
             case (ModValues.ANTIMAGIC):
 
             case (ModValues.WIND):
-                abilityData.addUnlockedAbility(player, ManaReinforcement.INSTANCE);
+                abilityData.addUnlockedAbility(player, ManaReinforcementAbility.INSTANCE);
                 break;
             case (ModValues.DARKNESS):
                 abilityData.addUnlockedAbility(player, BlackMoonAbility.INSTANCE);

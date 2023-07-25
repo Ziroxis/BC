@@ -21,7 +21,7 @@ public class XpMultiplierEvent {
             {
                 PlayerEntity player = (PlayerEntity) event.getEntity();
                 IEntityStats entityStats = EntityStatsCapability.get(player);
-                entityStats.alterMultiplier(0.2f);
+                entityStats.alterMultiplier(0.5f);
             }
         }
     }
@@ -35,7 +35,7 @@ public class XpMultiplierEvent {
             {
                 PlayerEntity player = (PlayerEntity) event.getEntity();
                 IEntityStats entityStats = EntityStatsCapability.get(player);
-                entityStats.alterMultiplier(-0.2f);
+                entityStats.alterMultiplier(-0.5f);
             }
         }
     }

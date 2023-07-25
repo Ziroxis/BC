@@ -37,7 +37,6 @@ import java.util.Random;
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
-    //TODO check with the other ability class
     private boolean assignedExperience = false;
     private boolean isEvolved;
     private int evolutionCost;
@@ -133,7 +132,8 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             // experience of player
             if (propsEntity.getLevel() < experienceGainLevelCap)
             {
-                propsEntity.alterExperience(experiencePoint);
+                float experienceToGive = experiencePoint * propsEntity.getMultiplier();
+                propsEntity.alterExperience((int) experienceToGive);
 
                 ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
                 MinecraftForge.EVENT_BUS.post(eventExperience);

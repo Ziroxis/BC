@@ -5,16 +5,15 @@ import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.objectives.UseContinuousAbilityObjective;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
-import com.yuanno.block_clover.init.ModAbilities;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
-import com.yuanno.block_clover.spells.misc.ManaReinforcement;
+import com.yuanno.block_clover.spells.misc.ManaReinforcementAbility;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class ManaSkinQuest extends Quest {
 
-    private Objective useAbility = new UseContinuousAbilityObjective("Use mana reinforcements for 2 minutes while standing still", 1200, ManaReinforcement.INSTANCE, true);
+    private Objective useAbility = new UseContinuousAbilityObjective("Use mana reinforcements for 2 minutes while standing still", 1200, ManaReinforcementAbility.INSTANCE, true);
 
     public ManaSkinQuest()
     {

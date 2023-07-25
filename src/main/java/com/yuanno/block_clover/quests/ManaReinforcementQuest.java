@@ -5,13 +5,9 @@ import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.objectives.ReachLevelObjective;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
-import com.yuanno.block_clover.data.entity.EntityStatsCapability;
-import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
-import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
-import com.yuanno.block_clover.spells.misc.ManaReinforcement;
-import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
+import com.yuanno.block_clover.spells.misc.ManaReinforcementAbility;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class ManaReinforcementQuest extends Quest {
@@ -30,7 +26,7 @@ public class ManaReinforcementQuest extends Quest {
     public boolean giveReward(PlayerEntity player)
     {
         IAbilityData abilityData = AbilityDataCapability.get(player);
-        abilityData.addUnlockedAbility(player, ManaReinforcement.INSTANCE);
+        abilityData.addUnlockedAbility(player, ManaReinforcementAbility.INSTANCE);
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
         return true;
     }

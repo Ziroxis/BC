@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.events.ability;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -24,10 +23,9 @@ import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
 import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryBubbleAbility;
-import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryRainAbility;
 import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
-import com.yuanno.block_clover.spells.misc.ManaReinforcement;
+import com.yuanno.block_clover.spells.misc.ManaReinforcementAbility;
 import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
 import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
@@ -38,7 +36,6 @@ import com.yuanno.block_clover.spells.wind.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.slash.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -53,7 +50,6 @@ public class AbilityProgressionEvents {
         //TODO make this pop up on screen
         if (!statsProps.hasGrimoire())
             return;
-        gainAbility(event.getPlayer(), 10, ManaReinforcement.INSTANCE);
         if (statsProps.getInnateDevil())
         {
             gainAbility(event.getPlayer(), 10, DevilSummoning.INSTANCE);

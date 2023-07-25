@@ -44,7 +44,7 @@ public class BiomeEvents {
             if (biome.equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.getId()))
             {
                 if (!hasMultiplier) {
-                    entityStats.alterMultiplier(0.3f);
+                    entityStats.alterMultiplier(0.5f);
                     hasMultiplier = true;
                 }
                 if (manaSkinAbility == null || !manaSkinAbility.isContinuous())

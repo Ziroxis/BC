@@ -12,12 +12,13 @@ import com.yuanno.block_clover.spells.curse.PoisonousCurseAbility;
 import com.yuanno.block_clover.spells.darkness.*;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
+import com.yuanno.block_clover.spells.devil.DevilSummoning;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.gravity.GravitySingularityAbility;
 import com.yuanno.block_clover.spells.gravity.HeavyInfightingAbility;
 import com.yuanno.block_clover.spells.gravity.PresenceOfTheDemonKingAbility;
-import com.yuanno.block_clover.spells.ice.DarkIceAbility;
+import com.yuanno.block_clover.spells.devil.DarkIceAbility;
 import com.yuanno.block_clover.spells.ice.IceBallAbility;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
@@ -64,7 +65,7 @@ public class ModAbilities {
     public static final AbilityCore[] ICE = new AbilityCore[] {IceBallAbility.INSTANCE};
     public static final AbilityCore[] UNDEAD = new AbilityCore[] {UndeadRecruitAbility.INSTANCE, UnleashUndeadAbility.INSTANCE};
     public static final AbilityCore[] CURSE = new AbilityCore[] {PoisonousCurseAbility.INSTANCE, MagicCurseAbility.INSTANCE, LifeCurseAbility.INSTANCE, HealingCurseAbility.INSTANCE};
-    public static final AbilityCore[] DEVIL = new AbilityCore[] {CrowAbility.INSTANCE, DarkFireBallAbility.INSTANCE, DarkIceAbility.INSTANCE};
+    public static final AbilityCore[] DEVIL = new AbilityCore[] {CrowAbility.INSTANCE, DarkFireBallAbility.INSTANCE, DarkIceAbility.INSTANCE, DevilSummoning.INSTANCE};
     private static void registerAbilities(AbilityCore[] abilities)
     {
         Arrays.stream(abilities).filter(Objects::nonNull).forEach(abl -> BeRegistry.registerAbility(abl));

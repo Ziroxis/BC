@@ -13,7 +13,7 @@ import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
-import com.yuanno.block_clover.spells.ice.DarkIceAbility;
+import com.yuanno.block_clover.spells.devil.DarkIceAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;

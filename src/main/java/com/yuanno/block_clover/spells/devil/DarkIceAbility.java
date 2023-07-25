@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.spells.ice;
+package com.yuanno.block_clover.spells.devil;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;

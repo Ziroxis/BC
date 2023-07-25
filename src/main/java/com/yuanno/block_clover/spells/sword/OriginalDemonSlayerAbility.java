@@ -9,14 +9,15 @@ import com.yuanno.block_clover.init.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
-public class MagicDwellerCleanAbility extends ItemAbility implements IParallelContinuousAbility {
+public class OriginalDemonSlayerAbility extends ItemAbility implements IParallelContinuousAbility {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Original demon dweller", AbilityCategories.AbilityCategory.ATTRIBUTE, MagicDwellerCleanAbility.class)
-            .setDescription("Takes the demon dweller sword out of your grimoire")
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Original Demon Slayer", AbilityCategories.AbilityCategory.ATTRIBUTE, OriginalDemonSlayerAbility.class)
+            .setDescription("Takes the original demon slayer sword out of your grimoire")
             .setDamageKind(AbilityDamageKind.ITEM)
             .build();
 
-    public MagicDwellerCleanAbility()
+    // TODO need a texture
+    public OriginalDemonSlayerAbility()
     {
         super(INSTANCE);
 
@@ -27,7 +28,7 @@ public class MagicDwellerCleanAbility extends ItemAbility implements IParallelCo
     @Override
     public ItemStack getItemStack(PlayerEntity player)
     {
-        return new ItemStack(ModItems.DEMON_DWELLER.get());
+        return new ItemStack(ModItems.DEMON_SLAYER_CLEAN.get());
     }
 
     @Override

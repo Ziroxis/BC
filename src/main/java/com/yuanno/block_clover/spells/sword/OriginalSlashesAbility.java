@@ -5,14 +5,9 @@ import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.entities.projectiles.sword.OriginalSlashProjectile;
-import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
-import com.yuanno.block_clover.items.weapons.DemonSlayerItem;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SAnimateHandPacket;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
@@ -22,7 +17,7 @@ public class OriginalSlashesAbility extends RepeaterAbility {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Original slashes", AbilityCategories.AbilityCategory.ATTRIBUTE, OriginalSlashesAbility.class)
             .setDescription("Shoots a big amount of slashes made by your sword")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
-            .setDependencies(MagicDwellerCleanAbility.INSTANCE)
+            .setDependencies(OriginalMagicDwellerAbility.INSTANCE)
             .build();
 
     public OriginalSlashesAbility()

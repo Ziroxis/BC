@@ -8,8 +8,8 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.items.weapons.DemonDestroyerItem;
 import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
 import com.yuanno.block_clover.items.weapons.DemonSlayerItem;
-import com.yuanno.block_clover.spells.sword.DemonSlayerCleanAbility;
-import com.yuanno.block_clover.spells.sword.MagicDestroyerAbility;
+import com.yuanno.block_clover.spells.sword.OriginalDemonSlayerAbility;
+import com.yuanno.block_clover.spells.sword.OriginalMagicDestroyerAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,10 +37,10 @@ public class DemonSlayerDropEvent {
                         event.getEntityItem().remove();
                         if (ability instanceof DemonSlayerAbility)
                             ((DemonSlayerAbility) ability).stopContinuity(player);
-                        else if (ability instanceof DemonSlayerCleanAbility)
-                            ((DemonSlayerCleanAbility) ability).stopContinuity(player);
-                        else if (ability instanceof MagicDestroyerAbility)
-                            ((MagicDestroyerAbility) ability).stopContinuity(player);
+                        else if (ability instanceof OriginalDemonSlayerAbility)
+                            ((OriginalDemonSlayerAbility) ability).stopContinuity(player);
+                        else if (ability instanceof OriginalMagicDestroyerAbility)
+                            ((OriginalMagicDestroyerAbility) ability).stopContinuity(player);
                         else if (ability instanceof DemonDwellerAbility)
                             ((DemonDwellerAbility) ability).stopContinuity(player);
                     }

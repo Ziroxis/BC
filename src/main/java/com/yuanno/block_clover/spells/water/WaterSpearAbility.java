@@ -21,7 +21,7 @@ public class WaterSpearAbility extends ChargeableAbility {
     public WaterSpearAbility()
     {
         super(INSTANCE);
-        this.setMaxCooldown(7);
+        this.setMaxCooldown(5);
         this.setMaxChargeTime(5);
         this.setmanaCost(20);
         this.setExperiencePoint(20);

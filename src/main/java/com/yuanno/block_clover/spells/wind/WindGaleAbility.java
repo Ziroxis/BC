@@ -20,7 +20,7 @@ public class WindGaleAbility extends ChargeableAbility {
     {
         super(INSTANCE);
         this.setMaxCooldown(12);
-        this.setMaxChargeTime(5);
+        this.setMaxChargeTime(4);
         this.setmanaCost(30);
         this.setExperiencePoint(20);
         this.setCancelable();

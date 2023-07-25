@@ -38,7 +38,7 @@ public class ThunderChargeAbility extends ChargeableAbility implements IMultiTar
     {
         super(INSTANCE);
         this.setMaxCooldown(15);
-        this.setMaxChargeTime(7);
+        this.setMaxChargeTime(5);
         this.setmanaCost(20);
         this.setExperiencePoint(20);
 
@@ -98,7 +98,7 @@ public class ThunderChargeAbility extends ChargeableAbility implements IMultiTar
         if (this.canDealDamage())
         {
 
-            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 3, LivingEntity.class);
+            List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 6, LivingEntity.class);
             list.remove(player);
 
             list.forEach(entity ->

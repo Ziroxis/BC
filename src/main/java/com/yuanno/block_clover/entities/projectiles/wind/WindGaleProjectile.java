@@ -15,7 +15,7 @@ public class WindGaleProjectile extends AbilityProjectileEntity {
     public WindGaleProjectile(World world, LivingEntity player)
     {
         super(WindProjectiles.WIND_GALE.get(), world, player);
-        this.setDamage(7);
+        this.setDamage(12);
         this.setMaxLife(64);
         this.setPhysical(false);
     }

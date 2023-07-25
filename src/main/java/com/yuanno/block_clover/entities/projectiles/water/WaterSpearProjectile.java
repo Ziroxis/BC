@@ -20,7 +20,7 @@ public class WaterSpearProjectile extends AbilityProjectileEntity {
     public WaterSpearProjectile(World world, LivingEntity player)
     {
         super(WaterProjectiles.WATER_SPEAR.get(), world, player);
-        this.setDamage(5);
+        this.setDamage(15);
         this.setMaxLife(64);
         this.setPhysical(false);
     }

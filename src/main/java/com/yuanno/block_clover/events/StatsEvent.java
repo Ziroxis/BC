@@ -54,7 +54,6 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
         PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
-        //TODO add the new attribute starting spells
         if (!props.hasAttribute())
         {
             //TODO don't spawn with anti-magic + second attribute
@@ -93,6 +92,7 @@ public class StatsEvent {
                 }
             }
 
+            // TODO check if you can optimize this code
             if (!attribute.equals(ModValues.ANTIMAGIC))
             {
                 props.setRace(Beapi.randomizer(ModValues.races));

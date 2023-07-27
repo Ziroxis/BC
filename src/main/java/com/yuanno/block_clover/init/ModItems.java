@@ -110,7 +110,6 @@ public class ModItems {
     public static final RegistryObject<Item> RARE_CANDY = ITEMS.register("rare_candy", RareCandyArtifactItem::new);
     public static final RegistryObject<Item> MANA_ARTIFACT = ITEMS.register("maximizing_mana", ManaArtifactItem::new);
     public static final RegistryObject<Item> MANA_REGENERATION = ITEMS.register("mana_regeneration", ManaRegenerationArtifactItem::new);
-    //public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
     public static final RegistryObject<Item> RACE_CHANGE = ITEMS.register("race_change", RaceChangeArtifactItem::new);
     public static final RegistryObject<Item> MANA_LINK = ITEMS.register("mana_link", ManaLinkArtifact::new);
 

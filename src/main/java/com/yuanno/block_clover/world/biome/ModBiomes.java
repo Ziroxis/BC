@@ -26,7 +26,7 @@ public class ModBiomes {
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Main.MODID);
 
     public static final RegistryObject<Biome> GRAND_MAGIC_ZONE_VOLCANO = BIOMES.register("volcano_zone", () -> makeVolcanoBiome(() -> ModConfiguredSurfaceBuilders.GRAND_MAGIC_ZONE_VOLCANO, 0.18f, 0.15f));
-    public static final RegistryObject<Biome> MOGURO_FOREST = BIOMES.register("moguro_forest", () -> makeMoguroBiome(() -> ModConfiguredSurfaceBuilders.MOGURO_FOREST, 0.18f, 0.15f));
+    public static final RegistryObject<Biome> MOGURO_FOREST = BIOMES.register("moguro_forest", () -> makeMoguroBiome(() -> ModConfiguredSurfaceBuilders.MOGURO_FOREST, 0.18f, 0.05f));
 
     public static Biome makeMoguroBiome(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder lvt_3_1_ = new MobSpawnInfo.Builder();

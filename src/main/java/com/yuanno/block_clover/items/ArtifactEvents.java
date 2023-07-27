@@ -30,7 +30,7 @@ public class ArtifactEvents {
 
          */
     }
-
+/*
     @SubscribeEvent
     public static void greenThumb(PlayerInteractEvent event)
     {
@@ -47,4 +47,6 @@ public class ArtifactEvents {
             }
         }
     }
+
+ */
 }

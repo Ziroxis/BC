@@ -350,11 +350,6 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "block_clover:mana_regeneration"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "block_clover:green_thumb"
         }
       ]
     }

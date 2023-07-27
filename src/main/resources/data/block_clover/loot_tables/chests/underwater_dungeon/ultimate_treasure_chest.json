@@ -234,6 +234,11 @@
         {
           "type": "minecraft:item",
           "weight": 1,
+          "name": "block_clover:demon_destroyer_black"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
           "name": "block_clover:fire_belt"
         },
         {
@@ -310,11 +315,6 @@
           "type": "minecraft:item",
           "weight": 1,
           "name": "block_clover:mana_regeneration"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 1,
-          "name": "block_clover:green_thumb"
         }
       ]
     }

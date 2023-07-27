@@ -13,6 +13,11 @@ import net.minecraft.item.ItemStack;
 
 public class ManaLinkArtifact extends ArtifactItem implements ICurioItem {
 
+    public ManaLinkArtifact()
+    {
+        this.artifactInformation = "In progress!";
+    }
+
     @Override
     public void onEquip(SlotContext slotContext, ItemStack previousStack, ItemStack currentStack)
     {

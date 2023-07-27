@@ -48,7 +48,9 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get())))
+        if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get()))
+                || !player.getMainHandItem().getItem().equals(ModItems.DEMON_DESTROYER.get())
+        || !player.getMainHandItem().getItem().equals(ModItems.DEMON_DWELLER.get()))
         {
             player.sendMessage(new StringTextComponent("Need to hold an anti-magic sword!"), Util.NIL_UUID);
             return false;

@@ -110,7 +110,7 @@ public class ModItems {
     public static final RegistryObject<Item> RARE_CANDY = ITEMS.register("rare_candy", RareCandyArtifactItem::new);
     public static final RegistryObject<Item> MANA_ARTIFACT = ITEMS.register("maximizing_mana", ManaArtifactItem::new);
     public static final RegistryObject<Item> MANA_REGENERATION = ITEMS.register("mana_regeneration", ManaRegenerationArtifactItem::new);
-    public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
+    //public static final RegistryObject<Item> GREEN_THUMB = ITEMS.register("green_thumb", GreenThumbArtifactItem::new);
     public static final RegistryObject<Item> RACE_CHANGE = ITEMS.register("race_change", RaceChangeArtifactItem::new);
     public static final RegistryObject<Item> MANA_LINK = ITEMS.register("mana_link", ManaLinkArtifact::new);
 
@@ -128,7 +128,7 @@ public class ModItems {
     // bulky sword
     public static final RegistryObject<Item> DEMON_DESTROYER = ITEMS.register("demon_destroyer", DemonDestroyerItem::new); // clean
     public static final RegistryObject<Item> DEMON_DESTROYER_BLACK = ITEMS.register("demon_destroyer_black", DemonDestroyerItem::new); // black
-    public static final RegistryObject<Item> DEMON_DESTROYER_ANTIMAGIC = ITEMS.register("demon_destroyer_antimagic", DemonDestroyerItem::new); // rusty
+    public static final RegistryObject<Item> DEMON_DESTROYER_ANTIMAGIC = ITEMS.register("demon_destroyer_antimagic", DemonDestroyerRustyItem::new); // rusty
 
     // absorb spells sword
     public static final RegistryObject<Item> DEMON_DWELLER = ITEMS.register("demon_dweller", DemonDwellerItem::new); // clean

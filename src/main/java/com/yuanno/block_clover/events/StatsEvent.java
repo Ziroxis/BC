@@ -131,7 +131,6 @@ public class StatsEvent {
                 if (race.equals(ModValues.HYBRID)) {
                     props.setManaRegeneration(1);
                     props.setMultiplier(1);
-
                     // Create a list of available attributes (excluding the current attribute)
                     List<String> availableAttributes = new ArrayList<>(Arrays.asList(
                             ModValues.WIND, ModValues.FIRE, ModValues.LIGHT, ModValues.LIGHTNING, ModValues.DARKNESS,
@@ -144,7 +143,7 @@ public class StatsEvent {
 
                     // Randomly select the second attribute from the remaining available attributes
                     String secondAttribute = availableAttributes.get(new Random().nextInt(availableAttributes.size()));
-
+                    props.setSecondAttribute(secondAttribute);
                     // Map secondAttribute to its corresponding ability using a HashMap
                     Map<String, AbilityCore> abilityMapSecond = new HashMap<>();
                     abilityMapSecond.put(ModValues.WIND, WindBladeAbility.INSTANCE);

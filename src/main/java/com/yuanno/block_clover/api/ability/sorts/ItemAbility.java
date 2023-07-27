@@ -43,7 +43,7 @@ public abstract class ItemAbility extends ContinuousAbility implements IParallel
 		}
 	}
 
-	private boolean onEndContinuityEvent(PlayerEntity player) // TODO make it so it also takes it off the off hand
+	private boolean onEndContinuityEvent(PlayerEntity player)
 	{
 
 		for (int i = 0; i < 35; i++)

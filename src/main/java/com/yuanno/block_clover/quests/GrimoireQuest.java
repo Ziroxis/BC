@@ -20,7 +20,7 @@ import net.minecraft.util.text.StringTextComponent;
 
 public class GrimoireQuest extends Quest {
 
-    private Objective levelObjective = new ReachLevelObjective("Obtaining a grimoire (reach level 5)", 5);
+    private Objective levelObjective = new ReachLevelObjective("Reach level 5 and go to the grimoire tower", 5);
 
     public GrimoireQuest()
     {

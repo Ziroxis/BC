@@ -51,7 +51,7 @@ public class GrimoireMagicianEntity extends NPCentity
         this.questChoiceSpeech = "Would you like to learn the art of mana?";
         this.acceptanceSpeech = "Fine... You'll have to do the quest I've given you for that. Check your quests for more information!";
         this.declineSpeech = "Not everyone is ready for the path of strength";
-        this.waitingSpeech = "Have you done your meditation?";
+        this.waitingSpeech = "You haven't reached your full potentiel yet.";
         this.doneSpeech = "My teachings end here for now";
     }
     @Override

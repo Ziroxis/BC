@@ -120,11 +120,11 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.SLASH) || statsProps.getSecondAttribute().equals(ModValues.SLASH))
         {
-            gainAbility(event.getPlayer(), 3, DeathScytheAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 5, DeathScytheShowerAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 10, ForwardThrustAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 15, LunaticSlashAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 20, RoundLunaticSlashAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 5, DeathScytheAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, DeathScytheShowerAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, ForwardThrustAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, LunaticSlashAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, RoundLunaticSlashAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.TIME) || statsProps.getSecondAttribute().equals(ModValues.TIME))
         {

@@ -46,7 +46,7 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
         IEntityStats stats = EntityStatsCapability.get(player);
-        stats.alterMana(-15);
+        stats.alterMana(-10);
         player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(SLASH_BLADES);
         player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(SLASH_BLADES);
         return true;

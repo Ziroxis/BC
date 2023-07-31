@@ -33,10 +33,10 @@ public class WildBurstingFlamesAbility extends Ability {
     }
 
     private boolean onUseEvent(PlayerEntity player)
-    { // TODO continue working on the barrage spell
+    {
         if (!this.isEvolved())
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 12; i++)
             {
                 FireBallProjectile projectile = new FireBallProjectile(player.level, player);
                 projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 20);

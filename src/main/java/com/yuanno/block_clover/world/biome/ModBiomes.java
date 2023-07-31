@@ -76,7 +76,6 @@ public class ModBiomes {
         mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
                 new MobSpawnInfo.Spawners(EntityType.BLAZE, 45, 7, 10));
 
-        //TODO make it generate
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntities.VOLCANO_MONSTER.get(), 200, 1, 2));
 

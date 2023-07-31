@@ -14,7 +14,6 @@ import java.util.Set;
 public class ModStructureGeneration
 {
     //structures that spawn in specific biomes
-    //TODO make it more readable
     public static void generateStructures(final BiomeLoadingEvent event)
     {
         RegistryKey key = RegistryKey.create(Registry.BIOME_REGISTRY, event.getName());

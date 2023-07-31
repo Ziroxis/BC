@@ -15,7 +15,6 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = "block_clover", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DemonDwellerEvent {
-    //TODO test it out with abilities
     private boolean isBlocking = false;
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {

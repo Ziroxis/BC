@@ -43,7 +43,8 @@ public class ModNetwork {
         PacketHandler.registerPacket(SSyncWorldDataPacket.class, SSyncWorldDataPacket::encode, SSyncWorldDataPacket::decode, SSyncWorldDataPacket::handle);
         PacketHandler.registerPacket(SOpenGuildScreenInvitationpacket.class, SOpenGuildScreenInvitationpacket::encode, SOpenGuildScreenInvitationpacket::decode, SOpenGuildScreenInvitationpacket::handle);
         PacketHandler.registerPacket(SUpdateExtraDataPacket.class, SUpdateExtraDataPacket::encode, SUpdateExtraDataPacket::decode, SUpdateExtraDataPacket::handle);
-
+        PacketHandler.registerPacket(SOpenDevilSummoningScreenPacket.class, SOpenDevilSummoningScreenPacket::encode, SOpenDevilSummoningScreenPacket::decode, SOpenDevilSummoningScreenPacket::handle);
+        PacketHandler.registerPacket(SummonDevilEntityPacket.class, SummonDevilEntityPacket::encode, SummonDevilEntityPacket::decode, SummonDevilEntityPacket::handle);
 
 
         //SYNC

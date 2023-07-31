@@ -250,7 +250,6 @@ public class AbilitiesEvents
 						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());
 						event.setCanceled(!result);
 					}
-					// TODO replace with IHitAbility
 					/*
 					if (ability instanceof DamagedPassiveAbility)
 					{

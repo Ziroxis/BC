@@ -2,11 +2,15 @@ package com.yuanno.block_clover.entities.devils;
 
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.entities.BCentity;
 import com.yuanno.block_clover.entities.goals.spells.CrowSpellGoal;
 import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkIceAbility;
 import net.minecraft.entity.EntityType;
@@ -101,6 +105,10 @@ public class LilithDevilEntity extends BCentity {
             abilityData.addUnlockedAbility(player, DarkIceAbility.INSTANCE);
             // add the other abilities that you get from walgner
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+
+            IEntityStats entityStats = EntityStatsCapability.get(player);
+            entityStats.addControlledDevilList(ModValues.LILITH);
+            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
 
         }
     }

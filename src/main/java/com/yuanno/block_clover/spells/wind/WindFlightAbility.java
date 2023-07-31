@@ -38,7 +38,6 @@ public class WindFlightAbility extends PassiveAbility {
         if (player.level.isClientSide)
             return;
          */
-        //TODO check if you crash in server or nah
         if (player.isOnGround() || player.isSwimming())
             return;
 

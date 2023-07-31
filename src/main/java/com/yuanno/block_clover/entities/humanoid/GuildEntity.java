@@ -62,7 +62,7 @@ public class GuildEntity extends BCentity implements IDynamicRenderer {
 
     @Override
     public String getMobTexture() {
-        return "grimoire_magician1"; // Todo work on this
+        return "grimoire_magician1";
     }
 
     @Override

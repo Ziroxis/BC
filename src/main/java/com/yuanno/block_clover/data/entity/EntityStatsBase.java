@@ -4,7 +4,9 @@ package com.yuanno.block_clover.data.entity;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EntityStatsBase implements IEntityStats{
@@ -14,14 +16,14 @@ public class EntityStatsBase implements IEntityStats{
 
     private String race = "";
     private String attribute = "";
-    private  String secondAttribute = "";
+    private String secondAttribute = "";
     private int level;
     private int maxLevel;
     private int experience;
     private int maxExperience;
     private float mana;
     private float maxMana;
-    private  float manaRegeneration;
+    private float manaRegeneration;
     private boolean hasGrimoire = false;
     private int state = 0;
     private String title = "";
@@ -36,9 +38,33 @@ public class EntityStatsBase implements IEntityStats{
     private int cookingExperience;
     private int maxCookingExperience;
     private boolean innateDevil;
-    private String devil = "";
-
+    private String innateDevilName = "";
+    List<String> controlledDevilList = new ArrayList<>();
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
+
+    @Override
+    public List<String> getControlledDevilList()
+    {
+        return controlledDevilList;
+    }
+
+    @Override
+    public void setControlledDevilList(List<String> controlledDevilList)
+    {
+        this.controlledDevilList = controlledDevilList;
+    }
+
+    @Override
+    public void addControlledDevilList(String devilListAddition)
+    {
+        this.controlledDevilList.add(devilListAddition);
+    }
+
+    @Override
+    public String getDevilInList(int key)
+    {
+        return this.controlledDevilList.get(key);
+    }
 
     @Override
     public HashMap<String, Integer> getExperienceSpells() {
@@ -423,12 +449,14 @@ public class EntityStatsBase implements IEntityStats{
     @Override
     public void setDevil(String devil)
     {
-        this.devil = devil;
+        this.innateDevilName = devil;
     }
 
     @Override
     public String getDevil()
     {
-        return this.devil;
+        return this.innateDevilName;
     }
+
+
 }

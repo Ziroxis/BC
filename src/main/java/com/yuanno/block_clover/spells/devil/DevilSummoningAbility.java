@@ -16,12 +16,12 @@ import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class DevilSummoning extends Ability {
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Devil Summoning", AbilityCategories.AbilityCategory.DEVIL, DevilSummoning.class)
+public class DevilSummoningAbility extends Ability {
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Devil Summoning", AbilityCategories.AbilityCategory.DEVIL, DevilSummoningAbility.class)
             .setDescription("You summon your innate devil trying to make him submit to you.\nIf you die during this fight you will loose everything including spells and levels.\nYou can summon your devil only once.")
             .setDamageKind(AbilityDamageKind.SUMMONING)
             .build();
-    public DevilSummoning()
+    public DevilSummoningAbility()
     {
         super(INSTANCE);
         this.setMaxCooldown(10);
@@ -52,7 +52,7 @@ public class DevilSummoning extends Ability {
                 abilityData.removeUnlockedAbility(DarkIceAbility.INSTANCE);
                 break;
         }
-        abilityData.removeUnlockedAbility(DevilSummoning.INSTANCE);
+        abilityData.removeUnlockedAbility(DevilSummoningAbility.INSTANCE);
         return true;
     }
 }

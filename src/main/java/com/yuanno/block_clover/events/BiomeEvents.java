@@ -37,7 +37,6 @@ public class BiomeEvents {
 
             IEntityStats entityStats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
-            // TODO check this
             ManaSkinAbility manaSkinAbility = (ManaSkinAbility) abilityData.getEquippedAbility(ManaSkinAbility.INSTANCE);
             ResourceLocation biome = world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(world.getBiome(player.blockPosition()));
 

@@ -98,7 +98,7 @@ public class StructureCommand {
                 .addProcessor(BlockIgnoreStructureProcessor.AIR)
                 .addProcessor(new IntegrityProcessor(1f)).setRandom(new Random(Util.getMillis()));
 
-        Beapi.loadNBTStructure((ServerWorld) player.level, "underwater_dungeon", player.blockPosition(), placement);
+        Beapi.loadNBTStructure((ServerWorld) player.level, "guild_tower", player.blockPosition(), placement);
         player.sendMessage(new StringTextComponent("Done"), Util.NIL_UUID);
         return 1;
     }

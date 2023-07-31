@@ -11,7 +11,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public abstract class ItemAbility extends ContinuousAbility implements IParallelContinuousAbility
 {
-	// TODO move the loseMana  and passive cost + experience to continuous abilities
 	boolean loseMana = false;
 	int passiveManaCost = 0;
 	int passiveExperience = 0;

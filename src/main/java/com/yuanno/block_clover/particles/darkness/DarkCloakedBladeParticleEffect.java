@@ -16,7 +16,6 @@ public class DarkCloakedBladeParticleEffect extends ParticleEffect {
             double offsetY = Beapi.randomDouble() ;
             double offsetZ = Beapi.randomDouble() ;
 
-            //TODO look at gekishin code from mmnm
             GenericParticleData data = new GenericParticleData(ModParticleTypes.DARKNESS.get());
             data.setLife(5);
             data.setSize(1f);

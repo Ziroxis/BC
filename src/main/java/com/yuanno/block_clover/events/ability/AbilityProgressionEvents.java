@@ -15,7 +15,7 @@ import com.yuanno.block_clover.spells.darkness.AvidyaSlashAbility;
 import com.yuanno.block_clover.spells.darkness.AvidyaWildSlashAbility;
 import com.yuanno.block_clover.spells.darkness.BlackHoleAbility;
 import com.yuanno.block_clover.spells.darkness.BluntStrikeAbility;
-import com.yuanno.block_clover.spells.devil.DevilSummoning;
+import com.yuanno.block_clover.spells.devil.DevilSummoningAbility;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
@@ -25,7 +25,6 @@ import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryBubbleAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryRainAbility;
 import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
-import com.yuanno.block_clover.spells.misc.ManaReinforcementAbility;
 import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
 import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
 import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
@@ -52,7 +51,7 @@ public class AbilityProgressionEvents {
             return;
         if (statsProps.getInnateDevil())
         {
-            gainAbility(event.getPlayer(), 10, DevilSummoning.INSTANCE);
+            gainAbility(event.getPlayer(), 10, DevilSummoningAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {

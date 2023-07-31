@@ -1,14 +1,16 @@
 package com.yuanno.block_clover.data.entity;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.*;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.util.Constants;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class EntityStatsCapability {
 
@@ -51,7 +53,19 @@ public class EntityStatsCapability {
                 props.putInt("maxCookingExperience", instance.getMaxCookingExperience());
 
                 props.putBoolean("innateDevil", instance.getInnateDevil());
-                props.putString("devil", instance.getDevil());
+                props.putString("innateDevilName", instance.getDevil());
+
+
+                // Save the List
+                CompoundNBT listNBT = new CompoundNBT();
+                List<String> myList = instance.getControlledDevilList(); // Replace this with your actual list
+                ListNBT listTag = new ListNBT();
+                for (String value : myList) {
+                    listTag.add(StringNBT.valueOf(value));
+                }
+                listNBT.put("devil_list_data", listTag);
+                props.put("devil_list", listNBT);
+
 
                 // Save the HashMap
                 CompoundNBT hashMapNBT = new CompoundNBT();
@@ -94,7 +108,17 @@ public class EntityStatsCapability {
                 instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
 
                 instance.setInnateDevil(props.getBoolean("innateDevil"));
-                instance.setDevil(props.getString("devil"));
+                instance.setDevil(props.getString("innateDevilName"));
+
+                // Load the List
+                CompoundNBT listNBT = props.getCompound("devil_list"); // Replace "my_list_data" with the actual key used to save the list
+                ListNBT listTag = listNBT.getList("devil_list_data", Constants.NBT.TAG_STRING); // Replace "my_list" with the actual key used to save the list
+                List<String> myList = new ArrayList<>();
+                for (int i = 0; i < listTag.size(); i++) {
+                    String value = listTag.getString(i);
+                    myList.add(value);
+                }
+
 
                 CompoundNBT hashMapNBT = props.getCompound("experience_spells");
                 HashMap<String, Integer> hashMap = new HashMap<>();

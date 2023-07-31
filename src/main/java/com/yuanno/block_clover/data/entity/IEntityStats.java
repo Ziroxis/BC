@@ -2,8 +2,15 @@ package com.yuanno.block_clover.data.entity;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface IEntityStats {
+
+    // DEVIL LIST
+    List<String> getControlledDevilList();
+    void setControlledDevilList(List<String> controlledDevilList);
+    void addControlledDevilList(String devilListAddition);
+    String getDevilInList(int key);
 
     // SPELL EXPERIENCE
     HashMap<String, Integer> getExperienceSpells();

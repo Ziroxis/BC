@@ -95,14 +95,10 @@ public class DevilSummoningScreen extends Screen {
                     PacketHandler.sendToServer(new SummonDevilEntityPacket(ModEntities.WALGNER_DEVIL.getId()));
                     break;
                 case ModValues.LILITH:
-                    LilithDevilEntity lilithDevilEntity = new LilithDevilEntity(ModEntities.LILITH_DEVIL.get(), world);
-                    lilithDevilEntity.setPos(player.getX() - 10, player.getY(), player.getZ());
-                    world.addFreshEntity(lilithDevilEntity);
+                    PacketHandler.sendToServer(new SummonDevilEntityPacket(ModEntities.LILITH_DEVIL.getId()));
                     break;
                 case ModValues.NAHAMAN:
-                    NahamanDevilEntity nahamanDevilEntity = new NahamanDevilEntity(ModEntities.NAHAMAN_DEVIL.get(), world);
-                    nahamanDevilEntity.setPos(player.getX() - 10, player.getY(), player.getZ());
-                    world.addFreshEntity(nahamanDevilEntity);
+                    PacketHandler.sendToServer(new SummonDevilEntityPacket(ModEntities.NAHAMAN_DEVIL.getId()));
                     break;
                 default:
                     // Unknown devil type - do nothing or handle the situation accordingly

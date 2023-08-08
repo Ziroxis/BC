@@ -46,7 +46,6 @@ public class CrowAbility extends Ability {
 
         if (player.level instanceof ServerWorld)
         {
-            // TODO implement particle effect
             // ((ServerWorld) player.level).sendParticles(ParticleTypes.SPIT, player.getX(), player.getY(), player.getZ(), (int) 100, 3, 2, 3, 1);
         }
 

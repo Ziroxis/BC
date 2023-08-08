@@ -65,8 +65,8 @@ public class UnleashUndeadAbility extends ContinuousAbility {
         return true;
     }
 
-    private void duringContinuityEvent(PlayerEntity player, int i) // changes target if the target is empty // todo add a check for guilds
-    {
+    private void duringContinuityEvent(PlayerEntity player, int i)
+    {// changes target if the target is empty
         for (MobEntity livingEntity : this.undeadArmy)
         {
             if (livingEntity.getTarget() == null || !livingEntity.getTarget().isAlive())

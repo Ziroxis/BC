@@ -127,29 +127,42 @@ public abstract class ContinuousAbility extends Ability {
 
         player.level.getProfiler().push(Beapi.getResourceName(this.getName()));
 
-        if(this.isContinuous())
-        {
+        if (this.isContinuous()) {
             this.continueTime++;
-            if((this.isClientSide() || !player.level.isClientSide) && !this.isStateForced())
-                this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 
-            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getMana() < getmanaCost() + 10 && !(getmanaCost() == 0)) {
+            boolean isClientOrServer = this.isClientSide() || !player.level.isClientSide;
+            boolean shouldEndContinuity = this.threshold > 0 && this.continueTime >= this.threshold
+                    || propsEntity.getMana() < getmanaCost() + 10 && getmanaCost() != 0;
+
+            if (isClientOrServer && !this.isStateForced()) {
+                this.duringContinuityEvent.duringContinuity(player, this.continueTime);
+            }
+
+            if (shouldEndContinuity) {
                 this.endContinuity(player);
             }
-            if (player.tickCount % 20 == 0)
-            {
-                if (propsEntity.getLevel() < getExperienceGainLevelCap())
-                {
-                    propsEntity.alterExperience(getExperiencePoint());
-                    ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
+
+            if (player.tickCount % 20 == 0) {
+                int experiencePoint = getExperiencePoint();
+                int manaCost = (int) getmanaCost();
+
+                if (propsEntity.getLevel() < getExperienceGainLevelCap()) {
+                    propsEntity.alterExperience(experiencePoint);
+                    ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
                     MinecraftForge.EVENT_BUS.post(eventExperience);
                 }
-                if (propsEntity.getMana() > getmanaCost())
-                    propsEntity.alterMana((int) - getmanaCost());
+
+                int currentMana = (int) propsEntity.getMana();
+                if (currentMana > manaCost) {
+                    propsEntity.alterMana(-manaCost);
+                }
             }
-            PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
+
+            int currentMana = (int) propsEntity.getMana();
+            PacketHandler.sendTo(new ManaSync(currentMana), player);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
         }
+
 
         player.level.getProfiler().pop();
     }

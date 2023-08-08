@@ -63,9 +63,10 @@ public class StatsEvent {
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
         props.setMultiplier(1);
         PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
+
+        /*
         if (!props.hasAttribute())
         {
-            //TODO don't spawn with anti-magic + second attribute
             String attribute = randomAttributeString();
             props.setAttribute(attribute);
             // Create a HashMap to store the mapping between attribute values and abilities
@@ -101,7 +102,6 @@ public class StatsEvent {
                 }
             }
 
-            // TODO check if you can optimize this code
             if (!attribute.equals(ModValues.ANTIMAGIC))
             {
                 props.setRace(Beapi.randomizer(ModValues.races));
@@ -193,38 +193,40 @@ public class StatsEvent {
                 props.setMaxMana(0);
             }
         }
+         */
+
         UUID uuid = player.getUUID();
         switch (uuid.toString()) {
             case "b0515226-7ff3-4ab4-aa87-69179ee0e4ae":
-// -> Beosti
+                // -> Beosti
                 props.setTitle("\u00A71Almighty captain of Yuanno");
                 break;
             case "df9f1a55-1cff-43ad-9e3d-3bc03b6bd984":
-// -> Kausu
+                // -> Kausu
                 props.setTitle("§aSage");
                 break;
             case "649d12e3-da8c-4a30-b7b5-1c99376d261e":
-// -> Redwolf
+                // -> Redwolf
                 props.setTitle("§cThe king");
                 break;
             case "b462e469-19ce-40b6-9999-d74102623b7c":
-// -> Gingershadow
+                // -> Gingershadow
                 props.setTitle("§4The true");
                 break;
             case "72336f87-461e-4e3b-a213-df3982241c39":
-// -> Apollo
+                // -> Apollo
                 props.setTitle("§0Wannabe rival");
                 break;
             case "0226c610-b3a4-4de0-b63a-2e5599b843f2":
-// -> Blank
+                // -> Blank
                 props.setTitle("§7Beggar");
                 break;
             case "2f81171f-fbec-442b-9d6d-3b21cad56f09":
-// -> Kiwi
+                // -> Kiwi
                 props.setTitle("§7Determined Soul");
                 break;
             case "2b01df92-48e7-4e6d-962d-c38e8e2a5fd0":
-// -> Danal
+                // -> Danal
                 props.setTitle("§2True farmer");
                 break;
         }

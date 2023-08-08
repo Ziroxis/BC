@@ -24,7 +24,7 @@ public class ChronoStasisGrigoraAbility extends Ability {
             .setDescription("Consumes time, freezing the time of every entity around you.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
-    public ChronoStasisGrigoraAbility() // TODO make it so entities can't attack + adds models
+    public ChronoStasisGrigoraAbility()
     {
         super(INSTANCE);
         this.setDescription("Consumes time, freezing the time of every entity around you");

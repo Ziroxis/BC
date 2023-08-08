@@ -20,6 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class DevilSummonerBlock extends Block {
+    int amountOfSummons = 4;
     public DevilSummonerBlock()
     {
         super(Properties.of(Material.BARRIER).strength(Float.MAX_VALUE).noCollission().noDrops());
@@ -27,9 +28,10 @@ public class DevilSummonerBlock extends Block {
 
     public ActionResultType use(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
     {
-        IEntityStats entityStats = EntityStatsCapability.get(player);
+        amountOfSummons--;
+        if (amountOfSummons <= 0)
+            return ActionResultType.CONSUME;
         PacketHandler.sendTo(new SOpenDevilSummoningScreenPacket(), player);
-
         return ActionResultType.SUCCESS;
     }
 

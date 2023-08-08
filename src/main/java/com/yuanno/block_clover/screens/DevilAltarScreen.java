@@ -34,7 +34,6 @@ public class DevilAltarScreen extends ContainerScreen<DevilAltarContainer> {
     public void init() {
         super.init();
         this.addButton(new ImageButton(this.leftPos+50,this.height/2+10,10,10,0,0,10,BUTTON_TEX, (p_214087_1_) -> {
-            //TODO put the code here for what the button should do
         }));
     }
 

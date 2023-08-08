@@ -2,11 +2,7 @@ package com.yuanno.block_clover.effects;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.init.ModAttributes;
-import com.yuanno.block_clover.particles.ParticleEffect;
-import com.yuanno.block_clover.particles.fire.LeoPalmaParticleEffect;
-import com.yuanno.block_clover.particles.time.ChronoStasisParticleEffect;
 import net.minecraft.block.Block;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.potion.EffectInstance;
@@ -14,9 +10,9 @@ import net.minecraft.potion.EffectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeMod;
 
-public class ChronoStasisEffect extends SpecialEffect{
-    private static final ParticleEffect PARTICLES = new ChronoStasisParticleEffect();
-    public ChronoStasisEffect()
+public class FreezeEffect extends SpecialEffect {
+
+    public FreezeEffect()
     {
         super(EffectType.HARMFUL, Beapi.hexToRGB("#000000").getRGB());
         this.addAttributeModifier(Attributes.MOVEMENT_SPEED, "2727e176-e9e8-4523-92f8-22619308d9ee", -256, AttributeModifier.Operation.ADDITION)
@@ -28,14 +24,6 @@ public class ChronoStasisEffect extends SpecialEffect{
 
     }
 
-    @Override
-    public void applyEffectTick(LivingEntity livingEntity, int amplifier)
-    {
-        if (!livingEntity.level.isClientSide)
-        {
-            PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
-        }
-    }
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier)
     {
@@ -78,6 +66,4 @@ public class ChronoStasisEffect extends SpecialEffect{
     public ResourceLocation getResourceLocation(int duration) {
         return null;
     }
-
-
 }

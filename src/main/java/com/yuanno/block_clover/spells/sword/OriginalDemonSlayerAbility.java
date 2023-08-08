@@ -16,7 +16,6 @@ public class OriginalDemonSlayerAbility extends ItemAbility implements IParallel
             .setDamageKind(AbilityDamageKind.ITEM)
             .build();
 
-    // TODO need a texture
     public OriginalDemonSlayerAbility()
     {
         super(INSTANCE);

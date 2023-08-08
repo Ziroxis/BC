@@ -43,6 +43,7 @@ public class ModStructures
     public static final RegistryObject<Structure<NoFeatureConfig>> FIRE_DUNGEON = DEFERRED_REGISTRY_STRUCTURE.register("fire_dungeon", VolcanoDungeonStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> GUILD_TOWER = DEFERRED_REGISTRY_STRUCTURE.register("guild_tower", GuildTowerStructure::new);
     public static final RegistryObject<Structure<NoFeatureConfig>> RUINS = DEFERRED_REGISTRY_STRUCTURE.register("ruins", RuinsStructure::new);
+    public static final RegistryObject<Structure<NoFeatureConfig>> DEVIL_CHURCH = DEFERRED_REGISTRY_STRUCTURE.register("devil_church", DevilChurchStructure::new);
 
 
     /**
@@ -101,6 +102,14 @@ public class ModStructures
                 new StructureSeparationSettings(10,
                         5,
                         156794685
+
+                ), false
+        );
+        setupMapSpacingAndLand(
+                DEVIL_CHURCH.get(),
+                new StructureSeparationSettings(30,
+                        10,
+                        156523685
 
                 ), false
         );

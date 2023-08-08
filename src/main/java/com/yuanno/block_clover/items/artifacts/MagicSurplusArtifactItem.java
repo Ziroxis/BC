@@ -52,7 +52,7 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
                 ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, stats.getExperience());
                 if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
                     ActionResult.fail(itemStack);
-                AbilityProgressionEvents.onLevelGained(eventExperienceUp); //TODO give abilities with level up
+                AbilityProgressionEvents.onLevelGained(eventExperienceUp);
             }
             else if (!stats.getAttribute().equals(ModValues.ANTIMAGIC))
             {

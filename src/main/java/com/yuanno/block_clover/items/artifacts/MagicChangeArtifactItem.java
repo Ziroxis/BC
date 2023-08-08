@@ -58,7 +58,6 @@ public class MagicChangeArtifactItem extends ArtifactItem {
         ItemStack stack = player.getItemInHand(hand);
         if (!world.isClientSide)
         {
-            //TODO give abilities of the level
             IEntityStats stats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
             abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);

@@ -29,7 +29,6 @@ public class LightHealingAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        //TODO make a special effect just for lighthealing
         if (this.isEvolved()) {
             player.addEffect(new EffectInstance(Effects.REGENERATION, 120, 3));
             player.addEffect(new EffectInstance(Effects.ABSORPTION, 2000, 4));

@@ -115,7 +115,6 @@ public class JuicerRecipe implements IJuicerRecipe {
             }
 
             ItemStack output = buffer.readItem(); // reads stack
-            //TODO get level & experience into data
             return new JuicerRecipe(recipeId, output, inputs); // returns
         }
 

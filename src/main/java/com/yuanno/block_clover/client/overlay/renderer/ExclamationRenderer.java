@@ -36,7 +36,6 @@ public class ExclamationRenderer<T extends LivingEntity, M extends EntityModel<T
 
         /*
         PlayerEntity player = Minecraft.getInstance().player;
-        //TODO fix this shit
         if (!(entity instanceof NPCentity))
             return;
         boolean flag = false;

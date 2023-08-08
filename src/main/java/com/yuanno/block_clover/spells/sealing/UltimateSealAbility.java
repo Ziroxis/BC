@@ -83,7 +83,7 @@ public class UltimateSealAbility extends Ability {
                     if (distance < radius * radius && !(true && distance < ((radius - 1) * (radius - 1))))
                     {
                         BlockPos pos = new BlockPos(x, y, z);
-                        if(true) //TODO add ability protection
+                        if(true)
                             blockList.add(pos);
                     }
                 }

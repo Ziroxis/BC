@@ -41,12 +41,11 @@ public class ModStructureGeneration
         {
             event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_GUILD_TOWER);
         }
-        /*
-        if (event.getName().equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.get().getRegistryName()))
+        if (types.contains(BiomeDictionary.Type.MOUNTAIN) &!types.contains(BiomeDictionary.Type.NETHER) && !types.contains(BiomeDictionary.Type.END))
         {
-            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_MINI_VOLCANO);
+            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_DEVIL_CHURCH);
+        }
 
-         */
 
     }
 }

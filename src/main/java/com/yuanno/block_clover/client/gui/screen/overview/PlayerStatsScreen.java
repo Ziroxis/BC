@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.screen.overview;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -13,11 +13,8 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.system.CallbackI;
 
 import java.awt.*;
-
-import static net.minecraft.client.gui.screen.inventory.InventoryScreen.renderEntityInInventory;
 
 @OnlyIn(Dist.CLIENT)
 public class PlayerStatsScreen extends Screen {

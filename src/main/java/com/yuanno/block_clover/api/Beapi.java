@@ -167,6 +167,126 @@ public class Beapi
         return attribute;
     }
 
+    public static String randomAttributeString(String removedAttribute)
+    {
+        String attribute = "";
+
+        List<List<String>> elementalAttributes = new ArrayList<>();
+
+        List<String> elemental = Arrays.asList(ModValues.DARKNESS, ModValues.EARTH, ModValues.FIRE, ModValues.LIGHT, ModValues.WATER, ModValues.WIND);
+        elementalAttributes.add(elemental);
+        List<String> subElemental = Arrays.asList(ModValues.LIGHTNING, ModValues.MERCURY);
+        elementalAttributes.add(subElemental);
+
+        List<List<String>> arcaneAttributes = new ArrayList<>();
+        List<String> normalArcane = Arrays.asList(ModValues.BEAST, ModValues.SEALING, ModValues.SLASH);
+        arcaneAttributes.add(normalArcane);
+        List<String> specialArcane = Arrays.asList(ModValues.COPY, ModValues.SWORD, ModValues.TIME);
+        arcaneAttributes.add(specialArcane);
+
+        List<String> specialCase = Arrays.asList(ModValues.ANTIMAGIC);
+
+        List<List<String>> allMixedAttributes = new ArrayList<>();
+        allMixedAttributes.addAll(elementalAttributes);
+        allMixedAttributes.addAll(arcaneAttributes);
+        allMixedAttributes.remove(removedAttribute);
+
+        double groupElementalWeight = 0.5;
+        double groupArcaneWeight = 0.5;
+
+        // randomly select between group A and group B based on their weights
+        List<List<String>> chosenGroup = Math.random() < groupElementalWeight ? elementalAttributes : arcaneAttributes;
+
+        // set weights for each subgroup
+        double subgroupNormalArcaneWeight = 0.7;
+        double subgroupSpecialArcaneWeight = 0.3;
+        double subgroupElementalWeight = 0.6;
+        double subgroupSubElementalWeight = 0.4;
+
+        // randomly select between the two subgroups within the chosen group based on their weights
+        List<String> chosenSubgroup;
+        if (chosenGroup == arcaneAttributes) {
+            chosenSubgroup = Math.random() < subgroupNormalArcaneWeight ? normalArcane : specialArcane;
+        } else {
+            chosenSubgroup = Math.random() < subgroupElementalWeight ? elemental : subElemental;
+        }
+
+        do
+        {// randomly select an attribute from the chosen subgroup
+            String chosenAttribute = chosenSubgroup.get((int) (Math.random() * chosenSubgroup.size()));
+
+            // randomly select an attribute from the specialCase list with a 5% chance
+            if (Math.random() < 0.05) {
+                chosenAttribute = specialCase.get((int) (Math.random() * specialCase.size()));
+            }
+
+            // check it's not removed attribute
+            if (!chosenAttribute.equals(removedAttribute))
+                attribute = chosenAttribute;
+        } while(attribute.isEmpty());
+
+        return attribute;
+    }
+
+    public static String randomAttributeString(String removedAttribute, String removedSecondAttribute)
+    {
+        String attribute = "";
+
+        List<List<String>> elementalAttributes = new ArrayList<>();
+
+        List<String> elemental = Arrays.asList(ModValues.DARKNESS, ModValues.EARTH, ModValues.FIRE, ModValues.LIGHT, ModValues.WATER, ModValues.WIND);
+        elementalAttributes.add(elemental);
+        List<String> subElemental = Arrays.asList(ModValues.LIGHTNING, ModValues.MERCURY);
+        elementalAttributes.add(subElemental);
+
+        List<List<String>> arcaneAttributes = new ArrayList<>();
+        List<String> normalArcane = Arrays.asList(ModValues.BEAST, ModValues.SEALING, ModValues.SLASH);
+        arcaneAttributes.add(normalArcane);
+        List<String> specialArcane = Arrays.asList(ModValues.COPY, ModValues.SWORD, ModValues.TIME);
+        arcaneAttributes.add(specialArcane);
+
+        List<String> specialCase = Arrays.asList(ModValues.ANTIMAGIC);
+
+        List<List<String>> allMixedAttributes = new ArrayList<>();
+        allMixedAttributes.addAll(elementalAttributes);
+        allMixedAttributes.addAll(arcaneAttributes);
+
+        double groupElementalWeight = 0.5;
+        double groupArcaneWeight = 0.5;
+
+        // randomly select between group A and group B based on their weights
+        List<List<String>> chosenGroup = Math.random() < groupElementalWeight ? elementalAttributes : arcaneAttributes;
+
+        // set weights for each subgroup
+        double subgroupNormalArcaneWeight = 0.7;
+        double subgroupSpecialArcaneWeight = 0.3;
+        double subgroupElementalWeight = 0.6;
+        double subgroupSubElementalWeight = 0.4;
+
+        // randomly select between the two subgroups within the chosen group based on their weights
+        List<String> chosenSubgroup;
+        if (chosenGroup == arcaneAttributes) {
+            chosenSubgroup = Math.random() < subgroupNormalArcaneWeight ? normalArcane : specialArcane;
+        } else {
+            chosenSubgroup = Math.random() < subgroupElementalWeight ? elemental : subElemental;
+        }
+
+        do
+        {// randomly select an attribute from the chosen subgroup
+            String chosenAttribute = chosenSubgroup.get((int) (Math.random() * chosenSubgroup.size()));
+
+            // randomly select an attribute from the specialCase list with a 5% chance
+            if (Math.random() < 0.05) {
+                chosenAttribute = specialCase.get((int) (Math.random() * specialCase.size()));
+            }
+
+            // check it's not removed attribute 1 and 2
+            if (!chosenAttribute.equals(removedAttribute) && !chosenAttribute.equals(removedSecondAttribute))
+                attribute = chosenAttribute;
+        } while (attribute.isEmpty());
+        return attribute;
+    }
+
     public static String randomizer(String[] values)
     {
         int random = RNG(values.length);

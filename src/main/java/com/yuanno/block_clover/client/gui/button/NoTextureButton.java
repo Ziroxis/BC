@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.button;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.mojang.blaze3d.matrix.MatrixStack;

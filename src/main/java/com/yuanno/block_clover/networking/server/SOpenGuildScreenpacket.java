@@ -1,10 +1,7 @@
 package com.yuanno.block_clover.networking.server;
 
-import com.yuanno.block_clover.client.gui.ChatPromptScreen;
-import com.yuanno.block_clover.client.gui.GuildCreationScreen;
-import com.yuanno.block_clover.client.gui.GuildScreen;
+import com.yuanno.block_clover.client.gui.screen.guild.GuildCreationScreen;
 import com.yuanno.block_clover.entities.BCentity;
-import com.yuanno.block_clover.entities.NPCentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

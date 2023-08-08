@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.networking.server;
 
-import com.yuanno.block_clover.client.gui.PlayerOverviewScreen;
-import com.yuanno.block_clover.client.gui.PlayerStatsScreen;
+import com.yuanno.block_clover.client.gui.screen.overview.PlayerStatsScreen;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

@@ -1,10 +1,7 @@
 package com.yuanno.block_clover.networking.server;
 
-import com.yuanno.block_clover.client.gui.ChatPromptScreen;
-import com.yuanno.block_clover.client.gui.DevilSummoningScreen;
-import com.yuanno.block_clover.entities.NPCentity;
+import com.yuanno.block_clover.client.gui.screen.block.DevilSummoningScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;

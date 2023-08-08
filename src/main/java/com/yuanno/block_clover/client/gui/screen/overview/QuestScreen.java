@@ -1,11 +1,10 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.screen.overview;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
-import com.yuanno.block_clover.data.quest.QuestDataBase;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;

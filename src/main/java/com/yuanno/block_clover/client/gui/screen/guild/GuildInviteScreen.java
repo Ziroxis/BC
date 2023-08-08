@@ -1,14 +1,10 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.screen.guild;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.yuanno.block_clover.api.FactionHelper;
+import com.yuanno.block_clover.client.gui.button.NoTextureButton;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
-import com.yuanno.block_clover.events.GuildEvents;
-import com.yuanno.block_clover.guild.Guild;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CJoinGuildPacket;
-import com.yuanno.block_clover.networking.client.CRequestSyncWorldDataPacket;
-import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,7 +13,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.awt.*;
 
@@ -94,20 +89,6 @@ public class GuildInviteScreen extends Screen {
 
     private void joinGuild()
     {
-        // join guild
-        /*
-        ExtendedWorldData extendedWorldDataCaptain = ExtendedWorldData.get(playerCaptain.level);
-        Guild guild = extendedWorldDataCaptain.getCrewWithCaptain(playerCaptain.getUUID());
-        GuildEvents.Join events = new GuildEvents.Join(playerTarget, guild);
-        if (!MinecraftForge.EVENT_BUS.post(events) && !guild.hasMember(playerTarget.getUUID()))
-        {
-            extendedWorldDataCaptain.addCrewMember(guild, playerTarget);
-            FactionHelper.sendUpdateMessageToCrew(playerTarget.level, guild);
-            FactionHelper.sendMessageToCrew(playerTarget.level, guild, new TranslationTextComponent("%s joined the guild!", playerTarget.getName().getString()));
-            PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldDataCaptain), playerTarget);
-            //PacketHandler.sendToAll(new SSyncWorldDataPacket(extendedWorldDataCaptain), playerTarget);
-        }
-         */
         PacketHandler.sendToServer(new CJoinGuildPacket(playerCaptain.getUUID()));
         this.onClose();
     }

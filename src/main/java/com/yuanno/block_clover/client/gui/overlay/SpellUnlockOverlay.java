@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.overlay;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;

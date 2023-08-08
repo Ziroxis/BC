@@ -16,10 +16,7 @@ import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
-import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
-import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
-import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
+import com.yuanno.block_clover.networking.server.*;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.beast.BearClawAbility;
@@ -63,137 +60,10 @@ public class StatsEvent {
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
         props.setMultiplier(1);
         PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
-
-        /*
-        if (!props.hasAttribute())
-        {
-            String attribute = randomAttributeString();
-            props.setAttribute(attribute);
-            // Create a HashMap to store the mapping between attribute values and abilities
-            Map<String, AbilityCore> abilityMap = new HashMap<>();
-            abilityMap.put(ModValues.WIND, WindBladeAbility.INSTANCE);
-            abilityMap.put(ModValues.FIRE, FireBallAbility.INSTANCE);
-            abilityMap.put(ModValues.LIGHT, LightBladeAbility.INSTANCE);
-            abilityMap.put(ModValues.LIGHTNING, ThunderGodBootsAbility.INSTANCE);
-            abilityMap.put(ModValues.DARKNESS, DarkCloakedBladeAbility.INSTANCE);
-            abilityMap.put(ModValues.EARTH, EarthChunkAbility.INSTANCE);
-            abilityMap.put(ModValues.SLASH, SlashBladesAbility.INSTANCE);
-            abilityMap.put(ModValues.SEALING, SealingProjectileAbility.INSTANCE);
-            abilityMap.put(ModValues.TIME, TimeStealAbility.INSTANCE);
-            abilityMap.put(ModValues.WATER, WaterBallAbility.INSTANCE);
-            abilityMap.put(ModValues.MERCURY, MercuryBulletAbility.INSTANCE);
-            abilityMap.put(ModValues.BEAST, BearClawAbility.INSTANCE);
-            abilityMap.put(ModValues.COPY, CopyAbility.INSTANCE);
-            abilityMap.put(ModValues.SWORD, AirDashAbility.INSTANCE);
-            abilityMap.put(ModValues.ANTIMAGIC, null); // Placeholder, as this case has multiple abilities
-
-            // Get the ability based on the attribute value from the HashMap
-            AbilityCore ability = abilityMap.get(attribute);
-
-            // Add the unlocked ability to the player
-            if (ability != null) {
-                abilityProps.addUnlockedAbility(player, ability);
-
-                // Additional operations for specific cases
-                if (attribute.equals(ModValues.ANTIMAGIC)) {
-                    abilityProps.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
-                    abilityProps.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
-                    props.setRace(ModValues.HUMAN);
-                }
-            }
-
-            if (!attribute.equals(ModValues.ANTIMAGIC))
-            {
-                props.setRace(Beapi.randomizer(ModValues.races));
-                String race = props.getRace();
-                switch (race) {
-                    // Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1
-                    case ModValues.HUMAN:
-                        props.setManaRegeneration(1);
-                        props.setMultiplier(1.2f);
-                        int chanceDevil = Beapi.RNG(5);
-                        if (chanceDevil == 0) {
-                            props.setInnateDevil(true);
-                            props.setDevil(Beapi.randomizer(ModValues.devils));
-                        }
-                        break;
-                    // Elf get mana regeneration = 2; multiplier = 1
-                    case ModValues.ELF:
-                        props.setManaRegeneration(2);
-                        props.setMultiplier(1);
-                        break;
-                    // Witch get mana regeneration = 1; xp multiplier = 0.3
-                    case ModValues.WITCH:
-                        props.setManaRegeneration(1);
-                        props.setMultiplier(1.3f);
-                        break;
-                }
-                if (race.equals(ModValues.HYBRID)) {
-                    props.setManaRegeneration(1);
-                    props.setMultiplier(1);
-                    // Create a list of available attributes (excluding the current attribute)
-                    List<String> availableAttributes = new ArrayList<>(Arrays.asList(
-                            ModValues.WIND, ModValues.FIRE, ModValues.LIGHT, ModValues.LIGHTNING, ModValues.DARKNESS,
-                            ModValues.EARTH, ModValues.SLASH, ModValues.SEALING, ModValues.TIME,
-                            ModValues.WATER, ModValues.MERCURY, ModValues.BEAST, ModValues.COPY, ModValues.SWORD
-                    ));
-
-                    // Remove the current attribute from the available attributes list
-                    availableAttributes.remove(props.getAttribute());
-
-                    // Randomly select the second attribute from the remaining available attributes
-                    String secondAttribute = availableAttributes.get(new Random().nextInt(availableAttributes.size()));
-                    props.setSecondAttribute(secondAttribute);
-                    // Map secondAttribute to its corresponding ability using a HashMap
-                    Map<String, AbilityCore> abilityMapSecond = new HashMap<>();
-                    abilityMapSecond.put(ModValues.WIND, WindBladeAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.FIRE, FireBallAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.LIGHT, LightBladeAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.LIGHTNING, ThunderGodBootsAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.DARKNESS, DarkCloakedBladeAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.EARTH, EarthChunkAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.SLASH, SlashBladesAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.SEALING, SealingProjectileAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.TIME, TimeStealAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.WATER, WaterBallAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.MERCURY, MercuryBulletAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.BEAST, BearClawAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.COPY, CopyAbility.INSTANCE);
-                    abilityMapSecond.put(ModValues.SWORD, AirDashAbility.INSTANCE);
-
-                    // Get the ability based on the secondAttribute value from the HashMap
-                    AbilityCore abilitySecond = abilityMapSecond.get(secondAttribute);
-
-                    // Add the unlocked ability to the player
-                    if (abilitySecond != null) {
-                        abilityProps.addUnlockedAbility(player, abilitySecond);
-                    }
-                }
-
-            }
-            props.setLevel(1);
-            props.setExperience(0);
-            props.setMaxExperience(100);
-            if (!attribute.equals(ModValues.ANTIMAGIC))
-            {
-                if (!props.getRace().equals(ModValues.ELF))
-                {
-                    props.setMana(50);
-                    props.setMaxMana(50);
-                }
-                else
-                {
-                    props.setMaxMana(60);
-                    props.setMana(60);
-                }
-            }
-            else
-            {
-                props.setMana(0);
-                props.setMaxMana(0);
-            }
-        }
-         */
+        props.setLevel(1);
+        props.setExperience(0);
+        props.setMaxExperience(100);
+        PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
 
         UUID uuid = player.getUUID();
         switch (uuid.toString()) {

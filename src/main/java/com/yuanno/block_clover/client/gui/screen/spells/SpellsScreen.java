@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.screen.spells;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.ITextComponent;

@@ -1,7 +1,7 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.screen.guild;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.yuanno.block_clover.data.entity.EntityStatsBase;
+import com.yuanno.block_clover.client.gui.button.NoTextureButton;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
@@ -10,7 +10,6 @@ import com.yuanno.block_clover.networking.client.CCreateGuildPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;

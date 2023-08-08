@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.networking.server;
 
+import com.yuanno.block_clover.client.gui.AttributeChoiceScreen;
 import com.yuanno.block_clover.client.gui.screen.overview.PlayerOverviewScreen;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -9,21 +10,21 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class SOpenPlayerScreenPacket
+public class SOpenAttributeChoiceScreenPacket
 {
-	public SOpenPlayerScreenPacket() {}
+	public SOpenAttributeChoiceScreenPacket() {}
 
 	public void encode(PacketBuffer buffer)
 	{
 	}
 
-	public static SOpenPlayerScreenPacket decode(PacketBuffer buffer)
+	public static SOpenAttributeChoiceScreenPacket decode(PacketBuffer buffer)
 	{
-		SOpenPlayerScreenPacket msg = new SOpenPlayerScreenPacket();
+		SOpenAttributeChoiceScreenPacket msg = new SOpenAttributeChoiceScreenPacket();
 		return msg;
 	}
 
-	public static void handle(SOpenPlayerScreenPacket message, final Supplier<NetworkEvent.Context> ctx)
+	public static void handle(SOpenAttributeChoiceScreenPacket message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
 			ctx.get().enqueueWork(() -> ClientHandler.handle(message));
@@ -33,9 +34,9 @@ public class SOpenPlayerScreenPacket
 	public static class ClientHandler
 	{
 		@OnlyIn(Dist.CLIENT)
-		public static void handle(SOpenPlayerScreenPacket message)
+		public static void handle(SOpenAttributeChoiceScreenPacket message)
 		{
-			PlayerOverviewScreen.open();
+			AttributeChoiceScreen.open();
 		}
 	}
 }

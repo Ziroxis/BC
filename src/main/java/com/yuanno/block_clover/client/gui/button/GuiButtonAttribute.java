@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.client.gui;
+package com.yuanno.block_clover.client.gui.button;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;

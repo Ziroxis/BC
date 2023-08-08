@@ -1,7 +1,24 @@
 package com.yuanno.block_clover.init;
 
 
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.spells.beast.BearClawAbility;
+import com.yuanno.block_clover.spells.copy.CopyAbility;
+import com.yuanno.block_clover.spells.darkness.DarkCloakedBladeAbility;
+import com.yuanno.block_clover.spells.earth.EarthChunkAbility;
+import com.yuanno.block_clover.spells.fire.FireBallAbility;
+import com.yuanno.block_clover.spells.light.LightBladeAbility;
+import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
+import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
+import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
+import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
+import com.yuanno.block_clover.spells.sword.AirDashAbility;
+import com.yuanno.block_clover.spells.time.TimeStealAbility;
+import com.yuanno.block_clover.spells.water.WaterBallAbility;
+import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 import org.lwjgl.system.CallbackI;
+
+import java.util.*;
 
 public class ModValues {
 
@@ -23,9 +40,11 @@ public class ModValues {
     public static final String MERCURY = "Mercury";
     public static final String SWORD = "Sword";
     public static final String COPY = "Copy";
-    public static final String[] attributes = {
-            ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME, ModValues.ANTIMAGIC
-    };
+    public static List<String> availableAttributes = new ArrayList<>(Arrays.asList(
+            ModValues.WIND, ModValues.FIRE, ModValues.LIGHT, ModValues.LIGHTNING, ModValues.DARKNESS,
+            ModValues.EARTH, ModValues.SLASH, ModValues.SEALING, ModValues.TIME,
+            ModValues.WATER, ModValues.MERCURY, ModValues.BEAST, ModValues.COPY, ModValues.SWORD
+    ));
     public static final String[] attributes_no_antimagic = {
             ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME
     };
@@ -44,6 +63,34 @@ public class ModValues {
     public static final String[] races = {
       ModValues.HUMAN, ModValues.ELF, ModValues.HYBRID, ModValues.WITCH
     };
+
+    // Define a static block to initialize the abilityMap
+    private static Map<String, AbilityCore> abilityMap = new HashMap<>();
+    static {
+        abilityMap.put(ModValues.WIND, WindBladeAbility.INSTANCE);
+        abilityMap.put(ModValues.FIRE, FireBallAbility.INSTANCE);
+        abilityMap.put(ModValues.LIGHT, LightBladeAbility.INSTANCE);
+        abilityMap.put(ModValues.LIGHTNING, ThunderGodBootsAbility.INSTANCE);
+        abilityMap.put(ModValues.DARKNESS, DarkCloakedBladeAbility.INSTANCE);
+        abilityMap.put(ModValues.EARTH, EarthChunkAbility.INSTANCE);
+        abilityMap.put(ModValues.SLASH, SlashBladesAbility.INSTANCE);
+        abilityMap.put(ModValues.SEALING, SealingProjectileAbility.INSTANCE);
+        abilityMap.put(ModValues.TIME, TimeStealAbility.INSTANCE);
+        abilityMap.put(ModValues.WATER, WaterBallAbility.INSTANCE);
+        abilityMap.put(ModValues.MERCURY, MercuryBulletAbility.INSTANCE);
+        abilityMap.put(ModValues.BEAST, BearClawAbility.INSTANCE);
+        abilityMap.put(ModValues.COPY, CopyAbility.INSTANCE);
+        abilityMap.put(ModValues.SWORD, AirDashAbility.INSTANCE);
+        abilityMap.put(ModValues.ANTIMAGIC, null);
+
+        // Optionally, you can assign the abilityMap to a static field for later access
+        // StaticAbilityMapHolder.setAbilityMap(abilityMap);
+    }
+
+    // You can also define a static method to get the initialized abilityMap
+    public static Map<String, AbilityCore> getAbilityMap() {
+        return abilityMap;
+    }
 
     //RANKS
     public static final String EMPEROR = "Magic Emperor";

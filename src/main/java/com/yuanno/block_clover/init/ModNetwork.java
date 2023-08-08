@@ -45,6 +45,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SUpdateExtraDataPacket.class, SUpdateExtraDataPacket::encode, SUpdateExtraDataPacket::decode, SUpdateExtraDataPacket::handle);
         PacketHandler.registerPacket(SOpenDevilSummoningScreenPacket.class, SOpenDevilSummoningScreenPacket::encode, SOpenDevilSummoningScreenPacket::decode, SOpenDevilSummoningScreenPacket::handle);
         PacketHandler.registerPacket(SummonDevilEntityPacket.class, SummonDevilEntityPacket::encode, SummonDevilEntityPacket::decode, SummonDevilEntityPacket::handle);
+        PacketHandler.registerPacket(SOpenAttributeChoiceScreenPacket.class, SOpenAttributeChoiceScreenPacket::encode, SOpenAttributeChoiceScreenPacket::decode, SOpenAttributeChoiceScreenPacket::handle);
 
 
         //SYNC

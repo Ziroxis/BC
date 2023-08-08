@@ -1,26 +1,27 @@
-package com.yuanno.block_clover.screens;
+package com.yuanno.block_clover.client.gui.screen.block;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.blocks.containers.BakingOvenContainer;
 import com.yuanno.block_clover.blocks.containers.JuicerContainer;
-import com.yuanno.block_clover.blocks.tileentities.BakingOvenBlockTileEntity;
 import com.yuanno.block_clover.blocks.tileentities.JuicerBlockTileEntity;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class BakingOvenScreen extends ContainerScreen<BakingOvenContainer> {
-    private BakingOvenBlockTileEntity tileEntity;
+public class JuicerScreen extends ContainerScreen<JuicerContainer> {
+    private JuicerBlockTileEntity tileEntity;
+    private JuicerContainer container;
     // Location for texture
-    private final ResourceLocation GUI_LOC = new ResourceLocation(Main.MODID, "textures/gui/baking_oven_gui.png");
+    private final ResourceLocation GUI_LOC = new ResourceLocation(Main.MODID, "textures/gui/juicer_gui.png");
 
-    public BakingOvenScreen(BakingOvenContainer container, PlayerInventory inv, ITextComponent text) {
+    public JuicerScreen(JuicerContainer container, PlayerInventory inv, ITextComponent text) {
         super(container, inv, text);
-        if (container.tileEntity instanceof BakingOvenBlockTileEntity) {
-            this.tileEntity = (BakingOvenBlockTileEntity) container.tileEntity;
+        if (container.tileEntity instanceof JuicerBlockTileEntity) {
+            this.tileEntity = (JuicerBlockTileEntity) container.tileEntity;
+            this.container = container;
         }
     }
 
@@ -41,6 +42,8 @@ public class BakingOvenScreen extends ContainerScreen<BakingOvenContainer> {
 
         this.blit(matrix, left, top, 0, 0, this.getXSize(), this.getYSize());
         this.blit(matrix, left + 72, top + 36, 176, 0, (int) (tileEntity.getWorkTime() / 82.76), 13);
+        if (EntityStatsCapability.get(this.container.player).getLinkAbility()) {
+            this.blit(matrix, left + 20, top + 34, 176, 14, 16, 20);
+        }
     }
 }
-

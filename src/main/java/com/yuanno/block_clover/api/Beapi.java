@@ -16,10 +16,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
@@ -35,8 +32,10 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.template.*;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.spawner.WorldEntitySpawner;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -285,6 +284,31 @@ public class Beapi
                 attribute = chosenAttribute;
         } while (attribute.isEmpty());
         return attribute;
+    }
+
+    public static BlockPos findOnGroundSpawnLocation(World world, EntityType type, BlockPos spawnLocation, int radius)
+    {
+        return findOnGroundSpawnLocation(world, type, spawnLocation, radius, 0);
+    }
+
+    @Nullable
+    public static BlockPos findOnGroundSpawnLocation(World world, EntityType type, BlockPos spawnLocation, int radius, int offset)
+    {
+        BlockPos blockpos = null;
+        for (int i = 0; i < 10; ++i)
+        {
+            int x = (int) Beapi.randomWithRange((spawnLocation.getX() - offset) - radius, (spawnLocation.getX() + offset) + radius);
+            int z = (int) Beapi.randomWithRange((spawnLocation.getZ() - offset) - radius, (spawnLocation.getZ() + offset) + radius);
+            int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+            BlockPos blockpos1 = new BlockPos(x, y, z);
+            if (WorldEntitySpawner.canSpawnAtBody(EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, world, blockpos1, type))
+            {
+                blockpos = blockpos1;
+                break;
+            }
+        }
+
+        return blockpos;
     }
 
     public static String randomizer(String[] values)

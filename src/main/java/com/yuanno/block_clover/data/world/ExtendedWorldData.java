@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.data.world;
 
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.guild.Guild;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -18,7 +19,6 @@ public class ExtendedWorldData extends WorldSavedData {
 
     private static final String IDENTIFIER = "block_clover";
     private HashMap<String, Guild> guilds = new HashMap<String, Guild>();
-
     public static Map<String, ExtendedWorldData> loadedExtWorlds = new HashMap<>();
     private List<int[][]> abilityProtections = new ArrayList<int[][]>();
     private static final ExtendedWorldData CLIENT_DATA = new ExtendedWorldData();
@@ -89,41 +89,6 @@ public class ExtendedWorldData extends WorldSavedData {
 
         loadedExtWorlds.put(worldType, worldExt);
         return worldExt;
-
-		/*ExtendedWorldData worldExt = null;
-		String worldType = "overworld";//world.getDimension().getType().getRegistryName().getPath();
-		// NOTE(Wynd): Because at the moment the id is always overworld this can cause problems, for example this loadedExtWorlds list is not cleared upon joining a new world.
-		// This means it is possible to join a different world using the data from another world. To solve this problem (which is only a problem client sided) there's an event subscriber
-		// in SyncEvents::onEntityJoinsWorld that clears the list client sided only. A dirty fix but a fix.
-
-		if (loadedExtWorlds.containsKey(worldType))
-		{
-			worldExt = loadedExtWorlds.get(worldType);
-			return worldExt;
-		}
-
-		if (world instanceof ServerWorld)
-		{
-			ServerWorld serverWorld = world.getServer().getWorld(DimensionType.OVERWORLD);
-			//world.increaseMaxEntityRadius(50);
-			ExtendedWorldData worldSavedData = serverWorld.getSavedData().get(ExtendedWorldData::new, IDENTIFIER);
-			if (worldSavedData != null)
-			{
-				worldExt = worldSavedData;
-			}
-			else
-			{
-				worldExt = new ExtendedWorldData();
-				serverWorld.getSavedData().set(worldExt);
-			}
-		}
-		else
-		{
-			worldExt = new ExtendedWorldData();
-		}
-
-		loadedExtWorlds.put(worldType, worldExt);
-		return worldExt;*/
     }
 
     @Override
@@ -141,6 +106,7 @@ public class ExtendedWorldData extends WorldSavedData {
                         });
             }
         }
+
 
         ListNBT guilds = nbt.getList("guilds", Constants.NBT.TAG_COMPOUND);
         this.guilds.clear();

@@ -31,6 +31,8 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<BlockItem> DEVIL_SUMMONER = ITEMS.register("devil_summoner", () -> new BlockItem(ModBlocks.DEVIL_SUMMONER.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<BlockItem> QUEST_BOARD = ITEMS.register("quest_board", () -> new BlockItem(ModBlocks.QUEST_BOARD.get(),
+            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.RARE)));
 
     //TREES
     //MOGURO

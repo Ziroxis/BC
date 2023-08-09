@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.init;
 
 
+import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.spells.beast.BearClawAbility;
 import com.yuanno.block_clover.spells.copy.CopyAbility;
@@ -48,6 +49,11 @@ public class ModValues {
     public static final String[] attributes_no_antimagic = {
             ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME
     };
+
+    public static List<Quest> availableQuests = new ArrayList<>(Arrays.asList(
+       ModQuests.KILL_CREEPER
+    ));
+
     public static final String NAHAMAN = "Nahaman";
     public static final String WALGNER = "Walgner";
     public static final String LILITH = "Lilith";
@@ -91,6 +97,14 @@ public class ModValues {
     public static Map<String, AbilityCore> getAbilityMap() {
         return abilityMap;
     }
+
+    public static final String RANK_QUEST_SSS = "SSS";
+    public static final String RANK_QUEST_SS = "SS";
+    public static final String RANK_QUEST_S = "S";
+    public static final String RANK_QUEST_A = "A";
+    public static final String RANK_QUEST_B = "B";
+    public static final String RANK_QUEST_C = "C";
+    public static final String RANK_QUEST_D = "D";
 
     //RANKS
     public static final String EMPEROR = "Magic Emperor";

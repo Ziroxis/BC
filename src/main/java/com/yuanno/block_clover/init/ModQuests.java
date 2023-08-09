@@ -5,10 +5,7 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestRegistry;
-import com.yuanno.block_clover.quests.GrimoireQuest;
-import com.yuanno.block_clover.quests.ManaReinforcementQuest;
-import com.yuanno.block_clover.quests.ManaSkinQuest;
-import com.yuanno.block_clover.quests.ManaZoneQuest;
+import com.yuanno.block_clover.quests.*;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.HashMap;
@@ -23,6 +20,9 @@ public class ModQuests {
     }
     public static final DeferredRegister<Quest> QUESTS = DeferredRegister.create(QuestRegistry.QUESTS, Main.MODID);
 
+    public static final Quest KILL_CREEPER = new KillCreeperQuest();
+    public static final Quest[] D_QUESTS = new Quest[] {KILL_CREEPER};
+
     public static final Quest GRIMOIRE = new GrimoireQuest();
     public static final Quest REINFORCEMENT = new ManaReinforcementQuest();
     public static final Quest MANASKIN = new ManaSkinQuest();
@@ -31,6 +31,19 @@ public class ModQuests {
 
     static
     {
+        for (Quest quest : D_QUESTS)
+        {
+            String resourceName = Beapi.getResourceName(quest.getId());
+            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
+
+            for(Objective obj : quest.getObjectives())
+            {
+                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
+            }
+
+            QUESTS.register(resourceName, () -> quest);
+        }
+
         for (Quest quest : MAGICIAN)
         {
             String resourceName = Beapi.getResourceName(quest.getId());

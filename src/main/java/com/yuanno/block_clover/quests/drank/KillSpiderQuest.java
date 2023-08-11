@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quests;
+package com.yuanno.block_clover.quests.drank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
@@ -7,16 +7,16 @@ import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class KillCreeperQuest extends Quest {
+public class KillSpiderQuest extends Quest {
 
-    private Objective killCreeperObjective = new KillEntityObjective("Kill 10 creepers", 10, EntityType.CREEPER);
+    private Objective killSpiderObjective = new KillEntityObjective("Kill 5 spiders", 5, EntityType.SPIDER);
 
-    public KillCreeperQuest()
+    public KillSpiderQuest()
     {
-        super("creeperquest", "Kill 10 creepers");
-        this.setDescription("Kill 10 creepers");
+        super("spiderquest", "Kill 5 spiders");
+        this.setDescription("Kill 5 spiders");
         this.setRank(ModValues.RANK_QUEST_D);
-        this.addObjective(this.killCreeperObjective);
+        this.addObjective(this.killSpiderObjective);
 
         this.onCompleteEvent = this::giveReward;
     }

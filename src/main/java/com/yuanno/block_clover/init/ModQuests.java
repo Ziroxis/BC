@@ -5,7 +5,11 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestRegistry;
-import com.yuanno.block_clover.quests.*;
+import com.yuanno.block_clover.quests.drank.*;
+import com.yuanno.block_clover.quests.magician.GrimoireQuest;
+import com.yuanno.block_clover.quests.magician.ManaReinforcementQuest;
+import com.yuanno.block_clover.quests.magician.ManaSkinQuest;
+import com.yuanno.block_clover.quests.magician.ManaZoneQuest;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.HashMap;
@@ -20,8 +24,12 @@ public class ModQuests {
     }
     public static final DeferredRegister<Quest> QUESTS = DeferredRegister.create(QuestRegistry.QUESTS, Main.MODID);
 
+    public static final Quest OBTAIN_IRON = new ObtainIronQuest();
+    public static final Quest KILL_SPIDER = new KillSpiderQuest();
+    public static final Quest KILL_ZOMBIE = new KillZombieQuest();
+    public static final Quest KILL_SKELETON = new KillSkeletonQuest();
     public static final Quest KILL_CREEPER = new KillCreeperQuest();
-    public static final Quest[] D_QUESTS = new Quest[] {KILL_CREEPER};
+    public static final Quest[] D_QUESTS = new Quest[] {KILL_CREEPER, KILL_SKELETON, KILL_ZOMBIE, KILL_SPIDER, OBTAIN_IRON};
 
     public static final Quest GRIMOIRE = new GrimoireQuest();
     public static final Quest REINFORCEMENT = new ManaReinforcementQuest();

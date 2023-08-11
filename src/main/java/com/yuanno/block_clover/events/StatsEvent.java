@@ -56,14 +56,16 @@ public class StatsEvent {
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
-        questData.addInProgressQuest(ModQuests.GRIMOIRE);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
-        props.setMultiplier(1);
-        PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
-        props.setLevel(1);
-        props.setExperience(0);
-        props.setMaxExperience(100);
-        PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
+        if (!props.hasAttribute())
+        {
+            questData.addInProgressQuest(ModQuests.GRIMOIRE);
+            props.setMultiplier(1);
+            props.setLevel(1);
+            props.setExperience(0);
+            props.setMaxExperience(100);
+            PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
+        }
 
         UUID uuid = player.getUUID();
         switch (uuid.toString()) {
@@ -100,6 +102,7 @@ public class StatsEvent {
                 props.setTitle("§2True farmer");
                 break;
         }
+        PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);

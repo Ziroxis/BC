@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quests;
+package com.yuanno.block_clover.quests.magician;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;

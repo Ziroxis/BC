@@ -97,7 +97,7 @@ public class QuestScreen extends Screen {
                     drawString(matrixStack, font, "" + questInprogress.getObjectives().get(ia).getTitle(), guiLeft - 155, guiTop - 30 + (i * 50), 16777215);
                     drawString(matrixStack, font, "Progress: " + (int) questInprogress.getObjectives().get(ia).getProgress() / questInprogress.getObjectives().get(ia).getMaxProgress() * 100, guiLeft - 155, guiTop - 20 + (ia * 20), 16777215);
                     if (questInprogress.getObjectives().get(ia).getProgress() >= questInprogress.getObjectives().get(ia).getMaxProgress())
-                        drawString(matrixStack, font, TextFormatting.BOLD + "V", guiLeft + 25 + (questInprogress.getObjectives().get(ia).getTitle().length() * 2), guiTop - 30 + (ia * 20), 16777215);
+                        drawString(matrixStack, font, TextFormatting.BOLD + "V", guiLeft + 25 + (questInprogress.getObjectives().get(ia).getTitle().length() * 2), guiTop - 30 + (ia * 20) + (i * 50), 16777215);
                 }
             }
         }

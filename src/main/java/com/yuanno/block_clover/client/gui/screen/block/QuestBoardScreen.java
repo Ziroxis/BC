@@ -42,20 +42,20 @@ public class QuestBoardScreen extends Screen {
     private int guiTop;
     private final int xSize = 64;
     private final int ySize = 58;
-    List<Quest> availableQuest = ModValues.availableQuests;
+    List<Quest> availableQuest;
     IQuestData questData;
     int buttonsPerPage = 4;
     int currentPage = 0;
     int startIndex = currentPage * buttonsPerPage;
-    int endIndex = Math.min(startIndex + buttonsPerPage, availableQuest.size());
     Button advanceButton;
     Button goBackButton;
 
-    public QuestBoardScreen(PlayerEntity player) {
+    public QuestBoardScreen(PlayerEntity player, List<Quest> availableQuest) {
         super(new StringTextComponent(""));
         this.player = player;
         this.entityStats = EntityStatsCapability.get(player);
         this.questData = QuestDataCapability.get(player);
+        this.availableQuest = availableQuest;
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
     }

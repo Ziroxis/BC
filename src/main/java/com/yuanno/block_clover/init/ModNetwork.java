@@ -47,6 +47,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SummonDevilEntityPacket.class, SummonDevilEntityPacket::encode, SummonDevilEntityPacket::decode, SummonDevilEntityPacket::handle);
         PacketHandler.registerPacket(SOpenAttributeChoiceScreenPacket.class, SOpenAttributeChoiceScreenPacket::encode, SOpenAttributeChoiceScreenPacket::decode, SOpenAttributeChoiceScreenPacket::handle);
         PacketHandler.registerPacket(SOpenQuestBoardPacket.class, SOpenQuestBoardPacket::encode, SOpenQuestBoardPacket::decode, SOpenQuestBoardPacket::handle);
+        PacketHandler.registerPacket(SOpenChatPromptScreenQuestBoardPacket.class, SOpenChatPromptScreenQuestBoardPacket::encode, SOpenChatPromptScreenQuestBoardPacket::decode, SOpenChatPromptScreenQuestBoardPacket::handle);
 
 
         //SYNC

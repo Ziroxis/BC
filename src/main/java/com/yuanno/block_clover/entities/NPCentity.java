@@ -42,7 +42,6 @@ public class NPCentity extends BCentity implements IDynamicRenderer {
             return ActionResultType.PASS;
         if (!player.level.isClientSide) {
             this.lookAt(player, 1, 1);
-            IEntityStats entityStats = EntityStatsCapability.get(player);
             PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
         }
         return ActionResultType.PASS;

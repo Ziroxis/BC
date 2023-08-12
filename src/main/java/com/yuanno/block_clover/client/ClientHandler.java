@@ -10,6 +10,7 @@ import com.yuanno.block_clover.client.renderers.entities.devils.WalgnerDevilEnti
 import com.yuanno.block_clover.client.renderers.entities.humanoid.BanditEntityRenderer;
 import com.yuanno.block_clover.client.renderers.entities.humanoid.GrimoireMagicianRenderer;
 import com.yuanno.block_clover.client.renderers.entities.humanoid.GuildEntityRenderer;
+import com.yuanno.block_clover.client.renderers.entities.humanoid.QuestBoardManagerEntityRenderer;
 import com.yuanno.block_clover.client.renderers.entities.misc.VolcanoMonsterRenderer;
 import com.yuanno.block_clover.init.ModEntities;
 import net.minecraft.client.Minecraft;
@@ -41,6 +42,7 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.WALGNER_DEVIL.get(), new WalgnerDevilEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LILITH_DEVIL.get(), new LilithDevilEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.NAHAMAN_DEVIL.get(), new NahamanDevilEntityRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUESTBOARD_MANAGER.get(), new QuestBoardManagerEntityRenderer.Factory());
 
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));

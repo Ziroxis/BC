@@ -8,6 +8,7 @@ import com.yuanno.block_clover.entities.devils.NahamanDevilEntity;
 import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
 import com.yuanno.block_clover.entities.humanoid.BanditEntity;
 import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
+import com.yuanno.block_clover.entities.humanoid.QuestBoardManagerEntity;
 import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
@@ -34,6 +35,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.WALGNER_DEVIL.get(), WalgnerDevilEntity.setCustomAttributes().build());
         event.put(ModEntities.LILITH_DEVIL.get(), LilithDevilEntity.setCustomAttributes().build());
         event.put(ModEntities.NAHAMAN_DEVIL.get(), NahamanDevilEntity.setCustomAttributes().build());
+        event.put(ModEntities.QUESTBOARD_MANAGER.get(), QuestBoardManagerEntity.setCustomAttributes().build());
 
     }
 

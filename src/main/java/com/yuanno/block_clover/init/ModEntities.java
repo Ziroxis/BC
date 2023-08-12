@@ -10,6 +10,7 @@ import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
 import com.yuanno.block_clover.entities.humanoid.BanditEntity;
 import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
 import com.yuanno.block_clover.entities.humanoid.GuildEntity;
+import com.yuanno.block_clover.entities.humanoid.QuestBoardManagerEntity;
 import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -41,6 +42,12 @@ public class ModEntities {
                             .sized(1f, 2f)
                             .setTrackingRange(15)
                             .build(new ResourceLocation(Main.MODID, "bandit").toString()));
+    public static final RegistryObject<EntityType<QuestBoardManagerEntity>> QUESTBOARD_MANAGER = ENTITIES
+            .register("questboardmanager",
+                    () -> EntityType.Builder.of(QuestBoardManagerEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "questboardmanager").toString()));
     public static final RegistryObject<EntityType<VolcanoMonsterEntity>> VOLCANO_MONSTER = ENTITIES
             .register("volcano_monster",
                     () -> EntityType.Builder.of(VolcanoMonsterEntity::new, EntityClassification.CREATURE)

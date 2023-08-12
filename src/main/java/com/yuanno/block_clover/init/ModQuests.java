@@ -5,6 +5,7 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestRegistry;
+import com.yuanno.block_clover.quests.crank.ObtainIronQuest;
 import com.yuanno.block_clover.quests.drank.*;
 import com.yuanno.block_clover.quests.magician.GrimoireQuest;
 import com.yuanno.block_clover.quests.magician.ManaReinforcementQuest;
@@ -12,8 +13,6 @@ import com.yuanno.block_clover.quests.magician.ManaSkinQuest;
 import com.yuanno.block_clover.quests.magician.ManaZoneQuest;
 import net.minecraftforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class ModQuests {

@@ -28,9 +28,6 @@ public class DevilSummonerBlock extends Block {
 
     public ActionResultType use(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
     {
-        amountOfSummons--;
-        if (amountOfSummons <= 0)
-            return ActionResultType.CONSUME;
         PacketHandler.sendTo(new SOpenDevilSummoningScreenPacket(), player);
         return ActionResultType.SUCCESS;
     }

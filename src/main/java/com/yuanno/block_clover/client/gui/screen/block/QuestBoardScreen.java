@@ -64,6 +64,25 @@ public class QuestBoardScreen extends Screen {
     public void init()
     {
         super.init();
+        // do not include the quests that the player already has done or is progressing in // todo remove this with title
+        System.out.println(availableQuest);
+        for (int i = 0; i < availableQuest.size(); i++)
+        {
+            for (int a = 0; a < questData.getFinishedQuests().size(); a++)
+            {
+                if (availableQuest.get(i).getTitle().equals(questData.getFinishedQuests().get(i).getTitle()))
+                    availableQuest.remove(i);
+            }
+            for (Quest quest : questData.getInProgressQuests())
+            {
+                if (quest != null && quest.getTitle().equals(availableQuest.get(i).getTitle()))
+                    availableQuest.remove(i);
+            }
+        }
+
+        System.out.println(availableQuest);
+
+
         this.buttons.clear();
         guiLeft = (this.width - this.xSize) / 2;
         guiTop = (this.height - this.ySize) / 2;

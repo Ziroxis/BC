@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quests.drank;
+package com.yuanno.block_clover.quests.crank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
@@ -15,7 +15,7 @@ public class ObtainIronQuest extends Quest {
     {
         super("obtainironquest", "Obtain some iron");
         this.setDescription("Collect some iron");
-        this.setRank(ModValues.RANK_QUEST_D);
+        this.setRank(ModValues.RANK_QUEST_C);
         this.addObjective(this.collectIronObjective);
 
         this.onCompleteEvent = this::giveReward;

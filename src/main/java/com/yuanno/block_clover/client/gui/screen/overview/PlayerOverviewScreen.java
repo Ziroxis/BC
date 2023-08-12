@@ -42,22 +42,21 @@ public class PlayerOverviewScreen extends Screen {
 
         int posX = ((this.width - 256) / 2) - 110;
         int posY = (this.height - 256) / 2;
-        posY += 190;
-        posX += 80;
+        posY += 210;
+        posX += 40;
         this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.spells"), b ->
         {
             Minecraft.getInstance().setScreen(new SelectHotbarAbilitiesScreen(this.player));
         }));
-
         posX += 240;
-        this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.stats"), b ->
+        this.addButton(new Button(posX + 80, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.achievements"), b ->
         {
-            Minecraft.getInstance().setScreen(new PlayerStatsScreen());
+            Minecraft.getInstance().setScreen(new PlayerAchievementsScreen());
         }));
 
         //posX += 240;
         posY -= 27;
-        this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.quests"), b ->
+        this.addButton(new Button(posX + 80, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.quests"), b ->
         {
            Minecraft.getInstance().setScreen(new QuestScreen());
         }));
@@ -81,7 +80,7 @@ public class PlayerOverviewScreen extends Screen {
         this.renderBackground(matrixStack);
         statsRendering(matrixStack);
 
-        renderEntityInInventory(posX + 190, posY + 190, 70, (float)(posX + 190) - this.xMouse, (float)(posY + 190 - 120) - this.yMouse, this.minecraft.player);
+        renderEntityInInventory(posX + 128, posY + 230, 70, (float)(posX + 190) - this.xMouse, (float)(posY + 190 - 120) - this.yMouse, this.minecraft.player);
 
         super.render(matrixStack, x, y, f);
     }
@@ -104,23 +103,25 @@ public class PlayerOverviewScreen extends Screen {
         int level = props.getLevel();
         int experience = props.getExperience();
         int maxExperience = props.getMaxExperience();
+        int maxHealth = (int) player.getMaxHealth();
+        int maxMana = (int) props.getMaxMana();
+        int manaRegeneration = (int) props.getManaRegeneration();
 
-        /*
-        String race = this.playerHandler.returnRace().getString().toLowerCase();
-        String magicAttribute = this.playerHandler.ReturnMagicAttribute().getString().toLowerCase();
-        String magicLevel = String.valueOf(this.playerHandler.ReturnMagicLevel());
-        String magicExp = ((int) (this.playerHandler.returnMagicExp() - BCMHelper.CalculateExp(this.playerHandler.ReturnMagicLevel()))) + " / " + ((int) (BCMHelper.CalculateExp(this.playerHandler.ReturnMagicLevel()+1) - BCMHelper.CalculateExp(this.playerHandler.ReturnMagicLevel())));
+        int leftShift = posX - 75;
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Name: " + TextFormatting.RESET + name, leftShift, posY + 20, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Race: " + TextFormatting.RESET + race, leftShift, posY + 40, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Experience: " + TextFormatting.RESET + experience + "/" + maxExperience, leftShift, posY + 60, -1);
 
-         */
-
-        drawString(matrixStack, this.font, TextFormatting.BOLD + "Name: " + TextFormatting.RESET + name, posX - 30, posY + 50, -1);
-        drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, posX - 30, posY + 70, -1);
+        int rightShift = posX + 200;
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Max health: " + TextFormatting.RESET + maxHealth, rightShift, posY + 20, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, rightShift, posY + 40, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, rightShift, posY + 40, -1);
         if (props.hasSecondAttribute())
-            drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute + ", " + secondAttribute, posX - 30, posY + 90, -1);
+            drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute + ", " + secondAttribute, rightShift, posY + 60, -1);
         else
-            drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute, posX - 30, posY + 90, -1);
-        drawString(matrixStack, this.font, TextFormatting.BOLD + "Race: " + TextFormatting.RESET + race, posX - 30, posY + 110, -1);
-        drawString(matrixStack, this.font, TextFormatting.BOLD + "Experience: " + TextFormatting.RESET + experience + "/" + maxExperience, posX - 30, posY + 130, -1);
+            drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute, rightShift, posY + 60, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Max mana: " + TextFormatting.RESET + maxMana, rightShift, posY + 80, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Mana regeneration: " + TextFormatting.RESET + manaRegeneration + "/s", rightShift, posY + 100, -1);
 
 
     }

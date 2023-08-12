@@ -1,6 +1,6 @@
 package com.yuanno.block_clover.networking.server;
 
-import com.yuanno.block_clover.client.gui.screen.overview.PlayerStatsScreen;
+import com.yuanno.block_clover.client.gui.screen.overview.PlayerAchievementsScreen;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -35,6 +35,6 @@ public class SOpenPlayerStatsScreenPacket {
         @OnlyIn(Dist.CLIENT)
         public static void handle(SOpenPlayerStatsScreenPacket message)
         {
-            PlayerStatsScreen.open();
+            PlayerAchievementsScreen.open();
         }
     }}

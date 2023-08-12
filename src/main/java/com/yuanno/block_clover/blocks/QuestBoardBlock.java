@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class QuestBoardBlock extends Block {
-    // TODO make it decrease once the quest is taken
     List<Quest> availableQuest = ModValues.availableQuests;
 
     public QuestBoardBlock()

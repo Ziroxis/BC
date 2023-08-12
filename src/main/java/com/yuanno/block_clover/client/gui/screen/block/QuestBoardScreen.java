@@ -64,7 +64,7 @@ public class QuestBoardScreen extends Screen {
     public void init()
     {
         super.init();
-        // do not include the quests that the player already has done or is progressing in // todo remove this with title
+        // do not include the quests that the player already has done or is progressing in
         System.out.println(availableQuest);
         for (int i = 0; i < availableQuest.size(); i++)
         {

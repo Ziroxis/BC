@@ -35,6 +35,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @OnlyIn(Dist.CLIENT)
 public class ChatPromptQuestBoardScreen extends Screen {
@@ -91,10 +92,11 @@ public class ChatPromptQuestBoardScreen extends Screen {
         {
             for (Quest quest1 : questData.getInProgressQuests())
                 if (quest != null && quest1 != null && quest.getTitle().equals(quest1.getTitle()) && quest1.isComplete()) {
-                    questData.addFinishedQuest(quest);
-                    questData.removeInProgressQuest(quest);
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest));
+                    questData.addFinishedQuest(quest1);
+                    questData.removeInProgressQuest(quest1);
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest1));
                     PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                    System.out.println(Arrays.toString(questData.getInProgressQuests()));
                     String text = "Good job on doing the quest, here is the reward!";
                     this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000); // -> first time talking to the npc
                     return;

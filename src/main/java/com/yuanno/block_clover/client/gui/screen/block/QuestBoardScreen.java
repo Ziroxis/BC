@@ -57,8 +57,6 @@ public class QuestBoardScreen extends Screen {
         this.entityStats = EntityStatsCapability.get(player);
         this.questData = QuestDataCapability.get(player);
         this.availableQuest = availableQuest;
-        int posX = (this.width - 256) / 2;
-        int posY = (this.height - 256) / 2;
     }
 
     @Override
@@ -66,7 +64,6 @@ public class QuestBoardScreen extends Screen {
     {
         super.init();
         // do not include the quests that the player already has done or is progressing in
-        System.out.println(availableQuest);
         for (int i = 0; i < availableQuest.size(); i++)
         {
             for (int a = 0; a < questData.getFinishedQuests().size(); a++)
@@ -81,7 +78,6 @@ public class QuestBoardScreen extends Screen {
             }
         }
 
-        System.out.println(availableQuest);
 
 
         this.buttons.clear();
@@ -90,7 +86,6 @@ public class QuestBoardScreen extends Screen {
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
 
-        System.out.println(availableQuest);
 
         // In the init() method
         goBackButton = new Button(posX + 40, posY + 200, 20, 20, new TranslationTextComponent("<"), b -> {

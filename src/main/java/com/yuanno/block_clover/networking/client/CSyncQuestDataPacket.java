@@ -73,7 +73,7 @@ public class CSyncQuestDataPacket
 						}
 					}
 				}
-				
+				System.out.println(props.getInProgressQuests());
 				PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
 			});
 		}

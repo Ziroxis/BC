@@ -104,7 +104,7 @@ public class QuestBoardScreen extends Screen {
         Button buttonChoice1 = new Button(posX + 162, posY + 60, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
             questData.addInProgressQuest(availableQuest.get(currentPage * 4));
-            PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4)));
+            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4)));
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4));
             this.onClose();
@@ -117,7 +117,7 @@ public class QuestBoardScreen extends Screen {
         Button buttonChoice2 = new Button(posX + 162, posY + 100, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
             questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 1));
-            PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 1)));
+            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 1)));
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4 + 1));
             this.onClose();
@@ -131,7 +131,7 @@ public class QuestBoardScreen extends Screen {
         Button buttonChoice3 = new Button(posX + 162, posY + 140, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
             questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 2));
-            PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 2)));
+            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 2)));
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4 + 2));
             this.onClose();
@@ -145,7 +145,7 @@ public class QuestBoardScreen extends Screen {
         Button buttonChoice4 = new Button(posX + 162, posY + 180, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
             questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 3));
-            PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 3)));
+            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 3)));
 
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4 + 3));

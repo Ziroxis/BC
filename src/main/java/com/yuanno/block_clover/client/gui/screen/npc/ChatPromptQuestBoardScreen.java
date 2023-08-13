@@ -88,20 +88,33 @@ public class ChatPromptQuestBoardScreen extends Screen {
      */
     public void loop()
     {
-        for (Quest quest : ModQuests.QUESTBOARD_QUESTS)
+        ArrayList<Quest> questArrayListQuestBoard = new ArrayList<>(Arrays.asList(ModQuests.QUESTBOARD_QUESTS));
+
+        for (int i = 0; i < questData.getInProgressQuests().length; i++)
         {
-            for (Quest quest1 : questData.getInProgressQuests())
-                if (quest != null && quest1 != null && quest.getTitle().equals(quest1.getTitle()) && quest1.isComplete()) {
-                    questData.addFinishedQuest(quest1);
-                    questData.removeInProgressQuest(quest1);
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest1));
-                    PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-                    System.out.println(Arrays.toString(questData.getInProgressQuests()));
-                    String text = "Good job on doing the quest, here is the reward!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000); // -> first time talking to the npc
+            for (int ia = 0; ia < questArrayListQuestBoard.size(); ia++)
+            {
+                if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).getId().equals(questArrayListQuestBoard.get(ia).getId())) {
+                    if (questData.getInProgressQuest(i).isComplete())
+                    {
+                        System.out.println(questData.getInProgressQuest(i));
+                        questData.addFinishedQuest(questData.getInProgressQuest(i));
+                        System.out.println(questData.getFinishedQuests());
+                        questData.removeInProgressQuest(questData.getInProgressQuest(i)); // -> doesn't work
+                        System.out.println(Arrays.toString(questData.getInProgressQuests()));
+                        PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                        PacketHandler.sendToServer(new CUpdateQuestStatePacket((Quest) questData.getInProgressQuest(i)));
+                        String text = "Good job on the quest!";
+                        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
+                        return;
+                    }
+                    String text = "Oh you got a quest from the quest board!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
                     return;
                 }
+            }
         }
+
         String text = "I manage all the quests for the guilds, pick up a quest from the quest board and once done come to me and I'll give the reward!";
         this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000); // -> first time talking to the npc
         return;

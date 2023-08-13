@@ -15,7 +15,6 @@ import com.yuanno.block_clover.entities.NPCentity;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
-import com.yuanno.block_clover.networking.client.CSyncQuestDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.networking.client.CUpdateQuestStatePacket;
 import com.yuanno.block_clover.spells.sword.OriginalDemonSlayerAbility;
@@ -143,6 +142,28 @@ public class ChatPromptScreen extends Screen {
         }
         int finalAmountDone = amountDone;
         Quest questGiver = npCentity.quests.get(finalAmountDone);
+        /*
+        for(int i = 0; i < questData.getInProgressQuests().length; i++)
+        {
+            System.out.println(questData.getInProgressQuest(i));
+            if (questData.getInProgressQuest(i) != null && !questData.hasFinishedQuest(questData.getInProgressQuest(i)) && alreadyDoneQuestNPCID.contains(questData.getInProgressQuest(i).getId()) && questData.getInProgressQuest(i).isComplete())
+            {
+                for (int ia = 0; ia < npCentity.quests.size(); i++)
+                {
+                    if (npCentity.quests.get(ia) != null && npCentity.quests.get(ia).getTitle().equals(questData.getInProgressQuest(i).getTitle()))
+                    {
+                        Quest quest = npCentity.quests.get(ia);
+                        questData.addFinishedQuest(quest);
+                        questData.removeFinishedQuest(quest);
+                        questData.removeInProgressQuest(quest);
+                        PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest));
+                        this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
+                    }
+                }
+                return;
+            }
+        }
+        */
 
         for (int i = 0; i < questData.getInProgressQuests().length; i++)
         {
@@ -154,11 +175,9 @@ public class ChatPromptScreen extends Screen {
                     {
                         if (npCentity.quests.get(ia) != null && !questData.hasFinishedQuest(npCentity.quests.get(ia)) && npCentity.quests.get(ia).isComplete())
                         {
-                            npCentity.quests.get(ia).triggerCompleteEvent(player);
                             questData.addFinishedQuest(npCentity.quests.get(ia));
                             questData.removeFinishedQuest(npCentity.quests.get(ia));
                             questData.removeInProgressQuest(npCentity.quests.get(ia));
-                            PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
                             PacketHandler.sendToServer(new CUpdateQuestStatePacket(npCentity.quests.get(ia)));
                             this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
                             return;
@@ -199,7 +218,6 @@ public class ChatPromptScreen extends Screen {
             {
                 this.questData.addInProgressQuest(questGiver);
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(questGiver));
-                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
                 this.state = 1;
                 this.message = new SequencedString(npCentity.acceptanceSpeech + "", 245, this.font.width(npCentity.declineSpeech) / 2, 2000);
             }); // -> accepting the quest

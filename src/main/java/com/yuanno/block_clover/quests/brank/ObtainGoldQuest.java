@@ -2,24 +2,22 @@ package com.yuanno.block_clover.quests.brank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.ObtainItemObjective;
-import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 
 public class ObtainGoldQuest extends Quest {
 
-    private Objective collectGoldObejctive = new ObtainItemObjective("Get some gold", 8, Items.GOLD_INGOT.delegate);
+    public static final QuestId INSTANCE = new QuestId.Builder("Get some gold", ObtainGoldQuest::new)
+            .build();
+    private Objective objective01 = new ObtainItemObjective("Obtain 8 gold", 8, Items.IRON_INGOT.delegate);
 
-    public ObtainGoldQuest()
+    public ObtainGoldQuest(QuestId id)
     {
-        super("obtaingoldquest", "Obtain some gold");
-        this.setDescription("Collect some gold");
-        this.setRank(ModValues.RANK_QUEST_B);
-        this.addObjective(this.collectGoldObejctive);
-
+        super(id);
+        this.addObjectives(this.objective01);
         this.onCompleteEvent = this::giveReward;
-
     }
 
     public boolean giveReward(PlayerEntity player)

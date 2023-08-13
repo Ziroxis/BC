@@ -87,6 +87,8 @@ public class Main
         BeRegistry.ABILITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
 
+        BeRegistry.QUESTS.register(modEventBus);
+        ModQuests.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModTileEntities.register(modEventBus);
@@ -95,7 +97,6 @@ public class Main
         ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-        ModQuests.QUESTS.register(modEventBus);
         ModPotions.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);

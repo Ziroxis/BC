@@ -24,7 +24,7 @@ import java.util.*;
 public class ModValues {
 
     public static final String NONE = "None";
-
+    public static final int MAX_IN_PROGRESS_QUESTS = 3;
     //Attributes
     public static final String FIRE = "Fire";
     public static final String WATER = "Water";
@@ -49,10 +49,6 @@ public class ModValues {
     public static final String[] attributes_no_antimagic = {
             ModValues.FIRE, ModValues.LIGHTNING, ModValues.DARKNESS, ModValues.EARTH, ModValues.LIGHT, ModValues.SLASH, ModValues.WIND, ModValues.SEALING, ModValues.WATER, ModValues.TIME
     };
-
-    public static List<Quest> availableQuests = new ArrayList<>(Arrays.asList(
-       ModQuests.KILL_CREEPER, ModQuests.KILL_SKELETON, ModQuests.KILL_ZOMBIE, ModQuests.KILL_SPIDER, ModQuests.OBTAIN_COAL, ModQuests.OBTAIN_IRON
-    ));
 
     public static final String NAHAMAN = "Nahaman";
     public static final String WALGNER = "Walgner";

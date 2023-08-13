@@ -1,19 +1,24 @@
 package com.yuanno.block_clover.init;
 
+import com.yuanno.block_clover.BeRegistry;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
-import com.yuanno.block_clover.api.Quest.QuestRegistry;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.quests.crank.ObtainIronQuest;
 import com.yuanno.block_clover.quests.drank.*;
 import com.yuanno.block_clover.quests.magician.GrimoireQuest;
 import com.yuanno.block_clover.quests.magician.ManaReinforcementQuest;
 import com.yuanno.block_clover.quests.magician.ManaSkinQuest;
 import com.yuanno.block_clover.quests.magician.ManaZoneQuest;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class ModQuests {
 
@@ -23,20 +28,26 @@ public class ModQuests {
     {
         return langMap;
     }
-    public static final DeferredRegister<Quest> QUESTS = DeferredRegister.create(QuestRegistry.QUESTS, Main.MODID);
 
-    public static final Quest OBTAIN_IRON = new ObtainIronQuest();
-    public static final Quest[] C_QUEST = new Quest[] {OBTAIN_IRON};
+    public static final QuestId OBTAIN_IRON = BeRegistry.registerQuest(ObtainIronQuest.INSTANCE);
+    public static final List<QuestId> C_QUESTS = Arrays.asList(OBTAIN_IRON);
 
-    public static final Quest OBTAIN_COAL = new ObtainCoalQuest();
-    public static final Quest KILL_SPIDER = new KillSpiderQuest();
-    public static final Quest KILL_ZOMBIE = new KillZombieQuest();
-    public static final Quest KILL_SKELETON = new KillSkeletonQuest();
-    public static final Quest KILL_CREEPER = new KillCreeperQuest();
-    public static final Quest[] D_QUESTS = new Quest[] {KILL_CREEPER, KILL_SKELETON, KILL_ZOMBIE, KILL_SPIDER, OBTAIN_COAL};
+    public static final QuestId OBTAIN_COAL = BeRegistry.registerQuest(ObtainCoalQuest.INSTANCE);
+    public static final QuestId KILL_CREEPER = BeRegistry.registerQuest(KillCreeperQuest.INSTANCE);
+    public static final QuestId KILL_SKELETON = BeRegistry.registerQuest(KillSkeletonQuest.INSTANCE);
+    public static final QuestId KILL_ZOMBIE = BeRegistry.registerQuest(KillZombieQuest.INSTANCE);
+    public static final QuestId KILL_ENDERMAN = BeRegistry.registerQuest(KillEndermanQuest.INSTANCE);
+    public static final List<QuestId> D_QUESTS = Arrays.asList(OBTAIN_COAL, KILL_CREEPER, KILL_SKELETON, KILL_ZOMBIE, KILL_ENDERMAN);
 
-    public static final Quest[] QUESTBOARD_QUESTS = concatenateQuestArrays(D_QUESTS, C_QUEST);
+    public static final List<QuestId> mergedListQuestBoard = setMergedList();
 
+    public static List<QuestId> setMergedList()
+    {
+        List<QuestId> mergedList = new ArrayList<>();
+        mergedList.addAll(C_QUESTS);
+        mergedList.addAll(D_QUESTS);
+        return mergedList;
+    }
     public static Quest[] concatenateQuestArrays(final Quest[] a, final Quest[] b) {
         final Quest[] c = new Quest[a.length + b.length];
 
@@ -54,54 +65,13 @@ public class ModQuests {
         return c;
     }
 
-    public static final Quest GRIMOIRE = new GrimoireQuest();
-    public static final Quest REINFORCEMENT = new ManaReinforcementQuest();
-    public static final Quest MANASKIN = new ManaSkinQuest();
-    public static final Quest MANAZONEQUEST = new ManaZoneQuest();
-    public static final Quest[] MAGICIAN = new Quest[] {GRIMOIRE, REINFORCEMENT, MANASKIN, MANAZONEQUEST};
-
-    static
+    public static final QuestId GRIMOIRE = BeRegistry.registerQuest(GrimoireQuest.INSTANCE);
+    public static final QuestId MANA_REINFORCEMENT = BeRegistry.registerQuest(ManaReinforcementQuest.INSTANCE);
+    public static final QuestId MANA_SKIN = BeRegistry.registerQuest(ManaSkinQuest.INSTANCE);
+    public static final QuestId MANA_ZONE = BeRegistry.registerQuest(ManaZoneQuest.INSTANCE);
+    public static final List<QuestId> MAGICIAN = Arrays.asList(GRIMOIRE, MANA_REINFORCEMENT, MANA_SKIN, MANA_ZONE);
+    public static void register(IEventBus eventBus)
     {
 
-        for (Quest quest : C_QUEST)
-        {
-            String resourceName = Beapi.getResourceName(quest.getId());
-            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
-
-            for(Objective obj : quest.getObjectives())
-            {
-                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
-            }
-
-            QUESTS.register(resourceName, () -> quest);
-        }
-
-
-        for (Quest quest : D_QUESTS)
-        {
-            String resourceName = Beapi.getResourceName(quest.getId());
-            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
-
-            for(Objective obj : quest.getObjectives())
-            {
-                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
-            }
-
-            QUESTS.register(resourceName, () -> quest);
-        }
-
-        for (Quest quest : MAGICIAN)
-        {
-            String resourceName = Beapi.getResourceName(quest.getId());
-            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
-
-            for(Objective obj : quest.getObjectives())
-            {
-                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
-            }
-
-            QUESTS.register(resourceName, () -> quest);
-
-        }
     }
 }

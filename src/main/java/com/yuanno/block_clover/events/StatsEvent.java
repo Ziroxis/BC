@@ -59,7 +59,7 @@ public class StatsEvent {
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
         if (!props.hasAttribute())
         {
-            questData.addInProgressQuest(ModQuests.GRIMOIRE);
+            questData.addInProgressQuest(ModQuests.GRIMOIRE.createQuest());
             props.setMultiplier(1);
             props.setLevel(1);
             props.setExperience(0);

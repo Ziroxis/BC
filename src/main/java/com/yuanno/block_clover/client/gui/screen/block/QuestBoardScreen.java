@@ -3,6 +3,7 @@ package com.yuanno.block_clover.client.gui.screen.block;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
@@ -43,7 +44,7 @@ public class QuestBoardScreen extends Screen {
     private int guiTop;
     private final int xSize = 64;
     private final int ySize = 58;
-    List<Quest> availableQuest;
+    List<QuestId> availableQuest;
     IQuestData questData;
     int buttonsPerPage = 4;
     int currentPage = 0;
@@ -51,7 +52,7 @@ public class QuestBoardScreen extends Screen {
     Button advanceButton;
     Button goBackButton;
 
-    public QuestBoardScreen(PlayerEntity player, List<Quest> availableQuest) {
+    public QuestBoardScreen(PlayerEntity player, List<QuestId> availableQuest) {
         super(new StringTextComponent(""));
         this.player = player;
         this.entityStats = EntityStatsCapability.get(player);
@@ -68,12 +69,12 @@ public class QuestBoardScreen extends Screen {
         {
             for (int a = 0; a < questData.getFinishedQuests().size(); a++)
             {
-                if (availableQuest.get(i).getTitle().equals(questData.getFinishedQuests().get(i).getTitle()))
+                if (availableQuest.get(i).getName().equals(questData.getFinishedQuests().get(i).getName()))
                     availableQuest.remove(i);
             }
             for (Quest quest : questData.getInProgressQuests())
             {
-                if (quest != null && quest.getTitle().equals(availableQuest.get(i).getTitle()))
+                if (quest != null && quest.getCore().getName().equals(availableQuest.get(i).getName()))
                     availableQuest.remove(i);
             }
         }
@@ -103,7 +104,7 @@ public class QuestBoardScreen extends Screen {
 
         Button buttonChoice1 = new Button(posX + 162, posY + 60, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4));
+            questData.addInProgressQuest(availableQuest.get(currentPage * 4).createQuest());
             //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4)));
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4));
@@ -116,7 +117,7 @@ public class QuestBoardScreen extends Screen {
             this.buttons.remove(buttonChoice1);
         Button buttonChoice2 = new Button(posX + 162, posY + 100, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 1));
+            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 1).createQuest());
             //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 1)));
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4 + 1));
@@ -130,7 +131,7 @@ public class QuestBoardScreen extends Screen {
             this.buttons.remove(buttonChoice2);
         Button buttonChoice3 = new Button(posX + 162, posY + 140, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 2));
+            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 2).createQuest());
             //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 2)));
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
             this.availableQuest.remove(availableQuest.get(currentPage * 4 + 2));
@@ -144,7 +145,7 @@ public class QuestBoardScreen extends Screen {
             this.buttons.remove(buttonChoice3);
         Button buttonChoice4 = new Button(posX + 162, posY + 180, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 3));
+            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 3).createQuest());
             //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 3)));
 
             PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
@@ -191,10 +192,10 @@ public class QuestBoardScreen extends Screen {
         int startIndex = currentPage * questsPerPage; // Calculate the starting index of quests on the current page
 
         for (int i = 0; i < questsPerPage && (startIndex + i) < availableQuest.size(); i++) {
-            Quest quest = availableQuest.get(startIndex + i);
+            Quest quest = availableQuest.get(startIndex + i).createQuest();
 
-            drawString(matrixStack, font, TextFormatting.GRAY + "Quest: " + quest.getTitle(), posX + 10, posY + 55 + i * 40, Color.GRAY.getRGB());
-            drawString(matrixStack, font, TextFormatting.GRAY + "Description: " + quest.getDescription(), posX + 10, posY + 70 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "Quest: " + quest.getCore().getName(), posX + 10, posY + 55 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "Description: " + quest.getObjectives(), posX + 10, posY + 70 + i * 40, Color.GRAY.getRGB());
         }
 
 
@@ -212,7 +213,7 @@ public class QuestBoardScreen extends Screen {
         int startIndex = currentPage * questsPerPage; // Calculate the starting index of quests on the current page
 
         for (int i = 0; i < questsPerPage && (startIndex + i) < availableQuest.size(); i++) {
-            Quest quest = availableQuest.get(startIndex + i);
+            Quest quest = availableQuest.get(startIndex + i).createQuest();
             this.addButton(new Button(posX + 162, posY + 60 + i * 40, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
             {
                 questData.addInProgressQuest(quest);

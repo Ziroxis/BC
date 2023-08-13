@@ -2,6 +2,7 @@ package com.yuanno.block_clover.quests.magician;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.UseContinuousAbilityObjective;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -25,13 +26,14 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class ManaZoneQuest extends Quest {
 
+    public static final QuestId INSTANCE = new QuestId.Builder("Mana zone", ManaZoneQuest::new)
+            .build();
+
     private Objective useAbility = new UseContinuousAbilityObjective("Use mana skin for 2 minutes while standing still", 1200, ManaSkinAbility.INSTANCE, true);
 
-    public ManaZoneQuest()
+    public ManaZoneQuest(QuestId id)
     {
-        super("manazonequest", "learning mana zone");
-        this.setDescription("Use mana skin for 2 minutes");
-        this.setRank("");
+        super(id);
         this.addObjective(this.useAbility);
         this.onCompleteEvent = this::giveReward;
     }

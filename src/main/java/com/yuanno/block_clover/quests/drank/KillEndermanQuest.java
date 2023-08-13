@@ -2,21 +2,21 @@ package com.yuanno.block_clover.quests.drank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.KillEntityObjective;
-import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class KillSpiderQuest extends Quest {
+public class KillEndermanQuest extends Quest {
 
-    private Objective killSpiderObjective = new KillEntityObjective("Kill 5 spiders", 5, EntityType.SPIDER);
+    public static final QuestId INSTANCE = new QuestId.Builder("Kill some enderman", KillEndermanQuest::new)
+            .build();
+    private Objective killEntityObjective = new KillEntityObjective("Kill 5 enderman", 5, EntityType.ENDERMAN);
 
-    public KillSpiderQuest()
+    public KillEndermanQuest(QuestId questId)
     {
-        super("spiderquest", "Kill 5 spiders");
-        this.setDescription("Kill 5 spiders");
-        this.setRank(ModValues.RANK_QUEST_D);
-        this.addObjective(this.killSpiderObjective);
+        super(questId);
+        this.addObjectives(killEntityObjective);
 
         this.onCompleteEvent = this::giveReward;
     }

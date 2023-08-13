@@ -1,7 +1,7 @@
 package com.yuanno.block_clover.data.quest;
 
-import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -14,7 +14,6 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
 
 public class QuestDataCapability
 {
@@ -39,20 +38,20 @@ public class QuestDataCapability
 						questsInTracker.add(quest.save());
 				}
 				props.put("quests_in_tracker", questsInTracker);
-
+				
 				ListNBT finishedQuests = new ListNBT();
 				for (int i = 0; i < instance.getFinishedQuests().size(); i++)
 				{
-					Quest quest = instance.getFinishedQuests().get(i);
+					QuestId quest = instance.getFinishedQuests().get(i);
 					CompoundNBT questNbt = new CompoundNBT();
-					questNbt.putString("id", quest.getId());
+					questNbt.putString("id", quest.getRegistryName().toString());
 					finishedQuests.add(questNbt);
 				}
 				props.put("finished_quests", finishedQuests);
-
+				
 				return props;
 			}
-
+			
 			@Override
 			public void readNBT(Capability<IQuestData> capability, IQuestData instance, Direction side, INBT nbt)
 			{
@@ -60,45 +59,45 @@ public class QuestDataCapability
 
 				instance.clearInProgressQuests();
 				instance.clearFinishedQuests();
-
+				
 				ListNBT trackerQuests = props.getList("quests_in_tracker", Constants.NBT.TAG_COMPOUND);
 				for (int i = 0; i < trackerQuests.size(); i++)
 				{
-					CompoundNBT nbtQuests = trackerQuests.getCompound(i);
-					Quest quest = GameRegistry.findRegistry(Quest.class).getValue(new ResourceLocation(Main.MODID, nbtQuests.getString("id")));
 					try
 					{
-						Quest newQuest = quest.create();
-						newQuest.load(nbtQuests);
-						instance.setInProgressQuest(i, newQuest);
+						CompoundNBT nbtQuests = trackerQuests.getCompound(i);
+						QuestId questId = (QuestId) GameRegistry.findRegistry(QuestId.class).getValue(new ResourceLocation(nbtQuests.getString("id")));
+						if(questId == null)
+							continue;
+						Quest quest = questId.createQuest();
+						quest.load(nbtQuests);
+						instance.setInProgressQuest(i, quest);
 					}
 					catch(Exception e)
 					{
-						System.out.println("Unregistered quest: " + nbtQuests.getString("id"));
-						e.printStackTrace();
+						continue;
 					}
 				}
-
+				
 				ListNBT finishedQuests = props.getList("finished_quests", Constants.NBT.TAG_COMPOUND);
 				for (int i = 0; i < finishedQuests.size(); i++)
 				{
-					CompoundNBT nbtQuests = finishedQuests.getCompound(i);
-					Quest quest = GameRegistry.findRegistry(Quest.class).getValue(new ResourceLocation(Main.MODID, nbtQuests.getString("id")));
 					try
 					{
-						instance.addFinishedQuest(quest.create());
+						CompoundNBT nbtQuests = finishedQuests.getCompound(i);
+						QuestId quest = (QuestId) GameRegistry.findRegistry(QuestId.class).getValue(new ResourceLocation(nbtQuests.getString("id")));
+						instance.addFinishedQuest(quest);
 					}
 					catch(Exception e)
 					{
-						System.out.println("Unregistered quest: " + nbtQuests.getString("id"));
-						e.printStackTrace();
+						continue;
 					}
 				}
 			}
-
+			
 		}, QuestDataBase::new);
 	}
-
+	
 	public static IQuestData get(final PlayerEntity entity)
 	{
 		return entity.getCapability(INSTANCE, null).orElse(new QuestDataBase());

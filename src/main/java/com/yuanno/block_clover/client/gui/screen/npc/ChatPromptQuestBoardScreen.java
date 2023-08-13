@@ -88,17 +88,34 @@ public class ChatPromptQuestBoardScreen extends Screen {
      */
     public void loop()
     {
-        ArrayList<Quest> questArrayListQuestBoard = new ArrayList<>(Arrays.asList(ModQuests.QUESTBOARD_QUESTS));
-
-        for (int i = 0; i < questData.getInProgressQuests().length; i++)
+        for (Quest quest : questData.getInProgressQuests())
         {
-            for (int ia = 0; ia < questArrayListQuestBoard.size(); ia++)
+            if (ModQuests.mergedListQuestBoard.contains(quest.getCore()))
+            {
+                if (quest.isComplete())
+                {
+                    String text = "Good job, here is the reward!";
+                    questData.addFinishedQuest(quest.getCore());
+                    questData.removeInProgressQuest(quest.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest.getCore()));
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 200);
+                    return;
+                }
+                String text = "You got a quest from the quest board!";
+                this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
+                return;
+            }
+        }
+        /*
+        for (int ia = 0; ia < questArrayListQuestBoard.size(); ia++)
+        {
+            for (int i = 0; i < questData.getInProgressQuests().length; i++)
             {
                 if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).getId().equals(questArrayListQuestBoard.get(ia).getId())) {
                     if (questData.getInProgressQuest(i).isComplete())
                     {
                         //questData.getInProgressQuest(i).triggerCompleteEvent(player);
-                        questData.addFinishedQuest(questArrayListQuestBoard.get(ia));
+                        questData.addFinishedQuest(questArrayListQuestBoard.get(ia).getCore());
                         questData.removeFinishedQuest(questArrayListQuestBoard.get(ia));
                         questData.removeInProgressQuest(questArrayListQuestBoard.get(ia)); // -> doesn't work
                         PacketHandler.sendToServer(new CUpdateQuestStatePacket(questArrayListQuestBoard.get(ia)));
@@ -106,12 +123,18 @@ public class ChatPromptQuestBoardScreen extends Screen {
                         this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
                         return;
                     }
-                    String text = "Oh you got a quest from the quest board!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
-                    return;
+                    else
+                    {
+                        String text = "Oh you got a quest from the quest board!";
+                        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
+                        return;
+                    }
                 }
             }
+
         }
+
+         */
 
         String text = "I manage all the quests for the guilds, pick up a quest from the quest board and once done come to me and I'll give the reward!";
         this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000); // -> first time talking to the npc

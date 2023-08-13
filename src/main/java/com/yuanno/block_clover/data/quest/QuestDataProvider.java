@@ -8,7 +8,6 @@ import net.minecraftforge.common.util.LazyOptional;
 
 public class QuestDataProvider implements ICapabilitySerializable<CompoundNBT>
 {
-
 	private IQuestData instance = QuestDataCapability.INSTANCE.getDefaultInstance();
 
 	@Override

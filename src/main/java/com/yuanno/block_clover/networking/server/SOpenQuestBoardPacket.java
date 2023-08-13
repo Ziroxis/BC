@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.networking.server;
 
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.client.gui.screen.block.QuestBoardScreen;
 import com.yuanno.block_clover.init.ModQuests;
 import net.minecraft.client.Minecraft;
@@ -18,19 +19,19 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class SOpenQuestBoardPacket {
-    private List<Quest> questList;
+    private List<QuestId> questList;
     public SOpenQuestBoardPacket() {}
 
-    public SOpenQuestBoardPacket(List<Quest> questList)
+    public SOpenQuestBoardPacket(List<QuestId> questList)
     {
         this.questList = questList;
     }
     public void encode(PacketBuffer buffer)
     {
         buffer.writeInt(this.questList.size());
-        for (Quest quest : this.questList)
+        for (QuestId quest : this.questList)
         {
-            buffer.writeUtf(quest.getTitle());
+            buffer.writeUtf(quest.getName());
         }
     }
 
@@ -43,10 +44,10 @@ public class SOpenQuestBoardPacket {
         {
             entries.add(buffer.readUtf());
         }
-        ArrayList<Quest> questArrayList = new ArrayList<>();
-        for (Quest quest : ModQuests.QUESTBOARD_QUESTS)
+        ArrayList<QuestId> questArrayList = new ArrayList<>();
+        for (QuestId quest : ModQuests.mergedListQuestBoard)
         {
-            if (entries.contains(quest.getTitle()))
+            if (entries.contains(quest.getName()))
                 questArrayList.add(quest);
         }
         msg.questList = questArrayList;

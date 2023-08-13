@@ -107,25 +107,25 @@ public class ChatPromptScreen extends Screen {
         int amountDone = 0;
         for (int i = 0; i < questData.getFinishedQuests().size(); i++)
         {
-            if (!alreadyDoneQuestID.contains(questData.getFinishedQuests().get(i).getId()))
+            if (!alreadyDoneQuestID.contains(questData.getFinishedQuests().get(i).getName()))
             {
-                alreadyDoneQuestID.add(questData.getFinishedQuests().get(i).getId());
+                alreadyDoneQuestID.add(questData.getFinishedQuests().get(i).getName());
             }
         }
 
         for (int i = 0; i < questData.getInProgressQuests().length; i++) {
             /*
-            if (!questData.getInProgressQuest(i).getId().isEmpty() && inProgressQuestID.isEmpty() || !inProgressQuestID.contains(questData.getInProgressQuest(i).getId())) {
-                inProgressQuestID.add(questData.getInProgressQuest(i).getId());
+            if (!questData.getInProgressQuest(i).getCore().getName().isEmpty() && inProgressQuestID.isEmpty() || !inProgressQuestID.contains(questData.getInProgressQuest(i).getCore().getName())) {
+                inProgressQuestID.add(questData.getInProgressQuest(i).getCore().getName());
             }
 
              */
             if (questData.getInProgressQuest(i) != null)
             {
-                if (!questData.getInProgressQuest(i).getId().isEmpty()) {
+                if (!questData.getInProgressQuest(i).getCore().getName().isEmpty()) {
                     if (inProgressQuestID.isEmpty()) {
-                        if (!inProgressQuestID.contains(questData.getInProgressQuest(i).getId()))
-                            inProgressQuestID.add(questData.getInProgressQuest(i).getId());
+                        if (!inProgressQuestID.contains(questData.getInProgressQuest(i).getCore().getName()))
+                            inProgressQuestID.add(questData.getInProgressQuest(i).getCore().getName());
                     }
                 }
             }
@@ -133,8 +133,8 @@ public class ChatPromptScreen extends Screen {
         ArrayList<String> alreadyDoneQuestNPCID = new ArrayList<String>();
         for (int i = 0; i < npCentity.quests.size(); i++)
         {
-            if (!alreadyDoneQuestNPCID.contains(npCentity.quests.get(i).getId()))
-                alreadyDoneQuestNPCID.add(npCentity.quests.get(i).getId());
+            if (!alreadyDoneQuestNPCID.contains(npCentity.quests.get(i).getCore().getName()))
+                alreadyDoneQuestNPCID.add(npCentity.quests.get(i).getCore().getName());
         }
         for (String s : alreadyDoneQuestID) {
             if (alreadyDoneQuestNPCID.contains(s))
@@ -146,7 +146,7 @@ public class ChatPromptScreen extends Screen {
         for(int i = 0; i < questData.getInProgressQuests().length; i++)
         {
             System.out.println(questData.getInProgressQuest(i));
-            if (questData.getInProgressQuest(i) != null && !questData.hasFinishedQuest(questData.getInProgressQuest(i)) && alreadyDoneQuestNPCID.contains(questData.getInProgressQuest(i).getId()) && questData.getInProgressQuest(i).isComplete())
+            if (questData.getInProgressQuest(i) != null && !questData.hasFinishedQuest(questData.getInProgressQuest(i)) && alreadyDoneQuestNPCID.contains(questData.getInProgressQuest(i).getCore().getName()) && questData.getInProgressQuest(i).isComplete())
             {
                 for (int ia = 0; ia < npCentity.quests.size(); i++)
                 {
@@ -171,14 +171,14 @@ public class ChatPromptScreen extends Screen {
             {
                 for (int ia = 0; ia < npCentity.quests.size(); ia++)
                 {
-                    if (npCentity.quests.get(ia) != null && questData.getInProgressQuest(i).getId().equals(npCentity.quests.get(ia).getId()))
+                    if (npCentity.quests.get(ia) != null && questData.getInProgressQuest(i).getCore().getName().equals(npCentity.quests.get(ia).getCore().getName()))
                     {
-                        if (npCentity.quests.get(ia) != null && !questData.hasFinishedQuest(npCentity.quests.get(ia)) && npCentity.quests.get(ia).isComplete())
+                        if (npCentity.quests.get(ia) != null && !questData.hasFinishedQuest(npCentity.quests.get(ia).getCore()) && npCentity.quests.get(ia).isComplete())
                         {
-                            questData.addFinishedQuest(npCentity.quests.get(ia));
-                            questData.removeFinishedQuest(npCentity.quests.get(ia));
+                            questData.addFinishedQuest(npCentity.quests.get(ia).getCore());
+                            questData.removeFinishedQuest(npCentity.quests.get(ia).getCore());
                             questData.removeInProgressQuest(npCentity.quests.get(ia));
-                            PacketHandler.sendToServer(new CUpdateQuestStatePacket(npCentity.quests.get(ia)));
+                            PacketHandler.sendToServer(new CUpdateQuestStatePacket(npCentity.quests.get(ia).getCore()));
                             this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
                             return;
                         }
@@ -201,13 +201,13 @@ public class ChatPromptScreen extends Screen {
                 this.message = new SequencedString(npCentity.requisiteSpeech + "", 245, this.font.width(npCentity.requisiteSpeech) / 2, 20000);
                 return;
             }
-            else if (npCentity.requisite == 2 && !alreadyDoneQuestID.contains(npCentity.questRequisite.getId()))
+            else if (npCentity.requisite == 2 && !alreadyDoneQuestID.contains(npCentity.questRequisite.getCore().getName()))
             {
                 this.message = new SequencedString(npCentity.requisiteSpeech + "", 245, this.font.width(npCentity.requisiteSpeech) / 2, 20000);
                 return;
             }
         }
-        if (!inProgressQuestID.contains(npCentity.quests.get(amountDone).getId()) && !alreadyDoneQuestID.contains(npCentity.quests.get(amountDone).getId()))
+        if (!inProgressQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()) && !alreadyDoneQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()))
         {
             this.message = new SequencedString(npCentity.questChoiceSpeech + "", 245, this.font.width(npCentity.questChoiceSpeech) / 2, 2000); // -> first time talking to the npc
             test = new TexturedIconButton(acceptButtonTexture, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
@@ -217,7 +217,7 @@ public class ChatPromptScreen extends Screen {
             acceptButton = new TexturedIconButton(acceptButtonTexture, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
             {
                 this.questData.addInProgressQuest(questGiver);
-                PacketHandler.sendToServer(new CUpdateQuestStatePacket(questGiver));
+                PacketHandler.sendToServer(new CUpdateQuestStatePacket(questGiver.getCore()));
                 this.state = 1;
                 this.message = new SequencedString(npCentity.acceptanceSpeech + "", 245, this.font.width(npCentity.declineSpeech) / 2, 2000);
             }); // -> accepting the quest
@@ -228,12 +228,12 @@ public class ChatPromptScreen extends Screen {
             }); // -> declining the quest
 
         }
-        else if (inProgressQuestID.contains(npCentity.quests.get(amountDone).getId()))
+        else if (inProgressQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()))
         {
             this.message = new SequencedString(npCentity.waitingSpeech + "", 245, this.font.width(npCentity.questChoiceSpeech) / 2, 2000); // -> first time talking to the npc
             return;
         }
-        else if (alreadyDoneQuestID.contains(npCentity.quests.get(amountDone).getId()))
+        else if (alreadyDoneQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()))
         {
             this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.questChoiceSpeech) / 2, 2000); // -> first time talking to the npc
             return;

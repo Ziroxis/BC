@@ -7,19 +7,20 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
-public class QuestArgument implements ArgumentType<Quest>
+public class QuestArgument implements ArgumentType<QuestId>
 {
 	@Override
-	public Quest parse(StringReader reader) throws CommandSyntaxException
+	public QuestId parse(StringReader reader) throws CommandSyntaxException
 	{
 		ResourceLocation resourcelocation = ResourceLocation.read(reader);
-		Quest quest = GameRegistry.findRegistry(Quest.class).getValue(resourcelocation);
+		QuestId quest = (QuestId) GameRegistry.findRegistry(QuestId.class).getValue(resourcelocation);
 		return quest;
 	}
 
@@ -28,9 +29,9 @@ public class QuestArgument implements ArgumentType<Quest>
 		return new QuestArgument();
 	}
 
-	public static <S> Quest getQuest(CommandContext<S> context, String name)
+	public static <S> QuestId getQuest(CommandContext<S> context, String name)
 	{
-		return context.getArgument(name, Quest.class);
+		return context.getArgument(name, QuestId.class);
 	}
 
 	@Override
@@ -44,6 +45,6 @@ public class QuestArgument implements ArgumentType<Quest>
 
 	private CompletableFuture<Suggestions> suggestQuest(SuggestionsBuilder builder)
 	{
-		return ISuggestionProvider.suggestResource(GameRegistry.findRegistry(Quest.class).getKeys(), builder);
+		return ISuggestionProvider.suggestResource(GameRegistry.findRegistry(QuestId.class).getKeys(), builder);
 	}
 }

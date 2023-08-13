@@ -1,9 +1,9 @@
 package com.yuanno.block_clover.data.quest;
 
-
-
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
+import com.yuanno.block_clover.init.ModValues;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 
 public class QuestDataBase implements IQuestData
 {
-	private Quest[] inProgressQuests = new Quest[5];
-	private List<Quest> finishedQuests = new ArrayList<Quest>();
+	private Quest[] inProgressQuests = new Quest[ModValues.MAX_IN_PROGRESS_QUESTS];
+	private List<QuestId> finishedQuests = new ArrayList<QuestId>();
 
 	@Override
 	public boolean addInProgressQuest(Quest quest)
@@ -34,7 +34,7 @@ public class QuestDataBase implements IQuestData
 	public boolean setInProgressQuest(int slot, Quest quest)
 	{
 		Quest ogQuest = this.getInProgressQuest(quest);
-		if (ogQuest == null && slot <= 5)
+		if (ogQuest == null && slot <= ModValues.MAX_IN_PROGRESS_QUESTS)
 		{
 			this.inProgressQuests[slot] = quest;
 			return true;
@@ -42,6 +42,26 @@ public class QuestDataBase implements IQuestData
 		return false;
 	}
 
+	@Override
+	public boolean removeInProgressQuest(QuestId quest)
+	{
+		Quest ogQuest = this.getInProgressQuest(quest);
+		if (ogQuest != null)
+		{		
+			for(int i = 0; i < this.inProgressQuests.length; i++)
+			{
+				Quest inProgressQuest = this.inProgressQuests[i];
+				if(inProgressQuest != null && inProgressQuest.equals(ogQuest))
+				{
+					inProgressQuest.resetProgress();
+					this.inProgressQuests[i] = null;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean removeInProgressQuest(Quest quest)
 	{
@@ -53,8 +73,9 @@ public class QuestDataBase implements IQuestData
 				Quest inProgressQuest = this.inProgressQuests[i];
 				if(inProgressQuest != null && inProgressQuest.equals(ogQuest))
 				{
-					 this.inProgressQuests[i] = null;
-					 return true;
+					inProgressQuest.resetProgress();
+					this.inProgressQuests[i] = null;
+					return true;
 				}
 			}
 		}
@@ -62,21 +83,34 @@ public class QuestDataBase implements IQuestData
 	}
 
 	@Override
+	public boolean hasInProgressQuest(QuestId quest)
+	{
+		return Arrays.stream(this.inProgressQuests)
+			.filter(qst -> qst != null)
+			.anyMatch(qst -> qst.getCore().equals(quest));
+	}
+	
+	@Override
 	public boolean hasInProgressQuest(Quest quest)
 	{
 		return Arrays.stream(this.inProgressQuests)
-			.parallel()
 			.filter(qst -> qst != null)
 			.anyMatch(qst -> qst.equals(quest));
 	}
 
 	@Override
+	public <T extends Quest> T getInProgressQuest(QuestId<T> quest)
+	{
+		return (T) Arrays.stream(this.inProgressQuests)
+			.filter(qst -> qst != null && qst.getCore().equals(quest))
+			.findFirst().orElse(null);
+	}
+	
+	@Override
 	public <T extends Quest> T getInProgressQuest(T quest)
 	{
 		return (T) Arrays.stream(this.inProgressQuests)
-			.parallel()
-			.filter(qst -> qst != null)
-			.filter(qst -> qst.equals(quest))
+			.filter(qst -> qst != null && qst.equals(quest))
 			.findFirst().orElse(null);
 	}
 
@@ -91,7 +125,7 @@ public class QuestDataBase implements IQuestData
 	{
 		for(int i = 0; i < this.inProgressQuests.length; i++)
 		{
-			if(this.inProgressQuests[i].equals(quest))
+			if(this.inProgressQuests[i] != null && this.inProgressQuests[i].equals(quest))
 				return i;
 		}
 		
@@ -99,28 +133,13 @@ public class QuestDataBase implements IQuestData
 	}
 	
 	@Override
-	public List<Objective> getInProgressObjectives()
+	public <T extends Objective> List<T> getInProgressObjectives()
 	{
-		List<Objective> objectives = new ArrayList<Objective>();
-
-		for (Quest quest : this.getInProgressQuests())
-		{
-			if(quest == null)
-				continue;
-			
-			if (!quest.isComplete())
-			{
-				for (Objective obj : quest.getObjectives())
-				{
-					if (!obj.isHidden() && !obj.isLocked() && !obj.isComplete())
-					{
-						objectives.add(obj);
-					}
-				}
-			}
-		}
-
-		return objectives;
+		return (List<T>) Arrays.stream(this.getInProgressQuests())
+			.filter(q -> q != null && !q.isComplete())
+			.flatMap(q -> q.getObjectives().stream())
+			.filter(o -> !o.isHidden() && !o.isLocked())
+			.collect(Collectors.toList());
 	}
 	
 	@Override
@@ -146,16 +165,14 @@ public class QuestDataBase implements IQuestData
 	public int countInProgressQuests()
 	{
 		return Arrays.stream(this.inProgressQuests)
-			.parallel()
 			.filter(quest -> quest != null)
-			.collect(Collectors.toList())
-			.size();
+			.mapToInt(q -> 1).sum();
 	}
 
 	@Override
-	public boolean addFinishedQuest(Quest quest)
+	public boolean addFinishedQuest(QuestId quest)
 	{
-		Quest ogQuest = this.getFinishedQuest(quest);
+		QuestId ogQuest = this.getFinishedQuest(quest);
 		if (ogQuest == null)
 		{
 			this.finishedQuests.add(quest);
@@ -165,9 +182,9 @@ public class QuestDataBase implements IQuestData
 	}
 
 	@Override
-	public boolean removeFinishedQuest(Quest quest)
+	public boolean removeFinishedQuest(QuestId quest)
 	{
-		Quest ogQuest = this.getFinishedQuest(quest);
+		QuestId ogQuest = this.getFinishedQuest(quest);
 		if (ogQuest != null)
 		{
 			this.finishedQuests.remove(ogQuest);
@@ -177,36 +194,32 @@ public class QuestDataBase implements IQuestData
 	}
 
 	@Override
-	public boolean hasFinishedQuest(Quest quest)
+	public boolean hasFinishedQuest(QuestId quest)
 	{
-		this.finishedQuests.removeIf(qst -> qst == null);
-		return this.finishedQuests.parallelStream().anyMatch(qst -> qst.equals(quest));
+		return this.finishedQuests.stream().filter(q -> q != null).anyMatch(qst -> qst.equals(quest));
 	}
 
 	@Override
-	public <T extends Quest> T getFinishedQuest(T quest)
+	public <T extends QuestId> T getFinishedQuest(T quest)
 	{
-		this.finishedQuests.removeIf(qst -> qst == null);
-		return (T) this.finishedQuests.parallelStream().filter(qst -> qst.equals(quest)).findFirst().orElse(null);
+		return (T) this.finishedQuests.stream().filter(qst -> qst != null && qst.equals(quest)).findFirst().orElse(null);
 	}
 
 	@Override
-	public List<Quest> getFinishedQuests()
+	public List<QuestId> getFinishedQuests()
 	{
-		this.finishedQuests.removeIf(qst -> qst == null);
-		return this.finishedQuests.parallelStream().collect(Collectors.toList());
+		return this.finishedQuests.stream().filter(q -> q != null).collect(Collectors.toList());
 	}
 
 	@Override
 	public void clearFinishedQuests()
 	{
-		this.finishedQuests.removeIf(qst -> qst == null);		
+		this.finishedQuests.clear();
 	}
 
 	@Override
 	public int countFinishedQuests()
 	{
-		this.finishedQuests.removeIf(qst -> qst == null);
 		return this.finishedQuests.size();
 	}
 }

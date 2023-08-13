@@ -2,21 +2,21 @@ package com.yuanno.block_clover.quests.drank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.KillEntityObjective;
-import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class KillZombieQuest extends Quest {
 
-    private Objective killZombieObjective = new KillEntityObjective("Kill 20 zombies", 20, EntityType.ZOMBIE);
+    public static final QuestId INSTANCE = new QuestId.Builder("Kill some zombies", KillZombieQuest::new)
+            .build();
+    private Objective killEntityObjective = new KillEntityObjective("Kill 20 zombies", 20, EntityType.ZOMBIE);
 
-    public KillZombieQuest()
+    public KillZombieQuest(QuestId questId)
     {
-        super("zombiequest", "Kill 10 zombies");
-        this.setDescription("Kill 10 zombies");
-        this.setRank(ModValues.RANK_QUEST_D);
-        this.addObjective(this.killZombieObjective);
+        super(questId);
+        this.addObjectives(killEntityObjective);
 
         this.onCompleteEvent = this::giveReward;
     }

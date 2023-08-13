@@ -48,6 +48,7 @@ public class PlayerAchievementsScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         PlayerEntity player = mc.player;
 
+        /*
         for (Quest quest : questData.getFinishedQuests())
         {
             switch (quest.getRank())
@@ -75,6 +76,8 @@ public class PlayerAchievementsScreen extends Screen {
                     break;
             }
         }
+
+         */
 
 
         int posX = ((this.width - 256) / 2) - 110;

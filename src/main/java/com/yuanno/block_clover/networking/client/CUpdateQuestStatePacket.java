@@ -1,7 +1,11 @@
 package com.yuanno.block_clover.networking.client;
 
+import java.util.Optional;
+import java.util.function.Supplier;
+
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
@@ -17,20 +21,20 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.function.Supplier;
-
 public class CUpdateQuestStatePacket
 {
 	private INBT data;
-	private String questId;
-	
-	public CUpdateQuestStatePacket() {}
+	private ResourceLocation questId;
 
-	public CUpdateQuestStatePacket(Quest quest)
+	public CUpdateQuestStatePacket()
 	{
-		this.questId = quest.getRegistryName().toString();
 	}
-	
+
+	public CUpdateQuestStatePacket(QuestId quest)
+	{
+		this.questId = quest.getRegistryName();
+	}
+
 	@Deprecated
 	public CUpdateQuestStatePacket(IQuestData props)
 	{
@@ -40,16 +44,13 @@ public class CUpdateQuestStatePacket
 
 	public void encode(PacketBuffer buffer)
 	{
-		int len = this.questId.length();
-		buffer.writeInt(len);
-		buffer.writeUtf(this.questId, len);
+		buffer.writeResourceLocation(this.questId);
 	}
 
 	public static CUpdateQuestStatePacket decode(PacketBuffer buffer)
 	{
 		CUpdateQuestStatePacket msg = new CUpdateQuestStatePacket();
-		int len = buffer.readInt();
-		msg.questId = buffer.readUtf(len);
+		msg.questId = buffer.readResourceLocation();
 		return msg;
 	}
 
@@ -59,30 +60,42 @@ public class CUpdateQuestStatePacket
 		{
 			ctx.get().enqueueWork(() ->
 			{
-				if(Beapi.isNullOrEmpty(message.questId))
+				if (message.questId == null)
 					return;
-							
+
 				PlayerEntity player = ctx.get().getSender();
-				assert player != null;
+				// Searching if there's a nearby trainer, otherwise there's no reason for the player to accept or finish a quest
+
+
 				IQuestData props = QuestDataCapability.get(player);
-				Quest quest = GameRegistry.findRegistry(Quest.class).getValue(new ResourceLocation(message.questId));
+				QuestId questId = (QuestId) GameRegistry.findRegistry(QuestId.class).getValue(message.questId);
+
+				if (questId == null || questId.isLocked(props))
+					return;
+
+				// Checking if the trainer we've found can indeed give the player the quest we're trying to accept/finish
+
 
 				boolean updateClient = false;
 
 				// If we're trying to accept the quest make sure we don't already have it in progress, otherwise if we're trying to finish one make sure we do have it in progress and its complete
-				if(props.hasInProgressQuest(quest) && props.getInProgressQuest(quest).isComplete() && props.getInProgressQuest(quest).triggerCompleteEvent(player))
+				if (props.hasInProgressQuest(questId) && props.getInProgressQuest(questId).isComplete() && props.getInProgressQuest(questId).triggerCompleteEvent(player))
 				{
-					props.addFinishedQuest(quest);
-					props.removeInProgressQuest(quest);
+					props.addFinishedQuest(questId);
+					props.removeInProgressQuest(questId);
 					updateClient = true;
 				}
-				else if(!props.hasInProgressQuest(quest) && quest.triggerStartEvent(player))
+				else if (!props.hasInProgressQuest(questId))
 				{
-					props.addInProgressQuest(quest);
-					updateClient = true;
+					Quest quest = questId.createQuest();
+					if(quest.triggerStartEvent(player))
+					{
+						props.addInProgressQuest(quest);
+						updateClient = true;
+					}
 				}
 
-				if(updateClient)
+				if (updateClient)
 				{
 					PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
 					PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), AbilityDataCapability.get(player)), player);

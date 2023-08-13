@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -15,8 +16,10 @@ public class ModRegistries {
     static
     {
         make(new ResourceLocation(Main.MODID, "abilities"), AbilityCore.class);
+        make(new ResourceLocation(Main.MODID, "quests"), QuestId.class);
     }
     public static final IForgeRegistry<AbilityCore<?>> ABILITIES = RegistryManager.ACTIVE.getRegistry(AbilityCore.class);
+    public static final IForgeRegistry<QuestId<?>> QUESTS = RegistryManager.ACTIVE.getRegistry(QuestId.class);
 
     public static <T extends IForgeRegistryEntry<T>> void make(ResourceLocation name, Class<T> type)
     {

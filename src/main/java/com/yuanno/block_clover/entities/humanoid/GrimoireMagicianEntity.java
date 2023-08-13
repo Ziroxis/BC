@@ -43,10 +43,10 @@ public class GrimoireMagicianEntity extends NPCentity
         this.levelrequisites.add(0);
         this.levelrequisites.add(10);
         this.levelrequisites.add(30);
-        this.quests.add(ModQuests.GRIMOIRE);
-        this.quests.add(ModQuests.REINFORCEMENT);
-        this.quests.add(ModQuests.MANASKIN);
-        this.quests.add(ModQuests.MANAZONEQUEST);
+        this.quests.add(ModQuests.GRIMOIRE.createQuest());
+        this.quests.add(ModQuests.MANA_REINFORCEMENT.createQuest());
+        this.quests.add(ModQuests.MANA_SKIN.createQuest());
+        this.quests.add(ModQuests.MANA_ZONE.createQuest());
         this.requisiteSpeech = "You'll need to be a bit stronger to learn the spells I want to teach you!";
         this.questChoiceSpeech = "Would you like to learn the art of mana?";
         this.acceptanceSpeech = "Fine... You'll have to do the quest I've given you for that. Check your quests for more information!";

@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.ArrayList;
@@ -55,18 +56,12 @@ public abstract class Objective
 	
 	public void setProgress(double progress)
 	{
-		if(progress <= this.getMaxProgress())
-			this.progress = progress;
-		else
-			this.progress = this.getMaxProgress();
+		this.progress = MathHelper.clamp(progress, 0, this.getMaxProgress());
 	}
 	
 	public void alterProgress(double progress)
 	{
-		if(this.progress + progress <= this.getMaxProgress())
-			this.progress += progress;
-		else
-			this.progress = this.getMaxProgress();
+		this.progress = MathHelper.clamp(this.progress + progress, 0, this.getMaxProgress());
 	}
 	
 	public double getProgress()
@@ -152,8 +147,8 @@ public abstract class Objective
 	{
 		if(this.requirements.size() <= 0)
 			return false;
-		
-		if(this.requirements.stream().allMatch(objective -> !objective.isOptional() && objective.isComplete()))
+
+		if(this.requirements.stream().filter(o -> o != null).allMatch(o -> !o.isOptional() && o.isComplete()))
 			return false;
 		
 		return true;
@@ -162,7 +157,7 @@ public abstract class Objective
 	public String getLocalizedTitle() 
 	{
 		String objectiveKey = new TranslationTextComponent(String.format("quest.objective." + Main.MODID + ".%s", this.getId())).getKey();
-		return new TranslationTextComponent(objectiveKey, ((int)this.getMaxProgress())).getString();
+		return new TranslationTextComponent(objectiveKey, ((int)this.getMaxProgress())).getString(); 
 	}
 	
 	public void setHasEvent(boolean flag)

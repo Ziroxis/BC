@@ -87,7 +87,7 @@ public class QuestScreen extends Screen {
             if (quests[i] != null)
             {
                 Quest questInprogress = questData.getInProgressQuests()[i];
-                String questInProgressString = questInprogress.getTitle();
+                String questInProgressString = questInprogress.getCore().getName();
                 drawString(matrixStack, font, "Quest: ", guiLeft - 155 , guiTop - 50 + (i * 50), 16777215);
                 drawString(matrixStack, font, questInProgressString, guiLeft - 122, guiTop - 50 + (i * 50), 16777215);
                 drawString(matrixStack, font, "Objectives: ", guiLeft - 155 , guiTop - 40 + (i * 50), 16777215);

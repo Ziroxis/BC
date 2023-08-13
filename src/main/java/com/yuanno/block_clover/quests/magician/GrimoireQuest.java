@@ -2,6 +2,7 @@ package com.yuanno.block_clover.quests.magician;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.ReachLevelObjective;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -19,14 +20,15 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 
 public class GrimoireQuest extends Quest {
+    public static final QuestId INSTANCE = new QuestId.Builder("Obtaining your grimoire", GrimoireQuest::new)
+            .build();
+
 
     private Objective levelObjective = new ReachLevelObjective("Reach level 5 and go to the grimoire tower", 5);
 
-    public GrimoireQuest()
+    public GrimoireQuest(QuestId questId)
     {
-        super("grimoirequest", "Obtaining your grimoire");
-        this.setDescription("Reach level 5 to obtain your grimoire");
-        this.setRank("");
+        super(questId);
         this.addObjective(this.levelObjective);
         this.onCompleteEvent = this::giveReward;
     }

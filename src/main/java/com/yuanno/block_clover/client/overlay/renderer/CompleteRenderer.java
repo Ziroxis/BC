@@ -34,7 +34,7 @@ public class CompleteRenderer<T extends LivingEntity, M extends EntityModel<T>> 
 
     @Override
     public void render(MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-
+/*
         PlayerEntity player = Minecraft.getInstance().player;
         if (!(entity instanceof NPCentity))
             return;
@@ -65,5 +65,8 @@ public class CompleteRenderer<T extends LivingEntity, M extends EntityModel<T>> 
             this.model.renderToBuffer(matrixStack, ivertexbuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
             matrixStack.popPose();
         }
+    }
+
+ */
     }
 }

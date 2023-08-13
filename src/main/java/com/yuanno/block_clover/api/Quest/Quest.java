@@ -2,8 +2,6 @@ package com.yuanno.block_clover.api.Quest;
 
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.quest.IQuestData;
-import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.client.CGiveItemStackPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,91 +10,59 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-public abstract class Quest extends ForgeRegistryEntry<Quest>
+public abstract class Quest
 {
-	private String title;
-	private String description;
-	private String rank;
-	private boolean free;
+	private QuestId core;
 	
 	private List<Objective> objectives = new ArrayList<Objective>();
-	private List<Quest> requirements = new ArrayList<Quest>();
 
 	// Setting the defaults so that no crash occurs and so they will be null safe.
 	protected IStarting onStartEvent = (player) -> { return true; };
 	protected ICompleting onCompleteEvent = (player) -> { return true; };
 	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
 
-	public Quest(String id, String title)
+	public Quest(QuestId core)
 	{
-		this.title = title;
+		this.core = core;
 	}
 	
 	/*
 	 *  Methods
 	 */
-	
-	@Nullable
-	public Quest create()
+
+	public QuestId getCore()
 	{
-		try
-		{
-			return this.getClass().getConstructor().newInstance();
-		}
-		catch (Exception ex)
-		{
-			ex.printStackTrace();
-		}
-		return null;
+		return this.core;
 	}
 	
 	@Override
 	public boolean equals(Object quest)
 	{
-		if(quest == null)
+		if(quest == null || this.getCore() == null)
 			return false;
-
-		if(!(quest instanceof Quest))
-			return false;
-
-		if(this.getRegistryName() == null || ((Quest)quest).getRegistryName() == null)
-			return false;
-
-		return this.getRegistryName().equals(((Quest) quest).getRegistryName());
+		
+		if(quest instanceof Quest)
+		{
+			if (((Quest) quest).getCore() == null)
+				return false;
+	
+			if (this.getCore().equals(((Quest) quest).getCore()))
+				return true;
+		}
+		else if(quest instanceof QuestId)
+		{
+			if (this.getCore().equals((quest)))
+				return true;
+		}
+		
+		return false;
 	}
-	public boolean addQuestItem(PlayerEntity player, Item item, int amount)
-	{
-		ItemStack stack = new ItemStack(item);
-		for (int i = 0; i < 35; i++)
-		{
-			if (player.inventory.getItem(i).isEmpty())
-			{
-				free = true;
-				break;
-			}
-		}
-		if (free)
-		{
-			PacketHandler.sendToServer(new CGiveItemStackPacket(stack));
-			return true;
-		}
-		else
-		{
-			player.sendMessage(new TranslationTextComponent("You need free space in your inventory!"), Util.NIL_UUID);
-			return false;
-		}
-	}
-
-
 
 	public boolean removeQuestItem(PlayerEntity player, Item item, int amount)
 	{
@@ -104,7 +70,7 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 		
 		if(id < 0)
 		{
-			player.sendMessage(new TranslationTextComponent("Missing quest items: %s", new ItemStack(item).getDisplayName().getString()), Util.NIL_UUID);
+			player.sendMessage(new TranslationTextComponent("Missing quest items: %s", new ItemStack(item).getHoverName().getString()), Util.NIL_UUID);
 			return false;
 		}
 		
@@ -129,18 +95,6 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	public boolean triggerStartEvent(PlayerEntity player)
 	{
 		return this.onStartEvent.check(player);
-	}
-	
-	public void addRequirements(Quest... requirements)
-	{
-		for(Quest req : requirements)
-			this.addRequirement(req);
-	}
-	
-	public void addRequirement(Quest req)
-	{
-		if(!this.requirements.contains(req))
-			this.requirements.add(req);
 	}
 	
 	public void addObjectives(Objective... objectives)
@@ -175,55 +129,16 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 		return progress;
 	}
 	
-	public void setDescription(String desc)
+	public void resetProgress()
 	{
-		this.description = desc;
+		this.objectives.stream().forEach((o) -> o.setProgress(0));
 	}
 
-	
-	public String getDescription()
-	{
-		return this.description;
-	}
-	
-	public String getId()
-	{
-		return Beapi.getResourceName(this.title);
-	}
-
-	public void setRank(String rank)
-	{
-		this.rank = rank;
-	}
-	public String getRank()
-	{
-		return this.rank;
-	}
-
-	public String getTitle()
-	{
-		return this.title;
-	}
-	
 	public boolean isLocked(IQuestData props)
 	{
-		if(this.requirements.size() <= 0)
-			return false;
-		
-		boolean isLocked = false;
-		for(Quest quest : this.requirements)
-		{
-			if(!props.hasFinishedQuest(quest))
-			{
-				isLocked = true;
-				break;
-			}
-		}
-
-		return isLocked;
+		return this.getCore().isLocked(props);
 	}
-	
-	
+
 	/*
 	 *  Save / Load data
 	 */
@@ -232,7 +147,7 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	{
 		CompoundNBT nbt = new CompoundNBT();
 		
-		nbt.putString("id", this.getId());
+		nbt.putString("id", this.core.getRegistryName().toString());
 		ListNBT objectivesData = new ListNBT();
 		for(Objective obj : this.getObjectives())
 		{
@@ -257,6 +172,10 @@ public abstract class Quest extends ForgeRegistryEntry<Quest>
 	/*
 	 *  Interfaces
 	 */
+	public interface IFactory<A extends Quest>
+	{
+		A create(QuestId<A> questid);
+	}
 	
 	public interface IShouldRestart extends Serializable
 	{

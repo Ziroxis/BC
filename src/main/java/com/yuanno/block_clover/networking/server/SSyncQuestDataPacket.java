@@ -15,7 +15,6 @@ import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-
 public class SSyncQuestDataPacket
 {
 	private int entityId;
@@ -63,12 +62,12 @@ public class SSyncQuestDataPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SSyncQuestDataPacket message)
 		{
-			Entity target = Minecraft.getInstance().level.getEntity(message.entityId);
+			Entity target = Minecraft.getInstance().level.getEntity(message.entityId);			
 			if(target == null || !(target instanceof PlayerEntity))
 				return;
 			
 			IQuestData props = QuestDataCapability.get((PlayerEntity) target);
-			System.out.println(props);
+						
 			QuestDataCapability.INSTANCE.getStorage().readNBT(QuestDataCapability.INSTANCE, props, null, message.data);		
 		}
 	}

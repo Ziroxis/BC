@@ -1,6 +1,8 @@
 package com.yuanno.block_clover.blocks;
 
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
+import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SOpenQuestBoardPacket;
@@ -17,7 +19,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class QuestBoardBlock extends Block {
-    List<Quest> availableQuest = ModValues.availableQuests;
+    List<QuestId> availableQuest = ModQuests.mergedListQuestBoard;
 
     public QuestBoardBlock()
     {

@@ -98,11 +98,9 @@ public class ChatPromptQuestBoardScreen extends Screen {
                     if (questData.getInProgressQuest(i).isComplete())
                     {
                         //questData.getInProgressQuest(i).triggerCompleteEvent(player);
-                        System.out.println(questArrayListQuestBoard.get(ia));
                         questData.addFinishedQuest(questArrayListQuestBoard.get(ia));
-                        System.out.println(questArrayListQuestBoard.get(ia));
+                        questData.removeFinishedQuest(questArrayListQuestBoard.get(ia));
                         questData.removeInProgressQuest(questArrayListQuestBoard.get(ia)); // -> doesn't work
-                        System.out.println(questArrayListQuestBoard.get(ia));
                         PacketHandler.sendToServer(new CUpdateQuestStatePacket(questArrayListQuestBoard.get(ia)));
                         String text = "Good job on the quest!";
                         this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);

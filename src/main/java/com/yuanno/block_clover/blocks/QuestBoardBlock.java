@@ -27,7 +27,8 @@ public class QuestBoardBlock extends Block {
     public ActionResultType use(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
     {
         // open the quest qui right here
-        PacketHandler.sendTo(new SOpenQuestBoardPacket(availableQuest), player);
+        if (!player.level.isClientSide)
+            PacketHandler.sendTo(new SOpenQuestBoardPacket(availableQuest), player);
         return ActionResultType.SUCCESS;
     }
 

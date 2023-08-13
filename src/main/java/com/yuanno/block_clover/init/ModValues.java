@@ -51,7 +51,7 @@ public class ModValues {
     };
 
     public static List<Quest> availableQuests = new ArrayList<>(Arrays.asList(
-       ModQuests.KILL_CREEPER, ModQuests.KILL_SKELETON, ModQuests.KILL_ZOMBIE, ModQuests.KILL_SPIDER, ModQuests.OBTAIN_IRON
+       ModQuests.KILL_CREEPER, ModQuests.KILL_SKELETON, ModQuests.KILL_ZOMBIE, ModQuests.KILL_SPIDER, ModQuests.OBTAIN_COAL, ModQuests.OBTAIN_IRON
     ));
 
     public static final String NAHAMAN = "Nahaman";

@@ -154,6 +154,7 @@ public class ChatPromptScreen extends Screen {
                     {
                         if (npCentity.quests.get(ia) != null && !questData.hasFinishedQuest(npCentity.quests.get(ia)) && npCentity.quests.get(ia).isComplete())
                         {
+                            npCentity.quests.get(ia).triggerCompleteEvent(player);
                             questData.addFinishedQuest(npCentity.quests.get(ia));
                             questData.removeFinishedQuest(npCentity.quests.get(ia));
                             questData.removeInProgressQuest(npCentity.quests.get(ia));

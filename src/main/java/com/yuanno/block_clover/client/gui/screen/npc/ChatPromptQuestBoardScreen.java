@@ -97,6 +97,7 @@ public class ChatPromptQuestBoardScreen extends Screen {
                 if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).getId().equals(questArrayListQuestBoard.get(ia).getId())) {
                     if (questData.getInProgressQuest(i).isComplete())
                     {
+                        questData.getInProgressQuest(i).triggerCompleteEvent(player);
                         System.out.println(questData.getInProgressQuest(i));
                         questData.addFinishedQuest(questData.getInProgressQuest(i));
                         System.out.println(questData.getFinishedQuests());

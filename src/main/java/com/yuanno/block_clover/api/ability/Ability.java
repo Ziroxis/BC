@@ -30,6 +30,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -37,7 +38,6 @@ import java.util.Random;
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
-    private boolean assignedExperience = false;
     private boolean isEvolved;
     private int evolutionCost;
     private String name = "";
@@ -89,7 +89,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (player.level.isClientSide)
             return;
 
-
         player.level.getProfiler().push(() ->
         {
             return Beapi.getResourceName(this.getName());
@@ -105,7 +104,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
             this.evolved(true);
 
-        AbilityUseEvent event = new AbilityUseEvent(player, this);
+        AbilityUseEvent event = new AbilityUseEvent.Pre(player, this);
         if (MinecraftForge.EVENT_BUS.post(event))
             return;
 
@@ -114,7 +113,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             IAbilityData props = AbilityDataCapability.get(player);
             this.checkAbilityPool(player, State.COOLDOWN);
 
-            //IEntityStats propsEntity = EntityStatsCapability.get(player);
             if (!this.isEvolved)
                 propsEntity.alterMana(-manaCost);
             else
@@ -123,7 +121,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             if (propsEntity.hasExperienceSpell(this.getName())) {
                 int experience = propsEntity.getExperienceSpell(this.getName());
                 propsEntity.setExperienceSpells(this.getName(), experience + 1);
-
             }
             else
                 propsEntity.setExperienceSpells(this.getName(), 1);
@@ -137,13 +134,15 @@ public class Ability extends ForgeRegistryEntry<Ability> {
                 ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
                 MinecraftForge.EVENT_BUS.post(eventExperience);
             }
-            PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
-
+            AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
+            MinecraftForge.EVENT_BUS.post(post);
 
             this.startCooldown(player);
             props.setPreviouslyUsedAbility(this);
+            PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
+            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+
         }
         player.level.getProfiler().pop();
     }
@@ -333,6 +332,11 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.cooldown;
     }
 
+    public boolean getEvolved()
+    {
+        return this.isEvolved;
+    }
+
     public void setEvolutionCost(int evolutionCost)
     {
         this.evolutionCost = evolutionCost;
@@ -376,6 +380,10 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public float getmanaCost()
     {
         return this.manaCost;
+    }
+    public float getEvolvedManaCost()
+    {
+        return this.evolvedManaCost;
     }
 
     public double getTimeProgression()
@@ -582,11 +590,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
 
         if (propsEntity.getMana() < manaCost)
-        {
-            //player.sendMessage(new TranslationTextComponent("Not enough mana!"), Util.NIL_UUID);
-
             return false;
-        }
         if (worldData.isInsideRestrictedArea((int)player.position().x(), (int)player.position().y(), (int)player.position().z()))
         {
             boolean isWhitelsited = false;
@@ -595,6 +599,16 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
             player.sendMessage(new TranslationTextComponent("Can't use here"), Util.NIL_UUID);
             return false;
+        }
+        //TODO should recheck the ability api
+        if (this.getCore().getDependencies() != null && this.getCore().getDependencies().length > 0)
+        {
+            List<AbilityCore> list = Arrays.asList(this.getCore().getDependencies());
+            int deps = list.size();
+            List<Ability> flag = AbilityDataCapability.get(player).getEquippedAbilities(abl -> abl.isContinuous() && list.contains(abl.getCore()));
+
+            if (flag.size() <= 0)
+                return false;
         }
 
         return true;

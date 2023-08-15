@@ -14,12 +14,16 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class QuestBoardBlock extends Block {
     List<QuestId> availableQuest = ModQuests.mergedListQuestBoard;
+
 
     public QuestBoardBlock()
     {
@@ -33,6 +37,4 @@ public class QuestBoardBlock extends Block {
             PacketHandler.sendTo(new SOpenQuestBoardPacket(availableQuest), player);
         return ActionResultType.SUCCESS;
     }
-
-
 }

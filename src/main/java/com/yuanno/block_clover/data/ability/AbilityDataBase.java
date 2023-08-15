@@ -341,22 +341,19 @@ public class AbilityDataBase implements IAbilityData
 	}
 
 	@Override
-	public<T extends Ability> T[] getEquippedAbilities()
+	public List<Ability> getEquippedAbilities()
 	{
-		Stream<Ability> stream = Arrays.stream(this.equippedAbilities);
-		List<Ability> list1 = stream.collect(Collectors.toList());
-		Ability list2[] = new Ability[list1.size()];
-		return (T[]) list1.toArray(list2);
+		return Arrays.stream(this.equippedAbilities)
+				.filter(abl -> abl != null)
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public <T extends Ability> T[] getEquippedAbilities(Predicate<Ability> check)
+	public <T extends Ability> List<T> getEquippedAbilities(Predicate<Ability> check)
 	{
-		Stream<Ability> stream = Arrays.stream(this.equippedAbilities);
-		stream = stream.filter(check);
-		List<Ability> list1 = stream.collect(Collectors.toList());
-		Ability list2[] = new Ability[list1.size()];
-		return (T[]) list1.toArray(list2);
+		return (List<T>) Arrays.stream(this.equippedAbilities)
+				.filter(abl -> abl != null && check.test(abl))
+				.collect(Collectors.toList());
 	}
 
 	@Override

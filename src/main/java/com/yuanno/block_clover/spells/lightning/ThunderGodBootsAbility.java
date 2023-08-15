@@ -30,14 +30,17 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
             "Lightning Speed", 0.3, AttributeModifier.Operation.ADDITION);
     private static final AttributeModifier LIGHTNING_STEP = new AttributeModifier(UUID.fromString("25c5b788-fec9-11ec-b939-0242ac120002"),
             "Lightning Step", 1, AttributeModifier.Operation.ADDITION);
-
+    private static final AttributeModifier LIGHTNING_JUMP = new AttributeModifier(UUID.fromString("99e2d1f6-3b80-11ee-be56-0242ac120002"),
+            "Lightning Jump", 1, AttributeModifier.Operation.ADDITION);
     private static final ParticleEffect PARTICLES = new BootsParticleEffect();
     public ThunderGodBootsAbility()
     {
         super(INSTANCE);
         this.setmanaCost(5);
+        this.setEvolvedManaCost(50);
         this.setMaxCooldown(5);
         this.setExperiencePoint(7);
+        this.setEvolutionCost(1);
         this.setExperienceGainLevelCap(10);
 
         this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -52,6 +55,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         propsEntity.alterMana(-15);
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(LIGHTNING_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(LIGHTNING_STEP);
+
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
     }
@@ -65,6 +69,7 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     {
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(LIGHTNING_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(LIGHTNING_STEP);
+
         return true;
     }
 

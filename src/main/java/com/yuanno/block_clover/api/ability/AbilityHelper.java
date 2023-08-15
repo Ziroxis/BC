@@ -53,16 +53,16 @@ public class AbilityHelper {
     public static AbilityOverlay getCurrentOverlay(PlayerEntity player)
     {
         AbilityOverlay overlay = null;
-        Ability[] list = AbilityDataCapability.get(player).getEquippedAbilities();
+        List<Ability> list = AbilityDataCapability.get(player).getEquippedAbilities();
         for (Ability ability : list)
         {
-            if (ability == null || (ability instanceof ContinuousAbility &&  !ability.isContinuous()))
+            if (ability == null || (ability instanceof ContinuousAbility && !ability.isContinuous()))
                 continue;
 
             if (ability instanceof IPunchOverlayAbility)
                 overlay = ((IPunchOverlayAbility) ability).getPunchOverlay(player);
             else if (ability instanceof IBodyOverlayAbility)
-                overlay = ((IBodyOverlayAbility) ability).getBodyOverlay();
+                overlay = ((IBodyOverlayAbility) ability).getBodyOverlay(player);
         }
 
         return overlay;

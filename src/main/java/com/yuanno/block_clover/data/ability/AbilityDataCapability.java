@@ -57,9 +57,9 @@ public class AbilityDataCapability
 					props.put("unlocked_abilities", unlockedAbilities);
 
 					ListNBT equippedAbilities = new ListNBT();
-					for (int i = 0; i < instance.getEquippedAbilities().length; i++)
+					for (int i = 0; i < instance.getEquippedAbilities().size(); i++)
 					{
-						Ability ability = instance.getEquippedAbilities()[i];
+						Ability ability = instance.getEquippedAbilities().get(i);
 						if(ability != null)
 						{
 							String name = Beapi.getResourceName(ability.getName());

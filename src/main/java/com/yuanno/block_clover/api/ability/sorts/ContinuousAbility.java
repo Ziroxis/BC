@@ -53,7 +53,7 @@ public abstract class ContinuousAbility extends Ability {
         AbilityUseEvent event = new AbilityUseEvent(player, this);
         if (MinecraftForge.EVENT_BUS.post(event))
             return;
-
+        IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.isContinuous())
         {
             if(!this.isOnStandby())
@@ -63,7 +63,8 @@ public abstract class ContinuousAbility extends Ability {
             {
                 this.checkAbilityPool(player, State.CONTINUOUS);
 
-
+                if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !getEvolved())
+                    this.evolved(true);
                 this.startContinuity(player);
                 PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
             }
@@ -111,50 +112,65 @@ public abstract class ContinuousAbility extends Ability {
     /*
      * 	Methods
      */
-    public void tick(PlayerEntity player)
-    {
-        /*
-        if(player.level.isClientSide)
-        	return;
-        */
-
+    public void tick(PlayerEntity player) {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
-        if(!this.canUse(player))
-        {
-            this.stopContinuity(player);
+
+        if (!canUse(player)) {
+            stopContinuity(player);
             return;
         }
 
-        player.level.getProfiler().push(Beapi.getResourceName(this.getName()));
+        String resourceName = Beapi.getResourceName(getName());
+        player.level.getProfiler().push(resourceName);
 
-        if (this.isContinuous()) {
-            this.continueTime++;
+        boolean isContinuous = isContinuous();
+        boolean isServer = !player.level.isClientSide;
+        boolean isClientOrServer = isClientSide() || isServer;
 
-            boolean isClientOrServer = this.isClientSide() || !player.level.isClientSide;
-            boolean shouldEndContinuity = this.threshold > 0 && this.continueTime >= this.threshold
-                    || propsEntity.getMana() < getmanaCost() + 10 && getmanaCost() != 0;
+        if (isContinuous) {
+            continueTime++;
 
-            if (isClientOrServer && !this.isStateForced()) {
-                this.duringContinuityEvent.duringContinuity(player, this.continueTime);
+            boolean shouldEndContinuity =
+                    (threshold > 0 && continueTime >= threshold) ||
+                            (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0);
+
+            if (isClientOrServer && !isStateForced()) {
+                duringContinuityEvent.duringContinuity(player, continueTime);
             }
 
             if (shouldEndContinuity) {
-                this.endContinuity(player);
+                endContinuity(player);
             }
 
             if (player.tickCount % 20 == 0) {
                 int experiencePoint = getExperiencePoint();
                 int manaCost = (int) getmanaCost();
+                int evolvedManaCost = (int) getEvolvedManaCost();
+                int currentLevel = propsEntity.getLevel();
+                int experienceGainLevelCap = getExperienceGainLevelCap();
 
-                if (propsEntity.getLevel() < getExperienceGainLevelCap()) {
+                // player level stuff
+                if (currentLevel < experienceGainLevelCap) {
                     propsEntity.alterExperience(experiencePoint);
                     ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
                     MinecraftForge.EVENT_BUS.post(eventExperience);
                 }
 
+                // individual spell experience
+                if (propsEntity.hasExperienceSpell(this.getName())) {
+                    int experience = propsEntity.getExperienceSpell(this.getName());
+                    propsEntity.setExperienceSpells(this.getName(), experience + 1);
+                }
+                else
+                    propsEntity.setExperienceSpells(this.getName(), 1);
+
+
                 int currentMana = (int) propsEntity.getMana();
                 if (currentMana > manaCost) {
-                    propsEntity.alterMana(-manaCost);
+                    if (!this.isEvolved())
+                        propsEntity.alterMana(-manaCost);
+                    else
+                        propsEntity.alterMana(-evolvedManaCost);
                 }
             }
 
@@ -163,9 +179,9 @@ public abstract class ContinuousAbility extends Ability {
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
         }
 
-
         player.level.getProfiler().pop();
     }
+
 
     public void startContinuity(PlayerEntity player)
     {

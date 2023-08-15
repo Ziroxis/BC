@@ -36,7 +36,7 @@ public class AbilitiesClientEvents
 				
 		if (event.getType() == ElementType.VIGNETTE)
 		{
-			Optional<Ability> ability = Arrays.<Ability>stream(abilityDataProps.getEquippedAbilities(IOutOfBodyAbility.IS_ACTIVE)).findFirst();
+			Optional<Ability> ability = abilityDataProps.getEquippedAbilities(IOutOfBodyAbility.IS_ACTIVE).stream().findFirst();
 			if(ability.isPresent())
 			{
 				float distance = (float) (((IOutOfBodyAbility)ability.get()).getDistanceFromPivot(player) / ((IOutOfBodyAbility)ability.get()).getMaxRange());

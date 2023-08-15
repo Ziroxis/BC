@@ -10,4 +10,20 @@ public class AbilityUseEvent extends AbilityEvent {
         super(player, ability);
     }
 
+    @Cancelable
+    public static class Pre extends AbilityUseEvent
+    {
+        public Pre(PlayerEntity player, Ability ability)
+        {
+            super(player, ability);
+        }
+    }
+
+    public static class Post extends AbilityUseEvent
+    {
+        public Post(PlayerEntity player, Ability ability)
+        {
+            super(player, ability);
+        }
+    }
 }

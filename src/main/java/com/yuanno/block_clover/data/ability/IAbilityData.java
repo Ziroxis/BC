@@ -50,8 +50,8 @@ public interface IAbilityData
 	<T extends Ability> T getEquippedAbility(T abl);
 	<T extends Ability> T getEquippedAbility(AbilityCore<T> core);
 	<T extends Ability> T getEquippedAbility(int slot);
-	<T extends Ability> T[] getEquippedAbilities();
-	<T extends Ability> T[] getEquippedAbilities(Predicate<Ability> check);
+	<T extends Ability> List<T> getEquippedAbilities();
+	<T extends Ability> List<T> getEquippedAbilities(Predicate<Ability> check);
 	<T extends Ability> T[] getEquippedAbilities(AbilityCategories.AbilityCategory category);
 	void clearEquippedAbilities(AbilityCategories.AbilityCategory category);
 	void clearEquippedAbilities(Predicate<Ability> check);

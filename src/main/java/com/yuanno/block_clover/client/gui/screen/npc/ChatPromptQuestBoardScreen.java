@@ -3,6 +3,7 @@ package com.yuanno.block_clover.client.gui.screen.npc;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.SequencedString;
 import com.yuanno.block_clover.client.gui.button.TexturedIconButton;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
@@ -88,56 +89,30 @@ public class ChatPromptQuestBoardScreen extends Screen {
      */
     public void loop()
     {
+        String text = "";
+        boolean hasCommons = false;
         for (Quest quest : questData.getInProgressQuests())
         {
-            if (ModQuests.mergedListQuestBoard.contains(quest.getCore()))
+            if (quest != null && ModQuests.mergedListQuestBoard.contains(quest.getCore()))
             {
+                text = "You have a quest from the questboard! Come back when it's done so I can give your reward.";
+                hasCommons = true;
                 if (quest.isComplete())
                 {
-                    String text = "Good job, here is the reward!";
+                    text = "Good job, here is the reward!";
                     questData.addFinishedQuest(quest.getCore());
                     questData.removeInProgressQuest(quest.getCore());
                     PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest.getCore()));
                     this.message = new SequencedString(text, 245, this.font.width(text) / 2, 200);
                     return;
                 }
-                String text = "You got a quest from the quest board!";
-                this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
-                return;
             }
         }
-        /*
-        for (int ia = 0; ia < questArrayListQuestBoard.size(); ia++)
+        if (!hasCommons)
         {
-            for (int i = 0; i < questData.getInProgressQuests().length; i++)
-            {
-                if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).getId().equals(questArrayListQuestBoard.get(ia).getId())) {
-                    if (questData.getInProgressQuest(i).isComplete())
-                    {
-                        //questData.getInProgressQuest(i).triggerCompleteEvent(player);
-                        questData.addFinishedQuest(questArrayListQuestBoard.get(ia).getCore());
-                        questData.removeFinishedQuest(questArrayListQuestBoard.get(ia));
-                        questData.removeInProgressQuest(questArrayListQuestBoard.get(ia)); // -> doesn't work
-                        PacketHandler.sendToServer(new CUpdateQuestStatePacket(questArrayListQuestBoard.get(ia)));
-                        String text = "Good job on the quest!";
-                        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
-                        return;
-                    }
-                    else
-                    {
-                        String text = "Oh you got a quest from the quest board!";
-                        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
-                        return;
-                    }
-                }
-            }
-
+            text = "I am the quest board managers for the guilds. Pick a quest from the quest board, complete it and then come to me for the reward!";
         }
-
-         */
-
-        String text = "I manage all the quests for the guilds, pick up a quest from the quest board and once done come to me and I'll give the reward!";
-        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000); // -> first time talking to the npc
+        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
         return;
     }
 

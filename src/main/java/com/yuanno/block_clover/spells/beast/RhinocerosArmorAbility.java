@@ -22,6 +22,8 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
             .build();
     private static final AttributeModifier RHINOCEROS_RESISTANCE = new AttributeModifier(UUID.fromString("0fe609ae-c5b1-11ed-afa1-0242ac120002"),
             "Rhinoceros Resistance", 3, AttributeModifier.Operation.ADDITION);
+    private static final AttributeModifier RHINOCEROS_RESISTANCE_EVOLVED = new AttributeModifier(UUID.fromString("81a80076-3d0a-11ee-be56-0242ac120002"),
+            "Rhinoceros Resistance", 6, AttributeModifier.Operation.ADDITION);
     private static final AttributeModifier RHINOCEROS_STEP = new AttributeModifier(UUID.fromString("127ff724-c5b1-11ed-afa1-0242ac120002"),
             "Rhinoceros Step", 1, AttributeModifier.Operation.ADDITION);
 
@@ -29,6 +31,8 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
     {
         super(INSTANCE);
         this.setmanaCost(8);
+        this.setEvolutionCost(50);
+        this.setEvolvedManaCost(5);
         this.setMaxCooldown(10);
         this.setExperiencePoint(0);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -37,8 +41,10 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
-        player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
+        if (this.isEvolved())
+            player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).addTransientModifier(RHINOCEROS_RESISTANCE_EVOLVED);
+        if (!this.isEvolved())
+            player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(RHINOCEROS_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
@@ -46,7 +52,10 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE);
+        if (this.isEvolved())
+            player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE_EVOLVED);
+        if (!this.isEvolved())
+            player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE);
         player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).removeModifier(RHINOCEROS_RESISTANCE);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(RHINOCEROS_STEP);
         return true;

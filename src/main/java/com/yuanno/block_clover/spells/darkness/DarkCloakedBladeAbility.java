@@ -5,13 +5,17 @@ import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousSwordAbility;
+import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.darkness.DarkCloakedBladeParticleEffect;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
+
+import java.util.UUID;
 
 public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements IParallelContinuousAbility {
 
@@ -21,11 +25,13 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
             .setDamageKind(AbilityDamageKind.BUFF)
             .build();
 
+
     public DarkCloakedBladeAbility()
     {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(5);
+        this.setEvolutionCost(50);
         this.setExperiencePoint(7);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
@@ -34,11 +40,13 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
+
         if (!(player.getMainHandItem().getItem() instanceof SwordItem))
         {
             player.sendMessage(new StringTextComponent("Need to hold a sword!"), Util.NIL_UUID);
             return false;
         }
+
         return true;
     }
 
@@ -75,7 +83,9 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
             return 0;
         }
         PARTICLES.spawn(player.level, target.getX(), target.getY(), target.getZ(), 0, 0, 0);
-
-        return 4;
+        if (this.isEvolved())
+            return 8;
+        else
+            return 3;
     }
 }

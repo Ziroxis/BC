@@ -24,11 +24,6 @@ public class ModQuests {
 
     private static HashMap<String, String> langMap = new HashMap<String, String>();
 
-    public static HashMap<String, String> getLangMap()
-    {
-        return langMap;
-    }
-
     public static final QuestId OBTAIN_IRON = BeRegistry.registerQuest(ObtainIronQuest.INSTANCE);
     public static final List<QuestId> C_QUESTS = Arrays.asList(OBTAIN_IRON);
 
@@ -47,22 +42,6 @@ public class ModQuests {
         mergedList.addAll(C_QUESTS);
         mergedList.addAll(D_QUESTS);
         return mergedList;
-    }
-    public static Quest[] concatenateQuestArrays(final Quest[] a, final Quest[] b) {
-        final Quest[] c = new Quest[a.length + b.length];
-
-        int index = 0;
-        for (Quest quest : a) {
-            c[index] = quest;
-            index++;
-        }
-
-        for (Quest quest : b) {
-            c[index] = quest;
-            index++;
-        }
-
-        return c;
     }
 
     public static final QuestId GRIMOIRE = BeRegistry.registerQuest(GrimoireQuest.INSTANCE);

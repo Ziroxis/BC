@@ -26,6 +26,7 @@ public abstract class Quest
 	protected IStarting onStartEvent = (player) -> { return true; };
 	protected ICompleting onCompleteEvent = (player) -> { return true; };
 	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
+	private String description;
 
 	public Quest(QuestId core)
 	{
@@ -40,7 +41,14 @@ public abstract class Quest
 	{
 		return this.core;
 	}
-	
+	public String getDescription()
+	{
+		return this.description;
+	}
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
 	@Override
 	public boolean equals(Object quest)
 	{
@@ -167,8 +175,8 @@ public abstract class Quest
 			this.getObjectives().get(i).load(questData);
 		}
 	}
-	
-	
+
+
 	/*
 	 *  Interfaces
 	 */

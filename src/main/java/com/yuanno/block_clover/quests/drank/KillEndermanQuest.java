@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class KillEndermanQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("Kill some enderman", KillEndermanQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("They teleport too much", KillEndermanQuest::new)
             .build();
     private Objective killEntityObjective = new KillEntityObjective("Kill 5 enderman", 5, EntityType.ENDERMAN);
 
@@ -17,6 +17,7 @@ public class KillEndermanQuest extends Quest {
     {
         super(questId);
         this.addObjectives(killEntityObjective);
+        this.setDescription("Kill a few enderman");
 
         this.onCompleteEvent = this::giveReward;
     }

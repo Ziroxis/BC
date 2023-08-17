@@ -195,7 +195,9 @@ public class QuestBoardScreen extends Screen {
             Quest quest = availableQuest.get(startIndex + i).createQuest();
 
             drawString(matrixStack, font, TextFormatting.GRAY + "Quest: " + quest.getCore().getName(), posX + 10, posY + 55 + i * 40, Color.GRAY.getRGB());
-            drawString(matrixStack, font, TextFormatting.GRAY + "Description: " + quest.getObjectives(), posX + 10, posY + 70 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "Description: ", posX + 10, posY + 63 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "" + quest.getDescription(), posX + 10, posY + 72 + i * 40, Color.GRAY.getRGB());
+
         }
 
 

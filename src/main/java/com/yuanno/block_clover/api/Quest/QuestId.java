@@ -14,13 +14,13 @@ public class QuestId<A extends Quest> extends ForgeRegistryEntry<QuestId<?>>
 	private final String name;
 	private Quest.IFactory<A> factory;
 	private List<QuestId> requirements = new ArrayList<QuestId>();
-	
 	protected QuestId(String name, Quest.IFactory<A> factory)
 	{
 		this.name = name;
 		this.factory = factory;
+
 	}
-	
+
 	public List<QuestId> getRequirements()
 	{
 		return this.requirements;

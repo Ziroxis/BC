@@ -10,7 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class KillCreeperQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("Kill some creepers", KillCreeperQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("They keep exploding", KillCreeperQuest::new)
             .build();
     private Objective killCreeperObjective = new KillEntityObjective("Kill 10 creepers", 10, EntityType.CREEPER);
 
@@ -18,6 +18,7 @@ public class KillCreeperQuest extends Quest {
     {
         super(questId);
         this.addObjectives(killCreeperObjective);
+        this.setDescription("Kill a few creepers");
 
         this.onCompleteEvent = this::giveReward;
     }

@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class KillSkeletonQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("Kill some skeletons", KillSkeletonQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("Rattle 'em", KillSkeletonQuest::new)
             .build();
     private Objective killEntityObjective = new KillEntityObjective("Kill 15 skeletons", 15, EntityType.SKELETON);
 
@@ -17,6 +17,7 @@ public class KillSkeletonQuest extends Quest {
     {
         super(questId);
         this.addObjectives(killEntityObjective);
+        this.setDescription("Kill a few skeletons");
 
         this.onCompleteEvent = this::giveReward;
     }

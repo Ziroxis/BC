@@ -9,7 +9,7 @@ import net.minecraft.item.Items;
 
 public class ObtainGoldQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("Get some gold", ObtainGoldQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("Ready for gold", ObtainGoldQuest::new)
             .build();
     private Objective objective01 = new ObtainItemObjective("Obtain 8 gold", 8, Items.IRON_INGOT.delegate);
 
@@ -17,6 +17,7 @@ public class ObtainGoldQuest extends Quest {
     {
         super(id);
         this.addObjectives(this.objective01);
+        this.setDescription("Obtain a few gold ingots");
         this.onCompleteEvent = this::giveReward;
     }
 

@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class KillZombieQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("Kill some zombies", KillZombieQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("Like the movies", KillZombieQuest::new)
             .build();
     private Objective killEntityObjective = new KillEntityObjective("Kill 20 zombies", 20, EntityType.ZOMBIE);
 
@@ -17,6 +17,7 @@ public class KillZombieQuest extends Quest {
     {
         super(questId);
         this.addObjectives(killEntityObjective);
+        this.setDescription("Kill a few zombies");
 
         this.onCompleteEvent = this::giveReward;
     }

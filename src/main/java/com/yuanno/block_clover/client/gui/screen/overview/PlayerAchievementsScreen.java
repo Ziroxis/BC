@@ -2,6 +2,7 @@ package com.yuanno.block_clover.client.gui.screen.overview;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
@@ -48,10 +49,10 @@ public class PlayerAchievementsScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         PlayerEntity player = mc.player;
 
-        /*
-        for (Quest quest : questData.getFinishedQuests())
+
+        for (QuestId quest : questData.getFinishedQuests())
         {
-            switch (quest.getRank())
+            switch (quest.createQuest().getRank())
             {
                 case (ModValues.RANK_QUEST_D):
                     this.DRANK += 1;
@@ -77,7 +78,7 @@ public class PlayerAchievementsScreen extends Screen {
             }
         }
 
-         */
+
 
 
         int posX = ((this.width - 256) / 2) - 110;

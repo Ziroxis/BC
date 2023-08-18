@@ -14,6 +14,7 @@ public class EntityStatsBase implements IEntityStats{
 
     private boolean inCombatMode = false;
 
+    private int yule;
     private String race = "";
     private String attribute = "";
     private String secondAttribute = "";
@@ -41,6 +42,24 @@ public class EntityStatsBase implements IEntityStats{
     private String innateDevilName = "";
     List<String> controlledDevilList = new ArrayList<>();
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
+
+    @Override
+    public void setYule(int value)
+    {
+        this.yule = value;
+    }
+
+    @Override
+    public void addYule(int value)
+    {
+        this.yule += value;
+    }
+
+    @Override
+    public int getYule()
+    {
+        return this.yule;
+    }
 
     @Override
     public List<String> getControlledDevilList()

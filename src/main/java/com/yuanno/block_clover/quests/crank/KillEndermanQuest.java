@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quests.drank;
+package com.yuanno.block_clover.quests.crank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
@@ -8,17 +8,18 @@ import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class KillCreeperQuest extends Quest {
+public class KillEndermanQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("They keep exploding", KillCreeperQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("They teleport too much", KillEndermanQuest::new)
             .build();
-    private Objective killCreeperObjective = new KillEntityObjective("Kill 10 creepers", 10, EntityType.CREEPER);
+    private Objective killEntityObjective = new KillEntityObjective("Kill 5 enderman", 5, EntityType.ENDERMAN);
 
-    public KillCreeperQuest(QuestId questId)
+    public KillEndermanQuest(QuestId questId)
     {
         super(questId);
-        this.addObjectives(killCreeperObjective);
-        this.setDescription("Kill a few creepers");
+        this.addObjectives(killEntityObjective);
+        this.setDescription("Kill a few enderman");
+        this.setRank(ModValues.RANK_QUEST_C);
 
         this.onCompleteEvent = this::giveReward;
     }

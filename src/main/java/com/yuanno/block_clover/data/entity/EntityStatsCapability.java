@@ -44,7 +44,8 @@ public class EntityStatsCapability {
                 props.putInt("time", instance.getTime());
                 props.putFloat("multiplier", instance.getMultiplier());
 		        props.putBoolean("staffBoost", instance.getStaffBoost());
-            
+                props.putInt("yule", instance.getYule());
+
                 props.putBoolean("hatBoost", instance.getHatBoost());
                 props.putBoolean("canLink", instance.getLinkAbility());
                 props.putInt("cookingLevel", instance.getCookingLevel());
@@ -106,6 +107,7 @@ public class EntityStatsCapability {
                 instance.setMaxCookingLevel(props.getInt("maxCookingLevel"));
                 instance.setCookingExperience(props.getInt("cookingExperience"));
                 instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
+                instance.setYule(props.getInt("yule"));
 
                 instance.setInnateDevil(props.getBoolean("innateDevil"));
                 instance.setDevil(props.getString("innateDevilName"));

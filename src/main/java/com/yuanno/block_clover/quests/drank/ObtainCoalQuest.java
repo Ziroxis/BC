@@ -19,13 +19,14 @@ public class ObtainCoalQuest extends Quest {
         super(id);
         this.addObjectives(this.objective01);
         this.setDescription("Obtain a bit of coal");
+        this.setRank(ModValues.RANK_QUEST_D);
 
         this.onCompleteEvent = this::giveReward;
     }
 
     public boolean giveReward(PlayerEntity player)
     {
-        System.out.println("GOTTEM");
+
         return true;
     }
 }

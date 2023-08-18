@@ -106,11 +106,13 @@ public class PlayerOverviewScreen extends Screen {
         int maxHealth = (int) player.getMaxHealth();
         int maxMana = (int) props.getMaxMana();
         int manaRegeneration = (int) props.getManaRegeneration();
+        int yule = props.getYule();
 
         int leftShift = posX - 75;
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Name: " + TextFormatting.RESET + name, leftShift, posY + 20, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Race: " + TextFormatting.RESET + race, leftShift, posY + 40, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Experience: " + TextFormatting.RESET + experience + "/" + maxExperience, leftShift, posY + 60, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Yule: " + TextFormatting.RESET + yule, leftShift, posY + 80, -1);
 
         int rightShift = posX + 200;
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Max health: " + TextFormatting.RESET + maxHealth, rightShift, posY + 20, -1);

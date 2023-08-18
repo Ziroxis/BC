@@ -64,6 +64,7 @@ public class StatsEvent {
             props.setLevel(1);
             props.setExperience(0);
             props.setMaxExperience(100);
+            props.setYule(0);
             PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
         }
 

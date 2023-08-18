@@ -4,6 +4,7 @@ import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.ObtainItemObjective;
+import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 
@@ -18,6 +19,8 @@ public class ObtainIronQuest extends Quest {
         super(id);
         this.addObjectives(this.objective01);
         this.setDescription("Obtain a few iron ingots");
+        this.setRank(ModValues.RANK_QUEST_C);
+
         this.onCompleteEvent = this::giveReward;
     }
 

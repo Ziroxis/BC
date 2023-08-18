@@ -1,23 +1,25 @@
-package com.yuanno.block_clover.quests.drank;
+package com.yuanno.block_clover.quests.crank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.KillEntityObjective;
+import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 
-public class KillEndermanQuest extends Quest {
+public class KillZombieQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("They teleport too much", KillEndermanQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("Like the movies", KillZombieQuest::new)
             .build();
-    private Objective killEntityObjective = new KillEntityObjective("Kill 5 enderman", 5, EntityType.ENDERMAN);
+    private Objective killEntityObjective = new KillEntityObjective("Kill 20 zombies", 20, EntityType.ZOMBIE);
 
-    public KillEndermanQuest(QuestId questId)
+    public KillZombieQuest(QuestId questId)
     {
         super(questId);
         this.addObjectives(killEntityObjective);
-        this.setDescription("Kill a few enderman");
+        this.setDescription("Kill a few zombies");
+        this.setRank(ModValues.RANK_QUEST_C);
 
         this.onCompleteEvent = this::giveReward;
     }

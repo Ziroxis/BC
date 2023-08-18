@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface IEntityStats {
 
+    // YULE
+    void setYule(int value);
+    void addYule(int value);
+    int getYule();
+
     // DEVIL LIST
     List<String> getControlledDevilList();
     void setControlledDevilList(List<String> controlledDevilList);

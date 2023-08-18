@@ -27,7 +27,7 @@ public abstract class Quest
 	protected ICompleting onCompleteEvent = (player) -> { return true; };
 	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
 	private String description;
-
+	private String rank;
 	public Quest(QuestId core)
 	{
 		this.core = core;
@@ -41,6 +41,8 @@ public abstract class Quest
 	{
 		return this.core;
 	}
+	public String getRank() {return this.rank;}
+	public void setRank(String rank) {this.rank = rank;}
 	public String getDescription()
 	{
 		return this.description;

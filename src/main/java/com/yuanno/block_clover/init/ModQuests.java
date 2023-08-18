@@ -1,19 +1,14 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.BeRegistry;
-import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.Quest.Objective;
-import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
-import com.yuanno.block_clover.quests.crank.ObtainIronQuest;
+import com.yuanno.block_clover.quests.crank.*;
 import com.yuanno.block_clover.quests.drank.*;
 import com.yuanno.block_clover.quests.magician.GrimoireQuest;
 import com.yuanno.block_clover.quests.magician.ManaReinforcementQuest;
 import com.yuanno.block_clover.quests.magician.ManaSkinQuest;
 import com.yuanno.block_clover.quests.magician.ManaZoneQuest;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -600,7 +600,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             player.sendMessage(new TranslationTextComponent("Can't use here"), Util.NIL_UUID);
             return false;
         }
-        //TODO should recheck the ability api
+
         if (this.getCore().getDependencies() != null && this.getCore().getDependencies().length > 0)
         {
             List<AbilityCore> list = Arrays.asList(this.getCore().getDependencies());

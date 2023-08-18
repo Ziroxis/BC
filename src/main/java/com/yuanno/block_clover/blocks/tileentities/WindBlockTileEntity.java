@@ -27,7 +27,7 @@ public class WindBlockTileEntity extends TileEntity implements ITickableTileEnti
     private Optional<UUID> ownerUUID = Optional.empty();
     public WindBlockTileEntity()
     {
-        super(ModTileEntities.LIGHTNING_TILEENTITY.get());
+        super(ModTileEntities.WIND_TILEENTITY.get());
     }
         //test
     @Override

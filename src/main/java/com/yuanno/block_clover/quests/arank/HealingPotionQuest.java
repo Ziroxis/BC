@@ -1,40 +1,40 @@
-package com.yuanno.block_clover.quests.drank;
+package com.yuanno.block_clover.quests.arank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
-import com.yuanno.block_clover.api.Quest.objectives.ObtainItemObjective;
+import com.yuanno.block_clover.api.Quest.objectives.BrewPotionObjective;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.Effects;
 
-public class ObtainCoalQuest extends Quest {
+public class HealingPotionQuest extends Quest {
 
-    public static final QuestId INSTANCE = new QuestId.Builder("Furnace is empty", ObtainCoalQuest::new)
+    public static final QuestId INSTANCE = new QuestId.Builder("We need a medic", HealingPotionQuest::new)
             .build();
-    private Objective objective01 = new ObtainItemObjective("Obtain 32 coal", 32, Items.COAL.delegate);
+    public Objective objective = new BrewPotionObjective("Brew and deliver 6 healing potions", 6, new Item[] {Items.SPLASH_POTION}, new Effect[] {Effects.HEAL});
 
-    public ObtainCoalQuest(QuestId id)
+    public HealingPotionQuest(QuestId id)
     {
         super(id);
-        this.addObjectives(this.objective01);
-        this.setDescription("Obtain a bit of coal");
-        this.setRank(ModValues.RANK_QUEST_D);
-
-        this.onCompleteEvent = this::giveReward;
+        this.addObjective(objective);
+        this.setDescription("Brew healing potions");
+        this.setRank(ModValues.RANK_QUEST_A);
     }
 
     public boolean giveReward(PlayerEntity player)
     {
-        if (!this.removeQuestItem(player, Items.COAL, 32))
+        if (!this.removeQuestItem(player, Items.POTION, 6))
             return false;
         IEntityStats entityStats = EntityStatsCapability.get(player);
-        entityStats.addYule(100);
+        entityStats.addYule(700);
 
         PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
         return true;

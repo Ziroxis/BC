@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.quests.crank;
+package com.yuanno.block_clover.quests.brank;
 
 import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
@@ -23,7 +23,7 @@ public class KillEndermanQuest extends Quest {
         super(questId);
         this.addObjectives(killEntityObjective);
         this.setDescription("Kill a few enderman");
-        this.setRank(ModValues.RANK_QUEST_C);
+        this.setRank(ModValues.RANK_QUEST_B);
 
         this.onCompleteEvent = this::giveReward;
     }

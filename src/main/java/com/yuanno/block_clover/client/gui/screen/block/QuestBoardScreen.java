@@ -83,17 +83,24 @@ public class QuestBoardScreen extends Screen {
 
         // In the init() method
         goBackButton = new Button(posX + 40, posY + 200, 20, 20, new TranslationTextComponent("<"), b -> {
-            currentPage -= 1;
+            if (this.currentPage == 1)
+                currentPage -= 1;
             startIndex = currentPage * buttonsPerPage; // Update startIndex
             init();
         });
+        if (this.currentPage == 1) {
+            addButton(goBackButton);
 
+        }
 
         advanceButton = new Button(posX + 222, posY + 200, 20, 20, new TranslationTextComponent(">"), b -> {
-            currentPage += 1;
+            if (this.currentPage == 0)
+                currentPage += 1;
             startIndex = currentPage * buttonsPerPage; // Update startIndex
             init();
         });
+        if (this.currentPage == 0)
+            addButton(advanceButton);
 
         Button buttonChoice1 = new Button(posX + 162, posY + 60, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
         {
@@ -171,15 +178,6 @@ public class QuestBoardScreen extends Screen {
         minecraft.getTextureManager().bind(background);
         GuiUtils.drawTexturedModalRect(posX, posY + 30, 0, 0, 256, 256, 0);
 
-        if (this.currentPage > 2 && this.buttons.contains(advanceButton))
-            this.buttons.remove(this.advanceButton);
-        if (this.currentPage == 0 && this.buttons.contains(this.goBackButton))
-            this.buttons.remove(this.goBackButton);
-        if (this.currentPage < 3 && !this.buttons.contains(this.advanceButton))
-            addButton(this.advanceButton);
-        if (this.currentPage > 0 && !this.buttons.contains(this.goBackButton))
-            addButton(this.goBackButton);
-
 
         int questsPerPage = 4; // Number of quests displayed on each page
         int startIndex = currentPage * questsPerPage; // Calculate the starting index of quests on the current page
@@ -187,10 +185,10 @@ public class QuestBoardScreen extends Screen {
         for (int i = 0; i < questsPerPage && (startIndex + i) < availableQuest.size(); i++) {
             Quest quest = availableQuest.get(startIndex + i).createQuest();
 
-            drawString(matrixStack, font, TextFormatting.GRAY + "Quest: " + quest.getCore().getName(), posX + 10, posY + 55 + i * 40, Color.GRAY.getRGB());
-            drawString(matrixStack, font, TextFormatting.GRAY + "Description: ", posX + 10, posY + 63 + i * 40, Color.GRAY.getRGB());
-            drawString(matrixStack, font, TextFormatting.GRAY + "" + quest.getDescription(), posX + 10, posY + 72 + i * 40, Color.GRAY.getRGB());
-            drawString(matrixStack, font, TextFormatting.GRAY + "Rank: " + quest.getRank(), posX + 10, posY + 81 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "Quest: " + quest.getCore().getName(), posX + 10, posY + 35 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "Description: ", posX + 10, posY + 43 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "" + quest.getDescription(), posX + 10, posY + 52 + i * 40, Color.GRAY.getRGB());
+            drawString(matrixStack, font, TextFormatting.GRAY + "Rank: " + quest.getRank(), posX + 10, posY + 61 + i * 40, Color.GRAY.getRGB());
 
         }
 
@@ -210,7 +208,7 @@ public class QuestBoardScreen extends Screen {
 
         for (int i = 0; i < questsPerPage && (startIndex + i) < availableQuest.size(); i++) {
             Quest quest = availableQuest.get(startIndex + i).createQuest();
-            this.addButton(new Button(posX + 162, posY + 60 + i * 40, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+            this.addButton(new Button(posX + 162, posY + 40 + i * 40, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
             {
                 questData.addInProgressQuest(quest);
                 PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));

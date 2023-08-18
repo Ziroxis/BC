@@ -3,6 +3,8 @@ package com.yuanno.block_clover.api;
 
 import com.yuanno.block_clover.BlockProtectionRule;
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.Quest.Quest;
+import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.init.ModRegistry;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -52,7 +54,12 @@ import static com.yuanno.block_clover.api.ability.AbilityHelper.placeBlockIfAllo
 
 public class Beapi
 {
+    public static List<QuestId> randomQuestsFromList(List<QuestId> questList, int numberQuests)
+    {
+        Collections.shuffle(questList);
 
+        return questList.subList(0, numberQuests);
+    }
     public static void drawIcon(ResourceLocation rs, int x, int y, int z, int u, int v, float red, float green, float blue)
     {
         RenderSystem.enableAlphaTest();

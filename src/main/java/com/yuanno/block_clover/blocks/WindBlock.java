@@ -21,6 +21,8 @@ public class WindBlock extends Block {
         return true;
     }
 
+
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side)

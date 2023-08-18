@@ -2,6 +2,7 @@ package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.BeRegistry;
 import com.yuanno.block_clover.api.Quest.QuestId;
+import com.yuanno.block_clover.quests.brank.ObtainGoldQuest;
 import com.yuanno.block_clover.quests.crank.*;
 import com.yuanno.block_clover.quests.drank.*;
 import com.yuanno.block_clover.quests.magician.GrimoireQuest;
@@ -18,6 +19,9 @@ import java.util.List;
 public class ModQuests {
 
     private static HashMap<String, String> langMap = new HashMap<String, String>();
+
+    public static final QuestId OBTAIN_GOLD = BeRegistry.registerQuest(ObtainGoldQuest.INSTANCE);
+    public static final List<QuestId> B_QUESTS = Arrays.asList(OBTAIN_GOLD);
 
     public static final QuestId OBTAIN_IRON = BeRegistry.registerQuest(ObtainIronQuest.INSTANCE);
     public static final List<QuestId> C_QUESTS = Arrays.asList(OBTAIN_IRON);

@@ -1,11 +1,11 @@
 {
-  "name": "block_clover:guild_tower/start_pool1",
+  "name": "block_clover:guild_tower/start_pool2",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "block_clover:guild_tower1",
+        "location": "block_clover:guild_tower2",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

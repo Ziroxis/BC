@@ -20,10 +20,9 @@ public class ConfiguredStructures
     public static StructureFeature<?, ?> CONFIGURED_MINI_VOLCANO = ModStructures.MINI_VOLCANO.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_UNDERWATER_DUNGEON = ModStructures.UNDERWATER_DUNGEON.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_FIRE_DUNGEON = ModStructures.FIRE_DUNGEON.get().configured(IFeatureConfig.NONE);
-    public static StructureFeature<?, ?> CONFIGURED_GUILD_TOWER = ModStructures.GUILD_TOWER.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_RUINS = ModStructures.RUINS.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_DEVIL_CHURCH = ModStructures.DEVIL_CHURCH.get().configured(IFeatureConfig.NONE);
-
+    public static StructureFeature<?, ?> CONFIGURED_GUILD_TOWER = ModStructures.GUILD_TOWER.get().configured(IFeatureConfig.NONE);
 
 
 
@@ -42,9 +41,9 @@ public class ConfiguredStructures
         Registry.register(registry, new ResourceLocation(Main.MODID, "mini_volcano"), CONFIGURED_MINI_VOLCANO);
         Registry.register(registry, new ResourceLocation(Main.MODID, "underwater_dungeon"), CONFIGURED_UNDERWATER_DUNGEON);
         Registry.register(registry, new ResourceLocation(Main.MODID, "fire_dungeon"), CONFIGURED_FIRE_DUNGEON);
-        Registry.register(registry, new ResourceLocation(Main.MODID, "guild_tower"), CONFIGURED_GUILD_TOWER);
         Registry.register(registry, new ResourceLocation(Main.MODID, "ruins"), CONFIGURED_RUINS);
         Registry.register(registry, new ResourceLocation(Main.MODID, "devil_church"), CONFIGURED_DEVIL_CHURCH);
+        Registry.register(registry, new ResourceLocation(Main.MODID, "guild_tower"), CONFIGURED_GUILD_TOWER);
 
 
         /* Ok so, this part may be hard to grasp but basically, just add your structure to this to
@@ -67,9 +66,9 @@ public class ConfiguredStructures
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.MINI_VOLCANO.get(), CONFIGURED_MINI_VOLCANO);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.UNDERWATER_DUNGEON.get(), CONFIGURED_UNDERWATER_DUNGEON);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.FIRE_DUNGEON.get(), CONFIGURED_FIRE_DUNGEON);
-        FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.GUILD_TOWER.get(), CONFIGURED_GUILD_TOWER);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.RUINS.get(), CONFIGURED_RUINS);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.DEVIL_CHURCH.get(), CONFIGURED_DEVIL_CHURCH);
+        FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.GUILD_TOWER.get(), CONFIGURED_GUILD_TOWER);
 
     }
 }

@@ -49,17 +49,21 @@ public class DevilAltarBlock extends ContainerBlock {
         return BlockRenderType.MODEL;
     }
 
+    /*
     @Nullable
     @Override
     public TileEntity newBlockEntity(IBlockReader reader) {
         return new DevilAltarTileEntity();
     }
-
+     */
+    /*
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
     return ModTileEntities.DEVIL_ALTAR_TILEENTITY.get().create();
     }
+
+     */
 
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         if (!world.isClientSide()) {
@@ -151,4 +155,10 @@ public class DevilAltarBlock extends ContainerBlock {
             }
 
         }
+
+    @Nullable
+    @Override
+    public TileEntity newBlockEntity(IBlockReader p_196283_1_) {
+        return null;
     }
+}

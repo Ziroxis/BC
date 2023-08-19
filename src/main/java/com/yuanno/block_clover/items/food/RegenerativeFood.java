@@ -10,6 +10,10 @@ import net.minecraft.potion.Effects;
 import java.util.function.Supplier;
 
 public class RegenerativeFood extends Item {
+    public RegenerativeFood(Properties p_i48487_1_) {
+        super(p_i48487_1_);
+    }
+    /*
     public RegenerativeFood(float saturationmod, int nutrition, int durationinsec) {
         super(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD).food(new Food.Builder().saturationMod(saturationmod)
                 .nutrition(nutrition).effect(() -> {
@@ -17,4 +21,6 @@ public class RegenerativeFood extends Item {
                         return new EffectInstance(ModEffects.MANA_REGENERATION.get(), durationinsec*20, 0);
                 }, 1).effect(new EffectInstance(Effects.REGENERATION,40,0),1).build()));
     }
+
+     */
 }

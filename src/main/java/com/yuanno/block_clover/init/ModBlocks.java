@@ -33,7 +33,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> JUICER = BLOCKS.register("juicer_block", JuicerBlock::new);
     public static final RegistryObject<Block> BAKING_OVEN = BLOCKS.register("baking_oven_block", BakingOvenBlock::new);
-    public static final RegistryObject<Block> DEVIL_ALTAR = BLOCKS.register("devil_altar_block", DevilAltarBlock::new);
+    //public static final RegistryObject<Block> DEVIL_ALTAR = BLOCKS.register("devil_altar_block", DevilAltarBlock::new);
 
     //Moguro Tree
     public static final RegistryObject<Block> MOGURO_LOG = BLOCKS.register("moguro_log",
@@ -103,7 +103,7 @@ public class ModBlocks {
                     .harvestTool(ToolType.AXE)
                     .harvestLevel(2)
                     .sound(SoundType.WOOD)));
-
+/*
     public static final RegistryObject<Block> MOGURO_DOOR = BLOCKS.register("moguro_door",() -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_BLUE)
             .strength(1f, 3f)
             .harvestTool(ToolType.AXE)
@@ -122,12 +122,14 @@ public class ModBlocks {
                     .harvestLevel(2)
                     .sound(SoundType.WOOD), ModWoodTypes.MOGURO));
 
+
+
     public static final RegistryObject<Block> MOGURO_WALL_SIGN = BLOCKS.register("moguro_wall_sign",
             () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD).strength(1f, 3f)
                     .harvestTool(ToolType.AXE)
                     .harvestLevel(2)
                     .sound(SoundType.WOOD), ModWoodTypes.MOGURO));
-
+*/
     //Elder Tree
     public static final RegistryObject<Block> ELDER_LOG = BLOCKS.register("elder_log",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
@@ -195,11 +197,14 @@ public class ModBlocks {
                     .harvestLevel(3)
                     .sound(SoundType.WOOD)));
 
+    /*
     public static final RegistryObject<Block> ELDER_DOOR = BLOCKS.register("elder_door", () -> new DoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
             .strength(2f, 4f)
             .harvestTool(ToolType.AXE)
             .harvestLevel(3)
             .sound(SoundType.WOOD)));
+
+
 
     public static final RegistryObject<Block> ELDER_TRAPDOOR = BLOCKS.register("elder_trapdoor", () -> new TrapDoorBlock(AbstractBlock.Properties.of(Material.WOOD, MaterialColor.COLOR_LIGHT_GRAY)
             .strength(2f, 4f)
@@ -218,7 +223,7 @@ public class ModBlocks {
                     .harvestTool(ToolType.AXE)
                     .harvestLevel(3)
                     .sound(SoundType.WOOD), ModWoodTypes.ELDER));
-
+*/
     public static final RegistryObject<Block> ELDER_SAPLING = BLOCKS.register("elder_sapling",
             () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.ROOTS)));
 

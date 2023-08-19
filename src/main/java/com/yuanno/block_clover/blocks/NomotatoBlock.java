@@ -27,12 +27,12 @@ public class NomotatoBlock extends CropsBlock {
         super(AbstractBlock.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
     }
 
-
+/*
     @Override
     protected IItemProvider getBaseSeedId() {
         return ModItems.NOMOTATO.get();
     }
-
+ */
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
         return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];

@@ -34,9 +34,12 @@ public class DevilAltarTileEntity extends TileEntity implements ITickableTileEnt
         super(tiletype);
     }
 
+    /*
     public DevilAltarTileEntity() {
         this(ModTileEntities.DEVIL_ALTAR_TILEENTITY.get());
     }
+
+     */
 
     public CompoundNBT save(CompoundNBT p_189515_1_) {
         super.save(p_189515_1_);

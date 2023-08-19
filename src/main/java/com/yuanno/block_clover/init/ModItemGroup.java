@@ -38,10 +38,13 @@ public class ModItemGroup {
         }
     };
 
+
     public static final ItemGroup BLOCK_CLOVER_FOOD = new ItemGroup("block_cloverModTabFood") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.NOMOTATO.get());
+            return new ItemStack(ModItems.MOGURO_JUICE.get());
         }
     };
+
+
 }

@@ -27,8 +27,11 @@ public class ModItems {
 
     //BLOCKS
     public static final RegistryObject<BlockItem> JUICER_BLOCK = ITEMS.register("juicer_block", JuicerBlockItem::new);
+    /*
     public static final RegistryObject<BlockItem> DEVIL_ALTAR_BLOCK = ITEMS.register("devil_altar_block", () -> new BlockItem(ModBlocks.DEVIL_ALTAR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.UNCOMMON)));
+
+     */
     public static final RegistryObject<BlockItem> DEVIL_SUMMONER = ITEMS.register("devil_summoner", () -> new BlockItem(ModBlocks.DEVIL_SUMMONER.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<BlockItem> QUEST_BOARD = ITEMS.register("quest_board", () -> new BlockItem(ModBlocks.QUEST_BOARD.get(),
@@ -56,12 +59,15 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_BUTTON = ITEMS.register("moguro_button", () -> new BlockItem(ModBlocks.MOGURO_BUTTON.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    /*
     public static final RegistryObject<BlockItem> MOGURO_DOOR = ITEMS.register("moguro_door", () -> new BlockItem(ModBlocks.MOGURO_DOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_TRAPDOOR = ITEMS.register("moguro_trapdoor", () -> new BlockItem(ModBlocks.MOGURO_TRAPDOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> MOGURO_SIGN = ITEMS.register("moguro_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(16)
             , ModBlocks.MOGURO_SIGN.get(), ModBlocks.MOGURO_WALL_SIGN.get()));
+
+     */
     //ELDER
     public static final RegistryObject<BlockItem> ELDER_PLANK = ITEMS.register("elder_planks", () -> new BlockItem(ModBlocks.ELDER_PLANK.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
@@ -83,6 +89,7 @@ public class ModItems {
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_BUTTON = ITEMS.register("elder_button", () -> new BlockItem(ModBlocks.ELDER_BUTTON.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
+    /*
     public static final RegistryObject<BlockItem> ELDER_DOOR = ITEMS.register("elder_door", () -> new BlockItem(ModBlocks.ELDER_DOOR.get(),
             new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS)));
     public static final RegistryObject<BlockItem> ELDER_TRAPDOOR = ITEMS.register("elder_trapdoor", () -> new BlockItem(ModBlocks.ELDER_TRAPDOOR.get(),
@@ -90,7 +97,7 @@ public class ModItems {
     public static final RegistryObject<BlockItem> ELDER_SIGN = ITEMS.register("elder_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(16)
             , ModBlocks.ELDER_SIGN.get(), ModBlocks.ELDER_WALL_SIGN.get()));
 
-    
+     */
     //ARTIFACTS
     public static final RegistryObject<Item> NIGHT_CROWN = ITEMS.register("night_crown", NightCrownItem::new);
     public static final RegistryObject<Item> LIGHT_WEIGHT_RING = ITEMS.register("light_weight_ring", LightWeightRingArtifactItem::new);
@@ -108,14 +115,14 @@ public class ModItems {
     public static final RegistryObject<Item> NECKLACE_AGITATION = ITEMS.register("necklace_agitation", NecklaceOfAgitationArtifactItem::new);
     public static final RegistryObject<Item> CLOAK_INVISIBILITY = ITEMS.register("cloak_invisibility", CloakOfInvisibilityArtifactItem::new);
     public static final RegistryObject<Item> BELT_AIR = ITEMS.register("air_belt", BeltOfAirArtifactItem::new);
-    public static final RegistryObject<Item> CROWN_LIGHT = ITEMS.register("crown_light", CrownOfLightItem::new);
-    public static final RegistryObject<Item> ABYSSAL_SCYTHE = ITEMS.register("abyssal_scythe", AbyssalScytheItem::new);
+    //public static final RegistryObject<Item> CROWN_LIGHT = ITEMS.register("crown_light", CrownOfLightItem::new);
+    //public static final RegistryObject<Item> ABYSSAL_SCYTHE = ITEMS.register("abyssal_scythe", AbyssalScytheItem::new);
     public static final RegistryObject<Item> BRACELET_PUSH = ITEMS.register("bracelet_push", BraceletOfPushArtifactItem::new);
     public static final RegistryObject<Item> RARE_CANDY = ITEMS.register("rare_candy", RareCandyArtifactItem::new);
     public static final RegistryObject<Item> MANA_ARTIFACT = ITEMS.register("maximizing_mana", ManaArtifactItem::new);
     public static final RegistryObject<Item> MANA_REGENERATION = ITEMS.register("mana_regeneration", ManaRegenerationArtifactItem::new);
     public static final RegistryObject<Item> RACE_CHANGE = ITEMS.register("race_change", RaceChangeArtifactItem::new);
-    public static final RegistryObject<Item> MANA_LINK = ITEMS.register("mana_link", ManaLinkArtifact::new);
+    //public static final RegistryObject<Item> MANA_LINK = ITEMS.register("mana_link", ManaLinkArtifact::new);
 
 
 
@@ -177,11 +184,11 @@ public class ModItems {
 
     //food
     public static final RegistryObject<Item> MOGURO_JUICE = ITEMS.register("moguro_juice", MoguroJuiceItem::new);
-    public static final RegistryObject<Item> NOMOTATO = ITEMS.register("nomotato", () -> new BlockNamedItem(ModBlocks.NOMOTATO_BLOCK.get(), new Item.Properties()
-            .tab(ModItemGroup.BLOCK_CLOVER_MISC).food(new Food.Builder().nutrition(2).saturationMod(0.2f).build())));
-    public static final RegistryObject<Item> BAKED_NOMOTATO = ITEMS.register("baked_nomotato",() -> new RegenerativeFood(0.6f,5,10));
-    public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD)));
-    public static final RegistryObject<Item> NOMOTATO_PUREY = ITEMS.register("nomotato_purey", () -> new RegenerativeFood(0.8f, 6, 12));
+    //public static final RegistryObject<Item> NOMOTATO = ITEMS.register("nomotato", () -> new BlockNamedItem(ModBlocks.NOMOTATO_BLOCK.get(), new Item.Properties()
+    //        .tab(ModItemGroup.BLOCK_CLOVER_MISC).food(new Food.Builder().nutrition(2).saturationMod(0.2f).build())));
+    //public static final RegistryObject<Item> BAKED_NOMOTATO = ITEMS.register("baked_nomotato",() -> new RegenerativeFood(0.6f,5,10));
+    //public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_FOOD)));
+    //public static final RegistryObject<Item> NOMOTATO_PUREY = ITEMS.register("nomotato_purey", () -> new RegenerativeFood(0.8f, 6, 12));
 
     //SPAWN EGGS
     public static final RegistryObject<SpawnEggItem> VOLCANO_MONSTER_EGG = ITEMS.register("volcano_monster_egg",

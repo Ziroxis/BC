@@ -9,6 +9,7 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 
@@ -24,6 +25,7 @@ public class WheatHarvestingQuest extends Quest {
         this.addObjective(this.obtainItemObjective);
         this.setDescription("Obtain wheat");
         this.setRank(ModValues.RANK_QUEST_C);
+        this.onCompleteEvent = this::giveReward;
 
 
     }
@@ -34,7 +36,7 @@ public class WheatHarvestingQuest extends Quest {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         entityStats.addYule(200);
 
-        PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
         return true;
     }
 }

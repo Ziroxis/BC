@@ -4,6 +4,8 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.blocks.tileentities.QuestBoardTileEntity;
+import com.yuanno.block_clover.data.quest.IQuestData;
+import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModTileEntities;
 import com.yuanno.block_clover.init.ModValues;
@@ -21,6 +23,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestBoardBlock extends Block {
@@ -50,11 +53,24 @@ public class QuestBoardBlock extends Block {
         // open the quest qui right here
 
         if (!player.level.isClientSide) {
-            TileEntity tileEntity = world.getBlockEntity(blockPos);
-            if (!(tileEntity instanceof QuestBoardTileEntity))
-                return ActionResultType.FAIL;
-            TileEntity questBoardTileEntity = (QuestBoardTileEntity) tileEntity;
-            questBoardTileEntity
+
+            IQuestData questData = QuestDataCapability.get(player);
+            List<QuestId> inProgressQuests = new ArrayList<>();
+            for (Quest quest : questData.getInProgressQuests())
+            {
+                if (quest != null)
+                    inProgressQuests.add(quest.getCore());
+            }
+            long correspondCount = availableQuest.stream()
+                    .filter(element -> inProgressQuests.contains(element) && questData.getFinishedQuests().contains(element))
+                    .count();
+            if (correspondCount > 5)
+            {
+                List<QuestId> toTakeQuests = ModQuests.mergedListQuestBoard;
+                toTakeQuests.removeAll(inProgressQuests);
+                toTakeQuests.removeAll(questData.getFinishedQuests());
+                this.availableQuest = Beapi.randomQuestsFromList(toTakeQuests, 8);
+            }
             PacketHandler.sendTo(new SOpenQuestBoardPacket(availableQuest), player);
         }
         return ActionResultType.SUCCESS;

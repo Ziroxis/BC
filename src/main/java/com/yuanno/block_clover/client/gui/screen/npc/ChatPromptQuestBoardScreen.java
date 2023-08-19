@@ -110,7 +110,7 @@ public class ChatPromptQuestBoardScreen extends Screen {
         }
         if (!hasCommons)
         {
-            text = "I am the quest board managers for the guilds. Pick a quest from the quest board, complete it and then come to me for the reward!";
+            text = "I am the quest board manager. Pick a quest from the quest board, complete it and then come to me for the reward! You need the items for the reward!";
         }
         this.message = new SequencedString(text, 245, this.font.width(text) / 2, 2000);
         return;

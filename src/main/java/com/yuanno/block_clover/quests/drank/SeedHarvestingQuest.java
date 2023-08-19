@@ -9,6 +9,7 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraftforge.common.Tags;
@@ -26,6 +27,7 @@ public class SeedHarvestingQuest extends Quest {
         this.setDescription("Obtain seeds");
         this.setRank(ModValues.RANK_QUEST_D);
 
+        this.onCompleteEvent = this::giveReward;
 
     }
     public boolean giveReward(PlayerEntity player)
@@ -35,7 +37,7 @@ public class SeedHarvestingQuest extends Quest {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         entityStats.addYule(100);
 
-        PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
         return true;
     }
 }

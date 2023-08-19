@@ -70,7 +70,7 @@ public class ClientHandler {
             layers.add(new WagnerDevilFamiliarRenderer<>(renderer));
             layers.add(new LilithDevilFamiliarRenderer<>(renderer));
             layers.add(new NahamanDevilFamiliarRenderer<>(renderer));
-
+            layers.add(new ManaLayerRenderer<>(renderer));
         }
     }
 }

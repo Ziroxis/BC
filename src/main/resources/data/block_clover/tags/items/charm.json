@@ -2,6 +2,7 @@
   "replace": "false",
   "values": [
     "block_clover:rabbit_foot",
-    "block_clover:protecting_charm"
+    "block_clover:protecting_charm",
+    "block_clover:maximizing_mana"
   ]
 }

@@ -24,6 +24,7 @@ import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.mercury.*;
 import com.yuanno.block_clover.spells.misc.ManaReinforcementAbility;
+import com.yuanno.block_clover.spells.misc.ManaSenseAbility;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
 import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
@@ -42,7 +43,7 @@ public class ModAbilities {
 
 
 
-    public static final AbilityCore[] MISC = new AbilityCore[] {ManaSkinAbility.INSTANCE, ManaReinforcementAbility.INSTANCE};
+    public static final AbilityCore[] MISC = new AbilityCore[] {ManaSkinAbility.INSTANCE, ManaReinforcementAbility.INSTANCE, ManaSenseAbility.INSTANCE};
     public static final AbilityCore[] WATER = new AbilityCore[] {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterManaZoneAbility.INSTANCE};
     public static final AbilityCore[] SEALING = new AbilityCore[] {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE, SealingManaZoneAbility.INSTANCE};
     public static final AbilityCore[] ANTIMAGIC = new AbilityCore[] {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE, AntiMagicManaZoneAbility.INSTANCE, DemonDwellerAbility.INSTANCE};

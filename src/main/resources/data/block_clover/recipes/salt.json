@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "minecraft:water_bucket"
-  },
-  "result": "block_clover:salt",
-  "experience": 0.2,
-  "cookingtime": 500
-}

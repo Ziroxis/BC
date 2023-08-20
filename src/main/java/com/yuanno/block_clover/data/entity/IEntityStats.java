@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface IEntityStats {
 
+    // RESET
+    void fullReset();
+
     // YULE
     void setYule(int value);
     void addYule(int value);

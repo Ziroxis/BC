@@ -16,6 +16,13 @@ public class QuestDataBase implements IQuestData
 	private List<QuestId> finishedQuests = new ArrayList<QuestId>();
 
 	@Override
+	public void fullReset() {
+		Arrays.fill(inProgressQuests, null);
+		finishedQuests.clear();
+	}
+
+
+	@Override
 	public boolean addInProgressQuest(Quest quest)
 	{
 		for(int i = 0; i < this.inProgressQuests.length; i++)

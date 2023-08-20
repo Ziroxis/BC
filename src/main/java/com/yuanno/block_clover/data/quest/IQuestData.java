@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IQuestData
 {
+	void fullReset();
 	boolean addInProgressQuest(Quest quest);
 	boolean setInProgressQuest(int slot, Quest quest);
 	boolean removeInProgressQuest(QuestId quest);

@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 
 public interface IAbilityData
 {
+	void fullReset();
 	boolean isEvolved();
 
 	void evolve(boolean evolve);

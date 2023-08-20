@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class LilithDevilEntity extends BCentity {
+public class LilithDevilEntity extends DevilEntity {
 
     public LilithDevilEntity(EntityType type, World world)
     {

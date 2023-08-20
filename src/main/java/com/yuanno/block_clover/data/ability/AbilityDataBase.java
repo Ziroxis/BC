@@ -31,6 +31,16 @@ public class AbilityDataBase implements IAbilityData
 	 */
 
 	@Override
+	public void fullReset() {
+		unlockedAbilities.clear();
+		Arrays.fill(equippedAbilities, null);
+		previouslyUsedAbility = null;
+		currentCombatBarSet = 0;
+		isEvolved = false;
+		experience = 0;
+	}
+
+	@Override
 	public boolean isEvolved() {
 		return this.isEvolved;
 	}

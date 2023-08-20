@@ -20,7 +20,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class DevilSummonerBlock extends Block {
-    int amountOfSummons = 4;
     public DevilSummonerBlock()
     {
         super(Properties.of(Material.BARRIER).strength(Float.MAX_VALUE).noCollission().noDrops());

@@ -12,6 +12,7 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
+import com.yuanno.block_clover.entities.devils.DevilEntity;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
@@ -33,10 +34,12 @@ import com.yuanno.block_clover.spells.sword.AirDashAbility;
 import com.yuanno.block_clover.spells.time.TimeStealAbility;
 import com.yuanno.block_clover.spells.water.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -57,16 +60,26 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
-        if (!props.hasAttribute())
-        {
-            questData.addInProgressQuest(ModQuests.GRIMOIRE.createQuest());
-            props.setMultiplier(1);
-            props.setLevel(1);
-            props.setExperience(0);
-            props.setMaxExperience(100);
-            props.setYule(0);
-            PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
-        }
+        statsHandling(player);
+    }
+
+    public static void statsHandling(PlayerEntity player)
+    {
+        IEntityStats props = EntityStatsCapability.get(player);
+        IAbilityData abilityProps = AbilityDataCapability.get(player);
+        IQuestData questData = QuestDataCapability.get(player);
+        ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
+
+        if (props.hasAttribute())
+            return;
+        questData.addInProgressQuest(ModQuests.GRIMOIRE.createQuest());
+        props.setMultiplier(1);
+        props.setLevel(1);
+        props.setExperience(0);
+        props.setMaxExperience(100);
+        props.setYule(0);
+        PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
+
 
         UUID uuid = player.getUUID();
         switch (uuid.toString()) {
@@ -107,15 +120,41 @@ public class StatsEvent {
         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
+
     }
 
     @SubscribeEvent
+    public static void onPlayerDeath(LivingDeathEvent event)
+    {
+
+        // the killed one is player; the killer is devil; check side
+        if (!(event.getSource().getEntity() instanceof DevilEntity) || !(event.getEntityLiving() instanceof PlayerEntity) || event.getSource().getEntity().level.isClientSide)
+            return;
+        PlayerEntity playerTarget = (PlayerEntity) event.getEntityLiving();
+        DevilEntity devilEntity = (DevilEntity) event.getSource().getEntity();
+        IEntityStats entityStats = EntityStatsCapability.get(playerTarget);
+        entityStats.fullReset();
+        IAbilityData abilityData = AbilityDataCapability.get(playerTarget);
+        abilityData.fullReset();
+        IQuestData questData = QuestDataCapability.get(playerTarget);
+        questData.fullReset();
+        PacketHandler.sendTo(new SSyncQuestDataPacket(playerTarget.getId(), questData), playerTarget);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(playerTarget.getId(), entityStats), playerTarget);
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(playerTarget.getId(), abilityData), playerTarget);
+
+    }
+    @SubscribeEvent
     public static void onRelogging(PlayerEvent.PlayerRespawnEvent event) {
         PlayerEntity player = event.getPlayer();
+        statsHandling(player);
         IEntityStats statsProps = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
+        IQuestData questData = QuestDataCapability.get(player);
+
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
+
     }
 
     @SubscribeEvent

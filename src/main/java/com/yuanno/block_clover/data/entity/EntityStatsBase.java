@@ -44,6 +44,38 @@ public class EntityStatsBase implements IEntityStats{
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
 
     @Override
+    public void fullReset() {
+        yule = 0;
+        race = "";
+        attribute = "";
+        secondAttribute = "";
+        level = 0;
+        maxLevel = 0;
+        experience = 0;
+        maxExperience = 0;
+        mana = 0.0f;
+        maxMana = 0.0f;
+        manaRegeneration = 0.0f;
+        hasGrimoire = false;
+        state = 0;
+        title = "";
+        rank = "";
+        time = 0;
+        multiplier = 0.0f;
+        staffBoost = false;
+        hatBoost = false;
+        canLink = false;
+        cookingLevel = 0;
+        maxCookingLevel = 0;
+        cookingExperience = 0;
+        maxCookingExperience = 0;
+        innateDevil = false;
+        innateDevilName = "";
+        controlledDevilList.clear();
+        experienceSpells.clear();
+    }
+
+    @Override
     public void setYule(int value)
     {
         this.yule = value;

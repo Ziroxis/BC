@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class WalgnerDevilEntity extends BCentity {
+public class WalgnerDevilEntity extends DevilEntity {
 
     public static final int ENTITY_ID = 175895; // Replace 123 with the actual entity type ID you assigned during registration
 

@@ -93,6 +93,7 @@ public class QuestBoardScreen extends Screen {
 
         }
 
+        // TODO fix this issue
         advanceButton = new Button(posX + 222, posY + 200, 20, 20, new TranslationTextComponent(">"), b -> {
             if (this.currentPage == 0)
                 currentPage += 1;
@@ -101,62 +102,62 @@ public class QuestBoardScreen extends Screen {
         });
         if (this.currentPage == 0)
             addButton(advanceButton);
-
-        Button buttonChoice1 = new Button(posX + 162, posY + 60, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+        boolean flag = questData.getInProgressQuests().length == 3;
+        if (availableQuest.size() > currentPage * 4 && flag)
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4).createQuest());
-            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4)));
-            PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-            this.availableQuest.remove(availableQuest.get(currentPage * 4));
-            this.onClose();
-        });
-        addButton(buttonChoice1);
-        if (availableQuest.size() > currentPage * 4)
-            this.buttons.add(buttonChoice1);
-        else
-            this.buttons.remove(buttonChoice1);
-        Button buttonChoice2 = new Button(posX + 162, posY + 100, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
-        {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 1).createQuest());
-            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 1)));
-            PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-            this.availableQuest.remove(availableQuest.get(currentPage * 4 + 1));
-            this.onClose();
-        });
-        addButton(buttonChoice2);
+            Button buttonChoice1 = new Button(posX + 162, posY + 60, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+            {
+                questData.addInProgressQuest(availableQuest.get(currentPage * 4).createQuest());
+                //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4)));
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                this.availableQuest.remove(availableQuest.get(currentPage * 4));
+                this.onClose();
+            });
+            this.addButton(buttonChoice1);
+        }
 
-        if (availableQuest.size() > currentPage * 4 + 1)
-            this.buttons.add(buttonChoice2);
-        else
-            this.buttons.remove(buttonChoice2);
-        Button buttonChoice3 = new Button(posX + 162, posY + 140, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+        if (availableQuest.size() > currentPage * 4 + 1 && flag)
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 2).createQuest());
-            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 2)));
-            PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-            this.availableQuest.remove(availableQuest.get(currentPage * 4 + 2));
-            this.onClose();
-        });
-        addButton(buttonChoice3);
+            Button buttonChoice2 = new Button(posX + 162, posY + 100, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+            {
+                questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 1).createQuest());
+                //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 1)));
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                this.availableQuest.remove(availableQuest.get(currentPage * 4 + 1));
+                this.onClose();
+            });
+            this.addButton(buttonChoice2);
+        }
 
-        if (availableQuest.size() > currentPage * 4 + 2)
-            this.buttons.add(buttonChoice3);
-        else
-            this.buttons.remove(buttonChoice3);
-        Button buttonChoice4 = new Button(posX + 162, posY + 180, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+
+        if (availableQuest.size() > currentPage * 4 + 2 && flag)
         {
-            questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 3).createQuest());
-            //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 3)));
+            Button buttonChoice3 = new Button(posX + 162, posY + 140, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+            {
+                questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 2).createQuest());
+                //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 2)));
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                this.availableQuest.remove(availableQuest.get(currentPage * 4 + 2));
+                this.onClose();
+            });
+            this.addButton(buttonChoice3);
+        }
 
-            PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-            this.availableQuest.remove(availableQuest.get(currentPage * 4 + 3));
-            this.onClose();
-        });
-        addButton(buttonChoice4);
-        if (availableQuest.size() > currentPage * 4 + 3)
-            this.buttons.add(buttonChoice4);
-        else
-            this.buttons.remove(buttonChoice4);
+        if (availableQuest.size() > currentPage * 4 + 3 && flag)
+        {
+            Button buttonChoice4 = new Button(posX + 162, posY + 180, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
+            {
+                questData.addInProgressQuest(availableQuest.get(currentPage * 4 + 3).createQuest());
+                //PacketHandler.sendToServer(new CUpdateQuestStatePacket(availableQuest.get(currentPage * 4 + 3)));
+
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                this.availableQuest.remove(availableQuest.get(currentPage * 4 + 3));
+                this.onClose();
+            });
+            //this.buttons.add(buttonChoice4);
+        }
+
+
 
 
 
@@ -198,26 +199,6 @@ public class QuestBoardScreen extends Screen {
         super.render(matrixStack, x, y, f);
     }
 
-    public void onPageFlip()
-    {
-        int posX = (this.width - 256) / 2;
-        int posY = (this.height - 256) / 2;
-
-        int questsPerPage = 4; // Number of quests displayed on each page
-        int startIndex = currentPage * questsPerPage; // Calculate the starting index of quests on the current page
-
-        for (int i = 0; i < questsPerPage && (startIndex + i) < availableQuest.size(); i++) {
-            Quest quest = availableQuest.get(startIndex + i).createQuest();
-            this.addButton(new Button(posX + 162, posY + 40 + i * 40, 70, 20, new TranslationTextComponent("ACCEPT"), b ->
-            {
-                questData.addInProgressQuest(quest);
-                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-                this.availableQuest.remove(quest);
-                this.onClose();
-            }));
-
-        }
-    }
 
     @Override
     public boolean isPauseScreen()

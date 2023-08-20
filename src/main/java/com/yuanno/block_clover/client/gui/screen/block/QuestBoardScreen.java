@@ -75,6 +75,7 @@ public class QuestBoardScreen extends Screen {
 
 
         this.buttons.clear();
+        this.children.clear();
         guiLeft = (this.width - this.xSize) / 2;
         guiTop = (this.height - this.ySize) / 2;
         int posX = (this.width - 256) / 2;
@@ -154,7 +155,7 @@ public class QuestBoardScreen extends Screen {
                 this.availableQuest.remove(availableQuest.get(currentPage * 4 + 3));
                 this.onClose();
             });
-            //this.buttons.add(buttonChoice4);
+            this.buttons.add(buttonChoice4);
         }
 
 

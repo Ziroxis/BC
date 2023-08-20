@@ -38,6 +38,7 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
         this.setExperiencePoint(10);
         this.setExperienceGainLevelCap(40);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
+        this.onStopContinuityEvent = this::onStopContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 
@@ -53,6 +54,17 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)
+    {
+        if (this.isEvolved())
+            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(JAGUAR_ATTACK_EVOLVED);
+
+        player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(JAGUAR_SPEED);
+        player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(JAGUAR_STEP);
+        PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+        return true;
+    }
+
+    private boolean onStopContinuityEvent(PlayerEntity player)
     {
         if (this.isEvolved())
             player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(JAGUAR_ATTACK_EVOLVED);

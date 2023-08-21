@@ -12,6 +12,7 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.entities.NPCentity;
+import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
@@ -42,25 +43,25 @@ public class ChatPromptScreen extends Screen {
 
     private IQuestData questData;
     private int state = 0;
-    private NPCentity npCentity;
     private int guiLeft;
     private int guiTop;
     private final int xSize = 64;
     private final int ySize = 58;
     private PlayerEntity player;
     private SequencedString message = new SequencedString("", 0, 0);
+    String text = "";
     TexturedIconButton test;
-    int amountDone;
-
+    Quest inprogressQuestMana;
+    private IEntityStats entityStats;
     TexturedIconButton acceptButton;
     TexturedIconButton declineButton;
 
-    public ChatPromptScreen(PlayerEntity player, NPCentity npCentity)
+    public ChatPromptScreen(PlayerEntity player)
     {
         super(new StringTextComponent(""));
-        this.npCentity = npCentity;
         this.minecraft = Minecraft.getInstance();
         this.player = player;
+        this.entityStats = EntityStatsCapability.get(player);
         this.questData = QuestDataCapability.get(player);
     }
 
@@ -72,170 +73,149 @@ public class ChatPromptScreen extends Screen {
         guiTop = (this.height - this.ySize) / 2;
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
-        this.loop(posX, posY);
-        if (this.test != null)
-        {
-            this.addButton(test);
-            this.addButton(acceptButton);
-            this.addButton(declineButton);
-        }
+        this.loop();
+
     }
 
-    public void loop(int posX, int posY)
+    public void loop()
     {
-        IEntityStats entityStats = EntityStatsCapability.get(player);
-        if (entityStats.getAttribute().equals(ModValues.SWORD) && !entityStats.hasGrimoire())
-        {
-            this.message = new SequencedString("Huh??? I've never seen this before, a grimoire randomly chose you! It's yours!", 245, this.font.width(npCentity.doneSpeech) / 2, 2000);
-            entityStats.setGrimoire(true);
-            IAbilityData abilityData = AbilityDataCapability.get(player);
-            abilityData.addUnlockedAbility(player, OriginalDemonSlayerAbility.INSTANCE);
-            abilityData.addUnlockedAbility(player, OriginalMagicDwellerAbility.INSTANCE);
-            abilityData.addUnlockedAbility(player, OriginalMagicDestroyerAbility.INSTANCE);
-            abilityData.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
-            PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
-            PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
-            return;
-        }
-        else if (entityStats.getAttribute().equals(ModValues.SWORD) && entityStats.hasGrimoire())
-        {
-            this.message = new SequencedString("You must be a prodigy! Go make good use of your grimoire", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
-            return;
-        }
-        ArrayList<String> alreadyDoneQuestID = new ArrayList<String>();
-        ArrayList<String> inProgressQuestID = new ArrayList<String>();
-        int amountDone = 0;
-        for (int i = 0; i < questData.getFinishedQuests().size(); i++)
-        {
-            if (!alreadyDoneQuestID.contains(questData.getFinishedQuests().get(i).getName()))
-            {
-                alreadyDoneQuestID.add(questData.getFinishedQuests().get(i).getName());
-            }
-        }
+        // check if you got a magician quest in progress
+        boolean containsManaQuest = false;
 
-        for (int i = 0; i < questData.getInProgressQuests().length; i++) {
-            /*
-            if (!questData.getInProgressQuest(i).getCore().getName().isEmpty() && inProgressQuestID.isEmpty() || !inProgressQuestID.contains(questData.getInProgressQuest(i).getCore().getName())) {
-                inProgressQuestID.add(questData.getInProgressQuest(i).getCore().getName());
-            }
-
-             */
-            if (questData.getInProgressQuest(i) != null)
-            {
-                if (!questData.getInProgressQuest(i).getCore().getName().isEmpty()) {
-                    if (inProgressQuestID.isEmpty()) {
-                        if (!inProgressQuestID.contains(questData.getInProgressQuest(i).getCore().getName()))
-                            inProgressQuestID.add(questData.getInProgressQuest(i).getCore().getName());
-                    }
-                }
-            }
-        }
-        ArrayList<String> alreadyDoneQuestNPCID = new ArrayList<String>();
-        for (int i = 0; i < npCentity.quests.size(); i++)
+        for (Quest quest : questData.getInProgressQuests())
         {
-            if (!alreadyDoneQuestNPCID.contains(npCentity.quests.get(i).getCore().getName()))
-                alreadyDoneQuestNPCID.add(npCentity.quests.get(i).getCore().getName());
-        }
-        for (String s : alreadyDoneQuestID) {
-            if (alreadyDoneQuestNPCID.contains(s))
-                amountDone++;
-        }
-        int finalAmountDone = amountDone;
-        Quest questGiver = npCentity.quests.get(finalAmountDone);
-        /*
-        for(int i = 0; i < questData.getInProgressQuests().length; i++)
-        {
-            System.out.println(questData.getInProgressQuest(i));
-            if (questData.getInProgressQuest(i) != null && !questData.hasFinishedQuest(questData.getInProgressQuest(i)) && alreadyDoneQuestNPCID.contains(questData.getInProgressQuest(i).getCore().getName()) && questData.getInProgressQuest(i).isComplete())
-            {
-                for (int ia = 0; ia < npCentity.quests.size(); i++)
-                {
-                    if (npCentity.quests.get(ia) != null && npCentity.quests.get(ia).getTitle().equals(questData.getInProgressQuest(i).getTitle()))
-                    {
-                        Quest quest = npCentity.quests.get(ia);
-                        questData.addFinishedQuest(quest);
-                        questData.removeFinishedQuest(quest);
-                        questData.removeInProgressQuest(quest);
-                        PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest));
-                        this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
-                    }
-                }
-                return;
-            }
-        }
-        */
-
-        for (int i = 0; i < questData.getInProgressQuests().length; i++)
-        {
-            if (questData.getInProgressQuest(i) != null)
-            {
-                for (int ia = 0; ia < npCentity.quests.size(); ia++)
-                {
-                    if (npCentity.quests.get(ia) != null && questData.getInProgressQuest(i).getCore().getName().equals(npCentity.quests.get(ia).getCore().getName()))
-                    {
-                        if (npCentity.quests.get(ia) != null && !questData.hasFinishedQuest(npCentity.quests.get(ia).getCore()) && npCentity.quests.get(ia).isComplete())
-                        {
-                            questData.addFinishedQuest(npCentity.quests.get(ia).getCore());
-                            questData.removeFinishedQuest(npCentity.quests.get(ia).getCore());
-                            questData.removeInProgressQuest(npCentity.quests.get(ia));
-                            PacketHandler.sendToServer(new CUpdateQuestStatePacket(npCentity.quests.get(ia).getCore()));
-                            this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
-                            return;
-                        }
-                        else
-                        {
-                            this.message = new SequencedString(npCentity.waitingSpeech + "", 245, this.font.width(npCentity.doneSpeech) / 2, 2000); // -> first time talking to the npc
-                            return;
-                        }
-                    }
-                }
-            }
-            else
+            if (quest != null
+                    && ModQuests.MAGICIAN.contains(quest.getCore())) {
+                containsManaQuest = true;
+                inprogressQuestMana = quest;
                 break;
-        }
-
-        if (npCentity.preRequisite)
-        {
-            if (npCentity.requisite == 1 && entityStats.getLevel() < npCentity.levelrequisites.get(amountDone))
-            {
-                this.message = new SequencedString(npCentity.requisiteSpeech + "", 245, this.font.width(npCentity.requisiteSpeech) / 2, 20000);
-                return;
-            }
-            else if (npCentity.requisite == 2 && !alreadyDoneQuestID.contains(npCentity.questRequisite.getCore().getName()))
-            {
-                this.message = new SequencedString(npCentity.requisiteSpeech + "", 245, this.font.width(npCentity.requisiteSpeech) / 2, 20000);
-                return;
             }
         }
-        if (!inProgressQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()) && !alreadyDoneQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()))
-        {
-            this.message = new SequencedString(npCentity.questChoiceSpeech + "", 245, this.font.width(npCentity.questChoiceSpeech) / 2, 2000); // -> first time talking to the npc
-            test = new TexturedIconButton(acceptButtonTexture, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
-            {
-                //just a button to remove the giant black square
-            });
-            acceptButton = new TexturedIconButton(acceptButtonTexture, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-            {
-                this.questData.addInProgressQuest(questGiver);
-                PacketHandler.sendToServer(new CUpdateQuestStatePacket(questGiver.getCore()));
-                this.state = 1;
-                this.message = new SequencedString(npCentity.acceptanceSpeech + "", 245, this.font.width(npCentity.declineSpeech) / 2, 2000);
-            }); // -> accepting the quest
-            declineButton = new TexturedIconButton(declineButtonTexture, posX + 180, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-            {
-                this.message = new SequencedString(npCentity.declineSpeech + "", 245, this.font.width(npCentity.declineSpeech) / 2, 2000);
-                this.state = -1;
-            }); // -> declining the quest
 
-        }
-        else if (inProgressQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()))
+        if (containsManaQuest) // if he has an in progress quest from the magician
         {
-            this.message = new SequencedString(npCentity.waitingSpeech + "", 245, this.font.width(npCentity.questChoiceSpeech) / 2, 2000); // -> first time talking to the npc
-            return;
+            if (inprogressQuestMana.getCore().equals(ModQuests.GRIMOIRE)) // got the grimoire quest in progress
+            {
+                if (!inprogressQuestMana.isComplete()) { // if it isn't complete
+                    text = "You need to mature before getting your grimoire! (hit level 5)";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                } else if (inprogressQuestMana.isComplete()) { // if it is complete
+                    questData.addFinishedQuest(inprogressQuestMana.getCore());
+                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    text = "Good job! A grimoire has chosen you, use a spell to open the grimoire!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+            }
+            else if (inprogressQuestMana.getCore().equals(ModQuests.MANA_REINFORCEMENT))
+            {
+                if (!inprogressQuestMana.isComplete()) {
+                    text = "You need to get stronger before unlocking mana reinforcement! (hit level 10) And come back!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                } else if (inprogressQuestMana.isComplete())
+                {
+                    questData.addFinishedQuest(inprogressQuestMana.getCore());
+                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    text = "Mana reinforcement envelops your arm with mana dealing more damage! Come back when you're stronger to start your training again.";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+            }
+            else if (inprogressQuestMana.getCore().equals(ModQuests.MANA_SKIN))
+            {
+                if (!inprogressQuestMana.isComplete()) {
+                    text = "How is the training going? You need to use mana reinforcement for 2 minutes as training. After that come back to me!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                } else if (inprogressQuestMana.isComplete())
+                {
+                    questData.addFinishedQuest(inprogressQuestMana.getCore());
+                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    text = "You've undergone thorough training, now comes the sensing your surroundings";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+            }
+            else if (inprogressQuestMana.getCore().equals(ModQuests.MANA_SENSE))
+            {
+                if (!inprogressQuestMana.isComplete()) {
+                    text = "How is the training going? You need to use mana skin for 2 minutes as training. After that come back to me!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                } else if (inprogressQuestMana.isComplete())
+                {
+                    questData.addFinishedQuest(inprogressQuestMana.getCore());
+                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    text = "You've completed my training";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+            }
         }
-        else if (alreadyDoneQuestID.contains(npCentity.quests.get(amountDone).getCore().getName()))
+        else
         {
-            this.message = new SequencedString(npCentity.doneSpeech + "", 245, this.font.width(npCentity.questChoiceSpeech) / 2, 2000); // -> first time talking to the npc
+            if (questData.getFinishedQuests().contains(ModQuests.GRIMOIRE))
+            {
+                questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
+                PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_REINFORCEMENT));
+                text = "Now you have your grimoire, reach a higher level and come back so I can teach you mana reinforcement! (hit level 10)";
+                this.message = new SequencedString(text, 245, this.font.width(text), 800);
+                return;
+            }
+            else if (questData.getFinishedQuests().contains(ModQuests.MANA_REINFORCEMENT))
+            {
+                if (entityStats.getLevel() < 20)
+                {
+                    text = "You have to become stronger for me to teach you mana skin! (hit level 20)";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+                else
+                {
+                    questData.addInProgressQuest(ModQuests.MANA_SKIN.createQuest());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_SKIN));
+                    text = "Here is my training regiment, stand still using mana reinforcement for 2 minutes and then come back!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+            }
+            else if (questData.getFinishedQuests().contains(ModQuests.MANA_SKIN))
+            {
+                if (entityStats.getLevel() < 25)
+                {
+                    text = "You have to become stronger for me to teach you mana sense! (hit level 25)";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+                else
+                {
+                    questData.addInProgressQuest(ModQuests.MANA_SENSE.createQuest());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_SENSE));
+                    text = "You're now ready to learn mana sense, here is my training regiment use mana skin for 2 minutes and then come back to me!";
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+            }
+            else {
+                text = "My training regiment ends here, come back later maybe for more stuff!";
+                this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                return;
+            }
+        }
+
+    }
+
+    void questInprogressLoop(Quest questInProgress, String ifNotCompleted, String ifCompleted) // TODO finish up this loop later
+    {
+        if (!questInProgress.isComplete())
+        {
+            this.message = new SequencedString(text, 245, this.font.width(text) / 2, 200);
             return;
         }
     }
@@ -243,13 +223,6 @@ public class ChatPromptScreen extends Screen {
     @Override
     public void render(MatrixStack matrixStack, int x, int y, float f) {
         this.renderBackground(matrixStack);
-
-
-        if (!(this.state == 0)) {
-            this.buttons.remove(acceptButton);
-            this.buttons.remove(declineButton);
-        }
-
 
         int posX = this.width / 2;
         int posY = this.height / 2;

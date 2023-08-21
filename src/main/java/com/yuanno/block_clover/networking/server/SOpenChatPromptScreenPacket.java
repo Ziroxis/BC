@@ -17,20 +17,14 @@ public class SOpenChatPromptScreenPacket {
 
     private int questerEntity;
     public SOpenChatPromptScreenPacket() {}
-    public SOpenChatPromptScreenPacket(int questerEntity)
-    {
-        this.questerEntity = questerEntity;
-    }
 
     public void encode(PacketBuffer buffer)
     {
-        buffer.writeInt(this.questerEntity);
     }
 
     public static SOpenChatPromptScreenPacket decode(PacketBuffer buffer)
     {
         SOpenChatPromptScreenPacket msg = new SOpenChatPromptScreenPacket();
-        msg.questerEntity = buffer.readInt();
         return msg;
     }
 
@@ -47,11 +41,9 @@ public class SOpenChatPromptScreenPacket {
         public static void handle(SOpenChatPromptScreenPacket message)
         {
             PlayerEntity player = Minecraft.getInstance().player;
-            Entity questGiver = Minecraft.getInstance().level.getEntity(message.questerEntity);
-            if (!(questGiver instanceof NPCentity))
-                return;
 
-            Minecraft.getInstance().setScreen(new ChatPromptScreen(player, (NPCentity) questGiver));
+
+            Minecraft.getInstance().setScreen(new ChatPromptScreen(player));
         }
     }
 }

@@ -94,7 +94,6 @@ public class QuestBoardScreen extends Screen {
 
         }
 
-        // TODO fix this issue
         advanceButton = new Button(posX + 222, posY + 200, 20, 20, new TranslationTextComponent(">"), b -> {
             if (this.currentPage == 0)
                 currentPage += 1;

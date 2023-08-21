@@ -7,10 +7,7 @@ import com.yuanno.block_clover.quests.brank.KillEndermanQuest;
 import com.yuanno.block_clover.quests.brank.ObtainGoldQuest;
 import com.yuanno.block_clover.quests.crank.*;
 import com.yuanno.block_clover.quests.drank.*;
-import com.yuanno.block_clover.quests.magician.GrimoireQuest;
-import com.yuanno.block_clover.quests.magician.ManaReinforcementQuest;
-import com.yuanno.block_clover.quests.magician.ManaSkinQuest;
-import com.yuanno.block_clover.quests.magician.ManaZoneQuest;
+import com.yuanno.block_clover.quests.magician.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.ArrayList;
@@ -56,6 +53,7 @@ public class ModQuests {
     public static final QuestId GRIMOIRE = BeRegistry.registerQuest(GrimoireQuest.INSTANCE);
     public static final QuestId MANA_REINFORCEMENT = BeRegistry.registerQuest(ManaReinforcementQuest.INSTANCE);
     public static final QuestId MANA_SKIN = BeRegistry.registerQuest(ManaSkinQuest.INSTANCE);
+    public static final QuestId MANA_SENSE = BeRegistry.registerQuest(ManaSenseQuest.INSTANCE);
     public static final QuestId MANA_ZONE = BeRegistry.registerQuest(ManaZoneQuest.INSTANCE);
     public static final List<QuestId> MAGICIAN = Arrays.asList(GRIMOIRE, MANA_REINFORCEMENT, MANA_SKIN, MANA_ZONE);
     public static void register(IEventBus eventBus)

@@ -1,15 +1,19 @@
 package com.yuanno.block_clover.entities.humanoid;
 
+import com.yuanno.block_clover.client.IDynamicRenderer;
 import com.yuanno.block_clover.data.ability.AbilityDataBase;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.entities.BCentity;
 import com.yuanno.block_clover.entities.NPCentity;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SOpenChatPromptScreenPacket;
+import com.yuanno.block_clover.networking.server.SOpenChatPromptScreenQuestBoardPacket;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.*;
@@ -33,27 +37,25 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 
-public class GrimoireMagicianEntity extends NPCentity
+public class GrimoireMagicianEntity extends BCentity implements IDynamicRenderer
 {
     public GrimoireMagicianEntity(EntityType type, World world)
     {
         super(type, world);
-        this.preRequisite = true;
-        this.requisite = 1;
-        this.levelrequisites.add(0);
-        this.levelrequisites.add(10);
-        this.levelrequisites.add(30);
-        this.quests.add(ModQuests.GRIMOIRE.createQuest());
-        this.quests.add(ModQuests.MANA_REINFORCEMENT.createQuest());
-        this.quests.add(ModQuests.MANA_SKIN.createQuest());
-        this.quests.add(ModQuests.MANA_ZONE.createQuest());
-        this.requisiteSpeech = "You'll need to be a bit stronger to learn the spells I want to teach you!";
-        this.questChoiceSpeech = "Would you like to learn the art of mana?";
-        this.acceptanceSpeech = "Fine... You'll have to do the quest I've given you for that. Check your quests for more information!";
-        this.declineSpeech = "Not everyone is ready for the path of strength";
-        this.waitingSpeech = "You haven't reached your full potentiel yet.";
-        this.doneSpeech = "My teachings end here for now";
     }
+
+    @Override
+    public ActionResultType mobInteract(PlayerEntity player, Hand hand)
+    {
+        if (hand != Hand.MAIN_HAND)
+            return ActionResultType.PASS;
+        if (!player.level.isClientSide) {
+            this.lookAt(player, 1, 1);
+            PacketHandler.sendTo(new SOpenChatPromptScreenPacket(), player);
+        }
+        return ActionResultType.PASS;
+    }
+
     @Override
     protected void registerGoals()
     {
@@ -103,6 +105,15 @@ public class GrimoireMagicianEntity extends NPCentity
 
         return spawnData;
     }
-     
 
+
+    @Override
+    public String getMobTexture() {
+        return "grimoire_magician1";
+    }
+
+    @Override
+    public String getDefaultTexture() {
+        return null;
+    }
 }

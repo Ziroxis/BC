@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestBoardBlock extends Block {
-    // TODO create a tile entity that stores this
     List<QuestId> availableQuest = Beapi.randomQuestsFromList(ModQuests.mergedListQuestBoard, 8);
 
 

@@ -45,7 +45,7 @@ public class OriginalSlashesAbility extends RepeaterAbility {
         }
         else
         {
-            player.sendMessage(new StringTextComponent("Need to hold the demon slayer sword!"), Util.NIL_UUID);
+            player.sendMessage(new StringTextComponent("Need to hold the demon dweller sword!"), Util.NIL_UUID);
             this.stopContinuity(player);
             return false;
         }

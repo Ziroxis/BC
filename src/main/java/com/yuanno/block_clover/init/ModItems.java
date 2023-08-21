@@ -131,7 +131,7 @@ public class ModItems {
 
     // asta sword
     public static final RegistryObject<Item> DEMON_SLAYER = ITEMS.register("demon_slayer_antimagic", DemonSlayerItem::new); // black
-    public static final RegistryObject<Item> DEMON_SLAYER_CLEAN = ITEMS.register("demon_slayer", DemonSlayerItem::new); // clean
+    public static final RegistryObject<Item> DEMON_SLAYER_CLEAN = ITEMS.register("demon_slayer", DemonSlayerRustyItem::new); // rusty
 
     public static final RegistryObject<Item> KATANA = ITEMS.register("yamis_katana", KatanaItem::new);
 

@@ -9,12 +9,14 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.data.quest.IQuestData;
+import com.yuanno.block_clover.data.quest.QuestDataCapability;
+import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
+import com.yuanno.block_clover.networking.client.CSyncQuestDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
-import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
-import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -103,6 +105,7 @@ public class AttributeChoiceScreen extends Screen {
         int posY = (this.height - 256) / 2;
         IEntityStats entityStats = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
+        IQuestData questData = QuestDataCapability.get(player);
         entityStats.setAttribute(attribute);
         Map<String, AbilityCore> abilityMap = ModValues.getAbilityMap();
 
@@ -115,8 +118,7 @@ public class AttributeChoiceScreen extends Screen {
 
             // Additional operations for specific cases
             if (attribute.equals(ModValues.ANTIMAGIC)) {
-                abilityData.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
-                abilityData.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
+
                 entityStats.setRace(ModValues.HUMAN);
             }
         }
@@ -172,6 +174,8 @@ public class AttributeChoiceScreen extends Screen {
             entityStats.setMana(0);
             entityStats.setMaxMana(0);
         }
+
+        PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
         PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
         this.onClose();
@@ -197,7 +201,11 @@ public class AttributeChoiceScreen extends Screen {
 
         }
     }
-
+    @Override
+    public boolean isPauseScreen()
+    {
+        return false;
+    }
     public static void open()
     {
         Minecraft.getInstance().setScreen(new AttributeChoiceScreen());

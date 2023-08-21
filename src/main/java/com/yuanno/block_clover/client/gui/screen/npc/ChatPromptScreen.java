@@ -96,6 +96,24 @@ public class ChatPromptScreen extends Screen {
         {
             if (inprogressQuestMana.getCore().equals(ModQuests.GRIMOIRE)) // got the grimoire quest in progress
             {
+                if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC)) // if anti-magic
+                {
+                    text = "Huh? An old dusty grimoire has chosen you as it's master";
+                    questData.addFinishedQuest(inprogressQuestMana.getCore());
+                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
+                if (entityStats.getAttribute().equals(ModValues.SWORD) || entityStats.getSecondAttribute().equals(ModValues.SWORD))
+                {
+                    text = "You're a prodigy! This 4 leaf grimoire just chose you!";
+                    questData.addFinishedQuest(inprogressQuestMana.getCore());
+                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+                    return;
+                }
                 if (!inprogressQuestMana.isComplete()) { // if it isn't complete
                     text = "You need to mature before getting your grimoire! (hit level 5)";
                     this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
@@ -162,6 +180,12 @@ public class ChatPromptScreen extends Screen {
         {
             if (questData.getFinishedQuests().contains(ModQuests.GRIMOIRE))
             {
+                if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC))
+                {
+                    text = "You have no mana at all there is nothing for me to teach you...";
+                    this.message = new SequencedString(text, 245, this.font.width(text), 800);
+                    return;
+                }
                 questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_REINFORCEMENT));
                 text = "Now you have your grimoire, reach a higher level and come back so I can teach you mana reinforcement! (hit level 10)";

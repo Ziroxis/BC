@@ -12,9 +12,15 @@ import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
+import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
+import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
 import com.yuanno.block_clover.spells.devil.DarkIceAbility;
+import com.yuanno.block_clover.spells.sword.OriginalDemonSlayerAbility;
+import com.yuanno.block_clover.spells.sword.OriginalMagicDestroyerAbility;
+import com.yuanno.block_clover.spells.sword.OriginalMagicDwellerAbility;
+import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
@@ -24,7 +30,7 @@ public class GrimoireQuest extends Quest {
             .build();
 
 
-    private Objective levelObjective = new ReachLevelObjective("Reach level 5 and go to the grimoire tower", 5);
+    private Objective levelObjective = new ReachLevelObjective("Go to the grimoire tower and reach level 5", 5);
 
     public GrimoireQuest(QuestId questId)
     {
@@ -37,6 +43,23 @@ public class GrimoireQuest extends Quest {
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         entityStats.setGrimoire(true);
+        if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC))
+        {
+            IAbilityData abilityDataBase = AbilityDataCapability.get(player);
+            abilityDataBase.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
+            abilityDataBase.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
+            PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityDataBase));
+
+        }
+        if (entityStats.getAttribute().equals(ModValues.SWORD))
+        {
+            IAbilityData abilityDataBase = AbilityDataCapability.get(player);
+            abilityDataBase.addUnlockedAbility(player, OriginalDemonSlayerAbility.INSTANCE);
+            abilityDataBase.addUnlockedAbility(player, OriginalMagicDestroyerAbility.INSTANCE);
+            abilityDataBase.addUnlockedAbility(player, OriginalMagicDwellerAbility.INSTANCE);
+            abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
+            PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityDataBase));
+        }
         if (entityStats.getInnateDevil()) {
             player.sendMessage(new StringTextComponent("You feel an evil aura from your grimoire"), Util.NIL_UUID);
             IAbilityData abilityDataBase = AbilityDataCapability.get(player);

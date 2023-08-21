@@ -11,6 +11,7 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
+import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.items.ArtifactItem;
 import com.yuanno.block_clover.networking.PacketHandler;
@@ -61,6 +62,15 @@ public class MagicChangeArtifactItem extends ArtifactItem {
             IEntityStats stats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
             abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE);
+            int idSlayer = Beapi.getIndexOfItemStack(ModItems.DEMON_SLAYER_CLEAN.get(), player.inventory);
+            int idDweller = Beapi.getIndexOfItemStack(ModItems.DEMON_DWELLER.get(), player.inventory);
+            int idDestroyer = Beapi.getIndexOfItemStack(ModItems.DEMON_DESTROYER.get(), player.inventory);
+            if (idSlayer >= 0)
+                player.inventory.getItem(idSlayer).shrink(1);
+            if (idDweller >= 0)
+                player.inventory.getItem(idDweller).shrink(1);
+            if (idDestroyer >= 0)
+                player.inventory.getItem(idDestroyer).shrink(1);
             for (Ability ability : abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE))
             {
                 if (ability instanceof ContinuousAbility && ability.isContinuous()) {

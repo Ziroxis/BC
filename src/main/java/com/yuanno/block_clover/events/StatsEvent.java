@@ -72,7 +72,6 @@ public class StatsEvent {
 
         if (props.hasAttribute())
             return;
-        questData.addInProgressQuest(ModQuests.GRIMOIRE.createQuest());
         props.setMultiplier(1);
         props.setLevel(1);
         props.setExperience(0);

@@ -60,7 +60,13 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
-        statsHandling(player);
+        System.out.println("Has attribute: " + props.hasAttribute());
+        if (!props.hasAttribute())
+            statsHandling(player);
+        PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
+        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
     }
 
     public static void statsHandling(PlayerEntity player)
@@ -69,6 +75,7 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
+        System.out.println("Has attribute: " + props.hasAttribute());
 
         if (props.hasAttribute())
             return;
@@ -129,6 +136,7 @@ public class StatsEvent {
         // the killed one is player; the killer is devil; check side
         if (!(event.getSource().getEntity() instanceof DevilEntity) || !(event.getEntityLiving() instanceof PlayerEntity) || event.getSource().getEntity().level.isClientSide)
             return;
+        System.out.println("called");
         PlayerEntity playerTarget = (PlayerEntity) event.getEntityLiving();
         DevilEntity devilEntity = (DevilEntity) event.getSource().getEntity();
         IEntityStats entityStats = EntityStatsCapability.get(playerTarget);
@@ -145,10 +153,13 @@ public class StatsEvent {
     @SubscribeEvent
     public static void onRelogging(PlayerEvent.PlayerRespawnEvent event) {
         PlayerEntity player = event.getPlayer();
-        statsHandling(player);
         IEntityStats statsProps = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
+
+        System.out.println("Has attribute" + statsProps.hasAttribute());
+        if (!statsProps.hasAttribute())
+            statsHandling(player);
 
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);

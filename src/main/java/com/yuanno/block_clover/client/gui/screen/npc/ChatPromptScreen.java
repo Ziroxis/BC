@@ -99,6 +99,7 @@ public class ChatPromptScreen extends Screen {
                 if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC)) // if anti-magic
                 {
                     text = "Huh? An old dusty grimoire has chosen you as it's master";
+                    inprogressQuestMana.triggerCompleteEvent(player);
                     questData.addFinishedQuest(inprogressQuestMana.getCore());
                     questData.removeInProgressQuest(inprogressQuestMana.getCore());
                     PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
@@ -108,6 +109,7 @@ public class ChatPromptScreen extends Screen {
                 if (entityStats.getAttribute().equals(ModValues.SWORD) || entityStats.getSecondAttribute().equals(ModValues.SWORD))
                 {
                     text = "You're a prodigy! This 4 leaf grimoire just chose you!";
+                    inprogressQuestMana.triggerCompleteEvent(player);
                     questData.addFinishedQuest(inprogressQuestMana.getCore());
                     questData.removeInProgressQuest(inprogressQuestMana.getCore());
                     PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));

@@ -5,6 +5,7 @@ import com.yuanno.block_clover.client.gui.screen.spells.SelectHotbarAbilitiesScr
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -99,6 +100,8 @@ public class PlayerOverviewScreen extends Screen {
         String name = player.getName().getString();
         String race = props.getRace();
         String attribute = props.getAttribute();
+        if (attribute.equals(ModValues.ANTIMAGIC))
+            attribute = "Anti magic";
         String secondAttribute = props.getSecondAttribute();
         int level = props.getLevel();
         int experience = props.getExperience();

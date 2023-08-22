@@ -83,13 +83,22 @@ public class AttributeChoiceScreen extends Screen {
         drawString(matrixStack, font, TextFormatting.GRAY + "MAGIC CHOICE", posX + 92, posY + 30, Color.GRAY.getRGB());
         drawString(matrixStack, font, TextFormatting.BOLD + "Choose your magic", posX + 68, posY + 70, Color.GRAY.getRGB());
 
+        String randomAttributeString = randomAttribute1;
+        String randomAttributeString2 = randomAttribute2;
+        String randomAttributeString3 = randomAttribute3;
 
+        if (randomAttributeString.equals(ModValues.ANTIMAGIC))
+            randomAttributeString = "Anti magic";
+        if (randomAttributeString2.equals(ModValues.ANTIMAGIC))
+            randomAttributeString2 = "Anti magic";
+        if (randomAttributeString3.equals(ModValues.ANTIMAGIC))
+            randomAttributeString3 = "Anti magic";
         // here the buttons that show the attribute, once chosen they'll receive the ability etc
-        NoTextureButton AttributeChoice1 = new NoTextureButton(posX + 25, posY + 100, 60, 16, new TranslationTextComponent(randomAttribute1),
+        NoTextureButton AttributeChoice1 = new NoTextureButton(posX + 25, posY + 100, 60, 16, new TranslationTextComponent(randomAttributeString),
                 (btn) -> this.getAttribute(randomAttribute1));
-        NoTextureButton AttributeChoice2 = new NoTextureButton(posX + 90, posY + 100, 60, 16, new TranslationTextComponent(randomAttribute2),
+        NoTextureButton AttributeChoice2 = new NoTextureButton(posX + 90, posY + 100, 60, 16, new TranslationTextComponent(randomAttributeString2),
                 (btn) -> this.getAttribute(randomAttribute2));
-        NoTextureButton AttributeChoice3 = new NoTextureButton(posX + 155, posY + 100, 60, 16, new TranslationTextComponent(randomAttribute3),
+        NoTextureButton AttributeChoice3 = new NoTextureButton(posX + 155, posY + 100, 60, 16, new TranslationTextComponent(randomAttributeString3),
                 (btn) -> this.getAttribute(randomAttribute3));
         this.addButton(AttributeChoice1);
         this.addButton(AttributeChoice2);
@@ -117,13 +126,9 @@ public class AttributeChoiceScreen extends Screen {
             abilityData.addUnlockedAbility(player, ability);
 
             // Additional operations for specific cases
-            if (attribute.equals(ModValues.ANTIMAGIC)) {
 
-                entityStats.setRace(ModValues.HUMAN);
-            }
         }
-        if (!attribute.equals(ModValues.ANTIMAGIC))
-        {
+        if (!attribute.equals(ModValues.ANTIMAGIC)) {
             entityStats.setRace(Beapi.randomizer(ModValues.races));
             String race = entityStats.getRace();
             switch (race) {
@@ -153,9 +158,8 @@ public class AttributeChoiceScreen extends Screen {
             entityStats.setMultiplier(1);
 
             setSecondAttribute(entityStats, abilityData);
-
         }
-    }
+        }
         if (!attribute.equals(ModValues.ANTIMAGIC))
         {
             if (!entityStats.getRace().equals(ModValues.ELF))
@@ -171,10 +175,11 @@ public class AttributeChoiceScreen extends Screen {
         }
         else
         {
+            entityStats.setRace(ModValues.HUMAN);
             entityStats.setMana(0);
             entityStats.setMaxMana(0);
         }
-
+        questData.addInProgressQuest(ModQuests.GRIMOIRE.createQuest());
         PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
         PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));

@@ -37,11 +37,11 @@ public class BearClawAbility extends ContinuousPunchAbility implements IParallel
         this.setmanaCost(5);
         this.setExperiencePoint(5);
         this.setExperienceGainLevelCap(30);
-        this.setEvolutionCost(50);
+        this.setEvolutionCost(100);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-
+        this.onStopContinuityEvent = this::onStopContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)
@@ -71,6 +71,23 @@ public class BearClawAbility extends ContinuousPunchAbility implements IParallel
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)
+    {
+        if (!this.isEvolved())
+        {
+            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW);
+            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW);
+            return true;
+        }
+        else
+        {
+            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW_EVOLVED);
+            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW_EVOLVED);
+
+            return true;
+        }
+    }
+
+    private boolean onStopContinuityEvent(PlayerEntity player)
     {
         if (!this.isEvolved())
         {

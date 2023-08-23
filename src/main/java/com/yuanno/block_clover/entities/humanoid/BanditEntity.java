@@ -54,34 +54,34 @@ public class BanditEntity extends BCentity {
         switch (random)
         {
             case 0:
-                this.goalSelector.addGoal(5, new EarthChunkGoal(this));
+                this.goalSelector.addGoal(8, new EarthChunkGoal(this));
                 abilityList.add(EarthChunkAbility.INSTANCE);
                 if (randomStrength) {
-                    this.goalSelector.addGoal(4, new EarthChargeGoal(this));
+                    this.goalSelector.addGoal(6, new EarthChargeGoal(this));
                     abilityList.add(EarthChargeAbility.INSTANCE);
                 }
                 break;
             case 1:
-                this.goalSelector.addGoal(5, new FireBallGoal(this));
+                this.goalSelector.addGoal(8, new FireBallGoal(this));
                 abilityList.add(FireBallAbility.INSTANCE);
                 if (randomStrength) {
-                    this.goalSelector.addGoal(4, new FlameRoarGoal(this));
+                    this.goalSelector.addGoal(6, new FlameRoarGoal(this));
                     abilityList.add(FlameRoarAbility.INSTANCE);
                 }
                 break;
             case 2:
-                this.goalSelector.addGoal(5, new LightBladeGoal(this));
+                this.goalSelector.addGoal(8, new LightBladeGoal(this));
                 abilityList.add(LightBladeAbility.INSTANCE);
                 if (randomStrength) {
-                    this.goalSelector.addGoal(4, new LightBladeShowerGoal(this));
+                    this.goalSelector.addGoal(6, new LightBladeShowerGoal(this));
                     abilityList.add(LightBladeShowerAbility.INSTANCE);
                 }
                 break;
             case 3:
-                this.goalSelector.addGoal(5, new WindBladeGoal(this));
+                this.goalSelector.addGoal(8, new WindBladeGoal(this));
                 abilityList.add(WindBladeAbility.INSTANCE);
                 if (randomStrength) {
-                    this.goalSelector.addGoal(4, new WindBladeShowerGoal(this));
+                    this.goalSelector.addGoal(6, new WindBladeShowerGoal(this));
                     abilityList.add(WindBladeShowerAbility.INSTANCE);
                 }
                 break;
@@ -108,7 +108,7 @@ public class BanditEntity extends BCentity {
                 .add(Attributes.ATTACK_DAMAGE, 5)
                 .add(Attributes.ARMOR, 5)
                 .add(Attributes.MAX_HEALTH, 15)
-                .add(Attributes.FOLLOW_RANGE, 10)
+                .add(Attributes.FOLLOW_RANGE, 30)
                 .add(Attributes.MOVEMENT_SPEED, 0.24);
 
     }

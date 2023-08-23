@@ -72,17 +72,7 @@ public class CloverSharkModel<T extends CloverSharkEntity> extends EntityModel<T
 
 	@Override
 	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		/*
-		this.Base_Body.xRot = headPitch * 0.017453292F;
-		this.Base_Body.yRot = headPitch * 0.017453292F;
-		if (Entity.getHorizontalDistanceSqr(entityIn.getDeltaMovement()) > 1.0E-7) {
-			ModelRenderer var10000 = this.Base_Body;
-			var10000.xRot += -0.05F + -0.05F * MathHelper.cos(ageInTicks * 0.3F);
-			this.Tail.xRot = -0.1F * MathHelper.cos(ageInTicks * 0.3F);
-			//this.tailFin.xRot = -0.2F * MathHelper.cos(ageInTicks * 0.3F);
-		}
 
-		 */
 	}
 
 

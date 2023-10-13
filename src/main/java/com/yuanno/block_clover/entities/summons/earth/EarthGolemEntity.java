@@ -34,14 +34,6 @@ public class EarthGolemEntity extends BCsummon {
 
 
 
-    /*
-    public EarthGolemEntity(World world)
-    {
-        super(EarthSummons.EARTH_MINION.get(), world);
-    }
-
-     */
-
 
     public EarthGolemEntity(EntityType type, World world) {
         super(type, world);
@@ -139,7 +131,6 @@ public class EarthGolemEntity extends BCsummon {
             if(this.distanceTo(this.getOwner()) > 128)
                 this.setPos(this.getOwner().getX(), this.getOwner().getY(), this.getOwner().getZ());
 
-            IEntityStats ownerProps = EntityStatsCapability.get(this.getOwner());
             List<LivingEntity> earthMinionAttackList = this.isAggressive ? Beapi.getEntitiesNear(this.blockPosition(), this.level, 20, PlayerEntity.class, MonsterEntity.class, VolcanoMonsterEntity.class, CloverSharkEntity.class, MonkeyEntity.class) : !this.forcedTargets.isEmpty() ? this.forcedTargets : new ArrayList<LivingEntity>();
             LivingEntity target = null;
 

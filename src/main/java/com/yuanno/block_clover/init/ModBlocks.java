@@ -227,8 +227,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> ELDER_SAPLING = BLOCKS.register("elder_sapling",
             () -> new SaplingBlock(new ElderTree(), AbstractBlock.Properties.of(Material.WOOD).noCollission().randomTicks().sound(SoundType.ROOTS)));
 
-    public static final RegistryObject<Block> NOMOTATO_BLOCK = BLOCKS.register("nomotato_block", NomotatoBlock::new);
-    public static final RegistryObject<Block> DEVIL_SUMMONER = BLOCKS.register("devil_summoner", DevilSummonerBlock::new);
+    //public static final RegistryObject<Block> NOMOTATO_BLOCK = BLOCKS.register("nomotato_block", NomotatoBlock::new);
+    //public static final RegistryObject<Block> DEVIL_SUMMONER = BLOCKS.register("devil_summoner", DevilSummonerBlock::new);
     public static final RegistryObject<Block> QUEST_BOARD = BLOCKS.register("quest_board", QuestBoardBlock::new);
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

@@ -17,10 +17,6 @@ public class ModWorldEvents {
         ModBiomeGeneration.generateBiomes();
         ModStructureGeneration.generateStructures(event);
         TreeGeneration.generateTrees(event);
-        /*
-        ModEntityGeneration.onEntitySpawn(event);
-        ModTreeGeneration.generateTrees(event);
 
-         */
     }
 }

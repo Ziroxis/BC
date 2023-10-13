@@ -187,7 +187,7 @@ public class Main
             RenderTypeLookup.setRenderLayer(ModBlocks.MOGURO_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ELDER_LEAF.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ELDER_SAPLING.get(), RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(ModBlocks.NOMOTATO_BLOCK.get(), RenderType.cutout());
+            //RenderTypeLookup.setRenderLayer(ModBlocks.NOMOTATO_BLOCK.get(), RenderType.cutout());
 
             ScreenManager.register(ModContainers.JUICER_CONTAINER.get(), JuicerScreen::new);
             ScreenManager.register(ModContainers.DEVIL_ALTAR_CONTAINER.get(), DevilAltarScreen::new);

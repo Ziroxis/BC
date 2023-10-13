@@ -46,7 +46,7 @@ public class WildBurstingFlamesAbility extends Ability {
         else
         {
             GiantFireBallProjectile projectile = new GiantFireBallProjectile(player.level, player);
-            projectile.shootFromRotation(player, player.xRot , player.yRot , 0, 1f, 5);
+            projectile.shootFromRotation(player, player.xRot , player.yRot , 0, 1f, 15);
             player.level.addFreshEntity(projectile);
         }
         return true;

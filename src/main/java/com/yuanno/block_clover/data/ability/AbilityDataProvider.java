@@ -6,8 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
-public class AbilityDataProvider implements ICapabilitySerializable<CompoundNBT>
-{
+public class AbilityDataProvider implements ICapabilitySerializable<CompoundNBT> {
 	private IAbilityData instance = AbilityDataCapability.INSTANCE.getDefaultInstance();
 
 	@Override

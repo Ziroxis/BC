@@ -1,7 +1,6 @@
 {
   "replace": "false",
   "values": [
-    "block_clover:cloak_invisibility",
-    "block_clover:bag_gluttony"
+    "block_clover:cloak_invisibility"
   ]
 }

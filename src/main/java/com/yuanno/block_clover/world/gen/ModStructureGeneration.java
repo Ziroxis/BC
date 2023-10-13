@@ -43,7 +43,7 @@ public class ModStructureGeneration
         }
         if (types.contains(BiomeDictionary.Type.MOUNTAIN) &!types.contains(BiomeDictionary.Type.NETHER) && !types.contains(BiomeDictionary.Type.END))
         {
-            event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_DEVIL_CHURCH);
+            //event.getGeneration().getStructures().add(() -> ConfiguredStructures.CONFIGURED_DEVIL_CHURCH);
         }
 
 

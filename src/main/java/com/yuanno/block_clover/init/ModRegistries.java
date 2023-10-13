@@ -15,8 +15,8 @@ public class ModRegistries {
 
     static
     {
-        make(new ResourceLocation(Main.MODID, "abilities"), AbilityCore.class);
-        make(new ResourceLocation(Main.MODID, "quests"), QuestId.class);
+        make(new ResourceLocation(Main.MODID, "abilities_bc"), AbilityCore.class);
+        make(new ResourceLocation(Main.MODID, "quests_bc"), QuestId.class);
     }
     public static final IForgeRegistry<AbilityCore<?>> ABILITIES = RegistryManager.ACTIVE.getRegistry(AbilityCore.class);
     public static final IForgeRegistry<QuestId<?>> QUESTS = RegistryManager.ACTIVE.getRegistry(QuestId.class);

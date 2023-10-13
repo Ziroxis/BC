@@ -142,7 +142,6 @@ public class ModKeyBinds {
     {
         IAbilityData abilityDataProps = AbilityDataCapability.get(player);
         IEntityStats entityStatsProps = EntityStatsCapability.get(player);
-
         if(entityStatsProps.isInCombatMode())
         {
             if(nextCombatBar.isDown())

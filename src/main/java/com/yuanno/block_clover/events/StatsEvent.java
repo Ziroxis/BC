@@ -190,12 +190,15 @@ public class StatsEvent {
 
         // Keep the ability stats
         IAbilityData oldAbilityData = AbilityDataCapability.get(original);
-        oldAbilityData.clearEquippedAbilities(AbilityCategories.AbilityCategory.ALL);
-
+        //oldAbilityData.clearEquippedAbilities(AbilityCategories.AbilityCategory.ALL);
         nbt = AbilityDataCapability.INSTANCE.writeNBT(oldAbilityData, null);
         IAbilityData newAbilityData = AbilityDataCapability.get(player);
         AbilityDataCapability.INSTANCE.readNBT(newAbilityData, null, nbt);
 
+        IQuestData oldQuestData = QuestDataCapability.get(original);
+        nbt = QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);
+        IQuestData newQuestData = QuestDataCapability.get(player);
+        QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 
         /*
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), newAbilityData), player);

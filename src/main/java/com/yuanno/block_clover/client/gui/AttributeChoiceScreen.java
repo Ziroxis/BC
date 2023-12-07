@@ -68,21 +68,6 @@ public class AttributeChoiceScreen extends Screen {
         this.randomAttribute3 = randomAttributeString(randomAttribute1, randomAttribute2);
 
 
-        guiLeft = (this.width - this.xSize) / 2;
-        guiTop = (this.height - this.ySize) / 2;
-
-    }
-
-    @Override
-    public void render(MatrixStack matrixStack, int x, int y, float f)
-    {
-        int posX = (this.width - 256) / 2;
-        int posY = (this.height - 256) / 2;
-        this.renderBackground(matrixStack);
-
-        drawString(matrixStack, font, TextFormatting.GRAY + "MAGIC CHOICE", posX + 92, posY + 30, Color.GRAY.getRGB());
-        drawString(matrixStack, font, TextFormatting.BOLD + "Choose your magic", posX + 68, posY + 70, Color.GRAY.getRGB());
-
         String randomAttributeString = randomAttribute1;
         String randomAttributeString2 = randomAttribute2;
         String randomAttributeString3 = randomAttribute3;
@@ -103,6 +88,20 @@ public class AttributeChoiceScreen extends Screen {
         this.addButton(AttributeChoice1);
         this.addButton(AttributeChoice2);
         this.addButton(AttributeChoice3);
+
+        guiLeft = (this.width - this.xSize) / 2;
+        guiTop = (this.height - this.ySize) / 2;
+
+    }
+
+    @Override
+    public void render(MatrixStack matrixStack, int x, int y, float f)
+    {
+        int posX = (this.width - 256) / 2;
+        int posY = (this.height - 256) / 2;
+        this.renderBackground(matrixStack);
+
+
 
         super.render(matrixStack, x, y, f);
     }

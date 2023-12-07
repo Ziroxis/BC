@@ -48,9 +48,9 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get()))
-                || !player.getMainHandItem().getItem().equals(ModItems.DEMON_DESTROYER.get())
-        || !player.getMainHandItem().getItem().equals(ModItems.DEMON_DWELLER.get()))
+        if (!(player.getMainHandItem().getItem().equals(ModItems.DEMON_SLAYER.get().getItem()))
+                && !player.getMainHandItem().getItem().equals(ModItems.DEMON_DESTROYER_ANTIMAGIC.get().getItem())
+        && !player.getMainHandItem().getItem().equals(ModItems.DEMON_DWELLER_ANTIMAGIC.get().getItem()))
         {
             player.sendMessage(new StringTextComponent("Need to hold an anti-magic sword!"), Util.NIL_UUID);
             return false;
@@ -85,7 +85,6 @@ public class DemonStateAbility extends ContinuousAbility implements IParallelCon
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        System.out.println("END");
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         propsEntity.setState(0);
         player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(ANTISTRENGTH);

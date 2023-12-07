@@ -71,9 +71,9 @@ public abstract class ContinuousAbility extends Ability {
         }
         else
         {
-            if (!this.isStateForced())
+            if (!this.isStateForced()) {
                 this.endContinuity(player);
-
+            }
         }
     }
 
@@ -114,7 +114,6 @@ public abstract class ContinuousAbility extends Ability {
      */
     public void tick(PlayerEntity player) {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
-
         if (!canUse(player)) {
             stopContinuity(player);
             return;
@@ -131,8 +130,7 @@ public abstract class ContinuousAbility extends Ability {
             continueTime++;
 
             boolean shouldEndContinuity =
-                    (threshold > 0 && continueTime >= threshold) ||
-                            (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0);
+                    (threshold > 0 && continueTime >= threshold) || (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0); // checks if the ability should continue
 
             if (isClientOrServer && !isStateForced()) {
                 duringContinuityEvent.duringContinuity(player, continueTime);
@@ -173,7 +171,6 @@ public abstract class ContinuousAbility extends Ability {
                         propsEntity.alterMana(-evolvedManaCost);
                 }
             }
-
             int currentMana = (int) propsEntity.getMana();
             PacketHandler.sendTo(new ManaSync(currentMana), player);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
@@ -191,7 +188,6 @@ public abstract class ContinuousAbility extends Ability {
     {
         if(player.level.isClientSide)
             return;
-
         if(this.onEndContinuityEvent.onEndContinuity(player))
         {
             this.stopContinuity(player);

@@ -33,7 +33,7 @@ public class WorldEvents {
         if (event.phase == TickEvent.Phase.END)
         {
             event.world.getProfiler().push("worldEvents");
-            MANA_SIPHONING.tick((ServerWorld) event.world);
+            //MANA_SIPHONING.tick((ServerWorld) event.world);
             event.world.getProfiler().pop();
         }
     }

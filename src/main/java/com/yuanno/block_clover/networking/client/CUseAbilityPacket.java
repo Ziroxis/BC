@@ -68,8 +68,9 @@ public class CUseAbilityPacket
 						{
 							if (ability instanceof ContinuousAbility && ability.isContinuous() && !(ability instanceof IParallelContinuousAbility))
 							{
-								if(true)
-									((ContinuousAbility)ability).endContinuity(player);
+								if(true) {
+									((ContinuousAbility) ability).endContinuity(player);
+								}
 								else
 									return;
 							}

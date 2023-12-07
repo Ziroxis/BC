@@ -136,11 +136,14 @@ public class AttributeChoiceScreen extends Screen {
                 case ModValues.HUMAN:
                     entityStats.setManaRegeneration(1);
                     entityStats.setMultiplier(1.2f);
+                    /*
                     int chanceDevil = Beapi.RNG(5);
                     if (chanceDevil == 0) {
                         entityStats.setInnateDevil(true);
                         entityStats.setDevil(Beapi.randomizer(ModValues.devils));
                     }
+
+                     */
                     break;
                 // Elf get mana regeneration = 2; multiplier = 1
                 case ModValues.ELF:

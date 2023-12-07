@@ -588,9 +588,12 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         ExtendedWorldData worldData = ExtendedWorldData.get(player.level);
         IEntityStats propsEntity = EntityStatsCapability.get(player);
+        //System.out.println(propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0);
+        //System.out.println(propsEntity.getMana() < getmanaCost());
 
-        if (propsEntity.getMana() < manaCost)
+        if (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0 && propsEntity.getMana() != 0) {
             return false;
+        }
         if (worldData.isInsideRestrictedArea((int)player.position().x(), (int)player.position().y(), (int)player.position().z()))
         {
             boolean isWhitelsited = false;

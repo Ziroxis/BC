@@ -57,7 +57,7 @@ public class ExperienceCommand {
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
         ExperienceUpEvent event = new ExperienceUpEvent(player, amount);
         MinecraftForge.EVENT_BUS.post(event);
-        command.sendSuccess(new TranslationTextComponent(player.getDisplayName().getString() + " " + set + " " + amount + " experince"), true);
+        command.sendSuccess(new TranslationTextComponent(player.getDisplayName().getString() + " " + set + " " + amount + " experience"), true);
 
         return 1;
     }

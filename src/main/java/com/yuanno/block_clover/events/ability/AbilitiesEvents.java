@@ -101,8 +101,10 @@ public class AbilitiesEvents
 					if (ability instanceof ChargeableAbility && ability.isCharging())
 						((ChargeableAbility) ablProps.getEquippedAbility(ability)).charging(player);
 
-					if (ability instanceof ContinuousAbility && ability.isContinuous())
+					if (ability instanceof ContinuousAbility && ability.isContinuous()) {
+						//System.out.println("ABILITY IS CONTINUING");
 						((ContinuousAbility) ablProps.getEquippedAbility(ability)).tick(player);
+					}
 
 					if(ability.isDisabled())
 						ablProps.getEquippedAbility(ability).disableTick(player);

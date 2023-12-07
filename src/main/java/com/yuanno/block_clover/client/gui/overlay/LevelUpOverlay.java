@@ -57,7 +57,6 @@ public class LevelUpOverlay extends AbstractGui {
             {
                 spellEvolution = abilityData.getEquippedAbility(i).getName() + " has evolved!";
                 drawString(event.getMatrixStack(), Minecraft.getInstance().font, TextFormatting.BOLD + spellEvolution, 30, 30, -1);
-                System.out.println(spellEvolution);
                 int tickCountEvolution = player.tickCount + 80;
                 if (player.tickCount > tickCountEvolution)
                     abilityData.getEquippedAbility(i).evolved(true);

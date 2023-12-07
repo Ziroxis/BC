@@ -27,6 +27,8 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
+        this.onStopContinuityEvent = this::onStopContinuityEvent;
+
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)
@@ -38,11 +40,14 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
     }
 
     private void duringContinuityEvent(PlayerEntity player, int timer)
-    {
+    { /*
         if (player.tickCount % 20 == 0)
             secondsActivated += 1;
+        /*
         if (secondsActivated >= 120)
             this.stopContinuity(player);
+
+         */
     }
 
     private boolean onEndContinuityEvent(PlayerEntity player)
@@ -55,5 +60,17 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
         }        if(player instanceof ServerPlayerEntity)
             ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
     return true;
+    }
+
+    private boolean onStopContinuityEvent(PlayerEntity player)
+    {
+        if (!player.isCreative())
+        {
+            player.abilities.mayfly = false;
+            player.abilities.flying = false;
+            player.fallDistance = 0;
+        }        if(player instanceof ServerPlayerEntity)
+        ((ServerPlayerEntity)player).connection.send(new SPlayerAbilitiesPacket(player.abilities));
+        return true;
     }
 }

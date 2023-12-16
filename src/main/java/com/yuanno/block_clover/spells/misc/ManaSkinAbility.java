@@ -36,6 +36,7 @@ public class ManaSkinAbility extends ContinuousAbility implements IParallelConti
         this.setExperiencePoint(0);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
+        this.onStopContinuityEvent = this::onEndContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

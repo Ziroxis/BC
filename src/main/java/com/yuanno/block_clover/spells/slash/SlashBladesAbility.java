@@ -45,6 +45,7 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
+        this.onStopContinuityEvent = this::onEndContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.gui.ScrollPanel;
@@ -202,47 +203,23 @@ public class AbilitiesListScreenPanel extends ScrollPanel
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
     {
     	super.render(matrixStack, mouseX, mouseY, partialTicks);
-    	
-		if (true && this.isMouseOver(mouseX, mouseY))
+
+
+		if (this.isMouseOver(mouseX, mouseY))
 		{
 			Entry hoveredEntity = this.findAbilityEntry(mouseX, mouseY);
 			
 			if(hoveredEntity == null || hoveredEntity.ability.getDescription() == null)
 				return;
-
-			double posX = this.parent.width - 220;
-			double width = posX + 220;
-			int fgColor = 16777215;
-			int bgColor1 = Beapi.hexToRGB("#222222FF").getRGB();
-			int bgColor2 = Beapi.hexToRGB("#686868EE").getRGB();
-
-
 			double cooldown = hoveredEntity.ability.getMaxCooldown() / 20;
-			double posYCooldown = this.parent.height - 15;
-			double heightCooldown = posYCooldown + 120;
-			this.fillGradient(matrixStack, (int) posX, (int) posYCooldown, (int) width, (int) heightCooldown, bgColor1, bgColor2);
-			List<IReorderingProcessor> stringsCooldown = this.parent.getMinecraft().font.split(new StringTextComponent("Cooldown: " + cooldown), 210);
-
 			float manaCost = hoveredEntity.ability.getmanaCost();
-			double posYMana = this.parent.height - 30;
-			double heightMana = posYMana + 120;
-			this.fillGradient(matrixStack, (int) posX, (int) posYMana, (int) width, (int) heightMana, bgColor1, bgColor2);
-			List<IReorderingProcessor> stringsMana = this.parent.getMinecraft().font.split(new StringTextComponent("Mana cost: " + manaCost), 210);
-
-			String tooltip = hoveredEntity.ability.getDescription().getString();
-			double posY = this.parent.height - 120;
-			double height = posY + 120;
-			this.fillGradient(matrixStack, (int) posX, (int) posY, (int) width, (int) height, bgColor1, bgColor2);
-			List<IReorderingProcessor> strings = this.parent.getMinecraft().font.split(new StringTextComponent(tooltip), 210);
-			for (int b = 0; b < strings.size(); b++)
-				Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, strings.get(b), (int) posX + 5, 5 + (int) posY + 10 * b, fgColor);
-				//Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsMana.get(b), (int) posX + 5, 5 + (int) posYMana + 10 * b, fgColor);
-				//Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsCooldown.get(b), (int) posX + 5, 5 + (int) posYCooldown + 10 * b, fgColor);
-			for (int b = 0; b < stringsCooldown.size(); b++)
-				Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsCooldown.get(b), (int) posX + 5, 5 + (int) posYCooldown + 10 * b, fgColor);
-			for (int b = 0; b <stringsMana.size(); b++)
-				Beapi.drawStringWithBorder(this.parent.getMinecraft().font, matrixStack, stringsMana.get(b), (int) posX + 5, 5 + (int) posYMana + 10 * b, fgColor);
+			ITextComponent description = hoveredEntity.ability.getDescription();
+			this.parent.renderTooltip(matrixStack, new TranslationTextComponent("Cooldown: " + cooldown), mouseX, mouseY);
+			this.parent.renderTooltip(matrixStack, new TranslationTextComponent("Mana cost: " + manaCost), mouseX, mouseY + 10);
+			this.parent.renderTooltip(matrixStack, description, mouseX, mouseY + 20);
 		}
+
+
     }
 
 	class Entry

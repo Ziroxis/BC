@@ -126,12 +126,12 @@ public class EntityStatsCapability {
                 // Load the List
                 CompoundNBT listNBT = props.getCompound("devil_list"); // Replace "my_list_data" with the actual key used to save the list
                 ListNBT listTag = listNBT.getList("devil_list_data", Constants.NBT.TAG_STRING); // Replace "my_list" with the actual key used to save the list
-                List<String> myList = new ArrayList<>();
+                ArrayList<String> myList = new ArrayList<>();
                 for (int i = 0; i < listTag.size(); i++) {
                     String value = listTag.getString(i);
                     myList.add(value);
                 }
-
+                instance.setControlledDevilList(myList);
 
                 CompoundNBT hashMapNBT = props.getCompound("experience_spells");
                 HashMap<String, Integer> hashMap = new HashMap<>();

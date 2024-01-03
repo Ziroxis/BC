@@ -32,7 +32,7 @@ public class ModEntityGeneration {
         }
         if (types.contains(BiomeDictionary.Type.OCEAN) || types.contains(BiomeDictionary.Type.BEACH))
         {
-            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.CLOVER_SHARK.get(), 1, 1, 4));
+            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.CLOVER_SHARK.get(), 1, 1, 2));
         }
     }
 }

@@ -42,6 +42,7 @@ public class EntityStatsBase implements IEntityStats{
     private String innateDevilName = "";
     List<String> controlledDevilList = new ArrayList<>();
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
+    ArrayList<String> chosenAttributes = new ArrayList<>();
 
     @Override
     public void fullReset() {
@@ -509,5 +510,15 @@ public class EntityStatsBase implements IEntityStats{
         return this.innateDevilName;
     }
 
+    @Override
+    public ArrayList<String> getChosenAttributes()
+    {
+        return this.chosenAttributes;
+    }
 
+    @Override
+    public void setChosenAttributes(ArrayList<String> chosenAttributes)
+    {
+        this.chosenAttributes = chosenAttributes;
+    }
 }

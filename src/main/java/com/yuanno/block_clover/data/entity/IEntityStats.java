@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.data.entity;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -129,4 +130,7 @@ public interface IEntityStats {
 
     void setDevil(String devil);
     String getDevil();
+
+    void setChosenAttributes(ArrayList<String> chosenAttributes);
+    ArrayList<String> getChosenAttributes();
 }

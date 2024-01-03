@@ -46,7 +46,7 @@ public class SealingEffect extends SpecialEffect {
                 if (ability == null)
                     continue;
                 if (!ability.isDisabled())
-                    ability.startDisable();
+                    ability.startDisable(20);
             }
         }
         if (!livingEntity.level.isClientSide)

@@ -1,7 +1,9 @@
 package com.yuanno.block_clover.client.gui.screen.overview;
 
+import com.yuanno.block_clover.client.gui.AttributeChoiceScreen;
 import com.yuanno.block_clover.client.gui.screen.guild.GuildScreen;
 import com.yuanno.block_clover.client.gui.screen.spells.SelectHotbarAbilitiesScreen;
+import com.yuanno.block_clover.data.entity.EntityStatsBase;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -45,8 +47,15 @@ public class PlayerOverviewScreen extends Screen {
         int posY = (this.height - 256) / 2;
         posY += 210;
         posX += 40;
+        IEntityStats entityStats = EntityStatsCapability.get(player);
+        System.out.println(entityStats.getChosenAttributes());
+
         this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.spells"), b ->
         {
+            if (entityStats.getAttribute().isEmpty()) {
+                Minecraft.getInstance().setScreen(new AttributeChoiceScreen(entityStats.getChosenAttributes()));
+                return;
+            }
             Minecraft.getInstance().setScreen(new SelectHotbarAbilitiesScreen(this.player));
         }));
         posX += 240;

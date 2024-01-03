@@ -75,6 +75,17 @@ public class EntityStatsCapability {
                     hashMapNBT.putInt(key, hashMap.get(key));
                 }
                 props.put("experience_spells", hashMapNBT);
+
+                // Save the List
+                CompoundNBT listAttributeNBT = new CompoundNBT();
+                List<String> listAttributes = instance.getChosenAttributes(); // Replace this with your actual list
+                ListNBT listAttributesTag = new ListNBT();
+                for (String value : listAttributes) {
+                    listAttributesTag.add(StringNBT.valueOf(value));
+                }
+                listAttributeNBT.put("attribute_chosen_data", listAttributesTag);
+                props.put("attribute_chosen_list", listAttributeNBT);
+
                 return props;
             }
 
@@ -128,6 +139,16 @@ public class EntityStatsCapability {
                     hashMap.put(key, hashMapNBT.getInt(key));
                 }
                 instance.setExperienceSpells(hashMap);
+
+                // Load the List
+                CompoundNBT listAttributesNBT = props.getCompound("attribute_chosen_list"); // Replace "my_list_data" with the actual key used to save the list
+                ListNBT listAttributesTag = listAttributesNBT.getList("attribute_chosen_data", Constants.NBT.TAG_STRING); // Replace "my_list" with the actual key used to save the list
+                ArrayList<String> myListAttributes = new ArrayList<>();
+                for (int i = 0; i < listAttributesTag.size(); i++) {
+                    String value = listAttributesTag.getString(i);
+                    myListAttributes.add(value);
+                }
+                instance.setChosenAttributes(myListAttributes);
             }
         }, () -> new EntityStatsBase());
 

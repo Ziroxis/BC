@@ -52,10 +52,13 @@ import static com.yuanno.block_clover.api.Beapi.randomAttributeString;
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class StatsEvent {
 
+    private static ArrayList<String> attributes = new ArrayList<String>();
     @SubscribeEvent
     public static void joinWorldEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
         PlayerEntity player = event.getPlayer();
+        if (player.level.isClientSide)
+            return;
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
@@ -78,12 +81,22 @@ public class StatsEvent {
 
         if (props.hasAttribute())
             return;
+
+
         props.setMultiplier(1);
         props.setLevel(1);
         props.setExperience(0);
         props.setMaxExperience(100);
         props.setYule(0);
-        PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(), player);
+        System.out.println(props.getChosenAttributes());
+        ArrayList<String> attributes = Beapi.randomAttributes();
+        if (props.getChosenAttributes().isEmpty()) {
+            props.setChosenAttributes(attributes);
+            PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(attributes), player);
+            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
+        }
+        else
+            PacketHandler.sendTo(new SOpenAttributeChoiceScreenPacket(props.getChosenAttributes()), player);
 
 
         UUID uuid = player.getUUID();

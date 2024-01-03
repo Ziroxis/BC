@@ -27,10 +27,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.awt.*;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 import static com.yuanno.block_clover.api.Beapi.randomAttributeString;
 
@@ -45,14 +43,13 @@ public class AttributeChoiceScreen extends Screen {
     private final int xSize = 64;
     private final int ySize = 58;
     private String value = "";
-    private String randomAttribute1 = "";
-    private String randomAttribute2 = "";
-    private String randomAttribute3 = "";
+    private ArrayList<String> attributes = new ArrayList<>();
 
-    public AttributeChoiceScreen()
+    public AttributeChoiceScreen(ArrayList<String> attributes)
     {
         super(new StringTextComponent(""));
         this.player = Minecraft.getInstance().player;
+        this.attributes = attributes;
     }
 
     @Override
@@ -63,14 +60,12 @@ public class AttributeChoiceScreen extends Screen {
         int posY = (this.height - 256) / 2;
 
         // here the randomizer comes in and chooses 3 different attributes for the player, makes sure it's never the same
-        this.randomAttribute1 = randomAttributeString();
-        this.randomAttribute2 = randomAttributeString(randomAttribute1);
-        this.randomAttribute3 = randomAttributeString(randomAttribute1, randomAttribute2);
 
 
-        String randomAttributeString = randomAttribute1;
-        String randomAttributeString2 = randomAttribute2;
-        String randomAttributeString3 = randomAttribute3;
+        System.out.println(attributes);
+        String randomAttributeString = attributes.get(0);
+        String randomAttributeString2 = attributes.get(1);
+        String randomAttributeString3 = attributes.get(2);
 
         if (randomAttributeString.equals(ModValues.ANTIMAGIC))
             randomAttributeString = "Anti magic";
@@ -80,11 +75,11 @@ public class AttributeChoiceScreen extends Screen {
             randomAttributeString3 = "Anti magic";
         // here the buttons that show the attribute, once chosen they'll receive the ability etc
         NoTextureButton AttributeChoice1 = new NoTextureButton(posX + 25, posY + 100, 60, 16, new TranslationTextComponent(randomAttributeString),
-                (btn) -> this.getAttribute(randomAttribute1));
+                (btn) -> this.getAttribute(attributes.get(0)));
         NoTextureButton AttributeChoice2 = new NoTextureButton(posX + 90, posY + 100, 60, 16, new TranslationTextComponent(randomAttributeString2),
-                (btn) -> this.getAttribute(randomAttribute2));
+                (btn) -> this.getAttribute(attributes.get(1)));
         NoTextureButton AttributeChoice3 = new NoTextureButton(posX + 155, posY + 100, 60, 16, new TranslationTextComponent(randomAttributeString3),
-                (btn) -> this.getAttribute(randomAttribute3));
+                (btn) -> this.getAttribute(attributes.get(2)));
         this.addButton(AttributeChoice1);
         this.addButton(AttributeChoice2);
         this.addButton(AttributeChoice3);
@@ -213,8 +208,8 @@ public class AttributeChoiceScreen extends Screen {
     {
         return false;
     }
-    public static void open()
+    public static void open(ArrayList<String> attributes)
     {
-        Minecraft.getInstance().setScreen(new AttributeChoiceScreen());
+        Minecraft.getInstance().setScreen(new AttributeChoiceScreen(attributes));
     }
 }

@@ -1,7 +1,10 @@
 package com.yuanno.block_clover.client.gui.screen.spells;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.networking.CEquipAbilityPacket;
@@ -13,14 +16,15 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraftforge.client.gui.ScrollPanel;
 
 import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -214,13 +218,23 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 			double cooldown = hoveredEntity.ability.getMaxCooldown() / 20;
 			float manaCost = hoveredEntity.ability.getmanaCost();
 			ITextComponent description = hoveredEntity.ability.getDescription();
-			this.parent.renderTooltip(matrixStack, new TranslationTextComponent("Cooldown: " + cooldown), mouseX, mouseY);
-			this.parent.renderTooltip(matrixStack, new TranslationTextComponent("Mana cost: " + manaCost), mouseX, mouseY + 10);
-			this.parent.renderTooltip(matrixStack, description, mouseX, mouseY + 20);
+			StringBuilder longString = new StringBuilder("Cooldown: " + cooldown + "\n" + "Mana cost: " + manaCost + "\n" + description.getString());
+			AbilityCore[] dependencies = hoveredEntity.ability.getCore().getDependencies();
+			if (!(dependencies == null || dependencies.length == 0)) {
+				List<AbilityCore> list = Arrays.asList(dependencies);
+				for (AbilityCore core : list) {
+					longString.append("\n" + "Need: ").append(core.getName());
+				}
+			}
+			this.parent.renderTooltip(matrixStack, new TranslationTextComponent(String.valueOf(longString)), mouseX, mouseY);
+
+
+
 		}
 
 
     }
+
 
 	class Entry
 	{

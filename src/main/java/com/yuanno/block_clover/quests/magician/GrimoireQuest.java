@@ -8,12 +8,16 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.data.quest.IQuestData;
+import com.yuanno.block_clover.data.quest.QuestDataCapability;
+import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
@@ -44,8 +48,9 @@ public class GrimoireQuest extends Quest {
     public boolean giveReward(PlayerEntity player)
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
+        IQuestData questData = QuestDataCapability.get(player);
+        questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
         entityStats.setGrimoire(true);
-        System.out.println("reward reacher");
         if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC))
         {
             IAbilityData abilityDataBase = AbilityDataCapability.get(player);
@@ -63,6 +68,7 @@ public class GrimoireQuest extends Quest {
             abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataBase), player);
         }
+        /*
         if (entityStats.getInnateDevil()) {
             player.sendMessage(new StringTextComponent("You feel an evil aura from your grimoire"), Util.NIL_UUID);
             IAbilityData abilityDataBase = AbilityDataCapability.get(player);
@@ -80,6 +86,9 @@ public class GrimoireQuest extends Quest {
             }
             PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataBase), player);
         }
+
+         */
+        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
         return true;
     }

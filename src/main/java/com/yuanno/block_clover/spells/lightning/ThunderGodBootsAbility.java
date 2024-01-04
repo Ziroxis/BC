@@ -40,7 +40,6 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         this.setEvolvedManaCost(50);
         this.setMaxCooldown(5);
         this.setExperiencePoint(7);
-        this.setEvolutionCost(1);
         this.setExperienceGainLevelCap(10);
 
         this.onStartContinuityEvent = this::onStartContinuityEvent;

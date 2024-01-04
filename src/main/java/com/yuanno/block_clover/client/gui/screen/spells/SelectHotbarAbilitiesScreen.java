@@ -8,6 +8,7 @@ import com.yuanno.block_clover.client.gui.button.TexturedIconButton;
 import com.yuanno.block_clover.client.gui.button.NoTextureButton;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.entity.EntityStatsBase;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModResources;
@@ -184,7 +185,8 @@ public class SelectHotbarAbilitiesScreen extends Screen
 		Ability[] arr = new Ability[list.size()];
 		arr = list.toArray(arr);
 		
-		this.abilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);	
+		this.abilitiesList = new AbilitiesListScreenPanel(this, this.abilityDataProps, arr);
+
 		this.children.add(this.abilitiesList);
 		this.setFocused(this.abilitiesList);
 	}

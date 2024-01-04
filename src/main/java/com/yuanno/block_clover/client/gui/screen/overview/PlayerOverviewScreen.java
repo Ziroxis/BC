@@ -48,7 +48,6 @@ public class PlayerOverviewScreen extends Screen {
         posY += 210;
         posX += 40;
         IEntityStats entityStats = EntityStatsCapability.get(player);
-        System.out.println(entityStats.getChosenAttributes());
 
         this.addButton(new Button(posX, posY, 70, 20, new TranslationTextComponent("gui.blackclover.stats.spells"), b ->
         {

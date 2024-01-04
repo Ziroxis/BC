@@ -39,7 +39,7 @@ import java.util.Random;
 public class Ability extends ForgeRegistryEntry<Ability> {
 
     private boolean isEvolved;
-    private int evolutionCost;
+    private int evolutionCost = 0;
     private String name = "";
     private String displayName;
     private String textureName = "";

@@ -7,6 +7,8 @@ import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.CEquipAbilityPacket;
 import com.yuanno.block_clover.networking.CTogglePassiveAbilityPacket;
 import com.yuanno.block_clover.networking.PacketHandler;
@@ -21,10 +23,8 @@ import net.minecraftforge.client.gui.ScrollPanel;
 
 import java.awt.*;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -226,8 +226,13 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 					longString.append("\n" + "Need: ").append(core.getName());
 				}
 			}
+			IEntityStats entityStats = EntityStatsCapability.get(parent.player);
+			HashMap<String, Integer> spells = entityStats.getExperienceSpells();
+			if (hoveredEntity.ability.getEvolutionCost() != 0 && spells.containsKey(hoveredEntity.ability.getName()))
+			{
+				longString.append("\n" + "Experience: " + spells.get(hoveredEntity.ability.getName()) + "/" + hoveredEntity.ability.getEvolutionCost());
+			}
 			this.parent.renderTooltip(matrixStack, new TranslationTextComponent(String.valueOf(longString)), mouseX, mouseY);
-
 
 
 		}

@@ -228,9 +228,15 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 			}
 			IEntityStats entityStats = EntityStatsCapability.get(parent.player);
 			HashMap<String, Integer> spells = entityStats.getExperienceSpells();
-			if (hoveredEntity.ability.getEvolutionCost() != 0 && spells.containsKey(hoveredEntity.ability.getName()))
+			if (hoveredEntity.ability.getEvolutionCost() != 0
+					&& spells.containsKey(hoveredEntity.ability.getName())
+					&& !(hoveredEntity.ability.getEvolutionCost() <= spells.get(hoveredEntity.ability.getName())))
 			{
 				longString.append("\n" + "Experience: " + spells.get(hoveredEntity.ability.getName()) + "/" + hoveredEntity.ability.getEvolutionCost());
+			}
+			else if (hoveredEntity.ability.getEvolutionCost() <= spells.get(hoveredEntity.ability.getName()))
+			{
+				longString.append("\n" + "EVOLVED");
 			}
 			this.parent.renderTooltip(matrixStack, new TranslationTextComponent(String.valueOf(longString)), mouseX, mouseY);
 

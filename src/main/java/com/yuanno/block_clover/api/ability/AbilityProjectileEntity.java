@@ -93,7 +93,24 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		this.maxLife = this.life;
 		this.damage = 0.1f;
 		this.setThrower(thrower);
-		
+		// Assuming player is an instance of PlayerEntity
+		double playerX = thrower.getX();
+		double playerY = thrower.getY() + thrower.getEyeHeight(); // Adjusted for eye height
+		double playerZ = thrower.getZ();
+
+		// Get player's look direction
+		float yaw = thrower.yRot;
+		float pitch = thrower.xRot;
+
+		// Calculate the offset in the direction the player is looking
+		double offset = 0.95; // Adjust this value as needed
+		double offsetX = offset * -Math.sin(Math.toRadians(yaw));
+		double offsetY = offset * -Math.sin(Math.toRadians(pitch));
+		double offsetZ = offset * Math.cos(Math.toRadians(yaw));
+
+		// Create the projectile at the adjusted coordinates
+		this.setPos(playerX + offsetX, playerY, playerZ + offsetZ);
+
 		this.source = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile();
 		this.bypassingSource = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile().bypassArmor();		
 	}
@@ -103,65 +120,67 @@ public class AbilityProjectileEntity extends ThrowableEntity
 	{
 		super.tick();
 		
-		if (!this.level.isClientSide)
-		{
-			if (this.life <= 0)
-			{
+		if (!this.level.isClientSide) {
+
+			// handles life stuff
+			if (this.life <= 0) {
 				this.life = this.maxLife;
 				//this.onBlockImpactEvent.onImpact(this.blockPosition());
 				this.remove();
 				return;
-			}
-			else
+			} else
 				this.life--;
-			
-			if(ExtendedWorldData.get(this.level).isInsideRestrictedArea((int)this.getX(), (int)this.getY(), (int)this.getZ()))
-			{
+
+			// handles world data stuff
+			if (ExtendedWorldData.get(this.level).isInsideRestrictedArea((int) this.getX(), (int) this.getY(), (int) this.getZ())) {
 				this.remove();
 				return;
 			}
+
+
+			Vector3d vec31 = new Vector3d(this.getX(), this.getY(), this.getZ());
+			Vector3d vec3 = new Vector3d(this.getX() + this.getDeltaMovement().x, this.getY() + this.getDeltaMovement().y, this.getZ() + this.getDeltaMovement().z);
+			RayTraceResult hit = this.level.clip(new RayTraceContext(vec3, vec31, BlockMode.OUTLINE, FluidMode.ANY, this));
+			double sizeX = this.collisionSize;
+			double sizeY = this.collisionSize;
+			double sizeZ = this.collisionSize;
+
+			AxisAlignedBB aabb = new AxisAlignedBB(this.getX(), this.getY(), this.getZ(), this.getX(), this.getY(), this.getZ()).expandTowards(sizeX, sizeY, sizeZ);
+			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+
+			Entity entity = null;
+
+			for (Entity target : list)
+				if (target.canBeCollidedWith() && (target != this.getOwner() || this.tickCount >= 5))
+					entity = target;
+
+			if (entity == this.getOwner())
+				return;
+
+			if (entity != null)
+				hit = new EntityRayTraceResult(entity);
+
+			if (hit.getType() == RayTraceResult.Type.ENTITY)
+				this.onHit(hit);
+
+			if (this.tickCount % this.getTargetResetTime() == 0)
+				this.clearTargets();
+
+			this.onTickEvent.onTick();
 		}
-
-		Vector3d vec31 = new Vector3d(this.getX(), this.getY(), this.getZ());
-		Vector3d vec3 = new Vector3d(this.getX() + this.getDeltaMovement().x, this.getY() + this.getDeltaMovement().y, this.getZ() + this.getDeltaMovement().z);
-		RayTraceResult hit = this.level.clip(new RayTraceContext(vec3, vec31, BlockMode.OUTLINE, FluidMode.ANY, this));
-
-		double sizeX = this.collisionSize;
-		double sizeY = this.collisionSize;
-		double sizeZ = this.collisionSize;
-
-		AxisAlignedBB aabb = new AxisAlignedBB(this.getX(), this.getY(), this.getZ(), this.getX(), this.getY(), this.getZ()).expandTowards(sizeX, sizeY, sizeZ);
-		List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
-
-		Entity entity = null;
-
-		for (Entity target : list)
-			if (target.canBeCollidedWith() && (target != this.getOwner() || this.tickCount >= 5)) entity = target;
-		
-		if (entity == this.getOwner())
-			return;
-
-		if (entity != null)
-			hit = new EntityRayTraceResult(entity);
-
-		if (hit.getType() == RayTraceResult.Type.ENTITY)
-			this.onHit(hit);
-
-		if(this.tickCount % this.getTargetResetTime() == 0)
-			this.clearTargets();
-
-		this.onTickEvent.onTick();
-
 	}
 
 	@Override
-	public void shootFromRotation(Entity thrower, float yRotIn, float xRotIn, float pitchOffset, float velocity, float inaccuracy)
+	public void shootFromRotation(Entity thrower, float pX, float pY, float pZ, float velocity, float inaccuracy)
 	{
 		ProjectileShootEvent event = new ProjectileShootEvent(this, velocity, inaccuracy);
 		if (MinecraftForge.EVENT_BUS.post(event))
 			return;
 		this.clearTargets();
-		super.shootFromRotation(thrower, yRotIn, xRotIn, pitchOffset, velocity, inaccuracy);
+		float f = -MathHelper.sin(pY * ((float) Math.PI / 180F)) * MathHelper.cos(pX * ((float) Math.PI / 180F));
+		float f1 = -MathHelper.sin((pX + pZ) * ((float) Math.PI / 180F));
+		float f2 = MathHelper.cos(pY * ((float) Math.PI / 180F)) * MathHelper.cos(pX * ((float) Math.PI / 180F));
+		this.shoot(f, f1, f2, velocity, inaccuracy);
 	}
 	
 	// XXX(wynd) - Due to legacy reasons this method will remain as 'shoot' despite being more correctly to name it 'shootFromRotation'. Over time the name change should be a priority to avoid further confusions

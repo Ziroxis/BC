@@ -43,33 +43,6 @@ public class MercuryRainAbility extends ContinuousAbility {
             projectile.setDeltaMovement(0, -1, 0);
             player.level.addFreshEntity(projectile);
 
-
-
-
-
-
-            /*
-            double spawnHeight = player.getY() + 20; // adjust this value to set the spawn height
-            // spawn a projectile in front of the player
-            double frontSpawnX = player.getX() + (Math.random() * 30 - 5); // adjust the range of random offsets as needed
-            double frontSpawnZ = player.getZ() + (Math.random() * 30 - 5);
-            Vector3d frontSpawnPos = new Vector3d(frontSpawnX, spawnHeight, frontSpawnZ);
-            MercuryRainProjectile frontProjectile = new MercuryRainProjectile(player.level, player);
-            frontProjectile.setPos(frontSpawnPos.x, frontSpawnPos.y, frontSpawnPos.z);
-            frontProjectile.setDeltaMovement(0, -1, 0);
-            player.level.addFreshEntity(frontProjectile);
-
-            // spawn a projectile behind the player
-            double backSpawnX = player.getX() - (Math.random() * 30 - 5); // adjust the range of random offsets as needed
-            double backSpawnZ = player.getZ() - (Math.random() * 30 - 5);
-            Vector3d backSpawnPos = new Vector3d(backSpawnX, spawnHeight, backSpawnZ);
-            MercuryRainProjectile backProjectile = new MercuryRainProjectile(player.level, player);
-            backProjectile.setPos(backSpawnPos.x, backSpawnPos.y, backSpawnPos.z);
-            backProjectile.setDeltaMovement(0, -1, 0);
-            player.level.addFreshEntity(backProjectile);
-
-             */
-
         }
 
     }

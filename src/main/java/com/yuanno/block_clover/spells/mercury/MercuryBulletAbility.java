@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class MercuryBulletAbility extends Ability {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Mercury Bullet", AbilityCategories.AbilityCategory.ATTRIBUTE, MercuryBulletAbility.class)
-            .setDescription("Shoots a ball of mercury, poisoning the target")
+            .setDescription("Shoots a ball of mercury, poisoning the target.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
 
@@ -34,6 +34,9 @@ public class MercuryBulletAbility extends Ability {
             projectile.setPassThroughEntities();
             projectile.setLife(128);
         }
+
+
+
         player.level.addFreshEntity(projectile);
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2, 1);
         return true;

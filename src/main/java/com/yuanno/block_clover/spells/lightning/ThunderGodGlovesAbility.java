@@ -7,6 +7,7 @@ import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility
 import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.lightning.GlovesParticleEffect;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
@@ -42,6 +43,8 @@ public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements I
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHit;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
+        this.onStopContinuityEvent = this::onStopContinuityEvent;
+
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)
@@ -62,6 +65,12 @@ public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements I
         return 1;
     }
     private boolean onEndContinuityEvent(PlayerEntity player)
+    {
+        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(LIGHTNING_ATTACK);
+        player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(LIGHTNING_ATTACK_SPEED);
+        return true;
+    }
+    private boolean onStopContinuityEvent(PlayerEntity player)
     {
         player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(LIGHTNING_ATTACK);
         player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(LIGHTNING_ATTACK_SPEED);

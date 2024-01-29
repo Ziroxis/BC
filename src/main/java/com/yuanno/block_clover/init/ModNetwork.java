@@ -28,6 +28,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(CPromoteGuildPacket.class, CPromoteGuildPacket::encode, CPromoteGuildPacket::decode, CPromoteGuildPacket::handle);
         PacketHandler.registerPacket(CRequestSyncWorldDataPacket.class, CRequestSyncWorldDataPacket::encode, CRequestSyncWorldDataPacket::decode, CRequestSyncWorldDataPacket::handle);
         PacketHandler.registerPacket(CJoinGuildPacket.class, CJoinGuildPacket::encode, CJoinGuildPacket::decode, CJoinGuildPacket::handle);
+        PacketHandler.registerPacket(CSyncDevilStatsPacket.class, CSyncDevilStatsPacket::encode, CSyncDevilStatsPacket::decode, CSyncDevilStatsPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);
@@ -48,6 +49,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SOpenAttributeChoiceScreenPacket.class, SOpenAttributeChoiceScreenPacket::encode, SOpenAttributeChoiceScreenPacket::decode, SOpenAttributeChoiceScreenPacket::handle);
         PacketHandler.registerPacket(SOpenQuestBoardPacket.class, SOpenQuestBoardPacket::encode, SOpenQuestBoardPacket::decode, SOpenQuestBoardPacket::handle);
         PacketHandler.registerPacket(SOpenChatPromptScreenQuestBoardPacket.class, SOpenChatPromptScreenQuestBoardPacket::encode, SOpenChatPromptScreenQuestBoardPacket::decode, SOpenChatPromptScreenQuestBoardPacket::handle);
+        PacketHandler.registerPacket(SSyncDevilPacket.class, SSyncDevilPacket::encode, SSyncDevilPacket::decode, SSyncDevilPacket::handle);
 
 
         //SYNC

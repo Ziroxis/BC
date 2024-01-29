@@ -58,7 +58,6 @@ public class SOpenAttributeChoiceScreenPacket
 		@OnlyIn(Dist.CLIENT)
 		public static void handle(SOpenAttributeChoiceScreenPacket message)
 		{
-			System.out.println(message.strings);
 			AttributeChoiceScreen.open(message.strings);
 		}
 	}

@@ -38,9 +38,6 @@ public class EntityStatsBase implements IEntityStats{
     private int maxCookingLevel;
     private int cookingExperience;
     private int maxCookingExperience;
-    private boolean innateDevil;
-    private String innateDevilName = "";
-    List<String> controlledDevilList = new ArrayList<>();
     private HashMap<String, Integer> experienceSpells = new HashMap<String, Integer>();
     ArrayList<String> chosenAttributes = new ArrayList<>();
 
@@ -70,9 +67,6 @@ public class EntityStatsBase implements IEntityStats{
         maxCookingLevel = 0;
         cookingExperience = 0;
         maxCookingExperience = 0;
-        innateDevil = false;
-        innateDevilName = "";
-        controlledDevilList.clear();
         experienceSpells.clear();
     }
 
@@ -94,29 +88,7 @@ public class EntityStatsBase implements IEntityStats{
         return this.yule;
     }
 
-    @Override
-    public List<String> getControlledDevilList()
-    {
-        return controlledDevilList;
-    }
 
-    @Override
-    public void setControlledDevilList(List<String> controlledDevilList)
-    {
-        this.controlledDevilList = controlledDevilList;
-    }
-
-    @Override
-    public void addControlledDevilList(String devilListAddition)
-    {
-        this.controlledDevilList.add(devilListAddition);
-    }
-
-    @Override
-    public String getDevilInList(int key)
-    {
-        return this.controlledDevilList.get(key);
-    }
 
     @Override
     public HashMap<String, Integer> getExperienceSpells() {
@@ -486,29 +458,6 @@ public class EntityStatsBase implements IEntityStats{
         this.canLink = can;
     }
 
-    @Override
-    public void setInnateDevil(boolean flag)
-    {
-        this.innateDevil = flag;
-    }
-
-    @Override
-    public boolean getInnateDevil()
-    {
-        return this.innateDevil;
-    }
-
-    @Override
-    public void setDevil(String devil)
-    {
-        this.innateDevilName = devil;
-    }
-
-    @Override
-    public String getDevil()
-    {
-        return this.innateDevilName;
-    }
 
     @Override
     public ArrayList<String> getChosenAttributes()

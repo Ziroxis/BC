@@ -1,6 +1,5 @@
 package com.yuanno.block_clover.world.structure.configured;
 
-import com.yuanno.block_clover.AttachingCapabilities;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.init.ModStructures;
 import net.minecraft.util.ResourceLocation;

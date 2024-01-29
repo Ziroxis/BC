@@ -15,7 +15,6 @@ import com.yuanno.block_clover.spells.darkness.AvidyaSlashAbility;
 import com.yuanno.block_clover.spells.darkness.AvidyaWildSlashAbility;
 import com.yuanno.block_clover.spells.darkness.BlackHoleAbility;
 import com.yuanno.block_clover.spells.darkness.BluntStrikeAbility;
-import com.yuanno.block_clover.spells.devil.DevilSummoningAbility;
 import com.yuanno.block_clover.spells.earth.*;
 import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
@@ -48,10 +47,6 @@ public class AbilityProgressionEvents {
 
         if (!statsProps.hasGrimoire())
             return;
-        if (statsProps.getInnateDevil())
-        {
-            gainAbility(event.getPlayer(), 10, DevilSummoningAbility.INSTANCE);
-        }
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {
             gainAbility(event.getPlayer(), 5, WaterShieldAbility.INSTANCE);

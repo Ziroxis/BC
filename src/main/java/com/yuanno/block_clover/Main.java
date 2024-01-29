@@ -82,7 +82,6 @@ public class Main
 
         ModEffects.EFFECTS.register(modEventBus);
         ModRegistry.ENTITY_TYPES.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(new AttachingCapabilities.Registry());
 
         BeRegistry.ABILITIES.register(modEventBus);
         ModAbilities.register(modEventBus);

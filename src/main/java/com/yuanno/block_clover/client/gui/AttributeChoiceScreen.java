@@ -62,7 +62,6 @@ public class AttributeChoiceScreen extends Screen {
         // here the randomizer comes in and chooses 3 different attributes for the player, makes sure it's never the same
 
 
-        System.out.println(attributes);
         String randomAttributeString = attributes.get(0);
         String randomAttributeString2 = attributes.get(1);
         String randomAttributeString3 = attributes.get(2);

@@ -25,7 +25,6 @@ public class EntityStatsCapability {
             public INBT writeNBT(Capability<IEntityStats> capability, IEntityStats instance, Direction side)
             {
                 CompoundNBT props = new CompoundNBT();
-
                 props.putBoolean("isInCombatMode", instance.isInCombatMode());
                 props.putInt("level", instance.getLevel());
                 props.putInt("maxLevel", instance.getMaxLevel());
@@ -53,19 +52,6 @@ public class EntityStatsCapability {
                 props.putInt("cookingExperience", instance.getCookingExperience());
                 props.putInt("maxCookingExperience", instance.getMaxCookingExperience());
 
-                props.putBoolean("innateDevil", instance.getInnateDevil());
-                props.putString("innateDevilName", instance.getDevil());
-
-
-                // Save the List
-                CompoundNBT listNBT = new CompoundNBT();
-                List<String> myList = instance.getControlledDevilList(); // Replace this with your actual list
-                ListNBT listTag = new ListNBT();
-                for (String value : myList) {
-                    listTag.add(StringNBT.valueOf(value));
-                }
-                listNBT.put("devil_list_data", listTag);
-                props.put("devil_list", listNBT);
 
 
                 // Save the HashMap
@@ -120,18 +106,7 @@ public class EntityStatsCapability {
                 instance.setMaxCookingLevel(props.getInt("maxCookingExperience"));
                 instance.setYule(props.getInt("yule"));
 
-                instance.setInnateDevil(props.getBoolean("innateDevil"));
-                instance.setDevil(props.getString("innateDevilName"));
 
-                // Load the List
-                CompoundNBT listNBT = props.getCompound("devil_list"); // Replace "my_list_data" with the actual key used to save the list
-                ListNBT listTag = listNBT.getList("devil_list_data", Constants.NBT.TAG_STRING); // Replace "my_list" with the actual key used to save the list
-                ArrayList<String> myList = new ArrayList<>();
-                for (int i = 0; i < listTag.size(); i++) {
-                    String value = listTag.getString(i);
-                    myList.add(value);
-                }
-                instance.setControlledDevilList(myList);
 
                 CompoundNBT hashMapNBT = props.getCompound("experience_spells");
                 HashMap<String, Integer> hashMap = new HashMap<>();

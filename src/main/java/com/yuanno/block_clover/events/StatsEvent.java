@@ -63,7 +63,7 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
-        //System.out.println("Has attribute: " + props.hasAttribute());
+
         if (!props.hasAttribute())
             statsHandling(player);
         PacketHandler.sendTo(new SSyncWorldDataPacket(extendedWorldData), player);
@@ -88,7 +88,6 @@ public class StatsEvent {
         props.setExperience(0);
         props.setMaxExperience(100);
         props.setYule(0);
-        System.out.println(props.getChosenAttributes());
         ArrayList<String> attributes = Beapi.randomAttributes();
         if (props.getChosenAttributes().isEmpty()) {
             props.setChosenAttributes(attributes);

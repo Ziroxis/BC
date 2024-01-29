@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.events;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.world.random.ManaSiphoning;
 import com.yuanno.block_clover.world.spawners.AmbushSpawner;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -14,7 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 public class WorldEvents {
 
     private static final AmbushSpawner AMBUSH_SPAWNER = new AmbushSpawner();
-    private static final ManaSiphoning MANA_SIPHONING = new ManaSiphoning();
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.WorldTickEvent event)

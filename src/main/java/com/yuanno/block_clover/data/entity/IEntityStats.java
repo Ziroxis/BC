@@ -15,11 +15,6 @@ public interface IEntityStats {
     void addYule(int value);
     int getYule();
 
-    // DEVIL LIST
-    List<String> getControlledDevilList();
-    void setControlledDevilList(List<String> controlledDevilList);
-    void addControlledDevilList(String devilListAddition);
-    String getDevilInList(int key);
 
     // SPELL EXPERIENCE
     HashMap<String, Integer> getExperienceSpells();
@@ -125,11 +120,6 @@ public interface IEntityStats {
     boolean getLinkAbility();
     void setLinkAbility(boolean can);
 
-    void setInnateDevil(boolean flag);
-    boolean getInnateDevil();
-
-    void setDevil(String devil);
-    String getDevil();
 
     void setChosenAttributes(ArrayList<String> chosenAttributes);
     ArrayList<String> getChosenAttributes();

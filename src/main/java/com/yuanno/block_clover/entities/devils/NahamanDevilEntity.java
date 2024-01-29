@@ -98,18 +98,5 @@ public class NahamanDevilEntity extends DevilEntity {
     public void die(DamageSource source)
     {
         super.die(source);
-        if (source.getEntity() instanceof PlayerEntity)
-        {
-            PlayerEntity player = (PlayerEntity) source.getEntity();
-            IAbilityData abilityData = AbilityDataCapability.get(player);
-            abilityData.addUnlockedAbility(player, DarkFireBallAbility.INSTANCE);
-            // add the other abilities that you get from walgner
-            PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
-
-            IEntityStats entityStats = EntityStatsCapability.get(player);
-            entityStats.addControlledDevilList(ModValues.NAHAMAN);
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
-
-        }
     }
 }

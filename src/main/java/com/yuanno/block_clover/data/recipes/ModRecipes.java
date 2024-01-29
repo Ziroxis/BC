@@ -1,8 +1,6 @@
 package com.yuanno.block_clover.data.recipes;
 
-import com.yuanno.block_clover.AttachingCapabilities;
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.data.recipes.JuicerRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.registry.Registry;

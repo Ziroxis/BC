@@ -7,6 +7,7 @@ import com.yuanno.block_clover.api.challenges.InProgressChallenge;
 import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
 import com.yuanno.block_clover.init.ModEntities;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -18,14 +19,13 @@ import java.util.Set;
 public class DevilRitualArena extends ChallengeArena {
 
 	public static final DevilRitualArena INSTANCE = new DevilRitualArena();
-	
+
 	private static final int ARENA_SIZE = 25;
 	private static final int SAND_HEIGHT = ARENA_SIZE / 3;
-
 	public DevilRitualArena() {
 		super(ArenaStyle.BOX);
 	}
-	
+
 	@Override
 	public void buildArena(InProgressChallenge challenge) {
 		final int bottomLayerOffset = (-ARENA_SIZE) + 1;
@@ -53,7 +53,7 @@ public class DevilRitualArena extends ChallengeArena {
 	}
 
 	@Override
-	public void spawnPlayers(InProgressChallenge challenge) {		
+	public void spawnPlayers(InProgressChallenge challenge) {
 		for (LivingEntity groupMember : challenge.getGroup()) {
 			if (groupMember instanceof ServerPlayerEntity) {
 				ServerPlayerEntity player = (ServerPlayerEntity) groupMember;
@@ -61,12 +61,13 @@ public class DevilRitualArena extends ChallengeArena {
 			}
 		}
 	}
-	
+
+
 	@Override
 	public Set<LivingEntity> spawnEnemies(InProgressChallenge challenge) {
-		
+
 		Set<LivingEntity> set = new HashSet<>();
-		
+
 		WalgnerDevilEntity boss = new WalgnerDevilEntity(ModEntities.WALGNER_DEVIL.get(), challenge.getShard());
 
 		boss.forcedLoading = true;
@@ -76,7 +77,7 @@ public class DevilRitualArena extends ChallengeArena {
 		boss.setTarget(challenge.getOwner());
 		//GoalUtil.lookAtEntity(boss, challenge.getOwner());
 		set.add(boss);
-		
+
 		return set;
 	}
 }

@@ -285,5 +285,13 @@
   "challenge.message.start_title": "Starting Challenge",
   "challenge.message.start_subtitle": "Please wait",
   "challenge.message.start_fight": "§a§oFIGHT!!!§r",
-  "challenge.message.completion_report": "Completion Time: "
+  "challenge.message.completion_report": "Completion Time: ",
+
+  "challenge.block_clover.begin.lilith": "Lilith",
+  "challenge.block_clover.begin.objective.lilith": "Defeat Lilith",
+  "challenge.block_clover.begin.nahaman": "Nahaman",
+  "challenge.block_clover.begin.objective.nahaman": "Defeat Nahaman",
+  "challenge.block_clover.begin.walgner": "Walgner",
+  "challenge.block_clover.begin.objective.walgner": "Defeat Walgner"
+
 }

@@ -10,7 +10,8 @@ public class SpiralFlameGoal extends CooldownGoal {
 
     public SpiralFlameGoal(BCentity entity)
     {
-        super(entity, 180, entity.getRandom().nextInt(10));
+        super(entity);
+        this.setMaxCooldown(20);
         this.entity = entity;
         //this.entity.addThreat(3);
     }

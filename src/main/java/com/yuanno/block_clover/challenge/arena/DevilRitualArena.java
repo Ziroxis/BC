@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GlowstoneArena extends ChallengeArena {
+public class DevilRitualArena extends ChallengeArena {
 
-	public static final GlowstoneArena INSTANCE = new GlowstoneArena();
+	public static final DevilRitualArena INSTANCE = new DevilRitualArena();
 	
 	private static final int ARENA_SIZE = 25;
 	private static final int SAND_HEIGHT = ARENA_SIZE / 3;
 
-	public GlowstoneArena() {
+	public DevilRitualArena() {
 		super(ArenaStyle.BOX);
 	}
 	
@@ -41,8 +41,15 @@ public class GlowstoneArena extends ChallengeArena {
 				challenge.getArenaPos().getX(), challenge.getArenaPos().getY() - 24, challenge.getArenaPos().getZ(), ARENA_SIZE, ARENA_SIZE, ARENA_SIZE, null));
 		for (BlockPos block : blocks2)
 		{
-			challenge.getShard().setBlockAndUpdate(block, Blocks.GLOWSTONE.defaultBlockState());
+			challenge.getShard().setBlockAndUpdate(block, Blocks.OBSIDIAN.defaultBlockState());
 		}
+		ArrayList<BlockPos> blocks3 = new ArrayList<>(Beapi.createRandomizedPlatform(challenge.getShard(),
+				challenge.getArenaPos().getX(), challenge.getArenaPos().getY() - 23, challenge.getArenaPos().getZ(), ARENA_SIZE, ARENA_SIZE, ARENA_SIZE, null));
+		for (BlockPos block : blocks3)
+		{
+			challenge.getShard().setBlockAndUpdate(block, Blocks.TORCH.defaultBlockState());
+		}
+
 	}
 
 	@Override

@@ -16,7 +16,8 @@ public class CrowSpellGoal extends CooldownGoal {
 
     public CrowSpellGoal(BCentity entity)
     {
-        super(entity, 140, entity.getRandom().nextInt());
+        super(entity);
+        this.setMaxCooldown(3);
         this.entity = entity;
     }
 

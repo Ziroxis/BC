@@ -61,7 +61,6 @@ public class CStartChallengePacket {
 			ctx.get().enqueueWork(() -> {
 				ServerPlayerEntity player = ctx.get().getSender();
 				ServerWorld world = (ServerWorld) player.level;
-				IChallengesData props = ChallengesDataCapability.get(player);
 
 				ChallengeCore<?> core = ModRegistries.CHALLENGES.getValue(message.id);
 				if (core == null) {
@@ -81,8 +80,7 @@ public class CStartChallengePacket {
 				
 				// Lots of checks here just in case
 				
-				System.out.println(list);
-				
+
 				ChallengesWorldData.get().startChallenge((ServerPlayerEntity) player, new ArrayList<>(), core, message.isFree);
 			});
 		}

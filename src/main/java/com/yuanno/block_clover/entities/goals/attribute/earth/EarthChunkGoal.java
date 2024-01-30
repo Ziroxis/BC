@@ -9,8 +9,9 @@ public class EarthChunkGoal extends CooldownGoal {
 
     public EarthChunkGoal(BCentity entity)
     {
-        super(entity, 90, entity.getRandom().nextInt(10));
+        super(entity);
         this.entity = entity;
+        this.setMaxCooldown(10);
         //this.entity.addThreat(3);
     }
 

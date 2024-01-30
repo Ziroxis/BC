@@ -18,8 +18,9 @@ public class WindTornadoGoal extends CooldownGoal {
 
     public WindTornadoGoal(BCentity entity)
     {
-        super(entity, 110, entity.getRandom().nextInt(10));
+        super(entity);
         this.entity = entity;
+        this.setMaxCooldown(10);
         //this.entity.addThreat(3);
     }
 

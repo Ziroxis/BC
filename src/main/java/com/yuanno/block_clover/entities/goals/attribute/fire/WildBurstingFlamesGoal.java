@@ -9,8 +9,9 @@ public class WildBurstingFlamesGoal extends CooldownGoal {
 
     public WildBurstingFlamesGoal(BCentity entity)
     {
-        super(entity, 90, entity.getRandom().nextInt(20));
+        super(entity);
         this.entity = entity;
+        this.setMaxCooldown(10);
         //this.entity.addThreat(3);
     }
 

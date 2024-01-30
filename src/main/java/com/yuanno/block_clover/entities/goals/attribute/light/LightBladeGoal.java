@@ -10,8 +10,9 @@ public class LightBladeGoal extends CooldownGoal {
 
     public LightBladeGoal(BCentity entity)
     {
-        super(entity, 90, entity.getRandom().nextInt(10));
+        super(entity);
         this.entity = entity;
+        this.setMaxCooldown(12);
         //this.entity.addThreat(3);
     }
 

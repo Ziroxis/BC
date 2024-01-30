@@ -58,6 +58,20 @@ import static com.yuanno.block_clover.api.ability.AbilityHelper.placeBlockIfAllo
 
 public class Beapi
 {
+    public static List<BlockPos> createRandomizedPlatform(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, BlockProtectionRule rule)
+    {
+        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
+        for (int x = -sizeX; x <= sizeX; x++)
+        {
+            for (int z = -sizeZ; z <= sizeZ; z++)
+            {
+                BlockPos pos = new BlockPos(posX + x, posY, posZ + z);
+                if (Math.random() <= 0.05)
+                    blockPositions.add(pos);
+            }
+        }
+        return blockPositions;
+    }
     public static List<BlockPos> createPlatform(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, BlockProtectionRule rule)
     {
         List<BlockPos> blockPositions = new ArrayList<BlockPos>();

@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.blocks.DevilAltarBlock;
 import com.yuanno.block_clover.items.*;
 import com.yuanno.block_clover.items.artifacts.*;
 import com.yuanno.block_clover.items.clothes.*;
@@ -28,8 +27,6 @@ public class ModItems {
     //BLOCKS
     public static final RegistryObject<BlockItem> JUICER_BLOCK = ITEMS.register("juicer_block", JuicerBlockItem::new);
 
-    public static final RegistryObject<BlockItem> DEVIL_ALTAR_BLOCK = ITEMS.register("devil_altar_block", () -> new BlockItem(ModBlocks.DEVIL_ALTAR.get(),
-            new Item.Properties().tab(ModItemGroup.BLOCK_CLOVER_BLOCKS).stacksTo(1).rarity(Rarity.UNCOMMON)));
 
      /*
     //public static final RegistryObject<BlockItem> DEVIL_SUMMONER = ITEMS.register("devil_summoner", () -> new BlockItem(ModBlocks.DEVIL_SUMMONER.get(),

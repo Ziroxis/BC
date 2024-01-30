@@ -9,8 +9,10 @@ public class EarthChargeGoal extends CooldownGoal {
 
     public EarthChargeGoal(BCentity entity)
     {
-        super(entity, 360, entity.getRandom().nextInt(10));
+        super(entity);
         this.entity = entity;
+        this.setMaxCooldown(10);
+
         //this.entity.addThreat(3);
     }
 

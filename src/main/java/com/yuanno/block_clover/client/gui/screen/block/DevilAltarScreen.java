@@ -10,6 +10,7 @@ import com.yuanno.block_clover.blocks.tileentities.JuicerBlockTileEntity;
 import com.yuanno.block_clover.data.challenges.ChallengesDataCapability;
 import com.yuanno.block_clover.data.challenges.IChallengesData;
 import com.yuanno.block_clover.init.ModChallenges;
+import com.yuanno.block_clover.init.ModContainers;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CStartChallengePacket;
 import net.minecraft.client.Minecraft;
@@ -99,4 +100,6 @@ public class DevilAltarScreen extends ContainerScreen<DevilAltarContainer> {
 
         this.blit(matrix, left, top, 0, 0, 256, 256);
     }
+
+
 }

@@ -73,7 +73,7 @@ public class AbilityCategories {
         ATTRIBUTE(GET_ATTRIBUTE_ICON, GET_SECOND_ATTRIBUTE_ICON),
         MISCELLANEOUS(GET_MISCELLANEOUS_ICON),
         SPIRIT,
-        DEVIL,
+        DEVIL(GET_DEVIL_ICON),
         ALL;
 
         private Function<PlayerEntity, ResourceLocation> iconFunction;

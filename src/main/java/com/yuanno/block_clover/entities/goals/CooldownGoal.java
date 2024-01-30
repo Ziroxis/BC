@@ -3,45 +3,80 @@ package com.yuanno.block_clover.entities.goals;
 import com.yuanno.block_clover.entities.BCentity;
 import net.minecraft.entity.ai.goal.Goal;
 
-public abstract class CooldownGoal extends Goal
+public abstract class CooldownGoal<T extends BCentity> extends AbilityGoal<T>
 {
-	private BCentity entity;
 	private boolean isOnCooldown = false;
-	protected int maxCooldown, cooldown = 80, randomizer;
+	protected double maxCooldown, cooldown = 80;
+	protected int randomizer = 1;
+	private int ticksInUse;
 
-	public CooldownGoal(BCentity entity, int timer, int random)
+	public CooldownGoal(T entity)
 	{
-		this.entity = entity;
-		this.maxCooldown = timer;
-		this.cooldown = this.maxCooldown;
-		this.randomizer = random + 1;
+		super(entity);
 	}
 
-	public CooldownGoal setCooldown(int cooldown)
-	{
-		this.maxCooldown = cooldown;
-		return this;
-	}
-	
 	@Override
 	public boolean canUse()
 	{
-		if (this.isOnCooldown && this.cooldown <= 0)
-			return false;
-
-		if (this.isOnCooldown())
-		{
-			this.cooldownTick();
+		if(!super.canUse()) {
 			return false;
 		}
-		
+
+		if (this.isOnCooldown()) {
+			return this.cooldownTick();
+		}
+
+		if(this.entity.getGoalGCD().isOnGCD()) {
+			return false;
+		}
+
 		return true;
 	}
 
-	public void endCooldown()
+	@Override
+	public boolean canContinueToUse()
 	{
-		this.isOnCooldown = false;
-		this.cooldown = this.maxCooldown + this.entity.getRandom().nextInt(this.randomizer);
+		return false;
+	}
+
+	@Override
+	public void tick()
+	{
+		this.ticksInUse++;
+	}
+
+	@Override
+	public void stop()
+	{
+		this.ticksInUse = 0;
+		this.setOnCooldown(true);
+	}
+
+	public <G extends CooldownGoal> G setMaxCooldown(double cooldown)
+	{
+		this.cooldown = cooldown * 20;
+		this.maxCooldown = this.cooldown;
+		this.randomizer = (int) Math.max(1, (this.maxCooldown / 10));
+		return (G) this;
+	}
+
+	public int getTicksInUse()
+	{
+		return this.ticksInUse;
+	}
+
+	/** Get maximum cooldown in ticks */
+	public double getMaxCooldown()
+	{
+		return this.maxCooldown;
+	}
+
+	public void setOnCooldown(boolean value)
+	{
+		this.isOnCooldown = value;
+		if(value) {
+			this.entity.getGoalGCD().startGCD();
+		}
 	}
 
 	public boolean isOnCooldown()
@@ -49,28 +84,27 @@ public abstract class CooldownGoal extends Goal
 		return this.isOnCooldown;
 	}
 
-	public void setOnCooldown(boolean value)
-	{
-		this.isOnCooldown = value;
-	}
-
 	public boolean cooldownTick()
 	{
 		if (this.isOnCooldown)
 		{
 			this.cooldown--;
+			this.duringCooldown();
 			if (this.cooldown <= 0)
+			{
 				this.endCooldown();
+				this.isOnCooldown = false;
+				this.cooldown = this.maxCooldown + this.entity.getRandom().nextInt(this.randomizer);
+				return true;
+			}
 
-			return true;
+			return false;
 		}
 
 		return false;
 	}
-/*	
-	public LivingEntity getTarget()
-	{
-		return this.entity.getTarget() != null ? this.entity.getTarget() : this.entity.getRevengeTarget();
-	}
-	*/
+
+	public void duringCooldown() {};
+
+	public void endCooldown() {};
 }

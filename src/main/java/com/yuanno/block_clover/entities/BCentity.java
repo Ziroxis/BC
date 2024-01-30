@@ -2,6 +2,7 @@ package com.yuanno.block_clover.entities;
 
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.entities.goals.GoalGCD;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
@@ -15,9 +16,22 @@ import net.minecraftforge.common.MinecraftForge;
 public class BCentity extends CreatureEntity {
     protected int xpDrop = 0;
     public boolean canUseMagic = true;
+    private GoalGCD gcd = new GoalGCD();
+
+
     protected BCentity(EntityType<? extends CreatureEntity> p_i48575_1_, World p_i48575_2_) {
         super(p_i48575_1_, p_i48575_2_);
     }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+        if (!this.level.isClientSide)
+            this.gcd.tick();
+
+    }
+
 
     @Override
     public void die(DamageSource cause) {
@@ -54,4 +68,10 @@ public class BCentity extends CreatureEntity {
     {
         return canUseMagic;
     }
+    public GoalGCD getGoalGCD()
+    {
+        return this.gcd;
+    }
+
+
 }

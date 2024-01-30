@@ -9,8 +9,9 @@ public class FireBallGoal extends CooldownGoal {
 
     public FireBallGoal(BCentity entity)
     {
-        super(entity, 45, entity.getRandom().nextInt(10));
+        super(entity);
         this.entity = entity;
+        this.setMaxCooldown(10);
         //this.entity.addThreat(3);
     }
 

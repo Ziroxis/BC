@@ -1,7 +1,12 @@
 package com.yuanno.block_clover.api.challenges;
 
+import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.data.ability.AbilityDataCapability;
+import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.challenges.ChallengesDataCapability;
 import com.yuanno.block_clover.data.challenges.IChallengesData;
+import com.yuanno.block_clover.data.devil.DevilCapability;
+import com.yuanno.block_clover.data.devil.IDevil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
@@ -13,25 +18,27 @@ public class ChallengeReward {
 	public static final ChallengeReward EMPTY = new ChallengeReward();
 
 
-	private int kan = 0;
 	private List<Supplier<ItemStack>> items = new ArrayList<Supplier<ItemStack>>();
 	private List<Supplier<ChallengeCore>> challenges = new ArrayList<>();
-
+	private List<Supplier<Ability>> abilities = new ArrayList<>();
+	private List<Supplier<String>> devils = new ArrayList<>();
 
 	public List<Supplier<ItemStack>> getItems() {
 		return this.items;
 	}
 
-	public int getKan()
+	public ChallengeReward addAbility(Supplier<Ability> ability)
 	{
-		return this.kan;
-	}
-
-	public ChallengeReward setKan(int amount)
-	{
-		this.kan = amount;
+		abilities.add(ability);
 		return this;
 	}
+
+	public ChallengeReward addDevil(Supplier<String> devil)
+	{
+		devils.add(devil);
+		return this;
+	}
+
 	public ChallengeReward addChallenge(Supplier<ChallengeCore> challengeSupplier)
 	{
 		this.challenges.add(challengeSupplier);
@@ -59,6 +66,22 @@ public class ChallengeReward {
 			// so we keep it above, put the name in list and move on
 			sb.append("  " + stack.getDisplayName().getString() + (stack.getCount() > 1 ? " - " + stack.getCount() : "") + "\n");
 			player.addItem(stack);
+		}
+
+		for (Supplier<Ability> supplier : this.abilities)
+		{
+			Ability ability = supplier.get();
+			sb.append(" " + ability.getName() + " " + "unlocked" + "\n");
+			IAbilityData abilityData = AbilityDataCapability.get(player);
+			abilityData.addUnlockedAbility(player, ability);
+		}
+
+		for (Supplier<String> supplier : this.devils)
+		{
+			String devilname = supplier.get();
+			sb.append(" " + devilname + " " + "has been subjugated" + "\n");
+			IDevil devil = DevilCapability.get(player);
+			devil.addControlledDevilList(devilname);
 		}
 
 

@@ -27,7 +27,9 @@ public class DevilAltarContainer extends Container{
         this.tileEntity = world.getBlockEntity(pos);
         this.player = player;
         this.hander = new InvWrapper(inventory);
-        layoutPlayerInventorySlots(8, 84);
+
+        // Pass the IItemHandler (hander) to layoutPlayerInventorySlots
+        layoutPlayerInventorySlots(hander, 1, 1);
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
@@ -35,36 +37,72 @@ public class DevilAltarContainer extends Container{
             });
         }
     }
+
+    public DevilAltarContainer(int windowId, PlayerInventory playerInventory) {
+        super(ModContainers.DEVIL_ALTAR_CONTAINER.get(), windowId);
+        // Initialize the container without requiring world and block position
+        // Adjust the constructor call as needed
+        this.player = playerInventory.player;
+        this.hander = new InvWrapper(playerInventory);
+        this.tileEntity = null; // Set to null since there's no specific tile entity
+    }
+
     @Override
     public void slotsChanged(IInventory inv) {
         super.slotsChanged(inv);
     }
 
-    private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
-        for (int i = 0; i < amount; i++) {
-            addSlot(new SlotItemHandler(handler, index, x, y));
-            x += dx;
-            index++;
-        }
-
-        return index;
+    private int addSingleItemSlot(IItemHandler handler, int index, int x, int y) {
+        addSlot(new SlotItemHandler(handler, index, x, y));
+        return index + 1;
     }
 
-    private int addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
-        for (int j = 0; j < verAmount; j++) {
-            index = addSlotRange(handler, index, x, y, horAmount, dx);
-            y += dy;
-        }
+    private void addSingleItemSlotToCenter(IItemHandler handler, int index) {
+        // Assuming the screen size is 176x166 (typical for a GUI)
+        int centerX = 88;
+        int centerY = 83;
 
-        return index;
+        // Assuming the slot size is 18x18
+        int slotSize = 18;
+
+        // Calculate the position for the single item slot in the center
+        int x = centerX - slotSize / 2;
+        int y = centerY - slotSize / 2;
+
+        addSingleItemSlot(handler, index, x, y);
     }
 
-    private void layoutPlayerInventorySlots(int leftCol, int topRow) {
-        addSlotBox(hander, 9, leftCol, topRow, 9, 18, 3, 18);
 
+    private void layoutPlayerInventorySlots(IItemHandler handler, int leftCol, int topRow) {
+        // Add the player inventory slots
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                int x = leftCol + col * 18;
+                int y = topRow + row * 18;
+                addSlot(new SlotItemHandler(handler, col + row * 9 + 9, x, y));
+            }
+        }
+
+        // Update the topRow to provide space between player inventory and the single item slot
         topRow += 58;
-        addSlotRange(hander, 0, leftCol, topRow, 9, 18);
+
+        // Add a single item slot to the center of the screen
+        addSingleItemSlotToCenter(handler, 0);
+
+        // Add the remaining player inventory slots
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                int x = leftCol + col * 18;
+                int y = topRow + row * 18;
+                addSlot(new SlotItemHandler(handler, col + row * 9 + 9 + 1, x, y));  // Adjust index to start after the single item slot
+            }
+        }
     }
+
+
+
+
+
 
     @Override
     public boolean stillValid(PlayerEntity player) {

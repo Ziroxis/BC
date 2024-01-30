@@ -53,9 +53,21 @@ public class ModValues {
 
     public static final String NAHAMAN = "Nahaman";
     public static final String WALGNER = "Walgner";
+    public static final String TSUKUTA = "Tsukuta"; // fabric
     public static final String LILITH = "Lilith";
-    public static final String[] devils = {
-            ModValues.NAHAMAN, ModValues.WALGNER, ModValues.LILITH
+    public static final String ASMODEUS = "Asmodeus"; // healing
+    public static final String MARBAS = "Marbas"; // illusion
+    public static final String[] HIGHEST_RANK_DEVILS = {
+            ModValues.NAHAMAN, ModValues.LILITH
+    };
+    public static final String[] HIGH_RANK_DEVIL = {
+            ModValues.ASMODEUS, ModValues.MARBAS
+    };
+    public static final String[] MID_RANK_DEVILS = {
+            ModValues.WALGNER
+    };
+    public static final String[] LOW_RANK_DEVILS = {
+            ModValues.TSUKUTA
     };
     //Races
     public static final String HUMAN = "Human";
@@ -112,7 +124,6 @@ public class ModValues {
 
     //TITLES
     public static final String BEOSTI = "Almighty Captain of Yuanno";
-    public static final String SKYLING = "Engulfing sky";
     public static final String CONZILLA = "Collected storm";
     public static final String MADDOX = "Mad Goblin";
     public static final String KAUSU = "Sage";

@@ -280,5 +280,10 @@
   "item.block_clover.bag_gluttony": "Gluttonous Bag",
   "item.block_clover.green_thumb": "Green Thumbs",
   "item.block_clover.jump_artifact": "Jump Artifact",
-  "item.block_clover.race_change": "Race Change"
+  "item.block_clover.race_change": "Race Change",
+
+  "challenge.message.start_title": "Starting Challenge",
+  "challenge.message.start_subtitle": "Please wait",
+  "challenge.message.start_fight": "§a§oFIGHT!!!§r",
+  "challenge.message.completion_report": "Completion Time: "
 }

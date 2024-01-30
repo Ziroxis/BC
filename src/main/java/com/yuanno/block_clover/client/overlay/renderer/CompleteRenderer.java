@@ -1,25 +1,14 @@
 package com.yuanno.block_clover.client.overlay.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.client.overlay.model.CheckModel;
-import com.yuanno.block_clover.client.overlay.model.ExclamationModel;
-import com.yuanno.block_clover.data.quest.IQuestData;
-import com.yuanno.block_clover.data.quest.QuestDataCapability;
-import com.yuanno.block_clover.entities.NPCentity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
 
 public class CompleteRenderer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
 

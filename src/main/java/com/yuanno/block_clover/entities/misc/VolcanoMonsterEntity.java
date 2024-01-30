@@ -1,6 +1,6 @@
 package com.yuanno.block_clover.entities.misc;
 
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import com.yuanno.block_clover.entities.goals.attribute.fire.FireBallGoal;
 import com.yuanno.block_clover.entities.goals.attribute.fire.SpiralFlameGoal;
 import com.yuanno.block_clover.entities.goals.attribute.fire.WildBurstingFlamesGoal;

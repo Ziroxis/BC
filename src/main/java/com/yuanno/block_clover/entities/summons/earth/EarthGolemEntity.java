@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.entities.summons.earth;
 
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.data.entity.EntityStatsCapability;
-import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.entities.*;
+import com.yuanno.block_clover.entities.api.BCsummon;
 import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
 import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
 import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;

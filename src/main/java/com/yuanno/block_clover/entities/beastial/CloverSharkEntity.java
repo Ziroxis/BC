@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.entities.beastial;
 
-import com.yuanno.block_clover.entities.BCWaterEntity;
-import com.yuanno.block_clover.entities.goals.attribute.wind.WindTornadoGoal;
+import com.yuanno.block_clover.entities.api.BCWaterEntity;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -12,7 +11,6 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.merchant.villager.AbstractVillagerEntity;
 import net.minecraft.entity.monster.GuardianEntity;
-import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;

@@ -1,6 +1,6 @@
 package com.yuanno.block_clover.entities.goals;
 
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import net.minecraft.entity.ai.goal.Goal;
 
 public abstract class AbilityGoal<T extends BCentity> extends Goal

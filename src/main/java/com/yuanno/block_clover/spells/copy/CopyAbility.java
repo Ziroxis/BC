@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.spells.copy;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -8,7 +9,7 @@ import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
-import com.yuanno.block_clover.entities.humanoid.BanditEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.BanditEntity;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import net.minecraft.entity.LivingEntity;
@@ -42,14 +43,14 @@ public class CopyAbility extends PunchAbility {
             IAbilityData abilityDataTarget = AbilityDataCapability.get(playerTarget);
             List<Ability> abilityListUnlocked = abilityDataTarget.getUnlockedAbilities();
             int amountAbility = abilityListUnlocked.size();
-            int random = Beapi.RNG(amountAbility) + 1;
+            int random = BeJavapi.RNG(amountAbility) + 1;
             abilityDataPlayer.addUnlockedAbility(player, abilityListUnlocked.get(random));
         }
         if (target instanceof BanditEntity)
         {
             BanditEntity targetEntity = (BanditEntity) target;
             int amountAbility = targetEntity.getAbilityList().size();
-            int random = Beapi.RNG(amountAbility);
+            int random = BeJavapi.RNG(amountAbility);
             abilityDataPlayer.addUnlockedAbility(player, targetEntity.getAbilityList().get(random));
         }
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataPlayer), player);

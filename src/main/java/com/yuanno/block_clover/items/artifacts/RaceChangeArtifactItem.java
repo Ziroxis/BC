@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.items.artifacts;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -167,7 +168,7 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                     }
                 }
             }
-            statsProps.setRace(Beapi.randomizer(ModValues.races));
+            statsProps.setRace(BeJavapi.randomizer(ModValues.races));
             switch (statsProps.getRace())
             {
                 case (ModValues.ELF):
@@ -200,7 +201,7 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                     }
                     do
                     {
-                        statsProps.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                        statsProps.setSecondAttribute(BeJavapi.randomizer(ModValues.attributes_no_antimagic));
                     }   while (statsProps.getSecondAttribute().equals(statsProps.getAttribute()));
                     String secondAttribute = statsProps.getSecondAttribute();
                     switch (secondAttribute)

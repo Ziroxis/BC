@@ -3,16 +3,11 @@ package com.yuanno.block_clover.models.entities.npc;// Made with Blockbench 4.2.
 // Paste this class into your mod and generate all required imports
 
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
-import com.yuanno.block_clover.entities.humanoid.BanditEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.BanditEntity;
 import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelHelper;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

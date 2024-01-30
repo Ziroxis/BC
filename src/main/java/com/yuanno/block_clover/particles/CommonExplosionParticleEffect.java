@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.particles;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.world.World;
@@ -24,13 +25,13 @@ public class CommonExplosionParticleEffect extends ParticleEffect
 	{
 		for (int i = 0; i < this.explosionSize * 2; i++)
 		{
-			double x = posX + Beapi.randomWithRange(-this.explosionSize / 2, this.explosionSize / 2) + Beapi.randomDouble();
+			double x = posX + BeJavapi.randomWithRange(-this.explosionSize / 2, this.explosionSize / 2) + Beapi.randomDouble();
 			double y = posY + Beapi.randomDouble();
-			double z = posZ + Beapi.randomWithRange(-this.explosionSize / 2, this.explosionSize / 2) + Beapi.randomDouble();
+			double z = posZ + BeJavapi.randomWithRange(-this.explosionSize / 2, this.explosionSize / 2) + Beapi.randomDouble();
 
-			motionX = Beapi.randomWithRange(-2, 2) + Beapi.randomDouble();
-			motionY = Beapi.randomWithRange(-2, 2) + Beapi.randomDouble();
-			motionZ = Beapi.randomWithRange(-2, 2) + Beapi.randomDouble();
+			motionX = BeJavapi.randomWithRange(-2, 2) + Beapi.randomDouble();
+			motionY = BeJavapi.randomWithRange(-2, 2) + Beapi.randomDouble();
+			motionZ = BeJavapi.randomWithRange(-2, 2) + Beapi.randomDouble();
 
 			double middlePoint = 0.5D / (5 / this.explosionSize + 0.1D);
 			middlePoint *= (Beapi.randomDouble() * 2) + 0.3F;

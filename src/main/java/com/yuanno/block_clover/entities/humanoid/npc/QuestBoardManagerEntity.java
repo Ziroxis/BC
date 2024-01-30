@@ -1,15 +1,10 @@
-package com.yuanno.block_clover.entities.humanoid;
+package com.yuanno.block_clover.entities.humanoid.npc;
 
 import com.yuanno.block_clover.client.IDynamicRenderer;
-import com.yuanno.block_clover.data.entity.EntityStatsCapability;
-import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.entities.BCentity;
-import com.yuanno.block_clover.entities.NPCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.server.SOpenChatPromptScreenPacket;
 import com.yuanno.block_clover.networking.server.SOpenChatPromptScreenQuestBoardPacket;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;

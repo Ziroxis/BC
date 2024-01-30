@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.challenge.arena;
 
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.challenges.ArenaStyle;
 import com.yuanno.block_clover.api.challenges.ChallengeArena;
@@ -31,19 +32,19 @@ public class DevilRitualArena extends ChallengeArena {
 		final int bottomLayerOffset = (-ARENA_SIZE) + 1;
 
 		// Outer barrier
-		ArrayList<BlockPos> blocks1 = new ArrayList<>(Beapi.createEmptyCube(challenge.getShard(),
+		ArrayList<BlockPos> blocks1 = new ArrayList<>(BeModApi.createEmptyCube(challenge.getShard(),
 				challenge.getArenaPos().getX(), challenge.getArenaPos().getY(), challenge.getArenaPos().getZ(), ARENA_SIZE, ARENA_SIZE, ARENA_SIZE, Blocks.BARRIER, null));
 		for (BlockPos block : blocks1) {
 			challenge.getShard().setBlockAndUpdate(block, Blocks.BARRIER.defaultBlockState());
 		}
 
-		ArrayList<BlockPos> blocks2 = new ArrayList<>(Beapi.createPlatform(challenge.getShard(),
+		ArrayList<BlockPos> blocks2 = new ArrayList<>(BeModApi.createPlatform(challenge.getShard(),
 				challenge.getArenaPos().getX(), challenge.getArenaPos().getY() - 24, challenge.getArenaPos().getZ(), ARENA_SIZE, ARENA_SIZE, ARENA_SIZE, null));
 		for (BlockPos block : blocks2)
 		{
 			challenge.getShard().setBlockAndUpdate(block, Blocks.OBSIDIAN.defaultBlockState());
 		}
-		ArrayList<BlockPos> blocks3 = new ArrayList<>(Beapi.createRandomizedPlatform(challenge.getShard(),
+		ArrayList<BlockPos> blocks3 = new ArrayList<>(BeModApi.createRandomizedPlatform(challenge.getShard(),
 				challenge.getArenaPos().getX(), challenge.getArenaPos().getY() - 23, challenge.getArenaPos().getZ(), ARENA_SIZE, ARENA_SIZE, ARENA_SIZE, null));
 		for (BlockPos block : blocks3)
 		{

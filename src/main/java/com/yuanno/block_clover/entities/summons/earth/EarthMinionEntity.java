@@ -3,7 +3,7 @@ package com.yuanno.block_clover.entities.summons.earth;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.entities.BCsummon;
+import com.yuanno.block_clover.entities.api.BCsummon;
 import com.yuanno.block_clover.entities.goals.OwnerHurtTargetGoal;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;

@@ -2,6 +2,7 @@ package com.yuanno.block_clover.api.ability;
 
 import com.google.common.base.Strings;
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
@@ -91,7 +92,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
         player.level.getProfiler().push(() ->
         {
-            return Beapi.getResourceName(this.getName());
+            return BeJavapi.getResourceName(this.getName());
         });
 
         if (this.isOnCooldown() && this.getCooldown() <= 10)
@@ -413,13 +414,13 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public String getI18nKey()
     {
-        String resourceName = Beapi.getResourceName(this.getName());
+        String resourceName = BeJavapi.getResourceName(this.getName());
         return "ability." + Main.MODID + "." + resourceName;
     }
 
     public String getDisplayName()
     {
-        return !Beapi.isNullOrEmpty(this.displayName) ? this.displayName : this.getName();
+        return !BeJavapi.isNullOrEmpty(this.displayName) ? this.displayName : this.getName();
     }
 
     public void setDisplayName(String name)
@@ -447,12 +448,12 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if(Strings.isNullOrEmpty(texture))
             this.customTexture = null;
         else
-            this.customTexture = new ResourceLocation(this.getCore().getIcon().getNamespace(), "textures/abilities/" + Beapi.getResourceName(texture) + ".png");
+            this.customTexture = new ResourceLocation(this.getCore().getIcon().getNamespace(), "textures/abilities/" + BeJavapi.getResourceName(texture) + ".png");
     }
 
     public void setCustomTexture(String texture)
     {
-        this.textureName = Beapi.getResourceName(texture);
+        this.textureName = BeJavapi.getResourceName(texture);
     }
 
     public AbilityCategories.AbilityCategory getCategory()
@@ -486,7 +487,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         // if(player.level.isClientSide)
         // return;
-        player.level.getProfiler().push(() -> Beapi.getResourceName(this.getName()));
+        player.level.getProfiler().push(() -> BeJavapi.getResourceName(this.getName()));
 
         if (this.isOnCooldown() && this.cooldown > 0)
         {

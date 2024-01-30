@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.spells.antimagic;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -45,7 +46,7 @@ public class ObtainDemonStateEvent {
             return;
 
         // IF it's a player, almost death and it's not damage because of cheese (cactus, fall, drowning, bery bush) got a chance to trigger demon state and they don't have it already
-        int random = Beapi.RNG(3);
+        int random = BeJavapi.RNG(3);
         if (random == 0)
         {
             abilityProps.addUnlockedAbility(player, DemonStateAbility.INSTANCE);

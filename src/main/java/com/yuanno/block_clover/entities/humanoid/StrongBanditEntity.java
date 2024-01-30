@@ -1,8 +1,9 @@
 package com.yuanno.block_clover.entities.humanoid;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -22,7 +23,7 @@ public class StrongBanditEntity extends BCentity {
         this.xpDrop = 200;
         this.canUseMagic = true;
         abilityList = new ArrayList<>();
-        int random = Beapi.RNG(4);
+        int random = BeJavapi.RNG(4);
         switch (random)
         {
             case 0:

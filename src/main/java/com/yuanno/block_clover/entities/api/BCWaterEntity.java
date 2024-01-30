@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.api;
 
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -8,15 +8,12 @@ import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.DolphinLookController;
-import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -25,7 +22,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 
 import javax.annotation.Nullable;
-import java.awt.font.TextHitInfo;
 
 public abstract class BCWaterEntity extends WaterMobEntity {
 

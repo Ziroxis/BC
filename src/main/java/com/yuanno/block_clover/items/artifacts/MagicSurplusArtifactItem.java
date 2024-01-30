@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.items.artifacts;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
@@ -58,7 +59,7 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
             {
                 do
                 {
-                    stats.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                    stats.setSecondAttribute(BeJavapi.randomizer(ModValues.attributes_no_antimagic));
                 }   while (stats.getSecondAttribute().equals(stats.getAttribute()));
                 String secondAttribute = stats.getSecondAttribute();
                 String firstAttribute = stats.getAttribute();

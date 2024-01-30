@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.spells.time;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
@@ -60,7 +61,7 @@ public class TimeMagicManaZoneAbility extends PassiveAbility implements IOnDamag
 
         if (!result)
         {
-            livingEntity.teleportTo(livingEntity.getX() + Beapi.RNG(2) + 1, livingEntity.getY(), livingEntity.getZ() + Beapi.RNG(2) + 1);
+            livingEntity.teleportTo(livingEntity.getX() + BeJavapi.RNG(2) + 1, livingEntity.getY(), livingEntity.getZ() + BeJavapi.RNG(2) + 1);
             if (!livingEntity.level.isClientSide)
                 PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
 

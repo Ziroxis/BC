@@ -1,11 +1,12 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.events;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.entities.api.BCWaterEntity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.lwjgl.system.CallbackI;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class WaterDamageEvent {

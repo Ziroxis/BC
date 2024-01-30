@@ -10,7 +10,7 @@ import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.blocks.tileentities.AntiMagicBlockTileEntity;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import com.yuanno.block_clover.init.ModBlocks;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;

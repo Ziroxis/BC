@@ -1,7 +1,7 @@
 package com.yuanno.block_clover.client.renderers.entities.humanoid;
 
 import com.yuanno.block_clover.Main;
-import com.yuanno.block_clover.entities.humanoid.QuestBoardManagerEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.QuestBoardManagerEntity;
 import com.yuanno.block_clover.models.entities.npc.HumanoidModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

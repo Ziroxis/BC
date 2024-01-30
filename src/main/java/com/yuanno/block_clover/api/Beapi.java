@@ -58,58 +58,9 @@ import static com.yuanno.block_clover.api.ability.AbilityHelper.placeBlockIfAllo
 
 public class Beapi
 {
-    public static List<BlockPos> createRandomizedPlatform(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, BlockProtectionRule rule)
-    {
-        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
-        for (int x = -sizeX; x <= sizeX; x++)
-        {
-            for (int z = -sizeZ; z <= sizeZ; z++)
-            {
-                BlockPos pos = new BlockPos(posX + x, posY, posZ + z);
-                if (Math.random() <= 0.05)
-                    blockPositions.add(pos);
-            }
-        }
-        return blockPositions;
-    }
-    public static List<BlockPos> createPlatform(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, BlockProtectionRule rule)
-    {
-        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
-        for (int x = -sizeX; x <= sizeX; x++)
-        {
-            for (int z = -sizeZ; z <= sizeZ; z++)
-            {
-                BlockPos pos = new BlockPos(posX + x, posY, posZ + z);
-                blockPositions.add(pos);
-            }
-        }
-        return blockPositions;
-    }
-    public static List<BlockPos> createEmptyCube(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, Block blockToPlace, BlockProtectionRule rule)
-    {
-        return createEmptyCube(world, posX, posY, posZ, sizeX, sizeY, sizeZ, 2, blockToPlace, rule);
-    }
 
-    public static List<BlockPos> createEmptyCube(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, int flags, Block blockToPlace, BlockProtectionRule rule)
-    {
-        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
-        for (int x = -sizeX; x <= sizeX; x++)
-        {
-            for (int y = -sizeY; y <= sizeY; y++)
-            {
-                for (int z = -sizeZ; z <= sizeZ; z++)
-                {
-                    if (x == -sizeX || x == sizeX || y == -sizeY || y == sizeY || z == -sizeZ || z == sizeZ)
-                    {
-                        BlockPos pos = new BlockPos(posX + x, posY + y, posZ + z);
-                        if (true)
-                            blockPositions.add(pos);
-                    }
-                }
-            }
-        }
-        return blockPositions;
-    }
+
+
     public static void sendApplyEffectToAllNearby(LivingEntity player, Vector3d pos, int distance, EffectInstance effect) {
         player.getServer().getPlayerList().broadcast(null, pos.x, pos.y, pos.z, distance, player.getCommandSenderWorld().dimension(), new SPlayEntityEffectPacket(player.getId(), effect));
     }
@@ -275,8 +226,8 @@ public class Beapi
         BlockPos blockpos = null;
         for (int i = 0; i < 10; ++i)
         {
-            int x = (int) Beapi.randomWithRange((spawnLocation.getX() - offset) - radius, (spawnLocation.getX() + offset) + radius);
-            int z = (int) Beapi.randomWithRange((spawnLocation.getZ() - offset) - radius, (spawnLocation.getZ() + offset) + radius);
+            int x = (int) BeJavapi.randomWithRange((spawnLocation.getX() - offset) - radius, (spawnLocation.getX() + offset) + radius);
+            int z = (int) BeJavapi.randomWithRange((spawnLocation.getZ() - offset) - radius, (spawnLocation.getZ() + offset) + radius);
             int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
             BlockPos blockpos1 = new BlockPos(x, y, z);
             if (WorldEntitySpawner.canSpawnAtBody(EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, world, blockpos1, type))
@@ -289,12 +240,6 @@ public class Beapi
         return blockpos;
     }
 
-    public static String randomizer(String[] values)
-    {
-        int random = RNG(values.length);
-        String randomizedString = values[random];
-        return randomizedString;
-    }
 
 
     public static <T extends Entity> List<T> getEntitiesAround(BlockPos pos, World world, double diameter)
@@ -374,18 +319,7 @@ public class Beapi
         RenderSystem.disableBlend();
     }
 
-    public static <T extends Entity> EntityType.Builder createEntityType(EntityType.IFactory<T> factory)
-    {
-        return createEntityType(factory, EntityClassification.MISC);
-    }
-    public static <T extends Entity> EntityType.Builder createEntityType(EntityType.IFactory<T> factory, EntityClassification classification)
-    {
-        EntityType.Builder<T> builder = EntityType.Builder.<T>of(factory, classification);
 
-        builder.setTrackingRange(128).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1).sized(0.6F, 1.8F);
-
-        return builder;
-    }
     public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius, Predicate<Entity> predicate, Class<? extends T>... classEntities)
     {
         if(predicate != null)
@@ -883,30 +817,6 @@ public class Beapi
             //((TemplateMixin)template).getEntities().clear();
         }
     }
-    public static double randomWithRange(int min, int max)
-    {
-        return new Random().nextInt(max + 1 - min) + min;
-    }
-
-    public static boolean RNGboolean()
-    {
-        Random rd = new Random();
-        return rd.nextBoolean();
-    }
-    public static int RNG(int cap)
-    {
-        Random rand = new Random();
-        int int_random = rand.nextInt(cap);
-
-        return int_random;
-    }
-
-    public static boolean isNullOrEmpty(String str)
-    {
-        if (str != null && !str.isEmpty() && !str.equalsIgnoreCase("n/a"))
-            return false;
-        return true;
-    }
 
     public static boolean setBlockStateInChunk(World world, BlockPos pos, BlockState newState, int flags)
     {
@@ -930,16 +840,6 @@ public class Beapi
         }
     }
 
-    public static String getResourceName(String text)
-    {
-        return text
-                .replaceAll("[ \\t]+$", "")
-                .replaceAll("\\(","")
-                .replaceAll("\\)","")
-                .replaceAll("\\s+", "_")
-                .replaceAll("[\\'\\:\\-\\,\\#]", "")
-                .replaceAll("\\&", "and").toLowerCase();
-    }
 
     public static void drawAbilityIcon(String iconName, int x, int y, int z, int u, int v)
     {
@@ -950,7 +850,7 @@ public class Beapi
     {
         RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
-        Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png"));
+        Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(Main.MODID, "textures/abilities/" + BeJavapi.getResourceName(iconName) + ".png"));
         BufferBuilder bufferbuilder = Tessellator.getInstance().getBuilder();
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR_TEX);
         bufferbuilder.vertex(x, y + v, z).color(red, green, blue, 1f).uv(0.0f, 1.0f).endVertex();
@@ -967,7 +867,7 @@ public class Beapi
 
     public static <T extends Entity> RegistryObject<EntityType<T>> registerEntityType(String localizedName, Supplier<EntityType<T>> supp)
     {
-        String resourceName = Beapi.getResourceName(localizedName);
+        String resourceName = BeJavapi.getResourceName(localizedName);
         Beapi.getLangMap().put("entity." + Main.MODID + "." + resourceName, localizedName);
 
         RegistryObject<EntityType<T>> reg = ModRegistry.ENTITY_TYPES.register(resourceName, supp);

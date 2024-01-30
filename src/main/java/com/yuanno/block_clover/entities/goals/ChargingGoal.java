@@ -1,7 +1,7 @@
 package com.yuanno.block_clover.entities.goals;
 
 
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 
 public abstract class ChargingGoal<T extends BCentity> extends CooldownGoal<T> {
 	private boolean isCharging = false;

@@ -1,6 +1,6 @@
 package com.yuanno.block_clover.entities.beastial;
 
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import com.yuanno.block_clover.entities.goals.attribute.wind.WindTornadoGoal;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.EntityType;

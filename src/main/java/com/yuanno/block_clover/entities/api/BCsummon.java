@@ -1,6 +1,5 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.api;
 
-import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

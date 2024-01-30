@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.api;
 
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;

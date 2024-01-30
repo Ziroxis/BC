@@ -1,11 +1,9 @@
-package com.yuanno.block_clover.entities.humanoid;
+package com.yuanno.block_clover.entities.humanoid.npc;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.data.entity.EntityStatsCapability;
-import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.entities.BCentity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import com.yuanno.block_clover.entities.goals.attribute.earth.EarthChargeGoal;
 import com.yuanno.block_clover.entities.goals.attribute.earth.EarthChunkGoal;
 import com.yuanno.block_clover.entities.goals.attribute.fire.FireBallGoal;
@@ -14,10 +12,6 @@ import com.yuanno.block_clover.entities.goals.attribute.light.LightBladeGoal;
 import com.yuanno.block_clover.entities.goals.attribute.light.LightBladeShowerGoal;
 import com.yuanno.block_clover.entities.goals.attribute.wind.WindBladeGoal;
 import com.yuanno.block_clover.entities.goals.attribute.wind.WindBladeShowerGoal;
-import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
-import com.yuanno.block_clover.init.ModAbilities;
-import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.spells.earth.EarthChargeAbility;
 import com.yuanno.block_clover.spells.earth.EarthChunkAbility;
 import com.yuanno.block_clover.spells.fire.FireBallAbility;
@@ -31,12 +25,9 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -49,8 +40,8 @@ public class BanditEntity extends BCentity {
         this.xpDrop = 40;
         this.canUseMagic = true;
         abilityList = new ArrayList<>();
-        int random = Beapi.RNG(4);
-        boolean randomStrength = Beapi.RNGboolean();
+        int random = BeJavapi.RNG(4);
+        boolean randomStrength = BeJavapi.RNGboolean();
         switch (random)
         {
             case 0:

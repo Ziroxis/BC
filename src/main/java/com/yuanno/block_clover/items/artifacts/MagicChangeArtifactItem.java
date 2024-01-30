@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.items.artifacts;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -132,7 +133,7 @@ public class MagicChangeArtifactItem extends ArtifactItem {
 // Unlock abilities based on the second attribute
             if (stats.hasSecondAttribute()) {
                 do {
-                    stats.setSecondAttribute(Beapi.randomizer(ModValues.attributes_no_antimagic));
+                    stats.setSecondAttribute(BeJavapi.randomizer(ModValues.attributes_no_antimagic));
                 } while (stats.getSecondAttribute().equals(stats.getAttribute()));
 
                 String secondAttribute = stats.getSecondAttribute();

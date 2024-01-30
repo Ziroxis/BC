@@ -5,34 +5,22 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.SequencedString;
 import com.yuanno.block_clover.client.gui.button.TexturedIconButton;
-import com.yuanno.block_clover.data.ability.AbilityDataCapability;
-import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
-import com.yuanno.block_clover.entities.NPCentity;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
-import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
 import com.yuanno.block_clover.networking.client.CUpdateQuestStatePacket;
-import com.yuanno.block_clover.spells.sword.OriginalDemonSlayerAbility;
-import com.yuanno.block_clover.spells.sword.OriginalMagicDestroyerAbility;
-import com.yuanno.block_clover.spells.sword.OriginalMagicDwellerAbility;
-import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
-
-import java.util.ArrayList;
 
 @OnlyIn(Dist.CLIENT)
 public class ChatPromptScreen extends Screen {

@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.client.gui.button.NoTextureButton;
@@ -122,7 +123,7 @@ public class AttributeChoiceScreen extends Screen {
 
         }
         if (!attribute.equals(ModValues.ANTIMAGIC)) {
-            entityStats.setRace(Beapi.randomizer(ModValues.races));
+            entityStats.setRace(BeJavapi.randomizer(ModValues.races));
             String race = entityStats.getRace();
             switch (race) {
                 // Humans get -> 0.2 xp multiplier; chance to be innate devil; mana regen = 1

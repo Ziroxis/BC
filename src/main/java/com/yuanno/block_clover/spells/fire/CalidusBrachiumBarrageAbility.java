@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.spells.fire;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
@@ -47,9 +48,9 @@ public class CalidusBrachiumBarrageAbility extends ContinuousAbility {
         int randZ = random.nextInt(16);
         boolean x = false;
         boolean y = false;
-        if (Beapi.RNGboolean())
+        if (BeJavapi.RNGboolean())
             x = true;
-        if (Beapi.RNGboolean())
+        if (BeJavapi.RNGboolean())
             y = true;
         FireBallProjectile projectile = new FireBallProjectile(player.level, player);
         if (x && y)

@@ -1,8 +1,7 @@
-package com.yuanno.block_clover.entities.humanoid;
+package com.yuanno.block_clover.entities.humanoid.npc;
 
 import com.yuanno.block_clover.client.IDynamicRenderer;
-import com.yuanno.block_clover.entities.BCentity;
-import com.yuanno.block_clover.events.GuildEvents;
+import com.yuanno.block_clover.entities.api.BCentity;
 import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SOpenGuildScreenpacket;

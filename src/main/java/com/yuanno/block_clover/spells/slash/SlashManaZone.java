@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.spells.slash;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
@@ -28,8 +29,8 @@ public class SlashManaZone extends ContinuousAbility {
         int randY = random.nextInt(2);
         int randZ = random.nextInt(8);
 
-        boolean x = Beapi.RNGboolean();
-        boolean y = Beapi.RNGboolean();
+        boolean x = BeJavapi.RNGboolean();
+        boolean y = BeJavapi.RNGboolean();
 
         for (int i = 0; i < 4; i++) {
             DeathScytheProjectile projectile = new DeathScytheProjectile(player.level, player);

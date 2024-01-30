@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.entities.goals;
 
-import com.yuanno.block_clover.entities.BCentity;
-import net.minecraft.entity.ai.goal.Goal;
+import com.yuanno.block_clover.entities.api.BCentity;
 
 public abstract class CooldownGoal<T extends BCentity> extends AbilityGoal<T>
 {

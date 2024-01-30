@@ -1,10 +1,9 @@
 package com.yuanno.block_clover.entities.goals;
 
-import com.yuanno.block_clover.entities.BCsummon;
+import com.yuanno.block_clover.entities.api.BCsummon;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.TargetGoal;
-import net.minecraft.entity.passive.TameableEntity;
 
 import java.util.EnumSet;
 

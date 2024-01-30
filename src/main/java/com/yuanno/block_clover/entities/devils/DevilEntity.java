@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.entities.devils;
 
-import com.yuanno.block_clover.entities.BCentity;
-import net.minecraft.entity.CreatureEntity;
+import com.yuanno.block_clover.entities.api.BCentity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
 

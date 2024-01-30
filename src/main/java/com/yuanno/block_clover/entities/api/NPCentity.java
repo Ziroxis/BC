@@ -1,10 +1,7 @@
-package com.yuanno.block_clover.entities;
+package com.yuanno.block_clover.entities.api;
 
 import com.yuanno.block_clover.api.Quest.Quest;
-import com.yuanno.block_clover.api.SequencedString;
 import com.yuanno.block_clover.client.IDynamicRenderer;
-import com.yuanno.block_clover.data.entity.EntityStatsCapability;
-import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SOpenChatPromptScreenPacket;
 import net.minecraft.entity.EntityType;

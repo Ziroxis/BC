@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.data.entity;
 
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 
@@ -287,7 +288,7 @@ public class EntityStatsBase implements IEntityStats{
 
     @Override
     public boolean hasAttribute() {
-        if (Beapi.isNullOrEmpty(this.attribute))
+        if (BeJavapi.isNullOrEmpty(this.attribute))
             return false;
 
         return true;
@@ -305,7 +306,7 @@ public class EntityStatsBase implements IEntityStats{
 
     @Override
     public boolean hasSecondAttribute() {
-        if (Beapi.isNullOrEmpty(this.secondAttribute))
+        if (BeJavapi.isNullOrEmpty(this.secondAttribute))
             return false;
         return true;
     }
@@ -342,7 +343,7 @@ public class EntityStatsBase implements IEntityStats{
 
     @Override
     public boolean hasRace() {
-        if (Beapi.isNullOrEmpty(this.race))
+        if (BeJavapi.isNullOrEmpty(this.race))
             return false;
 
         return true;
@@ -389,7 +390,7 @@ public class EntityStatsBase implements IEntityStats{
 
     @Override
     public boolean hasTitle() {
-        if (Beapi.isNullOrEmpty(this.title))
+        if (BeJavapi.isNullOrEmpty(this.title))
             return false;
 
         return true;
@@ -407,7 +408,7 @@ public class EntityStatsBase implements IEntityStats{
 
     @Override
     public boolean hasRank() {
-        if (Beapi.isNullOrEmpty(this.rank))
+        if (BeJavapi.isNullOrEmpty(this.rank))
             return false;
 
         return true;

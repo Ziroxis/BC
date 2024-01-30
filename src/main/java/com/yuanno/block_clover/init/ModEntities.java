@@ -1,17 +1,21 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
+import com.yuanno.block_clover.api.BeModApi;
+import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.entities.beastial.CloverSharkEntity;
 import com.yuanno.block_clover.entities.beastial.FlameBoarEntity;
 import com.yuanno.block_clover.entities.beastial.MonkeyEntity;
 import com.yuanno.block_clover.entities.devils.LilithDevilEntity;
 import com.yuanno.block_clover.entities.devils.NahamanDevilEntity;
 import com.yuanno.block_clover.entities.devils.WalgnerDevilEntity;
-import com.yuanno.block_clover.entities.humanoid.BanditEntity;
-import com.yuanno.block_clover.entities.humanoid.GrimoireMagicianEntity;
-import com.yuanno.block_clover.entities.humanoid.GuildEntity;
-import com.yuanno.block_clover.entities.humanoid.QuestBoardManagerEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.BanditEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.GrimoireMagicianEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.GuildEntity;
+import com.yuanno.block_clover.entities.humanoid.npc.QuestBoardManagerEntity;
 import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -20,34 +24,24 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.function.Supplier;
+
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Main.MODID);
-    public static final RegistryObject<EntityType<GrimoireMagicianEntity>> GRIMOIRE_MAGICIAN = ENTITIES
-            .register("grimoire_magician",
-                    () -> EntityType.Builder.of(GrimoireMagicianEntity::new, EntityClassification.CREATURE)
-                            .sized(1f, 2f)
-                            .setTrackingRange(5)
-                            .build(new ResourceLocation(Main.MODID, "grimoire_magician").toString()));
+    public static <T extends Entity> RegistryObject<EntityType<T>> registerEntityType(String localizedName, Supplier<EntityType<T>> supp)
+    {
+        String resourceName = BeJavapi.getResourceName(localizedName);
+        Beapi.getLangMap().put("entity." + Main.MODID + "." + resourceName, localizedName);
 
-    public static final RegistryObject<EntityType<GuildEntity>> GUILD_ENTITY = ENTITIES
-            .register("guild_entity",
-                    () -> EntityType.Builder.of(GuildEntity::new, EntityClassification.CREATURE)
-                            .sized(1f, 2f)
-                            .setTrackingRange(5)
-                            .build(new ResourceLocation(Main.MODID, "guild_entity").toString()));
+        RegistryObject<EntityType<T>> reg = ENTITIES.register(resourceName, supp);
 
-    public static final RegistryObject<EntityType<BanditEntity>> BANDIT = ENTITIES
-            .register("bandit",
-                    () -> EntityType.Builder.of(BanditEntity::new, EntityClassification.CREATURE)
-                            .sized(1f, 2f)
-                            .setTrackingRange(15)
-                            .build(new ResourceLocation(Main.MODID, "bandit").toString()));
-    public static final RegistryObject<EntityType<QuestBoardManagerEntity>> QUESTBOARD_MANAGER = ENTITIES
-            .register("questboardmanager",
-                    () -> EntityType.Builder.of(QuestBoardManagerEntity::new, EntityClassification.CREATURE)
-                            .sized(1f, 2f)
-                            .setTrackingRange(15)
-                            .build(new ResourceLocation(Main.MODID, "questboardmanager").toString()));
+        return reg;
+    }
+    public static final RegistryObject<EntityType<GrimoireMagicianEntity>> GRIMOIRE_MAGICIAN = registerEntityType("Grimoire Magician", () -> BeModApi.createEntityType(GrimoireMagicianEntity::new).build(Main.MODID + ":grimoire_magician"));
+    public static final RegistryObject<EntityType<GuildEntity>> GUILD_ENTITY = registerEntityType("Guild Manager", () -> BeModApi.createEntityType(GuildEntity::new).build(Main.MODID + ":guild_entity"));
+    public static final RegistryObject<EntityType<BanditEntity>> BANDIT = registerEntityType("Bandit", () -> BeModApi.createEntityType(BanditEntity::new).build(Main.MODID + ":bandit_entity"));
+    public static final RegistryObject<EntityType<QuestBoardManagerEntity>> QUEST_MANAGER = registerEntityType("Quest Manager", () -> BeModApi.createEntityType(QuestBoardManagerEntity::new).build(Main.MODID + ":quest_manager"));
+
     public static final RegistryObject<EntityType<VolcanoMonsterEntity>> VOLCANO_MONSTER = ENTITIES
             .register("volcano_monster",
                     () -> EntityType.Builder.of(VolcanoMonsterEntity::new, EntityClassification.CREATURE)

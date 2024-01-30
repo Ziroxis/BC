@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.client.gui.screen.spells;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.client.gui.button.TexturedIconButton;
 import com.yuanno.block_clover.client.gui.button.GuiButtonAttribute;
@@ -40,7 +41,7 @@ public class PlayerSpellScreen extends Screen {
         PlayerEntity player = mc.player;
         IEntityStats props = EntityStatsCapability.get(player);
         String attribute = props.getAttribute();
-        ResourceLocation attributeLocation = new ResourceLocation(Main.MODID + ":textures/gui/attributes/" + Beapi.getResourceName(attribute) + ".png");
+        ResourceLocation attributeLocation = new ResourceLocation(Main.MODID + ":textures/gui/attributes/" + BeJavapi.getResourceName(attribute) + ".png");
 
         posX += 120;
         /*

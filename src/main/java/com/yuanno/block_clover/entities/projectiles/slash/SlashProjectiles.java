@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.slash;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SlashProjectiles {
     public static final RegistryObject<EntityType<LightBladeProjectile>> DEATH_SCYTHE = Beapi.registerEntityType("Death Scythe",
-            () -> Beapi.createEntityType(DeathScytheProjectile::new)
+            () -> BeModApi.createEntityType(DeathScytheProjectile::new)
                     .sized(2f, 0.5f)
                     .build(Main.MODID + ":death_scythe"));
 

@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.darkness;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.wind.WindCrescentModel;
@@ -17,11 +18,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class DarknessProjectiles {
 
     public static final RegistryObject<EntityType<AvidyaSlashProjectile>> AVIDYA_SLASH = Beapi.registerEntityType("Avidya Slash",
-            () -> Beapi.createEntityType(AvidyaSlashProjectile::new)
+            () -> BeModApi.createEntityType(AvidyaSlashProjectile::new)
                     .sized(2f, 1f)
                     .build(Main.MODID + ":avidya_slash"));
     public static final RegistryObject<EntityType<AvidyaSlashEvolvedProjectile>> AVIDYA_SLASH_EVOLVED = Beapi.registerEntityType("Avidya Slash evolved",
-            () -> Beapi.createEntityType(AvidyaSlashEvolvedProjectile::new)
+            () -> BeModApi.createEntityType(AvidyaSlashEvolvedProjectile::new)
                     .sized(6f, 1f)
                     .build(Main.MODID + ":avidya_slash"));
 

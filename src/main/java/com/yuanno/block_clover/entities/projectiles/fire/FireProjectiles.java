@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.fire;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
@@ -20,27 +21,27 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FireProjectiles {
     public static final RegistryObject<EntityType<FireBallProjectile>> FIRE_BALL = Beapi.registerEntityType("Fire Ball",
-            () -> Beapi.createEntityType(FireBallProjectile::new)
+            () -> BeModApi.createEntityType(FireBallProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":fire_ball"));
     public static final RegistryObject<EntityType<FireBallDarkProjectile>> FIRE_BALL_DARK = Beapi.registerEntityType("Fire Ball Dark",
-            () -> Beapi.createEntityType(FireBallDarkProjectile::new)
+            () -> BeModApi.createEntityType(FireBallDarkProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":fire_ball_dark"));
     public static final RegistryObject<EntityType<GiantFireBallProjectile>> GIANT_FIRE_BALL = Beapi.registerEntityType("Giant Fire Ball",
-            () -> Beapi.createEntityType(GiantFireBallProjectile::new)
+            () -> BeModApi.createEntityType(GiantFireBallProjectile::new)
                     .sized(3f, 3f)
                     .build(Main.MODID + ":giant_fire_ball"));
     public static final RegistryObject<EntityType<FlameRoarProjectile>> FLAME_ROAR = Beapi.registerEntityType("Flame Roar",
-            () -> Beapi.createEntityType(FlameRoarProjectile::new)
+            () -> BeModApi.createEntityType(FlameRoarProjectile::new)
                     .sized(4f, 4f)
                     .build(Main.MODID + ":flame_roar"));
     public static final RegistryObject<EntityType<SolLineaProjectile>> SOL_LINEA = Beapi.registerEntityType("Sol Linea",
-            () -> Beapi.createEntityType(LightBladeProjectile::new)
+            () -> BeModApi.createEntityType(LightBladeProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":sol_linea"));
     public static final RegistryObject<EntityType<SpiralFlameProjectile>> SPIRAL_FLAME = Beapi.registerEntityType("Spiral Flame",
-            () -> Beapi.createEntityType(SpiralFlameProjectile::new)
+            () -> BeModApi.createEntityType(SpiralFlameProjectile::new)
                     .sized(2f, 2f)
                     .build(Main.MODID + ":spiral_flame"));
 

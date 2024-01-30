@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.client.gui.screen.spells;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -81,7 +82,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 			int j = i + (this.abilityDataProps.getCombatBarSet() * 8);
 			RenderSystem.blendFuncSeparate(770, 771, 1, 0);
 			if (this.abilityDataProps.getEquippedAbility(j) != null)
-				Beapi.drawAbilityIcon(Beapi.getResourceName(this.abilityDataProps.getEquippedAbility(j).getName()), (posX / 2) - 98 + (i * 25), posY - 29, 16, 16);
+				Beapi.drawAbilityIcon(BeJavapi.getResourceName(this.abilityDataProps.getEquippedAbility(j).getName()), (posX / 2) - 98 + (i * 25), posY - 29, 16, 16);
 		}
 		
 		RenderSystem.disableBlend();
@@ -125,7 +126,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				String iconName = abl.getName();
 				ResourceLocation icon = category.getIcon(this.player);
 				if(icon == null)
-					icon = new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png");
+					icon = new ResourceLocation(Main.MODID, "textures/abilities/" + BeJavapi.getResourceName(iconName) + ".png");
 				TexturedIconButton button = new TexturedIconButton(ModResources.TAB, posX2 - 145, posY3, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
 				button = button.setTextureInfo(posX2 - 146, posY3 - 3, 0, 0).setIconInfo(icon, posX2 - 142, posY3 + 2, 1.45);
 
@@ -133,7 +134,7 @@ public class SelectHotbarAbilitiesScreen extends Screen
 				{
 					ResourceLocation secondIcon = category.getSecondIcon(this.player);
 					if (secondIcon == null)
-						secondIcon = new ResourceLocation(Main.MODID, "textures/abilities/" + Beapi.getResourceName(iconName) + ".png");
+						secondIcon = new ResourceLocation(Main.MODID, "textures/abilities/" + BeJavapi.getResourceName(iconName) + ".png");
 					TexturedIconButton secondButton = new TexturedIconButton(ModResources.TAB, posX2 - 158, posY3, 30, 30, new StringTextComponent(""), (btn) -> this.updateListScreen(category));
 					secondButton = secondButton.setTextureInfo(posX2 - 162, posY3 - 3, 0, 0).setIconInfo(secondIcon, posX2 - 154, posY3 + 2, 1.05);
 					this.addButton(secondButton);

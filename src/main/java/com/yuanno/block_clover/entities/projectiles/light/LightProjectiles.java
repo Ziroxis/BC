@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.light;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.light.LightBladeModel;
@@ -17,11 +18,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class LightProjectiles {
 
     public static final RegistryObject<EntityType<LightBladeProjectile>> LIGHT_BLADE = Beapi.registerEntityType("Light Blade",
-            () -> Beapi.createEntityType(LightBladeProjectile::new)
+            () -> BeModApi.createEntityType(LightBladeProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":light_blade"));
     public static final RegistryObject<EntityType<GiantLightBladeProjectile>> GIANT_LIGHT_BLADE = Beapi.registerEntityType("Giant Light Blade",
-            () -> Beapi.createEntityType(GiantLightBladeProjectile::new)
+            () -> BeModApi.createEntityType(GiantLightBladeProjectile::new)
                     .sized(1.5f, 1.5f)
                     .build(Main.MODID + ":giant_light_blade"));
 

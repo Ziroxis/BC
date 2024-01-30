@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.ice;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.earth.EarthChargeModel;
@@ -19,11 +20,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class IceProjectiles {
 
     public static final RegistryObject<EntityType<IceBallProjectile>> ICE_BALL = Beapi.registerEntityType("Ice Ball",
-            () -> Beapi.createEntityType(IceBallProjectile::new)
+            () -> BeModApi.createEntityType(IceBallProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + "ice_ball"));
     public static final RegistryObject<EntityType<DarkIceBallProjectile>> DARK_ICE_BALL = Beapi.registerEntityType("Dark Ice Ball",
-            () -> Beapi.createEntityType(DarkIceBallProjectile::new)
+            () -> BeModApi.createEntityType(DarkIceBallProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + "dark_ice_ball"));
     @OnlyIn(Dist.CLIENT)

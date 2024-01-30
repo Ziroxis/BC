@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.summons.earth;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.client.renderers.summons.earth.EarthGolemRenderer;
 import com.yuanno.block_clover.client.renderers.summons.earth.EarthMinionRenderer;
@@ -18,11 +19,11 @@ public class EarthSummons {
 
 
     public static final RegistryObject<EntityType<EarthMinionEntity>> EARTH_MINION = Beapi.registerEntityType("Earth Minion",
-            () -> Beapi.createEntityType(EarthMinionEntity::new)
+            () -> BeModApi.createEntityType(EarthMinionEntity::new)
                     .sized(1f, 2f)
                     .build(Main.MODID + ":earth_minion"));
     public static final RegistryObject<EntityType<EarthGolemEntity>> EARTH_GOLEM = Beapi.registerEntityType("Earth Golem",
-            () -> Beapi.createEntityType(EarthGolemEntity::new)
+            () -> BeModApi.createEntityType(EarthGolemEntity::new)
                     .sized(1.5f, 3f)
                     .build(Main.MODID + ":earth_golem"));
 

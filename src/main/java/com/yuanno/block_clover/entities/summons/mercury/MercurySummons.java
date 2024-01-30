@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.summons.mercury;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.client.renderers.summons.mercury.MercuryBubbleRenderer;
 import com.yuanno.block_clover.client.renderers.summons.water.WaterShieldRenderer;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class MercurySummons {
 
     public static final RegistryObject<EntityType<MercuryBubbleEntity>> MERCURY_BUBBLE = Beapi.registerEntityType("Mercury Bubble",
-            () -> Beapi.createEntityType(MercuryBubbleEntity::new)
+            () -> BeModApi.createEntityType(MercuryBubbleEntity::new)
                     .sized(1.5f, 3f)
                     .build(Main.MODID + ":mercury_build"));
 

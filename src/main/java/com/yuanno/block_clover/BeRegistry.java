@@ -1,5 +1,6 @@
 package com.yuanno.block_clover;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
@@ -26,7 +27,7 @@ public class BeRegistry {
 
     public static <T extends Quest> QuestId<T> registerQuest(QuestId<T> quest)
     {
-        String resourceName = Beapi.getResourceName(quest.getName());
+        String resourceName = BeJavapi.getResourceName(quest.getName());
         Beapi.getLangMap().put("quest." + Main.MODID + "." + resourceName, quest.getName());
 
         final ResourceLocation key = new ResourceLocation(Main.MODID, resourceName);
@@ -46,7 +47,7 @@ public class BeRegistry {
 
     public static <T extends Ability> AbilityCore<T> registerAbility(AbilityCore<T> ability)
     {
-        String resourceName = Beapi.getResourceName(ability.getName());
+        String resourceName = BeJavapi.getResourceName(ability.getName());
         BeRegistry.getLangMap().put("ability." + Main.MODID + "." + resourceName, ability.getName());
 
         final ResourceLocation key = new ResourceLocation(Main.MODID, resourceName);

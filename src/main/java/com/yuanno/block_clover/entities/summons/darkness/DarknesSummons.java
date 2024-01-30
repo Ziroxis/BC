@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.summons.darkness;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.client.renderers.summons.darkness.BlackHoleRenderer;
 import net.minecraft.entity.EntityType;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class DarknesSummons {
 
     public static final RegistryObject<EntityType<BlackHoleEntity>> BLACK_HOLE = Beapi.registerEntityType("Black Hole",
-            () -> Beapi.createEntityType(BlackHoleEntity::new)
+            () -> BeModApi.createEntityType(BlackHoleEntity::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":black_hole"));
 

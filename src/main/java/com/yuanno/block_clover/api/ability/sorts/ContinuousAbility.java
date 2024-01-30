@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -119,7 +120,7 @@ public abstract class ContinuousAbility extends Ability {
             return;
         }
 
-        String resourceName = Beapi.getResourceName(getName());
+        String resourceName = BeJavapi.getResourceName(getName());
         player.level.getProfiler().push(resourceName);
 
         boolean isContinuous = isContinuous();

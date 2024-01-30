@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.lightning;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.lightning.ThunderOrbModel;
@@ -17,11 +18,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class LightningProjectiles {
 
     public static final RegistryObject<EntityType<LightningOrbProjectile>> LIGHTNING_ORB = Beapi.registerEntityType("Lightning Orb",
-            () -> Beapi.createEntityType(LightningOrbProjectile::new)
+            () -> BeModApi.createEntityType(LightningOrbProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":lightning_orb"));
     public static final RegistryObject<EntityType<GiantLightningOrbProjectile>> GIANT_LIGHTNING_ORB = Beapi.registerEntityType("Giant Lightning Orb",
-            () -> Beapi.createEntityType(GiantLightningOrbProjectile::new)
+            () -> BeModApi.createEntityType(GiantLightningOrbProjectile::new)
                     .sized(3f, 3f)
                     .build(Main.MODID + ":giant_lightning_orb"));
 

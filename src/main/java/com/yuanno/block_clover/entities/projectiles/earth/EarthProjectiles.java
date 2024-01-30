@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.earth;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.earth.EarthChargeModel;
@@ -18,15 +19,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class EarthProjectiles {
 
     public static final RegistryObject<EntityType<EarthChunkProjectile>> EARTH_CHUNK = Beapi.registerEntityType("Earth Chunk",
-            () -> Beapi.createEntityType(EarthChunkProjectile::new)
+            () -> BeModApi.createEntityType(EarthChunkProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":earth_chunk"));
     public static final RegistryObject<EntityType<GiantEarthChunkProjectile>> GIANT_EARTH_CHUNK = Beapi.registerEntityType("Giant Earth Chunk",
-            () -> Beapi.createEntityType(GiantEarthChunkProjectile::new)
+            () -> BeModApi.createEntityType(GiantEarthChunkProjectile::new)
                     .sized(3f, 3f)
                     .build(Main.MODID + ":giant_earth_chunk"));
     public static final RegistryObject<EntityType<EarthChargeProjectile>> EARTH_CHARGE = Beapi.registerEntityType("Earth Charge",
-            () -> Beapi.createEntityType(EarthChargeProjectile::new)
+            () -> BeModApi.createEntityType(EarthChargeProjectile::new)
                     .sized(2f, 1f)
                     .build(Main.MODID + ":earth_charge"));
 

@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.wind;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.wind.PiercingTornadoModel;
@@ -20,20 +21,20 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class WindProjectiles {
 
     public static final RegistryObject<EntityType<WindBladeProjectile>> WIND_BLADE = Beapi.registerEntityType("Wind Blade",
-            () -> Beapi.createEntityType(WindBladeProjectile::new)
+            () -> BeModApi.createEntityType(WindBladeProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":wind_blade"));
 
     public static final RegistryObject<EntityType<WindCrescentProjectile>> WIND_CRESCENT = Beapi.registerEntityType("Wind Crescent",
-            () -> Beapi.createEntityType(WindCrescentProjectile::new)
+            () -> BeModApi.createEntityType(WindCrescentProjectile::new)
                     .sized(2f, 2f)
                     .build(Main.MODID + ":wind_crescent"));
     public static final RegistryObject<EntityType<WindGaleProjectile>> WIND_GALE = Beapi.registerEntityType("Wind Gale",
-            () -> Beapi.createEntityType(WindGaleProjectile::new)
+            () -> BeModApi.createEntityType(WindGaleProjectile::new)
                     .sized(2f, 2f)
                     .build(Main.MODID + ":wind_gale"));
     public static final RegistryObject<EntityType<PiercingTornadoProjectile>> PIERCING_TORNADO = Beapi.registerEntityType("Piercing Tornado",
-            () -> Beapi.createEntityType(PiercingTornadoProjectile::new)
+            () -> BeModApi.createEntityType(PiercingTornadoProjectile::new)
                     .sized(1.5f, 1.5f)
                     .build(Main.MODID + ":piercing_tornado"));
 

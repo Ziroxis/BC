@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.networking;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
@@ -24,7 +25,7 @@ public class CTogglePassiveAbilityPacket
 	
 	public CTogglePassiveAbilityPacket(Ability ability, boolean flag)
 	{
-		this.abilityName = Beapi.getResourceName(ability.getName());
+		this.abilityName = BeJavapi.getResourceName(ability.getName());
 		this.flag = flag;
 	}
 	

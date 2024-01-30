@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.data.world;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.guild.Guild;
@@ -114,7 +115,7 @@ public class ExtendedWorldData extends WorldSavedData {
         {
             CompoundNBT compoundNBT = guilds.getCompound(i);
             Guild guild = Guild.from(compoundNBT);
-            this.guilds.put(Beapi.getResourceName(guild.getName()), guild);
+            this.guilds.put(BeJavapi.getResourceName(guild.getName()), guild);
         }
     }
 
@@ -167,7 +168,7 @@ public class ExtendedWorldData extends WorldSavedData {
 
     public void removeCrew(Guild crew)
     {
-        String key = Beapi.getResourceName(crew.getName());
+        String key = BeJavapi.getResourceName(crew.getName());
         if(this.guilds.containsKey(key))
             this.guilds.remove(key);
         this.setDirty();
@@ -175,7 +176,7 @@ public class ExtendedWorldData extends WorldSavedData {
 
     public void addCrew(Guild crew)
     {
-        String key = Beapi.getResourceName(crew.getName());
+        String key = BeJavapi.getResourceName(crew.getName());
         if(!this.guilds.containsKey(key))
             this.guilds.put(key, crew);
         this.setDirty();

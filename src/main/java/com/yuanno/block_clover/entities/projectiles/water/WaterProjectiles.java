@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.water;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
@@ -23,19 +24,19 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class WaterProjectiles {
 
     public static final RegistryObject<EntityType<WaterBallProjectile>> WATER_BALL = Beapi.registerEntityType("Water Ball",
-            () -> Beapi.createEntityType(WaterBallProjectile::new)
+            () -> BeModApi.createEntityType(WaterBallProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":water_ball"));
     public static final RegistryObject<EntityType<WaterDragonProjectile>> WATER_DRAGON = Beapi.registerEntityType("Water Dragon",
-            () -> Beapi.createEntityType(WaterDragonProjectile::new)
+            () -> BeModApi.createEntityType(WaterDragonProjectile::new)
                     .sized(5f, 5f)
                     .build(Main.MODID + ":water_dragon"));
     public static final RegistryObject<EntityType<PointBlankDragonProjectile>> POINT_BLANK_DRAGON = Beapi.registerEntityType("Point Blank Dragon",
-            () -> Beapi.createEntityType(PointBlankDragonProjectile::new)
+            () -> BeModApi.createEntityType(PointBlankDragonProjectile::new)
                     .sized(3f, 3f)
                     .build(Main.MODID + ":point_blank_dragon"));
     public static final RegistryObject<EntityType<WaterSpearProjectile>> WATER_SPEAR = Beapi.registerEntityType("Water Spear",
-            () -> Beapi.createEntityType(WaterSpearProjectile::new)
+            () -> BeModApi.createEntityType(WaterSpearProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":water_spear"));
 

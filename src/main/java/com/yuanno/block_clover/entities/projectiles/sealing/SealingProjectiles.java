@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.sealing;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.CubeModel;
@@ -17,11 +18,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class SealingProjectiles {
 
     public static final RegistryObject<EntityType<SealingProjectile>> SEALING_PROJECTILE = Beapi.registerEntityType("Sealing Projectile",
-            () -> Beapi.createEntityType(SealingProjectile::new)
+            () -> BeModApi.createEntityType(SealingProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":sealing_projectile"));
     public static final RegistryObject<EntityType<EvolvedSealingProjectile>> EVOLVED_SEALING_PROJECTILE = Beapi.registerEntityType("Evolved Sealing Projectile",
-            () -> Beapi.createEntityType(EvolvedSealingProjectile::new)
+            () -> BeModApi.createEntityType(EvolvedSealingProjectile::new)
                     .sized(0.5f, 0.5f)
                     .build(Main.MODID + ":evolved_sealing_projectile"));
 

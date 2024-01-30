@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.Quest;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -38,7 +39,7 @@ public class QuestId<A extends Quest> extends ForgeRegistryEntry<QuestId<?>>
 	
 	public String getLocalizedTitle() 
 	{
-		String id = Beapi.getResourceName(this.getName());
+		String id = BeJavapi.getResourceName(this.getName());
 		return new TranslationTextComponent(String.format("quest." + Main.MODID + "." + id)).getString();
 	}
 	

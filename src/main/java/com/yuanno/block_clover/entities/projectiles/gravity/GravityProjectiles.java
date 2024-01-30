@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.gravity;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.CubeModel;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class GravityProjectiles {
 
     public static final RegistryObject<EntityType<SingularityProjectile>> SINGULARITY = Beapi.registerEntityType("Singularity",
-            () -> Beapi.createEntityType(SingularityProjectile::new)
+            () -> BeModApi.createEntityType(SingularityProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":singularity"));
 

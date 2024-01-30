@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.init;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.blocks.QuestBoardBlock;
@@ -51,7 +52,7 @@ public class ModTileEntities {
 
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> registerTileEntity(String localizedName, Supplier<TileEntityType<T>> type)
     {
-        String resourceName = Beapi.getResourceName(localizedName);
+        String resourceName = BeJavapi.getResourceName(localizedName);
 
         RegistryObject<TileEntityType<T>> reg = TILE_ENTITIES.register(resourceName, type);
 

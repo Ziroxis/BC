@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -19,7 +20,7 @@ public class AbilityCategories {
         IEntityStats props = EntityStatsCapability.get(player);
         String iconName = props.getAttribute();
         ResourceLocation icon = null;
-        icon = new ResourceLocation(Main.MODID, "textures/gui/attributes/" + Beapi.getResourceName(iconName) + ".png");
+        icon = new ResourceLocation(Main.MODID, "textures/gui/attributes/" + BeJavapi.getResourceName(iconName) + ".png");
 
         return icon;
     };
@@ -29,7 +30,7 @@ public class AbilityCategories {
         IEntityStats props = EntityStatsCapability.get(player);
         String iconName = props.getSecondAttribute();
         ResourceLocation icon = null;
-        icon = new ResourceLocation(Main.MODID, "textures/gui/attributes/" + Beapi.getResourceName(iconName) + ".png");
+        icon = new ResourceLocation(Main.MODID, "textures/gui/attributes/" + BeJavapi.getResourceName(iconName) + ".png");
 
         return icon;
     };

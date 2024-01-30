@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.client.gui.button;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -43,7 +44,7 @@ public class GuiButtonAttribute extends Button {
         String attribute = props.getAttribute();
 
 
-        mc.textureManager.bind(new ResourceLocation(Main.MODID + ":textures/gui/attributes/" + Beapi.getResourceName(attribute) + ".png"));
+        mc.textureManager.bind(new ResourceLocation(Main.MODID + ":textures/gui/attributes/" + BeJavapi.getResourceName(attribute) + ".png"));
         if (!visible)
         {
             return;

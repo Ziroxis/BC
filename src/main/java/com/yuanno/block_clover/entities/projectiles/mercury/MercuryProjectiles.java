@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.mercury;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.mercury.MercuryBulletModel;
@@ -19,15 +20,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class MercuryProjectiles {
 
     public static final RegistryObject<EntityType<MercuryBulletProjectile>> MERCURY_BULLET = Beapi.registerEntityType("Mercury Bullet",
-            () -> Beapi.createEntityType(MercuryBulletProjectile::new)
+            () -> BeModApi.createEntityType(MercuryBulletProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":mercury_bullet"));
     public static final RegistryObject<EntityType<MercurySpearProjectile>> MERCURY_SPEAR = Beapi.registerEntityType("Mercury Spear",
-            () -> Beapi.createEntityType(MercurySpearProjectile::new)
+            () -> BeModApi.createEntityType(MercurySpearProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":mercury_spear"));
     public static final RegistryObject<EntityType<MercuryRainProjectile>> MERCURY_RAIN = Beapi.registerEntityType("Mercury Rain",
-            () -> Beapi.createEntityType(MercuryRainProjectile::new)
+            () -> BeModApi.createEntityType(MercuryRainProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":mercury_rain"));
 

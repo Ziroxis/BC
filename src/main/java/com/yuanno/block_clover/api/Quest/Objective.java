@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.Quest;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -120,7 +121,7 @@ public abstract class Objective
 	
 	public String getId()
 	{
-		return Beapi.getResourceName(this.title);
+		return BeJavapi.getResourceName(this.title);
 	}
 	
 	public boolean isHidden()

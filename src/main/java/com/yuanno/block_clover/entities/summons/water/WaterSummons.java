@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.summons.water;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.client.renderers.summons.water.WaterShieldRenderer;
 import net.minecraft.entity.EntityType;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class WaterSummons {
 
     public static final RegistryObject<EntityType<WaterShieldEntity>> WATER_SHIELD = Beapi.registerEntityType("Water Shield",
-            () -> Beapi.createEntityType(WaterShieldEntity::new)
+            () -> BeModApi.createEntityType(WaterShieldEntity::new)
                     .sized(1.5f, 3f)
                     .build(Main.MODID + ":water_shield"));
 

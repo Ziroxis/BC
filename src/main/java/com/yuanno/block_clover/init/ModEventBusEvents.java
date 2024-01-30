@@ -35,7 +35,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.WALGNER_DEVIL.get(), WalgnerDevilEntity.setCustomAttributes().build());
         event.put(ModEntities.LILITH_DEVIL.get(), LilithDevilEntity.setCustomAttributes().build());
         event.put(ModEntities.NAHAMAN_DEVIL.get(), NahamanDevilEntity.setCustomAttributes().build());
-        event.put(ModEntities.QUESTBOARD_MANAGER.get(), QuestBoardManagerEntity.setCustomAttributes().build());
+        event.put(ModEntities.QUEST_MANAGER.get(), QuestBoardManagerEntity.setCustomAttributes().build());
 
     }
 

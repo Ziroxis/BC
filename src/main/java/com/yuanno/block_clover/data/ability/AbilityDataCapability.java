@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.data.ability;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -62,7 +63,7 @@ public class AbilityDataCapability
 						Ability ability = instance.getEquippedAbilities().get(i);
 						if(ability != null)
 						{
-							String name = Beapi.getResourceName(ability.getName());
+							String name = BeJavapi.getResourceName(ability.getName());
 							CompoundNBT nbtAbility = new CompoundNBT();
 							nbtAbility = ability.save(nbtAbility);
 							nbtAbility.putInt("pos", i);

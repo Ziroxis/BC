@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.entities.projectiles.sword;
 
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.models.projectiles.wind.WindCrescentModel;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SwordProjectiles {
     public static final RegistryObject<EntityType<OriginalSlashProjectile>> ORIGINAL_SLASH = Beapi.registerEntityType("Original slash",
-            () -> Beapi.createEntityType(OriginalSlashProjectile::new)
+            () -> BeModApi.createEntityType(OriginalSlashProjectile::new)
                     .sized(2f, 1f)
                     .build(Main.MODID + ":original_slash"));
 

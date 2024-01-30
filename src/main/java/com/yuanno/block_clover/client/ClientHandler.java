@@ -42,7 +42,7 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.WALGNER_DEVIL.get(), new WalgnerDevilEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LILITH_DEVIL.get(), new LilithDevilEntityRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.NAHAMAN_DEVIL.get(), new NahamanDevilEntityRenderer.Factory());
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUESTBOARD_MANAGER.get(), new QuestBoardManagerEntityRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUEST_MANAGER.get(), new QuestBoardManagerEntityRenderer.Factory());
 
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));

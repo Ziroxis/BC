@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
@@ -127,7 +128,7 @@ public class ChargeableAbility extends Ability {
             return;
         }
 
-        player.level.getProfiler().push(Beapi.getResourceName(this.getName()));
+        player.level.getProfiler().push(BeJavapi.getResourceName(this.getName()));
 
         if(this.isCharging() && this.chargeTime > 0)
         {

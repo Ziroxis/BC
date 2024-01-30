@@ -2,6 +2,7 @@ package com.yuanno.block_clover.networking.server;
 
 import com.google.common.base.Strings;
 import com.yuanno.block_clover.Main;
+import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
@@ -38,7 +39,7 @@ public class SUpdateExtraDataPacket
 	public SUpdateExtraDataPacket(PlayerEntity player, Ability ability)
 	{
 		this.entityId = player.getId();
-		this.abilityId = Beapi.getResourceName(ability.getName());
+		this.abilityId = BeJavapi.getResourceName(ability.getName());
 		this.isEquipped = true;
 		
 		if (ability instanceof PassiveAbility)

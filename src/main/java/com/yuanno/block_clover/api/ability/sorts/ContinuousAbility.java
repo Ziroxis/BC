@@ -195,11 +195,12 @@ public abstract class ContinuousAbility extends Ability {
     }
     public void stopContinuity(PlayerEntity player)
     {
+        if (player.level.isClientSide)
+            return;
         this.checkAbilityPool(player, State.COOLDOWN);
         this.continueTime = 0;
         this.startCooldown(player);
-        if (!player.level.isClientSide)
-            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+        PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         this.onStopContinuityEvent.onStopContinuity(player);
     }
 

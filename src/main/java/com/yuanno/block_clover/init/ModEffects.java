@@ -24,6 +24,8 @@ public class ModEffects {
     public static final RegistryObject<Effect> MAGIC_CURSE = EFFECTS.register("magic_curse", MagicCurseEffect::new);
     public static final RegistryObject<Effect> POISONOUS_CURSE = EFFECTS.register("poisonous_curse", PoisonousCurseEffect::new);
     public static final RegistryObject<Effect> HEALING_CURSE = EFFECTS.register("healing_curse", HealingCurseEffect::new);
+    public static final RegistryObject<Effect> IN_EVENT = EFFECTS.register("in_event", InEventEffect::new);
+
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

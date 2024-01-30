@@ -25,8 +25,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.play.server.SPlayEntityEffectPacket;
+import net.minecraft.network.play.server.SRemoveEntityEffectPacket;
 import net.minecraft.network.play.server.SSpawnParticlePacket;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -54,6 +58,63 @@ import static com.yuanno.block_clover.api.ability.AbilityHelper.placeBlockIfAllo
 
 public class Beapi
 {
+    public static List<BlockPos> createPlatform(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, BlockProtectionRule rule)
+    {
+        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
+        for (int x = -sizeX; x <= sizeX; x++)
+        {
+            for (int z = -sizeZ; z <= sizeZ; z++)
+            {
+                BlockPos pos = new BlockPos(posX + x, posY, posZ + z);
+                blockPositions.add(pos);
+            }
+        }
+        return blockPositions;
+    }
+    public static List<BlockPos> createEmptyCube(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, Block blockToPlace, BlockProtectionRule rule)
+    {
+        return createEmptyCube(world, posX, posY, posZ, sizeX, sizeY, sizeZ, 2, blockToPlace, rule);
+    }
+
+    public static List<BlockPos> createEmptyCube(World world, double posX, double posY, double posZ, int sizeX, int sizeY, int sizeZ, int flags, Block blockToPlace, BlockProtectionRule rule)
+    {
+        List<BlockPos> blockPositions = new ArrayList<BlockPos>();
+        for (int x = -sizeX; x <= sizeX; x++)
+        {
+            for (int y = -sizeY; y <= sizeY; y++)
+            {
+                for (int z = -sizeZ; z <= sizeZ; z++)
+                {
+                    if (x == -sizeX || x == sizeX || y == -sizeY || y == sizeY || z == -sizeZ || z == sizeZ)
+                    {
+                        BlockPos pos = new BlockPos(posX + x, posY + y, posZ + z);
+                        if (true)
+                            blockPositions.add(pos);
+                    }
+                }
+            }
+        }
+        return blockPositions;
+    }
+    public static void sendApplyEffectToAllNearby(LivingEntity player, Vector3d pos, int distance, EffectInstance effect) {
+        player.getServer().getPlayerList().broadcast(null, pos.x, pos.y, pos.z, distance, player.getCommandSenderWorld().dimension(), new SPlayEntityEffectPacket(player.getId(), effect));
+    }
+
+    public static void sendRemoveEffectToAllNearby(LivingEntity player, Vector3d pos, int distance, Effect effect) {
+        player.getServer().getPlayerList().broadcast(null, pos.x, pos.y, pos.z, distance, player.getCommandSenderWorld().dimension(), new SRemoveEntityEffectPacket(player.getId(), effect));
+    }
+
+    public static boolean isInChallengeDimension(World world) {
+        return isInChallengeDimension(world.dimension());
+    }
+
+    public static boolean isInChallengeDimension(RegistryKey<World> world) {
+        return world.location().toString().contains("challenges_");
+    }
+    public static String formatTimeMMSS(long time) {
+        return String.format("%02d:%02d", time / 60, time % 60);
+    }
+
     public static List<QuestId> randomQuestsFromList(List<QuestId> questList, int numberQuests)
     {
         Collections.shuffle(questList);

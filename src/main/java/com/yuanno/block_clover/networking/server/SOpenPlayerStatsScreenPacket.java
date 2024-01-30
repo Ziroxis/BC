@@ -37,4 +37,5 @@ public class SOpenPlayerStatsScreenPacket {
         {
             PlayerAchievementsScreen.open();
         }
-    }}
+    }
+}

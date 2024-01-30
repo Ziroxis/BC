@@ -1,0 +1,6 @@
+{
+  "type": "block_clover:challenges",
+  "generator": {
+    "type": "block_clover:challenges_chunk_generator"
+  }
+}

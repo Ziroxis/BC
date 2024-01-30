@@ -29,6 +29,8 @@ public class ModNetwork {
         PacketHandler.registerPacket(CRequestSyncWorldDataPacket.class, CRequestSyncWorldDataPacket::encode, CRequestSyncWorldDataPacket::decode, CRequestSyncWorldDataPacket::handle);
         PacketHandler.registerPacket(CJoinGuildPacket.class, CJoinGuildPacket::encode, CJoinGuildPacket::decode, CJoinGuildPacket::handle);
         PacketHandler.registerPacket(CSyncDevilStatsPacket.class, CSyncDevilStatsPacket::encode, CSyncDevilStatsPacket::decode, CSyncDevilStatsPacket::handle);
+        PacketHandler.registerPacket(CStartChallengePacket.class, CStartChallengePacket::encode, CStartChallengePacket::decode, CStartChallengePacket::handle);
+        PacketHandler.registerPacket(COpenDevilSummoningScreenPacket.class, COpenDevilSummoningScreenPacket::encode, COpenDevilSummoningScreenPacket::decode, COpenDevilSummoningScreenPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);
@@ -50,7 +52,8 @@ public class ModNetwork {
         PacketHandler.registerPacket(SOpenQuestBoardPacket.class, SOpenQuestBoardPacket::encode, SOpenQuestBoardPacket::decode, SOpenQuestBoardPacket::handle);
         PacketHandler.registerPacket(SOpenChatPromptScreenQuestBoardPacket.class, SOpenChatPromptScreenQuestBoardPacket::encode, SOpenChatPromptScreenQuestBoardPacket::decode, SOpenChatPromptScreenQuestBoardPacket::handle);
         PacketHandler.registerPacket(SSyncDevilPacket.class, SSyncDevilPacket::encode, SSyncDevilPacket::decode, SSyncDevilPacket::handle);
-
+        PacketHandler.registerPacket(SSyncDynDimensionsPacket.class, SSyncDynDimensionsPacket::encode, SSyncDynDimensionsPacket::decode, SSyncDynDimensionsPacket::handle);
+        PacketHandler.registerPacket(SOpenDevilSummoningScreenpacket.class, SOpenDevilSummoningScreenpacket::encode, SOpenDevilSummoningScreenpacket::decode, SOpenDevilSummoningScreenpacket::handle);
 
         //SYNC
         PacketHandler.registerPacket(ManaSync.class, ManaSync::encode, ManaSync::decode, ManaSync::handle);

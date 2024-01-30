@@ -99,6 +99,7 @@ public class Main
         ModPotions.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModBiomes.register(modEventBus);
+        ModChallenges.register(modEventBus);
 
         ModAdvancements.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CuriosClientConfig.CLIENT_SPEC);
@@ -165,7 +166,8 @@ public class Main
 
         event.enqueueWork(() ->
         {
-           ModStructures.setupStructures();
+            ModDimensions.setupDimensions();
+            ModStructures.setupStructures();
             ConfiguredStructures.registerConfiguredStructures();
             WoodType.register(ModWoodTypes.ELDER);
             WoodType.register(ModWoodTypes.MOGURO);

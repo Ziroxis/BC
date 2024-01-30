@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "com.yuanno.block_clover.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "block_clover.refmap.json",
+  "mixins": [
+    "ServerPlayNetHandlerMixin",
+    "PlayerEntityMixin",
+    "EntityMixin"
+
+  ],
+  "client": [
+    "client.ServerWorldInfoMixin",
+    "client.DeathScreenMixin",
+    "client.GameRendererMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": -1
+  },
+  "minVersion": "0.8"
+}

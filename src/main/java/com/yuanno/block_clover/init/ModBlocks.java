@@ -33,7 +33,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> JUICER = BLOCKS.register("juicer_block", JuicerBlock::new);
     public static final RegistryObject<Block> BAKING_OVEN = BLOCKS.register("baking_oven_block", BakingOvenBlock::new);
-    //public static final RegistryObject<Block> DEVIL_ALTAR = BLOCKS.register("devil_altar_block", DevilAltarBlock::new);
+    public static final RegistryObject<Block> DEVIL_ALTAR = BLOCKS.register("devil_altar_block", DevilAltarBlock::new);
 
     //Moguro Tree
     public static final RegistryObject<Block> MOGURO_LOG = BLOCKS.register("moguro_log",

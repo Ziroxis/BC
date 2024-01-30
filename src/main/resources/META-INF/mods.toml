@@ -14,3 +14,15 @@ description='''
 Black clover mod, big thanks to Jo for his original mod
 Big thanks to my patrons:
 Kausu, Maddox, Redwolf'''
+[[dependencies.block_clover]] #optional
+modId="forge" #mandatory
+mandatory=true #mandatory
+versionRange="[36,)" #mandatory
+ordering="NONE"
+side="BOTH"
+[[dependencies.block_clover]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5,1.17)"
+ordering="NONE"
+side="BOTH"

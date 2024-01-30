@@ -42,7 +42,7 @@ public class SOpenDevilSummoningScreenPacket {
             PlayerEntity player = Minecraft.getInstance().player;
 
 
-            Minecraft.getInstance().setScreen(new DevilSummoningScreen(player));
+            Minecraft.getInstance().setScreen(new DevilSummoningScreen());
         }
     }
 }

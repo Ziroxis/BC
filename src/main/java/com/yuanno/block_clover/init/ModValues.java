@@ -22,6 +22,7 @@ import org.lwjgl.system.CallbackI;
 import java.util.*;
 
 public class ModValues {
+    public static final int MAX_DIFFICULTY_STARS = 15;
 
     public static final String NONE = "None";
     public static final int MAX_IN_PROGRESS_QUESTS = 3;

@@ -1,7 +1,6 @@
 package com.yuanno.block_clover.networking.server;
 
-import com.yuanno.block_clover.client.gui.screen.block.DevilSummoningScreen;
-import com.yuanno.block_clover.client.gui.screen.overview.PlayerAchievementsScreen;
+import com.yuanno.block_clover.client.gui.screen.DevilSummoningScreen;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

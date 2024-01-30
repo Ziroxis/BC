@@ -12,7 +12,7 @@ public class BeJavapi {
         return randomizedString;
     }
 
-    public static double randomWithRange(int min, int max)
+    public static int randomWithRange(int min, int max)
     {
         return new Random().nextInt(max + 1 - min) + min;
     }

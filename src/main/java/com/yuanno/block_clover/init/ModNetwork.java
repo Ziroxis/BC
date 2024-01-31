@@ -31,6 +31,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(CSyncDevilStatsPacket.class, CSyncDevilStatsPacket::encode, CSyncDevilStatsPacket::decode, CSyncDevilStatsPacket::handle);
         PacketHandler.registerPacket(CStartChallengePacket.class, CStartChallengePacket::encode, CStartChallengePacket::decode, CStartChallengePacket::handle);
         PacketHandler.registerPacket(COpenDevilSummoningScreenPacket.class, COpenDevilSummoningScreenPacket::encode, COpenDevilSummoningScreenPacket::decode, COpenDevilSummoningScreenPacket::handle);
+        PacketHandler.registerPacket(CSyncChallengeyDataPacket.class, CSyncChallengeyDataPacket::encode, CSyncChallengeyDataPacket::decode, CSyncChallengeyDataPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);

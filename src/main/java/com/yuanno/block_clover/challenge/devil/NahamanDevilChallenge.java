@@ -7,9 +7,12 @@ import com.yuanno.block_clover.api.challenges.*;
 import com.yuanno.block_clover.challenge.arena.DevilRitualArena;
 import com.yuanno.block_clover.challenge.arena.NahamanDevilRitualArena;
 import com.yuanno.block_clover.init.ModEntities;
+import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 
 public class NahamanDevilChallenge extends Challenge {
@@ -34,6 +37,10 @@ public class NahamanDevilChallenge extends Challenge {
                     .addDevil(() -> {
                         String walgner = ModValues.NAHAMAN;
                         return walgner;
+                    })
+                    .addItemToRemove(() -> {
+                        ItemStack itemStack = new ItemStack(Items.ENCHANTED_GOLDEN_APPLE);
+                        return itemStack;
                     }))
             .build();
     public NahamanDevilChallenge(ChallengeCore core) {

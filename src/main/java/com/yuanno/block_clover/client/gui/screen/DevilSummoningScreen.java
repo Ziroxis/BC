@@ -12,6 +12,8 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModChallenges;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CStartChallengePacket;
+import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
+import com.yuanno.block_clover.networking.client.CSyncChallengeyDataPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -67,13 +69,10 @@ public class DevilSummoningScreen extends Screen {
         challengeCores.add(ModChallenges.NAHAMAN_DEVIL.get());
         int test = BeJavapi.randomWithRange(0, 1);
         Button button = new Button(posX - 65, posY + 20, 32, 16, new TranslationTextComponent("Highest Rank"), b -> {
+            IChallengesData challengesData = ChallengesDataCapability.get(player);
+            challengesData.addChallenge(challengeCores.get(test));
+            PacketHandler.sendToServer(new CSyncChallengeyDataPacket(challengesData));
             PacketHandler.sendToServer(new CStartChallengePacket(challengeCores.get(test).getRegistryName(), this.group, false));
-            if (items.contains(Items.NETHER_STAR))
-                items.remove(Items.NETHER_STAR);
-            else if (items.contains(Items.ENCHANTED_GOLDEN_APPLE))
-                items.remove(Items.ENCHANTED_GOLDEN_APPLE);
-            else if (items.contains(Items.DRAGON_EGG))
-                items.remove(Items.DRAGON_EGG);
             this.minecraft.setScreen(null);
         }, (but, matrixStack, mouseX, mouseY) -> {
          if (but.isHovered() && but.active)

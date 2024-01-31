@@ -22,7 +22,7 @@ public class ChallengeReward {
 	private List<Supplier<ChallengeCore>> challenges = new ArrayList<>();
 	private List<Supplier<Ability>> abilities = new ArrayList<>();
 	private List<Supplier<String>> devils = new ArrayList<>();
-
+	private List<Supplier<ItemStack>> itemToRemove = new ArrayList<>();
 	public List<Supplier<ItemStack>> getItems() {
 		return this.items;
 	}
@@ -47,6 +47,12 @@ public class ChallengeReward {
 
 	public ChallengeReward addItem(Supplier<ItemStack> item) {
 		this.items.add(item);
+		return this;
+	}
+
+	public ChallengeReward addItemToRemove(Supplier<ItemStack> item)
+	{
+		this.itemToRemove.add(item);
 		return this;
 	}
 
@@ -82,6 +88,14 @@ public class ChallengeReward {
 			sb.append(" " + devilname + " " + "has been subjugated" + "\n");
 			IDevil devil = DevilCapability.get(player);
 			devil.addControlledDevilList(devilname);
+		}
+
+		for (Supplier<ItemStack> itemStack : this.itemToRemove)
+		{
+			if (player.inventory.contains(itemStack.get())) {
+				player.inventory.removeItem(itemStack.get());
+				break;
+			}
 		}
 
 

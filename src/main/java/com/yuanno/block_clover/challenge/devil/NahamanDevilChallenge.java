@@ -15,10 +15,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.function.Supplier;
+
 public class NahamanDevilChallenge extends Challenge {
     private static final String TITLE = BeRegistry.registerName("challenge." + Main.MODID + ".begin.nahaman", "Nahaman");
     public static final String OBJECTIVE = BeRegistry.registerName("challenge." + Main.MODID + ".begin.objective.nahaman", "Defeat Nahaman");
-
 
 
 
@@ -35,13 +40,15 @@ public class NahamanDevilChallenge extends Challenge {
                         return ability;
                     })
                     .addDevil(() -> {
-                        String walgner = ModValues.NAHAMAN;
-                        return walgner;
+                        String nahaman = ModValues.NAHAMAN;
+                        return nahaman;
                     })
-                    .addItemToRemove(() -> {
-                        ItemStack itemStack = new ItemStack(Items.ENCHANTED_GOLDEN_APPLE);
-                        return itemStack;
-                    }))
+                    .addItemsToRemove(new ArrayList<>(Arrays.asList(
+                            () -> new ItemStack(Items.ENCHANTED_GOLDEN_APPLE),
+                            () -> new ItemStack(Items.NETHER_STAR),
+                            () -> new ItemStack(Items.DRAGON_EGG)
+                    )))
+            )
             .build();
     public NahamanDevilChallenge(ChallengeCore core) {
         super(core);

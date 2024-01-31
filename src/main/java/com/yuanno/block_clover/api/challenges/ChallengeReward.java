@@ -56,6 +56,12 @@ public class ChallengeReward {
 		return this;
 	}
 
+	public ChallengeReward addItemsToRemove(ArrayList<Supplier<ItemStack>> itemsToRemove)
+	{
+		this.itemToRemove.addAll(itemsToRemove);
+		return this;
+	}
+
 
 	public String giveRewards(PlayerEntity player) {
 		IChallengesData challengesData = ChallengesDataCapability.get(player);

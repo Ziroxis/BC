@@ -10,7 +10,12 @@ import com.yuanno.block_clover.init.ModEntities;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkIceAbility;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LilithDevilChallenge extends Challenge {
     private static final String TITLE = BeRegistry.registerName("challenge." + Main.MODID + ".begin.lilith", "Lilith");
@@ -34,7 +39,13 @@ public class LilithDevilChallenge extends Challenge {
                     .addDevil(() -> {
                         String walgner = ModValues.LILITH;
                         return walgner;
-                    }))
+                    })
+                    .addItemsToRemove(new ArrayList<>(Arrays.asList(
+                            () -> new ItemStack(Items.ENCHANTED_GOLDEN_APPLE),
+                            () -> new ItemStack(Items.NETHER_STAR),
+                            () -> new ItemStack(Items.DRAGON_EGG)
+                    )))
+            )
             .build();
     public LilithDevilChallenge(ChallengeCore core) {
         super(core);

@@ -30,6 +30,13 @@ public class WalgnerDevilChallenge extends Challenge {
             .setTargetShowcase(new RegistryObject[]{ModEntities.WALGNER_DEVIL})
             .setTimeLimit(10)
             .setOrder(0)
+            .setOffering(new ChallengeOffering()
+                    .addItemsToRemove(new ArrayList<>(Arrays.asList(
+                            () -> new ItemStack(Items.ENCHANTED_GOLDEN_APPLE),
+                            () -> new ItemStack(Items.NETHER_STAR),
+                            () -> new ItemStack(Items.DRAGON_EGG)
+                    )))
+            )
             .setReward(new ChallengeReward()
                     .addAbility(() -> {
                         Ability ability = new CrowAbility();
@@ -39,11 +46,6 @@ public class WalgnerDevilChallenge extends Challenge {
                         String walgner = ModValues.WALGNER;
                         return walgner;
                     })
-                    .addItemsToRemove(new ArrayList<>(Arrays.asList(
-                            () -> new ItemStack(Items.ENCHANTED_GOLDEN_APPLE),
-                            () -> new ItemStack(Items.NETHER_STAR),
-                            () -> new ItemStack(Items.DRAGON_EGG)
-                    )))
             )
             .build();
     public WalgnerDevilChallenge(ChallengeCore core) {

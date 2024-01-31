@@ -139,6 +139,20 @@ public class InProgressChallenge {
 		}
 		else if(this.phase.equals(Phase.BUILD)) {
 			this.sendGroupTitle(ModI18n.CHALLENGE_MESSAGE_START_TITLE, ModI18n.CHALLENGE_MESSAGE_START_SUBTITLE, 5, 90, 10);
+			if (this.getCore().getChallengeOffering() != null)
+			{
+				for (LivingEntity entity : this.getGroup()) {
+					if (entity.isAlive() && entity instanceof ServerPlayerEntity) {
+
+						ServerPlayerEntity player = (ServerPlayerEntity) entity;
+						IChallengesData challengesData = ChallengesDataCapability.get(player);
+						Challenge challenge = challengesData.getChallenge(this.getCore());
+						String offering = "";
+						offering = challenge.getCore().getChallengeOffering().takeOffering(player);
+						player.sendMessage(new StringTextComponent(offering), Util.NIL_UUID);
+					}
+				}
+			}
 			long start = System.currentTimeMillis();
 			
 			this.arena.buildArena(this);

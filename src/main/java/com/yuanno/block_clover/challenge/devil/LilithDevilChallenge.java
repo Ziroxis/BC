@@ -31,6 +31,13 @@ public class LilithDevilChallenge extends Challenge {
             .setTargetShowcase(new RegistryObject[]{ModEntities.LILITH_DEVIL})
             .setTimeLimit(10)
             .setOrder(0)
+            .setOffering(new ChallengeOffering()
+                    .addItemsToRemove(new ArrayList<>(Arrays.asList(
+                            () -> new ItemStack(Items.ENCHANTED_GOLDEN_APPLE),
+                            () -> new ItemStack(Items.NETHER_STAR),
+                            () -> new ItemStack(Items.DRAGON_EGG)
+                    )))
+            )
             .setReward(new ChallengeReward()
                     .addAbility(() -> {
                         Ability ability = new DarkIceAbility();
@@ -40,11 +47,6 @@ public class LilithDevilChallenge extends Challenge {
                         String walgner = ModValues.LILITH;
                         return walgner;
                     })
-                    .addItemsToRemove(new ArrayList<>(Arrays.asList(
-                            () -> new ItemStack(Items.ENCHANTED_GOLDEN_APPLE),
-                            () -> new ItemStack(Items.NETHER_STAR),
-                            () -> new ItemStack(Items.DRAGON_EGG)
-                    )))
             )
             .build();
     public LilithDevilChallenge(ChallengeCore core) {

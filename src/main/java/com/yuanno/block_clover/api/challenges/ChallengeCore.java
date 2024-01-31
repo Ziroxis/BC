@@ -25,6 +25,7 @@ public class ChallengeCore<T extends Challenge> extends ForgeRegistryEntry<Chall
 	private int timeLimit; // In minutes!
 	private ChallengeReward reward;
 	private ChallengeReward secondReward;
+	private ChallengeOffering challengeOffering;
 	private ChallengeDifficulty difficulty;
 	private int difficultyStars;
 	private HashMultimap<ArenaStyle, ChallengeArena> arenas = HashMultimap.create();
@@ -75,6 +76,10 @@ public class ChallengeCore<T extends Challenge> extends ForgeRegistryEntry<Chall
 	}
 	private void setSecondReward(ChallengeReward reward) {
 		this.secondReward = reward;
+	}
+	private void setChallengeOffering(ChallengeOffering challengeOffering)
+	{
+		this.challengeOffering = challengeOffering;
 	}
 
 	public void setBannedFactions(String... factions) {
@@ -186,6 +191,11 @@ public class ChallengeCore<T extends Challenge> extends ForgeRegistryEntry<Chall
 		return this.secondReward;
 	}
 
+	public ChallengeOffering getChallengeOffering()
+	{
+		return this.challengeOffering;
+	}
+
 	public String[] getBannedFactions() {
 		return this.bannedFactions;
 	}
@@ -201,6 +211,7 @@ public class ChallengeCore<T extends Challenge> extends ForgeRegistryEntry<Chall
 		private int timeLimit = 10; // In minutes!
 		private ChallengeReward reward = ChallengeReward.EMPTY;
 		private ChallengeReward secondReward = ChallengeReward.EMPTY;
+		private ChallengeOffering challengeOffering = ChallengeOffering.EMPTY;
 		private ChallengeDifficulty difficulty = ChallengeDifficulty.STANDARD;
 		private int difficultyStars;
 		private HashMultimap<ArenaStyle, ChallengeArena> arenas = HashMultimap.create();
@@ -234,6 +245,12 @@ public class ChallengeCore<T extends Challenge> extends ForgeRegistryEntry<Chall
 
 		public Builder<T> setSecondReward(ChallengeReward reward) {
 			this.secondReward = reward;
+			return this;
+		}
+
+		public Builder<T> setOffering(ChallengeOffering challengeOffering)
+		{
+			this.challengeOffering = challengeOffering;
 			return this;
 		}
 
@@ -272,6 +289,7 @@ public class ChallengeCore<T extends Challenge> extends ForgeRegistryEntry<Chall
 			challenge.setTimeLimit(this.timeLimit);
 			challenge.setReward(this.reward);
 			challenge.setSecondReward(this.secondReward);
+			challenge.setChallengeOffering(this.challengeOffering);
 			challenge.setBannedFactions(this.bannedFactions);
 			challenge.setStartCheck(this.startCheck);
 			challenge.setDifficulty(this.difficulty);

@@ -138,7 +138,6 @@ public class InProgressChallenge {
 			}			
 		}
 		else if(this.phase.equals(Phase.BUILD)) {
-			this.sendGroupTitle(ModI18n.CHALLENGE_MESSAGE_START_TITLE, ModI18n.CHALLENGE_MESSAGE_START_SUBTITLE, 5, 90, 10);
 			if (this.getCore().getChallengeOffering() != null)
 			{
 				for (LivingEntity entity : this.getGroup()) {
@@ -153,6 +152,7 @@ public class InProgressChallenge {
 					}
 				}
 			}
+			this.sendGroupTitle(ModI18n.CHALLENGE_MESSAGE_START_TITLE, ModI18n.CHALLENGE_MESSAGE_START_SUBTITLE, 5, 90, 10);
 			long start = System.currentTimeMillis();
 			
 			this.arena.buildArena(this);

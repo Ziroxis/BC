@@ -58,7 +58,6 @@ public class DevilSummoningScreen extends Screen {
     {
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
-        //addChallengeButton(posX - 65, posY + 20, ModChallenges.WALGNER_DEVIL.get(), "Walgner", "Challenging Walgner, low rank devil");
         for (int i = 0; i < player.inventory.getContainerSize(); i++)
         {
             if (!player.inventory.getItem(i).isEmpty())

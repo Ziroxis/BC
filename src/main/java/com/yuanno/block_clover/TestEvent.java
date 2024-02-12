@@ -30,7 +30,6 @@ public class TestEvent {
         {
             PlayerEntity player = event.getPlayer();
             IChallengesData challengesData = ChallengesDataCapability.get(player);
-            challengesData.addChallenge(ModChallenges.WALGNER_DEVIL.get());
             PacketHandler.sendTo(new SSyncChallengeDataPacket(player.getId(), challengesData), player);
             PacketHandler.sendTo(new SOpenDevilSummoningScreenpacket(), player);
         }

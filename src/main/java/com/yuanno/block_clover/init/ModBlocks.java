@@ -27,6 +27,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MODID);
     public List<Supplier<Block>> blocks = new ArrayList<>();
 
+    public static final RegistryObject<Block> DEVIL_ALTAR = BLOCKS.register("devil_altar", DevilAltarBlock::new);
     public static final RegistryObject<Block> ANTIMAGIC = BLOCKS.register("antimagic_block", AntiMagicBlock::new);
     public static final RegistryObject<Block> LIGHTNING = BLOCKS.register("lightning_block", LightningBlock::new);
     public static final RegistryObject<Block> WIND = BLOCKS.register("wind_block", WindBlock::new);

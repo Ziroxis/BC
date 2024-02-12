@@ -13,6 +13,7 @@ import com.yuanno.block_clover.init.ModTileEntities;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SOpenDevilSummoningScreenpacket;
 import com.yuanno.block_clover.networking.server.SOpenQuestBoardPacket;
+import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.server.SSyncChallengeDataPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -46,7 +47,11 @@ public class DevilAltarBlock extends Block {
         if (player.level.isClientSide)
             return ActionResultType.PASS;
         PacketHandler.sendTo(new SOpenDevilSummoningScreenpacket(), player);
+        IChallengesData challengesData = ChallengesDataCapability.get(player);
+        PacketHandler.sendTo(new SSyncChallengeDataPacket(player.getId(), challengesData), player);
 
         return ActionResultType.SUCCESS;
+
+
     }
 }

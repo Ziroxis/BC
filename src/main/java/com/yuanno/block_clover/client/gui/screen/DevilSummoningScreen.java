@@ -10,6 +10,7 @@ import com.yuanno.block_clover.data.challenges.IChallengesData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModChallenges;
+import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CStartChallengePacket;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
@@ -63,28 +64,53 @@ public class DevilSummoningScreen extends Screen {
             if (!player.inventory.getItem(i).isEmpty())
                 items.add(player.inventory.getItem(i).getItem());
         }
+        // button highest demon
+        // 1. makes list of devils to pick
         ArrayList<ChallengeCore> challengeCores = new ArrayList<>();
         challengeCores.add(ModChallenges.LILITH_DEVIL.get());
         challengeCores.add(ModChallenges.NAHAMAN_DEVIL.get());
-        int test = BeJavapi.randomWithRange(0, 1);
+
+        // 2. remove the ones that are already completed
+        for (int i = 0; i < challengeCores.size(); i++)
+        {
+            if (challengesDataBase.isChallengeCompleted(challengeCores.get(i)))
+            {
+                challengeCores.remove(i);
+                i--;
+            }
+        }
+
+
+        // 3. add the button (check if you got the right offering)
         Button button = new Button(posX - 65, posY + 20, 32, 16, new TranslationTextComponent("Highest Rank"), b -> {
+            ChallengeCore selectedChallenge = challengeCores.get(ModValues.random.nextInt(challengeCores.size()));
             IChallengesData challengesData = ChallengesDataCapability.get(player);
-            challengesData.addChallenge(challengeCores.get(test));
+            if (!challengesData.hasChallenge(selectedChallenge) && !challengesData.isChallengeCompleted(selectedChallenge))
+                challengesData.addChallenge(selectedChallenge);
             PacketHandler.sendToServer(new CSyncChallengeyDataPacket(challengesData));
-            PacketHandler.sendToServer(new CStartChallengePacket(challengeCores.get(test).getRegistryName(), this.group, false));
+            PacketHandler.sendToServer(new CStartChallengePacket(selectedChallenge.getRegistryName(), this.group, false));
             this.minecraft.setScreen(null);
         }, (but, matrixStack, mouseX, mouseY) -> {
          if (but.isHovered() && but.active)
          {
-             this.renderTooltip(matrixStack, new TranslationTextComponent("Try subjugation of a random highest rank demon demon"), mouseX, mouseY);
+             this.renderTooltip(matrixStack, new TranslationTextComponent("Try subjugation of a random highest rank demon"), mouseX, mouseY);
          }
          else if (but.isHovered() && !but.active)
          {
-             this.renderTooltip(matrixStack,
-                     new TranslationTextComponent("Need a high quality offering for highest rank demon\nItems:\nNether Star\nEnchanted Golden Apple\nDragon egg"), mouseX, mouseY);
+             if (challengeCores.isEmpty())
+                this.renderTooltip(matrixStack, new TranslationTextComponent("Subjugated all devils of this level"), mouseX, mouseY);
+             else
+                 this.renderTooltip(matrixStack, new TranslationTextComponent("Need a high quality offering for highest rank demon\nItems:\nNether Star\nEnchanted Golden Apple\nDragon egg"), mouseX, mouseY);
          }});
-        button.active = items.contains(Items.NETHER_STAR) || items.contains(Items.ENCHANTED_GOLDEN_APPLE) || items.contains(Items.DRAGON_EGG);
+        button.active = (items.contains(Items.NETHER_STAR) || items.contains(Items.ENCHANTED_GOLDEN_APPLE) || items.contains(Items.DRAGON_EGG)) && !challengeCores.isEmpty();
         this.addButton(button);
+
+        // button high devil
+
+        //button medium devil
+
+        //button low devil
+
     }
 
     private void addChallengeButton(int x, int y, ChallengeCore challenge, String buttonText, String tooltipText) {

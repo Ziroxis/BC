@@ -10,6 +10,9 @@ import com.yuanno.block_clover.data.challenges.IChallengesData;
 import com.yuanno.block_clover.data.world.ChallengesWorldData;
 import com.yuanno.block_clover.init.ModEffects;
 import com.yuanno.block_clover.init.ModI18n;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncChallengeDataPacket;
+import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -94,6 +97,10 @@ public class InProgressChallenge {
 				if (!this.rewardsAwarded) {
 					this.completeChallenge();
 					this.rewardsAwarded = true;
+					//SSyncChallengeDataPacket packet = new SSyncChallengeDataPacket(this.id, this.result);
+					// Send the packet to the client
+					//PacketHandler.sendTo(packet, this.owner);
+
 				}
 
 				ITextComponent countdownMessage = new StringTextComponent("§f§l" + new TranslationTextComponent("End countdown", this.endWaitInterval.getTick()).getString() + "§r");

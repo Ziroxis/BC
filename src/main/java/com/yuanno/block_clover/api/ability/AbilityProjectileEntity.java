@@ -103,6 +103,24 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		this.damage = 0.1f;
 		this.setThrower(thrower);
 
+		// Assuming player is an instance of PlayerEntity
+		double playerX = thrower.getX();
+		double playerY = thrower.getY() + thrower.getEyeHeight(); // Adjusted for eye height
+		double playerZ = thrower.getZ();
+
+		// Get player's look direction
+		float yaw = thrower.yRot;
+		float pitch = thrower.xRot;
+
+		// Calculate the offset in the direction the player is looking
+		double offset = 0.95; // Adjust this value as needed
+		double offsetX = offset * -Math.sin(Math.toRadians(yaw));
+		double offsetY = offset * -Math.sin(Math.toRadians(pitch));
+		double offsetZ = offset * Math.cos(Math.toRadians(yaw));
+
+		// Create the projectile at the adjusted coordinates
+		this.setPos(playerX + offsetX, playerY, playerZ + offsetZ);
+
 		this.source = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile();
 		this.bypassingSource = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile().bypassArmor();		
 	}

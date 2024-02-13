@@ -17,8 +17,7 @@ public class DarkIceAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
-        this.setExperiencePoint(25);
-        this.setExperienceGainLevelCap(10);
+        this.setDevil(true);
         this.onUseEvent = this::onUseEvent;
     }
 

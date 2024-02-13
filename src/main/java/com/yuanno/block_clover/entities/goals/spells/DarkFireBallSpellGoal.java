@@ -12,7 +12,7 @@ public class DarkFireBallSpellGoal extends CooldownGoal {
     {
         super(entity);
         this.entity = entity;
-        this.setMaxCooldown(10);
+        this.setMaxCooldown(5);
         //this.entity.addThreat(3);
     }
 
@@ -47,7 +47,7 @@ public class DarkFireBallSpellGoal extends CooldownGoal {
 
         FireBallDarkProjectile projectile = new FireBallDarkProjectile(this.entity.level, this.entity);
         projectile.setPos(projectile.getX(), this.entity.getY() + this.entity.getBbHeight() / 2.0F + 0.5D, projectile.getZ());
-        projectile.shoot(d1 + this.entity.getRandom().nextGaussian(), d2, d3 + this.entity.getRandom().nextGaussian(), 1F, 0);
+        projectile.shoot(d1 + this.entity.getRandom().nextGaussian(), d2, d3 + this.entity.getRandom().nextGaussian(), 2F, 0);
         this.entity.level.addFreshEntity(projectile);
 
         //this.entity.setCurrentGoal(this);

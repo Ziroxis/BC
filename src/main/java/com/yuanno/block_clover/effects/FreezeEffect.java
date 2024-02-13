@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.effects;
 
 import com.yuanno.block_clover.api.Beapi;
+import com.yuanno.block_clover.api.ModEffect;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -10,7 +11,7 @@ import net.minecraft.potion.EffectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeMod;
 
-public class FreezeEffect extends SpecialEffect {
+public class FreezeEffect extends ModEffect {
 
     public FreezeEffect()
     {
@@ -42,28 +43,19 @@ public class FreezeEffect extends SpecialEffect {
     }
 
     @Override
-    public float[] getOverlayColor()
-    {
-        return new float[] { 0.0f, 0.0f, 0.0f, 1f };
+    public boolean isBlockingRotations() {
+        return true;
     }
 
+
     @Override
-    public boolean hasBodyOverlayColor() {
+    public boolean isRemoveable() {
         return false;
     }
 
     @Override
-    public Block getBlockOverlay() {
-        return null;
-    }
-
-    @Override
-    public boolean isBlockingMovement() {
+    public boolean shouldUpdateClient() {
         return true;
     }
 
-    @Override
-    public ResourceLocation getResourceLocation(int duration) {
-        return null;
-    }
 }

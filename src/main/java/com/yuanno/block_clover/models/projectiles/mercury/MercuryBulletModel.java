@@ -17,7 +17,7 @@ public class MercuryBulletModel extends EntityModel {
 		texHeight = 32;
 
 		Silver_Bullets = new ModelRenderer(this);
-		Silver_Bullets.setPos(0.0F, 24.0F, 0.0F);
+		Silver_Bullets.setPos(0.0F, 12.0F, 0.0F);
 		Silver_Bullets.texOffs(0, 0).addBox(-3.0F, -15.0F, -3.0F, 6.0F, 2.0F, 6.0F, 0.0F, false);
 		Silver_Bullets.texOffs(12, 10).addBox(-2.0F, -13.0F, -2.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);
 		Silver_Bullets.texOffs(0, 8).addBox(-2.0F, -17.0F, -2.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);

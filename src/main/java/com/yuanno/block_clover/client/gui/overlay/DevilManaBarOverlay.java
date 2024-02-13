@@ -20,7 +20,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class DevilManaBarOverlay {
     private final ResourceLocation manaBar = new ResourceLocation(Main.MODID + ":textures/gui/mana_bars.png");
     private final int tex_width = 9, tex_height = 102, bar_width = 7, bar_height = 100;
-    int mana = 0;
 
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent.Post event) {
@@ -31,7 +30,7 @@ public class DevilManaBarOverlay {
             if (devil.getMaxDevilMana() > 0 && entityStats.isInCombatMode()) {
                 Minecraft mc = Minecraft.getInstance();
                 String manaString = "" + (int) devil.getDevilMana();
-                int colour_x = ((6 * 8) + 9);
+                int colour_x = ((5 * 8) + 9);
                 mc.textureManager.bind(manaBar);
                 mc.gui.blit(event.getMatrixStack(), 20, 130, 0, 0, tex_width, tex_height);
 

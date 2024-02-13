@@ -29,7 +29,6 @@ public class BullThrustAbility extends Ability implements IMultiTargetAbility {
     {
         super(INSTANCE);
         this.setMaxCooldown(3);
-        this.setmanaCost(0);
         this.onUseEvent = this::onUseEvent;
         this.duringCooldownEvent = this::duringCooldown;
     }

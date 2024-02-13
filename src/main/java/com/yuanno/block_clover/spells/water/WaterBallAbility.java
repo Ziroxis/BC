@@ -28,6 +28,7 @@ public class WaterBallAbility extends Ability {
 
     }
 
+    // todo make a spell evolution event so you can replace it by another ability
     private boolean onUseEvent(PlayerEntity player)
     {
         if (this.isEvolved())

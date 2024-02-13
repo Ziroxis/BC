@@ -45,8 +45,8 @@ public class DevilManaBarOverlay {
                     double manaRatio = (devil.getDevilMana() / devil.getMaxDevilMana());
                     int set_height = (int) (tex_height * manaRatio);//(int) (bar_height * chakraratio)
                     int move_tex = (tex_height - set_height);
-                    mc.gui.blit(event.getMatrixStack(), 55, 130 + move_tex, colour_x, move_tex, tex_width, set_height); // set_height
-                    Beapi.drawStringWithBorder(Minecraft.getInstance().font, event.getMatrixStack(), TextFormatting.ITALIC + manaString,  60, 220, Beapi.hexToRGB("#000000").getRGB());
+                    mc.gui.blit(event.getMatrixStack(), 380, 130 + move_tex, colour_x, move_tex, tex_width, set_height); // set_height
+                    Beapi.drawStringWithBorder(Minecraft.getInstance().font, event.getMatrixStack(), TextFormatting.ITALIC + manaString,  350, 220, Beapi.hexToRGB("#000000").getRGB());
                 }
             }
         }

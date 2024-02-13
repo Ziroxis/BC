@@ -5,6 +5,8 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.SequencedString;
 import com.yuanno.block_clover.client.gui.button.TexturedIconButton;
+import com.yuanno.block_clover.data.devil.DevilCapability;
+import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
@@ -86,6 +88,9 @@ public class ChatPromptScreen extends Screen {
             {
                 if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC)) // if anti-magic
                 {
+                    IDevil devil = DevilCapability.get(player);
+                    devil.alterMaxDevilMana(200);
+                    devil.alterDevilMana(200);
                     text = "Huh? An old dusty grimoire has chosen you as it's master";
                     inprogressQuestMana.triggerCompleteEvent(player);
                     questData.addFinishedQuest(inprogressQuestMana.getCore());

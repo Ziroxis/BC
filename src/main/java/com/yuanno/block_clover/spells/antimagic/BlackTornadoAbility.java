@@ -29,7 +29,8 @@ public class BlackTornadoAbility extends Ability implements IMultiTargetAbility 
     public BlackTornadoAbility() {
         super(INSTANCE);
         this.setMaxCooldown(5);
-        this.setmanaCost(0);
+        this.setmanaCost(10);
+        this.setDevil(true);
         this.onUseEvent = this::onUseEvent;
     }
 
@@ -56,48 +57,5 @@ public class BlackTornadoAbility extends Ability implements IMultiTargetAbility 
         }
     }
 }
-        /*
-        for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
-        {
-            if (ability == null)
-                continue;
-
-            try {
-                if (ability instanceof DemonStateAbility && ability.isContinuous())
-                {
-                    List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, 2.5, LivingEntity.class);
-                    list.remove(player);
-                    list.stream().forEach(entity ->
-                    {
-                        if(this.isTarget(entity))
-                        {
-                            entity.hurt(ModDamageSource.causeAbilityDamage(player, this, "player").markDamageAsSlash(), 20);
-                            Vector3d speed = Beapi.propulsion(player, 3, 3);
-                            entity.setDeltaMovement(speed.x, 1.5, speed.z);
-                            entity.hurtMarked = true;
-                        }
-                    });
-                    PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
-                    return true;
-                }
-                else
-                {
-                    if (ability instanceof DemonStateAbility)
-                    {
-                        System.out.println("test");
-                    }
-                    player.sendMessage(new StringTextComponent("Need to be in demon state!"), Util.NIL_UUID);
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-
-         */
 
 

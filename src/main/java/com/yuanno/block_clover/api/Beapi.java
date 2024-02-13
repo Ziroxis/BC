@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api;
 
 
+import com.google.common.base.Predicates;
 import com.yuanno.block_clover.BlockProtectionRule;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
@@ -36,6 +37,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.Heightmap;
@@ -318,8 +320,45 @@ public class Beapi
         RenderSystem.enableTexture();
         RenderSystem.disableBlend();
     }
+    public static final Predicate<Entity> IS_ALIVE_AND_SURVIVAL = EntityPredicates.NO_CREATIVE_OR_SPECTATOR.and(EntityPredicates.ENTITY_STILL_ALIVE);
+    public static List<BlockPos> getNearbyBlocks(BlockPos pos, IWorld world, int sizeX, int sizeY, int sizeZ, @Nullable Predicate<BlockState> predicate)
+    {
+        predicate = predicate == null ? (blockPos) -> true : predicate;
 
+        List<BlockPos> blockLocations = new ArrayList<BlockPos>();
+        for (int x = -sizeX; x <= sizeX; x++)
+        {
+            for (int y = -sizeY; y <= sizeY; y++)
+            {
+                for (int z = -sizeZ; z <= sizeZ; z++)
+                {
+                    BlockPos newPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+                    BlockState state = world.getBlockState(newPos);
+                    if(!predicate.test(state))
+                        continue;
 
+                    blockLocations.add(newPos);
+                }
+            }
+        }
+
+        return blockLocations;
+    }
+    public static <T extends Entity> List<T> getNearbyEntities(BlockPos pos, IWorld world, double sizeX, double sizeY, double sizeZ, @Nullable Predicate<Entity> predicate, Class<? extends T>... clazzez) {
+        if (clazzez.length <= 0) {
+            clazzez = new Class[] { Entity.class };
+        }
+        if (predicate == null) {
+            predicate = Predicates.alwaysTrue();
+        }
+        predicate = IS_ALIVE_AND_SURVIVAL.and(predicate);
+        AxisAlignedBB aabb = new AxisAlignedBB(pos).inflate(sizeX, sizeY, sizeZ);
+        List<T> list = new ArrayList<T>();
+        for (Class<? extends T> clz : clazzez) {
+            list.addAll(world.getEntitiesOfClass(clz, aabb, predicate));
+        }
+        return list;
+    }
     public static <T extends Entity> List<T> getEntitiesNear(BlockPos pos, World world, double radius, Predicate<Entity> predicate, Class<? extends T>... classEntities)
     {
         if(predicate != null)

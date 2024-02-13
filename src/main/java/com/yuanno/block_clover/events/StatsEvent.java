@@ -7,6 +7,8 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.devil.DevilCapability;
+import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
@@ -62,6 +64,7 @@ public class StatsEvent {
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
+        IDevil devil = DevilCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
 
         if (!props.hasAttribute())
@@ -70,6 +73,8 @@ public class StatsEvent {
         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
+        PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
+
     }
 
     public static void statsHandling(PlayerEntity player)
@@ -78,7 +83,7 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
-
+        IDevil devil = DevilCapability.get(player);
         if (props.hasAttribute())
             return;
 
@@ -137,6 +142,7 @@ public class StatsEvent {
         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
+        PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
 
     }
 
@@ -155,9 +161,12 @@ public class StatsEvent {
         abilityData.fullReset();
         IQuestData questData = QuestDataCapability.get(playerTarget);
         questData.fullReset();
+        IDevil devil = DevilCapability.get(playerTarget);
+        devil.fullReset();
         PacketHandler.sendTo(new SSyncQuestDataPacket(playerTarget.getId(), questData), playerTarget);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(playerTarget.getId(), entityStats), playerTarget);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(playerTarget.getId(), abilityData), playerTarget);
+        PacketHandler.sendTo(new SSyncDevilPacket(playerTarget.getId(), devil), playerTarget);
 
     }
     @SubscribeEvent
@@ -166,6 +175,7 @@ public class StatsEvent {
         IEntityStats statsProps = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
+        IDevil devil = DevilCapability.get(player);
 
         if (!statsProps.hasAttribute())
             statsHandling(player);
@@ -173,7 +183,7 @@ public class StatsEvent {
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
-
+        PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
     }
 
     @SubscribeEvent
@@ -212,6 +222,11 @@ public class StatsEvent {
         IQuestData newQuestData = QuestDataCapability.get(player);
         QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 
+        IDevil oldDevilData = DevilCapability.get(original);
+        nbt = DevilCapability.INSTANCE.writeNBT(oldDevilData, null);
+        IDevil newDevilData = DevilCapability.get(player);
+        DevilCapability.INSTANCE.readNBT(newDevilData, null, nbt);
+
         /*
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), newAbilityData), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), newEntityStats), player);
@@ -227,9 +242,10 @@ public class StatsEvent {
         PlayerEntity player = event.getPlayer();
         IEntityStats stats = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
-
+        IDevil devil = DevilCapability.get(player);
         PacketHandler.sendToAllTrackingAndSelf(new SSyncEntityStatsPacket(player.getId(), stats), player);
         PacketHandler.sendToAllTrackingAndSelf(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
+        PacketHandler.sendToAllTrackingAndSelf(new SSyncDevilPacket(player.getId(), devil), player);
         //MinecraftForge.EVENT_BUS.post(new EntityEvent.Size(player, player.getPose(), player.getDimensions(player.getPose()), player.getBbHeight()));
     }
 

@@ -11,4 +11,12 @@ public interface IDevil {
     void addControlledDevilList(String devilListAddition);
     void setDevil(String devil);
     String getDevil();
+
+    double getMaxDevilMana();
+    void setMaxDevilMana(double maxDevilMana);
+    void alterMaxDevilMana(double maxDevilMana);
+    double getDevilMana();
+    void setDevilMana(double devilMana);
+    void alterDevilMana(double devilMana);
+
 }

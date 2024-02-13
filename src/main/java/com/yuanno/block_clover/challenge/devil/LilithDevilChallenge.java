@@ -47,6 +47,7 @@ public class LilithDevilChallenge extends Challenge {
                         String walgner = ModValues.LILITH;
                         return walgner;
                     })
+                    .changeDevilMana(1000)
             )
             .build();
     public LilithDevilChallenge(ChallengeCore core) {

@@ -7,11 +7,14 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.challenges.ChallengesDataCapability;
 import com.yuanno.block_clover.data.challenges.IChallengesData;
+import com.yuanno.block_clover.data.devil.DevilCapability;
+import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.world.ChallengesWorldData;
 import com.yuanno.block_clover.init.ModEffects;
 import com.yuanno.block_clover.init.ModI18n;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncChallengeDataPacket;
+import com.yuanno.block_clover.networking.server.SSyncDevilPacket;
 import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -232,6 +235,8 @@ public class InProgressChallenge {
 					rewards = challenge.getCore().getReward().giveRewards(player);
 					challenge.tryUpdateBestTime(time);
 					challenge.setComplete(true);
+					IDevil devil = DevilCapability.get(player);
+					PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
 				}
 				else if (this.hasRewards() && challenge.isComplete())
 				{

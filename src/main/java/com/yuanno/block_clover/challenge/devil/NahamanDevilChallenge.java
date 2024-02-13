@@ -49,7 +49,9 @@ public class NahamanDevilChallenge extends Challenge {
                     .addDevil(() -> {
                         String nahaman = ModValues.NAHAMAN;
                         return nahaman;
-                    }))
+                    })
+                    .changeDevilMana(1000)
+            )
             .build();
     public NahamanDevilChallenge(ChallengeCore core) {
         super(core);

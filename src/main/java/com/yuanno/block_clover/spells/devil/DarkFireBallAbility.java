@@ -9,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class DarkFireBallAbility extends Ability {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Dark Fire Ball", AbilityCategories.AbilityCategory.DEVIL, DarkFireBallAbility.class)
-            .setDescription("Shoots a ball of flame")
+            .setDescription("Shoots a ball of dark flames")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
 
@@ -17,8 +17,7 @@ public class DarkFireBallAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
-        this.setExperiencePoint(25);
-        this.setExperienceGainLevelCap(10);
+        this.setDevil(true);
         this.onUseEvent = this::onUseEvent;
     }
 

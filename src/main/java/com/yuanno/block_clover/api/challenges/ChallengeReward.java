@@ -7,6 +7,9 @@ import com.yuanno.block_clover.data.challenges.ChallengesDataCapability;
 import com.yuanno.block_clover.data.challenges.IChallengesData;
 import com.yuanno.block_clover.data.devil.DevilCapability;
 import com.yuanno.block_clover.data.devil.IDevil;
+import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncDevilPacket;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
@@ -23,9 +26,10 @@ public class ChallengeReward {
 	private List<Supplier<Ability>> abilities = new ArrayList<>();
 	private List<Supplier<String>> devils = new ArrayList<>();
 	private List<Supplier<ItemStack>> itemToRemove = new ArrayList<>();
-	public List<Supplier<ItemStack>> getItems() {
+	private List<Supplier<ItemStack>> getItems() {
 		return this.items;
 	}
+	private int changeDevilMana = 0;
 
 	public ChallengeReward addAbility(Supplier<Ability> ability)
 	{
@@ -62,12 +66,26 @@ public class ChallengeReward {
 		return this;
 	}
 
+	public ChallengeReward changeDevilMana(int changeDevilMana)
+	{
+		this.changeDevilMana = changeDevilMana;
+		return this;
+	}
+
 
 	public String giveRewards(PlayerEntity player) {
 		IChallengesData challengesData = ChallengesDataCapability.get(player);
 		StringBuilder sb = new StringBuilder();
 
 		boolean hasAtLeastOneReward = false;
+
+		IDevil devil = DevilCapability.get(player);
+
+		if (this.changeDevilMana != 0) {
+			devil.alterDevilMana(this.changeDevilMana);
+			devil.alterMaxDevilMana(this.changeDevilMana);
+			System.out.println(devil.getDevilMana());
+		}
 
 		for (Supplier<ItemStack> supp : this.items) {
 			ItemStack stack = supp.get().copy();
@@ -92,8 +110,8 @@ public class ChallengeReward {
 		{
 			String devilname = supplier.get();
 			sb.append(" " + devilname + " " + "has been subjugated" + "\n");
-			IDevil devil = DevilCapability.get(player);
 			devil.addControlledDevilList(devilname);
+			PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
 		}
 
 		for (Supplier<ItemStack> itemStack : this.itemToRemove)

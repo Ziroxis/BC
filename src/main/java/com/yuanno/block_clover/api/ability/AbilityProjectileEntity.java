@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.api.ability;
 
+import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
@@ -7,6 +8,7 @@ import com.yuanno.block_clover.events.projectiles.ProjectileBlockEvent;
 import com.yuanno.block_clover.events.projectiles.ProjectileHitEvent;
 import com.yuanno.block_clover.events.projectiles.ProjectileShootEvent;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -28,6 +30,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.math.RayTraceContext.BlockMode;
 import net.minecraft.util.math.RayTraceContext.FluidMode;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -37,9 +40,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class AbilityProjectileEntity extends ThrowableEntity
 {
+	private double collisionSizeX = super.getBoundingBox().getXsize();
+	private double collisionSizeY = super.getBoundingBox().getYsize();
+	private double collisionSizeZ = super.getBoundingBox().getZsize();
+
+
 	private int life = 64;
 	private int maxLife = 64;
 	private int knockbackStrength = 0;
@@ -93,27 +102,22 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		this.maxLife = this.life;
 		this.damage = 0.1f;
 		this.setThrower(thrower);
-		// Assuming player is an instance of PlayerEntity
-		double playerX = thrower.getX();
-		double playerY = thrower.getY() + thrower.getEyeHeight(); // Adjusted for eye height
-		double playerZ = thrower.getZ();
-
-		// Get player's look direction
-		float yaw = thrower.yRot;
-		float pitch = thrower.xRot;
-
-		// Calculate the offset in the direction the player is looking
-		double offset = 0.95; // Adjust this value as needed
-		double offsetX = offset * -Math.sin(Math.toRadians(yaw));
-		double offsetY = offset * -Math.sin(Math.toRadians(pitch));
-		double offsetZ = offset * Math.cos(Math.toRadians(yaw));
-
-		// Create the projectile at the adjusted coordinates
-		this.setPos(playerX + offsetX, playerY, playerZ + offsetZ);
-
+		
 		this.source = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile();
 		this.bypassingSource = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile().bypassArmor();		
 	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox() {
+		return new AxisAlignedBB(
+				super.getX() - this.collisionSizeX / 2.0D,
+				super.getY() - this.collisionSizeY / 2.0D,
+				super.getZ() - this.collisionSizeZ / 2.0D,
+				super.getX() + this.collisionSizeX / 2.0D,
+				super.getY() + this.collisionSizeY / 2.0D,
+				super.getZ() + this.collisionSizeZ / 2.0D);
+	}
+
 
 	@Override
 	public void tick()
@@ -141,30 +145,42 @@ public class AbilityProjectileEntity extends ThrowableEntity
 			Vector3d vec31 = new Vector3d(this.getX(), this.getY(), this.getZ());
 			Vector3d vec3 = new Vector3d(this.getX() + this.getDeltaMovement().x, this.getY() + this.getDeltaMovement().y, this.getZ() + this.getDeltaMovement().z);
 			RayTraceResult hit = this.level.clip(new RayTraceContext(vec3, vec31, BlockMode.OUTLINE, FluidMode.ANY, this));
+
+			Predicate<Entity> entityPredicate = target -> {
+				if (target instanceof LivingEntity && target.canBeCollidedWith() && target != this.getThrower()) {
+					return ((LivingEntity) target).canSee(this);
+				}
+				return target != this;
+			};
+
+
+
 			double sizeX = this.collisionSize;
 			double sizeY = this.collisionSize;
 			double sizeZ = this.collisionSize;
+			Predicate<BlockState> blockPredicate = (state) -> {
+				return !state.isAir();
+			};
+			Vector3i radius = new Vector3i(this.getBoundingBox().getXsize() / 2.0D, this.getBoundingBox().getYsize() / 2.0D, this.getBoundingBox().getZsize() / 2.0D);
+			List<Entity> entityList = Beapi.getNearbyEntities(super.blockPosition(), super.level, radius.getX(), radius.getY(), radius.getZ(), entityPredicate, Entity.class);
+			List<BlockPos> blockList = Beapi.getNearbyBlocks(super.blockPosition(), super.level, radius.getX(), radius.getY(), radius.getZ(), blockPredicate);
 
-			AxisAlignedBB aabb = new AxisAlignedBB(this.getX(), this.getY(), this.getZ(), this.getX(), this.getY(), this.getZ()).expandTowards(sizeX, sizeY, sizeZ);
-			List<LivingEntity> list = this.level.getEntitiesOfClass(LivingEntity.class, aabb);
+			Entity entityTarget = entityList.stream().findAny().orElse(null);
+			BlockPos blockTarget = blockList.stream().findAny().orElse(null);
 
-			Entity entity = null;
+			if (entityTarget != null) {
+				hit = new EntityRayTraceResult(entityTarget);
+			} else if (blockTarget != null) {
+				hit = new BlockRayTraceResult(new Vector3d(blockTarget.getX(), blockTarget.getY(), blockTarget.getZ()), null, blockTarget, false);
+			}
 
-			for (Entity target : list)
-				if (target.canBeCollidedWith() && (target != this.getOwner() || this.tickCount >= 5))
-					entity = target;
-
-			if (entity == this.getOwner())
-				return;
-
-			if (entity != null)
-				hit = new EntityRayTraceResult(entity);
-
-			if (hit.getType() == RayTraceResult.Type.ENTITY)
+			if (hit.getType() == RayTraceResult.Type.ENTITY || hit.getType() == RayTraceResult.Type.BLOCK) {
 				this.onHit(hit);
+			}
 
-			if (this.tickCount % this.getTargetResetTime() == 0)
+			if(this.tickCount % this.getTargetResetTime() == 0) {
 				this.clearTargets();
+			}
 
 			this.onTickEvent.onTick();
 		}

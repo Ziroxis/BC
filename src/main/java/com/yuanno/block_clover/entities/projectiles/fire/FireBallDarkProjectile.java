@@ -19,7 +19,7 @@ public class FireBallDarkProjectile extends AbilityProjectileEntity {
     public FireBallDarkProjectile(World world, LivingEntity player)
     {
         super(FireProjectiles.FIRE_BALL_DARK.get(), world, player);
-        this.setDamage(8);
+        this.setDamage(16);
         this.setMaxLife(128);
         this.setPhysical(false);
         this.onEntityImpactEvent = this::onEntityImpactEvent;

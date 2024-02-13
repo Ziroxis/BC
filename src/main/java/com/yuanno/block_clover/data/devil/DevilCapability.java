@@ -40,6 +40,8 @@ public class DevilCapability {
                 listNBT.put("devil_list_data", listTag);
                 props.put("devil_list", listNBT);
 
+                props.putDouble("devilMaxMana", instance.getMaxDevilMana());
+                props.putDouble("devilMana", instance.getDevilMana());
 
                 return props;
             }
@@ -61,6 +63,9 @@ public class DevilCapability {
                         instance.addControlledDevilList(value);
                     }
                 }
+
+                instance.setMaxDevilMana(props.getDouble("devilMaxMana"));
+                instance.setDevilMana(props.getDouble("devilMana"));
             }
         }, () -> new DevilBase());
     }

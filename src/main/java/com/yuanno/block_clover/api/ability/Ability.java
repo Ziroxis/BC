@@ -9,12 +9,15 @@ import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.data.IExtraUpdateData;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.devil.DevilCapability;
+import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.networking.ManaSync;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncDevilPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
@@ -68,6 +71,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     @Deprecated
     private boolean needsClientSide = false;
     private int poolId = -1;
+    private boolean isDevil = false;
 
     protected final Random random = new Random();
 
@@ -101,6 +105,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (!this.isOnStandby())
             return;
         IEntityStats propsEntity = EntityStatsCapability.get(player);
+        IDevil propsDevil = DevilCapability.get(player);
 
         if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
             this.evolved(true);
@@ -114,10 +119,17 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             IAbilityData props = AbilityDataCapability.get(player);
             this.checkAbilityPool(player, State.COOLDOWN);
 
-            if (!this.isEvolved)
-                propsEntity.alterMana(-manaCost);
-            else
-                propsEntity.alterMana(-evolvedManaCost);
+            if (!this.isDevil)
+            {
+                if (!this.isEvolved)
+                    propsEntity.alterMana(-manaCost);
+                else
+                    propsEntity.alterMana(-evolvedManaCost);
+            }
+            else if (this.isDevil)
+            {
+                propsDevil.alterDevilMana(-manaCost);
+            }
             // experience of the spell
             if (propsEntity.hasExperienceSpell(this.getName())) {
                 int experience = propsEntity.getExperienceSpell(this.getName());
@@ -135,6 +147,9 @@ public class Ability extends ForgeRegistryEntry<Ability> {
                 ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
                 MinecraftForge.EVENT_BUS.post(eventExperience);
             }
+
+
+
             AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
             MinecraftForge.EVENT_BUS.post(post);
 
@@ -142,6 +157,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             props.setPreviouslyUsedAbility(this);
             PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
+            PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), propsDevil), player);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
 
         }
@@ -589,10 +605,14 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         ExtendedWorldData worldData = ExtendedWorldData.get(player.level);
         IEntityStats propsEntity = EntityStatsCapability.get(player);
+        IDevil devil = DevilCapability.get(player);
         //System.out.println(propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0);
         //System.out.println(propsEntity.getMana() < getmanaCost());
 
-        if (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0 && propsEntity.getMana() != 0) {
+        if (!this.isDevil && (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0 && propsEntity.getMana() != 0)) {
+            return false;
+        }
+        else if (this.isDevil && (devil.getDevilMana() < getmanaCost() + 5 && getmanaCost() != 0 && devil.getDevilMana() != 0)) {
             return false;
         }
         if (worldData.isInsideRestrictedArea((int)player.position().x(), (int)player.position().y(), (int)player.position().z()))
@@ -707,5 +727,14 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public interface IFactory<A extends Ability>
     {
         A create(AbilityCore<A> ability);
+    }
+
+    public void setDevil(boolean flag)
+    {
+        this.isDevil = flag;
+    }
+    public boolean getIsDevil()
+    {
+        return this.isDevil;
     }
 }

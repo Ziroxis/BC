@@ -45,11 +45,12 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.QUEST_MANAGER.get(), new QuestBoardManagerEntityRenderer.Factory());
 
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
-        ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
-        ClientHandler.addPlayerLayers(playerSkinMap.get("slim"));
+        //ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
+        //ClientHandler.addPlayerLayers(playerSkinMap.get("slim"));
 
     }
 
+    /*
     @OnlyIn(Dist.CLIENT)
     public static void addPlayerLayers(PlayerRenderer renderer)
     {
@@ -71,6 +72,9 @@ public class ClientHandler {
             layers.add(new LilithDevilFamiliarRenderer<>(renderer));
             layers.add(new NahamanDevilFamiliarRenderer<>(renderer));
             layers.add(new ManaLayerRenderer<>(renderer));
+            layers.add(new FrozenRenderer<>(renderer));
         }
     }
+
+     */
 }

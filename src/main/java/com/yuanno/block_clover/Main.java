@@ -11,6 +11,7 @@ import com.yuanno.block_clover.client.curios.*;
 import com.yuanno.block_clover.client.curios.gui.CuriosScreen;
 import com.yuanno.block_clover.client.curios.gui.GuiEventHandler;
 import com.yuanno.block_clover.client.gui.overlay.*;
+import com.yuanno.block_clover.client.overlay.renderer.*;
 import com.yuanno.block_clover.commands.QuestArgument;
 import com.yuanno.block_clover.curios.CuriosConfig;
 import com.yuanno.block_clover.curios.CuriosHelper;
@@ -33,12 +34,17 @@ import com.yuanno.block_clover.world.structure.configured.ConfiguredStructures;
 import com.yuanno.block_clover.init.*;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.WoodType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.command.arguments.ArgumentSerializer;
 import net.minecraft.command.arguments.ArgumentTypes;
+import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -61,6 +67,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Mod(Main.MODID)
@@ -231,6 +238,58 @@ public class Main
             MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
             ScreenManager.register(CuriosRegistry.CONTAINER_TYPE, CuriosScreen::new);
             KeyRegistry.registerKeys();
+
+
+            event.enqueueWork(() -> {
+                Minecraft mc = Minecraft.getInstance();
+
+                for (Map.Entry<EntityType<?>, EntityRenderer<?>> entry : mc.getEntityRenderDispatcher().renderers.entrySet()) {
+                    EntityRenderer entityRenderer = entry.getValue();
+                    if (entityRenderer instanceof LivingRenderer) {
+                        LivingRenderer renderer = (LivingRenderer) entityRenderer;
+
+                        renderer.addLayer(new GrimoirRenderer(renderer));
+                        renderer.addLayer(new BlackModeRenderer(renderer));
+                        renderer.addLayer(new EarthManipulationRenderer(renderer));
+                        renderer.addLayer(new LeoPalmaRenderer(renderer));
+                        renderer.addLayer(new SlashBladesRenderer(renderer));
+                        renderer.addLayer(new ThunderGodGearRenderer(renderer));
+                        renderer.addLayer(new EarthGlovesRenderer(renderer));
+                        renderer.addLayer(new ValkyrieArmorRenderer(renderer));
+                        renderer.addLayer(new ManaSkinRenderer(renderer));
+                        renderer.addLayer(new BearClawRenderer(renderer));
+                        renderer.addLayer(new RhinocerosArmorRenderer(renderer));
+                        renderer.addLayer(new WagnerDevilFamiliarRenderer(renderer));
+                        renderer.addLayer(new LilithDevilFamiliarRenderer(renderer));
+                        renderer.addLayer(new NahamanDevilFamiliarRenderer(renderer));
+                        renderer.addLayer(new ManaLayerRenderer(renderer));
+                        renderer.addLayer(new FrozenRenderer(renderer));
+
+
+                    }
+                }
+
+                for (Map.Entry<String, PlayerRenderer> entry : mc.getEntityRenderDispatcher().getSkinMap().entrySet()) {
+                    PlayerRenderer renderer = entry.getValue();
+
+                    renderer.addLayer(new GrimoirRenderer(renderer));
+                    renderer.addLayer(new BlackModeRenderer(renderer));
+                    renderer.addLayer(new EarthManipulationRenderer(renderer));
+                    renderer.addLayer(new LeoPalmaRenderer(renderer));
+                    renderer.addLayer(new SlashBladesRenderer(renderer));
+                    renderer.addLayer(new ThunderGodGearRenderer(renderer));
+                    renderer.addLayer(new EarthGlovesRenderer(renderer));
+                    renderer.addLayer(new ValkyrieArmorRenderer(renderer));
+                    renderer.addLayer(new ManaSkinRenderer(renderer));
+                    renderer.addLayer(new BearClawRenderer(renderer));
+                    renderer.addLayer(new RhinocerosArmorRenderer(renderer));
+                    renderer.addLayer(new WagnerDevilFamiliarRenderer(renderer));
+                    renderer.addLayer(new LilithDevilFamiliarRenderer(renderer));
+                    renderer.addLayer(new NahamanDevilFamiliarRenderer(renderer));
+                    renderer.addLayer(new ManaLayerRenderer(renderer));
+                    renderer.addLayer(new FrozenRenderer(renderer));
+                }
+            });
         }
     }
 

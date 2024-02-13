@@ -1,5 +1,7 @@
 package com.yuanno.block_clover.entities.devils;
 
+import com.yuanno.block_clover.entities.goals.spells.DarkFireBallSpellGoal;
+import com.yuanno.block_clover.entities.goals.spells.DarkIceBallSpellGoal;
 import com.yuanno.block_clover.init.ModAttributes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -25,6 +27,8 @@ public class LilithDevilEntity extends DevilEntity {
     {
         super(type, world);
         this.canUseMagic = true;
+        this.goalSelector.addGoal(5, new DarkIceBallSpellGoal(this));
+
     }
 
     @Override
@@ -33,22 +37,19 @@ public class LilithDevilEntity extends DevilEntity {
         super.registerGoals();
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillagerEntity.class, false));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D, 0.0F));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 4));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(1, new SwimGoal(this));
 
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes()
     {
         return MobEntity.createMobAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 5)
+                .add(Attributes.ATTACK_DAMAGE, 10)
                 .add(Attributes.ARMOR, 10)
-                .add(Attributes.MAX_HEALTH, 50)
+                .add(Attributes.MAX_HEALTH, 200)
                 .add(Attributes.FOLLOW_RANGE, 20)
                 .add(Attributes.MOVEMENT_SPEED, 0.27)
                 .add(ModAttributes.FALL_RESISTANCE.get(), 50);

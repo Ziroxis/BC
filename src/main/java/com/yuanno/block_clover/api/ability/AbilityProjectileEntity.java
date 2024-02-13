@@ -102,7 +102,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		this.maxLife = this.life;
 		this.damage = 0.1f;
 		this.setThrower(thrower);
-		
+
 		this.source = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile();
 		this.bypassingSource = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile().bypassArmor();		
 	}
@@ -150,7 +150,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 				if (target instanceof LivingEntity && target.canBeCollidedWith() && target != this.getThrower()) {
 					return ((LivingEntity) target).canSee(this);
 				}
-				return target != this;
+				return target != this && target != this.getThrower();
 			};
 
 

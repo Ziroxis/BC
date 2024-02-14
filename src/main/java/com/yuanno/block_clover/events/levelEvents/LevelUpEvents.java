@@ -1,5 +1,6 @@
 package com.yuanno.block_clover.events.levelEvents;
 
+import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModValues;
@@ -10,7 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = "block_clover")
+@Mod.EventBusSubscriber(modid = Main.MODID)
 public class LevelUpEvents {
 
     @SubscribeEvent

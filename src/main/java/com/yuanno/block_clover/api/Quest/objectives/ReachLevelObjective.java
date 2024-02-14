@@ -24,7 +24,9 @@ public class ReachLevelObjective extends Objective implements IReachLevelObjecti
 	public boolean checkLevel(PlayerEntity player)
 	{
 		IEntityStats props = EntityStatsCapability.get(player);
-		return props.getLevel() >= this.level;
+		// this is hacky, but the LevelUpEvent for quests gets called BEFORE the actual level up event happens that does all the logic
+		int actualLevel = props.getLevel() + 1;
+		return actualLevel >= this.level;
 	}
 
 	@Override

@@ -35,6 +35,7 @@ public class ManaSkinQuest extends Quest {
     {
         super(id);
         this.addObjective(this.useAbility);
+        this.setCategory(Category.MAGICIAN);
         this.onCompleteEvent = this::giveReward;
     }
 
@@ -42,7 +43,6 @@ public class ManaSkinQuest extends Quest {
     public boolean giveReward(PlayerEntity player)
     {
         IAbilityData abilityData = AbilityDataCapability.get(player);
-        IEntityStats entityStats = EntityStatsCapability.get(player);
         abilityData.addUnlockedAbility(player, ManaSkinAbility.INSTANCE);
 
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));

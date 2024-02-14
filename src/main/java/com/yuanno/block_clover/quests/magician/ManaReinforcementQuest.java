@@ -21,6 +21,7 @@ public class ManaReinforcementQuest extends Quest {
     {
         super(questId);
         this.addObjective(this.levelObjective);
+        this.setCategory(Category.MAGICIAN);
         this.onCompleteEvent = this::giveReward;
     }
 

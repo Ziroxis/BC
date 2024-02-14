@@ -7,6 +7,7 @@ import com.yuanno.block_clover.api.ability.AbilityUseEvent;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
 import net.minecraft.entity.LivingEntity;
@@ -327,7 +328,7 @@ public class QuestEvents
     }
 
     @SubscribeEvent
-    public static void onDorikiGained(ExperienceUpEvent event)
+    public static void onLevelGained(LevelUpEvent event)
     {
         if (!(event.getEntity() instanceof PlayerEntity))
             return;

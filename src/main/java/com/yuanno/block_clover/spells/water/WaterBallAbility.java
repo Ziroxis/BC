@@ -20,7 +20,7 @@ public class WaterBallAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
-        this.setEvolutionCost(50);
+        this.setEvolutionCost(3);
         this.setEvolvedManaCost(5);
         this.setExperiencePoint(25);
         this.setExperienceGainLevelCap(10);

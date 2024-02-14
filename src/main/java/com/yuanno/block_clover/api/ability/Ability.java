@@ -104,60 +104,20 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
         if (!this.isOnStandby())
             return;
-        IEntityStats propsEntity = EntityStatsCapability.get(player);
-        IDevil propsDevil = DevilCapability.get(player);
-
-        if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !this.isEvolved)
-            this.evolved(true);
-
-        AbilityUseEvent event = new AbilityUseEvent.Pre(player, this);
-        if (MinecraftForge.EVENT_BUS.post(event))
-            return;
 
         if (!this.isStateForced() && this.onUseEvent.onUse(player))
         {
+            AbilityUseEvent pre = new AbilityUseEvent.Pre(player, this);
+            MinecraftForge.EVENT_BUS.post(pre);
+
             IAbilityData props = AbilityDataCapability.get(player);
             this.checkAbilityPool(player, State.COOLDOWN);
-
-            if (!this.isDevil)
-            {
-                if (!this.isEvolved)
-                    propsEntity.alterMana(-manaCost);
-                else
-                    propsEntity.alterMana(-evolvedManaCost);
-            }
-            else if (this.isDevil)
-            {
-                propsDevil.alterDevilMana(-manaCost);
-            }
-            // experience of the spell
-            if (propsEntity.hasExperienceSpell(this.getName())) {
-                int experience = propsEntity.getExperienceSpell(this.getName());
-                propsEntity.setExperienceSpells(this.getName(), experience + 1);
-            }
-            else
-                propsEntity.setExperienceSpells(this.getName(), 1);
-
-            // experience of player
-            if (propsEntity.getLevel() < experienceGainLevelCap)
-            {
-                float experienceToGive = experiencePoint * propsEntity.getMultiplier();
-                propsEntity.alterExperience((int) experienceToGive);
-
-                ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
-                MinecraftForge.EVENT_BUS.post(eventExperience);
-            }
-
-
 
             AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
             MinecraftForge.EVENT_BUS.post(post);
 
             this.startCooldown(player);
             props.setPreviouslyUsedAbility(this);
-            PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
-            PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), propsDevil), player);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
 
         }

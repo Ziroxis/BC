@@ -15,37 +15,17 @@ import net.minecraftforge.fml.common.Mod;
 public class ExperienceEvents {
 
     @SubscribeEvent
-    public static void onLevelUp(ExperienceUpEvent e)
+    public static void onLevelUp(ExperienceUpEvent event)
     {
-        PlayerEntity player = e.getPlayer();
+        PlayerEntity player = event.getPlayer();
+        if (player.level.isClientSide)
+            return;
         IEntityStats statsProps = EntityStatsCapability.get(player);
 
         if (statsProps.getExperience() >= statsProps.getMaxExperience() && statsProps.getLevel() < 50)
         {
-            int currentExperience = statsProps.getExperience();
-            int currentMaxExperience = statsProps.getMaxExperience();
-            statsProps.alterLevel(1);
             LevelUpEvent eventLevelUp = new LevelUpEvent(player, statsProps.getLevel());
-            if (MinecraftForge.EVENT_BUS.post(eventLevelUp))
-                return;
-            statsProps.alterMaxExperience(100 * statsProps.getLevel()/2);
-            MaxExperienceUpEvent eventMaxExperienceUp = new MaxExperienceUpEvent(player, statsProps.getMaxExperience());
-            if (MinecraftForge.EVENT_BUS.post(eventMaxExperienceUp))
-                return;
-            statsProps.setExperience(currentExperience - currentMaxExperience);
-            ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, statsProps.getExperience());
-            if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
-                return;
-            if (statsProps.getRace().equals(ModValues.ELF)) {
-                statsProps.alterMaxMana(100);
-                statsProps.alterManaRegeneration(0.1f);
-            }
-            else {
-                statsProps.alterMaxMana(50);
-                statsProps.alterManaRegeneration(0.05f);
-            }
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), statsProps), player);
-            //player.sendMessage(new StringTextComponent("You leveled up to level " + statsProps.getLevel() + "!"), player.getUUID());
+            MinecraftForge.EVENT_BUS.post(eventLevelUp);
         }
     }
 }

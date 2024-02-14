@@ -32,6 +32,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(CStartChallengePacket.class, CStartChallengePacket::encode, CStartChallengePacket::decode, CStartChallengePacket::handle);
         PacketHandler.registerPacket(COpenDevilSummoningScreenPacket.class, COpenDevilSummoningScreenPacket::encode, COpenDevilSummoningScreenPacket::decode, COpenDevilSummoningScreenPacket::handle);
         PacketHandler.registerPacket(CSyncChallengeyDataPacket.class, CSyncChallengeyDataPacket::encode, CSyncChallengeyDataPacket::decode, CSyncChallengeyDataPacket::handle);
+        PacketHandler.registerPacket(CTeleportMagicTowerPacket.class, CTeleportMagicTowerPacket::encode, CTeleportMagicTowerPacket::decode, CTeleportMagicTowerPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);
@@ -56,6 +57,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SSyncDynDimensionsPacket.class, SSyncDynDimensionsPacket::encode, SSyncDynDimensionsPacket::decode, SSyncDynDimensionsPacket::handle);
         PacketHandler.registerPacket(SOpenDevilSummoningScreenpacket.class, SOpenDevilSummoningScreenpacket::encode, SOpenDevilSummoningScreenpacket::decode, SOpenDevilSummoningScreenpacket::handle);
         PacketHandler.registerPacket(SSyncChallengeDataPacket.class, SSyncChallengeDataPacket::encode, SSyncChallengeDataPacket::decode, SSyncChallengeDataPacket::handle);
+        PacketHandler.registerPacket(SOpenTeleportTowerScreenPacket.class, SOpenTeleportTowerScreenPacket::encode, SOpenTeleportTowerScreenPacket::decode, SOpenTeleportTowerScreenPacket::handle);
 
         //SYNC
         PacketHandler.registerPacket(ManaSync.class, ManaSync::encode, ManaSync::decode, ManaSync::handle);

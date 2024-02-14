@@ -49,9 +49,12 @@ public class PlayerAchievementsScreen extends Screen {
         Minecraft mc = Minecraft.getInstance();
         PlayerEntity player = mc.player;
 
-
+        if (questData.getFinishedQuests().isEmpty())
+            return;
         for (QuestId quest : questData.getFinishedQuests())
         {
+            if (quest.createQuest().getRank().isEmpty())
+                return;
             switch (quest.createQuest().getRank())
             {
                 case (ModValues.RANK_QUEST_D):

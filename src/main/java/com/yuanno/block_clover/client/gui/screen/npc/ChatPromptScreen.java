@@ -64,18 +64,22 @@ public class ChatPromptScreen extends Screen {
         int posY = (this.height - 256) / 2;
         //this.loop();
         IQuestData questData = QuestDataCapability.get(player);
-        System.out.println(questData.getInProgressQuests());
-        for (Quest quest : questData.getInProgressQuests())
+        if (!(questData.getInProgressQuests().length == 0))
         {
-            System.out.println(quest);
-            if (quest.getCategory() != Quest.Category.MAGICIAN)
-                return;
-            inprogressQuestMana = quest;
-            System.out.println(inprogressQuestMana);
-            break;
-
+            for (Quest quest : questData.getInProgressQuests()) {
+                if (quest.getCategory() != null && quest.getCategory() != Quest.Category.MAGICIAN)
+                    return;
+                inprogressQuestMana = quest;
+                break;
+            }
         }
         // check first quest
+        if (inprogressQuestMana == null)
+        {
+            text = "You've undergone thorough basic mana training, I can't teach you more!";
+            this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+            return;
+        }
         if (inprogressQuestMana.getCore().equals(ModQuests.GRIMOIRE))
         {
             // edge cases
@@ -91,6 +95,7 @@ public class ChatPromptScreen extends Screen {
                     questData.addFinishedQuest(inprogressQuestMana.getCore());
                     questData.removeInProgressQuest(inprogressQuestMana.getCore());
                     PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                    PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
                     this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                     return;
                 }
@@ -102,6 +107,7 @@ public class ChatPromptScreen extends Screen {
                 questData.addFinishedQuest(inprogressQuestMana.getCore());
                 questData.removeInProgressQuest(inprogressQuestMana.getCore());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             }
@@ -113,10 +119,9 @@ public class ChatPromptScreen extends Screen {
                 questData.addFinishedQuest(inprogressQuestMana.getCore());
                 questData.removeInProgressQuest(inprogressQuestMana.getCore());
                 questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
-                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-                System.out.println(questData.getInProgressQuests());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                text = "Good job! A grimoire has chosen you, go into combat mode to see your grimoire!";
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                text = "A grimoire has chosen you, go into combat mode to see your grimoire!";
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             }
@@ -131,10 +136,10 @@ public class ChatPromptScreen extends Screen {
             {
                 questData.addFinishedQuest(inprogressQuestMana.getCore());
                 questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
-                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                questData.addInProgressQuest(ModQuests.MANA_SKIN.createQuest());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                text = "Mana reinforcement envelops your arm with mana dealing more damage! Come back when you're stronger to start your training again.";
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                text = "Mana reinforcement envelops your arm with mana dealing more damage! Use mana reinforcement for 2 minutes for your next spell.";
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             }
@@ -150,10 +155,17 @@ public class ChatPromptScreen extends Screen {
                 questData.addFinishedQuest(inprogressQuestMana.getCore());
                 questData.removeInProgressQuest(inprogressQuestMana.getCore());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                text = "You've undergone thorough training, now comes the sensing your surroundings";
+                PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
+                text = "You've undergone thorough basic mana training, I can't teach you more!";
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             }
+        }
+        else
+        {
+            text = "You've undergone thorough basic mana training, I can't teach you more!";
+            this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+            return;
         }
     }
 

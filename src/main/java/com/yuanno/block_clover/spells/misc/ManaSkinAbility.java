@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class ManaSkinAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Mana Skin", AbilityCategories.AbilityCategory.ATTRIBUTE, ManaSkinAbility.class)
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Mana Skin", AbilityCategories.AbilityCategory.MISCELLANEOUS, ManaSkinAbility.class)
             .setDescription("Envelops your skin with mana.\nGiving you resistance, auto-step.")
             .setDamageKind(AbilityDamageKind.BUFF)
             .build();

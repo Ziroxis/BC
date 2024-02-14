@@ -31,9 +31,9 @@ public class ManaSkinQuest extends Quest {
 
     private Objective useAbility = new UseContinuousAbilityObjective("Use mana reinforcement for 2 minutes while standing still", 1200, ManaReinforcementAbility.INSTANCE, true);
 
-    public ManaSkinQuest(QuestId id)
+    public ManaSkinQuest(QuestId questId)
     {
-        super(id);
+        super(questId);
         this.addObjective(this.useAbility);
         this.setCategory(Category.MAGICIAN);
         this.onCompleteEvent = this::giveReward;
@@ -44,7 +44,6 @@ public class ManaSkinQuest extends Quest {
     {
         IAbilityData abilityData = AbilityDataCapability.get(player);
         abilityData.addUnlockedAbility(player, ManaSkinAbility.INSTANCE);
-
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
         return true;
     }

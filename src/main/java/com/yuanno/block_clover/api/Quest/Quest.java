@@ -27,7 +27,7 @@ public abstract class Quest
 	protected ICompleting onCompleteEvent = (player) -> { return true; };
 	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
 	private String description;
-	private String rank;
+	private String rank = "";
 	private Category category;
 	public Quest(QuestId core)
 	{

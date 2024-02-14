@@ -63,10 +63,21 @@ public class ChatPromptScreen extends Screen {
         guiTop = (this.height - this.ySize) / 2;
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
-        this.loop();
+        //this.loop();
+        text = "Here is my training regiment, stand still using mana reinforcement for 2 minutes and then come back!";
+        this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
+        for (Quest quest : questData.getInProgressQuests())
+        {
+            if (quest.getCategory() != Quest.Category.MAGICIAN)
+                return;
+            if (quest.getCore().equals(ModQuests.GRIMOIRE))
+            {
 
+            }
+        }
     }
 
+    /*
     public void loop()
     {
         // check if you got a magician quest in progress
@@ -229,6 +240,8 @@ public class ChatPromptScreen extends Screen {
         }
 
     }
+
+     */
 
     void questInprogressLoop(Quest questInProgress, String ifNotCompleted, String ifCompleted) // TODO finish up this loop later
     {

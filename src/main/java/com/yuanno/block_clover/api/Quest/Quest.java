@@ -28,6 +28,7 @@ public abstract class Quest
 	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
 	private String description;
 	private String rank;
+	private Category category;
 	public Quest(QuestId core)
 	{
 		this.core = core;
@@ -200,5 +201,20 @@ public abstract class Quest
 	public interface ICompleting extends Serializable
 	{
 		boolean check(PlayerEntity player);
+	}
+
+	public Category getCategory()
+	{
+		return this.category;
+	}
+
+	public void setCategory(Category category)
+	{
+		this.category = category;
+	}
+
+	public enum Category
+	{
+		MAGICIAN, BOARD
 	}
 }

@@ -65,4 +65,7 @@ public interface IAbilityData
 	int getCombatBarSet();
 	void nextCombatBarSet();
 	void prevCombatBarSet();
-	void setCombatBarSet(int set);}
+	void setCombatBarSet(int set);
+
+	void replaceAbility(AbilityCore abilityCore, AbilityCore abilityCoreSecond);
+}

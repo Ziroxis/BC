@@ -2,6 +2,7 @@ package com.yuanno.block_clover.events.ability;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityEvolutionEvent;
 import com.yuanno.block_clover.api.ability.AbilityUseEvent;
 import com.yuanno.block_clover.data.devil.DevilCapability;
 import com.yuanno.block_clover.data.devil.IDevil;
@@ -66,14 +67,17 @@ public class AbilityUseEvents {
         }
 
         // experience of the spell logic
-        if (entityStats.getExperienceSpell(ability.getName()) != null && (int) entityStats.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost() && !ability.isEvolved())
-            ability.evolved(true);
         if (entityStats.hasExperienceSpell(ability.getName())) {
             int experience = entityStats.getExperienceSpell(ability.getName());
             entityStats.setExperienceSpells(ability.getName(), experience + 1);
         }
         else
             entityStats.setExperienceSpells(ability.getName(), 1);
+        if (entityStats.getExperienceSpell(ability.getName()) != null && (int) entityStats.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost() && !ability.isEvolved()) {
+            ability.evolved(true);
+            AbilityEvolutionEvent abilityEvolutionEvent = new AbilityEvolutionEvent(player, ability);
+            MinecraftForge.EVENT_BUS.post(abilityEvolutionEvent);
+        }
 
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
     }

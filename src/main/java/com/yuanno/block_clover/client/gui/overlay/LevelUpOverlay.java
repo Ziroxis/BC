@@ -47,6 +47,7 @@ public class LevelUpOverlay extends AbstractGui {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         IAbilityData abilityData = AbilityDataCapability.get(player);
         String spellEvolution = "";
+        /*
         for (int i = 0; i < abilityData.getEquippedAbilities().size(); i++)
         {
             if (abilityData.getEquippedAbility(i) != null
@@ -62,5 +63,7 @@ public class LevelUpOverlay extends AbstractGui {
                     abilityData.getEquippedAbility(i).evolved(true);
             }
         }
+
+         */
     }
 }

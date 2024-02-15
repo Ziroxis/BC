@@ -462,4 +462,24 @@ public class AbilityDataBase implements IAbilityData
 	{
 		this.currentCombatBarSet = set;
 	}
+
+	@Override
+	public void replaceAbility(AbilityCore abilityCore, AbilityCore abilityCoreSecond)
+	{
+		Ability ogAbl = this.getUnlockedAbility(abilityCore);
+		int place = this.unlockedAbilities.indexOf(ogAbl);
+		this.unlockedAbilities.remove(ogAbl);
+		this.unlockedAbilities.add(place, abilityCoreSecond.createAbility());
+		Ability replacedAbl = this.getUnlockedAbility(abilityCoreSecond);
+		for (int i = 0; i < this.equippedAbilities.length; i++)
+		{
+			System.out.println(this.getEquippedAbility(i));
+			if (this.getEquippedAbility(i).equals(ogAbl))
+			{
+				this.equippedAbilities[i] = replacedAbl;
+				break;
+			}
+		}
+
+	}
 }

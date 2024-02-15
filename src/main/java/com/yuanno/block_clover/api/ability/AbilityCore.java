@@ -1,6 +1,7 @@
 package com.yuanno.block_clover.api.ability;
 
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
+import com.yuanno.block_clover.spells.water.WaterBallAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -135,13 +136,37 @@ public class AbilityCore<A extends Ability> extends ForgeRegistryEntry<AbilityCo
 	@Nullable
 	public A createAbility()
 	{
-		if(this.factory != null)
-			return this.factory.create(this);
-		
+    	if(this.factory != null)
+        	return this.factory.create(this);
 		try
-		{
-			return this.getAbilityClass().getConstructor().newInstance();
-		}
+    	{
+        	// Check if the clazz field is a container for Ability subclasses
+
+			/*
+        	if (clazz.getEnclosingClass() != null && Ability.class.isAssignableFrom(clazz.getEnclosingClass())) {
+				Class<?>[] declaredClasses = clazz.getDeclaredClasses();
+
+				for (Class<?> declaredClass : declaredClasses) {
+                // Check if the declared class is a subclass of Ability
+                	if (Ability.class.isAssignableFrom(declaredClass)) {
+                    	// Create an instance of the declared class and return it
+                   	 return (A) declaredClass.getConstructor().newInstance();
+					}
+				}
+			}
+
+			 */
+			if (clazz.getDeclaredClasses().length > 0)
+			{
+				Class<?>[] declaredClasses = WaterBallAbility.class.getDeclaredClasses();
+				for (Class<?> declaredClass : declaredClasses) {
+					if (Ability.class.isAssignableFrom(declaredClass))
+						return (A) declaredClass.getConstructor().newInstance();
+				}
+			}
+        	// If the clazz field is not a container for Ability subclasses, create an instance of the clazz field itself
+        	return this.getAbilityClass().getConstructor().newInstance();
+    }
 		catch (Exception ex)
 		{
 			System.out.println("Exception raised for " + this.getName());

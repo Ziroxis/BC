@@ -3,7 +3,6 @@ package com.yuanno.block_clover.api.ability;
 import com.google.common.base.Strings;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.BeJavapi;
-import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.data.IExtraUpdateData;
@@ -14,11 +13,7 @@ import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
-import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
-import com.yuanno.block_clover.networking.ManaSync;
 import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.server.SSyncDevilPacket;
-import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -616,7 +611,36 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     }
     public CompoundNBT save(CompoundNBT nbt)
     {
-        nbt.putString("id", this.core.getRegistryName().toString());
+        if (this.core.getRegistryName() != null)
+            nbt.putString("id", this.core.getRegistryName().toString());
+        /*else
+        {
+            Class<?>[] declaredClasses = WaterBall.class.getDeclaredClasses();
+
+            if (declaredClasses.length > 0) {
+                for (Class<?> declaredClass : declaredClasses) {
+                    try {
+                        Object instance = declaredClass.getConstructor().newInstance();
+
+                        // Check if the instance is an Ability
+                        if (instance instanceof Ability) {
+                            Ability abilityInstance = (Ability) instance;
+                            AbilityCore core = abilityInstance.getCore();
+
+                            // Now you have the core of the Ability class
+                        }
+                    } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                             InvocationTargetException e) {
+                        System.out.println("Exception occurred while creating instance of class: " + declaredClass.getName());
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
+        }
+
+         */
         nbt.putString("displayName", Strings.isNullOrEmpty(this.getDisplayName()) ? "" : this.getDisplayName());
         nbt.putIntArray("pools", this.getPools());
         nbt.putString("unlock", this.getUnlockType().name());
@@ -632,6 +656,30 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     }
     public AbilityCore getCore()
     {
+        /*
+        Class<?>[] declaredClasses = WaterBall.class.getDeclaredClasses();
+
+        if (declaredClasses.length > 0) {
+            for (Class<?> declaredClass : declaredClasses) {
+                try {
+                    Object instance = declaredClass.getConstructor().newInstance();
+
+                    // Check if the instance is an Ability
+                    if (instance instanceof Ability && instance.getClass() != this.getClass()) {
+                        Ability abilityInstance = (Ability) instance;
+                        AbilityCore core = abilityInstance.getCore();
+                        return core;
+                        // Now you have the core of the Ability class
+                    }
+                } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
+                         InvocationTargetException e) {
+                    System.out.println("Exception occurred while creating instance of class: " + declaredClass.getName());
+                    e.printStackTrace();
+                }
+            }
+        }
+
+         */
         return this.core;
     }
     public int[] getPools()

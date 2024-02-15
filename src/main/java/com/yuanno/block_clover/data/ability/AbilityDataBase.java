@@ -88,6 +88,9 @@ public class AbilityDataBase implements IAbilityData
 	public boolean addUnlockedAbility(PlayerEntity player, AbilityCore core)
 	{
 		Ability abl = core.createAbility();
+		if (abl == null) {
+			return false;
+		}
 		if (abl.getEvolvedAbility() != null) {
 			IEntityStats entityStats = EntityStatsCapability.get(player);
 			entityStats.setExperienceSpells(abl.getName(), 0);

@@ -11,7 +11,6 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
-import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
 import com.yuanno.block_clover.init.ModItems;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.items.ArtifactItem;

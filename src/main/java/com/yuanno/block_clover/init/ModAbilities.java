@@ -32,6 +32,8 @@ import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.undead.UndeadRecruitAbility;
 import com.yuanno.block_clover.spells.undead.UnleashUndeadAbility;
 import com.yuanno.block_clover.spells.water.*;
+import com.yuanno.block_clover.spells.water.waterball.EvolvedWaterBallAbility;
+import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 

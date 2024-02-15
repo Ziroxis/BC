@@ -1,11 +1,11 @@
-package com.yuanno.block_clover.spells.water;
+package com.yuanno.block_clover.spells.water.waterball;
 
-import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.RepeaterAbility;
 import com.yuanno.block_clover.entities.projectiles.water.WaterBallProjectile;
+import com.yuanno.block_clover.spells.water.FinalWaterBallAbility;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class EvolvedWaterBallAbility extends RepeaterAbility {
@@ -18,9 +18,8 @@ public class EvolvedWaterBallAbility extends RepeaterAbility {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
-        this.setEvolvedAbility(FinalWaterBallAbility.INSTANCE);
         this.setEvolutionCost(3);
-        this.setMaxRepeaterCount(3, 2);
+        this.setMaxRepeaterCount(3, 3);
         this.onUseEvent = this::onUseEvent;
 
     }

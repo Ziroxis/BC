@@ -14,7 +14,7 @@ import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import com.yuanno.block_clover.spells.sword.AirDashAbility;
 import com.yuanno.block_clover.spells.time.TimeStealAbility;
-import com.yuanno.block_clover.spells.water.WaterBallAbility;
+import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindBladeAbility;
 
 import java.util.*;

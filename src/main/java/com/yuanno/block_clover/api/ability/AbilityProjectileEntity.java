@@ -119,7 +119,7 @@ public class AbilityProjectileEntity extends ThrowableEntity
 		double offsetZ = offset * Math.cos(Math.toRadians(yaw));
 
 		// Create the projectile at the adjusted coordinates
-		this.setPos(playerX + offsetX, playerY, playerZ + offsetZ);
+		this.setPos(playerX + offsetX, playerY + offsetY, playerZ + offsetZ);
 
 		this.source = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile();
 		this.bypassingSource = new IndirectEntityDamageSource("ability_projectile", this, thrower).setProjectile().bypassArmor();		

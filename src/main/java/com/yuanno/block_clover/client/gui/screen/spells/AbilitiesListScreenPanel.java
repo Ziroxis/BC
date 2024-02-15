@@ -234,10 +234,6 @@ public class AbilitiesListScreenPanel extends ScrollPanel
 			{
 				longString.append("\n" + "Experience: " + spells.get(hoveredEntity.ability.getName()) + "/" + hoveredEntity.ability.getEvolutionCost());
 			}
-			else if (spells.containsKey(hoveredEntity.ability.getName()) && hoveredEntity.ability.getEvolutionCost() <= spells.get(hoveredEntity.ability.getName()))
-			{
-				longString.append("\n" + "EVOLVED");
-			}
 			this.parent.renderTooltip(matrixStack, new TranslationTextComponent(String.valueOf(longString)), mouseX, mouseY);
 
 

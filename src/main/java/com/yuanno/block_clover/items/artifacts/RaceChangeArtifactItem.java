@@ -21,6 +21,7 @@ import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.water.*;
+import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
 package com.yuanno.block_clover.api.ability;
 
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
-import com.yuanno.block_clover.spells.water.WaterBallAbility;
+import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;

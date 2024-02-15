@@ -37,7 +37,6 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
     {
         super(INSTANCE);
         this.setmanaCost(5);
-        this.setEvolvedManaCost(50);
         this.setMaxCooldown(5);
         this.setExperiencePoint(7);
         this.setExperienceGainLevelCap(10);

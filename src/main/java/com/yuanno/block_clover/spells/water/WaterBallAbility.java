@@ -20,8 +20,8 @@ public class WaterBallAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
+        this.setEvolvedAbility(EvolvedWaterBallAbility.INSTANCE);
         this.setEvolutionCost(3);
-        this.setEvolvedManaCost(5);
         this.setExperiencePoint(25);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
@@ -31,31 +31,10 @@ public class WaterBallAbility extends Ability {
     // todo make a spell evolution event so you can replace it by another ability
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-        {
-            WaterBallProjectile projectile = new WaterBallProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
+        WaterBallProjectile projectile = new WaterBallProjectile(player.level, player);
+        player.level.addFreshEntity(projectile);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
 
-            int tickCount = player.tickCount + 60;
-            if (tickCount < player.tickCount) {
-                WaterBallProjectile projectile1 = new WaterBallProjectile(player.level, player);
-                player.level.addFreshEntity(projectile1);
-                projectile1.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
-            }
-            int tickCountAgain = player.tickCount + 120;
-            if (tickCountAgain < player.tickCount) {
-                WaterBallProjectile projectile2 = new WaterBallProjectile(player.level, player);
-                player.level.addFreshEntity(projectile2);
-                projectile2.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
-            }
-        }
-        else
-        {
-            WaterBallProjectile projectile = new WaterBallProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);
-        }
         return true;
     }
 }

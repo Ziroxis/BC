@@ -4,6 +4,8 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.sorts.PassiveAbility;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAdvancements;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -70,9 +72,12 @@ public class AbilityDataBase implements IAbilityData
 	{
 		if(abl == null || this.hasUnlockedAbility(abl))
 			return false;
-
 		this.unlockedAbilities.add(abl);
-
+		if (abl.getEvolvedAbility() != null)
+		{
+			IEntityStats entityStats = EntityStatsCapability.get(player);
+			entityStats.setExperienceSpells(abl.getName(), 0);
+		}
 		if (player instanceof ServerPlayerEntity)
 			ModAdvancements.UNLOCK_ABILITY.trigger((ServerPlayerEntity)player, abl.getCore());
 
@@ -83,6 +88,10 @@ public class AbilityDataBase implements IAbilityData
 	public boolean addUnlockedAbility(PlayerEntity player, AbilityCore core)
 	{
 		Ability abl = core.createAbility();
+		if (abl.getEvolvedAbility() != null) {
+			IEntityStats entityStats = EntityStatsCapability.get(player);
+			entityStats.setExperienceSpells(abl.getName(), 0);
+		}
 		return this.addUnlockedAbility(player, abl);
 	}
 
@@ -473,7 +482,6 @@ public class AbilityDataBase implements IAbilityData
 		Ability replacedAbl = this.getUnlockedAbility(abilityCoreSecond);
 		for (int i = 0; i < this.equippedAbilities.length; i++)
 		{
-			System.out.println(this.getEquippedAbility(i));
 			if (this.getEquippedAbility(i).equals(ogAbl))
 			{
 				this.equippedAbilities[i] = replacedAbl;

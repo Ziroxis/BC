@@ -29,12 +29,6 @@ public class WindCrescentAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         WindCrescentProjectile projectile = new WindCrescentProjectile(player.level, player);
-        if (this.isEvolved())
-        {
-            projectile.setDamage(14);
-            projectile.setArmorPiercing();
-            projectile.setPassThroughEntities();
-        }
         player.level.addFreshEntity(projectile);
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
 

@@ -29,15 +29,8 @@ public class LightHealingAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (this.isEvolved()) {
-            player.addEffect(new EffectInstance(Effects.REGENERATION, 120, 3));
-            player.addEffect(new EffectInstance(Effects.ABSORPTION, 2000, 4));
 
-        }
-        else
-        {
-            player.addEffect(new EffectInstance(Effects.REGENERATION, 80, 2));
-        }
+        player.addEffect(new EffectInstance(Effects.REGENERATION, 80, 2));
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
 
         return true;

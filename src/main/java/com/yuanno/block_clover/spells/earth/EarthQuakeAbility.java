@@ -38,18 +38,9 @@ public class EarthQuakeAbility extends Ability {
 
     public boolean onUseEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-        {
-            damage = 20;
-            diameter = 16;
-            jump = 12;
-        }
-        else
-        {
-            damage = 12;
-            diameter = 8;
-            jump = 5;
-        }
+        damage = 12;
+        diameter = 8;
+        jump = 5;
         IEntityStats stats = EntityStatsCapability.get(player);
         List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, diameter + (float) stats.getLevel() / 2);
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);

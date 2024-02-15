@@ -35,10 +35,6 @@ public class LightMovementAbility extends Ability {
 
     public boolean onUseEvent(PlayerEntity player)
     {
-        if (this.isEvolved()) {
-            this.setMaxCooldown(2);
-            this.setmanaCost(20);
-        }
         IEntityStats stats = EntityStatsCapability.get(player);
         BlockPos pos = Beapi.rayTraceBlockSafe(player, 8 + stats.getLevel());
         player.teleportTo(pos.getX(), pos.getY(), pos.getZ());

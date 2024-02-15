@@ -44,12 +44,7 @@ public class LionsHowlAbility extends Ability {
     {
         IEntityStats stats = EntityStatsCapability.get(player);
         List<Entity> entities = new ArrayList<>();
-        if (this.isEvolved()) {
-            minimumDiameter = 30;
-            durationEffects = 180;
-            effectStrength = 1;
-            doDamage = true;
-        }
+
         entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, minimumDiameter + (float) stats.getLevel() / 2);
 
         //PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);

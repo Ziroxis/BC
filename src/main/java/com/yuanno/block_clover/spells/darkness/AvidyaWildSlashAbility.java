@@ -32,22 +32,12 @@ public class AvidyaWildSlashAbility extends RepeaterAbility {
 
     private boolean onUseEvent(PlayerEntity player)
     {
+        AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
+        player.level.addFreshEntity(projectile);
+        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 10);
 
-        if (!this.isEvolved())
-        {
-            AvidyaSlashProjectile projectile = new AvidyaSlashProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 10);
-        }
-        else
-        {
-            AvidyaSlashEvolvedProjectile projectile = new AvidyaSlashEvolvedProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 10);
-
-        }        return false;
+       return false;
 
     }
 }

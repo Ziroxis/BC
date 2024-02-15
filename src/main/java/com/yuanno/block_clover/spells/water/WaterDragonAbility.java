@@ -21,7 +21,6 @@ public class WaterDragonAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(20);
         this.setmanaCost(50);
-        this.setEvolvedManaCost(35);
         this.setEvolutionCost(100);
         this.setExperiencePoint(35);
         this.onUseEvent = this::onUseEvent;

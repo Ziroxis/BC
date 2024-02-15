@@ -41,10 +41,8 @@ public class ThunderDischargeAbility extends Ability {
     public boolean onUseEvent(PlayerEntity player)
     {
         IEntityStats stats = EntityStatsCapability.get(player);
-        if (!this.isEvolved())
-            diameter = 10;
-        else
-            diameter = 16;
+        diameter = 10;
+
         List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, diameter + (float) stats.getLevel() / 2);
         PARTICLES.spawn(player.level, player.getX(), player.getY(), player.getZ(), 0, 0, 0);
         if (entities.contains(player))
@@ -55,16 +53,8 @@ public class ThunderDischargeAbility extends Ability {
 
                 if (entity instanceof LivingEntity)
                 {
-                    if (!this.isEvolved()) {
-                        ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 80, 0));
-                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 10);
-                    }
-                    else
-                    {
-                        ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 120, 0));
-                        entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 14);
-
-                    }
+                    ((LivingEntity) entity).addEffect(new EffectInstance(ModEffects.ELECTROCUTED.get(), 80, 0));
+                    entity.hurt(ModDamageSource.causeAbilityDamage(player, this), 10);
                     ((ServerWorld) player.level).sendParticles(ParticleTypes.END_ROD, entity.getX(), entity.getY(),
                             entity.getZ(), (int) 10, 3, 3, 3, 0.1);
                 }            });

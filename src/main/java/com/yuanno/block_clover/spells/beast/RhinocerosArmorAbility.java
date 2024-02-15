@@ -32,7 +32,6 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
         super(INSTANCE);
         this.setmanaCost(8);
         this.setEvolutionCost(50);
-        this.setEvolvedManaCost(5);
         this.setMaxCooldown(10);
         this.setExperiencePoint(0);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -41,10 +40,7 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-            player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).addTransientModifier(RHINOCEROS_RESISTANCE_EVOLVED);
-        if (!this.isEvolved())
-            player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
+        player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).addTransientModifier(RHINOCEROS_RESISTANCE);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(RHINOCEROS_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         return true;
@@ -52,10 +48,7 @@ public class RhinocerosArmorAbility extends ContinuousAbility implements IParall
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-            player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE_EVOLVED);
-        if (!this.isEvolved())
-            player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE);
+        player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).removeModifier(RHINOCEROS_RESISTANCE);
         player.getAttribute(ModAttributes.FALL_RESISTANCE.get()).removeModifier(RHINOCEROS_RESISTANCE);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(RHINOCEROS_STEP);
         return true;

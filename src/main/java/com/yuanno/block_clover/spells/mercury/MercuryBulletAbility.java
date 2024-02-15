@@ -18,7 +18,6 @@ public class MercuryBulletAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
-        this.setEvolvedManaCost(5);
         this.setExperiencePoint(25);
         this.setExperienceGainLevelCap(10);
         this.setEvolutionCost(50);
@@ -28,15 +27,6 @@ public class MercuryBulletAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player)
     {
         MercuryBulletProjectile projectile = new MercuryBulletProjectile(player.level, player);
-        if (this.isEvolved()) {
-            projectile.setDamage(8);
-            projectile.setArmorPiercing();
-            projectile.setPassThroughEntities();
-            projectile.setLife(128);
-        }
-
-
-
         player.level.addFreshEntity(projectile);
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2, 1);
         return true;

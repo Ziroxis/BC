@@ -22,7 +22,6 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
         super(INSTANCE);
         this.setMaxCooldown(15);
         this.setEvolutionCost(100);
-        this.setEvolvedManaCost(3);
         this.setmanaCost(5);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;

@@ -32,7 +32,6 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
     {
         super(INSTANCE);
         this.setmanaCost(8);
-        this.setEvolvedManaCost(4);
         this.setEvolutionCost(50);
         this.setMaxCooldown(10);
         this.setExperiencePoint(10);
@@ -44,9 +43,6 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-            player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(JAGUAR_ATTACK_EVOLVED);
-
         player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(JAGUAR_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).addTransientModifier(JAGUAR_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
@@ -55,8 +51,6 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(JAGUAR_ATTACK_EVOLVED);
 
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(JAGUAR_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(JAGUAR_STEP);
@@ -66,9 +60,6 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
 
     private boolean onStopContinuityEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(JAGUAR_ATTACK_EVOLVED);
-
         player.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(JAGUAR_SPEED);
         player.getAttribute(ModAttributes.STEP_HEIGHT.get()).removeModifier(JAGUAR_STEP);
         PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);

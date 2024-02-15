@@ -41,10 +41,8 @@ public class CheetaChargeAbility extends Ability implements IMultiTargetAbility 
         this.clearTargets();
         IAbilityData abilityData = AbilityDataCapability.get(player);
         BearClawAbility bearClawAbility = (BearClawAbility) abilityData.getEquippedAbility(BearClawAbility.INSTANCE);
-        if (this.isEvolved())
-            this.damage = 10;
-        else
-            this.damage = 5;
+
+        this.damage = 5;
         if (bearClawAbility != null && bearClawAbility.isContinuous())
             this.damage += 5;
         Vector3d speed = Beapi.propulsion(player, 5, 5);
@@ -58,10 +56,8 @@ public class CheetaChargeAbility extends Ability implements IMultiTargetAbility 
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
-        if (this.isEvolved())
-            this.radius = 3;
-        else
-            this.radius = 1.5;
+
+        this.radius = 1.5;
         if (this.canDealDamage())
         {
 

@@ -48,19 +48,11 @@ public class BearClawAbility extends ContinuousPunchAbility implements IParallel
     {
         IEntityStats stats = EntityStatsCapability.get(player);
         stats.alterMana(-15);
-        if (!this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(BEAR_CLAW);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(BEAR_CLAW);
-            return true;
-        }
-        else
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(BEAR_CLAW_EVOLVED);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(BEAR_CLAW_EVOLVED);
 
-            return true;
-        }
+        player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(BEAR_CLAW);
+        player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(BEAR_CLAW);
+        return true;
+
     }
 
     private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
@@ -72,35 +64,16 @@ public class BearClawAbility extends ContinuousPunchAbility implements IParallel
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        if (!this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW);
-            return true;
-        }
-        else
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW_EVOLVED);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW_EVOLVED);
+        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW);
+        player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW);
+        return true;
 
-            return true;
-        }
     }
 
     private boolean onStopContinuityEvent(PlayerEntity player)
     {
-        if (!this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW);
-            return true;
-        }
-        else
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW_EVOLVED);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW_EVOLVED);
-
-            return true;
-        }
+        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(BEAR_CLAW);
+        player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(BEAR_CLAW);
+        return true;
     }
 }

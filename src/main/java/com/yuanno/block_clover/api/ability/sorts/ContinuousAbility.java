@@ -64,8 +64,7 @@ public abstract class ContinuousAbility extends Ability {
             {
                 this.checkAbilityPool(player, State.CONTINUOUS);
 
-                if (propsEntity.getExperienceSpell(this.getName()) != null && (int) propsEntity.getExperienceSpell(this.getName()) >= getEvolutionCost() && !getEvolved())
-                    this.evolved(true);
+                // todo add evolution logic for continuous abilities
                 this.startContinuity(player);
                 PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
             }
@@ -144,7 +143,6 @@ public abstract class ContinuousAbility extends Ability {
             if (player.tickCount % 20 == 0) {
                 int experiencePoint = getExperiencePoint();
                 int manaCost = (int) getmanaCost();
-                int evolvedManaCost = (int) getEvolvedManaCost();
                 int currentLevel = propsEntity.getLevel();
                 int experienceGainLevelCap = getExperienceGainLevelCap();
 
@@ -166,10 +164,7 @@ public abstract class ContinuousAbility extends Ability {
 
                 int currentMana = (int) propsEntity.getMana();
                 if (currentMana > manaCost) {
-                    if (!this.isEvolved())
-                        propsEntity.alterMana(-manaCost);
-                    else
-                        propsEntity.alterMana(-evolvedManaCost);
+                    propsEntity.alterMana(-manaCost);
                 }
             }
             int currentMana = (int) propsEntity.getMana();

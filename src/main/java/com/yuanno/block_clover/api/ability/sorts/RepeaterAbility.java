@@ -2,6 +2,7 @@ package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.AbilityUseEvent;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -78,17 +79,8 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
     public void use(PlayerEntity player)
     {
         super.use(player);
-        IEntityStats stats = EntityStatsCapability.get(player);
-        stats.alterMana(-getmanaCost());
-        if (stats.getLevel() < getExperienceGainLevelCap())
-        {
-            stats.alterExperience(getExperiencePoint());
-
-            ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
-            MinecraftForge.EVENT_BUS.post(eventExperience);
-        }
-        PacketHandler.sendTo(new ManaSync(stats.getMana()), player);
-        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+        AbilityUseEvent pre = new AbilityUseEvent.Pre(player, this);
+        MinecraftForge.EVENT_BUS.post(pre);
 
     }
 
@@ -124,6 +116,8 @@ public abstract class RepeaterAbility extends ContinuousAbility implements IPara
             this.continueTime = 0;
             this.repeaterCount = this.maxRepeaterCount;
             this.startCooldown(player);
+            AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
+            MinecraftForge.EVENT_BUS.post(post);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         }
     }

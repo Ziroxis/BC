@@ -27,18 +27,10 @@ public class FireBallAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (!this.isEvolved())
-        {
-            FireBallProjectile projectile = new FireBallProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
-        }
-        else
-        {
-            GiantFireBallProjectile projectile = new GiantFireBallProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            projectile.shootFromRotation(player, player.xRot , player.yRot , 0, 1f, 5);
-        }
+        FireBallProjectile projectile = new FireBallProjectile(player.level, player);
+        player.level.addFreshEntity(projectile);
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
+
         return true;
     }
 

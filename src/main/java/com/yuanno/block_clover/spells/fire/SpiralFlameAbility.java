@@ -27,12 +27,6 @@ public class SpiralFlameAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player) {
         SpiralFlameProjectile projectile = new SpiralFlameProjectile(player.level, player);
-        if (this.isEvolved())
-        {
-            projectile.setDamage(10);
-            projectile.setArmorPiercing();
-            projectile.setPassThroughEntities();
-        }
         player.level.addFreshEntity(projectile);
         ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 1f, 1);

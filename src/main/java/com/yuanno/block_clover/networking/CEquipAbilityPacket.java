@@ -58,8 +58,6 @@ public class CEquipAbilityPacket
 				Ability ability = ((AbilityCore)GameRegistry.findRegistry(AbilityCore.class).getValue(message.abilityId)).createAbility();
 
 				abilityDataProps.setEquippedAbility(message.slot, ability);
-				if (propsEntity.getExperienceSpell(ability.getName()) != null && (int) propsEntity.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost() && !ability.isEvolved())
-					ability.evolved(true);
 				PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, ability), player);
 			});	
 		}

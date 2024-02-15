@@ -20,7 +20,6 @@ public class MercuryBubbleAbility extends Ability {
         super(INSTANCE);
         this.setMaxCooldown(10);
         this.setmanaCost(30);
-        this.setEvolvedManaCost(15);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(30);
         this.onUseEvent = this::onUseEvent;

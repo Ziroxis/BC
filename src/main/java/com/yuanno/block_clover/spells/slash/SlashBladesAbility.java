@@ -39,7 +39,6 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
         this.setMaxCooldown(3);
         this.setmanaCost(6);
         this.setEvolutionCost(100);
-        this.setEvolvedManaCost(3);
         this.setExperiencePoint(7);
         this.setExperienceGainLevelCap(10);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
@@ -52,17 +51,10 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
     {
         IEntityStats stats = EntityStatsCapability.get(player);
         stats.alterMana(-10);
-        if (!this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(SLASH_BLADES);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(SLASH_BLADES);
-        }
-        if (this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(SLASH_BLADES_EVOLVED);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(SLASH_BLADES_EVOLVED);
+        player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(SLASH_BLADES);
+        player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(SLASH_BLADES);
 
-        }
+
         return true;
     }
 
@@ -87,17 +79,9 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
     
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
-        if (!this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(SLASH_BLADES);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(SLASH_BLADES);
-        }
-        if (this.isEvolved())
-        {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(SLASH_BLADES_EVOLVED);
-            player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(SLASH_BLADES_EVOLVED);
+        player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(SLASH_BLADES);
+        player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(SLASH_BLADES);
 
-        }
         return true;
     }
 

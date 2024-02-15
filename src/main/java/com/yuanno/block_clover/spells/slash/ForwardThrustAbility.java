@@ -56,10 +56,6 @@ public class ForwardThrustAbility extends Ability implements IMultiTargetAbility
     }
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
-        if (this.isEvolved()) {
-            radius = 3;
-            damage = 14;
-        }
         if (this.canDealDamage())
         {
 

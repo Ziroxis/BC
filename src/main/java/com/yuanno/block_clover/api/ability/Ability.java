@@ -42,7 +42,7 @@ import java.util.Random;
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
-    private boolean isEvolved;
+    private AbilityCore evolvedAbility;
     private int evolutionCost = 0;
     private String name = "";
     private String displayName;
@@ -53,7 +53,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     private ResourceLocation customTexture;
 
     private int manaCost = 1;
-    private int evolvedManaCost = 1;
     private int experiencePoint = 0;
     private int experienceGainLevelCap = 50;
     private ITextComponent tooltip;
@@ -217,14 +216,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         this.state = state;
     }
 
-    public boolean isEvolved()
-    {
-        return this.isEvolved;
-    }
-    public void evolved(boolean isEvolved)
-    {
-        this.isEvolved = isEvolved;
-    }
 
 
     public State getState()
@@ -309,11 +300,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.cooldown;
     }
 
-    public boolean getEvolved()
-    {
-        return this.isEvolved;
-    }
-
     public void setEvolutionCost(int evolutionCost)
     {
         this.evolutionCost = evolutionCost;
@@ -344,11 +330,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.experiencePoint;
     }
 
-    public void setEvolvedManaCost(int value)
-    {
-        this.evolvedManaCost = value;
-    }
-
     public void setmanaCost(int value)
     {
         this.manaCost = value;
@@ -358,10 +339,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         return this.manaCost;
     }
-    public float getEvolvedManaCost()
-    {
-        return this.evolvedManaCost;
-    }
+
 
     public double getTimeProgression()
     {
@@ -696,5 +674,13 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public boolean getIsDevil()
     {
         return this.isDevil;
+    }
+    public void setEvolvedAbility(AbilityCore ability)
+    {
+        this.evolvedAbility = ability;
+    }
+    public AbilityCore getEvolvedAbility()
+    {
+        return this.evolvedAbility;
     }
 }

@@ -52,10 +52,8 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
             return false;
         }
         this.clearTargets();
-        if (!this.isEvolved())
-            MOVEMENT_SPEED = 0.3;
-        else
-            MOVEMENT_SPEED = 0.6;
+        MOVEMENT_SPEED = 0.3;
+
         Vector3d speed = Beapi.propulsion(player, 5, 5);
         player.setDeltaMovement(speed.x, MOVEMENT_SPEED, speed.z);
         player.hurtMarked = true;
@@ -65,18 +63,11 @@ public class BluntStrikeAbility extends Ability implements IMultiTargetAbility {
 
     private void duringCooldown(PlayerEntity player, int cooldownTimer)
     {
-        if (!this.isEvolved())
-        {
-            RADIUS = 1.5;
-            DAMAGE = 5;
-            STUN_COOLDOWN = 80;
-        }
-        else
-        {
-            RADIUS = 3;
-            DAMAGE = 10;
-            STUN_COOLDOWN = 120;
-        }
+
+        RADIUS = 1.5;
+        DAMAGE = 5;
+        STUN_COOLDOWN = 80;
+
         if (this.canDealDamage())
         {
             List<LivingEntity> list = Beapi.getEntitiesNear(player.blockPosition(), player.level, RADIUS, LivingEntity.class);

@@ -44,7 +44,7 @@ public class ModAbilities {
 
     public static final AbilityCore[] MISC = new AbilityCore[] {ManaSkinAbility.INSTANCE, ManaReinforcementAbility.INSTANCE, ManaSenseAbility.INSTANCE};
     public static final AbilityCore[] WATER = new AbilityCore[] {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterManaZoneAbility.INSTANCE};
-    public static final AbilityCore[] EVOLVED_WATER = new AbilityCore[] {EvolvedWaterBallAbility.INSTANCE};
+    public static final AbilityCore[] EVOLVED_WATER = new AbilityCore[] {EvolvedWaterBallAbility.INSTANCE, FinalWaterBallAbility.INSTANCE};
     public static final AbilityCore[] SEALING = new AbilityCore[] {SealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, UltimateSealAbility.INSTANCE, SealingManaZoneAbility.INSTANCE};
     public static final AbilityCore[] ANTIMAGIC = new AbilityCore[] {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE, AntiMagicManaZoneAbility.INSTANCE, DemonDwellerAbility.INSTANCE};
     public static final AbilityCore[] EARTH = new AbilityCore[] {EarthChunkAbility.INSTANCE, EarthChargeAbility.INSTANCE, EarthGlovesAbility.INSTANCE, EarthMinionAbility.INSTANCE, EarthManipulationAbility.INSTANCE, EarthGolemAbility.INSTANCE, EarthQuakeAbility.INSTANCE, EarthManaZoneAbility.INSTANCE};

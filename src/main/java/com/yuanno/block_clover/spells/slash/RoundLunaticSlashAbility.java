@@ -33,17 +33,12 @@ public class RoundLunaticSlashAbility extends Ability {
         this.setmanaCost(50);
         this.setMaxCooldown(20);
         this.setEvolutionCost(100);
-        this.setEvolvedManaCost(30);
         this.setExperiencePoint(25);
         this.onUseEvent = this::onUseEvent;
     }
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-        {
-            radius = 30;
-        }
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         for (Ability ability : abilityProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
         {

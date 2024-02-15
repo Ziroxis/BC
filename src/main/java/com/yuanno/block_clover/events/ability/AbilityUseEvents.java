@@ -31,16 +31,9 @@ public class AbilityUseEvents {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         IDevil propsDevil = DevilCapability.get(player);
         if (!ability.getIsDevil())
-        {
-            if (!ability.getEvolved())
                 propsEntity.alterMana(-ability.getmanaCost());
-            else
-                propsEntity.alterMana(-ability.getEvolvedManaCost());
-        }
         else if (ability.getIsDevil())
-        {
             propsDevil.alterDevilMana(-ability.getmanaCost());
-        }
         PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
         PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), propsDevil), player);
@@ -67,14 +60,13 @@ public class AbilityUseEvents {
         }
 
         // experience of the spell logic
-        if (entityStats.hasExperienceSpell(ability.getName())) {
+        if (ability.getEvolvedAbility() != null && entityStats.hasExperienceSpell(ability.getName())) {
             int experience = entityStats.getExperienceSpell(ability.getName());
             entityStats.setExperienceSpells(ability.getName(), experience + 1);
         }
-        else
+        else if (ability.getEvolvedAbility() != null)
             entityStats.setExperienceSpells(ability.getName(), 1);
-        if (entityStats.getExperienceSpell(ability.getName()) != null && (int) entityStats.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost() && !ability.isEvolved()) {
-            ability.evolved(true);
+        if (entityStats.getExperienceSpell(ability.getName()) != null && (int) entityStats.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost()) {
             AbilityEvolutionEvent abilityEvolutionEvent = new AbilityEvolutionEvent(player, ability);
             MinecraftForge.EVENT_BUS.post(abilityEvolutionEvent);
         }

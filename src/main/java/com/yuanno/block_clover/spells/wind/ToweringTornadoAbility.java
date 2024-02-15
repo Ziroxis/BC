@@ -36,12 +36,6 @@ public class ToweringTornadoAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (this.isEvolved())
-        {
-            diameter = 20;
-            propulsion = 7;
-            damage = 10;
-        }
         List<LivingEntity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, diameter, LivingEntity.class);
         entities.remove(player);
 

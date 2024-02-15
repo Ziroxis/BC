@@ -27,7 +27,6 @@ public class DeathScytheAbility extends Ability {
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setEvolutionCost(50);
-        this.setEvolvedManaCost(5);
         this.setExperiencePoint(30);
         this.onUseEvent = this::onUseEvent;
     }
@@ -35,13 +34,6 @@ public class DeathScytheAbility extends Ability {
     private boolean onUseEvent(PlayerEntity player) {
 
         DeathScytheProjectile projectile = new DeathScytheProjectile(player.level, player);
-        if (this.isEvolved()) {
-            projectile.setDamage(12);
-            projectile.setArmorPiercing();
-            projectile.setPassThroughEntities();
-            projectile.setPassThroughBlocks();
-            projectile.setLife(128);
-        }
         player.level.addFreshEntity(projectile);
         projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 2f);
         return true;

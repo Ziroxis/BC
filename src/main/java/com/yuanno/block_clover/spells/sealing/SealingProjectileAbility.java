@@ -20,7 +20,6 @@ public class SealingProjectileAbility extends Ability {
     {
         super(INSTANCE);
         this.setEvolutionCost(50);
-        this.setEvolvedManaCost(10);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
         this.setExperiencePoint(25);
@@ -30,20 +29,11 @@ public class SealingProjectileAbility extends Ability {
 
     private boolean onUseEvent(PlayerEntity player)
     {
-        if (!this.isEvolved())
-        {
-            SealingProjectile projectile = new SealingProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
-        }
-        else
-        {
-            EvolvedSealingProjectile projectile = new EvolvedSealingProjectile(player.level, player);
-            player.level.addFreshEntity(projectile);
-            ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
-            projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
-        }
+        EvolvedSealingProjectile projectile = new EvolvedSealingProjectile(player.level, player);
+        player.level.addFreshEntity(projectile);
+        ((ServerWorld) player.level).getChunkSource().broadcastAndSend(player, new SAnimateHandPacket(player, 0));
+        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 0.5f, 1);
+
         return true;
     }
 }

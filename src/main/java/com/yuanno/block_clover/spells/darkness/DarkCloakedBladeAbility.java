@@ -83,9 +83,7 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
             return 0;
         }
         PARTICLES.spawn(player.level, target.getX(), target.getY(), target.getZ(), 0, 0, 0);
-        if (this.isEvolved())
-            return 8;
-        else
-            return 3;
+
+        return 3;
     }
 }

@@ -18,6 +18,7 @@ import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.*;
 import com.yuanno.block_clover.spells.lightning.*;
 import com.yuanno.block_clover.spells.sealing.*;
+import com.yuanno.block_clover.spells.sealing.sealingprojectile.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.*;
 import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.water.*;

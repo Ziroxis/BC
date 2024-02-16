@@ -1,12 +1,10 @@
-package com.yuanno.block_clover.spells.sealing;
+package com.yuanno.block_clover.spells.sealing.sealingprojectile;
 
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
-import com.yuanno.block_clover.entities.projectiles.sealing.EvolvedSealingProjectile;
 import com.yuanno.block_clover.entities.projectiles.sealing.SealingProjectile;
-import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
@@ -19,7 +17,8 @@ public class SealingProjectileAbility extends Ability {
     public SealingProjectileAbility()
     {
         super(INSTANCE);
-        this.setEvolutionCost(50);
+        this.setEvolvedAbility(EvolvedSealingProjectileAbility.INSTANCE);
+        this.setEvolutionCost(100);
         this.setMaxCooldown(4);
         this.setmanaCost(15);
         this.setExperiencePoint(25);

@@ -27,7 +27,7 @@ import com.yuanno.block_clover.spells.fire.FireBallAbility;
 import com.yuanno.block_clover.spells.light.LightBladeAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryBulletAbility;
-import com.yuanno.block_clover.spells.sealing.SealingProjectileAbility;
+import com.yuanno.block_clover.spells.sealing.sealingprojectile.SealingProjectileAbility;
 import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import com.yuanno.block_clover.spells.sword.AirDashAbility;
 import com.yuanno.block_clover.spells.time.TimeStealAbility;

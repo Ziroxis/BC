@@ -4,6 +4,7 @@ import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
+import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.entities.projectiles.fire.FireBallProjectile;
 import com.yuanno.block_clover.entities.summons.darkness.BlackHoleEntity;
 import com.yuanno.block_clover.entities.summons.water.WaterShieldEntity;
@@ -17,7 +18,7 @@ import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
 
-public class WaterShieldAbility extends Ability {
+public class WaterShieldAbility extends ContinuousAbility {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Shield", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterShieldAbility.class)
             .setDescription("Spawns a water shield, lingering for a few seconds blocking incoming spells.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
@@ -28,13 +29,15 @@ public class WaterShieldAbility extends Ability {
     {
         super(INSTANCE);
         this.setMaxCooldown(10);
-        this.setmanaCost(30);
+        this.setmanaCost(5);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(30);
-        this.onUseEvent = this::onUseEvent;
+        this.onStartContinuityEvent = this::onStartContinuityEvent;
+        this.duringContinuityEvent = this::duringContinuityEvent;
+        this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 
-    private boolean onUseEvent(PlayerEntity player)
+    private boolean onStartContinuityEvent(PlayerEntity player)
     {
         this.waterShieldEntity = new WaterShieldEntity(player.level, player);
         Vector3d lookAngle = player.getLookAngle();
@@ -46,6 +49,29 @@ public class WaterShieldAbility extends Ability {
 
         player.level.addFreshEntity(waterShieldEntity);
 
+        return true;
+    }
+
+    private void duringContinuityEvent(PlayerEntity player, int timer)
+    {
+        /*
+        Vector3d lookAngle = player.getLookAngle();
+        BlockPos pos = player.blockPosition();
+
+        double goToX = pos.getX() + lookAngle.x;
+        double goToY = pos.getY() + lookAngle.y;
+        double goToZ = pos.getZ() + lookAngle.z;
+        waterShieldEntity.setPos(goToX, goToY, goToZ);
+
+         */
+    }
+
+    private boolean onEndContinuityEvent(PlayerEntity player)
+    {
+        if (this.waterShieldEntity != null)
+        {
+            this.waterShieldEntity.remove();
+        }
         return true;
     }
 }

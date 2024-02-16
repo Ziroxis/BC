@@ -25,10 +25,7 @@ import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryBubbleAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryRainAbility;
 import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
-import com.yuanno.block_clover.spells.sealing.OtherHealSealingAbility;
-import com.yuanno.block_clover.spells.sealing.SealingPunchAbility;
-import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
-import com.yuanno.block_clover.spells.sealing.UltimateSealAbility;
+import com.yuanno.block_clover.spells.sealing.*;
 import com.yuanno.block_clover.spells.time.*;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.wind.*;
@@ -58,8 +55,9 @@ public class AbilityProgressionEvents {
         if (statsProps.getAttribute().equals(ModValues.SEALING) || statsProps.getSecondAttribute().equals(ModValues.SEALING))
         {
             gainAbility(event.getPlayer(), 10, SealingPunchAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 15, OtherHealSealingAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 20, UltimateSealAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, SealingWaveAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 20, OtherHealSealingAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 25, UltimateSealAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.WIND) || statsProps.getSecondAttribute().equals(ModValues.WIND))
         {
@@ -129,6 +127,7 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.MERCURY) || statsProps.getSecondAttribute().equals(ModValues.MERCURY))
         {
+            gainAbility(event.getPlayer(), 10, MercurySpearAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, MercuryBubbleAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, MercuryRainAbility.INSTANCE);
         }

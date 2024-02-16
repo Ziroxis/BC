@@ -39,7 +39,12 @@ public class ModEntities {
     }
     public static final RegistryObject<EntityType<GrimoireMagicianEntity>> GRIMOIRE_MAGICIAN = registerEntityType("Grimoire Magician", () -> BeModApi.createEntityType(GrimoireMagicianEntity::new).build(Main.MODID + ":grimoire_magician"));
     public static final RegistryObject<EntityType<GuildEntity>> GUILD_ENTITY = registerEntityType("Guild Manager", () -> BeModApi.createEntityType(GuildEntity::new).build(Main.MODID + ":guild_entity"));
-    public static final RegistryObject<EntityType<BanditEntity>> BANDIT = registerEntityType("Bandit", () -> BeModApi.createEntityType(BanditEntity::new).build(Main.MODID + ":bandit_entity"));
+    public static final RegistryObject<EntityType<BanditEntity>> BANDIT = ENTITIES
+            .register("bandit",
+                    () -> EntityType.Builder.of(BanditEntity::new, EntityClassification.CREATURE)
+                            .sized(1f, 1.2f)
+                            .setTrackingRange(15)
+                            .build(new ResourceLocation(Main.MODID, "bandit").toString()));
     public static final RegistryObject<EntityType<QuestBoardManagerEntity>> QUEST_MANAGER = registerEntityType("Quest Manager", () -> BeModApi.createEntityType(QuestBoardManagerEntity::new).build(Main.MODID + ":quest_manager"));
 
     public static final RegistryObject<EntityType<VolcanoMonsterEntity>> VOLCANO_MONSTER = ENTITIES

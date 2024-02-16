@@ -7,6 +7,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
@@ -41,7 +42,7 @@ import net.minecraftforge.fml.common.Mod;
 public class AbilityProgressionEvents {
 
     @SubscribeEvent
-    public static void onLevelGained(ExperienceUpEvent event)
+    public static void onLevelGained(LevelUpEvent event)
     {
         IEntityStats statsProps = EntityStatsCapability.get(event.getPlayer());
 
@@ -49,7 +50,6 @@ public class AbilityProgressionEvents {
             return;
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {
-            gainAbility(event.getPlayer(), 5, WaterShieldAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, WaterSpearAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, WaterDragonAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, ValkyrieArmorAbility.INSTANCE);
@@ -57,15 +57,13 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.SEALING) || statsProps.getSecondAttribute().equals(ModValues.SEALING))
         {
-            gainAbility(event.getPlayer(), 5, SelfHealSealingAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, SealingPunchAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, OtherHealSealingAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, UltimateSealAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.WIND) || statsProps.getSecondAttribute().equals(ModValues.WIND))
         {
-            gainAbility(event.getPlayer(), 3, WindCrescentAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 7, WindBladeShowerAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 11, WindBladeShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ToweringTornadoAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, WindFlightAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, TornadoPiercingAbility.INSTANCE);
@@ -73,15 +71,13 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.LIGHT) || statsProps.getSecondAttribute().equals(ModValues.LIGHT))
         {
-            gainAbility(event.getPlayer(), 5, LightSwordAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, LightBladeShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, LightHealingAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, LightMovementAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.LIGHTNING) || statsProps.getSecondAttribute().equals(ModValues.LIGHTNING))
         {
-            gainAbility(event.getPlayer(), 3, ThunderFiendAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 5, ThunderGodGlovesAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 8, ThunderGodGlovesAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, ThunderCrumblingOrbAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ThunderSlashAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, ThunderFiendMultiAbility.INSTANCE);
@@ -91,7 +87,6 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.FIRE) || statsProps.getSecondAttribute().equals(ModValues.FIRE))
         {
-            gainAbility(event.getPlayer(), 5, FlameRoarAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, SpiralFlameAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, SolLineaAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, LeoPalmaAbility.INSTANCE);
@@ -99,7 +94,6 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.EARTH) || statsProps.getSecondAttribute().equals(ModValues.EARTH))
         {
-            gainAbility(event.getPlayer(), 5, EarthChargeAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, EarthGlovesAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, EarthMinionAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, EarthGolemAbility.INSTANCE);
@@ -107,14 +101,12 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.DARKNESS) || statsProps.getSecondAttribute().equals(ModValues.DARKNESS))
         {
-            gainAbility(event.getPlayer(), 3, AvidyaSlashAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, BluntStrikeAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, AvidyaWildSlashAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, BlackHoleAbility.INSTANCE);
         }
         if (statsProps.getAttribute().equals(ModValues.SLASH) || statsProps.getSecondAttribute().equals(ModValues.SLASH))
         {
-            gainAbility(event.getPlayer(), 5, DeathScytheAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, DeathScytheShowerAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ForwardThrustAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, LunaticSlashAbility.INSTANCE);
@@ -122,7 +114,6 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.TIME) || statsProps.getSecondAttribute().equals(ModValues.TIME))
         {
-            gainAbility(event.getPlayer(), 5, ChronoStasisAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, TimeHealAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, ChronoStasisGrigoraAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, TimeHopAbility.INSTANCE);
@@ -130,7 +121,6 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.BEAST) || statsProps.getSecondAttribute().equals(ModValues.BEAST))
         {
-            gainAbility(event.getPlayer(), 5, BeastRegenerationPassiveAbility.INSTANCE);
             gainAbility(event.getPlayer(), 10, CheetaChargeAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, JaguarsHunt.INSTANCE);
             gainAbility(event.getPlayer(), 20, HippopotamusBiteAbility.INSTANCE);
@@ -139,7 +129,6 @@ public class AbilityProgressionEvents {
         }
         if (statsProps.getAttribute().equals(ModValues.MERCURY) || statsProps.getSecondAttribute().equals(ModValues.MERCURY))
         {
-            gainAbility(event.getPlayer(), 5, MercurySpearAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, MercuryBubbleAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, MercuryRainAbility.INSTANCE);
         }
@@ -150,11 +139,11 @@ public class AbilityProgressionEvents {
         IEntityStats props = EntityStatsCapability.get(player);
         IAbilityData abilityProps = AbilityDataCapability.get(player);
 
-        if (props.getLevel() >= level && !abilityProps.hasUnlockedAbility(ability) )
+        if (props.getLevel() + 1 >= level && !abilityProps.hasUnlockedAbility(ability) )
         {
             abilityProps.addUnlockedAbility(player, ability);
         }
-        if ((props.getLevel() < level && abilityProps.hasUnlockedAbility(ability)))
+        if ((props.getLevel() + 1 < level && abilityProps.hasUnlockedAbility(ability)))
             abilityProps.removeUnlockedAbility(ability);
 
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);

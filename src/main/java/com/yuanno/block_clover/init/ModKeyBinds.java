@@ -7,10 +7,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.client.CChangeCombatBarPacket;
-import com.yuanno.block_clover.networking.client.COpenPlayerScreenPacket;
-import com.yuanno.block_clover.networking.client.CToggleCombatModePacket;
-import com.yuanno.block_clover.networking.client.CUseAbilityPacket;
+import com.yuanno.block_clover.networking.client.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.settings.KeyBinding;
@@ -29,22 +26,26 @@ import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(modid = Main.MODID, value = Dist.CLIENT)
 public class ModKeyBinds {
-    public static KeyBinding infoCard, enterCombatMode, nextCombatBar, prevCombatBar, combatSlot1, combatSlot2, combatSlot3, combatSlot4, combatSlot5, combatSlot6, combatSlot7, combatSlot8;
+    public static KeyBinding infoCard, config,
+            enterCombatMode, nextCombatBar, prevCombatBar, combatSlot1, combatSlot2, combatSlot3, combatSlot4, combatSlot5, combatSlot6, combatSlot7, combatSlot8;
     private static KeyBinding[] keyBindsCombatbar;
     private static final int[] PREVIOUS_INVENTORY_KEYBINDS = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
     private static int[] keyCooldown = new int[8];
 
     public static void init()
     {
-        infoCard = new KeyBinding("Keys.block_clover.info_card", 40, "Keys.block_clover.gui");
+        infoCard = new KeyBinding("Keys.block_clover.info_card", GLFW.GLFW_KEY_P, "Keys.block_clover.gui");
         ClientRegistry.registerKeyBinding(infoCard);
 
-        enterCombatMode = new KeyBinding("Keys.block_clover.combat_mode", 41, "Keys.block_clover.combat");
+        config = new KeyBinding("Keys.block_clover.config", GLFW.GLFW_KEY_B, "Keys.block_clover.gui");
+        ClientRegistry.registerKeyBinding(config);
+
+        enterCombatMode = new KeyBinding("Keys.block_clover.combat_mode", GLFW.GLFW_KEY_R, "Keys.block_clover.combat");
         ClientRegistry.registerKeyBinding(enterCombatMode);
 
-        nextCombatBar = new KeyBinding("Keys.block_clover.next_bar", 42, "Keys.block_clover.combat");
+        nextCombatBar = new KeyBinding("Keys.block_clover.next_bar", GLFW.GLFW_KEY_T, "Keys.block_clover.combat");
         ClientRegistry.registerKeyBinding(nextCombatBar);
-        prevCombatBar = new KeyBinding("Keys.block_clover.previous_bar", 43, "Keys.block_clover.combat");
+        prevCombatBar = new KeyBinding("Keys.block_clover.previous_bar", GLFW.GLFW_KEY_Y, "Keys.block_clover.combat");
         ClientRegistry.registerKeyBinding(prevCombatBar);
 
         combatSlot1 = new KeyBinding("Keys.block_clover.combat_1", GLFW.GLFW_KEY_1, "Keys.block_clover.combat");
@@ -156,6 +157,14 @@ public class ModKeyBinds {
                 return;
 
             PacketHandler.sendToServer(new COpenPlayerScreenPacket());
+        }
+
+        if (config.isDown())
+        {
+            if(Minecraft.getInstance().screen != null)
+                return;
+
+            PacketHandler.sendToServer(new COpenConfigScreenPacket());
         }
 
         if (enterCombatMode.isDown())

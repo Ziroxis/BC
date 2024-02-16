@@ -131,6 +131,9 @@
   "Keys.block_clover.previous_bar": "Previous Combat Bar",
   "Keys.block_clover.gui": "Gui Keys Block Clover",
   "Keys.block_clover.info_card": "Info Card Block Clover",
+  "Keys.block_clover.config": "Config",
+  "Keys.block_clover.config.disabled": "Disabled",
+  "Keys.block_clover.config.enabled": "Enabled",
 
 
   "ability.block_clover.mana_skin": "Mana Skin",

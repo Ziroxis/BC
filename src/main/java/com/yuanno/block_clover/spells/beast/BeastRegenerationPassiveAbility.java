@@ -19,17 +19,18 @@ public class BeastRegenerationPassiveAbility extends PassiveAbility {
     public BeastRegenerationPassiveAbility()
     {
         super(INSTANCE);
+        this.setmanaCost(0);
         this.duringPassiveEvent = this::duringPassiveEvent;
     }
 
     public void duringPassiveEvent(PlayerEntity player)
     {
-        if (player.tickCount % 20 == 0 && player.getHealth() < player.getMaxHealth())
+        if (player.tickCount % 80 == 0 && player.getHealth() < player.getMaxHealth())
         {
-            if (player.getHealth() > 10)
-                player.heal(0.5f);
-            else if (player.getHealth() < 10)
+            if (player.getHealth() >= 10)
                 player.heal(1f);
+            else if (player.getHealth() < 10)
+                player.heal(2f);
         }
     }
 

@@ -18,7 +18,6 @@ public class EvolvedWaterBallAbility extends RepeaterAbility {
         super(INSTANCE);
         this.setMaxCooldown(5);
         this.setmanaCost(15);
-        this.setEvolutionCost(3);
         this.setMaxRepeaterCount(3, 3);
         this.onUseEvent = this::onUseEvent;
 

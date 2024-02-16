@@ -5,6 +5,8 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.AbilityDataProvider;
 import com.yuanno.block_clover.data.challenges.ChallengesDataCapability;
 import com.yuanno.block_clover.data.challenges.ChallengesDataProvider;
+import com.yuanno.block_clover.data.config.ConfigCapability;
+import com.yuanno.block_clover.data.config.ConfigProvider;
 import com.yuanno.block_clover.data.devil.DevilCapability;
 import com.yuanno.block_clover.data.devil.DevilProvider;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -29,6 +31,7 @@ public class ModCapabilities {
         QuestDataCapability.register();
         DevilCapability.register();
         ChallengesDataCapability.register();
+        ConfigCapability.register();
     }
 
     @SubscribeEvent
@@ -47,7 +50,7 @@ public class ModCapabilities {
             event.addCapability(new ResourceLocation(Main.MODID, "quest_data"), new QuestDataProvider());
             event.addCapability(new ResourceLocation(Main.MODID, "devil_data"), new DevilProvider());
             event.addCapability(new ResourceLocation(Main.MODID, "challenges"), new ChallengesDataProvider());
-
+            event.addCapability(new ResourceLocation(Main.MODID, "config_data"), new ConfigProvider());
 
         }
     }

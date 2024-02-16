@@ -30,8 +30,7 @@ public class CheetaChargeAbility extends Ability implements IMultiTargetAbility 
         super(INSTANCE);
         this.setmanaCost(20);
         this.setMaxCooldown(10);
-        this.setExperiencePoint(10);
-        this.setEvolutionCost(30);
+        this.setExperiencePoint(30);
         this.onUseEvent = this::onUseEvent;
         this.duringCooldownEvent = this::duringCooldown;
     }

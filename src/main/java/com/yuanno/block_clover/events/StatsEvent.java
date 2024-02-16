@@ -4,6 +4,8 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.config.ConfigCapability;
+import com.yuanno.block_clover.data.config.IConfig;
 import com.yuanno.block_clover.data.devil.DevilCapability;
 import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
@@ -40,6 +42,7 @@ public class StatsEvent {
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         IQuestData questData = QuestDataCapability.get(player);
         IDevil devil = DevilCapability.get(player);
+        IConfig config = ConfigCapability.get(player);
         ExtendedWorldData extendedWorldData = ExtendedWorldData.get(player.level);
 
         if (!props.hasAttribute())
@@ -49,6 +52,7 @@ public class StatsEvent {
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), props), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityProps), player);
         PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
+        PacketHandler.sendTo(new SSyncConfigPacket(player.getId(), config), player);
 
     }
 
@@ -201,6 +205,11 @@ public class StatsEvent {
         nbt = DevilCapability.INSTANCE.writeNBT(oldDevilData, null);
         IDevil newDevilData = DevilCapability.get(player);
         DevilCapability.INSTANCE.readNBT(newDevilData, null, nbt);
+
+        IConfig oldConfigData = ConfigCapability.get(original);
+        nbt = ConfigCapability.INSTANCE.writeNBT(oldConfigData, null);
+        IConfig newConfigData = ConfigCapability.get(player);
+        ConfigCapability.INSTANCE.readNBT(newConfigData, null, nbt);
 
         /*
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), newAbilityData), player);

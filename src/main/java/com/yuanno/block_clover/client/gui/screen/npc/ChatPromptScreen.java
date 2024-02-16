@@ -121,7 +121,7 @@ public class ChatPromptScreen extends Screen {
                 questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
                 PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-                text = "A grimoire has chosen you, go into combat mode to see your grimoire!";
+                text = "A grimoire has chosen you and you unlocked a spell, go into combat mode to see your grimoire!";
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             }

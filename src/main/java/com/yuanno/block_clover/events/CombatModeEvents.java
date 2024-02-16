@@ -7,6 +7,8 @@ import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.data.config.ConfigCapability;
+import com.yuanno.block_clover.data.config.IConfig;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModResources;
@@ -244,7 +246,8 @@ public class CombatModeEvents
 		@SubscribeEvent
 		public static void onItemPickedUp(EntityItemPickupEvent event)
 		{
-			if(true)
+			IConfig config = ConfigCapability.get(event.getPlayer());
+			if(!config.getPickUpItems())
 			{
 				IEntityStats entityStatsProps = EntityStatsCapability.get(event.getPlayer());
 				event.setCanceled(entityStatsProps.isInCombatMode());

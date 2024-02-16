@@ -116,7 +116,8 @@ public class PlayerOverviewScreen extends Screen {
         int maxExperience = props.getMaxExperience();
         int maxHealth = (int) player.getMaxHealth();
         int maxMana = (int) props.getMaxMana();
-        int manaRegeneration = (int) props.getManaRegeneration();
+        float manaRegeneration = props.getManaRegeneration();
+        String formatManaRegeneration = String.format("%.1f", manaRegeneration);
         int yule = props.getYule();
 
         int leftShift = posX - 75;
@@ -125,7 +126,7 @@ public class PlayerOverviewScreen extends Screen {
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Experience: " + TextFormatting.RESET + experience + "/" + maxExperience, leftShift, posY + 60, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Yule: " + TextFormatting.RESET + yule, leftShift, posY + 80, -1);
 
-        int rightShift = posX + 200;
+        int rightShift = posX + 196;
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Max health: " + TextFormatting.RESET + maxHealth, rightShift, posY + 20, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, rightShift, posY + 40, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Magic level: " + TextFormatting.RESET + level, rightShift, posY + 40, -1);
@@ -134,7 +135,7 @@ public class PlayerOverviewScreen extends Screen {
         else
             drawString(matrixStack, this.font, TextFormatting.BOLD + "Attribute: " + TextFormatting.RESET + attribute, rightShift, posY + 60, -1);
         drawString(matrixStack, this.font, TextFormatting.BOLD + "Max mana: " + TextFormatting.RESET + maxMana, rightShift, posY + 80, -1);
-        drawString(matrixStack, this.font, TextFormatting.BOLD + "Mana regeneration: " + TextFormatting.RESET + manaRegeneration + "/s", rightShift, posY + 100, -1);
+        drawString(matrixStack, this.font, TextFormatting.BOLD + "Mana regeneration: " + TextFormatting.RESET + formatManaRegeneration + "/s", rightShift, posY + 100, -1);
 
 
     }

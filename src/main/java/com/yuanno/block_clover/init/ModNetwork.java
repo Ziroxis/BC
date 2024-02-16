@@ -33,6 +33,8 @@ public class ModNetwork {
         PacketHandler.registerPacket(COpenDevilSummoningScreenPacket.class, COpenDevilSummoningScreenPacket::encode, COpenDevilSummoningScreenPacket::decode, COpenDevilSummoningScreenPacket::handle);
         PacketHandler.registerPacket(CSyncChallengeyDataPacket.class, CSyncChallengeyDataPacket::encode, CSyncChallengeyDataPacket::decode, CSyncChallengeyDataPacket::handle);
         PacketHandler.registerPacket(CTeleportMagicTowerPacket.class, CTeleportMagicTowerPacket::encode, CTeleportMagicTowerPacket::decode, CTeleportMagicTowerPacket::handle);
+        PacketHandler.registerPacket(COpenConfigScreenPacket.class, COpenConfigScreenPacket::encode, COpenConfigScreenPacket::decode, COpenConfigScreenPacket::handle);
+        PacketHandler.registerPacket(CSyncConfigPacket.class, CSyncConfigPacket::encode, CSyncConfigPacket::decode, CSyncConfigPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);
@@ -58,6 +60,8 @@ public class ModNetwork {
         PacketHandler.registerPacket(SOpenDevilSummoningScreenpacket.class, SOpenDevilSummoningScreenpacket::encode, SOpenDevilSummoningScreenpacket::decode, SOpenDevilSummoningScreenpacket::handle);
         PacketHandler.registerPacket(SSyncChallengeDataPacket.class, SSyncChallengeDataPacket::encode, SSyncChallengeDataPacket::decode, SSyncChallengeDataPacket::handle);
         PacketHandler.registerPacket(SOpenTeleportTowerScreenPacket.class, SOpenTeleportTowerScreenPacket::encode, SOpenTeleportTowerScreenPacket::decode, SOpenTeleportTowerScreenPacket::handle);
+        PacketHandler.registerPacket(SOpenConfigScreenPacket.class, SOpenConfigScreenPacket::encode, SOpenConfigScreenPacket::decode, SOpenConfigScreenPacket::handle);
+        PacketHandler.registerPacket(SSyncConfigPacket.class, SSyncConfigPacket::encode, SSyncConfigPacket::decode, SSyncConfigPacket::handle);
 
         //SYNC
         PacketHandler.registerPacket(ManaSync.class, ManaSync::encode, ManaSync::decode, ManaSync::handle);

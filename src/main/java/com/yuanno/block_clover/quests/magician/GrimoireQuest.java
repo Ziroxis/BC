@@ -23,13 +23,29 @@ import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
+import com.yuanno.block_clover.spells.beast.BeastRegenerationPassiveAbility;
+import com.yuanno.block_clover.spells.darkness.AvidyaSlashAbility;
+import com.yuanno.block_clover.spells.darkness.DarkCloakedBladeAbility;
 import com.yuanno.block_clover.spells.devil.CrowAbility;
 import com.yuanno.block_clover.spells.devil.DarkFireBallAbility;
 import com.yuanno.block_clover.spells.devil.DarkIceAbility;
+import com.yuanno.block_clover.spells.earth.EarthChargeAbility;
+import com.yuanno.block_clover.spells.fire.FireBallAbility;
+import com.yuanno.block_clover.spells.fire.FlameRoarAbility;
+import com.yuanno.block_clover.spells.light.LightHealingAbility;
+import com.yuanno.block_clover.spells.light.LightSwordAbility;
+import com.yuanno.block_clover.spells.lightning.ThunderFiendAbility;
+import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
+import com.yuanno.block_clover.spells.sealing.SelfHealSealingAbility;
+import com.yuanno.block_clover.spells.slash.DeathScytheAbility;
 import com.yuanno.block_clover.spells.sword.OriginalDemonSlayerAbility;
 import com.yuanno.block_clover.spells.sword.OriginalMagicDestroyerAbility;
 import com.yuanno.block_clover.spells.sword.OriginalMagicDwellerAbility;
 import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
+import com.yuanno.block_clover.spells.time.ChronoStasisAbility;
+import com.yuanno.block_clover.spells.water.WaterShieldAbility;
+import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
+import com.yuanno.block_clover.spells.wind.WindCrescentAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
@@ -53,27 +69,61 @@ public class GrimoireQuest extends Quest {
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         entityStats.setGrimoire(true);
-        if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC))
+        IAbilityData abilityDataBase = AbilityDataCapability.get(player);
+        switch (entityStats.getAttribute())
         {
-            IDevil devil = DevilCapability.get(player);
-            devil.alterMaxDevilMana(200);
-            devil.alterDevilMana(200);
-            IAbilityData abilityDataBase = AbilityDataCapability.get(player);
-            abilityDataBase.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
-            abilityDataBase.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
-            PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataBase), player);
-            PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
-
+            case (ModValues.ANTIMAGIC):
+                IDevil devil = DevilCapability.get(player);
+                devil.alterMaxDevilMana(200);
+                devil.alterDevilMana(200);
+                abilityDataBase.addUnlockedAbility(player, DemonSlayerAbility.INSTANCE);
+                abilityDataBase.addUnlockedAbility(player, BullThrustAbility.INSTANCE);
+                PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
+                break;
+            case (ModValues.SWORD):
+                abilityDataBase.addUnlockedAbility(player, OriginalDemonSlayerAbility.INSTANCE);
+                abilityDataBase.addUnlockedAbility(player, OriginalMagicDestroyerAbility.INSTANCE);
+                abilityDataBase.addUnlockedAbility(player, OriginalMagicDwellerAbility.INSTANCE);
+                abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
+                break;
+            case (ModValues.WATER):
+                abilityDataBase.addUnlockedAbility(player, WaterShieldAbility.INSTANCE);
+                break;
+            case (ModValues.FIRE):
+                abilityDataBase.addUnlockedAbility(player, FlameRoarAbility.INSTANCE);
+                break;
+            case (ModValues.LIGHTNING):
+                abilityDataBase.addUnlockedAbility(player, ThunderFiendAbility.INSTANCE);
+                break;
+            case (ModValues.DARKNESS):
+                abilityDataBase.addUnlockedAbility(player, AvidyaSlashAbility.INSTANCE);
+                break;
+            case (ModValues.EARTH):
+                abilityDataBase.addUnlockedAbility(player, EarthChargeAbility.INSTANCE);
+                break;
+            case (ModValues.LIGHT):
+                abilityDataBase.addUnlockedAbility(player, LightSwordAbility.INSTANCE);
+                break;
+            case (ModValues.WIND):
+                abilityDataBase.addUnlockedAbility(player, WindCrescentAbility.INSTANCE);
+                break;
+            case (ModValues.SEALING):
+                abilityDataBase.addUnlockedAbility(player, SelfHealSealingAbility.INSTANCE);
+                break;
+            case (ModValues.TIME):
+                abilityDataBase.addUnlockedAbility(player, ChronoStasisAbility.INSTANCE);
+                break;
+            case (ModValues.BEAST):
+                abilityDataBase.addUnlockedAbility(player, BeastRegenerationPassiveAbility.INSTANCE);
+                break;
+            case (ModValues.MERCURY):
+                abilityDataBase.addUnlockedAbility(player, MercurySpearAbility.INSTANCE);
+                break;
+            case (ModValues.SLASH):
+                abilityDataBase.addUnlockedAbility(player, DeathScytheAbility.INSTANCE);
+                break;
         }
-        if (entityStats.getAttribute().equals(ModValues.SWORD))
-        {
-            IAbilityData abilityDataBase = AbilityDataCapability.get(player);
-            abilityDataBase.addUnlockedAbility(player, OriginalDemonSlayerAbility.INSTANCE);
-            abilityDataBase.addUnlockedAbility(player, OriginalMagicDestroyerAbility.INSTANCE);
-            abilityDataBase.addUnlockedAbility(player, OriginalMagicDwellerAbility.INSTANCE);
-            abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
-            PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataBase), player);
-        }
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataBase), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
         return true;
     }

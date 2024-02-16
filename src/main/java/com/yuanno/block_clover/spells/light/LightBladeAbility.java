@@ -22,7 +22,7 @@ public class LightBladeAbility extends Ability {
         this.setmanaCost(10);
         this.setCooldown(2);
         this.setEvolutionCost(50);
-        this.setExperiencePoint(20);
+        this.setExperiencePoint(12);
         this.setExperienceGainLevelCap(10);
         this.onUseEvent = this::onUseEvent;
     }

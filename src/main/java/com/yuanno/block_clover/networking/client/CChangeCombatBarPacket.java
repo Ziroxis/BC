@@ -55,7 +55,7 @@ public class CChangeCombatBarPacket
 					if(abilityProps.getCombatBarSet() > 0)
 						abilityProps.prevCombatBarSet();
 					else
-						abilityProps.setCombatBarSet(8);
+						abilityProps.setCombatBarSet(1);
 				}
 				
 				PacketHandler.sendTo(new SChangeCombatBarPacket(abilityProps.getCombatBarSet()), player);

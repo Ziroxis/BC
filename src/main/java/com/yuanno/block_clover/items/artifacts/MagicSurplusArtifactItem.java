@@ -9,6 +9,7 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.events.ability.AbilityProgressionEvents;
 import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.items.ArtifactItem;
 import com.yuanno.block_clover.networking.PacketHandler;
@@ -50,10 +51,11 @@ public class MagicSurplusArtifactItem extends ArtifactItem {
             if (stats.hasSecondAttribute() && !stats.getAttribute().equals(ModValues.ANTIMAGIC))
             {
                 stats.alterExperience(3000);
-                ExperienceUpEvent eventExperienceUp = new ExperienceUpEvent(player, stats.getExperience());
+                LevelUpEvent eventExperienceUp = new LevelUpEvent(player, stats.getExperience());
                 if (MinecraftForge.EVENT_BUS.post(eventExperienceUp))
                     ActionResult.fail(itemStack);
-                AbilityProgressionEvents.onLevelGained(eventExperienceUp);
+                MinecraftForge.EVENT_BUS.post(eventExperienceUp);
+                //AbilityProgressionEvents.onLevelGained(eventExperienceUp);
             }
             else if (!stats.getAttribute().equals(ModValues.ANTIMAGIC))
             {

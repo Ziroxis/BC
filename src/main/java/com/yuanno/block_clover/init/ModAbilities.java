@@ -35,6 +35,7 @@ import com.yuanno.block_clover.spells.undead.UndeadRecruitAbility;
 import com.yuanno.block_clover.spells.undead.UnleashUndeadAbility;
 import com.yuanno.block_clover.spells.water.*;
 import com.yuanno.block_clover.spells.water.waterball.EvolvedWaterBallAbility;
+import com.yuanno.block_clover.spells.water.waterball.FinalWaterBallAbility;
 import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -47,7 +48,7 @@ public class ModAbilities {
 
 
     public static final AbilityCore[] MISC = new AbilityCore[] {ManaSkinAbility.INSTANCE, ManaReinforcementAbility.INSTANCE, ManaSenseAbility.INSTANCE};
-    public static final AbilityCore[] WATER = new AbilityCore[] {WaterBallAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterManaZoneAbility.INSTANCE};
+    public static final AbilityCore[] WATER = new AbilityCore[] {WaterBallAbility.INSTANCE, CurrentOfTheFortuneRiverAbility.INSTANCE, WaterShieldAbility.INSTANCE, WaterDragonAbility.INSTANCE, WaterSpearAbility.INSTANCE, ValkyrieArmorAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterManaZoneAbility.INSTANCE};
     public static final AbilityCore[] EVOLVED_WATER = new AbilityCore[] {EvolvedWaterBallAbility.INSTANCE, FinalWaterBallAbility.INSTANCE};
     public static final AbilityCore[] SEALING = new AbilityCore[] {SealingProjectileAbility.INSTANCE, EvolvedSealingProjectileAbility.INSTANCE, SelfHealSealingAbility.INSTANCE, SealingPunchAbility.INSTANCE, OtherHealSealingAbility.INSTANCE, SealingWaveAbility.INSTANCE, UltimateSealAbility.INSTANCE, SealingManaZoneAbility.INSTANCE};
     public static final AbilityCore[] ANTIMAGIC = new AbilityCore[] {DemonSlayerAbility.INSTANCE, BullThrustAbility.INSTANCE, DemonStateAbility.INSTANCE, BlackSlashAbility.INSTANCE, BlackTornadoAbility.INSTANCE, AntiMagicManaZoneAbility.INSTANCE, DemonDwellerAbility.INSTANCE};

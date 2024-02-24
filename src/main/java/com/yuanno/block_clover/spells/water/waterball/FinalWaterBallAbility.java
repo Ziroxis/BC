@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.spells.water;
+package com.yuanno.block_clover.spells.water.waterball;
 
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;

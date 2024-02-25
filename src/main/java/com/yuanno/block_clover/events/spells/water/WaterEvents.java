@@ -37,19 +37,6 @@ public class WaterEvents {
                 player.fallDistance = 0;
                 player.setOnGround(true);
             }
-            /*
-            if (currentOfTheFortuneRiverAbility != null && currentOfTheFortuneRiverAbility.isPassiveEnabled())
-            {
-                System.out.println("CALLED");
-                World world = player.level;
-                BlockPos blockPos = player.blockPosition();
-
-                if (world.getBlockState(blockPos.below()).getBlock() == Blocks.WATER) {
-                    player.setDeltaMovement(player.getDeltaMovement().x, 0.1, player.getDeltaMovement().z);
-                }
-            }
-
-             */
         }
     }
 }

@@ -82,7 +82,8 @@ public class TestEvent {
             abilities.add(WaterShieldAbility.INSTANCE.createAbility());
              */
             abilities = GainSpellHelper.returnAbilitiesPerLevelAttribute(ModValues.WATER, 5);
-            PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(abilities), player);
+            if (!abilities.isEmpty())
+                PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(abilities), player);
         }
 
     }

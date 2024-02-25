@@ -11,30 +11,44 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GainSpellHelper {
-    
-    private static final AbilityCore[] water5 = {
-            WaterShieldAbility.INSTANCE, CurrentOfTheFortuneRiverAbility.INSTANCE, WaterBlessingAbility.INSTANCE     
+
+    private static final AbilityCore[][] waterAbilities = {
+            {WaterShieldAbility.INSTANCE, CurrentOfTheFortuneRiverAbility.INSTANCE, WaterBlessingAbility.INSTANCE},
+            // Add more arrays for water10, water15, etc.
     };
-    
+
     private static HashMap<Integer, AbilityCore[]> spellPerLevelWater = new HashMap<>();
     static {
-        spellPerLevelWater.put(5, water5);
+        spellPerLevelWater.put(5, waterAbilities[0]);
     }
-    
+
     public static HashMap<String, HashMap<Integer, AbilityCore[]>> spellsMap = new HashMap<>();
     static
     {
         spellsMap.put(ModValues.WATER, spellPerLevelWater);
     }
-    
+
+    // Cache for ArrayList<Ability>
+    private static HashMap<AbilityCore[], ArrayList<Ability>> abilityListCache = new HashMap<>();
+
     public static ArrayList<Ability> returnAbilitiesPerLevelAttribute(String attribute, int level)
     {
-        ArrayList<Ability> abilities = new ArrayList<>();
-        
         AbilityCore[] abilityCores = spellsMap.get(attribute).get(level);
-        for (AbilityCore abilityCore : abilityCores) {
-            abilities.add(abilityCore.createAbility());
+        if (abilityCores == null)
+        {
+            return new ArrayList<>();
         }
+        // Check if the ArrayList<Ability> is already in the cache
+        ArrayList<Ability> abilities = abilityListCache.get(abilityCores);
+        if (abilities == null) {
+            // If not, create it and put it in the cache
+            abilities = new ArrayList<>();
+            for (AbilityCore abilityCore : abilityCores) {
+                abilities.add(abilityCore.createAbility());
+            }
+            abilityListCache.put(abilityCores, abilities);
+        }
+
         return abilities;
     }
 

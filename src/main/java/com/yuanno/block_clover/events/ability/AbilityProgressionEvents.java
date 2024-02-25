@@ -6,13 +6,11 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
 import com.yuanno.block_clover.events.levelEvents.LevelUpEvent;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.block_clover.spells.beast.*;
-import com.yuanno.block_clover.spells.darkness.AvidyaSlashAbility;
 import com.yuanno.block_clover.spells.darkness.AvidyaWildSlashAbility;
 import com.yuanno.block_clover.spells.darkness.BlackHoleAbility;
 import com.yuanno.block_clover.spells.darkness.BluntStrikeAbility;
@@ -21,7 +19,6 @@ import com.yuanno.block_clover.spells.fire.*;
 import com.yuanno.block_clover.spells.light.LightBladeShowerAbility;
 import com.yuanno.block_clover.spells.light.LightHealingAbility;
 import com.yuanno.block_clover.spells.light.LightMovementAbility;
-import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryBubbleAbility;
 import com.yuanno.block_clover.spells.mercury.MercuryRainAbility;
 import com.yuanno.block_clover.spells.mercury.MercurySpearAbility;
@@ -47,7 +44,7 @@ public class AbilityProgressionEvents {
             return;
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {
-            gainAbility(event.getPlayer(), 10, WaterSpearAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 10, WaterJavelinAbility.INSTANCE);
             gainAbility(event.getPlayer(), 15, WaterDragonAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, ValkyrieArmorAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, PointBlankDragonAbility.INSTANCE);

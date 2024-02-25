@@ -6,19 +6,18 @@ import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.entities.projectiles.water.WaterSpearProjectile;
 import com.yuanno.block_clover.init.ModEffects;
-import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 
-public class WaterSpearAbility extends ChargeableAbility {
+public class WaterJavelinAbility extends ChargeableAbility {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Spear", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterSpearAbility.class)
-            .setDescription("Shoots a water spear.")
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Javelin", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterJavelinAbility.class)
+            .setDescription("Shoots a water javelin.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
     private boolean cancelled = false;
 
-    public WaterSpearAbility()
+    public WaterJavelinAbility()
     {
         super(INSTANCE);
         this.setMaxCooldown(5);

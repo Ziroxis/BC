@@ -113,7 +113,7 @@ public class RaceChangeArtifactItem extends ArtifactItem {
                     }
                     if (statsProps.getAttribute().equals(ModValues.WATER)) {
                         gainAbility(player, 5, WaterShieldAbility.INSTANCE);
-                        gainAbility(player, 10, WaterSpearAbility.INSTANCE);
+                        gainAbility(player, 10, WaterJavelinAbility.INSTANCE);
                         gainAbility(player, 15, WaterDragonAbility.INSTANCE);
                         gainAbility(player, 20, ValkyrieArmorAbility.INSTANCE);
                         gainAbility(player, 25, PointBlankDragonAbility.INSTANCE);

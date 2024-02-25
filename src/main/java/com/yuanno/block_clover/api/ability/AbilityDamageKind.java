@@ -5,6 +5,7 @@ public enum AbilityDamageKind
 	UNKNOWN,
 	PHYSICAL,
 	SPECIAL,
+	BLUNT,
 	ELEMENTAL,
 	SLASH,
 	PIERCING,

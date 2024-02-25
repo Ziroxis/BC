@@ -31,6 +31,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ANTIMAGIC = BLOCKS.register("antimagic_block", AntiMagicBlock::new);
     public static final RegistryObject<Block> LIGHTNING = BLOCKS.register("lightning_block", LightningBlock::new);
     public static final RegistryObject<Block> WIND = BLOCKS.register("wind_block", WindBlock::new);
+    public static final RegistryObject<Block> WATER = BLOCKS.register("water_block", WaterCustomBlock::new);
 
     public static final RegistryObject<Block> JUICER = BLOCKS.register("juicer_block", JuicerBlock::new);
     public static final RegistryObject<Block> BAKING_OVEN = BLOCKS.register("baking_oven_block", BakingOvenBlock::new);

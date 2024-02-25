@@ -651,7 +651,8 @@ public class Beapi
                     {
                         BlockPos pos = new BlockPos(x, y, z);
                         BlockState state = world.getBlockState(pos);
-
+                        if (!state.equals(Blocks.AIR.defaultBlockState()) && !state.equals(Blocks.GRASS.defaultBlockState()) && !state.equals(Blocks.WATER.defaultBlockState()))
+                            continue;
 //						BlockRayTraceResult result = WyHelper.rayTraceBlocks(world, new Vector3d(center), new Vector3d(pos));
 //						if(result.getType() == RayTraceResult.Type.BLOCK)
 //						{

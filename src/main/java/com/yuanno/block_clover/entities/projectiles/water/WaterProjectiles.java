@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
+import com.yuanno.block_clover.api.ability.StretchingProjectileRenderer;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
 import com.yuanno.block_clover.entities.projectiles.slash.DeathScytheProjectile;
 import com.yuanno.block_clover.models.CubeModel;
@@ -39,6 +40,10 @@ public class WaterProjectiles {
             () -> BeModApi.createEntityType(WaterSpearProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":water_spear"));
+    public static final RegistryObject<EntityType<CascadeDestroyerProjectile>> CASCADE_DESTROYER = Beapi.registerEntityType("Cascade Destroyer",
+            () -> BeModApi.createEntityType(CascadeDestroyerProjectile::new)
+                    .sized(1f, 1f)
+                    .build(Main.MODID + ":cascade_destroyer"));
 
 
     @OnlyIn(Dist.CLIENT)
@@ -53,6 +58,7 @@ public class WaterProjectiles {
                 .setTexture("water", "pointblankdragon_texture").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(WATER_SPEAR.get(), new AbilityProjectileRenderer.Factory(new WaterSpearModel())
                 .setTexture("water", "waterspear_texture").setScale(1));
-
+        RenderingRegistry.registerEntityRenderingHandler(CASCADE_DESTROYER.get(), new StretchingProjectileRenderer.Factory(new CubeModel())
+                .setStretchScale(1, 1).setColor("#DEF4FC"));
     }
 }

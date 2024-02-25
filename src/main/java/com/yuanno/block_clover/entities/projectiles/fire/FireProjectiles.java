@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
+import com.yuanno.block_clover.api.ability.StretchingProjectileRenderer;
 import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
 import com.yuanno.block_clover.models.projectiles.fire.FireBallModel;
 import com.yuanno.block_clover.models.projectiles.fire.FlameRoarModel;
@@ -59,7 +60,7 @@ public class FireProjectiles {
                 .setTexture("fire", "fireball").setScale(9));
         RenderingRegistry.registerEntityRenderingHandler(FLAME_ROAR.get(), new AbilityProjectileRenderer.Factory(new FlameRoarModel())
                 .setTexture("fire", "flameroar").setScale(1));
-        RenderingRegistry.registerEntityRenderingHandler(SOL_LINEA.get(), new AbilityProjectileRenderer.Factory(new SolLineaModel())
+        RenderingRegistry.registerEntityRenderingHandler(SOL_LINEA.get(), new StretchingProjectileRenderer.Factory(new SolLineaModel())
                 .setTexture("fire", "sollinea").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(SPIRAL_FLAME.get(), new AbilityProjectileRenderer.Factory(new SpiralFlameModel())
                 .setTexture("fire", "spiralflame").setScale(1));

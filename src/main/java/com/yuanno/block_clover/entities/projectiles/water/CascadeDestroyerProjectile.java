@@ -1,25 +1,27 @@
-package com.yuanno.block_clover.entities.projectiles.fire;
+package com.yuanno.block_clover.entities.projectiles.water;
 
 import com.yuanno.block_clover.api.ability.AbilityProjectileEntity;
+import com.yuanno.block_clover.entities.projectiles.fire.FireProjectiles;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.fire.FireBallParticleEffect;
+import com.yuanno.block_clover.particles.water.WaterBallParticleEffect;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 
-public class SolLineaProjectile extends AbilityProjectileEntity {
-    private static final ParticleEffect PARTICLES = new FireBallParticleEffect();
+public class CascadeDestroyerProjectile extends AbilityProjectileEntity {
+    private static final ParticleEffect PARTICLES = new WaterBallParticleEffect();
 
-    public SolLineaProjectile(EntityType type, World world)
+    public CascadeDestroyerProjectile(EntityType type, World world)
     {
         super(type, world);
     }
 
-    public SolLineaProjectile(World world, LivingEntity player)
+    public CascadeDestroyerProjectile(World world, LivingEntity player)
     {
-        super(FireProjectiles.SOL_LINEA.get(), world, player);
+        super(WaterProjectiles.CASCADE_DESTROYER.get(), world, player);
         this.setDamage(15);
-        this.setMaxLife(128);
+        this.setMaxLife(64);
         this.setPhysical(false);
         this.setPassThroughEntities();
         this.onEntityImpactEvent = this::onEntityImpactEvent;

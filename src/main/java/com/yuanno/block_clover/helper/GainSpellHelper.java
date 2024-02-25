@@ -3,9 +3,7 @@ package com.yuanno.block_clover.helper;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.init.ModValues;
-import com.yuanno.block_clover.spells.water.CurrentOfTheFortuneRiverAbility;
-import com.yuanno.block_clover.spells.water.WaterBlessingAbility;
-import com.yuanno.block_clover.spells.water.WaterShieldAbility;
+import com.yuanno.block_clover.spells.water.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +12,14 @@ public class GainSpellHelper {
 
     private static final AbilityCore[][] waterAbilities = {
             {WaterShieldAbility.INSTANCE, CurrentOfTheFortuneRiverAbility.INSTANCE, WaterBlessingAbility.INSTANCE},
+            {SeaDragonsNestAbility.INSTANCE, HolyFistOfLoveAbility.INSTANCE, WaterJavelinAbility.INSTANCE}
             // Add more arrays for water10, water15, etc.
     };
 
     private static HashMap<Integer, AbilityCore[]> spellPerLevelWater = new HashMap<>();
     static {
         spellPerLevelWater.put(5, waterAbilities[0]);
+        spellPerLevelWater.put(10, waterAbilities[1]);
     }
 
     public static HashMap<String, HashMap<Integer, AbilityCore[]>> spellsMap = new HashMap<>();

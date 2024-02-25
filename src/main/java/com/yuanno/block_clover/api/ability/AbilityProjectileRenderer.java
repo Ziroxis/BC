@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
@@ -19,7 +20,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import javax.annotation.Nullable;
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
 public class AbilityProjectileRenderer<T extends AbilityProjectileEntity, M extends EntityModel<T>> extends EntityRenderer<T>
@@ -28,8 +32,9 @@ public class AbilityProjectileRenderer<T extends AbilityProjectileEntity, M exte
 	private float red, blue, green, alpha;
 	protected M model;
 	private ResourceLocation texture;
+	private boolean isGlowing;
 
-	public AbilityProjectileRenderer(EntityRendererManager renderManager, M model)
+	public AbilityProjectileRenderer(EntityRendererManager renderManager, M model, @Nullable Set<Effect> effects)
 	{
 		super(renderManager);
 		this.model = model;
@@ -46,6 +51,16 @@ public class AbilityProjectileRenderer<T extends AbilityProjectileEntity, M exte
 		this.green = (float) (green / 255.0);
 		this.blue = (float) (blue / 255.0);
 		this.alpha = (float) (alpha / 255.0);
+	}
+
+	public void setGlowing(boolean flag)
+	{
+		this.isGlowing = flag;
+	}
+
+	public boolean isGlowing()
+	{
+		return this.isGlowing;
 	}
 
 	public void setScale(double scaleX, double scaleY, double scaleZ)
@@ -102,6 +117,8 @@ public class AbilityProjectileRenderer<T extends AbilityProjectileEntity, M exte
 		protected double scaleX = 1, scaleY = 1, scaleZ = 1;
 		protected double red = 255, green = 255, blue = 255, alpha = 255;
 		protected ResourceLocation texture;
+		protected Set<Effect> effects = new HashSet();
+		protected boolean isGlowing = false;
 
 		public Factory(EntityModel model)
 		{
@@ -162,7 +179,7 @@ public class AbilityProjectileRenderer<T extends AbilityProjectileEntity, M exte
 		@Override
 		public EntityRenderer<? super AbilityProjectileEntity> createRenderFor(EntityRendererManager manager)
 		{
-			AbilityProjectileRenderer renderer = new AbilityProjectileRenderer(manager, this.model);
+			AbilityProjectileRenderer renderer = new AbilityProjectileRenderer(manager, this.model, this.effects);
 			renderer.setTexture(this.texture);
 			renderer.setScale(this.scaleX, this.scaleY, this.scaleZ);
 			renderer.setColor(this.red, this.green, this.blue, this.alpha);

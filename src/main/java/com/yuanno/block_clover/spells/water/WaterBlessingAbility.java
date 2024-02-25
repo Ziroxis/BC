@@ -8,7 +8,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
 public class WaterBlessingAbility extends PassiveAbility {
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Passive", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterBlessingAbility.class)
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Blessing", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterBlessingAbility.class)
             .setDescription("Bless yourself, being able to swim more potently in the water")
             .build();
 

@@ -1,5 +1,6 @@
 package com.yuanno.block_clover;
 
+import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.blocks.containers.DevilAltarContainer;
 import com.yuanno.block_clover.blocks.tileentities.DevilAltarTileEntity;
 import com.yuanno.block_clover.client.gui.screen.block.DevilAltarScreen;
@@ -11,8 +12,12 @@ import com.yuanno.block_clover.init.ModStructures;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.COpenDevilSummoningScreenPacket;
 import com.yuanno.block_clover.networking.server.SOpenDevilSummoningScreenpacket;
+import com.yuanno.block_clover.networking.server.SOpenSpellChoiceScreenPacket;
 import com.yuanno.block_clover.networking.server.SOpenTeleportTowerScreenPacket;
 import com.yuanno.block_clover.networking.server.SSyncChallengeDataPacket;
+import com.yuanno.block_clover.spells.water.CurrentOfTheFortuneRiverAbility;
+import com.yuanno.block_clover.spells.water.WaterBlessingAbility;
+import com.yuanno.block_clover.spells.water.WaterShieldAbility;
 import com.yuanno.block_clover.world.structure.structures.MagicTowerStructure;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,6 +34,8 @@ import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import java.util.ArrayList;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class TestEvent {
@@ -63,7 +70,11 @@ public class TestEvent {
         if (event.getMessage().equals("test"))
         {
             PlayerEntity player = event.getPlayer();
-            PacketHandler.sendTo(new SOpenTeleportTowerScreenPacket(), player);
+            ArrayList<Ability> abilities = new ArrayList<>();
+            abilities.add(WaterBlessingAbility.INSTANCE.createAbility());
+            abilities.add(CurrentOfTheFortuneRiverAbility.INSTANCE.createAbility());
+            abilities.add(WaterShieldAbility.INSTANCE.createAbility());
+            PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(abilities), player);
         }
 
     }

@@ -62,6 +62,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SOpenTeleportTowerScreenPacket.class, SOpenTeleportTowerScreenPacket::encode, SOpenTeleportTowerScreenPacket::decode, SOpenTeleportTowerScreenPacket::handle);
         PacketHandler.registerPacket(SOpenConfigScreenPacket.class, SOpenConfigScreenPacket::encode, SOpenConfigScreenPacket::decode, SOpenConfigScreenPacket::handle);
         PacketHandler.registerPacket(SSyncConfigPacket.class, SSyncConfigPacket::encode, SSyncConfigPacket::decode, SSyncConfigPacket::handle);
+        PacketHandler.registerPacket(SOpenSpellChoiceScreenPacket.class, SOpenSpellChoiceScreenPacket::encode, SOpenSpellChoiceScreenPacket::decode, SOpenSpellChoiceScreenPacket::handle);
 
         //SYNC
         PacketHandler.registerPacket(ManaSync.class, ManaSync::encode, ManaSync::decode, ManaSync::handle);

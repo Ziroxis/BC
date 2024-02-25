@@ -6,9 +6,13 @@ import com.yuanno.block_clover.blocks.tileentities.DevilAltarTileEntity;
 import com.yuanno.block_clover.client.gui.screen.block.DevilAltarScreen;
 import com.yuanno.block_clover.data.challenges.ChallengesDataCapability;
 import com.yuanno.block_clover.data.challenges.IChallengesData;
+import com.yuanno.block_clover.data.entity.EntityStatsCapability;
+import com.yuanno.block_clover.data.entity.IEntityStats;
+import com.yuanno.block_clover.helper.GainSpellHelper;
 import com.yuanno.block_clover.init.ModChallenges;
 import com.yuanno.block_clover.init.ModConfiguredFeatures;
 import com.yuanno.block_clover.init.ModStructures;
+import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.COpenDevilSummoningScreenPacket;
 import com.yuanno.block_clover.networking.server.SOpenDevilSummoningScreenpacket;
@@ -71,9 +75,13 @@ public class TestEvent {
         {
             PlayerEntity player = event.getPlayer();
             ArrayList<Ability> abilities = new ArrayList<>();
+            IEntityStats entityStats = EntityStatsCapability.get(player);
+            /*
             abilities.add(WaterBlessingAbility.INSTANCE.createAbility());
             abilities.add(CurrentOfTheFortuneRiverAbility.INSTANCE.createAbility());
             abilities.add(WaterShieldAbility.INSTANCE.createAbility());
+             */
+            abilities = GainSpellHelper.returnAbilitiesPerLevelAttribute(ModValues.WATER, 5);
             PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(abilities), player);
         }
 

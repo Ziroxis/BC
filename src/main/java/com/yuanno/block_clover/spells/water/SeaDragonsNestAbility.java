@@ -7,8 +7,8 @@ import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
@@ -17,36 +17,44 @@ import java.util.List;
 public class SeaDragonsNestAbility extends ContinuousAbility {
 
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Sea Dragon's Nest", AbilityCategories.AbilityCategory.ATTRIBUTE, SeaDragonsNestAbility.class)
-            .setDescription("The user creates a sphere protecting everything in")
+            .setDescription("The user creates a sphere protecting you from projectiles and spells, moving dispells the spell")
             .build();
     List<BlockPos> blockPos = new ArrayList<>();
     BlockPos blockPosPlayer;
     public SeaDragonsNestAbility() {
         super(INSTANCE);
+        this.onStartContinuityEvent = this::onStartContinuity;
         this.duringContinuityEvent = this::duringSpell;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 
+    private boolean onStartContinuity(PlayerEntity player) {
+        blockPosPlayer = player.blockPosition();
+        List<BlockPos> test = Beapi.createSphere(player.level, player.blockPosition().above(), 3, true, ModBlocks.WATER.get(), 2, null);
+        blockPos.addAll(test);
+        return true;
+    }
+
     private void duringSpell(PlayerEntity player, int timer) {
 
-    // Create the air bubble around the player
-    Beapi.createSphere(player.level, player.blockPosition().above(), 3, false, Blocks.AIR, 2, null);
-    List<BlockPos> test = Beapi.createSphere(player.level, player.blockPosition().above(), 3, true, ModBlocks.WATER.get(), 2, null);
-    blockPos.addAll(test);
+        double radius = 3.0D; // Define the radius
 
-    if (blockPosPlayer == null) {
-        blockPosPlayer = player.blockPosition();
-    } else if (!blockPosPlayer.equals(player.blockPosition())) {
-        for (BlockPos pos : blockPos) {
-            BlockState blockState = player.level.getBlockState(pos);
-            if (blockState.getBlock().equals(ModBlocks.WATER.get())) {
-                player.level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        // Get all projectiles in a bounding box around the player
+        List<ProjectileEntity> projectiles = player.level.getEntitiesOfClass(ProjectileEntity.class, player.getBoundingBox().inflate(radius));
+
+        // Iterate over the projectiles
+        for (ProjectileEntity projectile : projectiles) {
+            // If the projectile is within the radius, remove it
+            if (player.distanceToSqr(projectile) <= radius * radius) {
+                projectile.remove();
             }
         }
-        blockPos.clear();
-        blockPosPlayer = player.blockPosition();
+
+        if (!blockPosPlayer.equals(player.blockPosition())) {
+            this.startContinuity(player);
+            this.onEndContinuityEvent(player);
+        }
     }
-}
 
     private boolean onEndContinuityEvent(PlayerEntity player)
     {

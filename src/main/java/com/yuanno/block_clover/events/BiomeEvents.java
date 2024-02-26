@@ -7,6 +7,7 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.spells.misc.ManaSkinAbility;
+import com.yuanno.block_clover.spells.water.SeaDragonsCradleAbility;
 import com.yuanno.block_clover.world.biome.ModBiomes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -38,6 +39,7 @@ public class BiomeEvents {
             IEntityStats entityStats = EntityStatsCapability.get(player);
             IAbilityData abilityData = AbilityDataCapability.get(player);
             ManaSkinAbility manaSkinAbility = (ManaSkinAbility) abilityData.getEquippedAbility(ManaSkinAbility.INSTANCE);
+            SeaDragonsCradleAbility seaDragonsCradleAbility = (SeaDragonsCradleAbility) abilityData.getEquippedAbility(SeaDragonsCradleAbility.INSTANCE);
             ResourceLocation biome = world.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(world.getBiome(player.blockPosition()));
 
             if (biome.equals(ModBiomes.GRAND_MAGIC_ZONE_VOLCANO.getId()))
@@ -46,7 +48,7 @@ public class BiomeEvents {
                     entityStats.alterMultiplier(0.5f);
                     hasMultiplier = true;
                 }
-                if (manaSkinAbility == null || !manaSkinAbility.isContinuous())
+                if ((manaSkinAbility == null || !manaSkinAbility.isContinuous()) && (seaDragonsCradleAbility == null || !seaDragonsCradleAbility.isContinuous()))
                 {
                     if (player.getHealth() > 1.0F)
                         player.hurt(DamageSource.MAGIC, 1.0F);

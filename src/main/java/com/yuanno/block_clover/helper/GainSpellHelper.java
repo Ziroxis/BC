@@ -12,7 +12,7 @@ public class GainSpellHelper {
 
     private static final AbilityCore[][] waterAbilities = {
             {WaterShieldAbility.INSTANCE, CurrentOfTheFortuneRiverAbility.INSTANCE, WaterBlessingAbility.INSTANCE},
-            {SeaDragonsNestAbility.INSTANCE, HolyFistOfLoveAbility.INSTANCE, WaterJavelinAbility.INSTANCE}
+            {SeaDragonsCradleAbility.INSTANCE, HolyFistOfLoveAbility.INSTANCE, WaterJavelinAbility.INSTANCE}
             // Add more arrays for water10, water15, etc.
     };
 

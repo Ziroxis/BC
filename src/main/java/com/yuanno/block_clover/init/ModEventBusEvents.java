@@ -13,6 +13,9 @@ import com.yuanno.block_clover.entities.misc.VolcanoMonsterEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthGolemEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthMinionEntity;
 import com.yuanno.block_clover.entities.summons.earth.EarthSummons;
+import com.yuanno.block_clover.entities.summons.water.WaterSoldierEntity;
+import com.yuanno.block_clover.entities.summons.water.WaterSubstituteEntity;
+import com.yuanno.block_clover.entities.summons.water.WaterSummons;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +39,8 @@ public class ModEventBusEvents {
         event.put(ModEntities.LILITH_DEVIL.get(), LilithDevilEntity.setCustomAttributes().build());
         event.put(ModEntities.NAHAMAN_DEVIL.get(), NahamanDevilEntity.setCustomAttributes().build());
         event.put(ModEntities.QUEST_MANAGER.get(), QuestBoardManagerEntity.setCustomAttributes().build());
+        event.put(WaterSummons.WATER_SUBSTITUTE.get(), WaterSubstituteEntity.setCustomAttributes().build());
+        event.put(WaterSummons.WATER_SOLDIER.get(), WaterSoldierEntity.setCustomAttributes().build());
 
     }
 

@@ -52,7 +52,10 @@ public class WaterProjectiles {
             () -> BeModApi.createEntityType(TaintedCulvertWyrmProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":tainted_culvert_wyrm"));
-
+    public static final RegistryObject<EntityType<SeaSerpentsBelowProjectile>> SEA_SERPENTS_BELOW = Beapi.registerEntityType("Sea Serpents Below",
+            () -> BeModApi.createEntityType(SeaSerpentsBelowProjectile::new)
+                    .sized(0.8f, 0.8f)
+                    .build(Main.MODID + ":sea_serpents_below"));
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerEntityRenderers(FMLClientSetupEvent event)
@@ -71,5 +74,7 @@ public class WaterProjectiles {
                 .setTexture("water", "waterball_texture").setScale(2));
         RenderingRegistry.registerEntityRenderingHandler(TAINTED_CULVERT_WYRM.get(), new AbilityProjectileRenderer.Factory(new WaterDragonModel())
                 .setTexture("water", "waterdragon_texture").setScale(0.15));
+        RenderingRegistry.registerEntityRenderingHandler(SEA_SERPENTS_BELOW.get(), new AbilityProjectileRenderer.Factory(new WaterDragonModel())
+                .setTexture("water", "waterdragon_texture").setScale(0.1));
     }
 }

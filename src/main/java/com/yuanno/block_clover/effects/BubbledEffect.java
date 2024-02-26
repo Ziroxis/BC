@@ -3,27 +3,21 @@ package com.yuanno.block_clover.effects;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ModEffect;
 import com.yuanno.block_clover.init.ModAttributes;
-import com.yuanno.block_clover.particles.ParticleEffect;
-import com.yuanno.block_clover.particles.fire.LeoPalmaParticleEffect;
-import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeMod;
 
-public class LeoPalmaEffect extends ModEffect {
-    private static final ParticleEffect PARTICLES = new LeoPalmaParticleEffect();
-    public LeoPalmaEffect()
+public class BubbledEffect extends ModEffect {
+
+    public BubbledEffect()
     {
         super(EffectType.HARMFUL, Beapi.hexToRGB("#000000").getRGB());
-        this.addAttributeModifier(Attributes.MOVEMENT_SPEED, "2727e176-e9e8-4523-92f8-22619308d9ee", -256, AttributeModifier.Operation.ADDITION)
-                .addAttributeModifier(ForgeMod.SWIM_SPEED.get(), "323ffb58-0b57-434e-bdfc-354670e22d5f", -256, AttributeModifier.Operation.ADDITION)
-                .addAttributeModifier(ModAttributes.JUMP_HEIGHT.get(), "e8cd65cb-2768-4fd8-aa54-bdcda029aaff", -256, AttributeModifier.Operation.ADDITION)
-                .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "f8b2474d-4cdb-42b0-a868-327443a2a505", 100, AttributeModifier.Operation.ADDITION)
-                .addAttributeModifier(Attributes.ARMOR_TOUGHNESS, "096ae850-ca45-11ec-9d64-0242ac120002", -200, AttributeModifier.Operation.ADDITION);
+        this.addAttributeModifier(Attributes.MOVEMENT_SPEED, "2727e176-e9e8-4523-92f8-22619308d9ee", -4, AttributeModifier.Operation.ADDITION)
+                .addAttributeModifier(ModAttributes.JUMP_HEIGHT.get(), "e8cd65cb-2768-4fd8-aa54-bdcda029aaff", -4, AttributeModifier.Operation.ADDITION)
+                .addAttributeModifier(Attributes.ATTACK_SPEED, "910ef02a-34b2-11ee-be56-0242ac120002", -4, AttributeModifier.Operation.ADDITION);
 
     }
 
@@ -32,9 +26,14 @@ public class LeoPalmaEffect extends ModEffect {
     {
         if (!livingEntity.level.isClientSide)
         {
-            PARTICLES.spawn(livingEntity.level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0, 0, 0);
+            if (livingEntity.tickCount % 20 == 0)
+            {
+                int airSupply = livingEntity.getAirSupply() - 1;
+                livingEntity.setAirSupply(airSupply);
+            }
         }
     }
+
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier)
     {
@@ -57,7 +56,6 @@ public class LeoPalmaEffect extends ModEffect {
         return true;
     }
 
-
     @Override
     public boolean isRemoveable() {
         return false;
@@ -67,6 +65,5 @@ public class LeoPalmaEffect extends ModEffect {
     public boolean shouldUpdateClient() {
         return true;
     }
-
 
 }

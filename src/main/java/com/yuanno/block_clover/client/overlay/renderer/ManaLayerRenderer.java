@@ -69,8 +69,7 @@ public class ManaLayerRenderer<T extends LivingEntity, M extends EntityModel<T>>
 			float blue = rgbColor.getBlue() / 255.0f;
 			outline.setColor((int)(red * 255), (int)(green * 255), (int)(blue * 255), 200);
 			IVertexBuilder vertex = outline.getBuffer(ModRenderTypes.getAuraRenderType(this.getTextureLocation(entity)));
-			
-			this.getParentModel().renderToBuffer(matrixStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, red, green, blue, 0.6f);	
+			this.getParentModel().renderToBuffer(matrixStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, red, green, blue, 0.6f);
 			
 			matrixStack.popPose();
 		}

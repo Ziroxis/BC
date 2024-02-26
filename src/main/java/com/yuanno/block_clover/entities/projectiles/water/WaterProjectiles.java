@@ -48,6 +48,10 @@ public class WaterProjectiles {
             () -> BeModApi.createEntityType(HolyFistOfLoveProjectile::new)
                     .sized(2f, 2f)
                     .build(Main.MODID + ":holy_fist_of_love"));
+    public static final RegistryObject<EntityType<TaintedCulvertWyrmProjectile>> TAINTED_CULVERT_WYRM = Beapi.registerEntityType("Tainted Culvert Wyrm",
+            () -> BeModApi.createEntityType(TaintedCulvertWyrmProjectile::new)
+                    .sized(1f, 1f)
+                    .build(Main.MODID + ":tainted_culvert_wyrm"));
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
@@ -65,5 +69,7 @@ public class WaterProjectiles {
                 .setStretchScale(1, 1).setColor("#DEF4FC"));
         RenderingRegistry.registerEntityRenderingHandler(HOLY_FIST.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
                 .setTexture("water", "waterball_texture").setScale(2));
+        RenderingRegistry.registerEntityRenderingHandler(TAINTED_CULVERT_WYRM.get(), new AbilityProjectileRenderer.Factory(new WaterDragonModel())
+                .setTexture("water", "waterdragon_texture").setScale(0.15));
     }
 }

@@ -30,13 +30,17 @@ public class ModRenderTypes extends RenderType
 			.createCompositeState(true));
 
 
-	public static final RenderType TRANSPARENT_COLOR = create(Main.MODID + "translucent_color_notexture", DefaultVertexFormats.NEW_ENTITY, 7, 256, true, true, State.builder()
-		.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-		.setTextureState(NO_TEXTURE)
-		.setCullState(RenderState.NO_CULL)
-		.setLightmapState(LIGHTMAP)
-		.setDiffuseLightingState(DIFFUSE_LIGHTING)
-		.createCompositeState(true));
+	public static final RenderType TRANSPARENT_COLOR = RenderType.create("transparent_color",
+		DefaultVertexFormats.POSITION_COLOR, GL11.GL_QUADS, 256,
+		RenderType.State.builder()
+			.setWriteMaskState(COLOR_WRITE)
+			.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+			.setOutputState(ITEM_ENTITY_TARGET)
+			.setTextureState(NO_TEXTURE)
+			.setDiffuseLightingState(NO_DIFFUSE_LIGHTING)
+			.setCullState(NO_CULL)
+			.setAlphaState(DEFAULT_ALPHA)
+			.createCompositeState(true));
 	
 	public static RenderType getEnergyRenderType()
 	{

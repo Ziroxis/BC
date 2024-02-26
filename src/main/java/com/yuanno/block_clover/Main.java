@@ -265,6 +265,7 @@ public class Main
                         renderer.addLayer(new NahamanDevilFamiliarRenderer(renderer));
                         renderer.addLayer(new ManaLayerRenderer(renderer));
                         renderer.addLayer(new FrozenRenderer(renderer));
+                        renderer.addLayer(new BubbledRenderer(renderer));
 
 
                     }
@@ -289,6 +290,8 @@ public class Main
                     renderer.addLayer(new NahamanDevilFamiliarRenderer(renderer));
                     renderer.addLayer(new ManaLayerRenderer(renderer));
                     renderer.addLayer(new FrozenRenderer(renderer));
+                    renderer.addLayer(new BubbledRenderer(renderer));
+
                 }
             });
         }

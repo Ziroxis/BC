@@ -102,10 +102,6 @@ public class LeoPalmaModel<T extends LivingEntity> extends BipedModel<T>{
 
 		 */
 
-		AbstractClientPlayerEntity clientPlayer = (AbstractClientPlayerEntity) entityIn;
-
-
-		this.swimAmount = clientPlayer.getSwimAmount(ageInTicks);
 		this.LeoPalma.copyFrom(this.body);
 
 

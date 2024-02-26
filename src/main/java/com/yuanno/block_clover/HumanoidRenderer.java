@@ -3,8 +3,10 @@ package com.yuanno.block_clover;
 import com.google.common.base.Strings;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.client.IDynamicRenderer;
+import com.yuanno.block_clover.client.overlay.renderer.BubbledRenderer;
 import com.yuanno.block_clover.client.overlay.renderer.CompleteRenderer;
 import com.yuanno.block_clover.client.overlay.renderer.ExclamationRenderer;
+import com.yuanno.block_clover.client.overlay.renderer.LeoPalmaRenderer;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.BipedRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -41,6 +43,9 @@ public class HumanoidRenderer<T extends MobEntity, M extends BipedModel<T>> exte
 		this.addLayer(new ExclamationRenderer<>(this));
 		this.addLayer(new CompleteRenderer<>(this));
 		this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
+		this.addLayer(new BubbledRenderer<>(this));
+		this.addLayer(new LeoPalmaRenderer<>(this));
+
 	}
 
 	@Override

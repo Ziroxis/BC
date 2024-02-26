@@ -12,7 +12,8 @@
   "client": [
     "client.ServerWorldInfoMixin",
     "client.DeathScreenMixin",
-    "client.GameRendererMixin"
+    "client.GameRendererMixin",
+    "client.ModelRendererMixin"
   ],
   "server": [],
   "injectors": {

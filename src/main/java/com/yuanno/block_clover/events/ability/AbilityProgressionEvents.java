@@ -45,7 +45,7 @@ public class AbilityProgressionEvents {
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {
             gainAbility(event.getPlayer(), 10, WaterJavelinAbility.INSTANCE);
-            gainAbility(event.getPlayer(), 15, WaterDragonAbility.INSTANCE);
+            gainAbility(event.getPlayer(), 15, SeaDragonsRoarAbility.INSTANCE);
             gainAbility(event.getPlayer(), 20, ValkyrieArmorAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, PointBlankDragonAbility.INSTANCE);
         }

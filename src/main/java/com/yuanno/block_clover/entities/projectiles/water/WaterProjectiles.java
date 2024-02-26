@@ -44,7 +44,10 @@ public class WaterProjectiles {
             () -> BeModApi.createEntityType(CascadeDestroyerProjectile::new)
                     .sized(1f, 1f)
                     .build(Main.MODID + ":cascade_destroyer"));
-
+    public static final RegistryObject<EntityType<HolyFistOfLoveProjectile>> HOLY_FIST = Beapi.registerEntityType("Holy Fist",
+            () -> BeModApi.createEntityType(HolyFistOfLoveProjectile::new)
+                    .sized(2f, 2f)
+                    .build(Main.MODID + ":holy_fist_of_love"));
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
@@ -60,5 +63,7 @@ public class WaterProjectiles {
                 .setTexture("water", "waterspear_texture").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(CASCADE_DESTROYER.get(), new StretchingProjectileRenderer.Factory(new CubeModel())
                 .setStretchScale(1, 1).setColor("#DEF4FC"));
+        RenderingRegistry.registerEntityRenderingHandler(HOLY_FIST.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
+                .setTexture("water", "waterball_texture").setScale(2));
     }
 }

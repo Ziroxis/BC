@@ -4,6 +4,7 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
+import com.yuanno.block_clover.entities.projectiles.water.HolyFistOfLoveProjectile;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -27,6 +28,11 @@ public class HolyFistOfLoveAbility extends PunchAbility {
 
     private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
     {
-        return 12;
+        HolyFistOfLoveProjectile holyFistOfLoveProjectile = new HolyFistOfLoveProjectile(player.level, player);
+        player.level.addFreshEntity(holyFistOfLoveProjectile);
+        holyFistOfLoveProjectile.setPos(target.getX(), target.getY() + 2, target.getZ());
+        holyFistOfLoveProjectile.shoot(0, -180, 0, 1.5f, 0);
+
+        return 2;
     }
 }

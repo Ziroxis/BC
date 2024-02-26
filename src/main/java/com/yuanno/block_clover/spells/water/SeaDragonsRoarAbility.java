@@ -5,24 +5,24 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.entities.projectiles.water.WaterDragonProjectile;
-import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
-public class WaterDragonAbility extends Ability {
+public class SeaDragonsRoarAbility extends Ability {
 
-    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Water Dragon", AbilityCategories.AbilityCategory.ATTRIBUTE, WaterDragonAbility.class)
-            .setDescription("Shoots a dragon made out of water.")
+    public static final AbilityCore INSTANCE = new AbilityCore.Builder("Sea Dragon roar", AbilityCategories.AbilityCategory.ATTRIBUTE, SeaDragonsRoarAbility.class)
+            .setDescription("Shoots a water dragon that grabs an enemy and pushes him forward.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
             .build();
-    public WaterDragonAbility()
+    public SeaDragonsRoarAbility()
     {
         super(INSTANCE);
-        this.setMaxCooldown(20);
-        this.setmanaCost(50);
+        this.setMaxCooldown(1);
+        this.setmanaCost(0);
         this.setEvolutionCost(100);
         this.setExperiencePoint(35);
+
         this.onUseEvent = this::onUseEvent;
     }
 

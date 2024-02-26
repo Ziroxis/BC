@@ -14,6 +14,7 @@ import com.yuanno.block_clover.init.ModValues;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -32,6 +33,8 @@ import net.minecraft.network.play.server.SSpawnParticlePacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
@@ -44,6 +47,8 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.template.*;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.WorldEntitySpawner;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -631,6 +636,7 @@ public class Beapi
     {
         return Beapi.createSphere(world, center, radiusXZ, radiusY, hollow, block, null, flags, rule);
     }
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static List<BlockPos> createSphere(World world, BlockPos center, int radiusXZ, int radiusY, boolean hollow, final Block block, @Nullable BlockProtectionRule.IReplaceBlockRule replaceTest, int flags, BlockProtectionRule rule)
     {
@@ -651,8 +657,10 @@ public class Beapi
                     {
                         BlockPos pos = new BlockPos(x, y, z);
                         BlockState state = world.getBlockState(pos);
-                        if (!state.equals(Blocks.AIR.defaultBlockState()) && !state.equals(Blocks.GRASS.defaultBlockState()) && !state.equals(Blocks.WATER.defaultBlockState()))
+                        if (!state.is(Blocks.AIR) && !state.is(Blocks.GRASS) && !(state.getBlock() instanceof FlowingFluidBlock))
                             continue;
+                        if (state.getFluidState().hasProperty(WATERLOGGED))
+                            state.getFluidState().setValue(WATERLOGGED, Boolean.valueOf(false));
 //						BlockRayTraceResult result = WyHelper.rayTraceBlocks(world, new Vector3d(center), new Vector3d(pos));
 //						if(result.getType() == RayTraceResult.Type.BLOCK)
 //						{

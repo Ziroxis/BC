@@ -54,7 +54,6 @@ public abstract class ContinuousAbility extends Ability {
         AbilityUseEvent event = new AbilityUseEvent(player, this);
         if (MinecraftForge.EVENT_BUS.post(event))
             return;
-        IEntityStats propsEntity = EntityStatsCapability.get(player);
         if(!this.isContinuous())
         {
             if(!this.isOnStandby())

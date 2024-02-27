@@ -34,7 +34,6 @@ public class ThunderDischargeAbility extends Ability {
         this.setmanaCost(50);
         this.setMaxCooldown(25);
         this.setExperiencePoint(25);
-        this.setEvolutionCost(100);
         this.onUseEvent = this::onUseEvent;
     }
     

@@ -4,6 +4,8 @@ import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.Quest.QuestId;
 import com.yuanno.block_clover.api.Quest.objectives.ReachLevelObjective;
+import com.yuanno.block_clover.api.ability.Ability;
+import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.devil.DevilCapability;
@@ -12,15 +14,13 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
+import com.yuanno.block_clover.init.ModAbilities;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.client.CSyncAbilityDataPacket;
 import com.yuanno.block_clover.networking.client.CSyncentityStatsPacket;
-import com.yuanno.block_clover.networking.server.SSyncAbilityDataPacket;
-import com.yuanno.block_clover.networking.server.SSyncDevilPacket;
-import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
-import com.yuanno.block_clover.networking.server.SSyncQuestDataPacket;
+import com.yuanno.block_clover.networking.server.*;
 import com.yuanno.block_clover.spells.antimagic.BullThrustAbility;
 import com.yuanno.block_clover.spells.antimagic.DemonSlayerAbility;
 import com.yuanno.block_clover.spells.beast.BeastRegenerationPassiveAbility;
@@ -43,12 +43,17 @@ import com.yuanno.block_clover.spells.sword.OriginalMagicDestroyerAbility;
 import com.yuanno.block_clover.spells.sword.OriginalMagicDwellerAbility;
 import com.yuanno.block_clover.spells.sword.OriginalSlashesAbility;
 import com.yuanno.block_clover.spells.time.ChronoStasisAbility;
+import com.yuanno.block_clover.spells.water.CurrentOfTheFortuneRiverAbility;
+import com.yuanno.block_clover.spells.water.HolyFistOfLoveAbility;
 import com.yuanno.block_clover.spells.water.WaterShieldAbility;
+import com.yuanno.block_clover.spells.water.WaterSubstituteSpell;
 import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import com.yuanno.block_clover.spells.wind.WindCrescentAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
+
+import java.util.ArrayList;
 
 public class GrimoireQuest extends Quest {
     public static final QuestId INSTANCE = new QuestId.Builder("Obtaining your grimoire", GrimoireQuest::new)
@@ -56,7 +61,13 @@ public class GrimoireQuest extends Quest {
 
 
     private Objective levelObjective = new ReachLevelObjective("Go to the grimoire tower and reach level 5", 5);
+    private static final ArrayList<Ability> waterSpells = new ArrayList<>();
 
+    static {
+        waterSpells.add(WaterSubstituteSpell.INSTANCE.createAbility());
+        waterSpells.add(CurrentOfTheFortuneRiverAbility.INSTANCE.createAbility());
+        waterSpells.add(HolyFistOfLoveAbility.INSTANCE.createAbility());
+    }
     public GrimoireQuest(QuestId questId)
     {
         super(questId);
@@ -87,7 +98,7 @@ public class GrimoireQuest extends Quest {
                 abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
                 break;
             case (ModValues.WATER):
-                abilityDataBase.addUnlockedAbility(player, WaterShieldAbility.INSTANCE);
+                PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(waterSpells), player);
                 break;
             case (ModValues.FIRE):
                 abilityDataBase.addUnlockedAbility(player, FlameRoarAbility.INSTANCE);

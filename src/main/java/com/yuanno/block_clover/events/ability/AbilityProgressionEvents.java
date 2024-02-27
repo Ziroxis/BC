@@ -42,6 +42,8 @@ public class AbilityProgressionEvents {
 
         if (!statsProps.hasGrimoire())
             return;
+        /*
+
         if (statsProps.getAttribute().equals(ModValues.WATER) || statsProps.getSecondAttribute().equals(ModValues.WATER))
         {
             gainAbility(event.getPlayer(), 10, WaterJavelinAbility.INSTANCE);
@@ -49,6 +51,8 @@ public class AbilityProgressionEvents {
             gainAbility(event.getPlayer(), 20, ValkyrieArmorAbility.INSTANCE);
             gainAbility(event.getPlayer(), 25, PointBlankDragonAbility.INSTANCE);
         }
+        */
+
         if (statsProps.getAttribute().equals(ModValues.SEALING) || statsProps.getSecondAttribute().equals(ModValues.SEALING))
         {
             gainAbility(event.getPlayer(), 10, SealingPunchAbility.INSTANCE);

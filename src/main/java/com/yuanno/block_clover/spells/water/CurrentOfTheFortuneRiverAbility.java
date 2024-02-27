@@ -13,5 +13,8 @@ public class CurrentOfTheFortuneRiverAbility extends PassiveAbility {
     public CurrentOfTheFortuneRiverAbility()
     {
         super(INSTANCE);
+        this.setmanaCost(3);
+        this.setExperiencePoint(2);
+        this.setExperienceGainLevelCap(20);
     }
 }

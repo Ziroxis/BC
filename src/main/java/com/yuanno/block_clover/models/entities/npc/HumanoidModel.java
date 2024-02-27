@@ -16,7 +16,7 @@ public class HumanoidModel<T extends CreatureEntity> extends BipedModel<T> {
 
     public HumanoidModel()
     {
-        super(0, 0, 64, 32);
+        super(0, 0, 64, 64);
         this.hat.visible = true;
     }
 

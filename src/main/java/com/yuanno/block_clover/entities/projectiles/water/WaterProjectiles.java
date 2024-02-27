@@ -5,10 +5,7 @@ import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
 import com.yuanno.block_clover.api.ability.StretchingProjectileRenderer;
-import com.yuanno.block_clover.entities.projectiles.light.LightBladeProjectile;
-import com.yuanno.block_clover.entities.projectiles.slash.DeathScytheProjectile;
 import com.yuanno.block_clover.models.CubeModel;
-import com.yuanno.block_clover.models.projectiles.slash.DeathScytheModel;
 import com.yuanno.block_clover.models.projectiles.water.PointBlankDragonModel;
 import com.yuanno.block_clover.models.projectiles.water.WaterDragonModel;
 import com.yuanno.block_clover.models.projectiles.water.WaterSpearModel;
@@ -56,6 +53,10 @@ public class WaterProjectiles {
             () -> BeModApi.createEntityType(SeaSerpentsBelowProjectile::new)
                     .sized(0.8f, 0.8f)
                     .build(Main.MODID + ":sea_serpents_below"));
+    public static final RegistryObject<EntityType<WaterPressureShotProjectile>> WATER_PRESSURE_SHOT = Beapi.registerEntityType("Water Pressure Shot",
+            () -> BeModApi.createEntityType(WaterPressureShotProjectile::new)
+                    .sized(0.3f, 0.3f)
+                    .build(Main.MODID + ":water_pressure_shot"));
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerEntityRenderers(FMLClientSetupEvent event)
@@ -76,5 +77,7 @@ public class WaterProjectiles {
                 .setTexture("water", "waterdragon_texture").setScale(0.15));
         RenderingRegistry.registerEntityRenderingHandler(SEA_SERPENTS_BELOW.get(), new AbilityProjectileRenderer.Factory(new WaterDragonModel())
                 .setTexture("water", "waterdragon_texture").setScale(0.1));
+        RenderingRegistry.registerEntityRenderingHandler(WATER_PRESSURE_SHOT.get(), new StretchingProjectileRenderer.Factory(new CubeModel())
+                .setStretchScale(0.3, 0.3).setColor("DEF4FC"));
     }
 }

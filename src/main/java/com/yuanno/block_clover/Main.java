@@ -206,6 +206,7 @@ public class Main
         MinecraftForge.EVENT_BUS.register(new LevelUpOverlay());
         MinecraftForge.EVENT_BUS.register(new SpellUnlockOverlay());
         MinecraftForge.EVENT_BUS.register(new DevilManaBarOverlay());
+        MinecraftForge.EVENT_BUS.register(new QuestOverlay());
         Atlases.addWoodType(ModWoodTypes.ELDER);
         Atlases.addWoodType(ModWoodTypes.MOGURO);
         ModRenderers.registerRenderers();

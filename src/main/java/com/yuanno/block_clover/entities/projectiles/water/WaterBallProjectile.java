@@ -21,7 +21,7 @@ public class WaterBallProjectile extends AbilityProjectileEntity {
     public WaterBallProjectile(World world, LivingEntity player)
     {
         super(WaterProjectiles.WATER_BALL.get(), world, player);
-        this.setDamage(4);
+        this.setDamage(6);
         this.setMaxLife(64);
         this.setPhysical(false);
     }

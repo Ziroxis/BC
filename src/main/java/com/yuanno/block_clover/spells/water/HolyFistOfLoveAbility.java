@@ -30,7 +30,7 @@ public class HolyFistOfLoveAbility extends PunchAbility {
     {
         HolyFistOfLoveProjectile holyFistOfLoveProjectile = new HolyFistOfLoveProjectile(player.level, player);
         player.level.addFreshEntity(holyFistOfLoveProjectile);
-        holyFistOfLoveProjectile.setPos(target.getX(), target.getY() + 4, target.getZ());
+        holyFistOfLoveProjectile.setPos(target.getX(), target.getY() + 8, target.getZ());
         holyFistOfLoveProjectile.shoot(0, -180, 0, 1f, 0);
 
         return 2;

@@ -22,7 +22,7 @@ public class ModEntityGeneration {
 
         if (!types.contains(BiomeDictionary.Type.WET) && !types.contains(BiomeDictionary.Type.VOID) && !types.contains(BiomeDictionary.Type.OCEAN) && !types.contains(BiomeDictionary.Type.RIVER)  && !types.contains(BiomeDictionary.Type.WATER))
         {
-            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BANDIT.get(), 40, 2, 4));
+            event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BANDIT.get(), 20, 2, 4));
         }
         if (types.contains(BiomeDictionary.Type.NETHER) || types.contains(BiomeDictionary.Type.DEAD) || types.contains(BiomeDictionary.Type.MESA))
         {

@@ -26,6 +26,7 @@ public abstract class Quest
 	protected IStarting onStartEvent = (player) -> { return true; };
 	protected ICompleting onCompleteEvent = (player) -> { return true; };
 	protected IShouldRestart shouldRestartEvent = (player) -> { return false; };
+	private String title = "";
 	private String description;
 	private String rank = "";
 	private Category category;
@@ -51,6 +52,14 @@ public abstract class Quest
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
+	public String getTitle()
+	{
+		return this.title;
 	}
 	@Override
 	public boolean equals(Object quest)
@@ -159,6 +168,7 @@ public abstract class Quest
 		CompoundNBT nbt = new CompoundNBT();
 		
 		nbt.putString("id", this.core.getRegistryName().toString());
+		nbt.putString("title", this.title);
 		ListNBT objectivesData = new ListNBT();
 		for(Objective obj : this.getObjectives())
 		{

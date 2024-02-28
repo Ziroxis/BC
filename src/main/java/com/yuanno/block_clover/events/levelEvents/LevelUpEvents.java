@@ -60,10 +60,12 @@ public class LevelUpEvents {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         String attribute = entityStats.getAttribute();
         ArrayList<Ability> abilities = GainSpellHelper.returnAbilitiesInPool(attribute, entityStats.getLevel(), player);
+        if ((GainSpellHelper.returnAbilitiesPerLevelAttribute(attribute, entityStats.getLevel()).isEmpty()))
+            return;
         Collections.shuffle(abilities);
         ArrayList<Ability> randomThree = new ArrayList<>();
         if (!abilities.isEmpty())
-            randomThree = new ArrayList<>(abilities.subList(0, 3));
+            randomThree = new ArrayList<>(abilities.subList(0, abilities.size()));
         if (!randomThree.isEmpty())
             PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(randomThree), player);
     }

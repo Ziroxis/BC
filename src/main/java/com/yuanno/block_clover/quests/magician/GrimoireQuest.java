@@ -71,6 +71,7 @@ public class GrimoireQuest extends Quest {
     public GrimoireQuest(QuestId questId)
     {
         super(questId);
+        this.setTitle("Obtaining a grimoire");
         this.addObjective(this.levelObjective);
         this.setCategory(Category.MAGICIAN);
         this.onCompleteEvent = this::giveReward;
@@ -97,9 +98,12 @@ public class GrimoireQuest extends Quest {
                 abilityDataBase.addUnlockedAbility(player, OriginalMagicDwellerAbility.INSTANCE);
                 abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
                 break;
+                /*
             case (ModValues.WATER):
                 PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(waterSpells), player);
                 break;
+
+                 */
             case (ModValues.FIRE):
                 abilityDataBase.addUnlockedAbility(player, FlameRoarAbility.INSTANCE);
                 break;

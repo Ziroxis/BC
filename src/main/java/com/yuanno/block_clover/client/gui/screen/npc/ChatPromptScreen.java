@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Quest.Quest;
 import com.yuanno.block_clover.api.SequencedString;
+import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.client.gui.button.TexturedIconButton;
 import com.yuanno.block_clover.data.devil.DevilCapability;
 import com.yuanno.block_clover.data.devil.IDevil;
@@ -14,8 +15,13 @@ import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.init.ModQuests;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.client.COpenPlayerScreenPacket;
+import com.yuanno.block_clover.networking.client.COpenSpellChoiceScreenPacket;
 import com.yuanno.block_clover.networking.client.CSyncQuestDataPacket;
 import com.yuanno.block_clover.networking.client.CUpdateQuestStatePacket;
+import com.yuanno.block_clover.spells.water.CurrentOfTheFortuneRiverAbility;
+import com.yuanno.block_clover.spells.water.HolyFistOfLoveAbility;
+import com.yuanno.block_clover.spells.water.WaterSubstituteSpell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +30,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
+
+import java.util.ArrayList;
 
 @OnlyIn(Dist.CLIENT)
 public class ChatPromptScreen extends Screen {
@@ -169,181 +177,6 @@ public class ChatPromptScreen extends Screen {
         }
     }
 
-    /*
-    public void loop()
-    {
-        // check if you got a magician quest in progress
-        boolean containsManaQuest = false;
-
-        for (Quest quest : questData.getInProgressQuests())
-        {
-            if (quest != null
-                    && ModQuests.MAGICIAN.contains(quest.getCore())) {
-                containsManaQuest = true;
-                inprogressQuestMana = quest;
-                break;
-            }
-        }
-
-        if (containsManaQuest) // if he has an in progress quest from the magician
-        {
-            if (inprogressQuestMana.getCore().equals(ModQuests.GRIMOIRE)) // got the grimoire quest in progress
-            {
-                if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC)) // if anti-magic
-                {
-                    IDevil devil = DevilCapability.get(player);
-                    devil.alterMaxDevilMana(200);
-                    devil.alterDevilMana(200);
-                    text = "Huh? An old dusty grimoire has chosen you as it's master";
-                    inprogressQuestMana.triggerCompleteEvent(player);
-                    questData.addFinishedQuest(inprogressQuestMana.getCore());
-                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-                if (entityStats.getAttribute().equals(ModValues.SWORD) || entityStats.getSecondAttribute().equals(ModValues.SWORD))
-                {
-                    text = "You're a prodigy! This 4 leaf grimoire just chose you!";
-                    inprogressQuestMana.triggerCompleteEvent(player);
-                    questData.addFinishedQuest(inprogressQuestMana.getCore());
-                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-                if (!inprogressQuestMana.isComplete()) { // if it isn't complete
-                    text = "You need to mature before getting your grimoire! (hit level 5)";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                } else if (inprogressQuestMana.isComplete()) { // if it is complete
-                    questData.addFinishedQuest(inprogressQuestMana.getCore());
-                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                    text = "Good job! A grimoire has chosen you, use a spell to open the grimoire!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-            }
-            else if (inprogressQuestMana.getCore().equals(ModQuests.MANA_REINFORCEMENT))
-            {
-                if (!inprogressQuestMana.isComplete()) {
-                    text = "You need to get stronger before unlocking mana reinforcement! (hit level 10) And come back!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                } else if (inprogressQuestMana.isComplete())
-                {
-                    questData.addFinishedQuest(inprogressQuestMana.getCore());
-                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                    text = "Mana reinforcement envelops your arm with mana dealing more damage! Come back when you're stronger to start your training again.";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-            }
-            else if (inprogressQuestMana.getCore().equals(ModQuests.MANA_SKIN))
-            {
-                if (!inprogressQuestMana.isComplete()) {
-                    text = "How is the training going? You need to use mana reinforcement for 2 minutes as training. After that come back to me!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                } else if (inprogressQuestMana.isComplete())
-                {
-                    questData.addFinishedQuest(inprogressQuestMana.getCore());
-                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                    text = "You've undergone thorough training, now comes the sensing your surroundings";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-            }
-            else if (inprogressQuestMana.getCore().equals(ModQuests.MANA_SENSE))
-            {
-                if (!inprogressQuestMana.isComplete()) {
-                    text = "How is the training going? You need to use mana skin for 2 minutes as training. After that come back to me!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                } else if (inprogressQuestMana.isComplete())
-                {
-                    questData.addFinishedQuest(inprogressQuestMana.getCore());
-                    questData.removeInProgressQuest(inprogressQuestMana.getCore());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
-                    text = "You've completed my training";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-            }
-        }
-        else
-        {
-            if (questData.getFinishedQuests().contains(ModQuests.GRIMOIRE))
-            {
-                if (entityStats.getAttribute().equals(ModValues.ANTIMAGIC))
-                {
-                    text = "You have no mana at all there is nothing for me to teach you...";
-                    this.message = new SequencedString(text, 245, this.font.width(text), 800);
-                    return;
-                }
-                questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
-                PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_REINFORCEMENT));
-                text = "Now you have your grimoire, reach a higher level and come back so I can teach you mana reinforcement! (hit level 10)";
-                this.message = new SequencedString(text, 245, this.font.width(text), 800);
-                return;
-            }
-            else if (questData.getFinishedQuests().contains(ModQuests.MANA_REINFORCEMENT))
-            {
-                if (entityStats.getLevel() < 20)
-                {
-                    text = "You have to become stronger for me to teach you mana skin! (hit level 20)";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-                else
-                {
-                    questData.addInProgressQuest(ModQuests.MANA_SKIN.createQuest());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_SKIN));
-                    text = "Here is my training regiment, stand still using mana reinforcement for 2 minutes and then come back!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-            }
-            else if (questData.getFinishedQuests().contains(ModQuests.MANA_SKIN))
-            {
-                if (entityStats.getLevel() < 25)
-                {
-                    text = "You have to become stronger for me to teach you mana sense! (hit level 25)";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-                else
-                {
-                    questData.addInProgressQuest(ModQuests.MANA_SENSE.createQuest());
-                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(ModQuests.MANA_SENSE));
-                    text = "You're now ready to learn mana sense, here is my training regiment use mana skin for 2 minutes and then come back to me!";
-                    this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                    return;
-                }
-            }
-            else {
-                text = "My training regiment ends here, come back later maybe for more stuff!";
-                this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
-                return;
-            }
-        }
-
-    }
-
-     */
-
-    void questInprogressLoop(Quest questInProgress, String ifNotCompleted, String ifCompleted) // TODO finish up this loop later
-    {
-        if (!questInProgress.isComplete())
-        {
-            this.message = new SequencedString(text, 245, this.font.width(text) / 2, 200);
-            return;
-        }
-    }
-
     @Override
     public void render(MatrixStack matrixStack, int x, int y, float f) {
         this.renderBackground(matrixStack);
@@ -354,5 +187,19 @@ public class ChatPromptScreen extends Screen {
         GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
         this.message.render(matrixStack, guiLeft - 88, guiTop + 115);
         super.render(matrixStack, x, y, f);
+    }
+    private static final ArrayList<Ability> waterSpells = new ArrayList<>();
+
+    static {
+        waterSpells.add(WaterSubstituteSpell.INSTANCE.createAbility());
+        waterSpells.add(CurrentOfTheFortuneRiverAbility.INSTANCE.createAbility());
+        waterSpells.add(HolyFistOfLoveAbility.INSTANCE.createAbility());
+    }
+    @Override
+    public void onClose()
+    {
+        if (this.text.equals("A grimoire has chosen you and you unlocked a spell, go into combat mode to see your grimoire!"))
+            PacketHandler.sendToServer(new COpenSpellChoiceScreenPacket(waterSpells));
+        super.onClose();
     }
 }

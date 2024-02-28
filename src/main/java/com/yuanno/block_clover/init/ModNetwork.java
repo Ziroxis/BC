@@ -35,6 +35,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(CTeleportMagicTowerPacket.class, CTeleportMagicTowerPacket::encode, CTeleportMagicTowerPacket::decode, CTeleportMagicTowerPacket::handle);
         PacketHandler.registerPacket(COpenConfigScreenPacket.class, COpenConfigScreenPacket::encode, COpenConfigScreenPacket::decode, COpenConfigScreenPacket::handle);
         PacketHandler.registerPacket(CSyncConfigPacket.class, CSyncConfigPacket::encode, CSyncConfigPacket::decode, CSyncConfigPacket::handle);
+        PacketHandler.registerPacket(COpenSpellChoiceScreenPacket.class, COpenSpellChoiceScreenPacket::encode, COpenSpellChoiceScreenPacket::decode, COpenSpellChoiceScreenPacket::handle);
 
         //SERVER PACKETS
         PacketHandler.registerPacket(SSyncEntityStatsPacket.class, SSyncEntityStatsPacket::encode, SSyncEntityStatsPacket::decode, SSyncEntityStatsPacket::handle);

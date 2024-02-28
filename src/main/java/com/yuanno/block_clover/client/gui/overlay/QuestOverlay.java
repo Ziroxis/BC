@@ -23,7 +23,6 @@ public class QuestOverlay extends AbstractGui {
         ClientPlayerEntity player = Minecraft.getInstance().player;
         IQuestData questData = QuestDataCapability.get(player);
         MatrixStack matrixStack = event.getMatrixStack();
-        System.out.println(questData.getInProgressQuests());
         boolean allNull = true;
         for (Quest quest : questData.getInProgressQuests()) {
             if (quest != null) {
@@ -37,12 +36,18 @@ public class QuestOverlay extends AbstractGui {
         }
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT)
         {
+            drawString(matrixStack, Minecraft.getInstance().font, TextFormatting.BOLD + "Quests: ", 10,  10, -1);
             for (int i = 0; i < questData.getInProgressQuests().length; i++) {
-                drawString(matrixStack, Minecraft.getInstance().font, TextFormatting.BOLD + questData.getInProgressQuests()[i].getCore().getName(), 290, 10 + (i * 40), -1);
+                if (questData.getInProgressQuest(i) == null)
+                    return;
                 matrixStack.pushPose();
                 matrixStack.scale(0.7f, 0.7f, 0.7f);
+                drawString(matrixStack, Minecraft.getInstance().font, TextFormatting.ITALIC + questData.getInProgressQuest(i).getCore().getName(), (int) (10 / 0.7), (int) ((24 + (i * 16)) / 0.7), -1);
+                matrixStack.popPose();
+                matrixStack.pushPose();
+                matrixStack.scale(0.65f, 0.65f, 0.65f);
                 for (int ia = 0; ia < questData.getInProgressQuests()[i].getObjectives().size(); ia++) {
-                    drawString(matrixStack, Minecraft.getInstance().font, TextFormatting.RESET + questData.getInProgressQuests()[i].getObjectives().get(ia).getTitle(), (int) (310 / 0.7), (int) ((30 + (i * 15)) / 0.7), -1);
+                    drawString(matrixStack, Minecraft.getInstance().font, TextFormatting.RESET + "- " + questData.getInProgressQuest(i).getObjectives().get(ia).getTitle(), (int) (14 / 0.65), (int) ((32 + (i * 15) + (ia * 15)) / 0.65), -1);
                 }
                 matrixStack.popPose();
             }

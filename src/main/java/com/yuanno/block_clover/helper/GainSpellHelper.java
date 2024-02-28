@@ -44,7 +44,7 @@ public class GainSpellHelper {
 
     public static ArrayList<Ability> returnAbilitiesPerLevelAttribute(String attribute, int level)
     {
-        level += 1;
+        //level += 1;
         AbilityCore[] abilityCores = spellsMap.get(attribute).get(level);
         if (abilityCores == null)
         {
@@ -77,7 +77,7 @@ public class GainSpellHelper {
 
     public static ArrayList<Ability> returnAbilitiesInPool(String attribute, int level, PlayerEntity player)
     {
-        level += 1;
+        //level += 1;
         ArrayList<Ability> abilities = returnAbilitiesTotal(attribute, level);
         IAbilityData abilityData = AbilityDataCapability.get(player);
         abilities.removeIf(ability -> abilityData.getUnlockedAbility(ability) != null);

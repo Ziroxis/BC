@@ -15,7 +15,7 @@ public class ManaReinforcementQuest extends Quest {
     public static final QuestId INSTANCE = new QuestId.Builder("Mana reinforcement", ManaReinforcementQuest::new)
             .build();
 
-    private Objective levelObjective = new ReachLevelObjective("Become stronger", 10);
+    private Objective levelObjective = new ReachLevelObjective("Become stronger (hit level 10)", 10);
 
     public ManaReinforcementQuest(QuestId questId)
     {

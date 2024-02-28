@@ -65,7 +65,7 @@ public class LevelUpEvents {
         Collections.shuffle(abilities);
         ArrayList<Ability> randomThree = new ArrayList<>();
         if (!abilities.isEmpty())
-            randomThree = new ArrayList<>(abilities.subList(0, abilities.size()));
+            randomThree = new ArrayList<>(abilities.subList(0, 3));
         if (!randomThree.isEmpty())
             PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(randomThree), player);
     }

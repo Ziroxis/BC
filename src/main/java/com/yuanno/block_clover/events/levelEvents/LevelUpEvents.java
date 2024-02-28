@@ -16,9 +16,23 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class LevelUpEvents {
+    static ArrayList<Integer> levelsWater = new ArrayList<>();
+    static {
+        levelsWater.add(5);
+        levelsWater.add(10);
+        levelsWater.add(15);
+        levelsWater.add(20);
+        levelsWater.add(25);
+        levelsWater.add(30);
+        levelsWater.add(35);
+        levelsWater.add(40);
+        levelsWater.add(45);
+        levelsWater.add(50);
+    }
 
     @SubscribeEvent
     public static void levelUp(LevelUpEvent event)
@@ -60,7 +74,9 @@ public class LevelUpEvents {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         String attribute = entityStats.getAttribute();
         ArrayList<Ability> abilities = GainSpellHelper.returnAbilitiesInPool(attribute, entityStats.getLevel(), player);
-        if ((GainSpellHelper.returnAbilitiesPerLevelAttribute(attribute, entityStats.getLevel()).isEmpty()))
+
+
+        if (attribute.equals(ModValues.WATER) && !levelsWater.contains(entityStats.getLevel()))
             return;
         Collections.shuffle(abilities);
         ArrayList<Ability> randomThree = new ArrayList<>();

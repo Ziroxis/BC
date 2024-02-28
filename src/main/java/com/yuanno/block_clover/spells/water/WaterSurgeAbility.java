@@ -33,6 +33,8 @@ public class WaterSurgeAbility extends Ability {
         super(INSTANCE);
         this.setmanaCost(30);
         this.setMaxCooldown(20);
+
+        this.onUseEvent = this::onUseEvent;
     }
 
     public boolean onUseEvent(PlayerEntity player)

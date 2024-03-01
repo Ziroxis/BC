@@ -245,7 +245,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.hideInGUI;
     }
 
-    public void needsClientSide()
+    public void needsClieadntSide()
     {
         this.needsClientSide = true;
     }

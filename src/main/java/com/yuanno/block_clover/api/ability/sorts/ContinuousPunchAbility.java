@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 /**
  * Specific class made for continuous enhanced punches with effect
+ * todo need to fix the issue nothing happens when hitting an entity
  */
 public abstract class ContinuousPunchAbility extends ContinuousAbility
 {

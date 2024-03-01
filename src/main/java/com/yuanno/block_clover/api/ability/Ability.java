@@ -13,7 +13,10 @@ import com.yuanno.block_clover.data.devil.IDevil;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
+import com.yuanno.block_clover.events.ability.AbilityUseEvent;
+import com.yuanno.block_clover.networking.ManaSync;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -56,7 +59,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     protected double disableTicks;
     protected double maxDisableTicks = 200;
     protected  ICheck check;
-    private AbilityCategories.AbilityCategory category = AbilityCategories.AbilityCategory.ALL;
     private AbilityUnlock unlock = AbilityUnlock.PROGRESSION;
     private State state = State.STANDBY;
     private State previousState = State.STANDBY;
@@ -106,9 +108,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
             IAbilityData props = AbilityDataCapability.get(player);
             this.checkAbilityPool(player, State.COOLDOWN);
-
-            AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
-            MinecraftForge.EVENT_BUS.post(post);
 
             this.startCooldown(player);
             props.setPreviouslyUsedAbility(this);
@@ -183,6 +182,9 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public void startCooldown(PlayerEntity player)
     {
+        AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
+        MinecraftForge.EVENT_BUS.post(post);
+
         this.previousState = this.state;
         this.state = State.COOLDOWN;
     }
@@ -539,8 +541,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         ExtendedWorldData worldData = ExtendedWorldData.get(player.level);
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         IDevil devil = DevilCapability.get(player);
-        //System.out.println(propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0);
-        //System.out.println(propsEntity.getMana() < getmanaCost());
 
         if (!this.isDevil && (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0 && propsEntity.getMana() != 0)) {
             return false;
@@ -569,6 +569,15 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         }
 
         return true;
+    }
+
+    public void alterMana(PlayerEntity player)
+    {
+        IEntityStats propsEntity = EntityStatsCapability.get(player);
+
+        propsEntity.alterMana((int) - getmanaCost());
+        PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
     }
 
     /*
@@ -613,34 +622,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         if (this.core.getRegistryName() != null)
             nbt.putString("id", this.core.getRegistryName().toString());
-        /*else
-        {
-            Class<?>[] declaredClasses = WaterBall.class.getDeclaredClasses();
-
-            if (declaredClasses.length > 0) {
-                for (Class<?> declaredClass : declaredClasses) {
-                    try {
-                        Object instance = declaredClass.getConstructor().newInstance();
-
-                        // Check if the instance is an Ability
-                        if (instance instanceof Ability) {
-                            Ability abilityInstance = (Ability) instance;
-                            AbilityCore core = abilityInstance.getCore();
-
-                            // Now you have the core of the Ability class
-                        }
-                    } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                             InvocationTargetException e) {
-                        System.out.println("Exception occurred while creating instance of class: " + declaredClass.getName());
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-
-        }
-
-         */
         nbt.putString("displayName", Strings.isNullOrEmpty(this.getDisplayName()) ? "" : this.getDisplayName());
         nbt.putIntArray("pools", this.getPools());
         nbt.putString("unlock", this.getUnlockType().name());
@@ -656,30 +637,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     }
     public AbilityCore getCore()
     {
-        /*
-        Class<?>[] declaredClasses = WaterBall.class.getDeclaredClasses();
-
-        if (declaredClasses.length > 0) {
-            for (Class<?> declaredClass : declaredClasses) {
-                try {
-                    Object instance = declaredClass.getConstructor().newInstance();
-
-                    // Check if the instance is an Ability
-                    if (instance instanceof Ability && instance.getClass() != this.getClass()) {
-                        Ability abilityInstance = (Ability) instance;
-                        AbilityCore core = abilityInstance.getCore();
-                        return core;
-                        // Now you have the core of the Ability class
-                    }
-                } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                         InvocationTargetException e) {
-                    System.out.println("Exception occurred while creating instance of class: " + declaredClass.getName());
-                    e.printStackTrace();
-                }
-            }
-        }
-
-         */
         return this.core;
     }
     public int[] getPools()

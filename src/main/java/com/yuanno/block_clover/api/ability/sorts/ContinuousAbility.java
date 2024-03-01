@@ -1,14 +1,12 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
 import com.yuanno.block_clover.api.BeJavapi;
-import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.api.ability.AbilityUseEvent;
+import com.yuanno.block_clover.events.ability.AbilityUseEvent;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.yuanno.block_clover.events.experience.ExperienceUpEvent;
 import com.yuanno.block_clover.networking.ManaSync;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
@@ -63,7 +61,6 @@ public abstract class ContinuousAbility extends Ability {
             {
                 this.checkAbilityPool(player, State.CONTINUOUS);
 
-                // todo add evolution logic for continuous abilities
                 this.startContinuity(player);
                 PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
             }
@@ -113,6 +110,10 @@ public abstract class ContinuousAbility extends Ability {
      */
     public void tick(PlayerEntity player) {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
+
+        if (player.level.isClientSide)
+            return;
+
         if (!canUse(player)) {
             stopContinuity(player);
             return;
@@ -121,17 +122,13 @@ public abstract class ContinuousAbility extends Ability {
         String resourceName = BeJavapi.getResourceName(getName());
         player.level.getProfiler().push(resourceName);
 
-        boolean isContinuous = isContinuous();
-        boolean isServer = !player.level.isClientSide;
-        boolean isClientOrServer = isClientSide() || isServer;
-
-        if (isContinuous) {
+        if (isContinuous()) {
             continueTime++;
 
             boolean shouldEndContinuity =
                     (threshold > 0 && continueTime >= threshold) || (propsEntity.getMana() < getmanaCost() + 5 && getmanaCost() != 0); // checks if the ability should continue
 
-            if (isClientOrServer && !isStateForced()) {
+            if (!isStateForced()) {
                 duringContinuityEvent.duringContinuity(player, continueTime);
             }
 
@@ -139,36 +136,8 @@ public abstract class ContinuousAbility extends Ability {
                 endContinuity(player);
             }
 
-            if (player.tickCount % 20 == 0) {
-                int experiencePoint = getExperiencePoint();
-                int manaCost = (int) getmanaCost();
-                int currentLevel = propsEntity.getLevel();
-                int experienceGainLevelCap = getExperienceGainLevelCap();
-
-                // player level stuff
-                if (currentLevel < experienceGainLevelCap) {
-                    propsEntity.alterExperience(experiencePoint);
-                    ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, experiencePoint);
-                    MinecraftForge.EVENT_BUS.post(eventExperience);
-                }
-
-                // individual spell experience
-                if (propsEntity.hasExperienceSpell(this.getName())) {
-                    int experience = propsEntity.getExperienceSpell(this.getName());
-                    propsEntity.setExperienceSpells(this.getName(), experience + 1);
-                }
-                else
-                    propsEntity.setExperienceSpells(this.getName(), 1);
-
-
-                int currentMana = (int) propsEntity.getMana();
-                if (currentMana > manaCost) {
-                    propsEntity.alterMana(-manaCost);
-                }
-            }
-            int currentMana = (int) propsEntity.getMana();
-            PacketHandler.sendTo(new ManaSync(currentMana), player);
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
+            AbilityUseEvent per = new AbilityUseEvent.Per(player, this);
+            MinecraftForge.EVENT_BUS.post(per);
         }
 
         player.level.getProfiler().pop();

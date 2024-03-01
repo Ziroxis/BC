@@ -2,7 +2,6 @@ package com.yuanno.block_clover.events.ability;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.api.ability.AbilityEvolutionEvent;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;

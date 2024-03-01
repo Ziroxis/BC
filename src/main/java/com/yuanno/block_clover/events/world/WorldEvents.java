@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events;
+package com.yuanno.block_clover.events.world;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.world.spawners.AmbushSpawner;

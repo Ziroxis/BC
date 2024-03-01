@@ -5,9 +5,6 @@ import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.api.ability.interfaces.IChangeDamageSourceAbility;
-import com.yuanno.block_clover.api.ability.interfaces.IFallDamageBlockingAbility;
-import com.yuanno.block_clover.api.ability.interfaces.IOnDamageAbility;
 import com.yuanno.block_clover.api.ability.interfaces.IOnDamageTakenAbility;
 import com.yuanno.block_clover.api.ability.sorts.*;
 import com.yuanno.block_clover.damagesource.AbilityDamageSource;
@@ -15,7 +12,6 @@ import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.init.ModDamageSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -48,26 +44,6 @@ public class AbilitiesEvents
 		{
 			PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 			IAbilityData ablProps = AbilityDataCapability.get(player);
-
-			/*//For debug reasons, literally a copy pasted but automated version of forge's CommandTps
-			if(!player.level.isClientSide && player.tickCount % 20 == 0)
-			{
-				DecimalFormat TIME_FORMATTER = new DecimalFormat("########0.000");
-				DimensionType dim = DimensionType.OVERWORLD;
-				long[] times = player.getServer().getTickTime(dim);
-
-		        if (times == null)
-		            times = new long[] {0};
-
-		        long sum = 0L;
-		        for (long v : times)
-		            sum += v;
-		       	        
-		        double worldTickTime = (sum / times.length) * 1.0E-6D;
-		        double worldTPS = Math.min(1000.0 / worldTickTime, 20);
-		        player.sendMessage(new TranslationTextComponent("commands.forge.tps.summary.named", dim.getId(), DimensionType.getKey(dim), TIME_FORMATTER.format(worldTickTime), TIME_FORMATTER.format(worldTPS)));
-			}
-			*/
 
 			player.level.getProfiler().push("abilityCooldown");
 
@@ -247,20 +223,6 @@ public class AbilitiesEvents
 						boolean result = ((IOnDamageTakenAbility) ability).isDamageTaken(entity, event.getSource(), event.getAmount());
 						event.setCanceled(!result);
 					}
-					if (ability instanceof IOnDamageAbility && IOnDamageAbility.IS_ACTIVE.test(ability))
-					{
-						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());
-						event.setCanceled(!result);
-					}
-					/*
-					if (ability instanceof DamagedPassiveAbility)
-					{
-						boolean result = ((DamagedPassiveAbility) ablProps.getUnlockedAbility(ability)).damage(entity, event.getSource());
-						eve
-						nt.setCanceled(!result);
-
-					}
-					 */
 				}
 				catch (Exception e)
 				{
@@ -280,87 +242,11 @@ public class AbilitiesEvents
 						boolean result = ((IOnDamageTakenAbility) ability).isDamageTaken(entity, event.getSource(), event.getAmount());
 						event.setCanceled(!result);
 					}
-					if (ability instanceof IOnDamageAbility && IOnDamageAbility.IS_ACTIVE.test(ability))
-					{
-						boolean result = ((IOnDamageAbility) ability).onDamage(entity, event.getSource(), event.getAmount());
-						event.setCanceled(!result);
-					}
-					/*
-					if (ability instanceof DamagedContinuousAbility && ability.isContinuous())
-					{
-						if(event.getSource() instanceof ModDamageSource && !((ModDamageSource)event.getSource()).isInternalDamage())
-						{
-							boolean result = ((DamagedContinuousAbility) ablProps.getUnlockedAbility(ability)).damage(entity, event.getSource(), event.getAmount());
-							event.setCanceled(!result);
-						}
-					}
-
-					 */
-					
-					if (ability instanceof IFallDamageBlockingAbility && event.getSource() == DamageSource.FALL)
-					{
-						boolean blockFallDamage = !((IFallDamageBlockingAbility) ability).hasFallDamage();
-						if (blockFallDamage)
-						{
-							entity.fallDistance = 0;
-							((IFallDamageBlockingAbility) ability).resetFallDamage(entity);
-							event.setCanceled(true);
-						}
-					}
 				}
 				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
-			}
-			
-			if (event.getSource().getDirectEntity() instanceof PlayerEntity && (event.getSource().getMsgId().equals("player") || event.getSource().getMsgId().equals("mob")) && event.getAmount() > 0)
-			{
-				PlayerEntity attacker = (PlayerEntity) event.getSource().getDirectEntity();
-				ablProps = AbilityDataCapability.get(attacker);
-				
-				Arrays.stream(ablProps.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL)).filter(Objects::nonNull).forEach(ability ->
-				{
-					try
-					{
-						if (ability instanceof IChangeDamageSourceAbility)
-						{
-							IChangeDamageSourceAbility abl = ((IChangeDamageSourceAbility) ability);
-							if (abl.isSourceChangeEnabled())
-							{
-								/*
-								boolean sameGroup = FactionHelper.getSameGroupPredicate(attacker).test(entity);
-								if(sameGroup)
-									return;
-
-								 */
-
-								double strength = attacker.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
-								if(strength == 0)
-									return;
-
-								float damage = (float) (abl.damageToEntityWithSource(attacker, entity) * (event.getAmount() / strength));
-								DamageSource source = abl.getSourceToUse(attacker);
-								boolean damaged = true;
-								// this hurt time check is to prevent you from spamming the attack to nulify hurt times
-								// if you want to handle the hurt time in other way you can use damageToEntityWithSource
-								// to modify it.
-								if(entity.invulnerableTime == 0 || abl.cancelsOriginalDamage())
-								{
-									damaged = entity.hurt(source, damage);
-									entity.hurtTime = entity.invulnerableTime = 0;
-								}
-								
-								if (!damaged || abl.cancelsOriginalDamage())
-									event.setCanceled(true);
-							}
-						}
-					} catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				});
-				
 			}
 		}
 	}

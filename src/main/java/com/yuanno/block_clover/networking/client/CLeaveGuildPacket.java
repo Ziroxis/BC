@@ -2,7 +2,7 @@ package com.yuanno.block_clover.networking.client;
 
 import com.yuanno.block_clover.api.FactionHelper;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
-import com.yuanno.block_clover.events.GuildEvents;
+import com.yuanno.block_clover.events.original.GuildEvents;
 import com.yuanno.block_clover.guild.Guild;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;

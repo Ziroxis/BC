@@ -80,9 +80,6 @@ public class CUseAbilityPacket
 
 					
 					abl.use(player);
-					//WyNetwork.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, abl, ), player);
-					//WyNetwork.sendToAllTrackingAndSelf(new SSyncDevilFruitPacket(player.getId(), devilFruitProps), player);
-					//WyNetwork.sendToAllTrackingAndSelf(new SSyncAbilityDataPacket(player.getId(), abilityDataProps), player);
 				}
 				catch(Exception e)
 				{

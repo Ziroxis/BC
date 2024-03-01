@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events;
+package com.yuanno.block_clover.events.combat;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;

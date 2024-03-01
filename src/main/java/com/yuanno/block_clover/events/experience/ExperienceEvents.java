@@ -1,11 +1,9 @@
-package com.yuanno.block_clover.events.levelEvents;
+package com.yuanno.block_clover.events.experience;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.init.ModValues;
-import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
+import com.yuanno.block_clover.events.level.LevelUpEvent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

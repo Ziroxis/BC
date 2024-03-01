@@ -2,8 +2,6 @@ package com.yuanno.block_clover.api.ability;
 
 import com.yuanno.block_clover.BlockProtectionRule;
 import com.yuanno.block_clover.api.Beapi;
-import com.yuanno.block_clover.api.ability.interfaces.IBodyOverlayAbility;
-import com.yuanno.block_clover.api.ability.interfaces.IPunchOverlayAbility;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ExplosionAbility;
@@ -59,10 +57,6 @@ public class AbilityHelper {
             if (ability == null || (ability instanceof ContinuousAbility && !ability.isContinuous()))
                 continue;
 
-            if (ability instanceof IPunchOverlayAbility)
-                overlay = ((IPunchOverlayAbility) ability).getPunchOverlay(player);
-            else if (ability instanceof IBodyOverlayAbility)
-                overlay = ((IBodyOverlayAbility) ability).getBodyOverlay(player);
         }
 
         return overlay;

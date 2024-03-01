@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events;
+package com.yuanno.block_clover.events.guild;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;

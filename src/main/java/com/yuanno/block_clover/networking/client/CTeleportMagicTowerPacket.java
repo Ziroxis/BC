@@ -1,25 +1,16 @@
 package com.yuanno.block_clover.networking.client;
 
-import com.yuanno.block_clover.api.FactionHelper;
-import com.yuanno.block_clover.data.world.ExtendedWorldData;
-import com.yuanno.block_clover.events.GuildEvents;
-import com.yuanno.block_clover.guild.Guild;
 import com.yuanno.block_clover.init.ModStructures;
-import com.yuanno.block_clover.networking.PacketHandler;
-import com.yuanno.block_clover.networking.server.SSyncWorldDataPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.UUID;
 import java.util.function.Supplier;
 
 public class CTeleportMagicTowerPacket {

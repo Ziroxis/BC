@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events;
+package com.yuanno.block_clover.events.quests;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHealEvent;

@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events.levelEvents;
+package com.yuanno.block_clover.events.level;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.Ability;
@@ -16,7 +16,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
 public class LevelUpEvents {

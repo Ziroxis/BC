@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events.levelEvents;
+package com.yuanno.block_clover.events.level;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.entity.player.PlayerEvent;

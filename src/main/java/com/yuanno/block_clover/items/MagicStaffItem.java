@@ -1,9 +1,7 @@
 package com.yuanno.block_clover.items;
 
-import com.yuanno.block_clover.data.entity.EntityStatsBase;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.events.StatsEvent;
 import com.yuanno.block_clover.init.ModItemGroup;
 import com.yuanno.block_clover.init.ModValues;
 import com.yuanno.block_clover.networking.PacketHandler;
@@ -11,11 +9,9 @@ import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;

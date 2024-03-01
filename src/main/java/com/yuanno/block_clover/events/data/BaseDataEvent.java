@@ -1,4 +1,4 @@
-package com.yuanno.block_clover.events;
+package com.yuanno.block_clover.events.data;
 
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.Beapi;
@@ -14,7 +14,7 @@ import com.yuanno.block_clover.data.quest.IQuestData;
 import com.yuanno.block_clover.data.quest.QuestDataCapability;
 import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.entities.devils.DevilEntity;
-import com.yuanno.block_clover.events.levelEvents.ExperienceUpEvent;
+import com.yuanno.block_clover.events.experience.ExperienceUpEvent;
 import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,9 +29,8 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Main.MODID)
-public class StatsEvent {
+public class BaseDataEvent {
 
-    private static ArrayList<String> attributes = new ArrayList<String>();
     @SubscribeEvent
     public static void joinWorldEvent(PlayerEvent.PlayerLoggedInEvent event)
     {
@@ -168,14 +167,14 @@ public class StatsEvent {
     @SubscribeEvent
     public static void onClonePlayer(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            StatsEvent.restoreFullData(event.getOriginal(), event.getPlayer());
+            BaseDataEvent.restoreFullData(event.getOriginal(), event.getPlayer());
             IAbilityData newAbilityData = AbilityDataCapability.get(event.getPlayer());
             IEntityStats newEntityStats = EntityStatsCapability.get(event.getPlayer());
             PacketHandler.sendTo(new SSyncAbilityDataPacket(event.getPlayer().getId(), newAbilityData), event.getPlayer());
             ExperienceUpEvent e = new ExperienceUpEvent(event.getPlayer(), newEntityStats.getExperience());
             MinecraftForge.EVENT_BUS.post(e);
         } else
-            StatsEvent.restoreFullData(event.getOriginal(), event.getPlayer());
+            BaseDataEvent.restoreFullData(event.getOriginal(), event.getPlayer());
     }
     private static void restoreFullData(PlayerEntity original, PlayerEntity player) {
         INBT nbt = new CompoundNBT();

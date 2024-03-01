@@ -332,42 +332,6 @@ public class AbilitiesEvents
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public static void onPotionEvent(PotionApplicableEvent event)
-	{
-		if (!(event.getEntityLiving() instanceof PlayerEntity))
-			return;
-
-		PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-
-		IAbilityData props = AbilityDataCapability.get(player);
-
-		for (Ability ability : props.getUnlockedAbilities(AbilityCategories.AbilityCategory.ALL))
-		{
-			if (ability == null)
-				continue;
-
-			try
-			{
-				if (ability instanceof PotionPassiveAbility)
-				{
-					boolean applied = ((PotionPassiveAbility) props.getUnlockedAbility(ability)).check(player, event.getPotionEffect());
-					if (applied)
-						event.setResult(Result.ALLOW);
-					else
-						event.setResult(Result.DENY);
-				}
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
-
-
-
 	@SubscribeEvent
 	public static void onEntityShootProjectile(ArrowLooseEvent event)
 	{

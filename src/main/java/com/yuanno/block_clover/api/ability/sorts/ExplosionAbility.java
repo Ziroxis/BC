@@ -36,6 +36,10 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.*;
 
+/**
+ * Easier and more controlled way to create explosions for abilities and other stuff
+ * the actual explosion is handled here: {@link #doExplosion()}
+ */
 public class ExplosionAbility extends Explosion
 {
 	private World world;

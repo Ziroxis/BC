@@ -1,14 +1,18 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
-import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.TranslationTextComponent;
 
+/**
+ * A more elaborate way for doing continuous ability handling giving items.
+ * Has the standard {@link #startContinuity(PlayerEntity)}, gives the player the item
+ * and the {@link #endContinuity(PlayerEntity)} removes the item from the player's inventory.
+ * The item is set as parameter in {@link #getItemStack(PlayerEntity)}.
+ */
 public abstract class ItemAbility extends ContinuousAbility implements IParallelContinuousAbility
 {
 	boolean loseMana = false;

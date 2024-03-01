@@ -5,17 +5,9 @@ import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
-import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.init.ModAttributes;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
-
-import java.util.UUID;
 
 public class ManaSenseAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
@@ -41,8 +33,6 @@ public class ManaSenseAbility extends ContinuousAbility implements IParallelCont
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        IEntityStats stats = EntityStatsCapability.get(player);
-        stats.alterMana(-15);
         return true;
     }
 

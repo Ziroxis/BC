@@ -35,13 +35,47 @@ public class AbilityUseEvent extends AbilityEvent {
      * @see com.yuanno.block_clover.api.ability.sorts.ContinuousAbility#tick
      * All handled at one place
      * @see com.yuanno.block_clover.events.ability.AbilityUseEvents#onUsePer
+     * It gives multiple options to handle the mana/experience/spell, so that it can be handled differently for different abilities
      */
     @Cancelable
     public static class Per extends AbilityUseEvent
     {
+        private boolean mana = true;
+        private boolean experience = true;
+        private boolean spell = true;
         public Per(PlayerEntity player, Ability ability)
         {
             super(player, ability);
+        }
+        public Per(PlayerEntity player, Ability ability, boolean mana)
+        {
+            super(player, ability);
+            this.mana = mana;
+        }
+        public Per(PlayerEntity player, Ability ability, boolean mana, boolean experience)
+        {
+            super(player, ability);
+            this.mana = mana;
+            this.experience = experience;
+        }
+        public Per(PlayerEntity player, Ability ability, boolean mana, boolean experience, boolean spell)
+        {
+            super(player, ability);
+            this.mana = mana;
+            this.experience = experience;
+            this.spell = spell;
+        }
+        public boolean getMana()
+        {
+            return this.mana;
+        }
+        public boolean getExperience()
+        {
+            return this.experience;
+        }
+        public boolean getSpell()
+        {
+            return this.spell;
         }
     }
     /**

@@ -18,6 +18,9 @@ import java.io.Serializable;
 
 /**
  * Class made for abilities that are active (for a time)
+ * Ability starts: {@link #use(PlayerEntity)}
+ * Something happens every tick while ability active: {@link #tick(PlayerEntity)}
+ * Ability ends: {@link #endContinuity(PlayerEntity)}
  */
 public abstract class ContinuousAbility extends Ability {
 
@@ -49,9 +52,6 @@ public abstract class ContinuousAbility extends Ability {
         if (this.isOnCooldown() && this.getCooldown() <= 10)
             this.stopCooldown(player);
 
-        AbilityUseEvent event = new AbilityUseEvent(player, this);
-        if (MinecraftForge.EVENT_BUS.post(event))
-            return;
         if(!this.isContinuous())
         {
             if(!this.isOnStandby())

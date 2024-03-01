@@ -4,13 +4,11 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
-import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
+import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
-import com.yuanno.block_clover.init.ModAttributes;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.lightning.GlovesParticleEffect;
-import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -19,7 +17,7 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.UUID;
 
-public class ThunderGodGlovesAbility extends ContinuousPunchAbility implements IParallelContinuousAbility {
+public class ThunderGodGlovesAbility extends PunchAbility implements IParallelContinuousAbility {
 
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Thunder God Gloves", AbilityCategories.AbilityCategory.ATTRIBUTE, ThunderGodGlovesAbility.class)
             .setDescription("The user gets speed by enveloping himself with lightning gloves.")

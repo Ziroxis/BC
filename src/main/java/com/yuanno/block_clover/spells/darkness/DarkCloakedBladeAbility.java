@@ -4,12 +4,10 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
-import com.yuanno.block_clover.api.ability.sorts.ContinuousSwordAbility;
-import com.yuanno.block_clover.init.ModAttributes;
+import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.darkness.DarkCloakedBladeParticleEffect;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.Util;
@@ -17,7 +15,7 @@ import net.minecraft.util.text.StringTextComponent;
 
 import java.util.UUID;
 
-public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements IParallelContinuousAbility {
+public class DarkCloakedBladeAbility extends PunchAbility implements IParallelContinuousAbility {
 
     private static final ParticleEffect PARTICLES = new DarkCloakedBladeParticleEffect();
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Dark cloaked blade", AbilityCategories.AbilityCategory.ATTRIBUTE, DarkCloakedBladeAbility.class)
@@ -58,12 +56,6 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
             this.endContinuity(player);
             return;
         }
-        /*
-        Vector3i test = player.getDirection().getNormal();
-        double testCoordsX =  test.getX();
-        double testCoordsY =  test.getY();
-        double testCoordsZ =  test.getZ();
-         */
         double test = player.yBodyRot;
         double testCoordsX = test;
         double testCoordsY = test;

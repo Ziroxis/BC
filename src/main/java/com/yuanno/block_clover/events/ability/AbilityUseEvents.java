@@ -52,36 +52,44 @@ public class AbilityUseEvents {
         if (!(player.tickCount % 20 == 0))
             return;
 
-        // handles the mana stuff
         Ability ability = event.getAbility();
         IEntityStats propsEntity = EntityStatsCapability.get(player);
-        IDevil propsDevil = DevilCapability.get(player);
-        if (!ability.getIsDevil())
-            propsEntity.alterMana(-ability.getmanaCost());
-        else if (ability.getIsDevil())
-            propsDevil.alterDevilMana(-ability.getmanaCost());
-        PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), propsDevil), player);
 
-        // handles player experience stuff
-        if (propsEntity.getLevel() < ability.getExperienceGainLevelCap())
+
+        // handles the mana stuff
+        if (event.getMana())
         {
-            float experienceToGive = ability.getExperiencePoint() * propsEntity.getMultiplier();
-            propsEntity.alterExperience((int) experienceToGive);
+            IDevil propsDevil = DevilCapability.get(player);
+            if (!ability.getIsDevil())
+                propsEntity.alterMana(-ability.getmanaCost());
+            else if (ability.getIsDevil())
+                propsDevil.alterDevilMana(-ability.getmanaCost());
+            PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), propsDevil), player);
+        }
+        // handles player experience stuff
+        if (event.getExperience())
+        {
+            if (propsEntity.getLevel() < ability.getExperienceGainLevelCap()) {
+                float experienceToGive = ability.getExperiencePoint() * propsEntity.getMultiplier();
+                propsEntity.alterExperience((int) experienceToGive);
 
-            ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, ability.getExperiencePoint());
-            MinecraftForge.EVENT_BUS.post(eventExperience);
+                ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, ability.getExperiencePoint());
+                MinecraftForge.EVENT_BUS.post(eventExperience);
+            }
         }
 
         // handles the evolution of the spell, 1 point every second maybe changed later?
-        if (ability.getEvolvedAbility() != null && propsEntity.hasExperienceSpell(ability.getName())) {
-            int experience = propsEntity.getExperienceSpell(ability.getName());
-            propsEntity.setExperienceSpells(ability.getName(), experience + 1);
-        }
-        else if (ability.getEvolvedAbility() != null)
-            propsEntity.setExperienceSpells(ability.getName(), 1);
-        if (propsEntity.getExperienceSpell(ability.getName()) != null && (int) propsEntity.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost()) {
-            AbilityEvolutionEvent abilityEvolutionEvent = new AbilityEvolutionEvent(player, ability);
-            MinecraftForge.EVENT_BUS.post(abilityEvolutionEvent);
+        if (event.getSpell())
+        {
+            if (ability.getEvolvedAbility() != null && propsEntity.hasExperienceSpell(ability.getName())) {
+                int experience = propsEntity.getExperienceSpell(ability.getName());
+                propsEntity.setExperienceSpells(ability.getName(), experience + 1);
+            } else if (ability.getEvolvedAbility() != null)
+                propsEntity.setExperienceSpells(ability.getName(), 1);
+            if (propsEntity.getExperienceSpell(ability.getName()) != null && (int) propsEntity.getExperienceSpell(ability.getName()) >= ability.getEvolutionCost()) {
+                AbilityEvolutionEvent abilityEvolutionEvent = new AbilityEvolutionEvent(player, ability);
+                MinecraftForge.EVENT_BUS.post(abilityEvolutionEvent);
+            }
         }
 
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);

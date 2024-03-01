@@ -1,13 +1,16 @@
 package com.yuanno.block_clover.api.ability.sorts;
 
-import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.Ability;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import net.minecraft.entity.player.PlayerEntity;
 
 import java.io.Serializable;
 
+/**
+ * Quite different from {@link ContinuousAbility}, this does not need to be equipped and runs every tick except if paused, so the spell doesn't start or end.
+ * It does something or it does not do something.
+ * Checks if it can be used {@link #canUse(PlayerEntity)} and then runs the {@link #duringPassiveEvent} every tick.
+ */
 public class PassiveAbility extends Ability {
 
     // Setting the defaults so that no crash occurs and so they will be null safe.

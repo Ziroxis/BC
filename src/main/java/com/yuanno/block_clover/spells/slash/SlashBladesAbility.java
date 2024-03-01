@@ -4,12 +4,10 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
-import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
 import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
-import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -51,8 +49,6 @@ public class SlashBladesAbility extends PunchAbility implements IParallelContinu
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
-        IEntityStats stats = EntityStatsCapability.get(player);
-        stats.alterMana(-10);
         player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(SLASH_BLADES);
         player.getAttribute(ModAttributes.ATTACK_RANGE.get()).addTransientModifier(SLASH_BLADES);
 

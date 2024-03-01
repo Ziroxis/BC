@@ -4,7 +4,7 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
-import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
+import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.UUID;
 
-public class EarthGlovesAbility extends ContinuousPunchAbility implements IParallelContinuousAbility {
+public class EarthGlovesAbility extends PunchAbility implements IParallelContinuousAbility {
 
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Earth gloves", AbilityCategories.AbilityCategory.ATTRIBUTE, EarthGlovesAbility.class)
             .setDescription("Makes gloves out of earth")

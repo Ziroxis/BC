@@ -17,7 +17,10 @@ import net.minecraftforge.common.MinecraftForge;
 import java.io.Serializable;
 
 /**
- * Ability, something happens when used spell, then something when charging and finally when charging stopped
+ * Ability class that handles the abilities that charge up and then something happen
+ * Ability starts: {@link #use(PlayerEntity)}
+ * Ability charges up: {@link #charging(PlayerEntity)}
+ * Ability does something after charge (can choose when to end charge or no): {@link #stopCharging(PlayerEntity)}
  */
 public class ChargeableAbility extends Ability {
 
@@ -151,27 +154,6 @@ public class ChargeableAbility extends Ability {
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
         }
     }
-
-    public String[] getChargedShouts()
-    {
-        String[] nameSplit = this.getDisplayName().split(" ");
-        int midPoint = (int) Math.ceil(nameSplit.length / 2.0D);
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < midPoint; i++)
-        {
-            sb.append(nameSplit[i] + " ");
-        }
-        String firstShout = sb.toString().replaceAll("[:-]", "");
-        sb = new StringBuilder();
-        for(int i = midPoint; i < nameSplit.length; i++)
-        {
-            sb.append(nameSplit[i] + " ");
-        }
-        String secondShout = sb.toString().replaceAll("[:-]", "");
-
-        return secondShout.length() > 0 ? new String[]{firstShout, secondShout} : new String[]{firstShout};
-    }
-
 
     /*
      *	Interfaces

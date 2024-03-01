@@ -9,6 +9,12 @@ import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 
+/**
+ * Does something x amount of times with y interval, amount and time set in {@link #setMaxRepeaterCount(int, int)}.
+ * The something that actually happens is in {@link #use(PlayerEntity)}
+ * The repeating of the thing is in {@link #tick(PlayerEntity)}
+ * Ability does have an end so the repeating stops {@link #endContinuity(PlayerEntity)}
+ */
 public abstract class RepeaterAbility extends ContinuousAbility implements IParallelContinuousAbility {
 
 

@@ -42,9 +42,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     private AbilityCore evolvedAbility;
     private int evolutionCost = 0;
-    private String name = "";
     private String displayName;
-    private String textureName = "";
     protected double timeProgression = 1;
     private AbilityCore core;
     private int[] pools = new int[0];
@@ -64,8 +62,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     private State previousState = State.STANDBY;
     private boolean hideInGUI = false;
     private boolean forcedState = false;
-    @Deprecated
-    private boolean needsClientSide = false;
     private int poolId = -1;
     private boolean isDevil = false;
 
@@ -110,6 +106,9 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             this.checkAbilityPool(player, State.COOLDOWN);
 
             this.startCooldown(player);
+            AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
+            MinecraftForge.EVENT_BUS.post(post);
+
             props.setPreviouslyUsedAbility(this);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
 
@@ -182,9 +181,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public void startCooldown(PlayerEntity player)
     {
-        AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
-        MinecraftForge.EVENT_BUS.post(post);
-
         this.previousState = this.state;
         this.state = State.COOLDOWN;
     }
@@ -244,18 +240,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         return this.hideInGUI;
     }
-
-    public void needsClieadntSide()
-    {
-        this.needsClientSide = true;
-    }
-
-    public boolean isClientSide()
-    {
-        return this.needsClientSide;
-    }
-
-
 
     public void setInPool(int poolId)
     {
@@ -400,11 +384,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             this.customTexture = null;
         else
             this.customTexture = new ResourceLocation(this.getCore().getIcon().getNamespace(), "textures/abilities/" + BeJavapi.getResourceName(texture) + ".png");
-    }
-
-    public void setCustomTexture(String texture)
-    {
-        this.textureName = BeJavapi.getResourceName(texture);
     }
 
     public AbilityCategories.AbilityCategory getCategory()

@@ -289,9 +289,9 @@ public class AbilitiesEvents
 	
 						float strength = (float) player.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
 						float finalDamage = (damage + strength);
-						System.out.println("Punch Damage: " + finalDamage);
 						target.hurt(((PunchAbility)ability).getPunchDamageSource(player), finalDamage);
 					}
+
 				}
 				catch (Exception e)
 				{
@@ -323,7 +323,7 @@ public class AbilitiesEvents
 					((ChargeableAbility)ability).stopCharging(player);
 
 				if (ability instanceof ContinuousAbility && ability.isContinuous())
-					((ContinuousAbility)ability).stopContinuity(player);
+					((ContinuousAbility)ability).endContinuity(player);
 			}
 			catch (Exception e)
 			{

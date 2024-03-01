@@ -65,7 +65,8 @@ public class PunchAbility extends ContinuousAbility{
         PacketHandler.sendTo(new ManaSync(currentNewMana), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
 
-        this.endContinuity(player);
+        if(this.isStoppingAfterHit)
+            this.endContinuity(player);
         return result;
     }
 
@@ -73,7 +74,7 @@ public class PunchAbility extends ContinuousAbility{
     public void tick(PlayerEntity player) {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         if (!canUse(player)) {
-            stopContinuity(player);
+            endContinuity(player);
             return;
         }
 
@@ -116,5 +117,10 @@ public class PunchAbility extends ContinuousAbility{
     public interface IOnHitEffect extends Serializable
     {
         void hitEffect(PlayerEntity player, LivingEntity target);
+    }
+
+    public void setStoppingAfterHit(boolean flag)
+    {
+        this.isStoppingAfterHit = flag;
     }
 }

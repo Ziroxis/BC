@@ -68,7 +68,7 @@ public class AntiMagicManaZoneAbility extends ContinuousAbility implements IPara
     public void duringContinuityEvent(PlayerEntity player, int timer)
     {
         if (timer == 180 * 20)
-            this.stopContinuity(player);
+            this.endContinuity(player);
         if (this.getThreshold() == 0)
         {
             if (this.blockList.isEmpty())
@@ -114,7 +114,7 @@ public class AntiMagicManaZoneAbility extends ContinuousAbility implements IPara
         if (zoneSet)
         {
             if (!isEntityInThisRoom(player))
-                this.stopContinuity(player);
+                this.endContinuity(player);
             List<Entity> entities = Beapi.getEntitiesAround(this.centerBlock, player.level, (float) 1 * roomSize / 2.0f);
             if (entities.contains(player)) {
                 entities.forEach(entity -> {

@@ -65,7 +65,7 @@ public class CalidusBrachiumBarrageAbility extends ContinuousAbility {
         player.level.addFreshEntity(projectile);
 
         if (timer >= 120)
-            this.stopContinuity(player);
+            this.endContinuity(player);
     }
 
 

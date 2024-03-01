@@ -46,7 +46,6 @@ public class QualleOperationSpell extends ContinuousAbility {
         {
             this.startCooldown(player);
             this.onEndContinuityEvent(player);
-            this.stopContinuity(player);
         }
     }
 

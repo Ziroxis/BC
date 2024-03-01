@@ -68,7 +68,7 @@ public class ThunderManaZone extends ContinuousAbility implements IParallelConti
     public void duringContinuityEvent(PlayerEntity player, int timer)
     {
         if (timer == 180 * 20)
-            this.stopContinuity(player);
+            this.endContinuity(player);
         if (this.getThreshold() == 0)
         {
             if (this.blockList.isEmpty())
@@ -114,7 +114,7 @@ public class ThunderManaZone extends ContinuousAbility implements IParallelConti
         if (zoneSet)
         {
             if (!isEntityInThisRoom(player))
-                this.stopContinuity(player);
+                this.endContinuity(player);
             List<LivingEntity> entities = Beapi.getEntitiesAround(this.centerBlock, player.level, roomSize + 30, LivingEntity.class);
             if (entities.contains(player))
                 entities.remove(player);

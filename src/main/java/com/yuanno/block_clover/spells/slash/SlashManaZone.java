@@ -47,7 +47,7 @@ public class SlashManaZone extends ContinuousAbility {
         }
 
         if (timer >= 480) {
-            this.stopContinuity(player);
+            this.endContinuity(player);
         }
     }
 

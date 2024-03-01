@@ -51,7 +51,7 @@ public class CRemoveAbilityPacket
 					return;
 				
 				if(ability instanceof ContinuousAbility && ((ContinuousAbility)ability).isContinuous())
-					((ContinuousAbility)ability).stopContinuity(player);
+					((ContinuousAbility)ability).endContinuity(player);
 				else if(ability instanceof ChargeableAbility && ((ChargeableAbility)ability).isCharging())
 					((ChargeableAbility)ability).stopCharging(player);
 				else if(ability.isOnCooldown())

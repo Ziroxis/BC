@@ -30,7 +30,7 @@ public class LightBladeDropEvent {
                     if (event.getEntityItem().getItem().getItem().equals(ModItems.LIGHT_SWORD.get()))
                     {
                         event.getEntityItem().remove();
-                        ((LightSwordAbility) ability).stopContinuity(player);
+                        ((LightSwordAbility) ability).endContinuity(player);
                     }
                     else
                         return;

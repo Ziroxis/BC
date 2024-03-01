@@ -37,7 +37,6 @@ public class ChargeableAbility extends Ability {
 
     /**
      * Happens when the player uses this spell, first instance of it happens here
-     *
      */
     @Override
     public void use(PlayerEntity player)

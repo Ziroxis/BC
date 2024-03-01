@@ -65,7 +65,7 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
     public void duringContinuityEvent(PlayerEntity player, int timer)
     {
         if (timer == 180 * 20)
-            this.stopContinuity(player);
+            this.endContinuity(player);
         if (this.getThreshold() == 0)
         {
             if (this.blockList.isEmpty())
@@ -111,7 +111,7 @@ public class BlackMoonAbility extends ContinuousAbility implements IParallelCont
         if (zoneSet)
         {
             if (!isEntityInThisRoom(player))
-                this.stopContinuity(player);
+                this.endContinuity(player);
             List<ProjectileEntity> entities = Beapi.getEntitiesAround(this.centerBlock, player.level, roomSize, ProjectileEntity.class);
                 entities.forEach(entity -> {
                         entity.remove();

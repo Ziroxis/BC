@@ -55,7 +55,7 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
         if (!(player.getMainHandItem().getItem() instanceof SwordItem))
         {
             player.sendMessage(new StringTextComponent("Need to hold a sword!"), Util.NIL_UUID);
-            this.stopContinuity(player);
+            this.endContinuity(player);
             return;
         }
         /*
@@ -79,7 +79,7 @@ public class DarkCloakedBladeAbility extends ContinuousSwordAbility implements I
         if (!(player.getMainHandItem().getItem() instanceof SwordItem))
         {
             player.sendMessage(new StringTextComponent("Need to hold a sword!"), Util.NIL_UUID);
-            this.stopContinuity(player);
+            this.endContinuity(player);
             return 0;
         }
         PARTICLES.spawn(player.level, target.getX(), target.getY(), target.getZ(), 0, 0, 0);

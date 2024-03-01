@@ -69,7 +69,7 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
     public void duringContinuityEvent(PlayerEntity player, int timer)
     {
         if (timer == 180 * 20)
-            this.stopContinuity(player);
+            this.endContinuity(player);
         if (this.getThreshold() == 0)
         {
             if (this.blockListCreate.isEmpty())
@@ -122,7 +122,7 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
         if (zoneSet)
         {
             if (!isEntityInThisRoom(player))
-                this.stopContinuity(player);
+                this.endContinuity(player);
             if (!player.hasEffect(Effects.WATER_BREATHING))
                 player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 80, 0));
             if (!player.hasEffect(Effects.DOLPHINS_GRACE))

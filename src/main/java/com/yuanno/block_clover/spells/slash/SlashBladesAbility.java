@@ -5,6 +5,7 @@ import com.yuanno.block_clover.api.ability.AbilityCore;
 import com.yuanno.block_clover.api.ability.AbilityDamageKind;
 import com.yuanno.block_clover.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousPunchAbility;
+import com.yuanno.block_clover.api.ability.sorts.PunchAbility;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModAttributes;
@@ -21,7 +22,7 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.UUID;
 
-public class SlashBladesAbility extends ContinuousPunchAbility implements IParallelContinuousAbility {
+public class SlashBladesAbility extends PunchAbility implements IParallelContinuousAbility {
 
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Slash Blades", AbilityCategories.AbilityCategory.ATTRIBUTE, SlashBladesAbility.class)
             .setDescription("Makes slash blades out of magic.")
@@ -41,6 +42,7 @@ public class SlashBladesAbility extends ContinuousPunchAbility implements IParal
         this.setEvolutionCost(100);
         this.setExperiencePoint(7);
         this.setExperienceGainLevelCap(10);
+        this.setStoppingAfterHit(false);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;

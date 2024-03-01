@@ -38,8 +38,8 @@ public abstract class ContinuousAbility extends Ability {
     }
 
 
-    /*
-     *  Event Starters
+    /**
+     * Happens when pressing the spell for the first time
      */
     @Override
     public void use(PlayerEntity player)
@@ -105,8 +105,8 @@ public abstract class ContinuousAbility extends Ability {
 
 
 
-    /*
-     * 	Methods
+    /**
+     * here is what happens every tick for the continuous ability/spells
      */
     public void tick(PlayerEntity player) {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
@@ -115,7 +115,7 @@ public abstract class ContinuousAbility extends Ability {
             return;
 
         if (!canUse(player)) {
-            stopContinuity(player);
+            endContinuity(player);
             return;
         }
 
@@ -154,18 +154,12 @@ public abstract class ContinuousAbility extends Ability {
             return;
         if(this.onEndContinuityEvent.onEndContinuity(player))
         {
-            this.stopContinuity(player);
+            this.checkAbilityPool(player, State.COOLDOWN);
+            this.continueTime = 0;
+            this.startCooldown(player);
+            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+            this.onStopContinuityEvent.onStopContinuity(player);
         }
-    }
-    public void stopContinuity(PlayerEntity player)
-    {
-        if (player.level.isClientSide)
-            return;
-        this.checkAbilityPool(player, State.COOLDOWN);
-        this.continueTime = 0;
-        this.startCooldown(player);
-        PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
-        this.onStopContinuityEvent.onStopContinuity(player);
     }
 
     /*

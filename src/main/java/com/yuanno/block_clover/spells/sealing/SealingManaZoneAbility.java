@@ -38,6 +38,6 @@ public class SealingManaZoneAbility extends ContinuousAbility {
         });
 
         if (timer >= 20 * 20)
-            this.stopContinuity(player);
+            this.endContinuity(player);
     }
 }

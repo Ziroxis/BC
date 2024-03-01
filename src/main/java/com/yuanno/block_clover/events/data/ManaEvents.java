@@ -26,18 +26,16 @@ public class ManaEvents {
         IEntityStats propsEntity = EntityStatsCapability.get(player);
         IDevil devil = DevilCapability.get(player);
         float regen = propsEntity.getManaRegeneration();
+        if (!(player.tickCount % 20 == 0))
+            return;
 
-        if (player.tickCount % 20 == 0)
-        {
-            if (propsEntity.getMana() < propsEntity.getMaxMana())
-                propsEntity.alterMana(regen);
-            if (propsEntity.getAttribute().equals(ModValues.TIME) || propsEntity.getSecondAttribute().equals(ModValues.TIME) && propsEntity.getTime() < 1000)
-                propsEntity.alterTime(1);
-            if (devil.getDevilMana() < devil.getMaxDevilMana())
-                devil.alterDevilMana(1);
-            PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
-            PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
-
-        }
+        if (propsEntity.getMana() < propsEntity.getMaxMana())
+            propsEntity.alterMana(regen);
+        if (propsEntity.getAttribute().equals(ModValues.TIME) || propsEntity.getSecondAttribute().equals(ModValues.TIME) && propsEntity.getTime() < 1000)
+            propsEntity.alterTime(1);
+        if (devil.getDevilMana() < devil.getMaxDevilMana())
+            devil.alterDevilMana(1);
+        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
+        PacketHandler.sendTo(new SSyncDevilPacket(player.getId(), devil), player);
     }
 }

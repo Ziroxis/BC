@@ -36,13 +36,13 @@ public class DemonSlayerDropEvent {
                     {
                         event.getEntityItem().remove();
                         if (ability instanceof DemonSlayerAbility)
-                            ((DemonSlayerAbility) ability).stopContinuity(player);
+                            ((DemonSlayerAbility) ability).endContinuity(player);
                         else if (ability instanceof OriginalDemonSlayerAbility)
-                            ((OriginalDemonSlayerAbility) ability).stopContinuity(player);
+                            ((OriginalDemonSlayerAbility) ability).endContinuity(player);
                         else if (ability instanceof OriginalMagicDestroyerAbility)
-                            ((OriginalMagicDestroyerAbility) ability).stopContinuity(player);
+                            ((OriginalMagicDestroyerAbility) ability).endContinuity(player);
                         else if (ability instanceof DemonDwellerAbility)
-                            ((DemonDwellerAbility) ability).stopContinuity(player);
+                            ((DemonDwellerAbility) ability).endContinuity(player);
                     }
                 }
             }

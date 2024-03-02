@@ -11,6 +11,7 @@ import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
+import com.yuanno.block_clover.spells.misc.ManaSenseAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -47,7 +48,7 @@ public class RoundLunaticSlashAbility extends Ability {
 
             try
             {
-                if (ability instanceof SlashBladesAbility && ability.isContinuous())
+                if (ability instanceof SlashBladesAbility && ((SlashBladesAbility) ability).isContinuous())
                 {
                     IEntityStats stats = EntityStatsCapability.get(player);
                     List<Entity> entities = Beapi.getEntitiesAround(player.blockPosition(), player.level, radius + (float) stats.getLevel() / 2);

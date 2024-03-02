@@ -3,6 +3,7 @@ package com.yuanno.block_clover.api.ability;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.spells.water.waterball.WaterBallAbility;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -140,22 +141,6 @@ public class AbilityCore<A extends Ability> extends ForgeRegistryEntry<AbilityCo
         	return this.factory.create(this);
 		try
     	{
-        	// Check if the clazz field is a container for Ability subclasses
-
-			/*
-        	if (clazz.getEnclosingClass() != null && Ability.class.isAssignableFrom(clazz.getEnclosingClass())) {
-				Class<?>[] declaredClasses = clazz.getDeclaredClasses();
-
-				for (Class<?> declaredClass : declaredClasses) {
-                // Check if the declared class is a subclass of Ability
-                	if (Ability.class.isAssignableFrom(declaredClass)) {
-                    	// Create an instance of the declared class and return it
-                   	 return (A) declaredClass.getConstructor().newInstance();
-					}
-				}
-			}
-
-			 */
 			if (clazz.getDeclaredClasses().length > 0)
 			{
 				Class<?>[] declaredClasses = WaterBallAbility.class.getDeclaredClasses();
@@ -243,7 +228,7 @@ public class AbilityCore<A extends Ability> extends ForgeRegistryEntry<AbilityCo
 			this.isHidden = true;
 			return (T) this;
 		}
-		
+
 		public AbilityCore<A> build()
 		{
 			AbilityCore<A> core = null;
@@ -256,6 +241,7 @@ public class AbilityCore<A extends Ability> extends ForgeRegistryEntry<AbilityCo
 			core.setDamageKind(this.damageKind);
 			core.setDependencies(this.deps);
 			if(this.isHidden) core.setHidden();
+
 			return core;
 		}
 	}

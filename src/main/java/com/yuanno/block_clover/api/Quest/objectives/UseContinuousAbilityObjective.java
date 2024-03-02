@@ -4,6 +4,7 @@ import com.yuanno.block_clover.api.Quest.Objective;
 import com.yuanno.block_clover.api.Quest.interfaces.IContinuousAbilityObjective;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,9 +40,12 @@ public class UseContinuousAbilityObjective extends Objective implements IContinu
     {
         IAbilityData abilityData = AbilityDataCapability.get(player);
         Ability continuousAbility = abilityData.getEquippedAbility(this.ability);
+        if (!(continuousAbility instanceof ContinuousAbility))
+            return false;
+
         if (this.meditation)
         {
-            if (continuousAbility == null || !continuousAbility.isContinuous() || !player.getEntity().blockPosition().equals(this.blockPos)) {
+            if (continuousAbility == null || !((ContinuousAbility) continuousAbility).isContinuous() || !player.getEntity().blockPosition().equals(this.blockPos)) {
                 this.setProgress(0);
                 this.blockPos = player.getEntity().blockPosition();
                 return false;
@@ -49,7 +53,7 @@ public class UseContinuousAbilityObjective extends Objective implements IContinu
         }
         else
         {
-            if (continuousAbility == null || !continuousAbility.isContinuous()) {
+            if (continuousAbility == null || !((ContinuousAbility) continuousAbility).isContinuous()) {
                 this.setProgress(0);
                 return false;
             }

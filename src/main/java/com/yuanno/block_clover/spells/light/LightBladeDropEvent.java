@@ -3,6 +3,7 @@ package com.yuanno.block_clover.spells.light;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModItems;
@@ -25,7 +26,7 @@ public class LightBladeDropEvent {
                 continue;
 
             try {
-                if (ability instanceof LightSwordAbility && ability.isContinuous())
+                if (ability instanceof LightSwordAbility && ((LightSwordAbility) ability).isContinuous())
                 {
                     if (event.getEntityItem().getItem().getItem().equals(ModItems.LIGHT_SWORD.get()))
                     {

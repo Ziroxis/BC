@@ -3,11 +3,13 @@ package com.yuanno.block_clover.spells.antimagic;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.sorts.ItemAbility;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.items.weapons.DemonDestroyerItem;
 import com.yuanno.block_clover.items.weapons.DemonDwellerItem;
 import com.yuanno.block_clover.items.weapons.DemonSlayerItem;
+import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import com.yuanno.block_clover.spells.sword.OriginalDemonSlayerAbility;
 import com.yuanno.block_clover.spells.sword.OriginalMagicDestroyerAbility;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,7 +30,7 @@ public class DemonSlayerDropEvent {
                 continue;
 
             try {
-                if (ability.isContinuous())
+                if (ability instanceof ItemAbility && ((ItemAbility) ability).isContinuous())
                 {
                     if (event.getEntityItem().getItem().getItem() instanceof DemonSlayerItem
                             || event.getEntityItem().getItem().getItem() instanceof DemonDestroyerItem

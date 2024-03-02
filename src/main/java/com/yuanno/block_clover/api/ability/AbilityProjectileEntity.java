@@ -171,11 +171,6 @@ public class AbilityProjectileEntity extends ThrowableEntity
 				return target != this && target != this.getThrower();
 			};
 
-
-
-			double sizeX = this.collisionSize;
-			double sizeY = this.collisionSize;
-			double sizeZ = this.collisionSize;
 			Predicate<BlockState> blockPredicate = (state) -> {
 				return !state.isAir();
 			};

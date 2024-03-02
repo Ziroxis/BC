@@ -12,6 +12,7 @@ import com.yuanno.block_clover.networking.PacketHandler;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.Serializable;
@@ -26,7 +27,7 @@ public abstract class ContinuousAbility extends Ability {
 
     private int threshold = 0;
     protected int continueTime = 0;
-
+    private ItemStack neededItem;
     // Setting the defaults so that no crash occurs and so they will be null safe.
     protected IOnStartContinuity onStartContinuityEvent = (player) -> { return true; };
     protected IOnEndContinuity onEndContinuityEvent = (player) -> { return true; };
@@ -71,6 +72,12 @@ public abstract class ContinuousAbility extends Ability {
                 this.endContinuity(player);
             }
         }
+    }
+
+
+    public boolean isContinuous()
+    {
+        return getState() == State.CONTINUOUS && !this.isStateForced();
     }
 
 
@@ -183,4 +190,5 @@ public abstract class ContinuousAbility extends Ability {
     {
         void onStopContinuity(PlayerEntity player);
     }
+
 }

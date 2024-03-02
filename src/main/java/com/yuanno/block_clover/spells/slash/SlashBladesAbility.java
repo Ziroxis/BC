@@ -58,7 +58,6 @@ public class SlashBladesAbility extends PunchAbility implements IParallelContinu
 
     private float onHitEntityEvent(PlayerEntity player, LivingEntity target)
     {
-        System.out.println("HIT ATTACK");
         player.getPersistentData().putBoolean("slash_damage", false);
         for (LivingEntity livingentity : player.level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(1.0D, 0.25D, 1.0D))) {
             if (livingentity != player && livingentity != target && !player.isAlliedTo(livingentity) && (!(livingentity instanceof ArmorStandEntity) || !((ArmorStandEntity) livingentity).isMarker()) && player.distanceToSqr(livingentity) < 9.0D)

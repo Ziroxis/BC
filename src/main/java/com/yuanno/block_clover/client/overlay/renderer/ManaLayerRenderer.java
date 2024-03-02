@@ -9,6 +9,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModRenderTypes;
+import com.yuanno.block_clover.spells.earth.EarthGlovesAbility;
 import com.yuanno.block_clover.spells.misc.ManaSenseAbility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -43,7 +44,7 @@ public class ManaLayerRenderer<T extends LivingEntity, M extends EntityModel<T>>
 		IAbilityData abilityData = AbilityDataCapability.get(player);
 
 		Ability ability = abilityData.getEquippedAbility(ManaSenseAbility.INSTANCE);
-		boolean isActive = ability != null && ability.isContinuous();
+		boolean isActive = ability != null && ((ManaSenseAbility) ability).isContinuous();
 		
 		if (isActive)
 		{

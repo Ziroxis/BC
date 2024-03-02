@@ -62,11 +62,11 @@ public class CUseAbilityPacket
 						return;
 	
 					// Stops multiple continuous abilities from being activated if they're not parallel continuous
-					if (abl instanceof ContinuousAbility && !abl.isContinuous() && !(abl instanceof IParallelContinuousAbility))
+					if (abl instanceof ContinuousAbility && !((ContinuousAbility) abl).isContinuous() && !(abl instanceof IParallelContinuousAbility))
 					{
 						for (Ability ability : abilityDataProps.getEquippedAbilities())
 						{
-							if (ability instanceof ContinuousAbility && ability.isContinuous() && !(ability instanceof IParallelContinuousAbility))
+							if (ability instanceof ContinuousAbility && ((ContinuousAbility) ability).isContinuous() && !(ability instanceof IParallelContinuousAbility))
 							{
 								if(true) {
 									((ContinuousAbility) ability).endContinuity(player);

@@ -12,6 +12,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.lightning.ThunderFiendParticleEffect;
+import com.yuanno.block_clover.spells.slash.SlashBladesAbility;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
@@ -52,7 +53,7 @@ public class ThunderFiendMultiAbility extends RepeaterAbility implements IMultiT
 
             try
             {
-                if (ability instanceof ThunderGodBootsAbility && ability.isContinuous())
+                if (ability instanceof ThunderGodBootsAbility && ((ThunderGodBootsAbility) ability).isContinuous())
                 {
                     this.clearTargets();
 

@@ -9,6 +9,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.spells.earth.EarthGlovesAbility;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.yuanno.block_clover.spells.earth.EarthManipulationAbility;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -48,7 +49,7 @@ public class EarthGlovesRenderer<T extends LivingEntity, M extends EntityModel<T
 
             try
             {
-                if (ability instanceof EarthGlovesAbility && ability.isContinuous())
+                if (ability instanceof EarthGlovesAbility && ((EarthGlovesAbility) ability).isContinuous())
                 {
                     matrixStackIn.pushPose();
                     this.getParentModel().copyPropertiesTo(this.model);

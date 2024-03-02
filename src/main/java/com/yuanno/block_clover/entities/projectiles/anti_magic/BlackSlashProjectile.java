@@ -35,31 +35,5 @@ public class BlackSlashProjectile extends AbilityProjectileEntity {
         knockback = 2;
         Vector3d vector3d = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale((double)this.knockback);
         entity.push(vector3d.x, 0.1, vector3d.z);
-        if (entity instanceof PlayerEntity)
-        {
-            PlayerEntity player = (PlayerEntity) entity;
-            IAbilityData abilityData = AbilityDataCapability.get(player);
-            IEntityStats entityStats = EntityStatsCapability.get(player);
-            if (entityStats.getMana() > 25)
-                entityStats.alterMana(-25);
-
-            for (Ability ability : abilityData.getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
-            {
-                if (ability == null)
-                    continue;
-
-                try
-                {
-                    if (ability.isContinuous())
-                    {
-                        ability.startCooldown(player);
-                    }
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }

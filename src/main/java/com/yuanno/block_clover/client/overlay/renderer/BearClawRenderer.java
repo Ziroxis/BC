@@ -9,6 +9,7 @@ import com.yuanno.block_clover.client.overlay.model.BearClawModel;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.spells.beast.BearClawAbility;
+import com.yuanno.block_clover.spells.light.LightSwordAbility;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -48,7 +49,7 @@ public class BearClawRenderer<T extends LivingEntity, M extends EntityModel<T>> 
 
             try
             {
-                if (ability instanceof BearClawAbility && ability.isContinuous())
+                if (ability instanceof BearClawAbility && ((BearClawAbility) ability).isContinuous())
                 {
                     matrixStackIn.pushPose();
                     this.getParentModel().copyPropertiesTo(this.model);

@@ -35,31 +35,13 @@ public class AbilityHelper {
 
     public static Predicate<Ability> getAbilityFromCategoryPredicate(AbilityCategories.AbilityCategory category)
     {
-        // Removes all non-command abilities obtained from category
         return (ability) ->
         {
-            if(ability.getUnlockType() == AbilityUnlock.COMMAND)
-                return false;
-
             if(ability.getCategory() == category)
                 return true;
 
             return false;
         };
-    }
-    @Nullable
-    public static AbilityOverlay getCurrentOverlay(PlayerEntity player)
-    {
-        AbilityOverlay overlay = null;
-        List<Ability> list = AbilityDataCapability.get(player).getEquippedAbilities();
-        for (Ability ability : list)
-        {
-            if (ability == null || (ability instanceof ContinuousAbility && !ability.isContinuous()))
-                continue;
-
-        }
-
-        return overlay;
     }
 
     public static void enableAbilities(PlayerEntity player, Predicate<Ability> check)

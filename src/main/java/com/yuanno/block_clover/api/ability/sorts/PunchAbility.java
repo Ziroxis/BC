@@ -20,33 +20,26 @@ import java.io.Serializable;
 /**
  * Ability for when you punch something, the ability has different behavior depending on {@link #isStoppingAfterHit}
  * This ability has 2 components:
- * 1. {@link #hitEffect(PlayerEntity, LivingEntity)} hitting of the actual entity, what happens there etc.
+ * 1. {@link #hitEntity(PlayerEntity, LivingEntity)} hitting of the actual entity, what happens there etc.
  * 2. {@link #tick(PlayerEntity)} what happens every tick of the ability
  */
 public class PunchAbility extends ContinuousAbility {
     private boolean isStoppingAfterHit = true;
     protected IOnHitEntity onHitEntityEvent = (player, target) -> { return 0; };
-    protected IOnHitEffect onHitEffectEvent = (player, target) -> {};
 
     public PunchAbility(AbilityCore core)
     {
         super(core);
     }
 
-    public void hitEffect(PlayerEntity player, LivingEntity target)
-    {
-        this.onHitEffectEvent.hitEffect(player, target);
-
-        if(this.isStoppingAfterHit)
-            this.endContinuity(player);
-    }
     public float hitEntity(PlayerEntity player, LivingEntity target)
     {
         float result = this.onHitEntityEvent.onHitEntity(player, target);
 
         AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
         MinecraftForge.EVENT_BUS.post(post);
-        this.endContinuity(player);
+        if(this.isStoppingAfterHit)
+            this.endContinuity(player);
 
         return result;
     }

@@ -124,12 +124,13 @@ public class ChatPromptScreen extends Screen {
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             } else if (inprogressQuestMana.isComplete()) { // if it is complete
+                text = "A grimoire has chosen you and you unlocked a spell, go into combat mode to see your grimoire!";
+                inprogressQuestMana.triggerCompleteEvent(player);
                 questData.addFinishedQuest(inprogressQuestMana.getCore());
                 questData.removeInProgressQuest(inprogressQuestMana.getCore());
                 questData.addInProgressQuest(ModQuests.MANA_REINFORCEMENT.createQuest());
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(inprogressQuestMana.getCore()));
                 PacketHandler.sendToServer(new CSyncQuestDataPacket(questData));
-                text = "A grimoire has chosen you and you unlocked a spell, go into combat mode to see your grimoire!";
                 this.message = new SequencedString(text, 245, this.font.width(text) / 2, 800);
                 return;
             }

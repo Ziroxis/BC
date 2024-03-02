@@ -77,7 +77,7 @@ public class AbilitiesEvents
 					if (ability instanceof ChargeableAbility && ability.isCharging())
 						((ChargeableAbility) ablProps.getEquippedAbility(ability)).charging(player);
 
-					if (ability instanceof ContinuousAbility && ability.isContinuous()) {
+					if (ability instanceof ContinuousAbility && ((ContinuousAbility) ability).isContinuous()) {
 						//System.out.println("ABILITY IS CONTINUING");
 						((ContinuousAbility) ablProps.getEquippedAbility(ability)).tick(player);
 					}
@@ -178,27 +178,6 @@ public class AbilitiesEvents
 					e.printStackTrace();
 				}
 			}
-			
-			if(attacker instanceof PlayerEntity)
-			{
-				PlayerEntity player = (PlayerEntity) attacker;
-
-				for(Ability ability : AbilityDataCapability.get(player).getEquippedAbilities(AbilityCategories.AbilityCategory.ALL))
-				{
-					if (ability == null)
-						continue;
-
-					
-					if(ability instanceof PunchAbility && event.getSource().msgId.equalsIgnoreCase("ability") && ability.isContinuous())
-					{
-						AbilityCore source = ((AbilityDamageSource)event.getSource()).getAbilitySource();
-						if(source != null)
-						{
-							((PunchAbility)ability).hitEffect(player, entity);
-						}
-					}
-				}
-			}
 		}
 	}
 
@@ -275,7 +254,7 @@ public class AbilitiesEvents
 
 				try
 				{
-					if (ability instanceof PunchAbility && ability.isContinuous())
+					if (ability instanceof PunchAbility && ((PunchAbility) ability).isContinuous())
 					{
 						//boolean isAbilityImbuing = HakiHelper.hasImbuingActive(player) && ((PunchAbility)ability).isAffectedByImbuing();
 
@@ -322,7 +301,7 @@ public class AbilitiesEvents
 				if (ability instanceof ChargeableAbility && ability.isCharging())
 					((ChargeableAbility)ability).stopCharging(player);
 
-				if (ability instanceof ContinuousAbility && ability.isContinuous())
+				if (ability instanceof ContinuousAbility && ((ContinuousAbility) ability).isContinuous())
 					((ContinuousAbility)ability).endContinuity(player);
 			}
 			catch (Exception e)

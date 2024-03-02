@@ -73,7 +73,7 @@ public class MagicChangeArtifactItem extends ArtifactItem {
                 player.inventory.getItem(idDestroyer).shrink(1);
             for (Ability ability : abilityData.getUnlockedAbilities(AbilityCategories.AbilityCategory.ATTRIBUTE))
             {
-                if (ability instanceof ContinuousAbility && ability.isContinuous()) {
+                if (ability instanceof ContinuousAbility && ((ContinuousAbility) ability).isContinuous()) {
                     ContinuousAbility continuousAbility = (ContinuousAbility) ability;
                     continuousAbility.endContinuity(player);
                 }

@@ -134,7 +134,7 @@ public class CombatModeEvents
 						{
 							ContinuousAbility cAbility = (ContinuousAbility)abl;
 							threshold = cAbility.getContinueTime() / (float) cAbility.getThreshold() * 23;
-							if(cAbility.getThreshold() > 0 && abl.isContinuous() && cAbility.getContinueTime() > 0)
+							if(cAbility.getThreshold() > 0 && cAbility.isContinuous() && cAbility.getContinueTime() > 0)
 								number = cAbility.getThreshold() - cAbility.getContinueTime() + " ";
 						}
 					
@@ -146,7 +146,7 @@ public class CombatModeEvents
 								number = cAbility.getChargeTime() + " ";
 						}
 	
-						boolean isContinuous = abl.isContinuous() || (abl.getState() == Ability.State.CONTINUOUS && abl.isStateForced());
+						boolean isContinuous = abl instanceof ContinuousAbility && ((ContinuousAbility) abl).isContinuous() || (abl.getState() == Ability.State.CONTINUOUS && abl.isStateForced());
 						boolean isCharging = abl.isCharging() || (abl.getState() == Ability.State.CHARGING && abl.isStateForced());
 						
 						// Setting their color based on their state

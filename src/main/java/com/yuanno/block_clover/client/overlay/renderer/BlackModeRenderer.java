@@ -3,6 +3,7 @@ package com.yuanno.block_clover.client.overlay.renderer;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCategories;
+import com.yuanno.block_clover.api.ability.sorts.ItemAbility;
 import com.yuanno.block_clover.client.overlay.model.BlackModeModel;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
@@ -45,7 +46,7 @@ public class BlackModeRenderer<T extends LivingEntity, M extends EntityModel<T>>
 
             try
             {
-                if (ability instanceof DemonStateAbility && ability.isContinuous() & stats.getState() == 1)
+                if (ability instanceof DemonStateAbility && ((DemonStateAbility) ability).isContinuous() & stats.getState() == 1)
                 {
                     matrixStackIn.pushPose();
                     this.getParentModel().copyPropertiesTo(this.model);

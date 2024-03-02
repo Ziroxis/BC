@@ -9,6 +9,7 @@ import com.yuanno.block_clover.data.ability.IAbilityData;
 import com.yuanno.block_clover.spells.earth.EarthManipulationAbility;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -48,7 +49,7 @@ public class EarthManipulationRenderer<T extends LivingEntity, M extends EntityM
 
             try
             {
-                if (ability instanceof EarthManipulationAbility && ability.isContinuous() && !entitylivingbaseIn.isOnGround())
+                if (ability instanceof EarthManipulationAbility && ((EarthManipulationAbility) ability).isContinuous() && !entitylivingbaseIn.isOnGround())
                 {
                     matrixStackIn.pushPose();
                     this.getParentModel().copyPropertiesTo(this.model);

@@ -11,6 +11,7 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.init.ModDamageSource;
 import com.yuanno.block_clover.particles.ParticleEffect;
 import com.yuanno.block_clover.particles.earth.EarthShakeParticleEffect;
+import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -38,7 +39,7 @@ public class EarthPassiveEvent {
         PlayerEntity player = (PlayerEntity) event.getEntityLiving();
         IAbilityData abilityProps = AbilityDataCapability.get(player);
         EarthPassiveAbility earthPassiveAbility = (EarthPassiveAbility) abilityProps.getEquippedAbility(EarthPassiveAbility.INSTANCE);
-        if (earthPassiveAbility == null || !earthPassiveAbility.isContinuous())
+        if (earthPassiveAbility == null || !((EarthPassiveAbility) earthPassiveAbility).isDisabled())
             return;
 
         if (distance < 3)

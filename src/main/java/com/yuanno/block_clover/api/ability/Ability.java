@@ -56,8 +56,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public double maxCooldown;
     protected double disableTicks;
     protected double maxDisableTicks = 200;
-    protected  ICheck check;
-    private AbilityUnlock unlock = AbilityUnlock.PROGRESSION;
     private State state = State.STANDBY;
     private State previousState = State.STANDBY;
     private boolean hideInGUI = false;
@@ -130,15 +128,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.state == State.COOLDOWN;
     }
 
-    public boolean isPassiveEnabled()
-    {
-        return this.state == State.PASSIVE;
-    }
-
-    public boolean isContinuous()
-    {
-        return this.state == State.CONTINUOUS && !this.isStateForced();
-    }
 
     public boolean isCharging()
     {
@@ -391,15 +380,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         return this.getCore().getCategory();
     }
 
-    public void setUnlockType(AbilityUnlock unlockType)
-    {
-        this.unlock = unlockType;
-    }
 
-    public AbilityUnlock getUnlockType()
-    {
-        return this.unlock;
-    }
 
     /*
      * Methods
@@ -415,8 +396,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
 
     public void cooldown(PlayerEntity player)
     {
-        // if(player.level.isClientSide)
-        // return;
         player.level.getProfiler().push(() -> BeJavapi.getResourceName(this.getName()));
 
         if (this.isOnCooldown() && this.cooldown > 0)
@@ -537,26 +516,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             return false;
         }
 
-        if (this.getCore().getDependencies() != null && this.getCore().getDependencies().length > 0)
-        {
-            List<AbilityCore> list = Arrays.asList(this.getCore().getDependencies());
-            int deps = list.size();
-            List<Ability> flag = AbilityDataCapability.get(player).getEquippedAbilities(abl -> abl.isContinuous() && list.contains(abl.getCore()));
-
-            if (flag.size() <= 0)
-                return false;
-        }
-
         return true;
-    }
-
-    public void alterMana(PlayerEntity player)
-    {
-        IEntityStats propsEntity = EntityStatsCapability.get(player);
-
-        propsEntity.alterMana((int) - getmanaCost());
-        PacketHandler.sendTo(new ManaSync(propsEntity.getMana()), player);
-        PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);
     }
 
     /*
@@ -573,11 +533,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     /*
      * Interfaces
      */
-
-    public interface ICheck {
-        boolean check(PlayerEntity player);
-    }
-
     public interface IOnUse extends Serializable
     {
         boolean onUse(PlayerEntity player);
@@ -603,7 +558,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             nbt.putString("id", this.core.getRegistryName().toString());
         nbt.putString("displayName", Strings.isNullOrEmpty(this.getDisplayName()) ? "" : this.getDisplayName());
         nbt.putIntArray("pools", this.getPools());
-        nbt.putString("unlock", this.getUnlockType().name());
         nbt.putString("state", this.getState().toString());
 
         if (this instanceof IExtraUpdateData)
@@ -625,7 +579,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     public void load(CompoundNBT nbt)
     {
         this.addInPool(nbt.getIntArray("pools"));
-        this.setUnlockType(AbilityUnlock.valueOf(nbt.getString("unlock")));
         this.setDisplayName(nbt.getString("displayName"));
         this.setState(Ability.State.valueOf(nbt.getString("state")));
 
@@ -634,11 +587,6 @@ public class Ability extends ForgeRegistryEntry<Ability> {
             CompoundNBT extraData = nbt.getCompound("extraData");
             ((IExtraUpdateData) this).setExtraData(extraData);
         }
-    }
-    public void addInPool(AbilityPool... pools)
-    {
-        int[] intPools = Arrays.stream(pools).mapToInt(AbilityPool::id).toArray();
-        this.addInPool(intPools);
     }
 
     public void addInPool(int... pools)

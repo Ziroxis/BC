@@ -75,7 +75,6 @@ public class AbilityCommand
 				if(op == 1)
 				{
 					Ability abl = core.createAbility();
-					abl.setUnlockType(AbilityUnlock.COMMAND);
 					abilityProps.addUnlockedAbility(player, abl);
 				}
 				else
@@ -124,7 +123,6 @@ public class AbilityCommand
 			IAbilityData props = AbilityDataCapability.get(player);
 			Ability ability = core.createAbility();
 
-			ability.setUnlockType(AbilityUnlock.COMMAND);
 			props.addUnlockedAbility(player, ability);
 			
 			if(BeoDebug.isDebug())

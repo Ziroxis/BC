@@ -6,6 +6,7 @@ import com.yuanno.block_clover.api.ability.AbilityCategories;
 import com.yuanno.block_clover.client.overlay.model.ThunderGodGearModel;
 import com.yuanno.block_clover.data.ability.AbilityDataCapability;
 import com.yuanno.block_clover.data.ability.IAbilityData;
+import com.yuanno.block_clover.spells.beast.BearClawAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodBootsAbility;
 import com.yuanno.block_clover.spells.lightning.ThunderGodGlovesAbility;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -49,11 +50,11 @@ public class ThunderGodGearRenderer<T extends LivingEntity, M extends EntityMode
 
             try
             {
-                if (ability instanceof ThunderGodBootsAbility && ability.isContinuous())
+                if (ability instanceof ThunderGodBootsAbility && ((ThunderGodBootsAbility) ability).isContinuous())
                     model.showBoots = true;
                 else if (ability instanceof ThunderGodBootsAbility && ability.isOnCooldown())
                     model.showBoots = false;
-                if (ability instanceof ThunderGodGlovesAbility && ability.isContinuous())
+                if (ability instanceof ThunderGodGlovesAbility && ((ThunderGodGlovesAbility) ability).isContinuous())
                     model.showGloves = true;
                 else if(ability instanceof ThunderGodGlovesAbility && ability.isOnCooldown())
                     model.showGloves = false;

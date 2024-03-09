@@ -9,16 +9,19 @@ import com.yuanno.block_clover.data.entity.IEntityStats;
 import com.yuanno.block_clover.events.experience.ExperienceUpEvent;
 import com.yuanno.block_clover.networking.ManaSync;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.client.CUseAbilityPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.Serializable;
+import java.util.function.Supplier;
 
 /**
  * Ability class that handles the abilities that charge up and then something happen
- * Ability starts: {@link #use(PlayerEntity)}
+ * Ability starts here {@link #use(PlayerEntity)}, triggered here:
+ * @see com.yuanno.block_clover.networking.client.CUseAbilityPacket#handle(CUseAbilityPacket, Supplier) 
  * Ability charges up: {@link #charging(PlayerEntity)}
  * Ability does something after charge (can choose when to end charge or no): {@link #stopCharging(PlayerEntity)}
  */

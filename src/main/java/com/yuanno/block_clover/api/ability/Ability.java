@@ -3,6 +3,7 @@ package com.yuanno.block_clover.api.ability;
 import com.google.common.base.Strings;
 import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.BeJavapi;
+import com.yuanno.block_clover.api.ability.interfaces.IShootAbility;
 import com.yuanno.block_clover.api.ability.sorts.ChargeableAbility;
 import com.yuanno.block_clover.api.ability.sorts.ContinuousAbility;
 import com.yuanno.block_clover.api.data.IExtraUpdateData;
@@ -16,6 +17,7 @@ import com.yuanno.block_clover.data.world.ExtendedWorldData;
 import com.yuanno.block_clover.events.ability.AbilityUseEvent;
 import com.yuanno.block_clover.networking.ManaSync;
 import com.yuanno.block_clover.networking.PacketHandler;
+import com.yuanno.block_clover.networking.client.CUseAbilityPacket;
 import com.yuanno.block_clover.networking.server.SSyncEntityStatsPacket;
 import com.yuanno.block_clover.networking.server.SUpdateEquippedAbilityPacket;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,6 +28,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -34,9 +37,14 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * Base class for all abilities, with most of the information every ability needs.
+ * The start for quite literally every ability {@link #use(PlayerEntity)}, very often override, triggered here:
+ * @see com.yuanno.block_clover.networking.client.CUseAbilityPacket#handle(CUseAbilityPacket, Supplier) 
+ * All the cooldown logic is also handled here {@link #cooldown(PlayerEntity)}, triggered here:
+ * @see com.yuanno.block_clover.events.ability.AbilitiesEvents#onLivingUpdate(LivingEvent.LivingUpdateEvent)
  */
 public class Ability extends ForgeRegistryEntry<Ability> {
 
@@ -83,7 +91,7 @@ public class Ability extends ForgeRegistryEntry<Ability> {
     {
         if (player.level.isClientSide)
             return;
-
+        System.out.println("WATERBAALL");
         player.level.getProfiler().push(() ->
         {
             return BeJavapi.getResourceName(this.getName());
@@ -95,7 +103,42 @@ public class Ability extends ForgeRegistryEntry<Ability> {
         if (!this.isOnStandby())
             return;
 
+        /*
         if (!this.isStateForced() && this.onUseEvent.onUse(player))
+        {
+            AbilityUseEvent pre = new AbilityUseEvent.Pre(player, this);
+            MinecraftForge.EVENT_BUS.post(pre);
+
+            IAbilityData props = AbilityDataCapability.get(player);
+            this.checkAbilityPool(player, State.COOLDOWN);
+
+            this.startCooldown(player);
+            AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
+            MinecraftForge.EVENT_BUS.post(post);
+
+            props.setPreviouslyUsedAbility(this);
+            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+
+        }
+
+         */
+        if (this instanceof IShootAbility)
+        {
+            AbilityUseEvent pre = new AbilityUseEvent.Pre(player, this);
+            MinecraftForge.EVENT_BUS.post(pre);
+
+            ((IShootAbility) this).onUse(player, this);
+            IAbilityData props = AbilityDataCapability.get(player);
+            this.checkAbilityPool(player, State.COOLDOWN);
+
+            this.startCooldown(player);
+            AbilityUseEvent post = new AbilityUseEvent.Post(player, this);
+            MinecraftForge.EVENT_BUS.post(post);
+
+            props.setPreviouslyUsedAbility(this);
+            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+        }
+        else if (this.onUseEvent.onUse(player))
         {
             AbilityUseEvent pre = new AbilityUseEvent.Pre(player, this);
             MinecraftForge.EVENT_BUS.post(pre);

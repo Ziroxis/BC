@@ -76,9 +76,7 @@ public class CUseAbilityPacket
 							}
 						}
 					}
-	
 
-					
 					abl.use(player);
 				}
 				catch(Exception e)

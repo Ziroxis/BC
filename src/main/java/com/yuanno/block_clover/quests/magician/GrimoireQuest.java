@@ -98,45 +98,6 @@ public class GrimoireQuest extends Quest {
                 abilityDataBase.addUnlockedAbility(player, OriginalMagicDwellerAbility.INSTANCE);
                 abilityDataBase.addUnlockedAbility(player, OriginalSlashesAbility.INSTANCE);
                 break;
-                /*
-            case (ModValues.WATER):
-                PacketHandler.sendTo(new SOpenSpellChoiceScreenPacket(waterSpells), player);
-                break;
-
-                 */
-            case (ModValues.FIRE):
-                abilityDataBase.addUnlockedAbility(player, FlameRoarAbility.INSTANCE);
-                break;
-            case (ModValues.LIGHTNING):
-                abilityDataBase.addUnlockedAbility(player, ThunderFiendAbility.INSTANCE);
-                break;
-            case (ModValues.DARKNESS):
-                abilityDataBase.addUnlockedAbility(player, AvidyaSlashAbility.INSTANCE);
-                break;
-            case (ModValues.EARTH):
-                abilityDataBase.addUnlockedAbility(player, EarthChargeAbility.INSTANCE);
-                break;
-            case (ModValues.LIGHT):
-                abilityDataBase.addUnlockedAbility(player, LightSwordAbility.INSTANCE);
-                break;
-            case (ModValues.WIND):
-                abilityDataBase.addUnlockedAbility(player, WindCrescentAbility.INSTANCE);
-                break;
-            case (ModValues.SEALING):
-                abilityDataBase.addUnlockedAbility(player, SelfHealSealingAbility.INSTANCE);
-                break;
-            case (ModValues.TIME):
-                abilityDataBase.addUnlockedAbility(player, ChronoStasisAbility.INSTANCE);
-                break;
-            case (ModValues.BEAST):
-                abilityDataBase.addUnlockedAbility(player, BeastRegenerationPassiveAbility.INSTANCE);
-                break;
-            case (ModValues.MERCURY):
-                abilityDataBase.addUnlockedAbility(player, MercurySpearAbility.INSTANCE);
-                break;
-            case (ModValues.SLASH):
-                abilityDataBase.addUnlockedAbility(player, DeathScytheAbility.INSTANCE);
-                break;
         }
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityDataBase), player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);

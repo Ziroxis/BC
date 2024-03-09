@@ -22,7 +22,7 @@ public class GainSpellHelper {
             {SeaSerpentsBelowAbility.INSTANCE, PointBlankDragonAbility.INSTANCE, WaterPressureShotAbility.INSTANCE},
     };
 
-    private static HashMap<Integer, AbilityCore[]> spellPerLevelWater = new HashMap<>();
+    private static final HashMap<Integer, AbilityCore[]> spellPerLevelWater = new HashMap<>();
     static {
         spellPerLevelWater.put(5, waterAbilities[0]);
         spellPerLevelWater.put(10, waterAbilities[1]);

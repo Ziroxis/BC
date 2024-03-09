@@ -1,6 +1,6 @@
 
-# Souls Awakening
-Minecraft mod based on the anime/manga of the author Tite Kubo called "Bleach".
+# Block Clover
+Minecraft mod based on the anime/manga of the author Yuki Tabata called "Black Clover".
 
 
 
@@ -97,4 +97,4 @@ Feel free to bugfix at your hearts content and make a pull request. Preferably w
 #### Additions
 Do not use if statements and their 
 #### Changes in api
-If you want to change something in the [API](souls-awakening/src/main/java/com/yuanno/soulsawakening/ability/api), because you are not able to make something you want with what there is now. Preferably add unto the interface you can use and if not add your own interface and if needed be your own logic. 
+If you want to change something in the [API](block-clover/src/main/java/com/yuanno/block_clover/api), because you are not able to make something you want with what there is now. Preferably add your own logic (preferably with documentation), if this is not possible and you have to change something. Feel free to do so but definitelly add documentation in the code!

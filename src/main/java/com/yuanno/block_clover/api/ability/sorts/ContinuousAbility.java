@@ -3,6 +3,8 @@ package com.yuanno.block_clover.api.ability.sorts;
 import com.yuanno.block_clover.api.BeJavapi;
 import com.yuanno.block_clover.api.ability.Ability;
 import com.yuanno.block_clover.api.ability.AbilityCore;
+import com.yuanno.block_clover.api.ability.interfaces.IAttributeContinuityAbility;
+import com.yuanno.block_clover.api.ability.interfaces.IEffectInstanceContinuousAbility;
 import com.yuanno.block_clover.events.ability.AbilityUseEvent;
 import com.yuanno.block_clover.data.entity.EntityStatsCapability;
 import com.yuanno.block_clover.data.entity.IEntityStats;
@@ -33,7 +35,6 @@ public abstract class ContinuousAbility extends Ability {
     protected IOnEndContinuity onEndContinuityEvent = (player) -> { return true; };
     protected IDuringContinuity duringContinuityEvent = (player, continuousTime) -> {};
 
-    protected IOnStopContinuity onStopContinuityEvent = (player) -> {};
 
 
     public ContinuousAbility(AbilityCore core)
@@ -57,8 +58,22 @@ public abstract class ContinuousAbility extends Ability {
         {
             if(!this.isOnStandby())
                 return;
+            if (this instanceof IAttributeContinuityAbility)
+            {
+                ((IAttributeContinuityAbility) this).applyAttributes(player, this);
+                this.checkAbilityPool(player, State.CONTINUOUS);
 
-            if (this.onStartContinuityEvent.onStartContinuity(player))
+                this.startContinuity(player);
+                PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+            }
+            else if (this instanceof IEffectInstanceContinuousAbility)
+            {
+                this.checkAbilityPool(player, State.CONTINUOUS);
+
+                this.startContinuity(player);
+                PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+            }
+            else if (this.onStartContinuityEvent.onStartContinuity(player))
             {
                 this.checkAbilityPool(player, State.CONTINUOUS);
 
@@ -143,6 +158,10 @@ public abstract class ContinuousAbility extends Ability {
                 endContinuity(player);
             }
 
+            if (this instanceof IEffectInstanceContinuousAbility)
+                ((IEffectInstanceContinuousAbility) this).addEffectInstances(player, this);
+
+
             AbilityUseEvent per = new AbilityUseEvent.Per(player, this);
             MinecraftForge.EVENT_BUS.post(per);
         }
@@ -159,13 +178,20 @@ public abstract class ContinuousAbility extends Ability {
     {
         if(player.level.isClientSide)
             return;
-        if(this.onEndContinuityEvent.onEndContinuity(player))
+        if (this instanceof IAttributeContinuityAbility)
+        {
+            ((IAttributeContinuityAbility) this).removeAttributes(player, this);
+            this.checkAbilityPool(player, State.COOLDOWN);
+            this.continueTime = 0;
+            this.startCooldown(player);
+            PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+        }
+        else if(this.onEndContinuityEvent.onEndContinuity(player))
         {
             this.checkAbilityPool(player, State.COOLDOWN);
             this.continueTime = 0;
             this.startCooldown(player);
             PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
-            this.onStopContinuityEvent.onStopContinuity(player);
         }
     }
 
@@ -185,10 +211,6 @@ public abstract class ContinuousAbility extends Ability {
     public interface IOnEndContinuity extends Serializable
     {
         boolean onEndContinuity(PlayerEntity player);
-    }
-    public interface IOnStopContinuity extends Serializable
-    {
-        void onStopContinuity(PlayerEntity player);
     }
 
 }

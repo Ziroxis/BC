@@ -125,6 +125,7 @@ public class ModItems {
 
     //WEAPONS
     public static final RegistryObject<Item> LIGHT_SWORD = ITEMS.register("light_sword", LightSwordItem::new);
+    public static final RegistryObject<Item> WIND_SWORD = ITEMS.register("wind_sword", WindSwordItem::new);
 
     // asta sword
     public static final RegistryObject<Item> DEMON_SLAYER = ITEMS.register("demon_slayer_antimagic", DemonSlayerItem::new); // black

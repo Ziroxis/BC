@@ -53,8 +53,6 @@ public class WaterManaZoneAbility extends ContinuousAbility implements IParallel
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
-
     }
     public int getROOMSize()
     {

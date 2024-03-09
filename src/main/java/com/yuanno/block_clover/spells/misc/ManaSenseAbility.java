@@ -28,7 +28,6 @@ public class ManaSenseAbility extends ContinuousAbility implements IParallelCont
         this.setEvolutionCost(50);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onEndContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

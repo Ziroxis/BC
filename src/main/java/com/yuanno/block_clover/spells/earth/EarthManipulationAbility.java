@@ -26,8 +26,6 @@ public class EarthManipulationAbility extends ContinuousAbility implements IPara
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
-
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

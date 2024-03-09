@@ -25,8 +25,6 @@ public class LightSwordAbility extends ItemAbility implements IParallelContinuou
         this.setMaxCooldown(0);
         this.setmanaCost(4);
         this.duringContinuityEvent = this::duringContinuityEvent;
-        //this.setPassiveExperience(3);
-        //this.setPassiveManaCost(3);
     }
 
 

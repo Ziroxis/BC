@@ -44,7 +44,6 @@ public class ThunderGodBootsAbility extends ContinuousAbility implements IParall
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::onDuringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

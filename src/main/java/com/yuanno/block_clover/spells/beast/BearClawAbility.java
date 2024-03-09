@@ -40,7 +40,6 @@ public class BearClawAbility extends PunchAbility implements IParallelContinuous
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

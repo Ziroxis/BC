@@ -52,8 +52,6 @@ public class ThunderManaZone extends ContinuousAbility implements IParallelConti
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
-
     }
     public int getROOMSize()
     {

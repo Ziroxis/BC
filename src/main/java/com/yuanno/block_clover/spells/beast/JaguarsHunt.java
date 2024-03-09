@@ -37,7 +37,6 @@ public class JaguarsHunt extends ContinuousAbility implements IParallelContinuou
         this.setExperiencePoint(10);
         this.setExperienceGainLevelCap(40);
         this.onStartContinuityEvent = this::onStartContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 

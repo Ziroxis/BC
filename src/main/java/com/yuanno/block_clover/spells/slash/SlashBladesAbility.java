@@ -44,7 +44,6 @@ public class SlashBladesAbility extends PunchAbility implements IParallelContinu
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHitEntityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onEndContinuityEvent;
     }
 
     private boolean onStartContinuityEvent(PlayerEntity player)

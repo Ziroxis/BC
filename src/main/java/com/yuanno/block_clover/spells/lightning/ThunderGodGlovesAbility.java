@@ -41,7 +41,6 @@ public class ThunderGodGlovesAbility extends PunchAbility implements IParallelCo
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.onHitEntityEvent = this::onHit;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
-        this.onStopContinuityEvent = this::onStopContinuityEvent;
 
     }
 

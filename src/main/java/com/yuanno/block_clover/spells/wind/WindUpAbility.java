@@ -13,13 +13,7 @@ public class WindUpAbility extends ContinuousAbility implements IEffectInstanceC
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Wind Up", AbilityCategories.AbilityCategory.ATTRIBUTE, WindUpAbility.class)
             .setDescription("Give yourself speed, attack speed, dig speed, slow falling and step height")
             .build();
-    /*
-    static ArrayList<EffectInstance> effectInstances = new ArrayList<>();
-    static {
-        effectInstances.add(new EffectInstance(ModEffects.WIND_UP.get(), 0, 0, false, false));
-    }
 
-     */
     public WindUpAbility()
     {
         super(INSTANCE);

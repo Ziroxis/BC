@@ -4,6 +4,7 @@ import com.yuanno.block_clover.Main;
 import com.yuanno.block_clover.api.BeModApi;
 import com.yuanno.block_clover.api.Beapi;
 import com.yuanno.block_clover.api.ability.AbilityProjectileRenderer;
+import com.yuanno.block_clover.models.CubeModel;
 import com.yuanno.block_clover.models.projectiles.wind.PiercingTornadoModel;
 import com.yuanno.block_clover.models.projectiles.wind.WindBladeModel;
 import com.yuanno.block_clover.models.projectiles.wind.WindCrescentModel;
@@ -22,7 +23,7 @@ public class WindProjectiles {
 
     public static final RegistryObject<EntityType<WindBladeProjectile>> WIND_BLADE = Beapi.registerEntityType("Wind Blade",
             () -> BeModApi.createEntityType(WindBladeProjectile::new)
-                    .sized(0.5f, 0.5f)
+                    .sized(0.25f, 0.25f)
                     .build(Main.MODID + ":wind_blade"));
 
     public static final RegistryObject<EntityType<WindCrescentProjectile>> WIND_CRESCENT = Beapi.registerEntityType("Wind Crescent",
@@ -37,7 +38,10 @@ public class WindProjectiles {
             () -> BeModApi.createEntityType(PiercingTornadoProjectile::new)
                     .sized(1.5f, 1.5f)
                     .build(Main.MODID + ":piercing_tornado"));
-
+    public static final RegistryObject<EntityType<SlicingWindEmperorWintryWindProjectile>> WIND_SWORD =Beapi.registerEntityType("Wind Sword",
+            () -> BeModApi.createEntityType(SlicingWindEmperorWintryWindProjectile::new)
+                    .sized(0.5f, 0.5f)
+                    .build(Main.MODID + ":wind_sword"));
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
@@ -51,6 +55,7 @@ public class WindProjectiles {
                 .setTexture("wind", "wind_gale").setScale(1));
         RenderingRegistry.registerEntityRenderingHandler(PIERCING_TORNADO.get(), new AbilityProjectileRenderer.Factory(new PiercingTornadoModel())
                 .setTexture("wind", "tornado_piercing_blast").setScale(1));
-
+        RenderingRegistry.registerEntityRenderingHandler(WIND_SWORD.get(), new AbilityProjectileRenderer.Factory(new CubeModel())
+                .setTexture("wind", "windblade").setScale(0.5, 0.07, 10));
     }
 }

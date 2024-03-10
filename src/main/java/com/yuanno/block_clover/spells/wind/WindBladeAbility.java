@@ -18,7 +18,6 @@ public class WindBladeAbility extends Ability implements IShootAbility {
         super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(15);
-        this.setEvolutionCost(50);
         this.setExperiencePoint(20);
         this.setExperienceGainLevelCap(10);
     }

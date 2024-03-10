@@ -40,15 +40,6 @@ public class EarthManipulationModel<T extends LivingEntity> extends BipedModel<T
         super.setupAnim(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.crouching = entityIn.isCrouching();
 
-        /*
-        this.Earth_Manipulation.copyFrom(this.rightArm);
-        this.Earth_Manipulation.copyFrom(this.leftArm);
-        this.Earth_Manipulation.copyFrom(this.leftLeg);
-        this.Earth_Manipulation.copyFrom(this.rightLeg);
-
-         */
-
-
         if(!(entityIn instanceof PlayerEntity))
             return;
 

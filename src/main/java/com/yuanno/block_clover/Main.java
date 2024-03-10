@@ -268,6 +268,7 @@ public class Main
                         renderer.addLayer(new ManaLayerRenderer(renderer));
                         renderer.addLayer(new FrozenRenderer(renderer));
                         renderer.addLayer(new BubbledRenderer(renderer));
+                        renderer.addLayer(new WindCloudRenderer(renderer));
 
 
                     }
@@ -293,6 +294,7 @@ public class Main
                     renderer.addLayer(new ManaLayerRenderer(renderer));
                     renderer.addLayer(new FrozenRenderer(renderer));
                     renderer.addLayer(new BubbledRenderer(renderer));
+                    renderer.addLayer(new WindCloudRenderer(renderer));
 
                 }
             });

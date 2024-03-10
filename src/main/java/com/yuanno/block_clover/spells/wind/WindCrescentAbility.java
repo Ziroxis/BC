@@ -1,16 +1,14 @@
 package com.yuanno.block_clover.spells.wind;
 
-import com.yuanno.block_clover.api.ability.Ability;
-import com.yuanno.block_clover.api.ability.AbilityCategories;
-import com.yuanno.block_clover.api.ability.AbilityCore;
-import com.yuanno.block_clover.api.ability.AbilityDamageKind;
+import com.yuanno.block_clover.api.ability.*;
+import com.yuanno.block_clover.api.ability.interfaces.IShootAbility;
 import com.yuanno.block_clover.entities.projectiles.wind.WindCrescentProjectile;
 import com.yuanno.block_clover.spells.fire.LeoPalmaAbility;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.play.server.SAnimateHandPacket;
 import net.minecraft.world.server.ServerWorld;
 
-public class WindCrescentAbility extends Ability {
+public class WindCrescentAbility extends Ability implements IShootAbility {
     public static final AbilityCore INSTANCE = new AbilityCore.Builder("Wind Crescent", AbilityCategories.AbilityCategory.ATTRIBUTE, WindCrescentAbility.class)
             .setDescription("Shoots a crescent made from wind infused with mana.")
             .setDamageKind(AbilityDamageKind.ELEMENTAL)
@@ -23,15 +21,10 @@ public class WindCrescentAbility extends Ability {
         this.setExperiencePoint(15);
         this.setExperienceGainLevelCap(15);
         this.setEvolutionCost(50);
-        this.onUseEvent = this::onUseEvent;
     }
 
-    private boolean onUseEvent(PlayerEntity player)
-    {
-        WindCrescentProjectile projectile = new WindCrescentProjectile(player.level, player);
-        player.level.addFreshEntity(projectile);
-        projectile.shootFromRotation(player, player.xRot, player.yRot, 0, 2f, 1);
-
-        return true;
+    @Override
+    public AbilityProjectileEntity getProjectile(PlayerEntity player) {
+        return new WindCrescentProjectile(player.level, player);
     }
 }

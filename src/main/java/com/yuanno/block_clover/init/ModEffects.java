@@ -27,6 +27,7 @@ public class ModEffects {
     public static final RegistryObject<Effect> IN_EVENT = EFFECTS.register("in_event", InEventEffect::new);
     public static final RegistryObject<Effect> BUBBLED = EFFECTS.register("bubbled", BubbledEffect::new);
     public static final RegistryObject<Effect> WIND_UP = EFFECTS.register("wind_up", WindUpEffect::new);
+    public static final RegistryObject<Effect> WHIRLWIND = EFFECTS.register("whirlwind", WhirlwindEffect::new);
 
 
     public static void register(IEventBus eventBus) {

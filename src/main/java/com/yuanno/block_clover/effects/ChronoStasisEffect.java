@@ -25,7 +25,6 @@ public class ChronoStasisEffect extends SpecialEffect {
                 .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "f8b2474d-4cdb-42b0-a868-327443a2a505", 100, AttributeModifier.Operation.ADDITION)
                 .addAttributeModifier(Attributes.ATTACK_SPEED, "910ef02a-34b2-11ee-be56-0242ac120002", -256, AttributeModifier.Operation.ADDITION)
                 .addAttributeModifier(Attributes.ARMOR_TOUGHNESS, "096ae850-ca45-11ec-9d64-0242ac120002", -200, AttributeModifier.Operation.ADDITION);
-
     }
 
     @Override

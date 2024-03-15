@@ -28,8 +28,6 @@ public class SlashBladesAbility extends PunchAbility implements IParallelContinu
             .build();
     private static final AttributeModifier SLASH_BLADES = new AttributeModifier(UUID.fromString("114e0640-feea-11ec-b939-0242ac120002"),
             "Slash Blades", 2, AttributeModifier.Operation.ADDITION);
-    private static final AttributeModifier SLASH_BLADES_EVOLVED = new AttributeModifier(UUID.fromString("114e0640-feea-11ec-b939-0242ac120002"),
-            "Slash Blades", 6, AttributeModifier.Operation.ADDITION);
 
 
     public SlashBladesAbility()
@@ -37,7 +35,6 @@ public class SlashBladesAbility extends PunchAbility implements IParallelContinu
         super(INSTANCE);
         this.setMaxCooldown(3);
         this.setmanaCost(6);
-        this.setEvolutionCost(100);
         this.setExperiencePoint(7);
         this.setExperienceGainLevelCap(10);
         this.setStoppingAfterHit(false);
